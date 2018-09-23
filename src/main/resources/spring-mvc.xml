@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd ">
+
+	<!-- 自动扫描包，使SpringMVC @controller注解 -->
+	<context:component-scan base-package="com.zj.**.controller" />
+
+	<mvc:default-servlet-handler />
+
+	<mvc:resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/"/>
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+	
+	
+	<mvc:annotation-driven>
+      <mvc:message-converters>
+             <ref bean="stringHttpMessageConverter" />
+             <ref bean="mappingJacksonHttpMessageConverter"/> 
+       </mvc:message-converters>  
+    </mvc:annotation-driven>
+	
+	<bean id="restApiConfig" class="com.zj.platform.common.api.RestApiConfig"></bean>
+	
+	<!-- String转化器 -->
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- JSON转化器(jackson版本) -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper">
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper" >
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg type="java.lang.String"
+							value="yyyy-MM-dd HH:mm:ss" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<bean id="springResourceTemplateResolver"
+		  class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/view/"></property>
+		<property name="suffix" value=".html"></property>
+		<property name="templateMode" value="LEGACYHTML5"></property>
+		<property name="characterEncoding" value="UTF-8"></property>
+		<property name="cacheable" value="false"></property>
+	</bean>
+
+	<bean id="springTemplateEngine"
+		  class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="springResourceTemplateResolver"></property>
+	</bean>
+
+	<bean id="thymeleafViewResolver"
+		  class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="springTemplateEngine"></property>
+		<property name="characterEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!-- 配置文件上传,如果不使用可不配置，而且POM可以不加入文件上传包 -->
+	<!-- uploader star -->
+	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  	<property name="maxUploadSize" value="500000000"/>
+	  	<property name="defaultEncoding" value="UTF-8"/>
+	  	<property name="resolveLazily" value="true"/>
+	  </bean>
+  	<!-- uploader end -->
+
+</beans>

@@ -1,0 +1,131 @@
+package ${package.ServiceImpl};
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+	public static TableInfo tableInfo = null;
+	
+    static {
+    	tableInfo=TableInfoHelper.getTableInfo(${entity}.class);
+    }
+	
+	@Override
+	public List<${entity}>  get${entity}List(Map<?,?> map){
+		return baseMapper.get${entity}PageListByMap(map);
+	}
+	
+	@Override
+	public IPage<${entity}> get${entity}Page(Map<?,?> map,int pageNo,int pageSize){
+		IPage<${entity}> page=new Page<${entity}>(pageNo,pageSize);
+		return baseMapper.get${entity}PageListByMap(page,map);
+	}
+	
+	@Override
+    public boolean saveOrUpdate(${entity} entity) {
+        if(entity.getId()==null){
+           return save(entity);
+        }else{
+           return updateById(entity);
+        }
+    }
+	
+	@Override
+    public boolean save(${entity} entity) {
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean saveBatch(Collection<${entity}> entityList) {
+        return super.saveBatch(entityList);
+    }
+
+    @Override
+    public boolean saveBatch(Collection<${entity}> entityList, int batchSize) {
+        return super.saveBatch(entityList,batchSize);
+    }
+
+    @Override
+    public boolean removeById(Serializable id) {
+        return super.removeById(id);
+    }
+    
+    @Override
+    public boolean removeByParmMap(Map<String, Object> parmMap) {
+    	parmMap=parmToColumnMap(tableInfo, parmMap);
+    	Assert.notEmpty(parmMap,"过滤后条件参数为空：请检查传入参数是否和实体属性名一致");
+        return removeByMap(parmMap);
+    }
+
+    @Override
+    public boolean removeByMap(Map<String, Object> columnMap) {
+        return super.removeByMap(columnMap);
+    }
+
+    @Override
+    public boolean remove(Wrapper<${entity}> wrapper) {
+        return super.remove(wrapper);
+    }
+
+    @Override
+    public boolean removeByIds(Collection<? extends Serializable> idList) {
+        return super.removeByIds(idList);
+    }
+
+    @Override
+    public boolean updateById(${entity} entity) {
+        return super.updateById(entity);
+    }
+
+    @Override
+    public boolean update(${entity} entity, Wrapper<${entity}> wrapper) {
+        return super.update(entity,wrapper);
+    }
+
+    @Override
+    public boolean updateBatchById(Collection<${entity}> entityList) {
+        return super.updateBatchById(entityList);
+    }
+
+    @Override
+    public boolean updateBatchById(Collection<${entity}> entityList, int batchSize) {
+        return super.updateBatchById(entityList, batchSize);
+    }
+    
+    @Override
+	public Collection<${entity}> listByParmMap(Map<String, Object> parmMap) {
+		parmMap=parmToColumnMap(tableInfo, parmMap);
+		return listByMap(parmMap);
+	}
+	
+}
+#end

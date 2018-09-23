@@ -1,0 +1,190 @@
+package ${package.Controller};
+
+
+import ${package.Service}.${table.serviceName};
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+#if(${cfg.controgen})
+import java.util.Date;
+import java.util.Map;
+import ${package.Entity}.${entity};
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+#end
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+
+#if(${cfg.controgen})
+import org.springframework.ui.ModelMap;
+import javax.servlet.http.HttpServletRequest;
+import com.zenith.platform.base.datastructure.Dto;
+import com.zenith.platform.base.util.AjaxSupport;
+import com.zenith.platform.base.util.CommonUtil;
+import com.zenith.platform.base.util.WebUtil;
+#end
+
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * $!{table.comment} Controller
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}Controller#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+	
+	@Autowired
+	#set ($entityLowerName = $table.entityName.toLowerCase())
+	#set ($entityName = $table.entityName.substring(0,1).toLowerCase() + $table.entityName.substring(1,$table.entityName.length()))
+	#set ($controllerServiceName = $table.serviceName.substring(0,1).toLowerCase() + $table.serviceName.substring(1,$table.serviceName.length()))
+    private ${table.serviceName} ${controllerServiceName};
+    
+    #if(${cfg.controgen})
+    	/**
+	 * 跳转基本信息查看、新增、修改页面
+	 * @param request
+	 * @param map
+	 * @return
+	 * @date ${date}
+	 * @author ${author}
+	 */
+	@GetMapping(value="/toSaveView")
+	public String toSaveView(HttpServletRequest request,ModelMap map) {
+		Dto dto=WebUtil.getParamAsDto(request);
+			map.put("dto", dto);
+			return "save${entityLowerName}view";
+	} 
+	
+	/**
+	 * 保存基本信息 包括新增、修改
+	 * @param request
+	 * @param ${entityName} 
+	 * @return AjaxSupport
+	 * @date ${date}
+	 * @author  ${author}
+	 */
+	@PostMapping(value="/save")
+	@ResponseBody
+	public AjaxSupport<${entity}> save(HttpServletRequest request,${entity} ${entityName}){
+		AjaxSupport<${entity}> ajax=new AjaxSupport<${entity}>();
+		String msg=CommonUtil.isEmpty(${entityName}.getId())?"新增":"修改";
+		try {
+			${controllerServiceName}.saveOrUpdate(${entityName});
+			ajax.setMessage(msg+"成功");
+		} catch (Exception e) {
+			ajax.setSuccess(false);
+			ajax.setMessage(msg+"失败");
+			e.printStackTrace();
+		}
+		return ajax;
+	}
+	
+	/**
+	 * 跳转分页查询界面
+	 * @param request
+	 * @param map
+	 * @return
+	 * @date ${date}
+	 * @author ${author}
+	 */
+	@GetMapping(value="/toQueryPageView")
+	public String toQueryPageView(HttpServletRequest request,ModelMap map) {
+		Dto dto=WebUtil.getParamAsDto(request);
+		map.put("dto", dto);
+		return "${entityLowerName}list";
+	}
+	
+	/**
+	 * 获取基本信息分页数据
+	 * @param request
+	 * @return Map
+	 * @date ${date}
+	 * @author ${author}
+	 */
+	@PostMapping(value="/getQueryPageData")
+	@ResponseBody
+	public Map<String,Object> getQueryPageData(HttpServletRequest request){
+		Dto dto=WebUtil.getParamAsDto(request);
+		return CommonUtil.pageToJsonMap(${controllerServiceName}.get${entity}Page(dto, dto.getPageNo(), dto.getPageSize()));
+	}
+	
+	/**
+     * 跳转分页查询维护界面
+     * @param request
+     * @param map
+     * @return
+     * @date ${date}
+     * @author ${author}
+     */
+    @GetMapping(value="/toQueryWhPageView")
+    public String toQueryWhPageView(HttpServletRequest request,ModelMap map) {
+        Dto dto=WebUtil.getParamAsDto(request);
+        map.put("dto", dto);
+        return "${entityLowerName}whlist";
+    }
+    
+    /**
+     * 获取查询维护分页数据
+     * @param request
+     * @return Map
+     * @date ${date}
+     * @author ${author}
+     */
+    @PostMapping(value="/getQueryWhPageData")
+    @ResponseBody
+    public Map<String,Object> getQueryWhPageData(HttpServletRequest request){
+        Dto dto=WebUtil.getParamAsDto(request);
+        return CommonUtil.pageToJsonMap(${controllerServiceName}.get${entity}Page(dto, dto.getPageNo(), dto.getPageSize()));
+    }
+	
+	/**
+	 * 逻辑废除基本信息
+	 * @param request
+	 * @param baseDomain 
+	 * @return AjaxSupport
+	 * @date ${date}
+	 * @author ${author}
+	 */
+	@PostMapping(value="/updateFc")
+	@ResponseBody
+	public AjaxSupport<${entity}> updateFc(HttpServletRequest request,${entity} ${entityName}){
+		AjaxSupport<${entity}> ajax=new AjaxSupport<${entity}>();
+		Dto dto=WebUtil.getParamAsDto(request);
+		try {
+			${entityName}.setIntfcbz(0L);
+			${entityName}.setDtmgxsj(new Date());
+			${controllerServiceName}.updateById(${entityName});
+			ajax.setMessage("删除成功");
+		} catch (Exception e) {
+			ajax.setSuccess(false);
+			ajax.setMessage("删除失败");
+			e.printStackTrace();
+		}
+		return ajax;
+	}
+    #end
+	
+}
+
+#end
