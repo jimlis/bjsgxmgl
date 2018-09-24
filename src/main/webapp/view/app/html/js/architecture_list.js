@@ -1,17 +1,18 @@
-mui.ajax(fileApiPath+"wdlist",{
+$bjAjax({
+	url:fileApiPath+"wdlist",
 	data:{
-		type:'2'
+		type:'1'
 	},
-	dataType:'json',//服务器返回json格式数据
-	type:'post',//HTTP请求类型
-	timeout:10000,//超时时间设置为10秒；
-	headers:{'Content-Type':'application/x-www-form-urlencoded'},	              
+	type:'post',
 	success:function(data){
-	
 		//服务器返回响应，根据响应结果，分析是否登录成功；
 		if(data.code==0){
 			var array = data.data;
-				console.log(array);
+			console.log(array);
+			if(array.length==0){
+				mui(".mui-content .mui-table-view-cell")[0].innerHTML='没有相关数据，请上传数据';
+				return;
+			}
 			mui.each(array,function(index,item){
 			  	var fileName = item.fileName;
 			 	var id = item.id;
@@ -23,12 +24,13 @@ mui.ajax(fileApiPath+"wdlist",{
 			mui(".mui-content .mui-table-view-cell")[0].innerHTML=data.msg;
 		}
 	},
-	error:function(xhr,type,errorThrown){
-		//异常处理；
+	err:function(xhr,type,errorThrown){
+			//异常处理；
 		console.log(type+"==err==");
 		mui(".mui-content .mui-table-view-cell")[0].innerHTML='获取数据失败！错误码:'+type;
+
 	}
-})
+});
 
 /**
  * 打开文件详情

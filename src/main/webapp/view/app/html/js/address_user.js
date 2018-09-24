@@ -1,13 +1,11 @@
 
 var userId = getRequest(location.search).userId;
-mui.ajax(userApiPath+"getUserById",{
+$bjAjax({
+	url:userApiPath+"getUserById",
 	data:{
 		userId:userId
 	},
-	dataType:'json',//服务器返回json格式数据
-	type:'post',//HTTP请求类型
-	timeout:10000,//超时时间设置为10秒；
-	headers:{'Content-Type':'application/x-www-form-urlencoded'},	              
+	type:'post',
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
 		if(data.code==0){
@@ -29,12 +27,12 @@ mui.ajax(userApiPath+"getUserById",{
 			`;
 		}
 	},
-	error:function(xhr,type,errorThrown){
+	err:function(xhr,type,errorThrown){
 		//异常处理；
 		console.log(type);
-		//mui(".mui-content .mui-table-view-cell")[0].innerHTML='获取数据失败！错误码:'+type;
 	}
-})
+});
+
 
 
 
