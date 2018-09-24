@@ -1,7 +1,7 @@
 $bjAjax({
 	url:fileApiPath+"wdlist",
 	data:{
-		type:'1'
+		type:'3'
 	},
 	type:'post',
 	success:function(data){
