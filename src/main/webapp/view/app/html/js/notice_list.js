@@ -1,7 +1,7 @@
 $bjAjax({
 	url:noticeApiPath+"list",
 	data:{
-		id:id
+		
 	},
 	type:'post',
 	success:function(data){
