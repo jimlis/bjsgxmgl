@@ -1,9 +1,12 @@
 
+var fileName = getRequest(location.search).fileName;
+mui("title")[0].innerText = fileName;
+mui("header .mui-title")[0].innerHTML = fileName;
+console.log(mui("title")[0]);
 function reinitIframe(){
 	var iframe = document.getElementById("fileIframe");
 	try{
 		var bHeight = window.screen.height;
-		//var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
 		iframe.height = bHeight;
 		console.log(bHeight);
 	}catch (ex){

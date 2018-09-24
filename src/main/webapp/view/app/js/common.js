@@ -35,6 +35,7 @@ function isNotEmpty(str){
 }
 
 function getRequest(url){
+	var url = decodeURI(url);
 	var theRequest = new Object();
 	if ( url.indexOf( "?" ) != -1 ) {
 	  var str = url.substr( 1 ); //substr()方法返回从参数值开始到结束的字符串；
@@ -61,7 +62,8 @@ function getQueryString(name) {
  */
 function openFileByName(fileId,fileName) {
 	if(fileName.slice(-".pdf".length)==".pdf"){//pdf文件
-        window.location.href="open_file.html?id="+fileId;
+		var url = encodeURI("open_file.html?id="+fileId+"&fileName="+fileName);
+        window.location.href=url
 	}else{
 		window.open(fileApiPath+"/down/"+fileId);
 	}
