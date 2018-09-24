@@ -16,6 +16,7 @@ $bjAjax({
 			var name=user.name||"";//用户名称
 			var mobile=user.mobile||"";//手机
 			var email=user.email||""//邮箱
+			mui("title")[0].innerHTML = name;
 			mui("header .mui-title")[0].innerHTML = name;
 			mui(".mui-content .mui-table-view")[0].innerHTML +=`
 				<li class="mui-table-view-cell">

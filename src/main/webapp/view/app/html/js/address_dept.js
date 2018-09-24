@@ -1,6 +1,11 @@
 
 var obj = getRequest(location.search);
 var deptId = obj.deptId||0;
+if(isNotEmpty(obj.name)){
+	mui("header .mui-title")[0].innerHTML = obj.name;
+	mui("title")[0].innerText = obj.name;
+}
+
 $bjAjax({
 	url:deptApiPath+"getNextDeptAndUser",
 	data:{
@@ -19,7 +24,7 @@ $bjAjax({
 			  	var name = item.name;
 			  	var lx = item.lx;
 			 	var id = item.id;
-				mui(".mui-content .mui-table-view")[0].innerHTML +="<li class=\"mui-table-view-cell\" onclick=\"openNext('"+lx+"','"+id+"');\">"+name+"</li>";
+				mui(".mui-content .mui-table-view")[0].innerHTML +="<li class=\"mui-table-view-cell\" onclick=\"openNext('"+lx+"','"+id+"','"+name+"');\">"+name+"</li>";
 			})
 			mui(".mui-content .mui-table-view-cell")[0].style.display="none";
 		}else{
@@ -37,11 +42,12 @@ $bjAjax({
 /**
  * 跳转组织机构人员列表页面
  */
-function openNext(lx,id){
+function openNext(lx,id,name){
 	if(lx=='unit'){
-		window.location.href="address_dept.html?deptId="+id;
+		var url = encodeURI("address_dept.html?deptId="+id+"&name="+name);
 	}else{
-		window.location.href="address_user.html?userId="+id;
+		var url = encodeURI("address_user.html?userId="+id+"&name="+name);
 	}
+	window.location.href=url;
 }
 
