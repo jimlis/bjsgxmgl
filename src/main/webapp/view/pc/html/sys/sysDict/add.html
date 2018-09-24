@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -67,7 +68,7 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="js/add.js" th:src="@{/view/pc/html/project/sysDict/js/add.js}">
+	<script type="text/javascript" src="js/add.js" th:src="@{/view/pc/html/sys/sysDict/js/add.js}">
 	</script>
 </body>
 </html>
