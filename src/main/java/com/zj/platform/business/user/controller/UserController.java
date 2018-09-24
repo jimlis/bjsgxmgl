@@ -88,7 +88,7 @@ public class UserController extends AdminBaseController {
     @PostMapping("/save")
     @ResponseBody
     Result<String> save(UserDO user) {
-        user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+        user.setPassword(MD5Utils.encrypt(user.getMobile(), user.getPassword()));
         userService.save(user);
         return Result.ok();
     }

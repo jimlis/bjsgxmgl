@@ -3,6 +3,9 @@ package ${package}.controller;
 
 import java.util.Arrays;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zj.platform.common.web.controller.AdminBaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,14 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.zj.platform.common.util.Result;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.ifast.common.base.AdminBaseController;
 import ${package}.domain.${className}DO;
 import ${package}.service.${className}Service;
-import com.ifast.common.utils.Result;
+
 
 /**
  * 
@@ -44,9 +44,9 @@ public class ${className}Controller extends AdminBaseController {
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
-	public Result<Page<${className}DO>> list(${className}DO ${classname}DTO){
-        Wrapper<${className}DO> wrapper = new EntityWrapper<${className}DO>(${classname}DTO);
-        Page<${className}DO> page = ${classname}Service.selectPage(getPage(${className}DO.class), wrapper);
+	public Result<IPage<${className}DO>> list(${className}DO ${classname}DTO){
+        QueryWrapper<${className}DO> wrapper = new QueryWrapper<${className}DO>(${classname}DTO);
+        IPage<${className}DO> page = ${classname}Service.page(getPage(${className}DO.class), wrapper);
         return Result.ok(page);
 	}
 	
@@ -59,7 +59,7 @@ public class ${className}Controller extends AdminBaseController {
 	@GetMapping("/edit/{${pk.attrname}}")
 	@RequiresPermissions("${pathName}:${classname}:edit")
 	String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
-		${className}DO ${classname} = ${classname}Service.selectById(${pk.attrname});
+		${className}DO ${classname} = ${classname}Service.getById(${pk.attrname});
 		model.addAttribute("${classname}", ${classname});
 	    return "${pathName}/${classname}/edit";
 	}
@@ -71,7 +71,7 @@ public class ${className}Controller extends AdminBaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("${pathName}:${classname}:add")
 	public Result<String> save( ${className}DO ${classname}){
-		${classname}Service.insert(${classname});
+		${classname}Service.save(${classname});
         return Result.ok();
 	}
 	/**
@@ -92,7 +92,7 @@ public class ${className}Controller extends AdminBaseController {
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:remove")
 	public Result<String>  remove( ${pk.attrType} ${pk.attrname}){
-		${classname}Service.deleteById(${pk.attrname});
+		${classname}Service.removeById(${pk.attrname});
         return Result.ok();
 	}
 	
@@ -103,7 +103,7 @@ public class ${className}Controller extends AdminBaseController {
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:batchRemove")
 	public Result<String>  remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
-		${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s));
+		${classname}Service.removeByIds(Arrays.asList(${pk.attrname}s));
 		return Result.ok();
 	}
 	

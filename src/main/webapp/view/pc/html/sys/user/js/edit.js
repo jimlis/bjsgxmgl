@@ -69,9 +69,9 @@ function validateRule() {
 			name : {
 				required : true
 			},
-			username : {
+            mobile : {
 				required : true,
-				minlength : 2
+                mobile : true
 			},
 			password : {
 				required : true,
@@ -82,14 +82,6 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
-			email : {
-				required : true,
-				email : true
-			},
-            mobile : {
-                required : true,
-                mobile : true
-            },
 			topic : {
 				required : "#newsletter:checked",
 				minlength : 2
@@ -102,9 +94,9 @@ function validateRule() {
 			name : {
 				required : icon + "请输入姓名"
 			},
-			username : {
-				required : icon + "请输入您的用户名",
-				minlength : icon + "用户名必须两个字符以上"
+            mobile : {
+				required : icon + "请输入您的手机号",
+                mobile : icon + "请输入正确的手机号"
 			},
 			password : {
 				required : icon + "请输入您的密码",
@@ -114,10 +106,6 @@ function validateRule() {
 				required : icon + "请再次输入密码",
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
-			},
-			email : icon + "请输入您的E-mail",
-            mobile:{
-                required : icon+"请输入您的手机号"
 			},
             orderNum:{digits:icon+"排序号必须为整数"}
 		}

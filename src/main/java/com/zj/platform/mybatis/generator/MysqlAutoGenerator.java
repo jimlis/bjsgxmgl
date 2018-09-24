@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.zj.platform.mybatis.generator.config.converts.CustomOracleTypeConvert;
@@ -13,57 +14,57 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class OracleAutoGenerator {
-	
+public class MysqlAutoGenerator {
+
 	private AutoGenerator autoGenerator=new AutoGenerator();
-	
+
 	private Properties pros=new Properties();
-	
+
 	private GlobalConfig globalConfig=new GlobalConfig();
-	
+
 	private DataSourceConfig dataSourceConfig=new DataSourceConfig();
-	
+
 	private StrategyConfig strategyConfig=new StrategyConfig();
-	
+
 	private PackageConfig packageConfig=new PackageConfig();
-	
+
 	private InjectionConfig injectionConfig=null;
-	
+
 	private TemplateConfig template = new TemplateConfig();
-	
+
 	private String outputDir=System.getProperty("user.dir")+File.separator+"src"+File.separator+"main"+File.separator+"java";
-	
+
 	private String author="zj";
-	
+
 	private String[] tables=new String[]{};
-	
+
 	/**自定义实体，公共字段 父类中字段 代码生成时候忽略  代码判断时候区分大小写*/
-	private String[] superEntityColumns=new String[]{"ID"};
-	
+	private String[] superEntityColumns=new String[]{};
+
 	/**父包路径*/
 	private String parentPackage="com.zj.project";
-	
+
 	/**模块名*/
 	private String moduleName=null;
-	
+
 	/**自定义vm中属性*/
 	private Map<String, Object> attr=new HashMap<String, Object>();
-	
+
 	/**添加自定义的模版输出*/
 	List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-	
+
 	/**只生成一次 不可以覆盖**/
 	private boolean fileOverride=false;
-	
-	public OracleAutoGenerator() {
-		
+
+	public MysqlAutoGenerator() {
+
 	}
-	
-	public OracleAutoGenerator(String author) {
+
+	public MysqlAutoGenerator(String author) {
 		this.author=author;
 	}
-	
-	public OracleAutoGenerator(String author,String outputDir,String moduleName,String[] tables) {
+
+	public MysqlAutoGenerator(String author, String outputDir, String moduleName, String[] tables) {
 		this.author=author;
 		this.outputDir=outputDir;
 		this.moduleName=moduleName;
@@ -72,7 +73,7 @@ public class OracleAutoGenerator {
 	
 	public void initProperties() {
 		try {
-			pros.load(OracleAutoGenerator.class.getClassLoader().getResourceAsStream("jdbc.properties"));
+			pros.load(MysqlAutoGenerator.class.getClassLoader().getResourceAsStream("jdbc.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,8 +85,8 @@ public class OracleAutoGenerator {
 		globalConfig.setFileOverride(fileOverride);//只生成一次 不可以覆盖
 		globalConfig.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
 		globalConfig.setEnableCache(false);// XML 二级缓存
-		globalConfig.setBaseResultMap(true);// XML ResultMap
-		globalConfig.setBaseColumnList(true);//生成xml公共的字段sql片段
+		globalConfig.setBaseResultMap(false);// XML ResultMap
+		globalConfig.setBaseColumnList(false);//生成xml公共的字段sql片段
 		globalConfig.setDateType(DateType.ONLY_DATE);//时间对应
 	    // .setKotlin(true) 是否生成 kotlin 代码
 		globalConfig.setAuthor(author);
@@ -95,12 +96,13 @@ public class OracleAutoGenerator {
 		globalConfig.setServiceName("%sService");
 		globalConfig.setServiceImplName("%sServiceImpl");
 		globalConfig.setControllerName("%sController");
+		globalConfig.setEntityName("%sDO");
 	}
 	
 	// 数据源配置
 	public void initDataSourceConfig(){
-		dataSourceConfig.setDbType(DbType.ORACLE);
-		dataSourceConfig.setTypeConvert(new CustomOracleTypeConvert());
+		dataSourceConfig.setDbType(DbType.MYSQL);
+		dataSourceConfig.setTypeConvert(new MySqlTypeConvert());
 		dataSourceConfig.setDriverName(pros.getProperty("jdbc.driver"));
 		dataSourceConfig.setUsername(pros.getProperty("jdbc.username"));
 		dataSourceConfig.setPassword(pros.getProperty("jdbc.password"));
@@ -112,7 +114,7 @@ public class OracleAutoGenerator {
 		 	strategyConfig.setCapitalMode(false);// 全局大写命名 ORACLE 注意
 		 	strategyConfig.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 		   // strategyConfig.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
-		 	strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);//表字段
+		 	strategyConfig.setColumnNaming(NamingStrategy.nochange);//表字段
 		 	strategyConfig.setInclude(tables); // 需要生成的表
 		    // strategyConfig.setExclude(new String[]{"test"}); // 排除生成的表
 		    // 自定义实体父类
@@ -325,15 +327,15 @@ public class OracleAutoGenerator {
 	}
 
 	public static void main(String[] args) throws Exception {
-		OracleAutoGenerator oracleAutoGenerator=
-				new OracleAutoGenerator("zj");
+		MysqlAutoGenerator mysqlAutoGenerator=
+				new MysqlAutoGenerator("zj");
 
 		String[] tables=new String[] {"SysUser"};
 		for (int i = 0; i < tables.length; i++) {
 			tables[i]=StringUtils.camelToUnderline(tables[i]).toUpperCase();
 		}
-		
-		oracleAutoGenerator.generatorTables(tables);
+
+		mysqlAutoGenerator.generatorTables(tables);
 	}
 
 }

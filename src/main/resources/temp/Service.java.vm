@@ -1,7 +1,10 @@
 package ${package}.service;
 
 import ${package}.domain.${className}DO;
-import com.ifast.common.base.CoreService;
+import  com.zj.platform.common.web.service.BaseService;
+import java.util.Collection;
+import java.util.Map;
+
 
 /**
  * 
@@ -10,6 +13,9 @@ import com.ifast.common.base.CoreService;
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */
-public interface ${className}Service extends CoreService<${className}DO> {
-    
+public interface ${className}Service extends BaseService<${className}DO> {
+
+    public boolean removeByParmMap(Map<String, Object> parmMap);
+
+    public Collection<${className}DO> listByParmMap(Map<String, Object> parmMap);
 }

@@ -15,10 +15,9 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.ConfigurableEnvironment;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -29,6 +28,13 @@ import java.util.zip.ZipOutputStream;
 public class GenUtils {
 
     private static Logger log = LoggerFactory.getLogger(GenUtils.class);
+
+    private  static  String genPath=SpringContextHolder.getBean(ConfigurableEnvironment.class).getProperty("genPath");
+
+    private static String javaOutPutDir=genPath+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator;
+
+    private static String htmlOutPutDir=genPath+File.separator+"src"+File.separator+"main"+File.separator+"webapp"+File.separator+"view"+File.separator+
+            "pc"+File.separator+"html"+File.separator;
 
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
@@ -53,8 +59,7 @@ public class GenUtils {
      * 生成代码
      */
 
-    public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns,
-            ZipOutputStream zip) {
+    public static void generatorCode(String moduleCode,Map<String, String> table, List<Map<String, String>> columns) throws IOException {
         // 配置信息
         Map<String, String> config = getConfig();
         // 表信息
@@ -113,7 +118,7 @@ public class GenUtils {
         String pack = config.get("package");
         map.put("pathName", pack.substring(pack.lastIndexOf(".") + 1));
         map.put("columns", tableDO.getColumns());
-        map.put("package", pack+"."+tableDO.getClassname());
+        map.put("package", pack+"."+moduleCode);
         map.put("author", config.get("author"));
         map.put("email", config.get("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN_19));
@@ -123,20 +128,43 @@ public class GenUtils {
         List<String> templates = getTemplates();
         for (String template : templates) {
             // 渲染模板
-            StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, "UTF-8");
-            tpl.merge(context, sw);
 
+            FileOutputStream outputStream=null;
+            OutputStreamWriter writer=null;
+            BufferedWriter  bufferedWriter=null;
             try {
-                // 添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableDO.getClassname(), tableDO.getClassName(),
-                		Objects.toString(map.get("package")))));
-                IOUtils.write(sw.toString(), zip, "UTF-8");
-                IOUtils.closeQuietly(sw);
-                zip.closeEntry();
-            } catch (IOException e) {
-                log.info("渲染模板失败，表名：" + tableDO.getTableName());
-                throw new CommonException(EnumErrorCode.genRenderTemplateError.getCodeStr());
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
+
+                String filePath = getFileName(template, tableDO.getClassname(), tableDO.getClassName(),Objects.toString(map.get("pathName")),
+                        Objects.toString(map.get("package")));
+                String packPath=filePath.substring(0,filePath.lastIndexOf("\\"));
+
+                File packFolder = new File(packPath);
+                if(!packFolder.exists()){
+                    packFolder.mkdirs();
+                }
+
+                File file = new File(filePath);
+                if(!file.exists()){
+                    file.createNewFile();
+                }
+
+              //创建输出流
+              outputStream = new FileOutputStream(file);
+               writer = new OutputStreamWriter(outputStream,"utf-8");
+               bufferedWriter = new BufferedWriter(writer);
+               tpl.merge(context,bufferedWriter);
+               bufferedWriter.flush();
+          }catch (Exception e){
+                        throw  e;
+          }finally {
+                if(outputStream!=null){
+                    outputStream.close();
+                }
+
+                if(bufferedWriter!=null){
+                    bufferedWriter.close();
+                }
             }
         }
     }
@@ -177,8 +205,9 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String classname, String className, String packageName) {
-        String packagePath = "main" + File.separator + "java" + File.separator;
+    public static String getFileName(String template, String classname, String className,String pathName, String packageName) {
+        String packagePath =javaOutPutDir;
+        String htmlPath=htmlOutPutDir+pathName+File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
@@ -204,41 +233,31 @@ public class GenUtils {
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + packageName
-                    + File.separator + className + "Mapper.xml";
+            return packagePath + "mapper" + File.separator + className+"Mapper.xml";
         }
 
         if (template.contains("list.html.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName
-                    + File.separator + classname + File.separator + classname + ".html";
+            return htmlPath + classname + File.separator + classname + ".html";
         }
         if (template.contains("add.html.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName
-                    + File.separator + classname + File.separator + "add.html";
+            return htmlPath + classname + File.separator + "add.html";
         }
         if (template.contains("edit.html.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName
-                    + File.separator + classname + File.separator + "edit.html";
+            return htmlPath+ classname + File.separator + "edit.html";
         }
 
         if (template.contains("list.js.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js"
-                    + File.separator + "appjs" + File.separator + packageName + File.separator + classname
-                    + File.separator + classname + ".js";
+            return htmlPath+ "js" + File.separator  + classname + ".js";
         }
         if (template.contains("add.js.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js"
-                    + File.separator + "appjs" + File.separator + packageName + File.separator + classname
-                    + File.separator + "add.js";
+            return htmlPath+"js"+File.separator + "add.js";
         }
         if (template.contains("edit.js.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js"
-                    + File.separator + "appjs" + File.separator + packageName + File.separator + classname
-                    + File.separator + "edit.js";
+            return htmlPath+"js" + File.separator + "edit.js";
         }
 
         if (template.contains("menu.sql.vm")) {
-            return className.toLowerCase() + "_menu.sql";
+            return htmlPath+"sql"+File.separator + className.toLowerCase() + "_menu.sql";
         }
 
         return null;

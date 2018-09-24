@@ -72,7 +72,35 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function code(tableName) {
-	location.href = prefix + "/code/" + tableName;
+	//location.href = prefix + "/code/" + tableName;
+
+	if(isEmpty(tableName)){
+        parent.layer.msg("请选择要生成代码的表");
+		return;
+	}
+
+	var moduleCode=$("#moduleCode").val();
+	if(isEmpty(moduleCode)){
+        parent.layer.msg("模块code不能为空");
+        return;
+	}
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : prefix + "/code/" + tableName,
+        data : {"moduleCode":moduleCode},
+        dataType: 'json',
+        error : function(request) {
+            parent.layer.alert("服务端异常");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+                parent.layer.msg(data.msg);
+            } else {
+                parent.layer.msg(data.msg);
+            }
+        }
+    });
 }
 function batchCode() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
@@ -80,12 +108,39 @@ function batchCode() {
 		layer.msg("请选择要生成代码的表");
 		return;
 	}
+
+    var moduleCode=$("#moduleCode").val();
+    if(isEmpty(moduleCode)){
+        parent.layer.msg("模块code不能为空");
+        return;
+    }
+
 	var tables = new Array();
 	// 遍历所有选择的行数据，取每条数据对应的ID
 	$.each(rows, function(i, row) {
 		tables[i] = row['tableName'];
 	});
-	location.href = prefix + "/batchCode?tables=" + JSON.stringify(tables);
+
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : prefix + "/batchCode",
+        data : {"moduleCode":moduleCode,"tables":JSON.stringify(tables)},
+        dataType: 'json',
+        error : function(request) {
+            parent.layer.alert("服务端异常");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+                parent.layer.msg(data.msg);
+            } else {
+                parent.layer.msg(data.msg);
+            }
+        }
+    });
+
+	//location.href = prefix + "/batchCode?tables=" + JSON.stringify(tables);
+
 }
 
 function edit(){

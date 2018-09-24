@@ -53,7 +53,7 @@ public class SysUserAuthorizingRealm extends AuthorizingRealm {
 
         UserDao userMapper = SpringContextHolder.getBean(UserDao.class);
         UserDO entity = new UserDO();
-        entity.setUsername(username);
+        entity.setMobile(username);
         QueryWrapper<UserDO> queryWrapper=new QueryWrapper<UserDO>(entity);
         // 查询用户信息
         UserDO user = userMapper.selectOne(queryWrapper);

@@ -21,7 +21,7 @@ interface ${table.mapperName} : ${superMapperClass}<${entity}>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
 	public List<${entity}> get${entity}PageListByMap (@Param("map") Map<?,?> map);
-	
+
 	public IPage<${entity}> get${entity}PageListByMap (IPage<${entity}> iPage,@Param("map") Map<?,?> map);
 }
 #end

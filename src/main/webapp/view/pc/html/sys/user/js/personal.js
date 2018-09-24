@@ -1,4 +1,5 @@
 var prefix =urlPath+ "sys/user";
+
 $(function () {
     laydate({
         elem : '#birth'

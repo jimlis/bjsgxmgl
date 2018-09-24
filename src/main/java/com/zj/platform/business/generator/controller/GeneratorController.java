@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 代码生成
@@ -50,30 +51,42 @@ public class GeneratorController {
     
     @Log("根据数据表生成代码")
     @RequestMapping("/code/{tableName}")
-    public void code(HttpServletRequest request, HttpServletResponse response,
+    @ResponseBody
+    public Result code(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("tableName") String tableName) throws IOException {
-        String[] tableNames = new String[] { tableName };
+        /*String[] tableNames = new String[] { tableName };
         byte[] data = generatorService.generatorCode(tableNames);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"code.zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
 
-        IOUtils.write(data, response.getOutputStream());
+        IOUtils.write(data, response.getOutputStream());*/
+        try {
+            String moduleCode= Objects.toString(request.getParameter("moduleCode"));
+            String[] tableNames = new String[] { tableName };
+            generatorService.generatorCode(moduleCode,tableNames);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
     }
     
     @Log("根据数据表批量生成代码")
     @RequestMapping("/batchCode")
-    public void batchCode(HttpServletRequest request, HttpServletResponse response, String tables) throws IOException {
-        String[] tableNames = new String[] {};
-        tableNames = JSON.parseArray(tables).toArray(tableNames);
-        byte[] data = generatorService.generatorCode(tableNames);
-        response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"code.zip\"");
-        response.addHeader("Content-Length", "" + data.length);
-        response.setContentType("application/octet-stream; charset=UTF-8");
-
-        IOUtils.write(data, response.getOutputStream());
+    @ResponseBody
+    public Result batchCode(HttpServletRequest request, HttpServletResponse response, String tables) throws Exception {
+        try {
+            String[] tableNames = new String[] {};
+            String moduleCode= Objects.toString(request.getParameter("moduleCode"));
+            tableNames = JSON.parseArray(tables).toArray(tableNames);
+            generatorService.generatorCode(moduleCode,tableNames);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
     }
     
     @Log("进入代码生成配置编辑页面")

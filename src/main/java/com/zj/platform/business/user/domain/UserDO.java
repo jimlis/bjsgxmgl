@@ -106,8 +106,11 @@ public class UserDO extends BaseDomain {
      * 所在地区
      */
     private String district;
+    /**
+     * 职务
+     */
+    private String chrzw;
 
-    
 
     /**
      * 设置：用户名
@@ -406,15 +409,40 @@ public class UserDO extends BaseDomain {
 		this.orderNum = orderNum;
 	}
 
-	@Override
-    public String toString() {
-        return "UserDO [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password + ", deptId="
-                + deptId + ", deptName=" + deptName + ", email=" + email + ", mobile=" + mobile + ", status=" + status
-                + ", userIdCreate=" + userIdCreate + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
-                + ", roleIds=" + roleIds + ", sex=" + sex + ", birth=" + birth + ", picId=" + picId + ", liveAddress="
-                + liveAddress + ", hobby=" + hobby + ", province=" + province + ", city=" + city + ", district="
-                + district+ ", orderNum=" + orderNum + "]";
+    public String getChrzw() {
+        return chrzw;
     }
 
-    
+    public void setChrzw(String chrzw) {
+        this.chrzw = chrzw;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDO{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", status=" + status +
+                ", orderNum=" + orderNum +
+                ", userIdCreate=" + userIdCreate +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", roleIds=" + roleIds +
+                ", sex=" + sex +
+                ", birth=" + birth +
+                ", picId=" + picId +
+                ", liveAddress='" + liveAddress + '\'' +
+                ", hobby='" + hobby + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", chrzw='" + chrzw + '\'' +
+                '}';
+    }
 }

@@ -54,16 +54,16 @@ function validateRule() {
 			name : {
 				required : true
 			},
-			username : {
+            mobile : {
 				required : true,
-				minlength : 2,
+                mobile : true,
 				remote : {
 					url : prefix+"/exit", // 后台处理程序
 					type : "post", // 数据发送方式
 					dataType : "json", // 接受数据格式
 					data : { // 要传递的数据
-						username : function() {
-							return $("#username").val();
+                        mobile : function() {
+							return $("#mobile").val();
 						}
 					}
 				}
@@ -77,14 +77,6 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
-			email : {
-				required : true,
-				email : true
-			},
-            mobile:{
-                required : true,
-                mobile:true
-			},
 			topic : {
 				required : "#newsletter:checked",
 				minlength : 2
@@ -97,10 +89,10 @@ function validateRule() {
 			name : {
 				required : icon + "请输入姓名"
 			},
-			username : {
-				required : icon + "请输入您的用户名",
-				minlength : icon + "用户名必须两个字符以上",
-				remote : icon + "用户名已经存在"
+            mobile : {
+				required : icon + "请输入您的手机号",
+                mobile  : icon + "请输入正确的手机号",
+				remote : icon + "手机号已经存在"
 			},
 			password : {
 				required : icon + "请输入您的密码",
@@ -111,10 +103,6 @@ function validateRule() {
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
 			},
-			email : icon + "请输入您的E-mail",
-            mobile:{
-                required :icon+"请输入您的手机号"
-            },
             orderNum:{digits:icon+"排序号必须为整数"}
 		}
 	})

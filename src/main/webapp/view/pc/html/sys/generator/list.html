@@ -5,10 +5,12 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
+		<div class="col-sm-8">
 			<div class="ibox">
 				<div class="ibox-body">
 					<div  id="exampleToolbar" role="group" >
+						<label>模块code：</label>
+						<input name="moduleCode" id="moduleCode" value="" type="text"/>
 						<button type="button" class="btn  btn-primary"
 							onclick="batchCode()">
 							<i class="" aria-hidden="true"></i>批量生成

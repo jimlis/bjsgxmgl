@@ -6,5 +6,5 @@ import java.util.Map;
 public interface GeneratorService {
 	List<Map<String, Object>> list();
 
-	byte[] generatorCode(String[] tableNames);
+	void generatorCode(String moduleCode,String[] tableNames) throws Exception;
 }
