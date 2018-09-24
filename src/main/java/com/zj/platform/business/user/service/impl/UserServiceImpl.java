@@ -118,8 +118,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
     @Override
     public int resetPwd(UserVO userVO, UserDO userDO) {
         if (Objects.equals(userVO.getUserDO().getId(), userDO.getId())) {
-            if (Objects.equals(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdOld()), userDO.getPassword())) {
-                userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
+            if (Objects.equals(MD5Utils.encrypt(userDO.getMobile(), userVO.getPwdOld()), userDO.getPassword())) {
+                userDO.setPassword(MD5Utils.encrypt(userDO.getMobile(), userVO.getPwdNew()));
                 return baseMapper.updateById(userDO);
             } else {
                 throw new CommonException("输入的旧密码有误！");
@@ -132,10 +132,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
     @Override
     public int adminResetPwd(UserVO userVO) {
         UserDO userDO = getById(userVO.getUserDO().getId());
-        if ("admin".equals(userDO.getUsername())) {
+        if ("admin".equals(userDO.getMobile())||"admin".equals(userDO.getUsername())) {
             throw new CommonException(EnumErrorCode.userUpdatePwd4adminNotAllowed.getCodeStr());
         }
-        userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
+        userDO.setPassword(MD5Utils.encrypt(userDO.getMobile(), userVO.getPwdNew()));
         return baseMapper.updateById(userDO);
 
     }
