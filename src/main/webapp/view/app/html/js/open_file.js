@@ -2,7 +2,6 @@
 var fileName = getRequest(location.search).fileName;
 mui("title")[0].innerText = fileName;
 mui("header .mui-title")[0].innerHTML = fileName;
-console.log(mui("title")[0]);
 function reinitIframe(){
 	var iframe = document.getElementById("fileIframe");
 	try{

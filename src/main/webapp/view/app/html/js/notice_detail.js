@@ -1,9 +1,11 @@
 
-var id = getRequest(location.search).id;
+var obj = getRequest(location.search);
+mui("title")[0].innerText = obj.chrbt;
+mui("header .mui-title")[0].innerHTML = obj.chrbt;
 $bjAjax({
 	url:noticeApiPath+"details",
 	data:{
-		id:id
+		id:obj.id
 	},
 	type:'post',
 	success:function(data){
@@ -47,5 +49,5 @@ $bjAjax({
  * 跳转文件详情
  */
 function openNext(id){
-		window.location.href="open_file.html?id="+id;
+		toUrl("open_file.html?id="+id);
 }

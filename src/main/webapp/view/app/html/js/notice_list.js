@@ -16,7 +16,7 @@ $bjAjax({
 				var chrdjrbmmc = item.chrdjrbmmc;
 				var chrdjrmc = item.chrdjrmc;
 				mui(".mui-content")[0].innerHTML +=`
-					<div class="mui-card" onclick="openNext(`+id+`)">
+					<div class="mui-card" onclick="openNext(`+id+`,'`+chrbt+`')">
 						<!--页眉，放置标题-->
 						<div class="mui-card-header" id="title">
 							`+chrbt+`
@@ -50,6 +50,6 @@ $bjAjax({
 /**
  * 跳转公告详情
  */
-function openNext(id){
-		window.location.href="notice_detail.html?id="+id;
+function openNext(id,chrbt){
+		toUrl("notice_detail.html?id="+id+"&chrbt="+chrbt);
 }

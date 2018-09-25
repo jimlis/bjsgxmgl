@@ -44,10 +44,10 @@ $bjAjax({
  */
 function openNext(lx,id,name){
 	if(lx=='unit'){
-		var url = encodeURI("address_dept.html?deptId="+id+"&name="+name);
+		var url = "address_dept.html?deptId="+id+"&name="+name;
 	}else{
-		var url = encodeURI("address_user.html?userId="+id+"&name="+name);
+		var url = "address_user.html?userId="+id+"&name="+name;
 	}
-	window.location.href=url;
+	toUrl(url);
 }
 

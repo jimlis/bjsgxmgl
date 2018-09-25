@@ -26,5 +26,5 @@ function openNext(id){
 		default:
 			break;
 	}
-	window.location.href=address;
+	toUrl(address);
 }

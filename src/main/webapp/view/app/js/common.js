@@ -33,6 +33,13 @@ function isEmpty(str){
 function isNotEmpty(str){
 	return !isEmpty(str);
 }
+/**
+ * 打开链接，进行跳转，传入跳转地址
+ * */
+function toUrl(url){
+	var enUrl = encodeURI(url);
+	window.location.href=enUrl;
+}
 
 function getRequest(url){
 	var url = decodeURI(url);
@@ -62,8 +69,8 @@ function getQueryString(name) {
  */
 function openFileByName(fileId,fileName) {
 	if(fileName.slice(-".pdf".length)==".pdf"){//pdf文件
-		var url = encodeURI("open_file.html?id="+fileId+"&fileName="+fileName);
-        window.location.href=url
+		var url = "open_file.html?id="+fileId+"&fileName="+fileName;
+        toUrl(url);
 	}else{
 		window.open(fileApiPath+"/down/"+fileId);
 	}
