@@ -81,6 +81,9 @@ function validateRule() {
 				required : "#newsletter:checked",
 				minlength : 2
 			},
+            email:{
+                email:true
+			},
 			agree : "required",
             orderNum:{digits:true}
 		},
@@ -102,6 +105,9 @@ function validateRule() {
 				required : icon + "请再次输入密码",
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
+			},
+            email:{
+                email: icon + "请输入正确的邮箱"
 			},
             orderNum:{digits:icon+"排序号必须为整数"}
 		}
