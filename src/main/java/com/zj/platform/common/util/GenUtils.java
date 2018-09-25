@@ -237,27 +237,27 @@ public class GenUtils {
         }
 
         if (template.contains("list.html.vm")) {
-            return htmlPath + classname + File.separator + classname + ".html";
+            return htmlPath + classname.toLowerCase() + File.separator + classname + ".html";
         }
         if (template.contains("add.html.vm")) {
-            return htmlPath + classname + File.separator + "add.html";
+            return htmlPath + classname.toLowerCase() + File.separator + "add.html";
         }
         if (template.contains("edit.html.vm")) {
-            return htmlPath+ classname + File.separator + "edit.html";
+            return htmlPath+ classname.toLowerCase() + File.separator + "edit.html";
         }
 
         if (template.contains("list.js.vm")) {
-            return htmlPath+ "js" + File.separator  + classname + ".js";
+            return htmlPath+ classname.toLowerCase() + File.separator+ "js" + File.separator  + classname + ".js";
         }
         if (template.contains("add.js.vm")) {
-            return htmlPath+"js"+File.separator + "add.js";
+            return htmlPath+ classname.toLowerCase() + File.separator+"js"+File.separator + "add.js";
         }
         if (template.contains("edit.js.vm")) {
-            return htmlPath+"js" + File.separator + "edit.js";
+            return htmlPath+ classname.toLowerCase() + File.separator+"js" + File.separator + "edit.js";
         }
 
         if (template.contains("menu.sql.vm")) {
-            return htmlPath+"sql"+File.separator + className.toLowerCase() + "_menu.sql";
+            return htmlPath+ classname.toLowerCase() + File.separator+"sql"+File.separator + className.toLowerCase() + "_menu.sql";
         }
 
         return null;

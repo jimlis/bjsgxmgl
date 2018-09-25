@@ -38,7 +38,7 @@ public class ${className}Controller extends AdminBaseController {
 	@GetMapping()
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
 	String ${className}(){
-	    return "${pathName}/${classname}/${classname}";
+	    return "${pathName}/${classname.toLowerCase()}/${classname}";
 	}
 	
 	@ResponseBody
@@ -53,7 +53,7 @@ public class ${className}Controller extends AdminBaseController {
 	@GetMapping("/add")
 	@RequiresPermissions("${pathName}:${classname}:add")
 	String add(){
-	    return "${pathName}/${classname}/add";
+	    return "${pathName}/${classname.toLowerCase()}/add";
 	}
 
 	@GetMapping("/edit/{${pk.attrname}}")
@@ -61,7 +61,7 @@ public class ${className}Controller extends AdminBaseController {
 	String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
 		${className}DO ${classname} = ${classname}Service.getById(${pk.attrname});
 		model.addAttribute("${classname}", ${classname});
-	    return "${pathName}/${classname}/edit";
+	    return "${pathName}/${classname.toLowerCase()}/edit";
 	}
 	
 	/**

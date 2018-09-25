@@ -26,7 +26,7 @@ public class DeptDO extends BaseDomain {
      */
     private Integer orderNum;
     /**
-     * 是否删除 -1：已删除 0：正常
+     * 是否删除 -0：已删除 1：正常
      */
     private Integer delFlag;
 
@@ -73,14 +73,14 @@ public class DeptDO extends BaseDomain {
     }
 
     /**
-     * 设置：是否删除 -1：已删除 0：正常
+     * 设置：是否删除 0：已删除 1：正常
      */
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
 
     /**
-     * 获取：是否删除 -1：已删除 0：正常
+     * 获取：是否删除 0：已删除 1：正常
      */
     public Integer getDelFlag() {
         return delFlag;

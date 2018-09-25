@@ -42,6 +42,7 @@ function validateRule() {
 				required : true
 			},
             orderNum:{
+                required : true,
                 digits:true
 			}
 		},
@@ -50,6 +51,7 @@ function validateRule() {
 				required : icon + "请输入姓名"
 			},
             orderNum:{
+                required :  icon + "排序号不能为空",
                 digits:icon+"排序号必须为整数"
             }
 		}

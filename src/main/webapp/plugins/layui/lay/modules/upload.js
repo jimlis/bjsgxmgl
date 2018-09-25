@@ -449,6 +449,9 @@ layui.define('layer' , function(exports){
     
     options.elem.on('click', function(){
       if(that.isFile()) return;
+        if(that.config.onBefore&&typeof (that.config.onBefore)=='function'&&(!that.config.onBefore())){
+            return;
+        }
       $(this).trigger('upload.start');
     });
     

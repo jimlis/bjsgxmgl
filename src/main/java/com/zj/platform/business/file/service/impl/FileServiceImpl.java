@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -36,10 +37,11 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
      * 上传文件到硬盘
      * </pre>、
      * @param file 文件对象
+     * @param  busType 业务表名
      * @return
      */
     @Override
-    public FileDO uploadFile(MultipartFile file)  throws Exception{
+    public FileDO uploadFile(MultipartFile file,String busType)  throws Exception{
         String uploadPath=environment.getProperty("uploadPath");
         if(StringUtils.isEmpty(uploadPath)) throw  new CommonException("请配置上传文件的路径（uploadPath）");
         LocalDate localDate=LocalDate.now();
@@ -67,7 +69,7 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
 
         FileDO fileDO=new FileDO();
         UserDO userDO= ShiroUtils.getSysUser();
-        fileDO.setBusType("bj_wdb");
+        fileDO.setBusType(StringUtils.isEmpty(busType)?"bj_wdb":busType);
         fileDO.setFileName(fileName);
         fileDO.setFileSize(file.getSize());
         fileDO.setCreateUserId(userDO.getId());
@@ -93,5 +95,10 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public List<FileDO> queryList(FileDO fileDO) {
+        return baseMapper.queryList(fileDO);
     }
 }

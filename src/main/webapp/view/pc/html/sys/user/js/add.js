@@ -1,5 +1,6 @@
 var prefix = urlPath+"sys/user";
 var deptPrefix=urlPath+"sys/dept";
+var filePrefix=urlPath+"sys/sysFile";
 $().ready(function() {
 	validateRule();
 });
@@ -21,6 +22,7 @@ function getCheckedRoles() {
 	return adIds;
 }
 function save() {
+    $("#fileIds").val(fileIds.join(","));
 	$("#roleIds").val(getCheckedRoles());
 	$.ajax({
 		cache : true,
@@ -125,4 +127,80 @@ var openDept = function(){
 function loadDept( deptId,deptName){
 	$("#deptId").val(deptId);
 	$("#deptName").val(deptName);
+}
+
+var fileIds=[];
+
+layui.use('upload', function () {
+    var upload = layui.upload;
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#test1', //绑定元素
+        url: filePrefix+'/upload', //上传接口
+        size: fileUploadSize,
+        accept: 'file',
+        data:{"busType":"sys_user"},
+        done: function (r) {
+            if(r.code==0){
+                var file=r.data;
+                var fileId=file.id;
+                var fileName=file.fileName||"";
+                fileIds.push(fileId);
+                var $fileList=$("#fileList");
+                $fileList.append("<div id=\"" + fileId + "\" fileId=\""+fileId+"\" title=\""+fileName+"\" class=\"file-item\"><a href=\"javascript:void(0);\" style='color:blue;' onclick=\"downFile("+fileId+")\">"+ fileName + "</a>" +
+                    "<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile("+fileId+",this)\"></a></div>");
+                $fileList.append("");
+            }else{
+                layer.msg(r.msg);
+            }
+        },
+        error: function (r) {
+            layer.msg(r.msg);
+        }
+    });
+});
+
+function  downFile(id) {
+    if($("#downForm").length>0){
+        $("#downForm").remove();
+    }
+    var $form=$('<form id="downForm" method="post" action="'+filePrefix+'/downFile/'+id+'"></form>');
+    $(document.body).append($form);
+    $form.submit();
+}
+
+/**
+ * 删除文件
+ * @param id
+ */
+function  removeFile(id,obj) {
+    layer.confirm('删除不可以恢复，确定删除文件？', {
+        btn : [ '确定', '取消' ],title: "提示"//按钮
+    }, function(index) {
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url :filePrefix+ "/remove",
+            data : {"id":id},// 你的formid
+            dataType:"json",
+            async : false,
+            error : function(request) {
+                parent.layer.alert("未知错误");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    debugger;
+                    var index = $.inArray(id,fileIds);
+                    if(index>=0){//存在 就删除
+                        fileIds.splice(index,1);
+                    }
+                    $(obj).parent().remove();
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+            }
+        });
+        layer.close(index);
+    });
+
 }

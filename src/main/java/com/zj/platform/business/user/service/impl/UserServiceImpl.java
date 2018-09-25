@@ -1,8 +1,10 @@
 package com.zj.platform.business.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.business.common.domain.Tree;
 import com.zj.platform.business.dept.dao.DeptDao;
 import com.zj.platform.business.dept.domain.DeptDO;
+import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.user.dao.UserDao;
 import com.zj.platform.business.user.dao.UserRoleDao;
@@ -16,6 +18,7 @@ import com.zj.platform.common.util.MD5Utils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +48,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
             user.setDeptName(deptDO.getName());
         }
         user.setroleIds(roleIds);
+
+        //设置最新图片id
+        FileDO fileDO=new FileDO();
+        fileDO.setBusType("sys_user");
+        fileDO.setBusId(user.getId());
+
+        List<FileDO> list = sysFileService.queryList(fileDO);
+        if(list!=null&&list.size()>0){
+            user.setFileId(list.get(0).getId());
+        }
         return user;
     }
 
@@ -70,6 +83,35 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
         return retBool(count);
     }
 
+    @Transactional
+    @Override
+    public boolean saveUser(UserDO user, String fileids) {
+        Long id=user.getId();
+        boolean flag=false;
+        if(id==null){
+             flag = save(user);
+        }else{
+            flag=updateById(user);
+        }
+
+        if(flag&& StringUtils.isNotEmpty(fileids)){
+                String[] fileIdArr=fileids.split(",");
+                List<FileDO> fileDOList=new ArrayList<FileDO>();
+                for (String fileId:fileIdArr){
+                        FileDO fileDO=new FileDO();
+                        fileDO.setId(Long.parseLong(fileId));
+                        fileDO.setBusType("sys_user");
+                        fileDO.setBusId(user.getId());
+                        fileDOList.add(fileDO);
+                }
+
+                if(!fileDOList.isEmpty()){
+                    sysFileService.updateBatchById(fileDOList);
+                }
+        }
+        return flag;
+    }
+
     @Override
     public boolean updateById(UserDO user) {
         int r = baseMapper.updateById(user);
@@ -78,12 +120,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
         //删除原来的角色
         userRoleMapper.removeByUserId(userId);
         List<UserRoleDO> list = new ArrayList<>();
-        for (Long roleId : roles) {
-            UserRoleDO ur = new UserRoleDO();
-            ur.setUserId(userId);
-            ur.setRoleId(roleId);
-            list.add(ur);
+        if(roles!=null&&(!roles.isEmpty())){
+            for (Long roleId : roles) {
+                UserRoleDO ur = new UserRoleDO();
+                ur.setUserId(userId);
+                ur.setRoleId(roleId);
+                list.add(ur);
+            }
         }
+
         if (list.size() > 0) {
         	//插入用户角色
             userRoleMapper.batchSave(list);
@@ -194,10 +239,26 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
      * 更新个人信息
      * 
      * @param userDO
+     * @param  fileids 文件ids
      * @return
      */
     @Override
-    public int updatePersonal(UserDO userDO) {
+    public int updatePersonal(UserDO userDO,String fileids) {
+        if(StringUtils.isNotEmpty(fileids)){
+            String[] fileIdArr=fileids.split(",");
+            List<FileDO> fileDOList=new ArrayList<FileDO>();
+            for (String fileId:fileIdArr){
+                FileDO fileDO=new FileDO();
+                fileDO.setId(Long.parseLong(fileId));
+                fileDO.setBusType("sys_user");
+                fileDO.setBusId(userDO.getId());
+                fileDOList.add(fileDO);
+            }
+
+            if(!fileDOList.isEmpty()){
+                sysFileService.updateBatchById(fileDOList);
+            }
+        }
         return baseMapper.updateById(userDO);
     }
     

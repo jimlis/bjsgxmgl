@@ -42,9 +42,9 @@ function load() {
 						title : '状态',
 						align : 'center',
 						formatter : function(item, index) {
-							if (item.delFlag == '0') {
+							if (item.delFlag == '1') {
 								return '<span class="label label-danger">正常</span>';
-							} else if (item.delFlag == '1') {
+							} else if (item.delFlag == '0') {
 								return '<span class="label label-primary">禁用</span>';
 							}
 						}

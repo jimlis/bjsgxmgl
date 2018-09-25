@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class UserController extends AdminBaseController {
     public Result<IPage<UserDO>> list(UserDO userDTO) {
         QueryWrapper<UserDO> queryWrapper=new QueryWrapper<UserDO>().
                 eq(StringUtils.isNotEmpty(userDTO.getName()),"name",userDTO.getName()).
-                eq(Objects.nonNull(userDTO.getDeptId()), "deptId", userDTO.getDeptId());
+                eq(Objects.nonNull(userDTO.getDeptId()), "deptId", userDTO.getDeptId()).orderByAsc("orderNum");
         // 查询列表数据
         IPage<UserDO> page = userService.page(getPage(UserDO.class), queryWrapper);
         return Result.ok(page);
@@ -87,9 +88,10 @@ public class UserController extends AdminBaseController {
     @Log("保存用户")
     @PostMapping("/save")
     @ResponseBody
-    Result<String> save(UserDO user) {
+    Result<String> save(HttpServletRequest request,UserDO user) {
         user.setPassword(MD5Utils.encrypt(user.getMobile(), user.getPassword()));
-        userService.save(user);
+        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        userService.saveUser(user,fileIds);
         return Result.ok();
     }
 
@@ -97,8 +99,9 @@ public class UserController extends AdminBaseController {
     @Log("更新用户")
     @PostMapping("/update")
     @ResponseBody
-    Result<String> update(UserDO user) {
-        userService.updateById(user);
+    Result<String> update(HttpServletRequest request,UserDO user) {
+        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        userService.saveUser(user,fileIds);
         return Result.ok();
     }
 
@@ -106,8 +109,9 @@ public class UserController extends AdminBaseController {
     @Log("更新用户")
     @PostMapping("/updatePeronal")
     @ResponseBody
-    Result<String> updatePeronal(UserDO user) {
-        userService.updatePersonal(user);
+    Result<String> updatePeronal(HttpServletRequest request,UserDO user) {
+        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        userService.updatePersonal(user,fileIds);
         return Result.ok();
     }
 

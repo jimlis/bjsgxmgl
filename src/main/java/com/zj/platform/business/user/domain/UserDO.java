@@ -111,6 +111,12 @@ public class UserDO extends BaseDomain {
      */
     private String chrzw;
 
+    /**
+     * 最新图片id
+     */
+    @TableField(exist = false)
+    private Long fileId;
+
 
     /**
      * 设置：用户名
@@ -415,6 +421,14 @@ public class UserDO extends BaseDomain {
 
     public void setChrzw(String chrzw) {
         this.chrzw = chrzw;
+    }
+
+    public Long getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Long fileId) {
+        this.fileId = fileId;
     }
 
     @Override

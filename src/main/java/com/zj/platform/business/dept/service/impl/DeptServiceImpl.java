@@ -1,5 +1,6 @@
 package com.zj.platform.business.dept.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.business.common.domain.Tree;
 import com.zj.platform.business.dept.dao.DeptDao;
 import com.zj.platform.business.dept.domain.DeptDO;
@@ -24,7 +25,9 @@ public class DeptServiceImpl extends BaseServiceImpl<DeptDao, DeptDO> implements
     @Override
     public Tree<DeptDO> getTree() {
         List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
-        List<DeptDO> sysDepts = baseMapper.selectList(null);
+        DeptDO query=new DeptDO();
+                        query.setDelFlag(1);
+        List<DeptDO> sysDepts = baseMapper.selectList(new QueryWrapper<>(query));
         for (DeptDO sysDept : sysDepts) {
             Tree<DeptDO> tree = new Tree<DeptDO>();
             tree.setId(sysDept.getId().toString());

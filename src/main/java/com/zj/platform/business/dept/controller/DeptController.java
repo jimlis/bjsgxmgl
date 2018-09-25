@@ -43,7 +43,7 @@ public class DeptController extends AdminBaseController {
     @Log("获取部门列表")
     @RequiresPermissions("system:sysDept:sysDept")
     public List<DeptDO> list(DeptDO deptDTO) {
-        QueryWrapper<DeptDO> queryWrapper=new QueryWrapper<DeptDO>().like(StringUtils.isNotEmpty(deptDTO.getName()),"name",deptDTO.getName());
+        QueryWrapper<DeptDO> queryWrapper=new QueryWrapper<DeptDO>().like(StringUtils.isNotEmpty(deptDTO.getName()),"name",deptDTO.getName()).orderByAsc("orderNum");
         return sysDeptService.list(queryWrapper);
     }
 

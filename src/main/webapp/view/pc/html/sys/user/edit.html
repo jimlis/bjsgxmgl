@@ -9,8 +9,8 @@
 			<div class="col-sm-12">
 				<div class="ibox-content">
 					<form class="form-horizontal m-t" id="signupForm">
-						<input id="id" name="id" th:value="${user.id}"
-							type="hidden">
+						<input id="id" name="id" th:value="${user.id}" type="hidden">
+						<input type="hidden" name="fileIds" id="fileIds">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">姓名：</label>
 							<div class="col-sm-8">
@@ -55,6 +55,16 @@
                                         type="text" th:value="${user.orderNum}">
                                 </div>
                         </div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">
+								<button type="button" class="layui-btn" id="test1" style="width: 100%;">
+									<i class="fa fa-cloud"></i>上传文件
+								</button>
+							</label>
+							<div class="col-sm-8">
+								<div id="fileList"></div>
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">状态:</label>
 							<div class="col-sm-8">

@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 文件上传
@@ -135,10 +136,11 @@ public class FileController extends AdminBaseController {
     @ResponseBody
     @PostMapping("/upload")
     @RequiresPermissions("sys:file:add")
-    Result<FileDO> upload(@RequestParam("file") MultipartFile file) {
+    Result<FileDO> upload(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
         FileDO fileDO =null;
         try {
-            fileDO = sysFileService.uploadFile(file);
+            String busType= Objects.toString(request.getParameter("busType"));
+            fileDO = sysFileService.uploadFile(file,busType);
         } catch (IOException e) {
             e.printStackTrace();
             return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),

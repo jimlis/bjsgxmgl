@@ -24,14 +24,15 @@
                     <!--basic info-->
                     <div class="ibox-content tab-pane fade in active"  id="basic_info">
                         <form class="gg-form" role="form" id="basicInfoForm">
-                            <input name="id" type="hidden" th:value="${user.id}"/>
+                            <input id="id" name="id" type="hidden" th:value="${user.id}"/>
+                            <input type="hidden" name="fileIds" id="fileIds">
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
                                     <em class="gg-star">*</em>
                                     <span>姓名:</span>
                                 </div>
                                 <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="userName" name="name" th:value="${user.name}"  placeholder="请输入姓名" />
+                                    <input type="text" class="form-control" required="true" id="userName" name="name" th:value="${user.name}"  placeholder="请输入姓名" />
                                 </div>
                             </div>
                             <div class="gg-formGroup">
@@ -40,12 +41,12 @@
                                     <span>手机:</span>
                                 </div>
                                 <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="phone" name="mobile"  th:value="${user.mobile}" placeholder="请输入手机号" />
+                                    <input type="text" class="form-control" required="true" id="phone" name="mobile"  th:value="${user.mobile}" placeholder="请输入手机号" />
                                 </div>
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
+                                    <em class="gg-star"></em>
                                     <span>性别:</span>
                                 </div>
                                 <div class="gg-formDetail">
@@ -67,7 +68,7 @@
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
+                                    <em class="gg-star"></em>
                                     <span>出生年月:</span>
                                 </div>
                                 <div class="gg-formDetail">
@@ -77,7 +78,7 @@
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
+                                    <em class="gg-star"></em>
                                     <span>居住地:</span>
                                 </div>
                                 <div class="gg-formDetail gg-font0" data-toggle="distpicker"  th:attr="data-province=${user.province},data-city=${user.city},data-district=${user.district}">
@@ -97,13 +98,25 @@
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
+                                    <em class="gg-star"></em>
                                     <span>联系地址:</span>
                                 </div>
                                 <div class="gg-formDetail">
                                     <input type="text" class="form-control" id="address" name="liveAddress" th:value="${user.liveAddress}" placeholder="请输入居住地址" />
                                 </div>
                             </div>
+                            <div class="gg-formGroup">
+                                <div class="gg-formTitle">
+                                    <em class="gg-star"></em>
+                                    <button type="button" class="layui-btn" id="test1" style="width: 100%;">
+                                        <i class="fa fa-cloud"></i>上传文件
+                                    </button>
+                                </div>
+                                <div class="gg-formDetail">
+                                    <div id="fileList"></div>
+                                </div>
+                            </div>
+
                             <!--<div class="gg-formGroup">
                                 <div class="gg-formTitle">
                                     <em class="gg-star">*</em>
