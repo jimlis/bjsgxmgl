@@ -1,9 +1,11 @@
 
-var userId = getRequest(location.search).userId;
+var obj = getRequest(location.search);
+mui("title")[0].innerText = obj.name;
+mui("header .mui-title")[0].innerHTML = obj.name;
 $bjAjax({
 	url:userApiPath+"getUserById",
 	data:{
-		userId:userId
+		userId:obj.userId
 	},
 	type:'post',
 	success:function(data){
@@ -16,8 +18,6 @@ $bjAjax({
 			var name=user.name||"";//用户名称
 			var mobile=user.mobile||"";//手机
 			var email=user.email||""//邮箱
-			mui("title")[0].innerHTML = name;
-			mui("header .mui-title")[0].innerHTML = name;
 			mui(".mui-content .mui-table-view")[0].innerHTML +=`
 				<li class="mui-table-view-cell">
 					<span>姓名：`+name+`</span>
