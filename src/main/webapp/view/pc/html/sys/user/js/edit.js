@@ -145,7 +145,7 @@ layui.use('upload', function () {
         elem: '#test1', //绑定元素
         url:filePrefix+ '/upload', //上传接口
         size: fileUploadSize,
-        accept: 'file',
+        accept: 'images',
         data:{"busType":"sys_user"},
         done: function (r) {
             if(r.code==0){
