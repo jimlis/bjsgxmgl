@@ -84,8 +84,12 @@ public class ProjectConfig {
 
     @Override
     public String toString() {
-        return "IFastConfig [projectName=" + projectName + ", projectRootURL=" + projectRootURL + ", demoMode="
-                + demoMode + ", devMode=" + devMode + ", jwt=" + jwt + "]";
+        return "ProjectConfig{" +
+                "projectName='" + projectName + '\'' +
+                ", projectRootURL='" + projectRootURL + '\'' +
+                ", demoMode=" + demoMode +
+                ", devMode=" + devMode +
+                ", jwt=" + jwt +
+                '}';
     }
-
 }

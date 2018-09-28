@@ -3,19 +3,27 @@ package com.zj.project.xmjb.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zj.platform.business.user.domain.UserDO;
+import com.zj.platform.common.util.Constant;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.AdminBaseController;
+import com.zj.platform.shiro.util.ShiroUtils;
+import com.zj.project.xmjb.domain.XmDlDO;
 import com.zj.project.xmjb.domain.XmjbDO;
+import com.zj.project.xmjb.service.XmDlService;
 import com.zj.project.xmjb.service.XmjbService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-
+import java.util.Objects;
 
 
 /**
@@ -30,17 +38,20 @@ import java.util.List;
 public class XmjbController extends AdminBaseController {
 	@Autowired
 	private XmjbService xmjbService;
+	@Autowired
+	private XmDlService xmDlService;
 	
 	@GetMapping()
 	@RequiresPermissions("project:xmjb:xmjb")
 	String Xmjb(){
-	    return "project/xmjb/xmjb";
+	    return Constant.PC_PREFIX+"project/xmjb/xmjb";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("project:xmjb:xmjb")
 	public Result<IPage<XmjbDO>> list(XmjbDO xmjbDTO){
+		xmjbDTO.setFcbz(1);
         QueryWrapper<XmjbDO> wrapper = new QueryWrapper<XmjbDO>(xmjbDTO);
 		IPage<XmjbDO> page = xmjbService.page(getPage(XmjbDO.class), wrapper);
         return Result.ok(page);
@@ -48,8 +59,13 @@ public class XmjbController extends AdminBaseController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("project:xmjb:add")
-	String add(){
-	    return "project/xmjb/add";
+	String add(HttpServletRequest request, Model model){
+	    XmjbDO xmjbDO=new XmjbDO();
+		UserDO userDO= ShiroUtils.getSysUser();
+		xmjbDO.setChrdjrmc(userDO.getName());
+		xmjbDO.setDtmdjsj(new Date());
+		model.addAttribute("xmjb", xmjbDO);
+		return Constant.PC_PREFIX+"project/xmjb/add";
 	}
 
 	@GetMapping("/edit/{id}")
@@ -57,7 +73,14 @@ public class XmjbController extends AdminBaseController {
 	String edit(@PathVariable("id") Integer id,Model model){
 		XmjbDO xmjb = xmjbService.getById(id);
 		model.addAttribute("xmjb", xmjb);
-	    return "project/xmjb/edit";
+
+		//查询楼栋信息
+		XmDlDO xmDlDO=new XmDlDO();
+						xmDlDO.setFcbz(1);
+						xmDlDO.setIntxmid(xmjb.getId());
+		QueryWrapper<XmDlDO> queryWrapper=new QueryWrapper<XmDlDO>(xmDlDO);
+		model.addAttribute("xmdllist", xmDlService.list(queryWrapper));
+	    return Constant.PC_PREFIX+"project/xmjb/edit";
 	}
 	
 	/**
@@ -66,8 +89,11 @@ public class XmjbController extends AdminBaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("project:xmjb:add")
-	public Result<String> save( XmjbDO xmjb){
-		xmjbService.save(xmjb);
+	public Result<String> save(HttpServletRequest request, XmjbDO xmjb){
+		String fileIds= Objects.toString(request.getParameter("fileIds"));
+		String ldJson=Objects.toString(request.getParameter("ldJson"));
+		String delLdIds=Objects.toString(request.getParameter("delLdIds"));
+		xmjbService.saveXmjb(xmjb,fileIds,ldJson,delLdIds);
         return Result.ok();
 	}
 	/**
