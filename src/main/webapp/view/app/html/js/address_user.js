@@ -11,7 +11,14 @@ $bjAjax({
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
 		if(data.code==0){
+			console.log(data);
 			var user = data.data;
+			if(user.fileId!=null){
+				mui(".mui-content")[0].innerHTML =`
+					<img class="bj-img-center" src="`+imgApiPath+user.fileId+`"/>
+				`;
+				return;
+			}
 			var userId=user.id;//用户id
 			var deptId=user.deptId;//部门id
 			var deptName=user.deptName||"";//部门名称

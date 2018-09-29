@@ -4,7 +4,8 @@ var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
 var fileApiPath=serverPath+"api/file/";
-var noticeApiPath=serverPath+"api/gsgg/"
+var noticeApiPath=serverPath+"api/gsgg/";
+var imgApiPath = serverPath+"api/file/down/";
 
 
 /**
