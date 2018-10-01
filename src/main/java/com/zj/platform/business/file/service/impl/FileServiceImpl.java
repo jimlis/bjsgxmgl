@@ -1,6 +1,7 @@
 package com.zj.platform.business.file.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.business.file.dao.FileDao;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
@@ -100,5 +101,22 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
     @Override
     public List<FileDO> queryList(FileDO fileDO) {
         return baseMapper.queryList(fileDO);
+    }
+
+    /**
+     * 根据busType、busId、type获取文件集合
+     * @param busType 业务表名称
+     * @param busId 对应业务id
+     * @param type 文件类型
+     * @return List<FileDO>
+     */
+    @Override
+    public List<FileDO> queryFileDOList(String busType,Long busId,String  type ){
+        FileDO fileDO=new FileDO();
+        fileDO.setBusType(busType);
+        fileDO.setBusId(busId);
+        fileDO.setType(type);
+        QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>(fileDO).orderByDesc("createDate");
+        return  list(queryWrapper);
     }
 }

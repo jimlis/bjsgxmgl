@@ -27,6 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/gsgg/")
+@Api("公司公告api")
 public class ApiGsggController extends ApiBaseController {
     @Autowired
     private GsggService gsggService;
@@ -35,9 +36,12 @@ public class ApiGsggController extends ApiBaseController {
     @Autowired
     private FileService fileService;
 
-    @Log("获取公司公告列表")
+    @Log("获取公司公告分页列表")
     @PostMapping("list")
-    @ApiOperation(value="获取公司公告列表",httpMethod="POST")
+    @ApiOperation(value="获取公司公告分页列表",httpMethod="POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="pageNumber",paramType="form",dataType = "int",required=true,value = "页面",defaultValue = "1"),
+            @ApiImplicitParam(name="pageSize",paramType="form",dataType = "int",required=true,value = "分页大小",defaultValue = "10")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
@@ -51,9 +55,9 @@ public class ApiGsggController extends ApiBaseController {
     @Log("根据公告id获取公司公告详情信息")
     @PostMapping("details")
     @ApiOperation(value="根据公告id获取公司公告详情信息",httpMethod="POST")
-    @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="long",required=true,value = "公司公告id"))
-    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
-            @ApiResponse(code=1,message="操作失败",response=List.class)})
+    @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="form",dataType = "long",required=true,value = "公司公告id"))
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=GsggDetailsVo.class),
+            @ApiResponse(code=1,message="操作失败",response=GsggDetailsVo.class)})
     @RequiresAuthentication
     public Result<GsggDetailsVo> details(Long id) {
         if(null==id){

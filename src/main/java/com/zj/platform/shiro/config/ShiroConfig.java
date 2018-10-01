@@ -39,6 +39,7 @@ import java.util.*;
  */
 @Configuration
 public class ShiroConfig {
+
     
     @Bean
     SessionDAO sessionDAO() {

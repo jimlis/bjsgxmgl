@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/file/")
+@Api("文件api")
 public class ApiFileController  extends ApiBaseController {
     @Autowired
     private FileService fileService;
@@ -32,12 +33,14 @@ public class ApiFileController  extends ApiBaseController {
     @ResponseBody
     @PostMapping("/wdlist")
     @ApiOperation(value="根据文件类型获取文档附件列表",httpMethod="POST")
-    @ApiImplicitParams(@ApiImplicitParam(name="type",paramType="string",required=false,value = "文件类型"))
+    @ApiImplicitParams({@ApiImplicitParam(name="type",paramType="form",dataType = "string",required=false,value = "文件类型"),
+            @ApiImplicitParam(name="pageNumber",paramType="form",dataType = "int",required=true,value = "页面",defaultValue = "1"),
+            @ApiImplicitParam(name="pageSize",paramType="form",dataType = "int",required=true,value = "分页大小",defaultValue = "10")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
             @ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
-    public Result<List<FileDO>> list(FileDO fileDO) {
-        QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>().eq("busType", "bj_wdb").eq("type", fileDO.getType());
+    public Result<List<FileDO>> wdlist(String  type) {
+        QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>().eq("busType", "bj_wdb").eq("type", type);
         // 查询列表数据
         IPage<FileDO> page = fileService.page(getPage(FileDO.class),queryWrapper);
         return Result.ok(page.getRecords());
@@ -46,9 +49,9 @@ public class ApiFileController  extends ApiBaseController {
     @Log("附件下载")
     @GetMapping("/down/{id}")
     @ApiOperation(value="根据附件id下载附件",httpMethod="GET")
-    @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="long",required=true,value = "附件id"))
+    @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="path",dataType = "long",required=true,value = "附件id"))
     @RequiresAuthentication
-    public void list(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) {
+    public void down(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) {
             fileService.downFile(id,request,response);
     }
 }

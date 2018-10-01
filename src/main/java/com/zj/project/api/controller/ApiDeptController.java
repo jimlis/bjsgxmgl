@@ -1,6 +1,7 @@
 package com.zj.project.api.controller;
 
 import com.zj.platform.business.dept.service.DeptService;
+import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import io.swagger.annotations.*;
@@ -21,13 +22,15 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/dept/")
+@Api("部门api")
 public class ApiDeptController extends ApiBaseController {
     @Autowired
     private DeptService deptService;
 
+    @Log("根据部门id获取下一级部门、人员信息")
     @PostMapping("getNextDeptAndUser")
     @ApiOperation(value="根据部门id获取下一级部门、人员信息",httpMethod="POST")
-    @ApiImplicitParams(@ApiImplicitParam(name="deptId",paramType="string",required=false,defaultValue="0",value = "部门id"))
+    @ApiImplicitParams(@ApiImplicitParam(name="deptId",paramType="form",dataType = "string",required=false,defaultValue="0",value = "部门id"))
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication

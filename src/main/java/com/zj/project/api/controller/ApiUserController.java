@@ -6,14 +6,14 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.api.pojo.vo.TokenVO;
 import com.zj.project.api.service.ApiUserService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <pre>
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/user/")
-//@Api(tags = { "测试API" })
+@Api("用户api")
 public class ApiUserController extends ApiBaseController {
     @Autowired
     private ApiUserService apiUserService;
@@ -83,6 +83,9 @@ public class ApiUserController extends ApiBaseController {
     
   @PostMapping("getUserById")
   @ApiOperation("根据用户id获取用户信息")
+  @ApiImplicitParams({ @ApiImplicitParam(name = "userId", value = "用户id", paramType = "form",dataType = "string",required=true) })
+  @ApiResponses({@ApiResponse(code=0,message="操作成功",response=UserDO.class),
+          @ApiResponse(code=1,message="操作失败",response=UserDO.class)})
   public Result<?> getUserById(String userId) {
       return Result.build(Result.CODE_SUCCESS,"获取成功",userService.getById(userId));
   }

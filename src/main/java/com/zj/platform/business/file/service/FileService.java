@@ -35,4 +35,13 @@ public interface FileService extends BaseService<FileDO> {
 
 
     List<FileDO> queryList(FileDO fileDO);
+
+    /**
+     * 根据busType、busId、type获取文件集合
+     * @param busType 业务表名称
+     * @param busId 对应业务id
+     * @param type 文件类型
+     * @return List<FileDO>
+     */
+    List<FileDO> queryFileDOList(String busType, Long busId, String type);
 }

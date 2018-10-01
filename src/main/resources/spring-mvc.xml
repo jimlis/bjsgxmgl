@@ -74,6 +74,12 @@
 	<bean id="springTemplateEngine"
 		  class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="springResourceTemplateResolver"></property>
+		<property name="additionalDialects">
+			<set>
+				<ref bean="shiroDialect"></ref>
+			</set>
+		</property>
+
 	</bean>
 
 	<bean id="thymeleafViewResolver"
