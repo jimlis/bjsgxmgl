@@ -1,5 +1,5 @@
 var prefix = urlPath+"/${pathName}/${classname}";
-1$().ready(function() {
+$().ready(function() {
 	validateRule();
 });
 

@@ -1,5 +1,5 @@
 var prefix = urlPath+"/project/xmGhzb";
-1$().ready(function() {
+$().ready(function() {
 	validateRule();
 });
 
