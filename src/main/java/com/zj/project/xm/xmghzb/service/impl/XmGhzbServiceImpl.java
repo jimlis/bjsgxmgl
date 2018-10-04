@@ -1,10 +1,10 @@
-package com.zj.project.xm.ghzb.service.impl;
+package com.zj.project.xm.xmghzb.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.zj.project.xm.ghzb.dao.XmGhzbDao;
-import com.zj.project.xm.ghzb.domain.XmGhzbDO;
-import com.zj.project.xm.ghzb.service.XmGhzbService;
+import com.zj.project.xm.xmghzb.dao.XmGhzbDao;
+import com.zj.project.xm.xmghzb.domain.XmGhzbDO;
+import com.zj.project.xm.xmghzb.service.XmGhzbService;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import org.springframework.util.Assert;
@@ -17,7 +17,7 @@ import java.util.Map;
  * <pre>
  * 项目基本信息-规划指标数据
  * </pre>
- * <small> 2018-10-04 13:41:37 | lijun</small>
+ * <small> 2018-10-04 18:35:49 | lijun</small>
  */
 @Service
 public class XmGhzbServiceImpl extends BaseServiceImpl<XmGhzbDao, XmGhzbDO> implements XmGhzbService {

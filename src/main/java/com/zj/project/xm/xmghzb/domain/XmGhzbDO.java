@@ -1,4 +1,4 @@
-package com.zj.project.xm.ghzb.domain;
+package com.zj.project.xm.xmghzb.domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,7 +15,7 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <pre>
  * 项目基本信息-规划指标数据
  * </pre>
- * <small> 2018-10-04 13:41:37 | lijun</small>
+ * <small> 2018-10-04 18:35:49 | lijun</small>
  */
  @TableName("bj_xm_ghzb")
 public class XmGhzbDO extends BaseDomain {

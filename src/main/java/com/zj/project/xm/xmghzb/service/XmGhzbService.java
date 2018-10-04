@@ -1,6 +1,6 @@
-package com.zj.project.xm.ghzb.service;
+package com.zj.project.xm.xmghzb.service;
 
-import com.zj.project.xm.ghzb.domain.XmGhzbDO;
+import com.zj.project.xm.xmghzb.domain.XmGhzbDO;
 import  com.zj.platform.common.web.service.BaseService;
 import java.util.Collection;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * <pre>
  * 项目基本信息-规划指标数据
  * </pre>
- * <small> 2018-10-04 13:41:37 | lijun</small>
+ * <small> 2018-10-04 18:35:49 | lijun</small>
  */
 public interface XmGhzbService extends BaseService<XmGhzbDO> {
 

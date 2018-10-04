@@ -1,4 +1,4 @@
-package com.zj.project.xm.ghzb.controller;
+package com.zj.project.xm.xmghzb.controller;
 
 
 import java.util.Arrays;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zj.platform.common.util.Result;
 
-import com.zj.project.xm.ghzb.domain.XmGhzbDO;
-import com.zj.project.xm.ghzb.service.XmGhzbService;
+import com.zj.project.xm.xmghzb.domain.XmGhzbDO;
+import com.zj.project.xm.xmghzb.service.XmGhzbService;
 
 
 /**
@@ -28,7 +28,7 @@ import com.zj.project.xm.ghzb.service.XmGhzbService;
  * <pre>
  * 项目基本信息-规划指标数据
  * </pre>
- * <small> 2018-10-04 13:41:37 | lijun</small>
+ * <small> 2018-10-04 18:35:49 | lijun</small>
  */
 @Controller
 @RequestMapping("/project/xmGhzb")
