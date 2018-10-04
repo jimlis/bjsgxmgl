@@ -2,6 +2,7 @@ package com.zj.project.xm.xmxkz.service.impl;
 
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.exception.MyApiException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,11 @@ public class XmXkzServiceImpl extends BaseServiceImpl<XmXkzDao, XmXkzDO> impleme
      */
     @Override
     public void saveXmXkzxx(XmXkzDO xmXkzDO, String fileIds) {
+        Long intxmid = xmXkzDO.getIntxmid();
+        if(intxmid==null){
+            throw  new MyApiException("44005");
+        }
+
         Long id=xmXkzDO.getId();
         if(id==null){
             xmXkzDO.setFcbz(1);

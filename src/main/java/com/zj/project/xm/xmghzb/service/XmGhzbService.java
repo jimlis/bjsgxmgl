@@ -18,4 +18,11 @@ public interface XmGhzbService extends BaseService<XmGhzbDO> {
     public boolean removeByParmMap(Map<String, Object> parmMap);
 
     public Collection<XmGhzbDO> listByParmMap(Map<String, Object> parmMap);
+
+    /**
+     * 批量保存项目的规划信息
+     * @param xmid
+     * @param json
+     */
+    void saveBatchXmGhzbxx(Long xmid, String json);
 }
