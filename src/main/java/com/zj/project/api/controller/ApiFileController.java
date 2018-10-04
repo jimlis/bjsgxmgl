@@ -5,16 +5,21 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.annotation.Log;
+import com.zj.platform.common.type.EnumErrorCode;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <pre>
@@ -29,7 +34,7 @@ public class ApiFileController  extends ApiBaseController {
     private FileService fileService;
 
 
-    @Log("查询文档附件列表")
+    @Log("根据文件类型获取文档附件列表")
     @ResponseBody
     @PostMapping("/wdlist")
     @ApiOperation(value="根据文件类型获取文档附件列表",httpMethod="POST")
@@ -46,12 +51,35 @@ public class ApiFileController  extends ApiBaseController {
         return Result.ok(page.getRecords());
     }
 
-    @Log("附件下载")
+    @Log("根据附件id下载附件")
     @GetMapping("/down/{id}")
     @ApiOperation(value="根据附件id下载附件",httpMethod="GET")
     @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="path",dataType = "long",required=true,value = "附件id"))
     @RequiresAuthentication
     public void down(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) {
             fileService.downFile(id,request,response);
+    }
+
+    @Log("上传文件")
+    @PostMapping("/upload")
+    @ApiOperation(value="上传文件",httpMethod="GET")
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=FileDO.class),
+            @ApiResponse(code=1,message="操作失败")})
+    @RequiresAuthentication
+    Result<FileDO> upload(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
+        FileDO fileDO =null;
+        try {
+            String busType= Objects.toString(request.getParameter("busType"));
+            fileDO = fileService.uploadFile(file,busType);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),
+                    EnumErrorCode.FileUploadGetBytesError.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.build(EnumErrorCode.unknowFail.getCode(),
+                    EnumErrorCode.unknowFail.getMsg());
+        }
+        return Result.ok(fileDO);
     }
 }

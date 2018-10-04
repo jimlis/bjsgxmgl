@@ -7,8 +7,8 @@ import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
-import com.zj.project.xmjb.domain.XmjbDO;
-import com.zj.project.xmjb.service.XmjbService;
+import com.zj.project.xm.xmjb.domain.XmjbDO;
+import com.zj.project.xm.xmjb.service.XmjbService;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +43,16 @@ public class ApiXmjbController extends ApiBaseController {
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
     public Result<List<XmjbDO>> getListByXmlx(Integer xmlx) {
-        QueryWrapper<XmjbDO> queryWrapper=new QueryWrapper<XmjbDO>().eq("fcbz",1).eq("intxmlx",xmlx).orderByAsc("intxh");
-        // 查询列表数据
-        IPage<XmjbDO> page = xmjbService.page(getPage(XmjbDO.class), queryWrapper);
-        return Result.ok(page.getRecords());
+        try {
+            QueryWrapper<XmjbDO> queryWrapper=new QueryWrapper<XmjbDO>().eq("fcbz",1).eq("intxmlx",xmlx).orderByAsc("intxh");
+            // 查询列表数据
+            IPage<XmjbDO> page = xmjbService.page(getPage(XmjbDO.class), queryWrapper);
+            return Result.ok(page.getRecords());
+        }catch (Exception e){
+            e.printStackTrace();
+            return  Result.fail();
+        }
+
     }
 
 

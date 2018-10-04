@@ -119,6 +119,9 @@ public class GenUtils {
         map.put("pathName", pack.substring(pack.lastIndexOf(".") + 1));
         map.put("columns", tableDO.getColumns());
         map.put("package", pack+"."+moduleCode);
+        map.put("modulePath",moduleCode);
+        String htmlPathPer=moduleCode.indexOf(".")>0?moduleCode.substring(0,moduleCode.lastIndexOf(".")+1).replace(".","/"):"";
+        map.put("htmlPathPer",htmlPathPer);
         map.put("author", config.get("author"));
         map.put("email", config.get("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN_19));
@@ -136,7 +139,7 @@ public class GenUtils {
                 Template tpl = Velocity.getTemplate(template, "UTF-8");
 
                 String filePath = getFileName(template, tableDO.getClassname(), tableDO.getClassName(),Objects.toString(map.get("pathName")),
-                        Objects.toString(map.get("package")));
+                        Objects.toString(map.get("package")),htmlPathPer);
                 String packPath=filePath.substring(0,filePath.lastIndexOf("\\"));
 
                 File packFolder = new File(packPath);
@@ -205,9 +208,12 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String classname, String className,String pathName, String packageName) {
+    public static String getFileName(String template, String classname, String className,String pathName, String packageName,String htmlPathPer) {
         String packagePath =javaOutPutDir;
         String htmlPath=htmlOutPutDir+pathName+File.separator;
+        if(StringUtils.isNotBlank(htmlPathPer)){
+            htmlPath+=htmlPathPer.replace("/",File.separator);
+        }
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }

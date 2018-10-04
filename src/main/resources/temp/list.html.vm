@@ -57,6 +57,6 @@
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="js/${classname}.js" th:src="@{/view/pc/html/${pathName}/${classname.toLowerCase()}/js/${classname}.js}"></script>
+	<script type="text/javascript" src="js/${classname}.js" th:src="@{/view/pc/html/${pathName}/${htmlPathPer}${classname.toLowerCase()}/js/${classname}.js}"></script>
 </body>
 </html>

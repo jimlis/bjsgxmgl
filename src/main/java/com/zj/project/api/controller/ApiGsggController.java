@@ -46,10 +46,15 @@ public class ApiGsggController extends ApiBaseController {
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
     public Result<List<GsggDO>> list() {
-        QueryWrapper<GsggDO> queryWrapper=new QueryWrapper<GsggDO>().eq("fcbz",1);
-        // 查询列表数据
-        IPage<GsggDO> page = gsggService.page(getPage(GsggDO.class), queryWrapper);
-        return Result.ok(page.getRecords());
+        try {
+            QueryWrapper<GsggDO> queryWrapper=new QueryWrapper<GsggDO>().eq("fcbz",1);
+            // 查询列表数据
+            IPage<GsggDO> page = gsggService.page(getPage(GsggDO.class), queryWrapper);
+            return Result.ok(page.getRecords());
+        }catch (Exception e){
+            e.printStackTrace();
+            return  Result.fail();
+        }
     }
 
     @Log("根据公告id获取公司公告详情信息")
@@ -60,9 +65,14 @@ public class ApiGsggController extends ApiBaseController {
             @ApiResponse(code=1,message="操作失败",response=GsggDetailsVo.class)})
     @RequiresAuthentication
     public Result<GsggDetailsVo> details(Long id) {
-        if(null==id){
+        try {
+            if(null==id){
+                return  Result.fail();
+            }
+            return Result.ok(gsggService.getGsggDetailsById(id));
+        }catch (Exception e){
+            e.printStackTrace();
             return  Result.fail();
         }
-        return Result.ok(gsggService.getGsggDetailsById(id));
     }
 }
