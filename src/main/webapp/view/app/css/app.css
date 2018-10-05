@@ -53,11 +53,30 @@
 	margin: 0 auto;
 	width: 100%;
 }
+.bj-img-temp{
+	width: 100px;
+	height: 150px;
+	margin: 5px 5px;
+}
 .bj-background-inherit{
 	background-color: inherit;
 }
 .mui-pull-right.bj-header-right{
 	line-height: 44px;
+}
+input.bj-input{
+    line-height: inherit;
+	height: inherit;
+	margin-bottom: inherit;
+	padding: inherit;
+	width: 100%;
+	-webkit-user-select: text;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 3px;
+	outline: 0;
+	background-color: #fff;
+	-webkit-appearance: none
+    
 }
 /*博建项目系统头背景*/
 header.mui-bar.mui-bar-nav{

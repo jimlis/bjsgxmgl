@@ -96,3 +96,127 @@ $bjAjax = function(obj){
 	}
 	})
 }
+/**
+ *日期选择器
+ */
+function dtPicker(selecter){
+	var result = mui(selecter);
+	result.each(function(i, btn) {
+		btn.addEventListener('tap', function() {
+			var _self = this;
+			if(_self.picker) {
+				_self.picker.show(function (rs) {
+					_self.value = rs.text;
+					_self.picker.dispose();
+					_self.picker = null;
+				});
+			} else {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				/*
+				 * 首次显示时实例化组件
+				 * 示例为了简洁，将 options 放在了按钮的 dom 上
+				 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+				 */
+				_self.picker = new mui.DtPicker(options);
+				_self.picker.show(function(rs) {
+					/*
+					 * rs.value 拼合后的 value
+					 * rs.text 拼合后的 text
+					 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+					 * rs.m 月，用法同年
+					 * rs.d 日，用法同年
+					 * rs.h 时，用法同年
+					 * rs.i 分（minutes 的第二个字母），用法同年
+					 */
+					_self.value = rs.text;
+					/* 
+					 * 返回 false 可以阻止选择框的关闭
+					 * return false;
+					 */
+					/*
+					 * 释放组件资源，释放后将将不能再操作组件
+					 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+					 */
+					_self.picker.dispose();
+					_self.picker = null;
+				});
+			}
+			
+		}, false);
+	});
+}
+/*选择框*/
+function relPicker(selecter,data){
+	var userPicker = new mui.PopPicker();
+	userPicker.setData(data);
+	var showUserPickerButton = document.getElementById(selecter);
+	showUserPickerButton.addEventListener('tap', function(event) {
+		userPicker.show(function(items) {
+			showUserPickerButton.value = JSON.stringify(items[0].text).replace(/^\"|\"$/g,'');
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+	}, false);
+}
+/*照片懒加载1*/
+var createFragment = function(count,src) {
+	var fragment = document.createDocumentFragment();
+	var ul = document.createElement('ul');
+	ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
+	var li;
+	for(var i = 0; i < count; i++) {
+		li = document.createElement('li');
+		li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
+		li.innerHTML = `<a>
+							<img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">
+						</a>`;
+		ul.appendChild(li);
+	}
+	fragment.appendChild(ul);
+	return fragment;
+};
+/*照片懒加载2*/
+function funLazyLoad(select){
+	var lazyLoad = mui(select).imageLazyload({
+    placeholder: '../images/bj_building.png',
+    destroy: false
+	});
+	return lazyLoad;
+}
+/*图片上传*/
+function upLoadImg(elem,bind,data){
+	layui.use('upload', function(){
+	$=jQuery;
+	var upload = layui.upload;
+	//选完文件后不自动上传（js代码，将文件传到后台）
+	upload.render({
+		elem: elem				//“选择文件”按钮的ID
+		,url: './rest/population/uploadPortrait'	//后台接收地址
+		,data: data		//传递到后台的数据
+		,auto: false				//不自动上传设置
+		,accept: 'file'				 //允许上传的文件类型
+		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
+		,size: 5000 				//最大允许上传的文件大小
+		,multiple: true				//设置是否多个文件上传
+		,bindAction: bind		//“上传”按钮的ID
+		,choose: function(obj){
+			//将每次选择的文件追加到文件队列
+    			var files = obj.pushFile();
+		    //预读本地文件示例，不支持ie8
+			obj.preview(function(index, file, result){		//在当前ID为“demo2”的区域显示图片
+				console.log(index); //得到文件索引
+      			console.log(file); //得到文件对象
+				$('#img-list').append(`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`)
+			});
+		}
+		,done: function(res){
+			console.log(res)
+			}
+		});
+	});
+}
+

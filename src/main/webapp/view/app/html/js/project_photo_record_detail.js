@@ -2,6 +2,6 @@
 
 window.onload = function(){
 	var list = document.getElementById('list');
-	 list.appendChild(createFragment(40,"http://www.dcloud.io/hellomui/images/1.jpg"));
+	 list.appendChild(createFragment(10,'../images/ly.png'));
 	 funLazyLoad('#list').refresh(true);
 }
