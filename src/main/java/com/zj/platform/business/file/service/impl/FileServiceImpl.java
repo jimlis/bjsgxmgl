@@ -39,10 +39,12 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
      * </pre>、
      * @param file 文件对象
      * @param  busType 业务表名
+     * @param  type 类型  默认：1
      * @return
      */
     @Override
-    public FileDO uploadFile(MultipartFile file,String busType)  throws Exception{
+    public FileDO uploadFile(MultipartFile file,String busType,String type)  throws Exception{
+        type=StringUtils.isEmpty(type)?"1":type;
         String uploadPath=environment.getProperty("uploadPath");
         if(StringUtils.isEmpty(uploadPath)) throw  new CommonException("请配置上传文件的路径（uploadPath）");
         LocalDate localDate=LocalDate.now();
@@ -76,6 +78,7 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
         fileDO.setCreateUserId(userDO.getId());
         fileDO.setCreateUserName(userDO.getName());
         fileDO.setCreateDeptId(userDO.getDeptId());
+        fileDO.setType(type);
         fileDO.setCreateDeptName(userDO.getDeptName());
         fileDO.setCreateDate(new Date());
         fileDO.setUrl(url);
