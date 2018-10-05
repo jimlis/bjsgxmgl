@@ -65,8 +65,8 @@ function load(deptId) {
 						title : '姓名'
 					},
 					{
-						field : 'username',
-						title : '用户名'
+						field : 'mobile',
+						title : '手机号'
 					},
 				/*	{
 						field : 'email',

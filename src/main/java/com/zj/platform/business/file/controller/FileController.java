@@ -135,12 +135,12 @@ public class FileController extends AdminBaseController {
     @Log("上传文件")
     @ResponseBody
     @PostMapping("/upload")
-    @RequiresPermissions("sys:file:add")
     Result<FileDO> upload(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
         FileDO fileDO =null;
         try {
             String busType= Objects.toString(request.getParameter("busType"));
-            fileDO = sysFileService.uploadFile(file,busType);
+            String type= Objects.toString(request.getParameter("type"),"1");
+            fileDO = sysFileService.uploadFile(file,busType,type);
         } catch (IOException e) {
             e.printStackTrace();
             return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),

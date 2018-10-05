@@ -32,7 +32,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="js/add.js" th:src="@{/view/pc/html/${pathName}/${classname.toLowerCase()}/js/add.js}">
+	<script type="text/javascript" src="js/add.js" th:src="@{/view/pc/html/${pathName}/${htmlPathPer}${classname.toLowerCase()}/js/add.js}">
 	</script>
 </body>
 </html>

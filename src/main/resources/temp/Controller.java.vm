@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zj.platform.common.util.Constant;
 import com.zj.platform.common.web.controller.AdminBaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class ${className}Controller extends AdminBaseController {
 	@GetMapping()
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
 	String ${className}(){
-	    return "${pathName}/${classname.toLowerCase()}/${classname}";
+	    return Constant.PC_PREFIX+"${pathName}/${htmlPathPer}${classname.toLowerCase()}/${classname}";
 	}
 	
 	@ResponseBody
@@ -53,7 +54,7 @@ public class ${className}Controller extends AdminBaseController {
 	@GetMapping("/add")
 	@RequiresPermissions("${pathName}:${classname}:add")
 	String add(){
-	    return "${pathName}/${classname.toLowerCase()}/add";
+	    return Constant.PC_PREFIX+"${pathName}/${htmlPathPer}${classname.toLowerCase()}/add";
 	}
 
 	@GetMapping("/edit/{${pk.attrname}}")
@@ -61,7 +62,7 @@ public class ${className}Controller extends AdminBaseController {
 	String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
 		${className}DO ${classname} = ${classname}Service.getById(${pk.attrname});
 		model.addAttribute("${classname}", ${classname});
-	    return "${pathName}/${classname.toLowerCase()}/edit";
+	    return Constant.PC_PREFIX+"${pathName}/${htmlPathPer}${classname.toLowerCase()}/edit";
 	}
 	
 	/**

@@ -43,7 +43,7 @@ public class RestApiConfig {
 	private ApiInfo apiInfo() {
 		Contact contact = new Contact("测试", "test", "");
 		return new ApiInfoBuilder().title("Spring 中使用Swagger2构建RESTful APIs")
-				.termsOfServiceUrl("http://127.0.0.1:8080/platform").contact(contact).version("1.0").build();
+				.termsOfServiceUrl("http://127.0.0.1:8080/bjsgxmgl").contact(contact).version("1.0").build();
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class RestApiConfig {
 		      @Override
 		      public boolean apply(RequestHandler input) {
 		    	  AntPathMatcher ant=new AntPathMatcher();
-		        return  ant.match("com.zj.**.web.controller", input.declaringClass().getPackage().getName())&&
+		        return  ant.match("com.zj.**.controller", input.declaringClass().getPackage().getName())&&
 		        		input.declaringClass().isAnnotationPresent(Api.class)&&
 		        		input.isAnnotatedWith(ApiOperation.class);
 		      }

@@ -34,7 +34,8 @@ public enum EnumErrorCode {
     , apiAuthorizationInvalid(44001, "token不合法")
     , apiAuthorizationLoggedout(44002, "token已注销")
     , apiAuthorizationExpired(44003, "token已过期")
-    , apiAuthorizationFailed(44004, "token认证失败")
+    , apiAuthorizationFailed(44004, "token认证失败"),
+    apiXmIdNotEmpty(44005,"项目id不能为空")
     ;
 
     private int code;

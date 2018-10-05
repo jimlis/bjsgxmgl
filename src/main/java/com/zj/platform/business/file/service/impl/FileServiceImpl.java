@@ -1,6 +1,7 @@
 package com.zj.platform.business.file.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.business.file.dao.FileDao;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
@@ -38,10 +39,12 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
      * </pre>、
      * @param file 文件对象
      * @param  busType 业务表名
+     * @param  type 类型  默认：1
      * @return
      */
     @Override
-    public FileDO uploadFile(MultipartFile file,String busType)  throws Exception{
+    public FileDO uploadFile(MultipartFile file,String busType,String type)  throws Exception{
+        type=StringUtils.isEmpty(type)?"1":type;
         String uploadPath=environment.getProperty("uploadPath");
         if(StringUtils.isEmpty(uploadPath)) throw  new CommonException("请配置上传文件的路径（uploadPath）");
         LocalDate localDate=LocalDate.now();
@@ -75,6 +78,7 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
         fileDO.setCreateUserId(userDO.getId());
         fileDO.setCreateUserName(userDO.getName());
         fileDO.setCreateDeptId(userDO.getDeptId());
+        fileDO.setType(type);
         fileDO.setCreateDeptName(userDO.getDeptName());
         fileDO.setCreateDate(new Date());
         fileDO.setUrl(url);
@@ -100,5 +104,22 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
     @Override
     public List<FileDO> queryList(FileDO fileDO) {
         return baseMapper.queryList(fileDO);
+    }
+
+    /**
+     * 根据busType、busId、type获取文件集合
+     * @param busType 业务表名称
+     * @param busId 对应业务id
+     * @param type 文件类型
+     * @return List<FileDO>
+     */
+    @Override
+    public List<FileDO> queryFileDOList(String busType,Long busId,String  type ){
+        FileDO fileDO=new FileDO();
+        fileDO.setBusType(busType);
+        fileDO.setBusId(busId);
+        fileDO.setType(type);
+        QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>(fileDO).orderByDesc("createDate");
+        return  list(queryWrapper);
     }
 }

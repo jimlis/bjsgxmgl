@@ -3,14 +3,14 @@ package com.zj.platform.mybatis.generator.config.converts;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.ITypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.PropertyInfo;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 /**
  * 自定义数据库字段类型转换
  * @author zj
  */
 public class CustomOracleTypeConvert implements ITypeConvert {
 	@Override
-    public PropertyInfo processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char")) {
             return DbColumnType.STRING;

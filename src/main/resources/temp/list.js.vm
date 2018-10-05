@@ -1,5 +1,5 @@
 
-var prefix = "/${pathName}/${classname}"
+var prefix = urlPath+"/${pathName}/${classname}";
 $(function() {
 	load();
 });
@@ -112,6 +112,7 @@ function removeone(id) {
 			data : {
 				'${pk.attrname}' : id
 			},
+            dataType:"json",
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
@@ -124,8 +125,7 @@ function removeone(id) {
 	})
 }
 
-function resetPwd(id) {
-}
+
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
@@ -146,6 +146,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
+            dataType:"json",
 			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
