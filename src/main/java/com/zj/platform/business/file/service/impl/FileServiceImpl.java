@@ -73,11 +73,17 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
 
         FileDO fileDO=new FileDO();
         UserDO userDO=new UserDO();
-        if("2".equals(reqClientType)){
-           userDO=ShiroUtils.getAppUserDO();
-        }else{
-           userDO= ShiroUtils.getSysUser();
+        try {
+            //TODO 身份验证问题
+            if("2".equals(reqClientType)){
+                userDO=ShiroUtils.getAppUserDO();
+            }else{
+                userDO= ShiroUtils.getSysUser();
+            }
+        }catch (Exception e){
+            userDO=new UserDO();
         }
+
 
         fileDO.setBusType(StringUtils.isEmpty(busType)?"bj_wdb":busType);
         fileDO.setFileName(fileName);

@@ -81,8 +81,8 @@ public class GsggController extends AdminBaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("project:gsgg:add")
 	public Result<String> save(HttpServletRequest request,GsggDO gsgg){
-		String fileIds= Objects.toString(request.getParameter("fileIds"));
-		String chrggnr= Objects.toString(request.getParameter("chrggnr"));
+		String fileIds= Objects.toString(request.getParameter("fileIds"),"");
+		String chrggnr= Objects.toString(request.getParameter("chrggnr"),"");
 		try {
 			gsggService.saveGsggxx(gsgg,chrggnr,fileIds);
 		} catch (Exception e) {

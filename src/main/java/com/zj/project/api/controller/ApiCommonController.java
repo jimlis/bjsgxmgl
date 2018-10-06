@@ -40,7 +40,7 @@ public class ApiCommonController extends ApiBaseController {
     public Result<String> getSysDate(@RequestParam(value = "dfm",defaultValue = "yyyy-MM-dd HH:mm:ss") String dfm) {
         try {
             LocalDateTime localDateTime=LocalDateTime.now();
-            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern(DateUtils.DATE_TIME_PATTERN_19);
+            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern(dfm);
             return Result.ok(dateTimeFormatter.format(localDateTime));
         }catch (Exception e){
             e.printStackTrace();

@@ -193,7 +193,18 @@ layui.define('layer' , function(exports){
           ,data: formData
           ,contentType: false 
           ,processData: false
-          ,dataType: 'json'
+          ,dataType: 'json',
+            beforeSend: function(xhr) {
+             try{
+               debugger
+                 var token=getLocalTokenValue("token");
+                 if(token){
+                     xhr.setRequestHeader("Authorization", token);
+                 }
+             }catch (e){
+                  alert("upload.js报错err："+e);
+             }
+            }
           ,success: function(res){
             done(index, res);
           }

@@ -97,7 +97,6 @@ $bjAjax = function(obj){
 	headers:headers,
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
-		debugger;
 		var code=data.code;
 		var msg=data.msg;
 		if(code==0){
@@ -181,16 +180,23 @@ function dtPicker(selecter){
 		}, false);
 	});
 }
-/*选择框*/
-function relPicker(selecter,data){
+/*
+*选择框
+*@param  textSelecter 文本显示domid
+*@param  data  点击文本显示的下拉框数据
+*@param  valueSelecter  选择文本存放隐藏至的domid
+**/
+function relPicker(textSelecter,data,valueSelecter){
 	var userPicker = new mui.PopPicker();
 	userPicker.setData(data);
-	var showUserPickerButton = document.getElementById(selecter);
+	var showUserPickerButton = document.getElementById(textSelecter);
 	showUserPickerButton.addEventListener('tap', function(event) {
 		userPicker.show(function(items) {
-			debugger;
 			showUserPickerButton.value = items[0].text.replace(/^\"|\"$/g,'');
-            showUserPickerButton.setAttribute("bj-value",items[0].value.replace(/^\"|\"$/g,'')) ;
+			if(valueSelecter){
+                var valueInput = document.getElementById(valueSelecter);
+                      valueInput.value=items[0].value.replace(/^\"|\"$/g,'');
+			}
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
@@ -257,11 +263,10 @@ function upLoadImg(elem,data,done){
  * @param showListDomId 图片列表显示domid
  */
 function  uploadDone(result,fileIdsDomId,showListDomId) {
-	debugger
     var code=result.code;
     var data=result.data;
     var msg=result.msg;
-    if(code==1){//成功
+    if(code==0){//成功
         var $fileIds=mui("#"+fileIdsDomId);
         var fileId=data.id;
         var fileName=data.fileName||"";
@@ -275,8 +280,10 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
             $fileIds[0].value=fileIds;
         }
         var src=fileApiPath+"down/"+fileId;
-        mui('#'+showListDomId)[0].appendChild('<div><img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
-			'<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\"></a>');
+        var div = document.createElement('div');
+        	   div.innerHTML='<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
+            '<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>';
+        mui('#'+showListDomId)[0].appendChild(div);
     }else{
     	bjToast(msg);
 	}
@@ -287,19 +294,24 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
  * @param id
  */
 function  removeFile(id,fileIdsDomId,obj) {
-	mui.confirm('删除不可以恢复，确定删除文件？',"提示",'确定',function(){
-		$bj_post_ajax({"url":ileApiPath+ "/del/"+id,success:function (result) {
-			    var $fileIds=mui("#"+fileIdsDomId);
-			    if($fileIds.length>0){
-			    	var fileIds=$fileIds[0].value;
-                    var index = $.inArray(id,fileIds);
-                    if(index>=0){//存在 就删除
-                        fileIds.splice(index,1);
-                        $fileIds[0].value(fileIds);
+	mui.confirm('删除不可以恢复，确定删除文件？',"提示",['确定','取消'],function(data){
+		var index=data.index;
+		if(index==0){//确定
+            $bj_post_ajax({"url":fileApiPath+ "/del/"+id,success:function (result) {
+                    var $fileIds=mui("#"+fileIdsDomId);
+                    if($fileIds.length>0){
+                        var fileIds=$fileIds[0].value;
+                               fileIds=fileIds.split(",");
+                        var index = $.inArray(id,fileIds);
+                        if(index>=0){//存在 就删除
+                            fileIds.splice(index,1);
+                            $fileIds[0].value=fileIds.join(",");
+                        }
+                        obj.parentNode.remove();
                     }
-                    $(obj).parent().remove();
-				}
-            }});
+                }});
+		}
+
 	});
 }
 
@@ -337,4 +349,36 @@ function geCookieTokenValue(key) {
 function getCookieUserValue(key) {
     var token=JSON.parse(window.getCookie("user"));
     return (token&&token[key])||"";
+}
+
+function getFromData(form){
+    var form=document.getElementById(form);
+    var data={};
+    for (var i = 0; i < form.elements.length; i++) {
+        var element=form.elements[i];
+        switch(element.type) {
+            case 'text':
+                data[element.name]=element.value;
+            	break;
+            case 'checkbox':
+                if (element.checked) {
+                    if (data[element.name]) {
+                        data[element.name]=data[element.name]+','+element.value;
+                    }else{
+                        data[element.name]=element.value;
+                    }
+				}
+                break;
+            case 'radio':
+                if (element.checked) {
+                    data[element.name]=element.value;
+                }
+                break;
+			case 'textarea':
+                data[element.name]=element.innerHTML;
+            default:
+                data[element.name]=element.value;
+        }
+    }
+    return data;
 }

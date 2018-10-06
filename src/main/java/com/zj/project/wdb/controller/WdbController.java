@@ -71,7 +71,7 @@ public class WdbController extends AdminBaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("project:wdb:add")
 	public Result<String> save(HttpServletRequest request,WdbDO wdb){
-		String fileIds= Objects.toString(request.getParameter("fileIds"));
+		String fileIds= Objects.toString(request.getParameter("fileIds"),"");
 		try {
 			wdbService.saveWdbxx(wdb,fileIds);
 		} catch (Exception e) {

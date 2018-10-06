@@ -89,9 +89,9 @@ public class XmjbController extends AdminBaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("project:xmjb:add")
 	public Result<String> save(HttpServletRequest request, XmjbDO xmjb){
-		String fileIds= Objects.toString(request.getParameter("fileIds"));
-		String ldJson=Objects.toString(request.getParameter("ldJson"));
-		String delLdIds=Objects.toString(request.getParameter("delLdIds"));
+		String fileIds= Objects.toString(request.getParameter("fileIds"),"");
+		String ldJson=Objects.toString(request.getParameter("ldJson"),"");
+		String delLdIds=Objects.toString(request.getParameter("delLdIds"),"");
 		xmjbService.saveXmjb(xmjb,fileIds,ldJson,delLdIds);
         return Result.ok();
 	}

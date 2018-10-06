@@ -7269,6 +7269,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * 确认消息框
 	 */
 	$.confirm = function(message, title, btnArray, callback) {
+		debugger
 		if ($.os.plus) {
 			if (typeof message === 'undefined') {
 				return;

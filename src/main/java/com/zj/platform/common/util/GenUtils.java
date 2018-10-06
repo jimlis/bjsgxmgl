@@ -138,8 +138,8 @@ public class GenUtils {
             try {
                 Template tpl = Velocity.getTemplate(template, "UTF-8");
 
-                String filePath = getFileName(template, tableDO.getClassname(), tableDO.getClassName(),Objects.toString(map.get("pathName")),
-                        Objects.toString(map.get("package")),htmlPathPer);
+                String filePath = getFileName(template, tableDO.getClassname(), tableDO.getClassName(),Objects.toString(map.get("pathName"),""),
+                        Objects.toString(map.get("package"),""),htmlPathPer);
                 String packPath=filePath.substring(0,filePath.lastIndexOf("\\"));
 
                 File packFolder = new File(packPath);

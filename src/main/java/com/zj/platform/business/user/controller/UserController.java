@@ -90,7 +90,7 @@ public class UserController extends AdminBaseController {
     @ResponseBody
     Result<String> save(HttpServletRequest request,UserDO user) {
         user.setPassword(MD5Utils.encrypt(user.getMobile(), user.getPassword()));
-        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        String fileIds=Objects.toString(request.getParameter("fileIds"),"");
         userService.saveUser(user,fileIds);
         return Result.ok();
     }
@@ -100,7 +100,7 @@ public class UserController extends AdminBaseController {
     @PostMapping("/update")
     @ResponseBody
     Result<String> update(HttpServletRequest request,UserDO user) {
-        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        String fileIds=Objects.toString(request.getParameter("fileIds"),"");
         userService.saveUser(user,fileIds);
         return Result.ok();
     }
@@ -110,7 +110,7 @@ public class UserController extends AdminBaseController {
     @PostMapping("/updatePeronal")
     @ResponseBody
     Result<String> updatePeronal(HttpServletRequest request,UserDO user) {
-        String fileIds=Objects.toString(request.getParameter("fileIds"));
+        String fileIds=Objects.toString(request.getParameter("fileIds"),"");
         userService.updatePersonal(user,fileIds);
         return Result.ok();
     }

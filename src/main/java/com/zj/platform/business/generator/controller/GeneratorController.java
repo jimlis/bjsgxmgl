@@ -63,7 +63,7 @@ public class GeneratorController {
 
         IOUtils.write(data, response.getOutputStream());*/
         try {
-            String moduleCode= Objects.toString(request.getParameter("moduleCode"));
+            String moduleCode= Objects.toString(request.getParameter("moduleCode"),"");
             String[] tableNames = new String[] { tableName };
             generatorService.generatorCode(moduleCode,tableNames);
             return Result.ok();
@@ -79,7 +79,7 @@ public class GeneratorController {
     public Result batchCode(HttpServletRequest request, HttpServletResponse response, String tables) throws Exception {
         try {
             String[] tableNames = new String[] {};
-            String moduleCode= Objects.toString(request.getParameter("moduleCode"));
+            String moduleCode= Objects.toString(request.getParameter("moduleCode"),"");
             tableNames = JSON.parseArray(tables).toArray(tableNames);
             generatorService.generatorCode(moduleCode,tableNames);
             return Result.ok();

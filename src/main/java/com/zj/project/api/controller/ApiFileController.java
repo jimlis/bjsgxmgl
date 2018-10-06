@@ -68,8 +68,8 @@ public class ApiFileController  extends ApiBaseController {
     Result<FileDO> upload(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
         FileDO fileDO =null;
         try {
-            String busType= Objects.toString(request.getParameter("busType"));
-            String type=Objects.toString(request.getParameter("type"));
+            String busType= Objects.toString(request.getParameter("busType"),"");
+            String type=Objects.toString(request.getParameter("type"),"");
             fileDO = fileService.uploadFile(file,busType,type,"2");
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class ApiFileController  extends ApiBaseController {
     }
 
     @Log("根据附件id删除附件信息")
-    @GetMapping("/del/{id}")
+    @PostMapping("/del/{id}")
     @ApiOperation(value="根据附件id删除附件信息",httpMethod="POST")
     @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="path",dataType = "long",required=true,value = "附件id"))
     @RequiresAuthentication

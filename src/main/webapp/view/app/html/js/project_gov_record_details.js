@@ -2,7 +2,6 @@
 window.onload = function(){
 	$bj_post_ajax({"url":commonApiPath+"getSysDate","data":{"dfm":"yyyy-MM-dd"},"success":function (result) {
 					if(result){
-						debugger
 							mui("#dtmgxrqLabel")[0].innerText=result;
                             mui("#dtmgxrq")[0].value=result;
 					}
@@ -31,10 +30,12 @@ window.onload = function(){
 			  }
         }});
 
-	dtPicker('#dtmxcrq');
+	//dtPicker('#dtmxcrq');
 
-	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
+	//upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
 }
+
+
 function save(){
 	console.log("baoc");
 }
