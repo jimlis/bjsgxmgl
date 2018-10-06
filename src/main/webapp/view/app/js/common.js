@@ -9,7 +9,9 @@ var imgApiPath = serverPath+"api/file/down/";
 var dictApiPath = serverPath+"api/dict/";
 var commonApiPath = serverPath+"api/common/";
 
-
+function bjToast(data){
+	 mui.toast(data);
+}
 /**
  * 将null undefined  "null" 转换为 ""
  * @param {Object} str 字符串
