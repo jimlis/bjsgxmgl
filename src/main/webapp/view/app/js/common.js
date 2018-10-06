@@ -6,6 +6,8 @@ var deptApiPath=serverPath+"api/dept/";
 var fileApiPath=serverPath+"api/file/";
 var noticeApiPath=serverPath+"api/gsgg/";
 var imgApiPath = serverPath+"api/file/down/";
+var dictApiPath = serverPath+"api/dict/";
+var commonApiPath = serverPath+"api/common/";
 
 
 /**
@@ -88,7 +90,17 @@ $bjAjax = function(obj){
 	headers:{'Content-Type':'application/x-www-form-urlencoded'},	              
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
-		obj.success(data);
+		debugger;
+		var code=data.code;
+		var msg=data.msg;
+		if(code==0){
+            obj.success(data.data);
+		}else if(code==2){
+
+		}else{
+			alert(msg);
+		}
+
 	},
 	error:function(xhr,type,errorThrown){
 		//异常处理；
@@ -213,7 +225,7 @@ function upLoadImg(elem,data,done){
 	//选完文件后不自动上传（js代码，将文件传到后台）
 	upload.render({
 		elem: elem				//“选择文件”按钮的ID
-		,url: './rest/population/uploadPortrait'	//后台接收地址
+		,url: fileApiPath+"upload"	//后台接收地址
 		,data: data		//传递到后台的数据
 		,auto: false				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
@@ -253,4 +265,22 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
         var src=fileApiPath+"down/"+fileId;
         $('#'+showListDomId).append('<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">');
     }
+}
+
+/**
+ * 根据key获取token的属性值
+ * @param key
+ */
+function getLocalTokenValue(key) {
+	var token=JSON.parse(localStorage.getItem("token"));
+	return token[key]||"";
+}
+
+/**
+ * 根据key获取user的属性值
+ * @param key
+ */
+function getLocalUserValue(key) {
+    var token=JSON.parse(localStorage.getItem("user"));
+    return token[key]||"";
 }
