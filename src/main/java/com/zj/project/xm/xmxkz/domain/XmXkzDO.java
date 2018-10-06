@@ -7,7 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -18,29 +19,40 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <small> 2018-10-04 18:10:12 | lijun</small>
  */
  @TableName("bj_xm_xkz")
+ @ApiModel(value = "XmXkzDO",description = "项目基本信息-许可证")
 public class XmXkzDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "逻辑废除：0（废除），1（正常）",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = "修改新增删除时间",name = "gxsj",dataType = "Date",hidden = true)
     private Date gxsj;
     /** 序号 */
+    @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",hidden = true)
     private Integer intxh;
     /** 项目id */
+    @ApiModelProperty(value = "项目id",name = "intxmid",dataType = "Long",hidden = true,required = true)
     private Long intxmid;
     /** 许可证类型:1（规划许可证），2（施工许可证） */
+    @ApiModelProperty(value = "许可证类型:1（规划许可证），2（施工许可证）",name = "intxkzlx",dataType = "string",required = true)
     private String intxkzlx;
     /** 许可证编号 */
+    @ApiModelProperty(value = "许可证编号",name = "chrxkzbh",dataType = "string",required = true)
     private String chrxkzbh;
     /** 发放部门 */
+    @ApiModelProperty(value = "发放部门",name = "chrffbm",dataType = "string",required = true)
     private String chrffbm;
     /** 发证日期 */
+    @ApiModelProperty(value = "发证日期",name = "dtmfzrq",dataType = "string",required = true,example = "2018-10-06")
     private Date dtmfzrq;
+    @ApiModelProperty(value = "有效截止日期",name = "dtmyxrq",dataType = "string",required = true,example = "2019-10-06")
     /** 有效截止日期 */
     private Date dtmyxrq;
 

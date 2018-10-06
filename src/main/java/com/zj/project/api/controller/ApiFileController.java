@@ -70,7 +70,8 @@ public class ApiFileController  extends ApiBaseController {
         FileDO fileDO =null;
         try {
             String busType= Objects.toString(request.getParameter("busType"));
-            fileDO = fileService.uploadFile(file,busType);
+            String type=Objects.toString(request.getParameter("type"));
+            fileDO = fileService.uploadFile(file,busType,type);
         } catch (IOException e) {
             e.printStackTrace();
             return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),

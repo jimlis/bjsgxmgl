@@ -171,9 +171,7 @@ var createFragment = function(count,src) {
 	for(var i = 0; i < count; i++) {
 		li = document.createElement('li');
 		li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
-		li.innerHTML = `<a>
-							<img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">
-						</a>`;
+		li.innerHTML ='<a><img class="mui-media-object mui-pull-left" data-lazyload="'+src+'"></a>';
 		ul.appendChild(li);
 	}
 	fragment.appendChild(ul);
@@ -210,7 +208,7 @@ function upLoadImg(elem,bind,data){
 			obj.preview(function(index, file, result){		//在当前ID为“demo2”的区域显示图片
 				console.log(index); //得到文件索引
       			console.log(file); //得到文件对象
-				$('#img-list').append(`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`)
+				$('#img-list').append('<img class="bj-img-temp" src="'+ result +'" alt="'+ file.name +'">');
 			});
 		}
 		,done: function(res){

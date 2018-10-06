@@ -68,13 +68,15 @@ public class XmGhzbServiceImpl extends BaseServiceImpl<XmGhzbDao, XmGhzbDO> impl
                 if(id==null){
                     xmGhzbDO.setFcbz(1);
                     xmGhzbDO.setGxsj(new Date());
+                    save(xmGhzbDO);
                 }else{
-
+                    xmGhzbDO.setGxsj(new Date());
+                    updateById(xmGhzbDO);
                 }
             });
         }
 
-        saveOrUpdateBatch(list);
+       // saveOrUpdateBatch(list);
     }
 
 
