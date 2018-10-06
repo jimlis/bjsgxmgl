@@ -96,6 +96,17 @@ $bjAjax = function(obj){
 	}
 	})
 }
+
+$bj_get_ajax=function (obj) {
+    obj.type="GET";
+    $bjAjax(obj);
+}
+
+$bj_post_ajax=function (obj) {
+    obj.type="POST";
+    $bjAjax(obj);
+}
+
 /**
  *日期选择器
  */

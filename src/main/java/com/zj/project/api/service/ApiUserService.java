@@ -3,6 +3,7 @@ package com.zj.project.api.service;
 
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.service.BaseService;
+import com.zj.project.api.pojo.vo.ApiUserVO;
 import com.zj.project.api.pojo.vo.TokenVO;
 
 
@@ -15,4 +16,11 @@ public interface ApiUserService extends BaseService<UserDO> {
     boolean verifyToken(String token, boolean refresh);
     /** 注销token */
     Boolean logoutToken(String token, String refreshToken);
+    /**
+     * 获取ApiUserVO
+     * @param mobile
+     * @param password
+     * @return
+     */
+    ApiUserVO getApiUserVo(String mobile, String password);
 }

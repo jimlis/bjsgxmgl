@@ -12,9 +12,11 @@ import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.platform.shiro.config.JWTConfig;
 import com.zj.platform.shiro.util.JWTUtil;
+import com.zj.project.api.pojo.vo.ApiUserVO;
 import com.zj.project.api.pojo.vo.TokenVO;
 import com.zj.project.api.service.ApiUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class ApiUserServiceImpl extends BaseServiceImpl<UserDao,UserDO> implemen
 	@Override
     public TokenVO getToken(String mobile, String password) {
         UserDO user = getOne(new QueryWrapper<UserDO>().eq("mobile", mobile));
-        if (null == user || !user.getPassword().equals(MD5Utils.encrypt(user.getUsername(), password))) {
+        if (null == user || !user.getPassword().equals(MD5Utils.encrypt(user.getMobile(), password))) {
             throw new MyApiException(EnumErrorCode.apiAuthorizationLoginFailed.getCodeStr());
         }
         return createToken(user);
@@ -99,5 +101,23 @@ public class ApiUserServiceImpl extends BaseServiceImpl<UserDao,UserDO> implemen
 		if(Holder.logoutTokens.get(token)!=null)
 			throw new MyApiException(EnumErrorCode.apiAuthorizationLoggedout.getMsg());
 		return true;
+	}
+
+	/**
+	 * 获取ApiUserVO
+	 * @param mobile
+	 * @param password
+	 * @return
+	 */
+	@Override
+	public ApiUserVO getApiUserVo(String mobile, String password) {
+		UserDO user = getOne(new QueryWrapper<UserDO>().eq("mobile", mobile));
+		ApiUserVO apiUserVO=new ApiUserVO();
+		if (null != user&&user.getPassword().equals(MD5Utils.encrypt(user.getMobile(), password))) {
+				BeanUtils.copyProperties(user,apiUserVO);
+		}else{
+
+		}
+		return  apiUserVO;
 	}
 }

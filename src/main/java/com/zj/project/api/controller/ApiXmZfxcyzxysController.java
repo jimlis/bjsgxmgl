@@ -35,17 +35,23 @@ public class ApiXmZfxcyzxysController extends ApiBaseController {
     @Autowired
     private XmZfxcyzxysService xmZfxcyzxysService;
 
-    @Log("根据项目id和巡查部门获取巡查信息")
-    @PostMapping("getXmZfxcyzxysByXmidAndXcbm")
-    @ApiOperation(value="根据项目id和巡查部门获取巡查信息",httpMethod="POST")
+    @Log("获取巡查信息")
+    @PostMapping("getXmZfxcyzxys")
+    @ApiOperation(value="获取巡查信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
-            @ApiImplicitParam(name="xcbm",paramType="form",dataType = "string",required=true,value = "巡查部门id")})
+            @ApiImplicitParam(name="xclb",paramType="form",dataType = "string",required=false,value = "巡查类别"),
+            @ApiImplicitParam(name="xcbm",paramType="form",dataType = "string",required=false,value = "巡查部门")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZfxcyzxysDO.class),
     	@ApiResponse(code=1,message="操作失败",response=XmZfxcyzxysDO.class)})
     @RequiresAuthentication
-    public Result<List<XmZfxcyzxysDO>> getXmZfxcyzxysByXmidAndXcbm(Long xmid,String xcbm) {
+    public Result<List<XmZfxcyzxysDO>> getXmZfxcyzxysByXmidAndXcbm(Long xmid,String xclb,String xcbm) {
         try {
-            QueryWrapper<XmZfxcyzxysDO> queryWrapper=new QueryWrapper<XmZfxcyzxysDO>().eq("fcbz",1).eq("intxmid",xmid).eq("intxcbm",xcbm).orderByDesc("dtmxcrq");
+            XmZfxcyzxysDO xmZfxcyzxysDO=new XmZfxcyzxysDO();
+            xmZfxcyzxysDO.setFcbz(1);
+            xmZfxcyzxysDO.setIntxmid(xmid);
+            xmZfxcyzxysDO.setIntxcbm(xcbm);
+            xmZfxcyzxysDO.setIntxclb(xclb);
+            QueryWrapper<XmZfxcyzxysDO> queryWrapper=new QueryWrapper<XmZfxcyzxysDO>(xmZfxcyzxysDO).orderByDesc("dtmxcrq");
             return Result.ok(xmZfxcyzxysService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();

@@ -1,9 +1,12 @@
 package com.zj.project.api.controller;
 
+import com.google.common.collect.Maps;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.business.user.service.UserService;
+import com.zj.platform.business.user.vo.UserVO;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
+import com.zj.project.api.pojo.vo.ApiUserVO;
 import com.zj.project.api.pojo.vo.TokenVO;
 import com.zj.project.api.service.ApiUserService;
 import io.swagger.annotations.*;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -34,8 +38,14 @@ public class ApiUserController extends ApiBaseController {
 //    @Log("api测试-登录")
     @ApiOperation("api测试-登录")
     public Result<?> token(UserDO userDo) {
+        Map<String,Object> map= Maps.newHashMap();
         TokenVO token = apiUserService.getToken(userDo.getMobile(), userDo.getPassword());
-        return Result.build(Result.CODE_SUCCESS,"登录成功",token);
+        if(token!=null){
+            ApiUserVO apiUserVO=apiUserService.getApiUserVo(userDo.getMobile(), userDo.getPassword());
+            map.put("user",apiUserVO);
+        }
+        map.put("token",token);
+        return Result.build(Result.CODE_SUCCESS,"登录成功",map);
     }
     
     @PostMapping("refresh")
