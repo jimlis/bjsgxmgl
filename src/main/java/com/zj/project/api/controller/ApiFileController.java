@@ -10,7 +10,6 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,7 +70,7 @@ public class ApiFileController  extends ApiBaseController {
         try {
             String busType= Objects.toString(request.getParameter("busType"));
             String type=Objects.toString(request.getParameter("type"));
-            fileDO = fileService.uploadFile(file,busType,type);
+            fileDO = fileService.uploadFile(file,busType,type,"2");
         } catch (IOException e) {
             e.printStackTrace();
             return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),
@@ -83,4 +82,20 @@ public class ApiFileController  extends ApiBaseController {
         }
         return Result.ok(fileDO);
     }
+
+    @Log("根据附件id删除附件信息")
+    @GetMapping("/del/{id}")
+    @ApiOperation(value="根据附件id删除附件信息",httpMethod="POST")
+    @ApiImplicitParams(@ApiImplicitParam(name="id",paramType="path",dataType = "long",required=true,value = "附件id"))
+    @RequiresAuthentication
+    public Result del(@PathVariable("id") Long id) {
+       try {
+           fileService.removeById(id);
+           return  Result.ok();
+       }catch (Exception e){
+           e.printStackTrace();
+           return  Result.fail();
+       }
+    }
+
 }

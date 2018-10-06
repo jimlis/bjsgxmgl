@@ -140,7 +140,7 @@ public class FileController extends AdminBaseController {
         try {
             String busType= Objects.toString(request.getParameter("busType"));
             String type= Objects.toString(request.getParameter("type"));
-            fileDO = sysFileService.uploadFile(file,busType,type);
+            fileDO = sysFileService.uploadFile(file,busType,type,"1");
         } catch (IOException e) {
             e.printStackTrace();
             return Result.build(EnumErrorCode.FileUploadGetBytesError.getCode(),

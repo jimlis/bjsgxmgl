@@ -84,12 +84,17 @@ function openFileByName(fileId,fileName) {
  *封装ajax访问。
  */
 $bjAjax = function(obj){
+	var headers={'Content-Type':'application/x-www-form-urlencoded'};
+	var token=getLocalTokenValue("token");
+	if(token){
+        headers["Authorization"]=token;
+	}
 	mui.ajax(obj.url,{
 	data:obj.data,
 	dataType:'json',//服务器返回json格式数据
 	type:obj.type,//HTTP请求类型
 	timeout:10000,//超时时间设置为10秒；
-	headers:{'Content-Type':'application/x-www-form-urlencoded'},	              
+	headers:headers,
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
 		debugger;
@@ -97,16 +102,18 @@ $bjAjax = function(obj){
 		var msg=data.msg;
 		if(code==0){
             obj.success(data.data);
-		}else if(code==2){
-
+		}else if(code==2){//重新登录
+		localStorage.removeItem("token");
+		localStorage.removeItem("user");
+		window.location.href="login/login.html";
 		}else{
-			alert(msg);
+            bjToast(msg);
 		}
 
 	},
 	error:function(xhr,type,errorThrown){
 		//异常处理；
-		obj.err(xhr,type,errorThrown);
+        bjToast(xhr)
 	}
 	})
 }
@@ -181,7 +188,9 @@ function relPicker(selecter,data){
 	var showUserPickerButton = document.getElementById(selecter);
 	showUserPickerButton.addEventListener('tap', function(event) {
 		userPicker.show(function(items) {
-			showUserPickerButton.value = JSON.stringify(items[0].text).replace(/^\"|\"$/g,'');
+			debugger;
+			showUserPickerButton.value = items[0].text.replace(/^\"|\"$/g,'');
+            showUserPickerButton.setAttribute("bj-value",items[0].value.replace(/^\"|\"$/g,'')) ;
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
@@ -222,14 +231,13 @@ function funLazyLoad(select){
 **/
 function upLoadImg(elem,data,done){
 	layui.use('upload', function(){
-	$=jQuery;
 	var upload = layui.upload;
 	//选完文件后不自动上传（js代码，将文件传到后台）
 	upload.render({
 		elem: elem				//“选择文件”按钮的ID
 		,url: fileApiPath+"upload"	//后台接收地址
 		,data: data		//传递到后台的数据
-		,auto: false				//不自动上传设置
+		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
 		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
@@ -249,24 +257,50 @@ function upLoadImg(elem,data,done){
  * @param showListDomId 图片列表显示domid
  */
 function  uploadDone(result,fileIdsDomId,showListDomId) {
+	debugger
     var code=result.code;
     var data=result.data;
+    var msg=result.msg;
     if(code==1){//成功
-        var $fileIds=$("#"+fileIdsDomId);fileIds
+        var $fileIds=mui("#"+fileIdsDomId);
         var fileId=data.id;
         var fileName=data.fileName||"";
         if($fileIds.length>0){
-            var fileIds=$fileIds.val();
+            var fileIds=$fileIds[0].value;
             if(isEmpty(fileIds)){
                 fileIds=fileId;
             }else{
                 fileIds+=","+fileId;
             }
-            $fileIds.val(fileIds);
+            $fileIds[0].value=fileIds;
         }
         var src=fileApiPath+"down/"+fileId;
-        $('#'+showListDomId).append('<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">');
-    }
+        mui('#'+showListDomId)[0].appendChild('<div><img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
+			'<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\"></a>');
+    }else{
+    	bjToast(msg);
+	}
+}
+
+/**
+ * 删除文件
+ * @param id
+ */
+function  removeFile(id,fileIdsDomId,obj) {
+	mui.confirm('删除不可以恢复，确定删除文件？',"提示",'确定',function(){
+		$bj_post_ajax({"url":ileApiPath+ "/del/"+id,success:function (result) {
+			    var $fileIds=mui("#"+fileIdsDomId);
+			    if($fileIds.length>0){
+			    	var fileIds=$fileIds[0].value;
+                    var index = $.inArray(id,fileIds);
+                    if(index>=0){//存在 就删除
+                        fileIds.splice(index,1);
+                        $fileIds[0].value(fileIds);
+                    }
+                    $(obj).parent().remove();
+				}
+            }});
+	});
 }
 
 /**
@@ -275,7 +309,7 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
  */
 function getLocalTokenValue(key) {
 	var token=JSON.parse(localStorage.getItem("token"));
-	return token[key]||"";
+	return (token&&token[key])||"";
 }
 
 /**
@@ -284,5 +318,23 @@ function getLocalTokenValue(key) {
  */
 function getLocalUserValue(key) {
     var token=JSON.parse(localStorage.getItem("user"));
-    return token[key]||"";
+    return (token&&token[key])||"";
+}
+
+/**
+ * 根据key获取token的属性值
+ * @param key
+ */
+function geCookieTokenValue(key) {
+    var token=JSON.parse(window.getCookie("token"));
+    return (token&&token[key])||"";
+}
+
+/**
+ * 根据key获取user的属性值
+ * @param key
+ */
+function getCookieUserValue(key) {
+    var token=JSON.parse(window.getCookie("user"));
+    return (token&&token[key])||"";
 }

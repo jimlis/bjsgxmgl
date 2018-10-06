@@ -1,31 +1,33 @@
 function login(){
-	var account=$("#account").val();
-	var password=$("#password").val();
+	var account=mui("#account")[0].value;
+	var password=mui("#password")[0].value;
 	if(isEmpty(account)){
-		alert("账号不能为空");
+		bjToast("账号不能为空");
 		return;
 	}
 	
 	if(isEmpty(password)){
-		alert("密码不能为空");
+        bjToast("密码不能为空");
 		return;
 	}
 
 	$bj_post_ajax({"url":userApiPath+"login",data:{"mobile":account,"password":password},success:function (result) {
-            var code=result.code;
-            var msg=result.msg;
-            if(code==0){
-            	var data=result.data;
-            	var token=data.token;
-            	var user=data.user;
+            	var token=result.token;
+            	var user=result.user;
+            	debugger
             	if(token){
-                    localStorage.setItem("token",token);
-                    localStorage.setItem("user",user);
-                    window.location.href="../main.html";
+            		try{
+                        window.document.setCookie("token",JSON.stringify(token),20*365);
+                        window.document.setCookie("user",JSON.stringify(user),20*365);
+					}catch (e){
+
+					}
+
+                    localStorage.setItem("token",JSON.stringify(token));
+                    localStorage.setItem("user",JSON.stringify(user));
+                    window.location.href="../../main.html";
 				}
-			}else{
-                alert(msg);
-			}
+
         }});
 	
 }

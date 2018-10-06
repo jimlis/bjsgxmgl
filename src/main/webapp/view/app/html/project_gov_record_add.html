@@ -23,20 +23,22 @@
 		</header>
 		<div class="mui-content" id="list">
 			<div class="mui-content-padded">
+				<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 				<h5 class="bj-title2-font">更新日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="" placeholder="请选择日期" />
+					<label id="dtmgxrqLabel"></label>
+					<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
 				</h5>
 				<h5 class="bj-title2-font">巡查类别：
-					<input class="bj-input bj-p-black-font" type="text" id="" placeholder="巡查类别" />
+					<input class="bj-input bj-p-black-font" type="text" id="intxclb" name="intxclb" placeholder="巡查类别" />
 				</h5>
 				<h5 class="bj-title2-font">巡查部门：
-					<input class="bj-input bj-p-black-font" type="text" id="" placeholder="巡查部门" />
+					<input class="bj-input bj-p-black-font" type="text" id="intxcbm" name="intxcbm" placeholder="巡查部门" />
 				</h5>
 				<h5 class="bj-title2-font">巡查人员：
-					<input class="bj-input bj-p-black-font" type="text" id="" placeholder="巡查人员" />
+					<input class="bj-input bj-p-black-font" type="text" id="chrxcry" name="chrxcry" placeholder="巡查人员" />
 				</h5>
 				<h5 class="bj-title2-font">巡查日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="" placeholder="巡查日期" />
+					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmxcrq" name="dtmxcrq" placeholder="巡查日期" />
 				</h5>
 				<h5 class="bj-title2-font">照片：</h5>
 				<div id="uploader" class="wu-example">
@@ -48,10 +50,11 @@
 				    </div>
 				</div>
 				<h5 class="bj-title2-font">备注：
-					<input class="bj-input bj-p-black-font" type="text" id="" placeholder="备注" />
+					<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
 				</h5>
 				<h5 class="bj-title2-font">报告人：
-					<input class="bj-input bj-p-black-font" type="text" id="" placeholder="报告人" />
+					<input class="bj-input bj-p-black-font" type="text" id="intbgrid" name="intbgrid" placeholder="报告人" />
+					<input class="bj-input bj-p-black-font" type="hidden" id="chrbgrmc" name="chrbgrmc" placeholder="报告人id" />
 				</h5>
 			</div>
 			

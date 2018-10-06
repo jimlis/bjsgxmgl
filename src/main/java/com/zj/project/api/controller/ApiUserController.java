@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.business.user.service.UserService;
 import com.zj.platform.business.user.vo.UserVO;
+import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.api.pojo.vo.ApiUserVO;
@@ -35,8 +36,8 @@ public class ApiUserController extends ApiBaseController {
     private UserService userService;
 
     @PostMapping("login")
-//    @Log("api测试-登录")
-    @ApiOperation("api测试-登录")
+   @Log("api-登录")
+    @ApiOperation("api-登录")
     public Result<?> token(UserDO userDo) {
         Map<String,Object> map= Maps.newHashMap();
         TokenVO token = apiUserService.getToken(userDo.getMobile(), userDo.getPassword());

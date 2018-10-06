@@ -76,9 +76,9 @@ public class DictServiceImpl extends BaseServiceImpl<DictDao, DictDO> implements
             QueryWrapper<DictDO> queryWrapper=new QueryWrapper<DictDO>().eq("type",type);
             List<DictDO> dictList= dictDao.selectList(queryWrapper);
             if(CollectionUtils.isNotEmpty(dictList)){
-                map.put("type",dictList);
+                map.put(type,dictList);
             }else{
-                map.put("type", Lists.newArrayList());
+                map.put(type, Lists.newArrayList());
             }
         });
 

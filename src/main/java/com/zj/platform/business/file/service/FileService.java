@@ -22,8 +22,9 @@ public interface FileService extends BaseService<FileDO> {
      * @param  busType 业务表名
      * @return FileDO 文件对象
      *@param  type 默认：1
+     * @param  reqClientType 客户端类型 1pc 2 app 默认1
      */
-    FileDO uploadFile (MultipartFile file,String busType,String type) throws Exception;
+    FileDO uploadFile (MultipartFile file,String busType,String type, String reqClientType) throws Exception;
 
     /**
      * 根据附件id下载附件

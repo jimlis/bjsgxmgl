@@ -51,7 +51,7 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         if (isLoginAttempt(request, response)) {
-        	String error = "未授权";
+        	String error = "请重新登录";
             try {
             	HttpServletRequest httpServletRequest = (HttpServletRequest) request;
                 String authorization = httpServletRequest.getHeader("Authorization");
@@ -60,7 +60,7 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
                 }else {
 	                JWTAuthenticationTokenToken token = new JWTAuthenticationTokenToken(authorization);
 	                Subject subject = getSubject(request, response);
-	                if(!subject.isAuthenticated()) {
+                    if(!subject.isAuthenticated()) {
 	                	subject.login(token);
 	                }
 	            	return true;
@@ -73,8 +73,7 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
             try(PrintWriter writer = response.getWriter()){
-                Result result = Result.fail();
-                result.setMsg(error);
+                Result result = Result.build(2,error);
             	writer.write(JSONUtils.beanToJson(result));
             }catch (Exception ex) {
             	log.warn(ex.getMessage());

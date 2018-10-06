@@ -7,9 +7,9 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.util.FileUtil;
-import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -40,10 +40,11 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
      * @param file 文件对象
      * @param  busType 业务表名
      * @param  type 类型  默认：1
+     *  @param  reqClientType 客户端类型 1pc 2 app 默认1
      * @return
      */
     @Override
-    public FileDO uploadFile(MultipartFile file,String busType,String type)  throws Exception{
+    public FileDO uploadFile(MultipartFile file, String busType, String type, String reqClientType)  throws Exception{
         type=StringUtils.isEmpty(type)?"1":type;
         String uploadPath=environment.getProperty("uploadPath");
         if(StringUtils.isEmpty(uploadPath)) throw  new CommonException("请配置上传文件的路径（uploadPath）");
@@ -71,7 +72,13 @@ public class FileServiceImpl extends BaseServiceImpl<FileDao, FileDO> implements
         file.transferTo(createfile);
 
         FileDO fileDO=new FileDO();
-        UserDO userDO= ShiroUtils.getSysUser();
+        UserDO userDO=new UserDO();
+        if("2".equals(reqClientType)){
+           userDO=ShiroUtils.getAppUserDO();
+        }else{
+           userDO= ShiroUtils.getSysUser();
+        }
+
         fileDO.setBusType(StringUtils.isEmpty(busType)?"bj_wdb":busType);
         fileDO.setFileName(fileName);
         fileDO.setFileSize(file.getSize());
