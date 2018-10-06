@@ -243,4 +243,3 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
         $('#'+showListDomId).append('<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">');
     }
 }
-}
