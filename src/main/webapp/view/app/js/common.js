@@ -163,12 +163,14 @@ function relPicker(selecter,data){
 	}, false);
 }
 /*照片懒加载1*/
-var createFragment = function(count,src) {
+var createFragment = function(files) {
 	var fragment = document.createDocumentFragment();
 	var ul = document.createElement('ul');
 	ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
 	var li;
-	for(var i = 0; i < count; i++) {
+	for(var i = 0; i < files; i++) {
+		var obj=files[i];
+		var src=fileApiPath+"down/"+obj.id;
 		li = document.createElement('li');
 		li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
 		li.innerHTML ='<a><img class="mui-media-object mui-pull-left" data-lazyload="'+src+'"></a>';
@@ -177,6 +179,7 @@ var createFragment = function(count,src) {
 	fragment.appendChild(ul);
 	return fragment;
 };
+
 /*照片懒加载2*/
 function funLazyLoad(select){
 	var lazyLoad = mui(select).imageLazyload({
@@ -185,8 +188,14 @@ function funLazyLoad(select){
 	});
 	return lazyLoad;
 }
-/*图片上传*/
-function upLoadImg(elem,bind,data){
+/*
+*图片上传
+*@param  elem “选择文件”按钮的ID
+* @param  bind “上传”按钮的ID
+* @param  data 自定义提交数据
+* @param  done 上传完成后函数
+**/
+function upLoadImg(elem,data,done){
 	layui.use('upload', function(){
 	$=jQuery;
 	var upload = layui.upload;
@@ -200,21 +209,38 @@ function upLoadImg(elem,bind,data){
 		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
-		,bindAction: bind		//“上传”按钮的ID
-		,choose: function(obj){
-			//将每次选择的文件追加到文件队列
-    			var files = obj.pushFile();
-		    //预读本地文件示例，不支持ie8
-			obj.preview(function(index, file, result){		//在当前ID为“demo2”的区域显示图片
-				console.log(index); //得到文件索引
-      			console.log(file); //得到文件对象
-				$('#img-list').append('<img class="bj-img-temp" src="'+ result +'" alt="'+ file.name +'">');
-			});
-		}
-		,done: function(res){
-			console.log(res)
-			}
+		//,bindAction: bind		//“上传”按钮的ID
+		,done: done||function(res) {
+            	uploadDone(res,"fileIds","img-list")
+       		 }
 		});
 	});
 }
 
+/**
+ * 图片上传后回调
+ * @param result 上传成功返回reslut对象
+ * @param fileIdsDomId 文件id串存放的domid
+ * @param showListDomId 图片列表显示domid
+ */
+function  uploadDone(result,fileIdsDomId,showListDomId) {
+    var code=result.code;
+    var data=result.data;
+    if(code==1){//成功
+        var $fileIds=$("#"+fileIdsDomId);fileIds
+        var fileId=data.id;
+        var fileName=data.fileName||"";
+        if($fileIds.length>0){
+            var fileIds=$fileIds.val();
+            if(isEmpty(fileIds)){
+                fileIds=fileId;
+            }else{
+                fileIds+=","+fileId;
+            }
+            $fileIds.val(fileIds);
+        }
+        var src=fileApiPath+"down/"+fileId;
+        $('#'+showListDomId).append('<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">');
+    }
+}
+}
