@@ -1,6 +1,10 @@
 
 window.onload = function(){
-	$bj_post_ajax({"url":commonApiPath+"getSysDate","data":{"dfm":"yyyy-MM-dd"},"success":function (result) {
+    relPicker("chrxclb",[{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}]);
+
+    relPicker("chrxcbm",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
+        {"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}]);
+	/*$bj_post_ajax({"url":commonApiPath+"getSysDate","data":{"dfm":"yyyy-MM-dd"},"success":function (result) {
 					if(result){
 						debugger
 							mui("#dtmgxrqLabel")[0].innerText=result;
@@ -33,7 +37,13 @@ window.onload = function(){
 
 	dtPicker('#dtmxcrq');
 
-	upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
+
+
+	*/
+
+    upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
+
+    dtPicker('#dtmxcrq');
 }
 function save(){
 	console.log("baoc");

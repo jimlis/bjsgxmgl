@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>政府部门巡查/专项验收记录详情</title>
+		<title>新增安全报告</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -19,44 +19,49 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">政府部门巡查/专项验收记录</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openAdd()">编辑</button>
+		    <h1 class="mui-title">安全报告</h1>
 		</header>
 		<div class="mui-content" id="list">
 
 			<form id="form">
 				<input type="hidden" id="id" name="id">
+				<input type="hidden" id="intxmid" name="intxmid">
 				<div class="mui-content-padded">
 					<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 					<h5 class="bj-title2-font">更新日期：
 						<label id="dtmgxrqLabel">2018-10-07</label>
 						<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
 					</h5>
-					<h5 class="bj-title2-font">巡查类别：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intxclb" name="intxclb" readonly="readonly" disabled placeholder="巡查类别" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrxclb" name="chrxclb" readonly="readonly" disabled placeholder="巡查类别" />
+					<h5 class="bj-title2-font">安全问题描述：
+						<input class="bj-input bj-p-black-font" type="text" id="chraqwtbs" name="chraqwtbs" placeholder="安全问题描述" />
 					</h5>
-					<h5 class="bj-title2-font">巡查部门：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intxcbm" name="intxcbm" readonly="readonly" disabled placeholder="巡查部门" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrxcbm" name="chrxcbm" readonly="readonly" disabled placeholder="巡查部门" />
-					</h5>
-					<h5 class="bj-title2-font">巡查人员：
-						<input class="bj-input bj-p-black-font" type="text" id="chrxcry" name="chrxcry" readonly="readonly" disabled placeholder="巡查人员" />
-					</h5>
-					<h5 class="bj-title2-font">巡查日期：
-						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmxcrq"  name="dtmxcrq" disabled readonly="readonly" placeholder="巡查日期" />
+					<h5 class="bj-title2-font">安全问题位置：
+						<input class="bj-input bj-p-black-font" type="text" id="chraqwtwz" name="chraqwtwz" placeholder="安全问题位置" />
 					</h5>
 					<h5 class="bj-title2-font">照片：</h5>
 					<div id="uploader" class="wu-example">
+						<!--用来存放文件信息-->
+						<div class="btns">
+							<button id="chbtn"  type="button">选择文件</button>
+						</div>
 						<div id="img-list">
 						</div>
 					</div>
 					<h5 class="bj-title2-font">备注：
-						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb"  readonly="readonly" disabled placeholder="备注" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
+					</h5>
+					<h5 class="bj-title2-font">施工负责单位：
+						<input class="bj-input bj-p-black-font" type="text" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
+					</h5>
+					<h5 class="bj-title2-font">通知施工方日期：
+						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmtzrq" name="dtmtzrq" placeholder="通知施工方日期" />
+					</h5>
+					<h5 class="bj-title2-font">整改完成日期：
+						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmwczgrq" name="dtmwczgrq" placeholder="整改完成日期" />
 					</h5>
 					<h5 class="bj-title2-font">报告人：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" name="intbgrid" disabled  readonly="readonly" placeholder="报告人" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc"  disabled readonly="readonly" value="李斯" placeholder="报告人名称" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" name="intbgrid" placeholder="报告人" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="李斯" placeholder="报告人名称" />
 					</h5>
 				</div>
 			</form>
@@ -70,7 +75,7 @@
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_gov_record_details.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_safe_report_add.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

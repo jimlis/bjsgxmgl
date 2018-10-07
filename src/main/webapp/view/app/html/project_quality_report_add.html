@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>新增质量缺陷报告</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css"/>
+	<link rel="stylesheet" href="../css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">质量缺陷报告</h1>
+</header>
+<div class="mui-content" id="list">
+
+	<form id="form">
+		<input type="hidden" id="id" name="id">
+		<input type="hidden" id="intxmid" name="intxmid">
+		<div class="mui-content-padded">
+			<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
+			<h5 class="bj-title2-font">更新日期：
+				<label id="dtmgxrqLabel">2018-10-07</label>
+				<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
+			</h5>
+			<h5 class="bj-title2-font">质量缺陷类型：
+				<input class="bj-input bj-p-black-font" type="hidden" id="intqxlx" name="intqxlx" placeholder="质量缺陷类型" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrqxlx" name="chrqxlx" placeholder="质量缺陷类型" />
+			</h5>
+			<h5 class="bj-title2-font">质量缺陷描述：
+				<input class="bj-input bj-p-black-font" type="text" id="chrqxms" name="chrqxms" placeholder="质量缺陷描述" />
+			</h5>
+			<h5 class="bj-title2-font">质量缺陷位置：
+				<input class="bj-input bj-p-black-font" type="text" id="chrqxwz" name="chrqxwz" placeholder="质量缺陷位置" />
+			</h5>
+			<h5 class="bj-title2-font">照片：</h5>
+			<div id="uploader" class="wu-example">
+				<!--用来存放文件信息-->
+				<div class="btns">
+					<button id="chbtn"  type="button">选择文件</button>
+				</div>
+				<div id="img-list">
+				</div>
+			</div>
+			<h5 class="bj-title2-font">备注：
+				<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
+			</h5>
+			<h5 class="bj-title2-font">施工负责单位：
+				<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrsgdw" name="chrsgdw" placeholder="施工负责单位" />
+			</h5>
+			<h5 class="bj-title2-font">通知施工方日期：
+				<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmtzrq" name="dtmtzrq" placeholder="通知施工方日期" />
+			</h5>
+			<h5 class="bj-title2-font">整改完成日期：
+				<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmwczgrq" name="dtmwczgrq" placeholder="整改完成日期" />
+			</h5>
+			<h5 class="bj-title2-font">报告人：
+				<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" name="intbgrid" placeholder="报告人" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="李斯" placeholder="报告人名称" />
+			</h5>
+		</div>
+	</form>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/project_quality_report_add.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

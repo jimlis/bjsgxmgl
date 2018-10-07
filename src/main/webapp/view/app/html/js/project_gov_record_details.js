@@ -1,6 +1,10 @@
 
 window.onload = function(){
-	$bj_post_ajax({"url":commonApiPath+"getSysDate","data":{"dfm":"yyyy-MM-dd"},"success":function (result) {
+    var list = document.getElementById('img-list');
+    list.appendChild(createFragment(10,'../images/ly.png'));
+    funLazyLoad('#img-list').refresh(true);
+
+	/*$bj_post_ajax({"url":commonApiPath+"getSysDate","data":{"dfm":"yyyy-MM-dd"},"success":function (result) {
 					if(result){
 							mui("#dtmgxrqLabel")[0].innerText=result;
                             mui("#dtmgxrq")[0].value=result;
@@ -28,14 +32,27 @@ window.onload = function(){
                       relPicker('chrxcbm',xcbm,'intxcbm');
                   }
 			  }
-        }});
+        }});*/
+
+	//    upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
 
 	//dtPicker('#dtmxcrq');
 
-	//upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
+    dtPicker('#dtmxcrq');
+
+
 }
 
 
 function save(){
 	console.log("baoc");
 }
+
+/**
+ *编辑
+ */
+function openAdd(){
+    var address = "project_gov_record_add.html?id=";
+    toUrl(address);
+}
+
