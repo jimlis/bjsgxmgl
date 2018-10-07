@@ -1,16 +1,9 @@
-
-/**
- *详情
- */
-function openDetails(){
-    var address = "project_gov_record_details.html";
-    toUrl(address);
+//初始化必要条件
+window.onload=function(){
 }
-
-/**
- *新增
- */
-function openAdd(){
-    var address = "project_templet_record_add.html";
-    toUrl(address);
+function openNext(id){
+	toUrl("project_templet_record_detail.html?id="+id);
+}
+function openNextAdd(){
+	toUrl("project_templet_record_add.html");
 }

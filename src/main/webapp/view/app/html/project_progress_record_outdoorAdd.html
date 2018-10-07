@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>新增样板施工记录</title>
+		<title>室外管网施工</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -18,42 +18,38 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">样板施工记录</h1>
+		    <h1 class="mui-title">室外管网施工</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="list">
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">报告日期：
-					<span class="bj-p-gray-font">2018-8-9</span>
+					<span class="bj-p-gray-font">2018-8-18</span>
 				</h5>
-				<h5 class="bj-title2-font">样板施工完成日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDateWC" placeholder="请选择" />
+				<h5 class="bj-title2-font">最新版csd图纸：
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">选择</button>
+					<div id="csdList"></div>
 				</h5>
-				<h5 class="bj-title2-font">现场样板类型：
-					<input class="bj-input bj-p-black-font" type="text" id="showLX" placeholder="请选择" />
-				</h5>
-				<h5 class="bj-title2-font">样板描述：
-					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
-				</h5>
-				<h5 class="bj-title2-font">样板位置：
-					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
-				</h5>
-				<h5 class="bj-title2-font">通过审批日期：
+				<h5 class="bj-title2-font">CSD图纸通过审批日期：
 					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDateSP" placeholder="请选择日期" />
 				</h5>
+				<h5 class="bj-title2-font">类型：
+					<input class="bj-input bj-p-black-font" type="text" id="showLX"placeholder="请选择类型" />
+				</h5>
+				<h5 class="bj-title2-font">施工区域：
+					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
+				</h5>
+				<h5 class="bj-title2-font">完成量：
+					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
+				</h5>
+				<h5 class="bj-title2-font">完成情况：
+					<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">选择</button>
+					<div id="wcList"></div>
+				</h5>
 				<h5 class="bj-title2-font">备注：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' placeholder="请输入" />
+					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
 				</h5>
 				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
-				<h5 class="bj-title2-font">照片：</h5>
-				<div id="uploader" class="wu-example">
-				    <!--用来存放文件信息-->
-				    <div class="btns">
-				        <button id="chbtn" >选择文件</button>
-				    </div>
-				    <div id="img-list">
-				    </div>
-				</div>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
@@ -62,7 +58,7 @@
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_templet_record_add.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_outdoorAdd.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

@@ -1,7 +1,6 @@
 
 window.onload = function(){
-	dtPicker('#showDatePicker');
-	dtPicker('#showDatePicker1');
+	dtPicker('#showDateJZS');
 	upLoadImg('#chbtn','#upbtn');
 	relPicker("showAddress",getPageData("sgwz"));
 	relPicker("showType",getPageData("pslx"));
