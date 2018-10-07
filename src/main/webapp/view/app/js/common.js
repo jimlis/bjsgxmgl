@@ -206,8 +206,27 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 		});
 	}, false);
 }
+
 /*照片懒加载1*/
-var createFragment = function(files) {
+var createFragment = function(count,src) {
+    var fragment = document.createDocumentFragment();
+    var ul = document.createElement('ul');
+    ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
+    var li;
+    for(var i = 0; i < count; i++) {
+        li = document.createElement('li');
+        li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
+        li.innerHTML = `<a>
+							<img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">
+						</a>`;
+        ul.appendChild(li);
+    }
+    fragment.appendChild(ul);
+    return fragment;
+};
+
+/*照片懒加载1*/
+var createFragment111 = function(files) {
 	var fragment = document.createDocumentFragment();
 	var ul = document.createElement('ul');
 	ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
