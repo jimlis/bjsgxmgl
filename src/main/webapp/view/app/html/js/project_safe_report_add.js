@@ -10,5 +10,5 @@ window.onload = function(){
 }
 
 function save(){
-	console.log("baoc");
+	bjToast("保存成功");
 }

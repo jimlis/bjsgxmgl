@@ -46,5 +46,5 @@ window.onload = function(){
     dtPicker('#dtmxcrq');
 }
 function save(){
-	console.log("baoc");
+    bjToast("保存成功");
 }
