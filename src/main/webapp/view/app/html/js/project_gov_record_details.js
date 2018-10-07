@@ -38,7 +38,7 @@ window.onload = function(){
 
 	//dtPicker('#dtmxcrq');
 
-    dtPicker('#dtmxcrq');
+   // dtPicker('#dtmxcrq');
 
 
 }

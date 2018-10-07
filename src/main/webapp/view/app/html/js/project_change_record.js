@@ -3,7 +3,7 @@
  *详情
  */
 function openDetails(){
-    var address = "project_gov_record_details.html";
+    var address = "project_change_record_details.html";
     toUrl(address);
 }
 
@@ -11,6 +11,6 @@ function openDetails(){
  *新增
  */
 function openAdd(){
-    var address = "project_gov_record_add.html";
+    var address = "project_change_record_add.html";
     toUrl(address);
 }
