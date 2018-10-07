@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>照片记录</title>
+		<title>基础施工</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -13,25 +13,24 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-		
 	</head>
 		
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">照片记录</h1>
-		    <button id="upbtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		    <h1 class="mui-title">基础施工</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="list">
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">报告日期：
 					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDatePicker" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">报告记录类别：
-					<input class="bj-input bj-p-black-font" type="text" id="showTypePicker" placeholder="请选择类别" />
+				<h5 class="bj-title2-font">施工位置：
+					<input class="bj-input bj-p-black-font" type="text" id="showAddress" placeholder="请选择施工位置" />
 				</h5>
-				<h5 class="bj-title2-font">拍摄位置：
-					<input class="bj-input bj-p-black-font" type="text" id="showAddressPicker" placeholder="请选择拍摄位置" />
+				<h5 class="bj-title2-font">浇筑砼日期：
+					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDatePicker1" placeholder="请选择日期" />
 				</h5>
 				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
 				<h5 class="bj-title2-font">照片：</h5>
@@ -44,16 +43,14 @@
 				    </div>
 				</div>
 			</div>
-			
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_photo_record_add.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_bodyAdd.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

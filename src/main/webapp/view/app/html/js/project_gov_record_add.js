@@ -33,7 +33,7 @@ window.onload = function(){
 
 	dtPicker('#dtmxcrq');
 
-	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
+	upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
 }
 function save(){
 	console.log("baoc");

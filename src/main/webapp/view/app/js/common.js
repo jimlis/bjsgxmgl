@@ -185,8 +185,9 @@ function dtPicker(selecter){
 *@param  textSelecter 文本显示domid
 *@param  data  点击文本显示的下拉框数据
 *@param  valueSelecter  选择文本存放隐藏至的domid
+* @param  funResult  自定义返回函数
 **/
-function relPicker(textSelecter,data,valueSelecter){
+function relPicker(textSelecter,data,valueSelecter,funResult){
 	var userPicker = new mui.PopPicker();
 	userPicker.setData(data);
 	var showUserPickerButton = document.getElementById(textSelecter);
@@ -196,6 +197,9 @@ function relPicker(textSelecter,data,valueSelecter){
 			if(valueSelecter){
                 var valueInput = document.getElementById(valueSelecter);
                       valueInput.value=items[0].value.replace(/^\"|\"$/g,'');
+			}
+			if(funResult){
+				funResult(items[0]);
 			}
 			//返回 false 可以阻止选择框的关闭
 			//return false;
@@ -235,7 +239,7 @@ function funLazyLoad(select){
 * @param  data 自定义提交数据
 * @param  done 上传完成后函数
 **/
-function upLoadImg(elem,data,done){
+function upLoadImg(elem,bind,data,done){
 	layui.use('upload', function(){
 	var upload = layui.upload;
 	//选完文件后不自动上传（js代码，将文件传到后台）
@@ -243,12 +247,23 @@ function upLoadImg(elem,data,done){
 		elem: elem				//“选择文件”按钮的ID
 		,url: fileApiPath+"upload"	//后台接收地址
 		,data: data		//传递到后台的数据
-		,auto: true				//不自动上传设置
+		,auto: false				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
 		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
-		//,bindAction: bind		//“上传”按钮的ID
+		,bindAction: bind		//“上传”按钮的ID
+		,choose: function(obj){
+			//将每次选择的文件追加到文件队列
+    			var files = obj.pushFile();
+		    //预读本地文件示例，不支持ie8
+			obj.preview(function(index, file, result){		//在当前ID为“demo2”的区域显示图片
+				console.log(index); //得到文件索引
+      			console.log(file); //得到文件对象
+				//$('#img-list').append(`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`)
+				document.getElementById("img-list").innerHTML+=`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`;
+			});
+		}
 		,done: done||function(res) {
             	uploadDone(res,"fileIds","img-list")
        		 }
