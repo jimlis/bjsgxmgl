@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>工程款申请/支付情况</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">工程款申请/支付情况</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		</header>
+		<div class="mui-content" id="list">
+			<div class="mui-content-padded">
+				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">2018-3-15</span></h5>
+				<h5 class="bj-title2-font">单位类型：
+					<input class="bj-input bj-p-black-font" type="text" id="showLX" placeholder="请选择" />
+				</h5>
+				<h5 class="bj-title2-font">单位名称：
+					<input class="bj-input bj-p-black-font" type="text" id="showMC" placeholder="请选择" />
+				</h5>
+				<h5 class="bj-title2-font">本次申请期数：
+					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+				</h5>
+				<h5 class="bj-title2-font">本期申请金额：
+					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+				</h5>
+				<h5 class="bj-title2-font">本期核实发放金额：
+					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+				</h5>
+				<h5 class="bj-title2-font">申请/支付情况：</h5>
+				<table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
+		            	<tr>
+		            		<th>合同金额A</th>
+		            		<th>潜在变更总金额B</th>
+		            		<th>累计已发放期数</th>
+		            		<th>累计发放金额C</th>
+		            	</tr>
+		            	<tr>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            	</tr>
+		            	<tr>
+		            		<th>B/A</th>
+		            		<th>本次申请金额D</th>
+		            		<th>本期核实发放金额E</th>
+		            		<th>D/E</th>
+		            	</tr>
+		            	<tr>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            	</tr>
+		            	<tr>
+		            		<th>C/A</th>
+		            		<th>（C+E）/A</th>
+		            		<th>C/（A+B）</th>
+		            		<th>（C+E）/（A+B）</th>
+		            	</tr>
+		            	<tr>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            	</tr>
+	            </table>
+				<h5 class="bj-title2-font">备注：
+					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+				</h5>
+				<ul class="bj-ul-clear bj-title2-font">支付证书：
+					<li><a>12345678XX.pdf</a></li>
+					<li><a>12345678XX.pdf</a></li>
+				</ul>
+				<h5 class="bj-title2-font">审批流程状态：
+					<input class="bj-input bj-p-black-font" type="text" id="showSPZT" placeholder="请选择" />
+				</h5>
+				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_pay_record_add.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
