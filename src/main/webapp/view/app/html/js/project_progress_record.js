@@ -25,27 +25,26 @@ function init(){
 	relPicker('confirmBtn',btnArray,null,function(obj){
 		switch (obj.value){
 			case "0":
-			toUrl("project_progress_record_baseDetail.html");
+			toUrl("project_progress_record_baseAdd.html");
 				break;
 			case "1":
-			toUrl("project_progress_record_BodyDetail.html");
+			toUrl("project_progress_record_bodyAdd.html");
 				break;
 			case "2":
 			toUrl("project_progress_record_SecDetail.html");
 				break;
 			case "3":
-			toUrl("project_progress_record_ElevatorDetail.html");
+			toUrl("project_progress_record_elevatorAdd.html");
 				break;
 			case "4":
-			toUrl("project_progress_record_outdoorDetail.html");
+			toUrl("project_progress_record_outdoorAdd.html");
 				break;
 			case "5":
-			toUrl("project_progress_record_gardenDetail.html");
+			toUrl("project_progress_record_gardenAdd.html");
 				break;
 			default:
 				break;
 		}
-		bjToast("您选择了："+obj.text);
 	});
 }
 function openNext(type,id){
