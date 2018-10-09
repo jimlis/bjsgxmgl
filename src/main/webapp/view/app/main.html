@@ -48,9 +48,10 @@
             mui('.mui-content').on('tap', '.mui-table-view-cell', function () {
                 url = this.getAttribute("url");
                 if (url!=null) {
-                    window.location.href=url;
+                    toUrl(url);
                 } else{
                     console.log('没有url');
+                    bjToast("跳转出现问题，请联系管理员！")
                 }
 
             });

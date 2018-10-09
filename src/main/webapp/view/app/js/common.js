@@ -43,6 +43,11 @@ function isNotEmpty(str){
  * 打开链接，进行跳转，传入跳转地址
  * */
 function toUrl(url){
+	if ( url.indexOf( "?" ) != -1 ) {
+		url+="&version=100";
+	}else{
+		url+="?version=100";
+	}
 	var enUrl = encodeURI(url);
 	window.location.href=enUrl;
 }

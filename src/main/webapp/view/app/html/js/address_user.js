@@ -10,9 +10,8 @@ $bjAjax({
 	type:'post',
 	success:function(data){
 		//服务器返回响应，根据响应结果，分析是否登录成功；
-		if(data.code==0){
 			console.log(data);
-			var user = data.data;
+			var user = data;
 			if(user.fileId!=null){
 				mui(".mui-content")[0].innerHTML =`
 					<img class="bj-img-center" src="`+imgApiPath+user.fileId+`"/>
@@ -33,12 +32,7 @@ $bjAjax({
 				<li class="mui-table-view-cell" ><span>邮箱：`+email+`</span></li>
 				<li class="mui-table-view-cell"><span>部门：`+deptName+`</span></li>
 			`;
-		}
 	},
-	err:function(xhr,type,errorThrown){
-		//异常处理；
-		console.log(type);
-	}
 });
 
 

@@ -4,6 +4,6 @@ window.onload=function(){
 function openNext(id){
 	toUrl("project_templet_record_detail.html?id="+id);
 }
-function openNextAdd(){
+function openAdd(){
 	toUrl("project_templet_record_add.html");
 }
