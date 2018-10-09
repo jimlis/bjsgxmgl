@@ -10,7 +10,6 @@ import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmxmcjdw.domain.XmXmcjdwDO;
 import com.zj.project.xm.xmxmcjdw.service.XmXmcjdwService;
 import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
-import com.zj.project.xm.xmzfxcyzxys.service.XmZfxcyzxysService;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

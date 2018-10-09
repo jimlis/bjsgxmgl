@@ -7,7 +7,6 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmdwmd.service.XmDwmdService;
-import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
