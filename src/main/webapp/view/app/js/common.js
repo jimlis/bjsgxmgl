@@ -8,6 +8,7 @@ var noticeApiPath=serverPath+"api/gsgg/";
 var imgApiPath = serverPath+"api/file/down/";
 var dictApiPath = serverPath+"api/dict/";
 var commonApiPath = serverPath+"api/common/";
+var xmzfxcyzxysApiPath = serverPath+"api/xmzfxcyzxys/";
 
 function bjToast(data){
 	 mui.toast(data);
@@ -46,8 +47,9 @@ function toUrl(url){
 	window.location.href=enUrl;
 }
 
-function getRequest(url){
-	var url = decodeURI(url);
+function getRequest(){
+	var url=window.location.search;
+	      url = decodeURI(url);
 	var theRequest = new Object();
 	if ( url.indexOf( "?" ) != -1 ) {
 	  var str = url.substr( 1 ); //substr()方法返回从参数值开始到结束的字符串；
@@ -415,4 +417,13 @@ function getFromData(form){
         }
     }
     return data;
+}
+
+/**
+ * 是否拥有该权限
+ * @param bs 权限标识
+ * @returns {boolean} true 拥有 false 不拥有
+ */
+function hasPermission(bs){
+	return true;
 }
