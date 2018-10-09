@@ -62,12 +62,13 @@ public class ApiXmZfxcyzxysController extends ApiBaseController {
     @Log("保存政府巡查及专项验收")
     @PostMapping("save")
     @ApiOperation(value="保存政府巡查及专项验收",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "图片ids，多个以逗号隔开")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZfxcyzxysDO.class),
             @ApiResponse(code=1,message="操作失败",response=XmZfxcyzxysDO.class)})
     @RequiresAuthentication
-    public Result<XmZfxcyzxysDO> save(XmZfxcyzxysDO xmZfxcyzxysDO) {
+    public Result<XmZfxcyzxysDO> save(XmZfxcyzxysDO xmZfxcyzxysDO,String fileIds) {
         try {
-            //xmZfxcyzxysService.saveXmXkzxx(xmZfxcyzxysDO);
+            xmZfxcyzxysService.saveXmZfxcyzxysxx(xmZfxcyzxysDO,fileIds);
             return Result.ok(xmZfxcyzxysDO);
         }catch (Exception e){
             e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.zj.project.xm.xmxmcjdw.service.impl;
 
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zj.project.xm.xmxmcjdw.dao.XmXmcjdwDao;
@@ -10,6 +13,7 @@ import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import org.springframework.util.Assert;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -28,6 +32,9 @@ public class XmXmcjdwServiceImpl extends BaseServiceImpl<XmXmcjdwDao, XmXmcjdwDO
         tableInfo=TableInfoHelper.getTableInfo( XmXmcjdwDO.class);
     }
 
+    @Autowired
+    private XmDwmdService xmDwmdService;
+
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
@@ -39,6 +46,33 @@ public class XmXmcjdwServiceImpl extends BaseServiceImpl<XmXmcjdwDao, XmXmcjdwDO
     public Collection<XmXmcjdwDO> listByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
         return listByMap(parmMap);
+    }
+
+    /**
+     * 保存项目承建单位和单位名单
+     * @param xmXmcjdwDO
+     * @param xmDwmdDO
+     */
+    @Override
+    public void saveXmXmcjdwAndXmDwmd(XmXmcjdwDO xmXmcjdwDO, XmDwmdDO xmDwmdDO) {
+        Long xmXmcjdwId=xmXmcjdwDO.getId();
+        Long xmDwmdId=xmDwmdDO.getId();
+            if(xmXmcjdwId==null){
+                xmXmcjdwDO.setGxsj(new Date());
+                xmXmcjdwDO.setFcbz(1);
+                save(xmXmcjdwDO);
+            }else{
+                updateById(xmXmcjdwDO);
+            }
+
+
+            if(xmDwmdId==null){
+                xmDwmdDO.setGxsj(new Date());
+                xmDwmdDO.setFcbz(1);
+                xmDwmdService.save(xmDwmdDO);
+            }else{
+                xmDwmdService.updateById(xmDwmdDO);
+            }
     }
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zj.project.xm.xmdwmd.dao.XmDwmdDao">
+        <select id="getXmDwmdxxListByXmid" resultType="xmDwmdDO">
+                SELECT d.* FROM bj_xm_dwmd d
+                LEFT JOIN (
+                    SELECT 	* FROM sys_dict
+                    WHERE type IN ('1', '2', '3')
+                ) t ON d.intlxmd=t.value and d.intlxmd=t.type where d.fcbz=1  and d.intxmid=#{xmid} order  by t.sort asc
+        </select>
+
+
+    <select id="getDwlx" resultType="dictDO">
+        SELECT 	t.*  FROM sys_dict  t
+	    WHERE type=#{lxmd}  and value not in (select d.intdwlxid  from bj_xm_dwmd d where  d.intxmid=#{xmid} and d.intlxmd=#{lxmd} and d.fcbz=1)
+    </select>
+
+</mapper>

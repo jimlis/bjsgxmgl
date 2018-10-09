@@ -98,4 +98,23 @@ public class ApiFileController  extends ApiBaseController {
        }
     }
 
+    @Log("根据业务类型、业务id、文件类型获取文档附件列表")
+    @ResponseBody
+    @PostMapping("/list")
+    @ApiOperation(value="根据业务类型、业务id、文件类型获取文档附件列表",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="type",paramType="form",dataType = "string",required=false,value = "文件类型"),
+            @ApiImplicitParam(name="busType",paramType="form",dataType = "string",required=true,value = "业务类型，业务表名"),
+            @ApiImplicitParam(name="busId",paramType="form",dataType = "Long",required=true,value = "业务id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+            @ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<List<FileDO>> list(String busType,Long busId,String  type) {
+        FileDO fileDO=new FileDO();
+        fileDO.setBusType(busType);
+        fileDO.setBusId(busId);
+        fileDO.setType(type);
+        QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>(fileDO);
+        return Result.ok(fileService.list(queryWrapper));
+    }
+
 }

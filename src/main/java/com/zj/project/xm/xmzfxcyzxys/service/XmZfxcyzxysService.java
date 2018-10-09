@@ -18,4 +18,11 @@ public interface XmZfxcyzxysService extends BaseService<XmZfxcyzxysDO> {
     public boolean removeByParmMap(Map<String, Object> parmMap);
 
     public Collection<XmZfxcyzxysDO> listByParmMap(Map<String, Object> parmMap);
+
+    /**
+     * 保存信息
+     * @param xmZfxcyzxysDO 政府验收和巡查记录信息
+     * @param fileIds  图片ids
+     */
+    void  saveXmZfxcyzxysxx(XmZfxcyzxysDO xmZfxcyzxysDO, String fileIds);
 }
