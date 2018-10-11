@@ -7,7 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -18,30 +19,41 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <small> 2018-10-03 21:21:16 | lijun</small>
  */
  @TableName("bj_xm_zpjl")
+ @ApiModel(value = "XmZpjlDO",description = "项目基本信息-照片记录")
 public class XmZpjlDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "逻辑废除：0（废除），1（正常）",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = "修改新增删除时间",name = "gxsj",dataType = "Date",hidden = true)
     private Date gxsj;
     /** 项目基本信息id */
+    @ApiModelProperty(value = "项目基本信息id",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 序号 */
+    @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
     private Integer intxh;
     /** 报告日期 */
+    @ApiModelProperty(value = "报告日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
     private Date dtmbgrq;
     /** 1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度） */
+    @ApiModelProperty(value = "1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）",name = "intbglb",dataType = "string",required = true)
     private String intbglb;
     /** 根据页面提交存储 */
+    @ApiModelProperty(value = "根据页面提交存储",name = "chrpswz",dataType = "string",required = true)
     private String chrpswz;
     /** 报告人id */
+    @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required = false)
     private Long intbgrid;
     /** 报告人名称 */
+    @ApiModelProperty(value = "报告人名称",name = "chrbgrmc",dataType = "String",required = false)
     private String chrbgrmc;
 
     /**

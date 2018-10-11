@@ -7,7 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -18,22 +19,29 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <small> 2018-09-25 22:20:27 | lijun</small>
  */
  @TableName("bj_xm_xmcjdw")
+ @ApiModel(value = "XmXmcjdwDO",description = "项目承建各方名称")
 public class XmXmcjdwDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "逻辑废除：0（废除），1（正常）",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = " 修改新增删除时间",name = "gxsj",dataType = "Date",hidden = true)
     private Date gxsj;
     /** 项目id */
+    @ApiModelProperty(value = " 项目id ",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 建设单位名称 */
+    @ApiModelProperty(value = " 建设单位名称 ",name = "chrcjdwmc",dataType = "string")
     private String chrcjdwmc;
     /** 代建单位名称 */
+    @ApiModelProperty(value = " 代建单位名称  ",name = "chrdjdwmc",dataType = "string")
     private String chrdjdwmc;
 
     /**

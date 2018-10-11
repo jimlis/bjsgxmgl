@@ -41,8 +41,8 @@ public class ApiXmZfxcyzxysController extends ApiBaseController {
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
             @ApiImplicitParam(name="xclb",paramType="form",dataType = "string",required=false,value = "巡查类别"),
             @ApiImplicitParam(name="xcbm",paramType="form",dataType = "string",required=false,value = "巡查部门")})
-    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZfxcyzxysDO.class),
-    	@ApiResponse(code=1,message="操作失败",response=XmZfxcyzxysDO.class)})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
     public Result<List<XmZfxcyzxysDO>> getXmZfxcyzxysByXmidAndXcbm(Long xmid,String xclb,String xcbm) {
         try {
