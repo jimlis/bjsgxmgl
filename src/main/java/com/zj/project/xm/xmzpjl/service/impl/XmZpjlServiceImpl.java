@@ -111,8 +111,10 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
                         xmZpmsDO.setFcbz(1);
                         xmZpmsDO.setGxsj(new Date());
                         xmZpmsDO.setIntxmid(xmid);
+                        xmZpmsDO.setIntzpssid(xmZpjlDO.getId());
                         xmZpmsService.save(xmZpmsDO);
                     }else{
+                    	xmZpmsDO.setGxsj(new Date());
                         xmZpmsService.updateById(xmZpmsDO);
                     }
                 });

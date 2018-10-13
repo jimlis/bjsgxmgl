@@ -55,8 +55,8 @@ public class ApiXmZpjlController extends ApiBaseController {
     @PostMapping("getXmZpjlById")
     @ApiOperation(value="根据xmzpjlid获取照片记录信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmZpjlId",paramType="form",dataType = "Long",required=true,value = "项目照片记录id")})
-    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
-            @ApiResponse(code=1,message="操作失败",response=List.class)})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZpjlDO.class),
+            @ApiResponse(code=1,message="操作失败",response=XmZpjlDO.class)})
     @RequiresAuthentication
     public Result<XmZpjlDO> getXmZpjlById(Long xmZpjlId) {
         try {

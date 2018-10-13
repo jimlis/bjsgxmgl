@@ -15,6 +15,8 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.xm.xmdl.domain.XmDlDO;
 import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmdlcs.domain.XmDlCsDO;
+import com.zj.project.xm.xmdlcs.service.XmDlCsService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,6 +37,9 @@ public class ApiXmdlController extends ApiBaseController {
 
     @Autowired
     private XmDlService xmDlService;
+    
+    @Autowired
+    private XmDlCsService xmDlCsService;
 
     @Log("根据项目id获取项目栋楼信息")
     @PostMapping("getXmdlByXmid")
@@ -50,6 +55,26 @@ public class ApiXmdlController extends ApiBaseController {
             xmDlDO.setIntxmid(xmid);
             QueryWrapper<XmDlDO> queryWrapper=new QueryWrapper<XmDlDO>(xmDlDO).orderByAsc("intxh");
             return Result.ok(xmDlService.list(queryWrapper));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据xmDlId获取项目栋楼层数信息")
+    @PostMapping("getXmDlCsByXmDlId")
+    @ApiOperation(value="根据xmDlId获取项目栋楼层数信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmDlId",paramType="form",dataType = "Long",required=true,value = "项目栋楼id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<List<XmDlCsDO>> getXmDlCsByXmDlId(Long xmDlId) {
+        try {
+        	XmDlCsDO xmDlCsDO=new XmDlCsDO();
+        	xmDlCsDO.setFcbz(1);
+        	xmDlCsDO.setIntxmdlid(xmDlId);
+            QueryWrapper<XmDlCsDO> queryWrapper=new QueryWrapper<XmDlCsDO>(xmDlCsDO).orderByAsc("intxh");
+            return Result.ok(xmDlCsService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

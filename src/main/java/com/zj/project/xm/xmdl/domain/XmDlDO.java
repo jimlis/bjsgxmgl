@@ -1,12 +1,14 @@
 package com.zj.project.xm.xmdl.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 
@@ -18,26 +20,35 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <small> 2018-09-28 22:39:21 | lijun</small>
  */
  @TableName("bj_xm_dl")
+ @ApiModel(value = "XmDlDO",description = "项目基本信息-栋楼,记录每栋楼名称及编号")
 public class XmDlDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "废除标志",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
     private Date gxsj;
     /** 项目id：bj_xmjb表 */
+    @ApiModelProperty(value = "项目id：bj_xmjb表",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 序号 */
+    @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
     private Integer intxh;
     /** 栋楼名称 */
+    @ApiModelProperty(value = "栋楼名称",name = "chrdlmc",dataType = "String",required = true)
     private String chrdlmc;
     /** 栋楼介绍 */
+    @ApiModelProperty(value = "栋楼介绍",name = "chrdljs",dataType = "String",required = false)
     private String chrdljs;
     /** 层数 */
+    @ApiModelProperty(value = "层数",name = "intcs",dataType = "Integer",required = true)
     private Integer intcs;
 
     /**

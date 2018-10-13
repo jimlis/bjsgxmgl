@@ -1,6 +1,5 @@
 package com.zj.project.xm.xmghzb.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
