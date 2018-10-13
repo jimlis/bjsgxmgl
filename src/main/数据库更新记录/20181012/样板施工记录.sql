@@ -12,6 +12,7 @@ CREATE TABLE `bj_xm_ybsgjl` (
   `dtmsprq` date DEFAULT NULL COMMENT '通过审批日期',
   `intbgrid` bigint(20) DEFAULT NULL COMMENT '报告人id',
   `chrbgrmc` varchar(100) DEFAULT NULL COMMENT '报告人名称',
+  `chrbz` varchar(1000) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='样板施工记录';
 

@@ -97,9 +97,9 @@ public class ApiXmZpjlController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmZpjlDO XmZpjlDO, String fileIds,String xmZpmsJson) {
+    public Result save(XmZpjlDO xmZpjlDO, String fileIds,String xmZpmsJson) {
         try {
-            xmZpjlService.saveXmZpjlxx(XmZpjlDO,fileIds,xmZpmsJson);
+            xmZpjlService.saveXmZpjlxx(xmZpjlDO,fileIds,xmZpmsJson);
            return Result.ok();
         }catch (Exception e){
             e.printStackTrace();

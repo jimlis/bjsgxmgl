@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${xmYbsgjl.id}"  type="hidden">
+<div class="form-group">	
+								<label class="col-sm-3 control-label">逻辑废除：0（废除），1（正常）：</label>
+								<div class="col-sm-8">
+									<input id="fcbz" name="fcbz" th:value="${xmYbsgjl.fcbz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">修改新增删除时间：</label>
+								<div class="col-sm-8">
+									<input id="gxsj" name="gxsj" th:value="${xmYbsgjl.gxsj}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">项目基本信息id：</label>
+								<div class="col-sm-8">
+									<input id="intxmid" name="intxmid" th:value="${xmYbsgjl.intxmid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">序号：</label>
+								<div class="col-sm-8">
+									<input id="intxh" name="intxh" th:value="${xmYbsgjl.intxh}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">更新日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmgxrq" name="dtmgxrq" th:value="${xmYbsgjl.dtmgxrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">样板施工完成日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmwcrq" name="dtmwcrq" th:value="${xmYbsgjl.dtmwcrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">现场样板类型code码：1（土建），2（机电），3（装修），4（园林），5（其他）：</label>
+								<div class="col-sm-8">
+									<input id="intyblx" name="intyblx" th:value="${xmYbsgjl.intyblx}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">样板描述：</label>
+								<div class="col-sm-8">
+									<input id="chrybms" name="chrybms" th:value="${xmYbsgjl.chrybms}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">样板位置：</label>
+								<div class="col-sm-8">
+									<input id="chrybwz" name="chrybwz" th:value="${xmYbsgjl.chrybwz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">通过审批日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmsprq" name="dtmsprq" th:value="${xmYbsgjl.dtmsprq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人id：</label>
+								<div class="col-sm-8">
+									<input id="intbgrid" name="intbgrid" th:value="${xmYbsgjl.intbgrid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人名称：</label>
+								<div class="col-sm-8">
+									<input id="chrbgrmc" name="chrbgrmc" th:value="${xmYbsgjl.chrbgrmc}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="js/edit.js" th:src="@{/view/pc/html/project/xm/xmybsgjl/js/edit.js}">
+	</script>
+</body>
+</html>
