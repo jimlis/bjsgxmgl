@@ -38,6 +38,9 @@ public class ApiXmQyjwzController extends ApiBaseController {
         try {
                 QueryWrapper<XmQyjwzDO> queryWrapper=new QueryWrapper<XmQyjwzDO>().eq("fcbz",1).eq("intxmid",xmid);
                 XmQyjwzDO xmQyjwzDO = xmQyjwzService.getOne(queryWrapper);
+                if(xmQyjwzDO==null) {
+                	return Result.ok(new XmQyjwzDO());
+                }
                 return Result.ok(xmQyjwzService.getById(xmQyjwzDO.getId()));
         }catch (Exception e){
             e.printStackTrace();
