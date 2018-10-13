@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 
 /**
@@ -22,35 +24,50 @@ public class XmZlqxbgDO extends BaseDomain {
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     @TableId
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "逻辑废除：0（废除），1（正常）",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = "修改新增删除时间 ",name = "gxsj",dataType = "Date",hidden = true)
     private Date gxsj;
     /** 序号 */
+    @ApiModelProperty(value = "序号 ",name = "intxh",dataType = "Integer",hidden = true)
     private Integer intxh;
     /** 项目基本信息id */
+    @ApiModelProperty(value = "项目基本信息id ",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 更新日期 */
+    @ApiModelProperty(value = "报告日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
     private Date dtmgxrq;
     /** 质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） */
+    @ApiModelProperty(value = "质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） ",name = "intqxlx",dataType = "string",required = true)
     private String intqxlx;
     /** 质量缺陷描述 */
+    @ApiModelProperty(value = "质量缺陷描述 ",name = "chrqxms",dataType = "string")
     private String chrqxms;
     /** 质量缺陷位置 */
+    @ApiModelProperty(value = "质量缺陷位置 ",name = "chrqxwz",dataType = "string")
     private String chrqxwz;
     /** 备注 */
+    @ApiModelProperty(value = "备注",name = "chrbz",dataType = "string")
     private String chrbz;
     /** 施工负责单位：单位名单表id */
+    @ApiModelProperty(value = "施工负责单位：单位名单表id",name = "intsgdw",dataType = "Long")
     private Long intsgdw;
     /** 通知施工方日期 */
+    @ApiModelProperty(value = "通知施工方日期 ",name = "dtmtzrq",dataType = "string",example = "2018-10-13",required = true)
     private Date dtmtzrq;
     /** 整改完成日期 */
+    @ApiModelProperty(value = "整改完成日期 ",name = "dtmzgwcrq",dataType = "string",example = "2018-10-13",required = true)
     private Date dtmzgwcrq;
     /** 报告人id */
+    @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
     private Long intbgrid;
     /** 报告人名称 */
+    @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "string",required = true)
     private String chrbgrmc;
 
     /**
