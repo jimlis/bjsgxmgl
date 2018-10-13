@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${xmZlqxbg.id}"  type="hidden">
+<div class="form-group">	
+								<label class="col-sm-3 control-label">逻辑废除：0（废除），1（正常）：</label>
+								<div class="col-sm-8">
+									<input id="fcbz" name="fcbz" th:value="${xmZlqxbg.fcbz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">修改新增删除时间：</label>
+								<div class="col-sm-8">
+									<input id="gxsj" name="gxsj" th:value="${xmZlqxbg.gxsj}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">序号：</label>
+								<div class="col-sm-8">
+									<input id="intxh" name="intxh" th:value="${xmZlqxbg.intxh}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">项目基本信息id：</label>
+								<div class="col-sm-8">
+									<input id="intxmid" name="intxmid" th:value="${xmZlqxbg.intxmid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">更新日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmgxrq" name="dtmgxrq" th:value="${xmZlqxbg.dtmgxrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他）：</label>
+								<div class="col-sm-8">
+									<input id="intqxlx" name="intqxlx" th:value="${xmZlqxbg.intqxlx}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">质量缺陷描述：</label>
+								<div class="col-sm-8">
+									<input id="chrqxms" name="chrqxms" th:value="${xmZlqxbg.chrqxms}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">质量缺陷位置：</label>
+								<div class="col-sm-8">
+									<input id="chrqxwz" name="chrqxwz" th:value="${xmZlqxbg.chrqxwz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="chrbz" name="chrbz" th:value="${xmZlqxbg.chrbz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">施工负责单位：单位名单表id：</label>
+								<div class="col-sm-8">
+									<input id="intsgdw" name="intsgdw" th:value="${xmZlqxbg.intsgdw}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">通知施工方日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmtzrq" name="dtmtzrq" th:value="${xmZlqxbg.dtmtzrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">整改完成日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmzgwcrq" name="dtmzgwcrq" th:value="${xmZlqxbg.dtmzgwcrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人id：</label>
+								<div class="col-sm-8">
+									<input id="intbgrid" name="intbgrid" th:value="${xmZlqxbg.intbgrid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人名称：</label>
+								<div class="col-sm-8">
+									<input id="chrbgrmc" name="chrbgrmc" th:value="${xmZlqxbg.chrbgrmc}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="js/edit.js" th:src="@{/view/pc/html/project/xm/xmzlqxbg/js/edit.js}">
+	</script>
+</body>
+</html>
