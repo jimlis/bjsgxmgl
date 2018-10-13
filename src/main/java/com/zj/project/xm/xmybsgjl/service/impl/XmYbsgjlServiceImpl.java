@@ -1,23 +1,22 @@
 package com.zj.project.xm.xmybsgjl.service.impl;
 
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
-import com.zj.project.xm.xmxmcjdw.domain.XmXmcjdwDO;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmybsgjl.dao.XmYbsgjlDao;
-import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
-import com.zj.project.xm.xmybsgjl.service.XmYbsgjlService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmybsgjl.dao.XmYbsgjlDao;
+import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
+import com.zj.project.xm.xmybsgjl.service.XmYbsgjlService;
 
 /**
  * 
@@ -82,7 +81,6 @@ public class XmYbsgjlServiceImpl extends BaseServiceImpl<XmYbsgjlDao, XmYbsgjlDO
                 }
             }
         }
-
     }
 
 }
