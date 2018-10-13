@@ -1,24 +1,34 @@
 package com.zj.project.api.controller;
 
+import java.util.Map;
+
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.google.common.collect.Maps;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.business.user.service.UserService;
-import com.zj.platform.business.user.vo.UserVO;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.api.pojo.vo.ApiUserVO;
 import com.zj.project.api.pojo.vo.TokenVO;
 import com.zj.project.api.service.ApiUserService;
-import io.swagger.annotations.*;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * <pre>

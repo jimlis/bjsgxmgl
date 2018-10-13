@@ -13,8 +13,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
-import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
-import com.zj.project.xm.xmybsgjl.service.XmYbsgjlService;
 import com.zj.project.xm.xmzlqxbg.domain.XmZlqxbgDO;
 import com.zj.project.xm.xmzlqxbg.service.XmZlqxbgService;
 

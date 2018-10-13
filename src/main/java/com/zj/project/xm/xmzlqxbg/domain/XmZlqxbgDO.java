@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 
@@ -19,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
  * <small> 2018-10-13 10:46:20 | lijun</small>
  */
  @TableName("bj_xm_zlqxbg")
+ @ApiModel(value = "XmZlqxbgDO",description = "质量缺陷报告")
 public class XmZlqxbgDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

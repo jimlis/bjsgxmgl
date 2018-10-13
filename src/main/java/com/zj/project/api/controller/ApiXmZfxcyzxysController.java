@@ -1,26 +1,27 @@
 package com.zj.project.api.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zj.platform.common.annotation.Log;
-import com.zj.platform.common.util.DateUtils;
-import com.zj.platform.common.util.Result;
-import com.zj.platform.common.web.controller.ApiBaseController;
-import com.zj.project.xm.xmqyjwz.domain.XmQyjwzDO;
-import com.zj.project.xm.xmxkz.domain.XmXkzDO;
-import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
-import com.zj.project.xm.xmzfxcyzxys.service.XmZfxcyzxysService;
-import io.swagger.annotations.*;
+import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zj.platform.common.annotation.Log;
+import com.zj.platform.common.util.Result;
+import com.zj.platform.common.web.controller.ApiBaseController;
+import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
+import com.zj.project.xm.xmzfxcyzxys.service.XmZfxcyzxysService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * <pre>
@@ -53,6 +54,22 @@ public class ApiXmZfxcyzxysController extends ApiBaseController {
             xmZfxcyzxysDO.setIntxclb(xclb);
             QueryWrapper<XmZfxcyzxysDO> queryWrapper=new QueryWrapper<XmZfxcyzxysDO>(xmZfxcyzxysDO).orderByDesc("dtmxcrq");
             return Result.ok(xmZfxcyzxysService.list(queryWrapper));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据xmZfxcyzxysId获取巡查信息")
+    @PostMapping("getXmZfxcyzxysById")
+    @ApiOperation(value="根据xmZfxcyzxysId获取巡查信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmZfxcyzxysId",paramType="form",dataType = "Long",required=true,value = "市政巡查信息id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZfxcyzxysDO.class),
+    	@ApiResponse(code=1,message="操作失败",response=XmZfxcyzxysDO.class)})
+    @RequiresAuthentication
+    public Result<XmZfxcyzxysDO> getXmZfxcyzxysById(Long xmZfxcyzxysId) {
+        try {
+            return Result.ok(xmZfxcyzxysService.getById(xmZfxcyzxysId));
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();
