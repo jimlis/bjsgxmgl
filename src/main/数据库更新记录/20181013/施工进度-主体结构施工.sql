@@ -1,5 +1,5 @@
 CREATE TABLE `bj_xm_sgjd_ztjgsg` (
-  `id` bigint(20) NOT NULL COMMENT '主键id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `fcbz` tinyint(4) DEFAULT '1' COMMENT '逻辑废除：0（废除），1（正常）',
   `gxsj` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改新增删除时间',
   `intxmid` bigint(20) DEFAULT NULL COMMENT '项目基本信息id',

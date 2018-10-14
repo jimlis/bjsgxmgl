@@ -5,59 +5,73 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zj.platform.common.web.domain.BaseDomain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
  * 文件
  */
 @TableName("sys_file")
+@ApiModel(value = "FileDO",description = " 文件")
 public class FileDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     //
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /**
      * 业务表名
      */
+    @ApiModelProperty(value = "业务表名",name = "busType",dataType = "String",required = false)
     private  String busType;
     /**
      * 业务id
      */
+    @ApiModelProperty(value = "业务id",name = "busId",dataType = "Long",required = false)
     private  Long busId;
     /**
      * 文件类型
      */
+    @ApiModelProperty(value = "文件类型",name = "type",dataType = "String",required = false)
     private String type;
     /**
      * 文件名称
      */
-    @TableField()
+    @ApiModelProperty(value = "文件名称",name = "fileName",dataType = "String",required = false)
     private  String fileName;
     /**
      * 文件大小
      */
+    @ApiModelProperty(value = "文件大小",name = "fileSize",dataType = "String",required = false)
     private  Long fileSize;
     /**
      * 创建人id
      */
+    @ApiModelProperty(value = "创建人id",name = "createUserId",dataType = "Long",required = false)
     private  Long createUserId;
     /**
      * 创建人名称
      */
+    @ApiModelProperty(value = "创建人名称",name = "createUserName",dataType = "String",required = false)
     private  String createUserName;
     /**
      * 创建人部门id
      */
+    @ApiModelProperty(value = "创建人部门id",name = "createDeptId",dataType = "Long",required = false)
     private  Long createDeptId;
     /***
      * 创建人部门名称
      */
+    @ApiModelProperty(value = "创建人部门名称",name = "createDeptName",dataType = "String",required = false)
     private  String createDeptName;
     /**
      * URL地址
      */
+    @ApiModelProperty(value = "URL地址",name = "url",dataType = "String",required = false)
     private String url;
 
     // 创建时间

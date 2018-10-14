@@ -45,7 +45,7 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
     @Autowired
     private  XmSgjdEcjgzxWclService xmSgjdEcjgzxWclService;
     
-    @Autowired
+    @Override
 	public XmSgjdEcjgzxDO getById(Serializable id) {
     	XmSgjdEcjgzxDO xmSgjdEcjgzxDO = super.getById(id);
 

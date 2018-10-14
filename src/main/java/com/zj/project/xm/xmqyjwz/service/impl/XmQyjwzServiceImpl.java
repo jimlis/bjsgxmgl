@@ -80,13 +80,17 @@ public class XmQyjwzServiceImpl extends BaseServiceImpl<XmQyjwzDao, XmQyjwzDO> i
      */
     @Override
     public void saveXmQyjwzxx(XmQyjwzDO xmQyjwzDO){
-
-            xmQyjwzDO.setFcbz(1);
-            xmQyjwzDO.setGxsj(new Date());
-
-           save(xmQyjwzDO);
-
-           Long id=xmQyjwzDO.getId();
+    	  Long id=xmQyjwzDO.getId();
+    	  if(id==null) {
+    		  xmQyjwzDO.setFcbz(1);
+              xmQyjwzDO.setGxsj(new Date());
+              save(xmQyjwzDO);
+    	  }else {
+    		  xmQyjwzDO.setGxsj(new Date());
+              updateById(xmQyjwzDO);
+    	  }
+    	  
+    	  id = xmQyjwzDO.getId();
 
         //关联附件对象
         String fileIds=xmQyjwzDO.getFileIds();

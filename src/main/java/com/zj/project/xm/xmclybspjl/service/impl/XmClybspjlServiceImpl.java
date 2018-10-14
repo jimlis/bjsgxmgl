@@ -50,7 +50,7 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 	@Autowired
 	private FileService fileService;
 	
-	@Autowired
+	@Override
 	public XmClybspjlDO getById(Serializable id) {
 		XmClybspjlDO xmClybspjlDO = super.getById(id);
 
