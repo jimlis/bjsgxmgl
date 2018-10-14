@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -61,14 +62,16 @@ public class XmDwmdServiceImpl extends BaseServiceImpl<XmDwmdDao, XmDwmdDO> impl
                     if(CollectionUtils.isNotEmpty(list)){
                         list.forEach(xmDwmdDO->{
                             String intlxmd=xmDwmdDO.getIntlxmd();
-                            if(map.containsKey(intlxmd)){
-                                List<XmDwmdDO> newList=map.get(intlxmd);
-                                                                   newList.add(xmDwmdDO);
-                                                                    map.put(intlxmd,newList);
-                            }else{
-                                List<XmDwmdDO> newList=Lists.newArrayList();
-                                newList.add(xmDwmdDO);
-                                map.put(intlxmd,newList);
+                            if(StringUtils.isNotEmpty(intlxmd)) {
+                            	if(map.containsKey(intlxmd)){
+                                    List<XmDwmdDO> newList=map.get(intlxmd);
+                                                   newList.add(xmDwmdDO);
+                                                   map.put(intlxmd,newList);
+                                }else{
+                                    List<XmDwmdDO> newList=Lists.newArrayList();
+                                    newList.add(xmDwmdDO);
+                                    map.put(intlxmd,newList);
+                                }
                             }
                         });
                         if(!map.containsKey("1")) {

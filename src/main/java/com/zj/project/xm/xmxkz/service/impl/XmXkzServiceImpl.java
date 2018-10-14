@@ -1,22 +1,24 @@
 package com.zj.project.xm.xmxkz.service.impl;
 
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.web.exception.MyApiException;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmxkz.dao.XmXkzDao;
-import com.zj.project.xm.xmxkz.domain.XmXkzDO;
-import com.zj.project.xm.xmxkz.service.XmXkzService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.exception.MyApiException;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmxkz.dao.XmXkzDao;
+import com.zj.project.xm.xmxkz.domain.XmXkzDO;
+import com.zj.project.xm.xmxkz.service.XmXkzService;
 
 /**
  * 
@@ -58,8 +60,21 @@ public class XmXkzServiceImpl extends BaseServiceImpl<XmXkzDao, XmXkzDO> impleme
     @Override
     public void saveXmXkzxx(XmXkzDO xmXkzDO, String fileIds) {
         Long intxmid = xmXkzDO.getIntxmid();
+        String intxkzlx = xmXkzDO.getIntxkzlx();
         if(intxmid==null){
             throw  new MyApiException("44005");
+        }
+        
+        XmXkzDO xmXkzDOOne=new XmXkzDO();
+        xmXkzDOOne.setFcbz(1);
+        xmXkzDOOne.setIntxkzlx(intxkzlx);
+        xmXkzDOOne.setIntxmid(intxmid);
+        QueryWrapper<XmXkzDO>  queryWapper=new QueryWrapper<XmXkzDO>(xmXkzDOOne);
+        XmXkzDO one = getOne(queryWapper);
+        
+       
+        if(one!=null) {
+        	xmXkzDO.setId(one.getId());
         }
 
         Long id=xmXkzDO.getId();

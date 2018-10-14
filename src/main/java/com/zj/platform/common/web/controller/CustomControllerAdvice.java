@@ -1,13 +1,13 @@
 package com.zj.platform.common.web.controller;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.zj.platform.common.type.EnumErrorCode;
-import com.zj.platform.common.util.Constant;
-import com.zj.platform.common.util.Result;
-import com.zj.platform.common.util.conversion.CustomDateTimeEditor;
-import com.zj.platform.common.web.exception.CommonException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.zj.platform.common.type.EnumErrorCode;
+import com.zj.platform.common.util.Constant;
+import com.zj.platform.common.util.Result;
+import com.zj.platform.common.util.conversion.CustomDateTimeEditor;
+import com.zj.platform.common.web.exception.CommonException;
 
 
 /**
@@ -101,6 +103,13 @@ public class CustomControllerAdvice {
 		}else{
 			errorMsg="服务端异常，请联系管理员";
 		}
+		
+		if(log.isErrorEnabled()) {
+			log.error("程序发生异常,异常信息："+e.getMessage());
+		}
+	
+		e.printStackTrace();
+
 
 		if ((request.getHeader("accept").indexOf("application/json") > -1
 				|| (request.getHeader("X-Requested-With") != null
@@ -110,9 +119,11 @@ public class CustomControllerAdvice {
 			Result result=Result.build(Result.CODE_FAIL,errorMsg);
 			try {
 				Gson gson= new GsonBuilder().serializeNulls().create();
-						try(PrintWriter pw=response.getWriter()){
-							pw.write(gson.toJson(result));
-							pw.flush();
+						try(OutputStream out=response.getOutputStream()){
+							String json = gson.toJson(result);
+							byte[] bytes = json.getBytes();
+							out.write(bytes);
+							out.flush();
 						}catch (Exception e1){
 							e1.printStackTrace();
 						}
@@ -123,13 +134,7 @@ public class CustomControllerAdvice {
 		} else {
 			request.setAttribute("errorMsg", errorMsg);
 		}
-
-		if(log.isErrorEnabled()) {
-			log.error("程序发生异常,异常信息："+e.getMessage());
-		}
-	
-		e.printStackTrace();
-
+		
 		return Constant.PC_PREFIX+"sys/error/error";
 	}
 }

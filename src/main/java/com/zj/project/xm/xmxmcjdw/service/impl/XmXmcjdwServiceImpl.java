@@ -2,15 +2,20 @@ package com.zj.project.xm.xmxmcjdw.service.impl;
 
 import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmdwmd.service.XmDwmdService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zj.project.xm.xmxmcjdw.dao.XmXmcjdwDao;
 import com.zj.project.xm.xmxmcjdw.domain.XmXmcjdwDO;
 import com.zj.project.xm.xmxmcjdw.service.XmXmcjdwService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import org.springframework.util.Assert;
+
+import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
 import java.util.Date;
@@ -55,7 +60,25 @@ public class XmXmcjdwServiceImpl extends BaseServiceImpl<XmXmcjdwDao, XmXmcjdwDO
      */
     @Override
     public void saveXmXmcjdwAndXmDwmd(XmXmcjdwDO xmXmcjdwDO, XmDwmdDO xmDwmdDO) {
+        Long intxmid=xmXmcjdwDO.getIntxmid();
+        if(intxmid==null) {
+        	throw new CommonException("xmid不能为空");
+        }
+        
+        XmXmcjdwDO xmXmcjdwDOOne=new XmXmcjdwDO();
+        xmXmcjdwDOOne.setFcbz(1);
+        xmXmcjdwDOOne.setIntxmid(intxmid);
+        QueryWrapper<XmXmcjdwDO>  queryWapper=new QueryWrapper<XmXmcjdwDO>(xmXmcjdwDOOne);
+        XmXmcjdwDO one = getOne(queryWapper);
+        
+       
+        if(one!=null) {
+        	xmXmcjdwDO.setId(one.getId());
+        }
+        
         Long xmXmcjdwId=xmXmcjdwDO.getId();
+        
+        
         Long xmDwmdId=xmDwmdDO.getId();
             if(xmXmcjdwId==null){
                 xmXmcjdwDO.setGxsj(new Date());
@@ -65,13 +88,15 @@ public class XmXmcjdwServiceImpl extends BaseServiceImpl<XmXmcjdwDao, XmXmcjdwDO
                 updateById(xmXmcjdwDO);
             }
 
-
-            if(xmDwmdId==null){
-                xmDwmdDO.setGxsj(new Date());
-                xmDwmdDO.setFcbz(1);
-                xmDwmdService.save(xmDwmdDO);
-            }else{
-                xmDwmdService.updateById(xmDwmdDO);
+            String chrdwmc = xmDwmdDO.getChrdwmc();
+            if(StringUtils.isNotEmpty(chrdwmc)) {//单位名称不能为空
+            	 if(xmDwmdId==null){
+                     xmDwmdDO.setGxsj(new Date());
+                     xmDwmdDO.setFcbz(1);
+                     xmDwmdService.save(xmDwmdDO);
+                 }else{
+                     xmDwmdService.updateById(xmDwmdDO);
+                 }
             }
     }
 

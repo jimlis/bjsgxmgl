@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmybsgjl.dao.XmYbsgjlDao;
 import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
@@ -57,7 +58,13 @@ public class XmYbsgjlServiceImpl extends BaseServiceImpl<XmYbsgjlDao, XmYbsgjlDO
      */
     @Override
     public void saveXmYbsgjlXx(XmYbsgjlDO xmYbsgjlDO, String fileIds) {
+       
+        Long intxmid = xmYbsgjlDO.getIntxmid();
+        if(intxmid==null){
+            throw  new MyApiException("44005");
+        }
         Long id = xmYbsgjlDO.getId();
+        
         if(id==null){
             xmYbsgjlDO.setGxsj(new Date());
             xmYbsgjlDO.setFcbz(1);

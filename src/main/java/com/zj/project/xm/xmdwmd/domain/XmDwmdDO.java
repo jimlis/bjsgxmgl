@@ -47,6 +47,7 @@ public class XmDwmdDO extends BaseDomain {
     @ApiModelProperty(value = "单位类型id：code表码  ",name = "intdwlxid",dataType = "String",required = true)
     private String intdwlxid;
     @ApiModelProperty(value = "单位类型名称 ",name = "chrdwlxmc",dataType = "String",required = true)
+    @TableField(exist=false)
     private String chrdwlxmc;
     /** 单位名称 */
     @ApiModelProperty(value = "单位名称  ",name = "chrdwmc",dataType = "String",required = true)

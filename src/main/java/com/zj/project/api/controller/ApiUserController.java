@@ -1,5 +1,7 @@
 package com.zj.project.api.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -56,6 +58,7 @@ public class ApiUserController extends ApiBaseController {
             map.put("user",apiUserVO);
         }
         map.put("token",token);
+        map.put("sysdate",DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
         return Result.build(Result.CODE_SUCCESS,"登录成功",map);
     }
     
