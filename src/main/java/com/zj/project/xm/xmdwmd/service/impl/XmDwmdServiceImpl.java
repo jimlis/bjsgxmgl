@@ -71,6 +71,15 @@ public class XmDwmdServiceImpl extends BaseServiceImpl<XmDwmdDao, XmDwmdDO> impl
                                 map.put(intlxmd,newList);
                             }
                         });
+                        if(!map.containsKey("1")) {
+                        	  map.put("1", Lists.newArrayList());
+                        }
+                        if(!map.containsKey("2")) {
+                      	  map.put("2", Lists.newArrayList());
+                        }
+                        if(!map.containsKey("3")) {
+                      	  map.put("3", Lists.newArrayList());
+                        }
                         return  map;
                     }else{
                         map.put("1", Lists.newArrayList());

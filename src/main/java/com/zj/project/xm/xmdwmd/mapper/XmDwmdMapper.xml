@@ -3,11 +3,11 @@
 
 <mapper namespace="com.zj.project.xm.xmdwmd.dao.XmDwmdDao">
         <select id="getXmDwmdxxListByXmid" resultType="xmDwmdDO">
-                SELECT d.* FROM bj_xm_dwmd d
+                SELECT d.*,t.name as chrdwlxmc FROM bj_xm_dwmd d
                 LEFT JOIN (
                     SELECT 	* FROM sys_dict
-                    WHERE type IN ('1', '2', '3')
-                ) t ON d.intlxmd=t.value and d.intlxmd=t.type where d.fcbz=1  and d.intxmid=#{xmid} order  by t.sort asc
+                    WHERE type IN ('intdwlxid')
+                ) t ON d.intdwlxid=t.value  where d.fcbz=1  and d.intxmid=#{xmid} order  by t.sort asc
         </select>
 
 

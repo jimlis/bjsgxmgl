@@ -46,6 +46,8 @@ public class XmDwmdDO extends BaseDomain {
     /** 单位类型id：code表码 */
     @ApiModelProperty(value = "单位类型id：code表码  ",name = "intdwlxid",dataType = "String",required = true)
     private String intdwlxid;
+    @ApiModelProperty(value = "单位类型名称 ",name = "chrdwlxmc",dataType = "String",required = true)
+    private String chrdwlxmc;
     /** 单位名称 */
     @ApiModelProperty(value = "单位名称  ",name = "chrdwmc",dataType = "String",required = true)
     private String chrdwmc;
@@ -146,4 +148,19 @@ public class XmDwmdDO extends BaseDomain {
     public String getChrdwmc() {
         return chrdwmc;
     }
+    
+    /**
+	 * 获取单位类型名称
+	 */
+	public String getChrdwlxmc() {
+		return chrdwlxmc;
+	}
+	/**
+	 * 设置单位类型名称
+	 */
+	public void setChrdwlxmc(String chrdwlxmc) {
+		this.chrdwlxmc = chrdwlxmc;
+	}
+    
+    
 }
