@@ -1,4 +1,3 @@
-var id =null;
 $bjAjax({
 	url:baseApiAddress,
 	type:"post",
@@ -6,12 +5,13 @@ $bjAjax({
 		xmid:getCookie("id")
 	},
 	success:function(data){
-		var chrqy = data.chrqy,
-		chrwz = data.chrwz,
-		chrgdjt = data.chrgdjt,
-		chrzwzk = data.chrzwzk,
-		fileIds = data.fileIds,
-		id = data.id;
+		var chrqy = data.chrqy||"",
+		chrwz = data.chrwz||"",
+		chrgdjt = data.chrgdjt||"",
+		chrzwzk = data.chrzwzk||"",
+		fileIds = data.fileIds||"",
+		id = data.id||"";
+		document.getElementById("id").value=id;
 		mui(".mui-content .mui-content-padded")[0].innerHTML +=`
 			<h5 class="bj-title2-font">区域：<span class="bj-p-gray-font">`+chrqy+`</span></h5>
 			<h5 class="bj-title2-font">位置：<span class="bj-p-gray-font">`+chrwz+`</span></h5>
@@ -31,6 +31,7 @@ function setimg(url){
 }
 
 function edit(){
+	var id=document.getElementById("id").value;
 	if(id){
 		toUrl("project_basis_address_edit.html?id="+id);
 		return;

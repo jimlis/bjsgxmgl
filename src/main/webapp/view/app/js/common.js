@@ -29,7 +29,7 @@
 //	}
 //}
 /**服务端地址*/
-var serverPath="http://192.168.0.102:8080/bjsgxmgl/";
+var serverPath="http://192.168.0.101:8080/bjsgxmgl/";
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
 var fileApiPath=serverPath+"api/file/";

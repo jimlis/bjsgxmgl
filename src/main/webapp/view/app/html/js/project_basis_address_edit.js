@@ -8,16 +8,16 @@ if(obj.id){
 			id:obj.id
 		},
 		success:function(data){
-			var chrqy = data.chrqy,
-			chrwz = data.chrwz,
-			chrgdjt = data.chrgdjt,
-			chrzwzk = data.chrzwzk,
-			fileIds = data.fileIds,
-			id = data.id;
-			document.getElementById("chrqy").innerText = chrqy;
-			document.getElementById("chrwz").innerText = chrwz;
-			document.getElementById("chrgdjt").innerText = chrgdjt;
-			document.getElementById("chrzwzk").innerText = chrzwzk;
+			var chrqy = data.chrqy||"",
+			chrwz = data.chrwz||"",
+			chrgdjt = data.chrgdjt||"",
+			chrzwzk = data.chrzwzk||"",
+			fileIds = data.fileIds||"",
+			id = data.id||"";
+			document.getElementById("chrqy").value = chrqy;
+			document.getElementById("chrwz").value = chrwz;
+			document.getElementById("chrgdjt").value = chrgdjt;
+			document.getElementById("chrzwzk").value = chrzwzk;
 		}
 	})
 }
