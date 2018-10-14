@@ -20,35 +20,32 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">材料样板审批记录</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="list">
 
 			<form id="form">
-				<input type="hidden" id="id" name="id">
-				<input type="hidden" id="intxmid" name="intxmid">
 				<div class="mui-content-padded">
-					<input type="hidden" id="fileIds" name="fileIds" title="附件ids">
 					<h5 class="bj-title2-font">报告日期：
-						<label id="dtmgxrqLabel">2018-10-07</label>
-						<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" placeholder="2018-8-8" disabled="disabled" />
 					</h5>
 					<h5 class="bj-title2-font">材料样板类型：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intclyblx" name="intclyblx" placeholder="材料样板类型" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrclyblx" name="chrclyblx" placeholder="材料样板类型" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intclyblx" placeholder="材料样板类型" />
+						<input class="bj-input bj-p-black-font" type="text" id="intclyblx" placeholder="材料样板类型" />
 					</h5>
 					<h5 class="bj-title2-font">施工负责单位：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrsgdw" name="chrsgdw" placeholder="施工负责单位" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" placeholder="施工负责单位" />
+						<input class="bj-input bj-p-black-font" type="text" id="intsgdw" placeholder="施工负责单位" />
 					</h5>
 					<h5 class="bj-title2-font">是否替代品：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" name="intsfdtp" placeholder="是否替代品" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrsfdtp" name="chrsfdtp" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="text" id="intsfdtp" placeholder="是否替代品" />
 					</h5>
 					<h5 class="bj-title2-font">材料样板名称：
-						<input class="bj-input bj-p-black-font" type="text" id="chrybmc" name="chrybmc" placeholder="材料样板名称" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrybmc" placeholder="材料样板名称" />
 					</h5>
 					<h5 class="bj-title2-font">材料使用位置：
-						<input class="bj-input bj-p-black-font" type="text" id="chrybwz" name="chrybwz" placeholder="材料使用位置" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrybwz" placeholder="材料使用位置" />
 					</h5>
 					<h5 class="bj-title2-font">品牌及技术资料：
 						<table  border="1" cellspacing="5" cellpadding="5">
@@ -99,10 +96,10 @@
 						</table>
 					</h5>
 					<h5 class="bj-title2-font">规范标准：
-						<input class="bj-input bj-p-black-font" type="text" id="chrgfbz" name="chrgfbz" placeholder="规范标准" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrgfbz" placeholder="规范标准" />
 					</h5>
 					<h5 class="bj-title2-font">备注：
-						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrbz" placeholder="备注" />
 					</h5>
 					<h5 class="bj-title2-font">材料样板文件：</h5>
 					<div id="uploader" class="wu-example">

@@ -1,17 +1,97 @@
-
+//window.onload=function(){
+//	var href = window.location.href
+//	var path = getCookie("path");
+//	if(path){
+//		setCookie("path",path+","+href);
+//	}else{
+//		setCookie("path",href);
+//	}
+//	path = getCookie("path");
+//	if ( path.indexOf( "," ) != -1 ) {
+//		var arrs = path.split(",");
+//		//bjToast(arrs.length);
+//	}
+//	
+//	window.addEventListener("popstate", function(e) {
+//		//bjToast(window.history.state);//根据自己的需求实现自己的功能
+//		if(window.history.state){
+//			window.history.back(-1);
+//			return
+//		}
+//	}, false);
+//	//pushHistory();
+//	function pushHistory() {
+//		var state = {
+//		title: "title",
+//      url:"#"
+//		};
+//		window.history.pushState(state, "title", "#");
+//	}
+//}
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://192.168.0.102:8080/bjsgxmgl/";
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
 var fileApiPath=serverPath+"api/file/";
 var noticeApiPath=serverPath+"api/gsgg/";
 var imgApiPath = serverPath+"api/file/down/";
-var dictApiPath = serverPath+"api/dict/";
+var dictApiPath = serverPath+"api/dict/getDictMapByTypes";
 var commonApiPath = serverPath+"api/common/";
-var xmzfxcyzxysApiPath = serverPath+"api/xmzfxcyzxys/";
+var projectApiBase = serverPath+"api/xmjb/getListByXmlx";
+var projectApiDl = serverPath+"api/xmdl/getXmdlByXmid";
+var baseApiAddress = serverPath+"api/xmqyjwz/getXmQyjwzByXmid";
+var baseApiAddressSave = serverPath+"api/xmqyjwz/save";
+var baseApiCjdw = serverPath+"api/xmxmcjdw/getXmXmcjdwByXmid";
+var baseApiDwmd = serverPath+"api/xmdwmd/getXmDwmdxxByXmid"
+var baseApiYjdw = serverPath+"api/xmdwmd/getXmYjDwmdByXmid"
+var baseApiCjdwSave = serverPath+"api/xmxmcjdw/save";
+var baseApixkz =serverPath+"api/xmxkz/getXmXkzByXmidAndLx";
+var baseApixkzSave = serverPath+"api/xmxkz/save";
+var xmzfxcyzxysApiPath = serverPath+"api/xmzfxcyzxys/getXmZfxcyzxys";
+var xmzfxcyzxysApiDetail = serverPath+"api/xmzfxcyzxys/getXmZfxcyzxysById";
+var xmzfxcyzxysApiSave = serverPath+"api/xmzfxcyzxys/save";
+var photoApiList = serverPath+"api/zpjl/getXmZpjlMapByXmid";
+var photoApiDetail = serverPath+"api/zpjl/getXmZpmsListByXmZpjlid";
+var photoApiDetailText = serverPath+"api/zpjl/getXmZpjlById";
+var photoApiSave = serverPath+"api/zpjl/save";
+var changeApiList = serverPath+"api/xmbgsqjl/getXmBgsqjlListByXmidAndBgsqlx";
+var changeApiDetail = serverPath+"api/xmbgsqjl/getXmBgsqjlById";
+var changeApiSave = serverPath+"api/xmbgsqjl/save";
+var materialApiList = serverPath +"api/xmclybspjl/getXmClybspjlListByXmidAndClyblx";
+var materialApiDetail = serverPath +"api/xmclybspjl/getXmClybspjlById";
+var materialApiSave = serverPath +"api/xmclybspjl/save";
 
-function bjToast(data){
-	 mui.toast(data);
+/**TODO begin Tzx*/
+
+//安全报告
+var safeReportListApiPath = serverPath+"api/xmaqbg/getXmAqbgListByXmid";
+var safeReportByIdApiPath = serverPath+"api/xmaqbg/getXmAqbgById";
+var safeReportSaveApiPath = serverPath+"api/xmaqbg/save";
+
+//材料样板
+var tempRecodeListApiPath = serverPath+"api/xmybsgjl/getXmYbsgjlListByXmidAndYblx";
+var tempRecodeByIdApiPath = serverPath+"api/xmybsgjl/getXmYbsgjlById";
+var tempRecodeSaveApiPath = serverPath+"api/xmybsgjl/save";
+
+//质量
+var quaRecodeListApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgListByXmidAndQxlx";
+var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
+var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
+
+/**TODO end Tzx*/
+function bjToast(data,fuc){
+	var mask = mui.createMask();//callback为用户点击蒙版时自动执行的回调；
+	mask.show();//显示遮罩
+	mui.toast(data);
+	setTimeout(function(){ 
+	 	mask.close();//关闭遮罩
+	 	if(fuc){
+	 		fuc(); 
+	 	}
+	 }, 1500);
+}
+function bjConsole(data){
+	console.log(data);
 }
 /**
  * 将null undefined  "null" 转换为 ""
@@ -233,7 +313,7 @@ var createFragment = function(count,src) {
 };
 
 /*照片懒加载1*/
-var createFragment111 = function(files) {
+var createFragments = function(files) {
 	var fragment = document.createDocumentFragment();
 	var ul = document.createElement('ul');
 	ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
@@ -243,7 +323,7 @@ var createFragment111 = function(files) {
 		var src=fileApiPath+"down/"+obj.id;
 		li = document.createElement('li');
 		li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
-		li.innerHTML ='<a><img class="mui-media-object mui-pull-left" data-lazyload="'+src+'"></a>';
+		li.innerHTML =`<a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`"></a>`;
 		ul.appendChild(li);
 	}
 	fragment.appendChild(ul);
@@ -392,6 +472,29 @@ function getCookieUserValue(key) {
     return (token&&token[key])||"";
 }
 
+function getCookie(c_name){
+	if (document.cookie.length>0){
+	  c_start=document.cookie.indexOf(c_name + "=");
+	  if (c_start!=-1){ 
+	    c_start=c_start + c_name.length+1 ;
+	    c_end=document.cookie.indexOf(";",c_start);
+	    if (c_end==-1) c_end=document.cookie.length;
+	    return unescape(document.cookie.substring(c_start,c_end));
+	  } 
+	}
+	return ""
+}
+
+function setCookie(c_name,value,expiredays){
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate()+expiredays);
+	document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+}
+function removeCookie(key) {
+    setCookie(key, '', -1);//这里只需要把Cookie保质期退回一天便可以删除
+}
+
+
 function getFromData(form){
     var form=document.getElementById(form);
     var data={};
@@ -399,7 +502,10 @@ function getFromData(form){
         var element=form.elements[i];
         switch(element.type) {
             case 'text':
-                data[element.name]=element.value;
+                data[element.id]=element.value;
+            	break;
+            	case 'hidden':
+                data[element.id]=element.value;
             	break;
             case 'checkbox':
                 if (element.checked) {

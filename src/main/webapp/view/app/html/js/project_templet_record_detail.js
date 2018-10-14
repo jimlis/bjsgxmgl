@@ -3,7 +3,7 @@ window.onload = function(){
     var list = document.getElementById('img-list');
     list.appendChild(createFragment(10,'../images/ly.png'));
     funLazyLoad('#img-list').refresh(true);
-
+	
    /* relPicker("intsgdw",[{"text":"地勘单位","value":""},{"text":"总包单位","value":""}]);
 
     dtPicker('#dtmtzrq');
@@ -11,26 +11,33 @@ window.onload = function(){
     dtPicker('#dtmwczgrq');*/
    	var id = obj.id;
    	$bjAjax({
-		url:safeReportByIdApiPath,
+		url:tempRecodeByIdApiPath,
 		data:{
-			xmAqbgId:id
+			xmYbsgjlId:id
 		},
 		type:'post',
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否登录成功；
-			document.getElementById("chraqwtbs").innerText = data.chraqwtbs;
-			document.getElementById("chraqwtwz").innerText = data.chraqwtwz;
 			document.getElementById("chrbgrmc").innerText = data.chrbgrmc;
-			document.getElementById("chrzb").innerText = data.chrzb;
+			document.getElementById("chrbz").innerText = data.chrbz;
+			document.getElementById("chrybms").innerText = data.chrybms;
+			document.getElementById("chrybwz").innerText = data.chrybwz;
 			document.getElementById("dtmgxrq").innerText = data.dtmgxrq;
-			document.getElementById("dtmtzrq").innerText = data.dtmtzrq;
-			document.getElementById("dtmwczgrq").innerText = data.dtmwczgrq;
-			document.getElementById("fcbz").innerText = data.fcbz;
-			document.getElementById("gxsj").innerText = data.gxsj;
+			document.getElementById("dtmsprq").innerText = data.dtmsprq;
+			document.getElementById("dtmwcrq").innerText = data.dtmwcrq;
 			document.getElementById("id").innerText = data.id;
 			document.getElementById("intbgrid").innerText = data.intbgrid;
-			document.getElementById("intsgdw").innerText = data.intsgdw;
-			document.getElementById("intxh").innerText = data.intxh;
+			if(data.intyblx=='1'){
+				document.getElementById("chryblx").innerText = "土建";
+			}else if(data.intyblx=='2'){
+				document.getElementById("chryblx").innerText = "机电";
+			}else if(data.intyblx=='3'){
+				document.getElementById("chryblx").innerText = "装修";
+			}else if(data.intyblx=='4'){
+				document.getElementById("chryblx").innerText = "园林";				
+			}else{
+				document.getElementById("chryblx").innerText = "其他";
+			}
 			document.getElementById("intxmid").innerText = data.intxmid;
 		},
 	});
@@ -41,7 +48,7 @@ window.onload = function(){
 /*
 *编辑
  */
-function  openAdd() {
-    var address = "project_saft_report_add.html?id=" + obj.id;
+function  openNext() {
+    var address = "project_templet_record_add.html?id=" + obj.id;
     toUrl(address);
 }

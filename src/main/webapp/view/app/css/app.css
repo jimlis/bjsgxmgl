@@ -78,6 +78,9 @@ input.bj-input{
 	-webkit-appearance: none
     
 }
+.bj-disable{
+	background-color: gainsboro !important;
+}
 /*博建项目系统头背景*/
 header.mui-bar.mui-bar-nav{
 	background-color: #00CCFF;

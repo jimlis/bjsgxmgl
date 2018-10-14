@@ -15,29 +15,29 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">工程/顾问变更记录</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openAdd()">新增</button>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="add()">新增</button>
 		</header>
 		<div class="mui-content" id="list">
 			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">顾问工作变更审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+		            <a class="mui-navigate-right" href="#" onclick="showList('gwgz')">顾问工作变更审批记录</a>
+		            	<ul class="mui-table-view bj-background-inherit" id="gwgz"> 
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">工程变更审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+		            <a class="mui-navigate-right" href="#" onclick="showList('gcbg')">工程变更审批记录</a>
+		            	<ul class="mui-table-view bj-background-inherit" id="gcbg"> 
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">其他变更审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+		            <a class="mui-navigate-right" href="#" onclick="showList('qtbg')">其他变更审批记录</a>
+		            	<ul class="mui-table-view bj-background-inherit" id="qtbg"> 
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
 		    </ul>

@@ -20,31 +20,34 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">政府部门巡查/专项验收记录</h1>
+		     <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="list">
-
-			<form id="form">
-				<input type="hidden" id="id" name="id">
-				<input type="hidden" id="intxmid" name="intxmid">
+			<form id="myform">
 				<div class="mui-content-padded">
-					<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 					<h5 class="bj-title2-font">更新日期：
-						<label id="dtmgxrqLabel">2018-10-07</label>
-						<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
+						<label id="dtmgxrq">2018-10-07</label>
 					</h5>
 					<h5 class="bj-title2-font">巡查类别：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intxclb" name="intxclb" placeholder="巡查类别" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrxclb" name="chrxclb" placeholder="巡查类别" />
+						<input class="bj-input bj-p-black-font" type="text" id="intxclbxs" name="chrxclb" placeholder="巡查类别" />
 					</h5>
 					<h5 class="bj-title2-font">巡查部门：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intxcbm" name="intxcbm" placeholder="巡查部门" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrxcbm" name="chrxcbm" placeholder="巡查部门" />
+						<input class="bj-input bj-p-black-font" type="text" id="intxcbmxs" name="chrxcbm" placeholder="巡查部门" />
 					</h5>
 					<h5 class="bj-title2-font">巡查人员：
 						<input class="bj-input bj-p-black-font" type="text" id="chrxcry" name="chrxcry" placeholder="巡查人员" />
 					</h5>
 					<h5 class="bj-title2-font">巡查日期：
 						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmxcrq" name="dtmxcrq" placeholder="巡查日期" />
+					</h5>
+					
+					<h5 class="bj-title2-font">备注：
+						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
+					</h5>
+					<h5 class="bj-title2-font">报告人：
+						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="李斯" placeholder="报告人名称" />
 					</h5>
 					<h5 class="bj-title2-font">照片：</h5>
 					<div id="uploader" class="wu-example">
@@ -55,13 +58,6 @@
 						<div id="img-list">
 						</div>
 					</div>
-					<h5 class="bj-title2-font">备注：
-						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
-					</h5>
-					<h5 class="bj-title2-font">报告人：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" name="intbgrid" placeholder="报告人" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="李斯" placeholder="报告人名称" />
-					</h5>
 				</div>
 			</form>
 		</div>

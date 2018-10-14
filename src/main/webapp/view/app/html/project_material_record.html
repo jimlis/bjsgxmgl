@@ -15,41 +15,41 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">材料样板审批记录</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openAdd()">新增</button>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="add()">新增</button>
 		</header>
 		<div class="mui-content" id="list">
 			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">土建类材料样板审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
+		            <a class="mui-navigate-right" href="#" onclick="showList('1','tjl')">土建类材料样板审批记录</a>
+		            	<ul class="mui-table-view bj-background-inherit" id="tjl"> 
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+					        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
+		    			</ul>
+		        </li>
+		        <li class="mui-table-view-cell mui-collapse">
+		            <a class="mui-navigate-right" href="#" onclick="showList('2','jdl')">机电类材料样板审批记录</a>
+		            	<ul class="mui-table-view bj-background-inherit" id="jdl"> 
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">机电类材料样板审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
-		    			</ul>
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
+		        <li class="mui-table-view-cell mui-collapse" onclick="showList('3','zxl')">
 		            <a class="mui-navigate-right" href="#">装修类材料样板审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
+		            	<ul class="mui-table-view bj-background-inherit" id="zxl"> 
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
+		        <li class="mui-table-view-cell mui-collapse" onclick="showList('4','yll')">
 		            <a class="mui-navigate-right" href="#">园林类材料样板审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
+		            	<ul class="mui-table-view bj-background-inherit" id="yll"> 
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>
 		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
+		        <li class="mui-table-view-cell mui-collapse" onclick="showList('5','qtl')">
 		            <a class="mui-navigate-right" href="#">其他材料样板审批记录</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
+		            	<ul class="mui-table-view bj-background-inherit" id="qtl"> 
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 				        <li class="mui-table-view-cell mui-collapse" onclick="openDetails()">2018-3-15</li>
 		    			</ul>

@@ -1,23 +1,30 @@
-
-window.onload = function(){
-
-  /*  relPicker("chrbgsqlx",[{"text":"顾问变更","value":""},{"text":"工程变更","value":""},{"text":"其他","value":""}],"intbgsqlx");
-
-    relPicker("chrsfqd",[{"text":"是","value":""},{"text":"否","value":""}],"intsfqd");
-
-    relPicker("chrbgsqwj",[{"text":"待审批","value":""},{"text":"总审批A","value":""},{"text":"总审批B","value":""},{"text":"业主","value":""}],"chrbgsqwj");
-
-    upLoadImg('#chbtn',{"busType":"bj_xm_bgsqjl"});*/
-}
-
-function save(){
-    bjToast("保存成功");
-}
+var obj = getRequest("id");
+$bjAjax({
+		url:changeApiDetail,
+		type:"post",
+		data:{
+			xmZfxcyzxysId:obj.id
+		},
+		success:function(data){
+			document.getElementById("dtmgxrq").innerText=data.dtmgxrq;
+			document.getElementById("intbgsqlx").innerText=data.intbgsqlx;
+			document.getElementById("chrbgsqbh").innerText=data.chrbgsqbh;
+			document.getElementById("chrbgsqmc").innerText=data.chrbgsqmc;
+			document.getElementById("intsfqd").innerText=data.intsfqd;
+			document.getElementById("").innerText=data.;
+			document.getElementById("chrbgxq").innerText=data.chrbgxq;
+			document.getElementById("intgqyx").innerText=data.intgqyx;
+			document.getElementById("intbggs").innerText=data.intbggs;
+			document.getElementById("").innerText=data.;
+			document.getElementById("inthtzb").innerText=data.inthtzb;
+			document.getElementById("chrbz").innerText=data.chrbz;
+		}
+});
 
 /**
  *编辑
  */
-function openAdd(){
-    var address = "project_change_record_add.html?id=";
+function edit(){
+    var address = "project_change_record_add.html?id="+obj.id;
     toUrl(address);
 }

@@ -1,5 +1,14 @@
-
-
+var xmid = getCookie("id");
+$bjAjax({
+	url:photoApiList,
+	type:"post",
+	data:{
+		xmid:xmid
+	},
+	success:function(data){
+		
+	}
+});
 
 
 /**
@@ -8,6 +17,6 @@
 function openNext(id){
 		toUrl("project_photo_record_detail.html?id="+id);
 }
-function openNextAdd(id){
-		toUrl("project_photo_record_add.html?id="+id);
+function add(){
+		toUrl("project_photo_record_add.html");
 }

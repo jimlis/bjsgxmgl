@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>所属区域及位置</title>
+		<title>项目承建各方名称</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -14,13 +14,13 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">所属区域及位置</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">编辑</button>
+		    <h1 class="mui-title">项目承建各方名称</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">更新</button>
 		</header>
 		<div class="mui-content" id="list">
 			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">建设单位：<span class="bj-p-gray-font">单位</span></h5>
-				<h5 class="bj-title2-font">代建单位：<span class="bj-p-gray-font">单位</span></h5>
+				<h5 class="bj-title2-font">建设单位：<span class="bj-p-gray-font" id="chrcjdwmc">单位</span></h5>
+				<h5 class="bj-title2-font">代建单位：<span class="bj-p-gray-font" id="chrdjdwmc">单位</span></h5>
 			</div>
 			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
 		        <li class="mui-table-view-cell mui-collapse">
@@ -57,5 +57,6 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_basis_buildUnits.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

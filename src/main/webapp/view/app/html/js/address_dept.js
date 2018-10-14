@@ -1,4 +1,3 @@
-
 var obj = getRequest(location.search);
 var deptId = obj.deptId||0;
 if(isNotEmpty(obj.name)){

@@ -20,7 +20,7 @@
 <header class="mui-bar mui-bar-nav">
 	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	<h1 class="mui-title">工程_顾问变更记录</h1>
-	<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openAdd()">编辑</button>
+	<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
 </header>
 <div class="mui-content" id="list">
 
@@ -30,53 +30,48 @@
 		<div class="mui-content-padded">
 			<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 			<h5 class="bj-title2-font">更新日期：
-				<label id="dtmgxrqLabel">2018-10-07</label>
-				<input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="请选择日期" />
+				<label id="dtmgxrq">2018-10-07</label>
 			</h5>
-			<h5 class="bj-title2-font">变更申请类型：<span class="bj-p-gray-font">变更申请类型</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqlx" name="intbgsqlx" placeholder="变更申请类型" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbgsqlx" name="chrbgsqlx" placeholder="变更申请类型" disabled/>
+			<h5 class="bj-title2-font">变更申请类型：
+				<span class="bj-p-gray-font" id="intbgsqlx">变更申请类型</span>
 			</h5>
-			<h5 class="bj-title2-font">变更申请编号：<span class="bj-p-gray-font">变更申请编号</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbgsqbh" name="chrbgsqbh" placeholder="变更申请编号" disabled/>
+			<h5 class="bj-title2-font">变更申请编号：
+				<span class="bj-p-gray-font" id="chrbgsqbh">变更申请编号</span>
 			</h5>
-			<h5 class="bj-title2-font">变更申请名称：<span class="bj-p-gray-font">变更申请名称</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbgsqmc" name="chrbgsqmc" placeholder="变更申请名称" disabled/>
+			<h5 class="bj-title2-font">变更申请名称：
+				<span class="bj-p-gray-font" id="chrbgsqmc">变更申请名称</span>
 			</h5>
-			<h5 class="bj-title2-font">是否取替之前变更申请：<span class="bj-p-gray-font">是否取替之前变更申请</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" name="intsfqd" placeholder="是否取替之前变更申请" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrsfqd" name="chrsfqd" placeholder="是否取替之前变更申请" disabled/>
+			<h5 class="bj-title2-font">是否取替之前变更申请：
+				<span class="bj-p-gray-font" id="intsfqd">是否取替之前变更申请</span>
 			</h5>
-			<h5 class="bj-title2-font">取替变更编号：<span class="bj-p-gray-font">取替变更编号</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrqtbgbh" name="chrqtbgbh" placeholder="取替变更编号" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="qtbgbh" name="qtbgbh" placeholder="取替变更编号" disabled/>
+			<h5 class="bj-title2-font">取替变更编号：
+				<span class="bj-p-gray-font" id="">取替变更编号</span>
 			</h5>
-			<h5 class="bj-title2-font">变更详情：<span class="bj-p-gray-font">是否取替之前变更申请</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbgxq" name="chrbgxq" placeholder="变更详情" disabled/>
+			<h5 class="bj-title2-font">变更详情：
+				<span class="bj-p-gray-font" id="chrbgxq">变更详情</span>
 			</h5>
-			<h5 class="bj-title2-font">工期估算：<span class="bj-p-gray-font">工期估算</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrgqgs" name="chrgqgs" placeholder="工期估算" disabled/>
+			<h5 class="bj-title2-font">工期估算：
+				<span class="bj-p-gray-font" id="intgqyx">工期估算</span>
 			</h5>
-			<h5 class="bj-title2-font">变更估算：<span class="bj-p-gray-font">变更估算</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbggs" name="intbggs" placeholder="变更估算" disabled/>
+			<h5 class="bj-title2-font">变更估算：
+				<span class="bj-p-gray-font" id="intbggs">变更估算</span>
 			</h5>
-			<h5 class="bj-title2-font">潜在变更总金额：<span class="bj-p-gray-font">潜在变更总金额</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrqzbgzje" name="chrqzbgzje" placeholder="潜在变更总金额" disabled/>
+			<h5 class="bj-title2-font">潜在变更总金额：
+				<span class="bj-p-gray-font" id="">潜在变更总金额</span>
 			</h5>
-			<h5 class="bj-title2-font">合同占比：<span class="bj-p-gray-font">合同占比</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrtgzb" name="chrtgzb" placeholder="合同占比" disabled/>
+			<h5 class="bj-title2-font">合同占比：
+				<span class="bj-p-gray-font" id="inthtzb">合同占比</span>
 			</h5>
-			<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbz" name="chrbz" placeholder="备注" disabled/>
+			<h5 class="bj-title2-font">备注：
+				<span class="bj-p-gray-font" id="chrbz">备注</span>
 			</h5>
 
 			<ul class="bj-ul-clear bj-title2-font">变更申请文件：
 				<li><a>12345678XX.pdf</a></li>
 				<li><a>12345678XX.pdf</a></li>
 			</ul>
-			<h5 class="bj-title2-font">审批流程状态：<span class="bj-p-gray-font">审批流程状态</span>
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqwj" name="intbgsqwj" placeholder="审批流程状态" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrbgsqwj" name="chrbgsqwj"  placeholder="审批流程状态" disabled/>
+			<h5 class="bj-title2-font">审批流程状态：
+				<span class="bj-p-gray-font">审批流程状态</span>
 			</h5>
 		</div>
 	</form>

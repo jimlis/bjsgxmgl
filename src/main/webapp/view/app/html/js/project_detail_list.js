@@ -1,6 +1,5 @@
-
-
-
+mui("title")[0].innerText = getCookie("chrxmmc");
+mui("header .mui-title")[0].innerHTML = getCookie("chrxmmc");
 
 /**
  * 跳转项目具体信息
