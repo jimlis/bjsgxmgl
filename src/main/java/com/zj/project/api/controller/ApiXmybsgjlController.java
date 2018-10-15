@@ -36,7 +36,7 @@ public class ApiXmybsgjlController extends ApiBaseController {
     @Autowired
     private XmYbsgjlService xmYbsgjlService;
 
-   @Log("根据xmid和yblx获取样板施工记录信息")
+    @Log("根据xmid和yblx获取样板施工记录信息")
     @PostMapping("getXmYbsgjlListByXmidAndYblx")
     @ApiOperation(value="根据xmid和yblx获取样板施工记录信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
@@ -50,6 +50,26 @@ public class ApiXmybsgjlController extends ApiBaseController {
             xmYbsgjlDO.setFcbz(1);
             xmYbsgjlDO.setIntxmid(xmid);
             xmYbsgjlDO.setIntyblx(yblx);
+            QueryWrapper<XmYbsgjlDO> queryWrapper=new QueryWrapper<XmYbsgjlDO>(xmYbsgjlDO).orderByAsc("dtmgxrq");
+            return Result.ok(xmYbsgjlService.list(queryWrapper));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据xmid获取样板施工记录信息")
+    @PostMapping("getXmYbsgjlListByXmid")
+    @ApiOperation(value="根据xmid获取样板施工记录信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<List<XmYbsgjlDO>> getXmYbsgjlListByXmid(Long xmid) {
+        try {
+            XmYbsgjlDO xmYbsgjlDO=new XmYbsgjlDO();
+            xmYbsgjlDO.setFcbz(1);
+            xmYbsgjlDO.setIntxmid(xmid);
             QueryWrapper<XmYbsgjlDO> queryWrapper=new QueryWrapper<XmYbsgjlDO>(xmYbsgjlDO).orderByAsc("dtmgxrq");
             return Result.ok(xmYbsgjlService.list(queryWrapper));
         }catch (Exception e){

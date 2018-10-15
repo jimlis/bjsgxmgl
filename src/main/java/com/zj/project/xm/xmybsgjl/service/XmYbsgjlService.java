@@ -3,6 +3,7 @@ package com.zj.project.xm.xmybsgjl.service;
 import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
 import  com.zj.platform.common.web.service.BaseService;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,4 +26,11 @@ public interface XmYbsgjlService extends BaseService<XmYbsgjlDO> {
      * @param fileIds 图片ids 多个以逗号隔开
      */
     void saveXmYbsgjlXx(XmYbsgjlDO xmYbsgjlDO, String fileIds);
+    
+    /**
+     * 获取材料样板List对象
+     * @param xmid 项目id
+     * @return
+     */
+	List<XmYbsgjlDO> getXmYbsgjlListByXmid(Long xmid);
 }

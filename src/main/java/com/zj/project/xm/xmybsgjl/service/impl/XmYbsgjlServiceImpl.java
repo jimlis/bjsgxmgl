@@ -2,19 +2,27 @@ package com.zj.project.xm.xmybsgjl.service.impl;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.util.Result;
+import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmybsgjl.dao.XmYbsgjlDao;
 import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
 import com.zj.project.xm.xmybsgjl.service.XmYbsgjlService;
@@ -89,5 +97,20 @@ public class XmYbsgjlServiceImpl extends BaseServiceImpl<XmYbsgjlDao, XmYbsgjlDO
             }
         }
     }
-
+    
+    /**
+     * 获取材料样板List对象
+     * @param xmid 项目id
+     * @return
+     */
+    @Override
+    public List<XmYbsgjlDO> getXmYbsgjlListByXmid(Long xmid){
+    	  if(xmid==null) throw  new CommonException("项目id不能为空");
+    	  XmYbsgjlDO xmYbsgjlDO=new XmYbsgjlDO();
+          xmYbsgjlDO.setFcbz(1);
+          xmYbsgjlDO.setIntxmid(xmid);
+          QueryWrapper<XmYbsgjlDO> queryWrapper=new QueryWrapper<XmYbsgjlDO>(xmYbsgjlDO).orderByAsc("dtmgxrq");
+          List<XmYbsgjlDO> list=list(queryWrapper);
+          return list;
+    }
 }
