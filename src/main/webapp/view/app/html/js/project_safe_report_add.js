@@ -1,5 +1,5 @@
 var obj = getRequest();
-var systemdate = getCookie('sysDate');
+var systemdate = getSysDate();
 window.onload = function(){
     relPicker("intsgdw",[{"text":"地勘单位","value":""},{"text":"总包单位","value":""}]);
 

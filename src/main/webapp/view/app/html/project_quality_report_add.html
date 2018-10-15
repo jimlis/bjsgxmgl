@@ -20,16 +20,18 @@
 <header class="mui-bar mui-bar-nav">
 	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	<h1 class="mui-title">质量缺陷报告</h1>
+	<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 </header>
 <div class="mui-content" id="list">
 
 	<form id="form">
 		<input type="hidden" id="id" name="id">
 		<input type="hidden" id="intxmid" name="intxmid">
+		<input type="hidden" id="dtmgxrq" name="dtmgxrq">
 		<div class="mui-content-padded">
 			<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 			<h5 class="bj-title2-font">更新日期：
-				<label id="dtmgxrq">2018-10-07</label>
+				<label id="dtmgxrqLable">2018-10-07</label>
 			</h5>
 			<h5 class="bj-title2-font">质量缺陷类型：
 				<input class="bj-input bj-p-black-font" type="hidden" id="intqxlx" name="intqxlx" placeholder="质量缺陷类型" />
@@ -51,7 +53,7 @@
 				</div>
 			</div>
 			<h5 class="bj-title2-font">备注：
-				<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbz" name="chrbz" placeholder="备注" />
 			</h5>
 			<h5 class="bj-title2-font">施工负责单位：
 				<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
@@ -72,6 +74,7 @@
 </div>
 <script src="../js/mui.min.js"></script>
 <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/business.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
