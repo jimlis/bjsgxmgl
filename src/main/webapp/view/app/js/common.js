@@ -43,8 +43,9 @@ var projectApiDl = serverPath+"api/xmdl/getXmdlByXmid";
 var baseApiAddress = serverPath+"api/xmqyjwz/getXmQyjwzByXmid";
 var baseApiAddressSave = serverPath+"api/xmqyjwz/save";
 var baseApiCjdw = serverPath+"api/xmxmcjdw/getXmXmcjdwByXmid";
-var baseApiDwmd = serverPath+"api/xmdwmd/getXmDwmdxxByXmid"
-var baseApiYjdw = serverPath+"api/xmdwmd/getXmYjDwmdByXmid"
+var baseApiDwmd = serverPath+"api/xmdwmd/getXmDwmdxxByXmid";
+var baseApiDwmdList = serverPath+"api/xmdwmd/getXmDwmdListByXmidAndLxmd";
+var baseApiYjdw = serverPath+"api/xmdwmd/getXmYjDwmdByXmid";
 var baseApiCjdwSave = serverPath+"api/xmxmcjdw/save";
 var baseApixkz =serverPath+"api/xmxkz/getXmXkzByXmidAndLx";
 var baseApixkzSave = serverPath+"api/xmxkz/save";
@@ -281,10 +282,10 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 	var showUserPickerButton = document.getElementById(textSelecter);
 	showUserPickerButton.addEventListener('tap', function(event) {
 		userPicker.show(function(items) {
-			showUserPickerButton.value = items[0].text.replace(/^\"|\"$/g,'');
+			showUserPickerButton.value = items[0].text;
 			if(valueSelecter){
                 var valueInput = document.getElementById(valueSelecter);
-                      valueInput.value=items[0].value.replace(/^\"|\"$/g,'');
+                      valueInput.value=items[0].value;
 			}
 			if(funResult){
 				funResult(items[0]);
@@ -354,12 +355,12 @@ function upLoadImg(elem,bind,data,done){
 		elem: elem				//“选择文件”按钮的ID
 		,url: fileApiPath+"upload"	//后台接收地址
 		,data: data		//传递到后台的数据
-		,auto: false				//不自动上传设置
+		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
 		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
-		,bindAction: bind		//“上传”按钮的ID
+		/*,bindAction: bind		//“上传”按钮的ID
 		,choose: function(obj){
 			//将每次选择的文件追加到文件队列
     			var files = obj.pushFile();
@@ -370,7 +371,7 @@ function upLoadImg(elem,bind,data,done){
 				//$('#img-list').append(`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`)
 				document.getElementById("img-list").innerHTML+=`<img class="bj-img-temp" src="`+ result +`" alt="`+ file.name +`">`;
 			});
-		}
+		}*/
 		,done: done||function(res) {
             	uploadDone(res,"fileIds","img-list")
        		 }

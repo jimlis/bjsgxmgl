@@ -1,6 +1,7 @@
 package com.zj.project.api.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.business.dict.domain.DictDO;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
@@ -42,6 +43,28 @@ public class ApiXmDwmdController extends ApiBaseController {
     public Result<Map<String, List<XmDwmdDO>>> getXmDwmdxxByXmid(Long xmid) {
         try {
             return Result.ok(xmDwmdService.getXmDwmdxxByXmid(xmid));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据xmid和lxmd获取项目单位名单信息")
+    @PostMapping("getXmDwmdListByXmidAndLxmd")
+    @ApiOperation(value = "获取项目单位名单信息", httpMethod = "POST")
+    @ApiImplicitParams({@ApiImplicitParam(name = "xmid", paramType = "form", dataType = "Long", required = true, value = "项目id"),
+    	@ApiImplicitParam(name = "lxmd", paramType = "form", dataType = "string", required = true, value = "类型名单")})
+    @ApiResponses({@ApiResponse(code = 0, message = "操作成功", response = List.class),
+            @ApiResponse(code = 1, message = "操作失败", response = List.class)})
+    @RequiresAuthentication
+    public Result<List<XmDwmdDO>> getXmDwmdListByXmidAndLxmd(Long xmid,String lxmd) {
+        try {
+        	XmDwmdDO xmDwmdDO=new  XmDwmdDO();
+        	xmDwmdDO.setFcbz(1);
+        	xmDwmdDO.setIntxmid(xmid);
+        	xmDwmdDO.setIntlxmd(lxmd);
+        	QueryWrapper<XmDwmdDO> queryWrapper=new QueryWrapper<XmDwmdDO>(xmDwmdDO).orderByAsc("intxh");
+            return Result.ok(xmDwmdService.list(queryWrapper));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.fail();
