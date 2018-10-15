@@ -1,18 +1,34 @@
+dtPicker('#dtmfzrq');
+dtPicker('#dtmyxrq');
+$bjAjax({
+	url:baseApixkz,
+	type:"post",
+	data:{
+		xmid:getCookie("id"),
+		xkzlx:1
+	},
+	success:function(data){
+		document.getElementById("chrxkzbh").value = data.chrxkzbh;
+		document.getElementById("chrffbm").value = data.chrffbm;
+		document.getElementById("dtmfzrq").value = data.dtmfzrq;
+		document.getElementById("dtmyxrq").value = data.dtmyxrq;
+	}
+})
 
 function save(){
 	var data = getFromData("myform");
 	data["intxkzlx"] = "1";
-	data["id"] = getCookie("id");
+	data["intxmid"] = getCookie("id");
 	$bjAjax({
 		url:baseApixkzSave,
 		type:"post",
 		data:data,
 		success:function(data){
-			bjConsole(data);
-			document.getElementById("chrxkzbh").innerText = data.chrxkzbh;
-			document.getElementById("chrffbm").innerText = data.chrffbm;
-			document.getElementById("dtmfzrq").innerText = data.dtmfzrq;
-			document.getElementById("dtmyxrq").innerText = data.dtmyxrq;
+			if(data){
+				toUrl("project_basis_constructionPermit.html");
+			}
+			
 		}
 	})
+
 }

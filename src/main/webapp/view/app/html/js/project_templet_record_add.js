@@ -1,12 +1,13 @@
 var obj = getRequest();
-var systemdate = getCookie('sysDate');
+var systemdate = bjGetSysDate();
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
+var intxmid = getCookie('id');
 window.onload = function(){
 	dtPicker('#dtmwcrq');//样板施工完成日期
 	dtPicker('#dtmsprq');//样板施工完成日期
 	upLoadImg('#chbtn','#upbtn');
-	relPicker("intyblx",getPageData());
+	relPicker("chryblx",getPageData(),"intyblx");
 	//修改
 	if(!!obj.id){
 		var id = obj.id;
@@ -18,34 +19,35 @@ window.onload = function(){
 			type:'post',
 			success:function(data){
 				//服务器返回响应，根据响应结果，分析是否登录成功；
-				document.getElementById("chrbgrmc").innerText = data.chrbgrmc;
-				document.getElementById("chrbz").innerText = data.chrbz;
-				document.getElementById("chrybms").innerText = data.chrybms;
-				document.getElementById("chrybwz").innerText = data.chrybwz;
-				document.getElementById("dtmgxrq").innerText = data.dtmgxrq;
-				document.getElementById("dtmsprq").innerText = data.dtmsprq;
-				document.getElementById("dtmwcrq").innerText = data.dtmwcrq;
-				document.getElementById("id").innerText = data.id;
-				document.getElementById("intbgrid").innerText = data.intbgrid;
+				document.getElementById("chrbgrmc").value = data.chrbgrmc;
+				document.getElementById("chrbz").value = data.chrbz;
+				document.getElementById("chrybms").value = data.chrybms;
+				document.getElementById("chrybwz").value = data.chrybwz;
+				document.getElementById("dtmgxrq").value = data.dtmgxrq;
+				document.getElementById("dtmsprq").value = data.dtmsprq;
+				document.getElementById("dtmwcrq").value = data.dtmwcrq;
+				document.getElementById("id").value = data.id;
+				document.getElementById("intbgrid").value = data.intbgrid;
 				if(data.intyblx=='1'){
-					document.getElementById("intyblx").innerText = "土建";
+					document.getElementById("chryblx").value = "土建";
 				}else if(data.intyblx=='2'){
-					document.getElementById("intyblx").innerText = "机电";
+					document.getElementById("chryblx").value = "机电";
 				}else if(data.intyblx=='3'){
-					document.getElementById("intyblx").innerText = "装修";
+					document.getElementById("chryblx").value = "装修";
 				}else if(data.intyblx=='4'){
-					document.getElementById("intyblx").innerText = "园林";				
+					document.getElementById("chryblx").value = "园林";				
 				}else{
-					document.getElementById("intyblx").innerText = "其他";
+					document.getElementById("chryblx").value = "其他";
 				}
-				document.getElementById("intxmid").innerText = data.intxmid;
+				document.getElementById("intyblx").value = data.intyblx;
+				document.getElementById("intxmid").value = data.intxmid;
 			},
 		});
 	}else{
 		//新增初始化 数据
-		document.getElementById("dtmgxrq").innerText = systemdate;
-		document.getElementById("chrbgrid").innerText = chrdlrid;
-		document.getElementById("chrbgrmc").innerText = chrdlrmc;
+		document.getElementById("dtmgxrq").value = systemdate;
+		document.getElementById("chrbgrid").value = chrdlrid;
+		document.getElementById("chrbgrmc").value = chrdlrmc;
 	}
 }
 function getPageData(){
@@ -57,6 +59,7 @@ function save(){
 	//bjToast("保存成功");
 	
 	var data = getFromData("form");
+	data["intxmid"] = intxmid;
 	$bjAjax({
 		url:tempRecodeSaveApiPath,
 		type:"post",

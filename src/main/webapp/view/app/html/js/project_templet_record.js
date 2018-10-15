@@ -1,5 +1,19 @@
 //初始化必要条件
 window.onload=function(){
+	$bjAjax({
+		url:tempRecodeListApiPath,
+		type:"post",
+		data:{
+			xmid:getCookie("id"),
+		},
+		success:function(array){
+			mui.each(array,function(index,item){
+			  	var dtmgxrq = item.dtmgxrq;
+			  	var id = item.id;
+				mui("#" + idName)[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			})
+		}
+	})
 }
 function openNext(id){
 	toUrl("project_templet_record_detail.html?id="+id);

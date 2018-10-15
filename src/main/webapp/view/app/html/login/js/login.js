@@ -17,14 +17,12 @@ function login(){
             	debugger
             	if(token){
             		try{
-                        window.document.setCookie("token",JSON.stringify(token),20*365);
-                        window.document.setCookie("user",JSON.stringify(user),20*365);
+            				setCookie("chrdlrmc",user.name);
+            				setCookie("chrdlrid",user.id);
+                        setCookie("token",JSON.stringify(token));
 					}catch (e){
 
 					}
-
-                    localStorage.setItem("token",JSON.stringify(token));
-                    localStorage.setItem("user",JSON.stringify(user));
                     window.location.href="../../main.html";
 				}
 

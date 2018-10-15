@@ -7,8 +7,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css"/>
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
 	</head>
 		
 	<body>
@@ -31,10 +35,10 @@
 						<input class="bj-input bj-p-black-font" type="text" id="chrffbm" placeholder="请输入" />
 					</h5>
 					<h5 class="bj-title2-font">发证日期：
-						<input class="bj-input bj-p-black-font" type="text" id="dtmfzrq" placeholder="请输入" />
+						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="dtmfzrq" placeholder="请选择日期" />
 					</h5>
 					<h5 class="bj-title2-font">有效截止日期：
-						<input class="bj-input bj-p-black-font" type="text" id="dtmyxrq" placeholder="请输入" />
+						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="dtmyxrq" placeholder="请选择日期" />
 					</h5>
 				</form>
 				
@@ -42,8 +46,11 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_basis_constructionPermit_edit.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_basis_planPermit_edit.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 

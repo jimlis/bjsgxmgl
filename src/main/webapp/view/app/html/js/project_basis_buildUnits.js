@@ -23,25 +23,27 @@ $bjAjax({
 	success:function(data){
 		var one=data["1"]||[];
 		mui.each(one,function(index,item){
-			bjConsole(item);
-		  	var name = item.name;
-		  	var lx = item.lx;
-		 	var id = item.id;
-			mui(".mui-content .mui-table-view")[0].innerHTML +="<li class=\"mui-table-view-cell\" onclick=\"openNext('"+lx+"','"+id+"','"+name+"');\">"+name+"</li>";
+		  	var chrdwlxmc = item.chrdwlxmc;
+		  	var chrdwmc = item.chrdwmc;
+			mui("#gw")[0].innerHTML +=`
+				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span></h5>
+			`;
 		})
 		var two=data["2"]||[];
 		mui.each(two,function(index,item){
-		  	var name = item.name;
-		  	var lx = item.lx;
-		 	var id = item.id;
-			mui(".mui-content .mui-table-view")[0].innerHTML +="<li class=\"mui-table-view-cell\" onclick=\"openNext('"+lx+"','"+id+"','"+name+"');\">"+name+"</li>";
+		  	var chrdwlxmc = item.chrdwlxmc;
+		  	var chrdwmc = item.chrdwmc;
+			mui("#sg")[0].innerHTML +=`
+				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span></h5>
+			`;
 		})
 		var three=data["3"]||[];
 		mui.each(three,function(index,item){
-		  	var name = item.name;
-		  	var lx = item.lx;
-		 	var id = item.id;
-			mui(".mui-content .mui-table-view")[0].innerHTML +="<li class=\"mui-table-view-cell\" onclick=\"openNext('"+lx+"','"+id+"','"+name+"');\">"+name+"</li>";
+		  	var chrdwlxmc = item.chrdwlxmc;
+		  	var chrdwmc = item.chrdwmc;
+			mui("#qt")[0].innerHTML +=`
+				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span></h5>
+			`;
 		})
 	}
 });

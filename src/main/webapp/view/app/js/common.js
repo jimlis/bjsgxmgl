@@ -29,7 +29,8 @@
 //	}
 //}
 /**服务端地址*/
-var serverPath="http://192.168.0.101:8080/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
 var fileApiPath=serverPath+"api/file/";
@@ -69,7 +70,7 @@ var safeReportByIdApiPath = serverPath+"api/xmaqbg/getXmAqbgById";
 var safeReportSaveApiPath = serverPath+"api/xmaqbg/save";
 
 //材料样板
-var tempRecodeListApiPath = serverPath+"api/xmybsgjl/getXmYbsgjlListByXmidAndYblx";
+var tempRecodeListApiPath = serverPath+"api/xmybsgjl/getXmYbsgjlListByXmid";
 var tempRecodeByIdApiPath = serverPath+"api/xmybsgjl/getXmYbsgjlById";
 var tempRecodeSaveApiPath = serverPath+"api/xmybsgjl/save";
 
@@ -177,30 +178,30 @@ $bjAjax = function(obj){
         headers["Authorization"]=token;
 	}
 	mui.ajax(obj.url,{
-	data:obj.data,
-	dataType:'json',//服务器返回json格式数据
-	type:obj.type,//HTTP请求类型
-	timeout:10000,//超时时间设置为10秒；
-	headers:headers,
-	success:function(data){
-		//服务器返回响应，根据响应结果，分析是否登录成功；
-		var code=data.code;
-		var msg=data.msg;
-		if(code==0){
-            obj.success(data.data);
-		}else if(code==2){//重新登录
-		localStorage.removeItem("token");
-		localStorage.removeItem("user");
-		window.location.href="login/login.html";
-		}else{
-            bjToast(msg);
+		data:obj.data,
+		async:(obj.async==undefined?true:obj.async),
+		dataType:'json',//服务器返回json格式数据
+		type:obj.type,//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		headers:headers,
+		success:function(data){
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			var code=data.code;
+			var msg=data.msg;
+			if(code==0){
+	            obj.success(data.data);
+			}else if(code==2){//重新登录
+			localStorage.removeItem("token");
+			localStorage.removeItem("user");
+			window.location.href="login/login.html";
+			}else{
+	            bjToast(msg);
+			}
+		},
+		error:function(xhr,type,errorThrown){
+			//异常处理；
+	        bjToast(xhr);
 		}
-
-	},
-	error:function(xhr,type,errorThrown){
-		//异常处理；
-        bjToast(xhr)
-	}
 	})
 }
 
@@ -537,4 +538,20 @@ function getFromData(form){
  */
 function hasPermission(bs){
 	return true;
+}
+
+function bjGetSysDate(){
+	var data1 ="";
+	$bjAjax({
+			url:getSysDate,
+			async:false,
+			data:{
+				dfm:"yyyy-MM-dd"
+			},
+			type:'post',
+			success:function(data){
+				data1=data;
+			},
+		});
+	return data1;
 }
