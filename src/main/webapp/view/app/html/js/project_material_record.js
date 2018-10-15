@@ -1,24 +1,60 @@
 
 var xmid = getCookie("id");
-function showList(type,typeID){
-	$bj_post_ajax({
-    	"url":materialApiList,
-    	"data":{
-    		"xmid":xmid,
-    		"xcbm":type
-    	},
-    	success:function (data) {
-    		bjConsole(data)
-    		mui.each(data,function(index,item){
-    			var dtmgxrq = item.dtmgxrq
-    			var id = item.id
-    			document.getElementById(xcbm).innerHTML+=`
-    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`</li>
-    			`;
-			})
-        }
-    });
+//初始化必要条件
+window.onload=function(){
+	bjConsole(123);
+	$bjAjax({
+		url:materialApiList,
+		type:"post",
+		data:{
+			xmid:xmid
+		},
+		success:function(array){
+			var tjl,jdl,zxl,yll,qtl
+			mui.each(array,function(index,item){
+			  	var dtmgxrq = item.dtmgxrq;
+			  	var intyblx = item.intyblx;
+			  	var id = item.id;
+			  	if(intyblx=="1"){
+			  		tjl = true;
+			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="2"){
+			  		jdl = true;
+			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="3"){
+			  		zxl = true;
+			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="4"){
+			  		yll = true;
+			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="5"){
+			  		qtl = true;
+			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			});
+			if(!tjl){
+			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!jdl){
+			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!zxl){
+			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!yll){
+			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!qtl){
+			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" )">没有相关数据，请上传数据</li>`;
+			  	}
+		}
+	})
 }
+
 /**
  *详情
  */

@@ -59,7 +59,8 @@ function save(){
 	//bjToast("保存成功");
 	
 	var data = getFromData("form");
-	data["intxmid"] = intxmid;
+	data["id"] = obj.id;
+	data["intxmid"] = getCookie("id");
 	$bjAjax({
 		url:tempRecodeSaveApiPath,
 		type:"post",

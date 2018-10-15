@@ -7,11 +7,47 @@ window.onload=function(){
 			xmid:getCookie("id"),
 		},
 		success:function(array){
+			var tjtemp,jdtemp,zxtemp,yltemp,qttemp
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
+			  	var intyblx = item.intyblx;
 			  	var id = item.id;
-				mui("#" + idName)[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
-			})
+			  	if(intyblx=="1"){
+			  		tjtemp = true;
+			  		mui("#tjtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="2"){
+			  		jdtemp = true;
+			  		mui("#jdtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="3"){
+			  		zxtemp = true;
+			  		mui("#zxtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="4"){
+			  		yltemp = true;
+			  		mui("#yltemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			  	if(intyblx=="5"){
+			  		qttemp = true;
+			  		mui("#qttemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  	}
+			});
+			if(!tjtemp){
+			  		mui("#tjtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!jdtemp){
+			  		mui("#jdtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!zxtemp){
+			  		mui("#zxtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!yltemp){
+			  		mui("#yltemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>`;
+			  	}
+			  	if(!qttemp){
+			  		mui("#qttemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" )">没有相关数据，请上传数据</li>`;
+			  	}
 		}
 	})
 }
@@ -23,29 +59,4 @@ function openAdd(){
 }
 
 
-function showTempList(temptype,idName){
-	
-	$bjAjax({
-		url:tempRecodeListApiPath,
-		type:"post",
-		data:{
-			xmid:getCookie("id"),
-			yblx:temptype
-		},
-		success:function(array){
-			
-			/*if(array.length==0){
-				mui("#" + idName)[0].innerHTML='没有相关数据，请上传数据';
-				return;
-			}*/
-			mui.each(array,function(index,item){
-			  	var dtmgxrq = item.dtmgxrq;
-			  	var id = item.id;
-				mui("#" + idName)[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
-			})
-			
-			//mui("#" + idName)[0].style.display="none";
-		}
-	})
-}
 
