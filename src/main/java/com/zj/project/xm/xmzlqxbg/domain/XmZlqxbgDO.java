@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmZlqxbgDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "修改新增删除时间 ",name = "gxsj",dataType = "Date",hidden = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
     @ApiModelProperty(value = "序号 ",name = "intxh",dataType = "Integer",hidden = true)
@@ -43,6 +45,7 @@ public class XmZlqxbgDO extends BaseDomain {
     private Long intxmid;
     /** 更新日期 */
     @ApiModelProperty(value = "报告日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
     /** 质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） */
     @ApiModelProperty(value = "质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） ",name = "intqxlx",dataType = "string",required = true)
@@ -59,10 +62,16 @@ public class XmZlqxbgDO extends BaseDomain {
     /** 施工负责单位：单位名单表id */
     @ApiModelProperty(value = "施工负责单位：单位名单表id",name = "intsgdw",dataType = "Long")
     private Long intsgdw;
+    /** 施工负责单位名称 */
+    @ApiModelProperty(value = "施工负责单位名称",name = "chrsgdw",dataType = "String")
+    @TableField(exist=false)
+    private String chrsgdw;
     /** 通知施工方日期 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     @ApiModelProperty(value = "通知施工方日期 ",name = "dtmtzrq",dataType = "string",example = "2018-10-13",required = true)
     private Date dtmtzrq;
     /** 整改完成日期 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     @ApiModelProperty(value = "整改完成日期 ",name = "dtmzgwcrq",dataType = "string",example = "2018-10-13",required = true)
     private Date dtmzgwcrq;
     /** 报告人id */
@@ -252,4 +261,19 @@ public class XmZlqxbgDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+    
+    /**
+     * 获取施工单位名称
+     */
+	public String getChrsgdw() {
+		return chrsgdw;
+	}
+	
+	/**
+     * 设置施工单位名称
+     */
+	public void setChrsgdw(String chrsgdw) {
+		this.chrsgdw = chrsgdw;
+	}
+    
 }

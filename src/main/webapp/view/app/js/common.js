@@ -315,21 +315,19 @@ var createFragment = function(count,src) {
 };
 
 /*照片懒加载1*/
-var createFragments = function(files) {
-	var fragment = document.createDocumentFragment();
-	var ul = document.createElement('ul');
-	ul.className = 'mui-table-view mui-table-view-chevron mui-grid-view';
-	var li;
-	for(var i = 0; i < files; i++) {
+var createFragments = function(files,fileIdsDomId,isEdit) {
+	var html="";
+	for(var i = 0; i < files.length; i++) {
 		var obj=files[i];
-		var src=fileApiPath+"down/"+obj.id;
-		li = document.createElement('li');
-		li.className = 'mui-table-view-cell mui-media mui-col-xs-4';
-		li.innerHTML =`<a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`"></a>`;
-		ul.appendChild(li);
+		var fileId=obj.id||"";
+		var src=fileApiPath+"down/"+fileId;
+		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">`;
+			if(isEdit){
+				html+='<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>'
+			}
+			html+=`</a></li>`;
 	}
-	fragment.appendChild(ul);
-	return fragment;
+	return html;
 };
 
 /*照片懒加载2*/
@@ -402,14 +400,52 @@ function  uploadDone(result,fileIdsDomId,showListDomId) {
             }
             $fileIds[0].value=fileIds;
         }
-        var src=fileApiPath+"down/"+fileId;
+        
+        var list = document.getElementById(showListDomId);
+        list.innerHTML+=createFragments([data],fileIdsDomId,true);
+	    funLazyLoad('#'+showListDomId).refresh(true);
+        /*var src=fileApiPath+"down/"+fileId;
         var div = document.createElement('div');
         	   div.innerHTML='<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
             '<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>';
-        mui('#'+showListDomId)[0].appendChild(div);
+        mui('#'+showListDomId)[0].appendChild(div);*/
     }else{
     	bjToast(msg);
 	}
+}
+
+
+function initImgList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
+	$bj_post_ajax({
+		url:fileApiPath+"list",
+		data:{"busType":busType,"busId":busId,"type":type},
+		success:function(result){
+			if(result&&result.length>0){
+				var list = document.getElementById(showListDomId);
+				list.innerHTML+=createFragments(result,fileIdsDomId,isEdit);
+			    funLazyLoad('#'+showListDomId).refresh(true);
+			}
+		}
+	});
+}
+
+function initFileList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
+	$bj_post_ajax({
+		url:fileApiPath+"list",
+		data:{"busType":busType,"busId":busId,"type":type},
+		success:function(result){
+			if(result&&result.length>0){
+				var list = document.getElementById(showListDomId);
+				list.innerHTML+=createFragments(result,fileIdsDomId,isEdit);
+			    funLazyLoad('#'+showListDomId).refresh(true);
+			    /*var src=fileApiPath+"down/"+fileId;
+		        var div = document.createElement('div');
+		        	   div.innerHTML='<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
+		            '<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>';
+		        mui('#'+showListDomId)[0].appendChild(div);*/
+			}
+		}
+	});
 }
 
 /**
@@ -421,17 +457,22 @@ function  removeFile(id,fileIdsDomId,obj) {
 		var index=data.index;
 		if(index==0){//确定
             $bj_post_ajax({"url":fileApiPath+ "/del/"+id,success:function (result) {
-                    var $fileIds=mui("#"+fileIdsDomId);
-                    if($fileIds.length>0){
-                        var fileIds=$fileIds[0].value;
-                               fileIds=fileIds.split(",");
-                        var index = $.inArray(id,fileIds);
-                        if(index>=0){//存在 就删除
-                            fileIds.splice(index,1);
-                            $fileIds[0].value=fileIds.join(",");
-                        }
-                        obj.parentNode.remove();
-                    }
+            		if(fileIdsDomId){
+            			 var $fileIds=mui("#"+fileIdsDomId);
+                         if($fileIds.length>0){
+                             var fileIds=$fileIds[0].value;
+                                    fileIds=fileIds.split(",");
+                             var index = $.inArray(id,fileIds);
+                             if(index>=0){//存在 就删除
+                                 fileIds.splice(index,1);
+                                 $fileIds[0].value=fileIds.join(",");
+                             }
+                             obj.parentNode.remove();
+                         }
+            		}else{
+            			obj.parentNode.remove();
+            		}
+                   
                 }});
 		}
 

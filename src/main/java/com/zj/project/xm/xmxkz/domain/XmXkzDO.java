@@ -34,6 +34,7 @@ public class XmXkzDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "修改新增删除时间",name = "gxsj",dataType = "Date",hidden = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
     @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",hidden = true)

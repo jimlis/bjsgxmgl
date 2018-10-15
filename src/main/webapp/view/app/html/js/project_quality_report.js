@@ -29,7 +29,8 @@ function showQuaReportList(temptype,idName){
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
 			  	var id = item.id;
-			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`</li>`;
+			  	var chrqxwz = item.chrqxwz||"";
+			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxwz+`</li>`;
 			})
 			mui("#" + idName)[0].innerHTML=html;
 			//mui("#" + idName)[0].style.display="none";

@@ -3,6 +3,7 @@ package com.zj.project.xm.xmjb.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import java.util.Date;
@@ -28,6 +29,7 @@ public class XmjbDO extends BaseDomain {
     /** 逻辑废除：0（废除），1（正常） */
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
     private Integer intxh;
@@ -36,6 +38,7 @@ public class XmjbDO extends BaseDomain {
     /** 项目类型:1(pmc项目)2（epc项目） */
     private Integer intxmlx;
     /** 登记时间 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmdjsj;
     /** 登记人部门id */
     private Long intdjrbm;

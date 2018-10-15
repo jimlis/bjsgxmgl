@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmDlDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 项目id：bj_xmjb表 */
     @ApiModelProperty(value = "项目id：bj_xmjb表",name = "intxmid",dataType = "Long",required = true)

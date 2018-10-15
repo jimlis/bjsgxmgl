@@ -2,6 +2,7 @@ package com.zj.project.api.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.google.common.collect.Lists;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.annotation.Log;
@@ -109,6 +110,9 @@ public class ApiFileController  extends ApiBaseController {
             @ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
     public Result<List<FileDO>> list(String busType,Long busId,String  type) {
+    	if(busId==null) {
+    		return Result.ok(Lists.newArrayList());
+    	}
         FileDO fileDO=new FileDO();
         fileDO.setBusType(busType);
         fileDO.setBusId(busId);

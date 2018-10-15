@@ -1,5 +1,6 @@
 package com.zj.project.xm.xmaqbg.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -17,6 +18,8 @@ import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmaqbg.dao.XmAqbgDao;
 import com.zj.project.xm.xmaqbg.domain.XmAqbgDO;
 import com.zj.project.xm.xmaqbg.service.XmAqbgService;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 
 /**
  * 
@@ -36,6 +39,9 @@ public class XmAqbgServiceImpl extends BaseServiceImpl<XmAqbgDao, XmAqbgDO> impl
     
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private XmDwmdService xmDwmdService;
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
@@ -48,6 +54,19 @@ public class XmAqbgServiceImpl extends BaseServiceImpl<XmAqbgDao, XmAqbgDO> impl
     public Collection<XmAqbgDO> listByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
         return listByMap(parmMap);
+    }
+    
+    @Override
+    public XmAqbgDO getById(Serializable id) {
+    	XmAqbgDO xmAqbgDO=super.getById(id);
+    	Long intsgdw = xmAqbgDO.getIntsgdw();
+    	if(intsgdw!=null) {
+    		XmDwmdDO xmDwmdDO = xmDwmdService.getById(intsgdw);
+    		if(xmDwmdDO!=null) {
+    			xmAqbgDO.setChrsgdw(xmDwmdDO.getChrdwmc());
+    		}
+    	}
+    	return xmAqbgDO;
     }
     
     /**

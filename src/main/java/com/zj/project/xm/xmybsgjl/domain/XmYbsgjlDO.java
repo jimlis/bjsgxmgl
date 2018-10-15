@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -33,6 +34,7 @@ public class XmYbsgjlDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "修改新增删除时间 ",name = "gxsj",dataType = "Date",hidden = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 项目基本信息id */
     @ApiModelProperty(value = "项目id:bj_xmjb表 ",name = "intxmid",dataType = "Long",required = true)
@@ -42,9 +44,11 @@ public class XmYbsgjlDO extends BaseDomain {
     private Integer intxh;
     /** 更新日期 */
     @ApiModelProperty(value = "报告日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
     /** 样板施工完成日期 */
     @ApiModelProperty(value = "样板施工完成日期 ",name = "dtmwcrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmwcrq;
     /** 现场样板类型code码：1（土建），2（机电），3（装修），4（园林），5（其他） */
     @ApiModelProperty(value = "现场样板类型code码：1（土建），2（机电），3（装修），4（园林），5（其他）  ",name = "intyblx",dataType = "string",required = true)
@@ -57,6 +61,7 @@ public class XmYbsgjlDO extends BaseDomain {
     private String chrybwz;
     /** 通过审批日期 */
     @ApiModelProperty(value = "通过审批日期 ",name = "dtmsprq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmsprq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)

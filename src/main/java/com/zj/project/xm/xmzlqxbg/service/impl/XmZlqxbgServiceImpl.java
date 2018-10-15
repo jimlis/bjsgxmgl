@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 import com.zj.project.xm.xmzlqxbg.dao.XmZlqxbgDao;
 import com.zj.project.xm.xmzlqxbg.domain.XmZlqxbgDO;
 import com.zj.project.xm.xmzlqxbg.service.XmZlqxbgService;
@@ -14,6 +16,8 @@ import org.springframework.util.Assert;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -36,6 +40,22 @@ public class XmZlqxbgServiceImpl extends BaseServiceImpl<XmZlqxbgDao, XmZlqxbgDO
     
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private XmDwmdService xmDwmdService;
+    
+    @Override
+    public XmZlqxbgDO getById(Serializable id) {
+    	XmZlqxbgDO xmZlqxbgDO=super.getById(id);
+    	Long intsgdw = xmZlqxbgDO.getIntsgdw();
+    	if(intsgdw!=null) {
+    		XmDwmdDO xmDwmdDO = xmDwmdService.getById(intsgdw);
+    		if(xmDwmdDO!=null) {
+    			xmZlqxbgDO.setChrsgdw(xmDwmdDO.getChrdwmc());
+    		}
+    	}
+    	return xmZlqxbgDO;
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

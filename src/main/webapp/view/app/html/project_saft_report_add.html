@@ -30,7 +30,8 @@
 				<div class="mui-content-padded">
 					<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
 					<h5 class="bj-title2-font">更新日期：
-						<label id="dtmgxrq">2018-10-07</label>
+					   <input class="bj-input bj-p-black-font" type="hidden" id="dtmgxrq" name="dtmgxrq" placeholder="更新日期" />
+						<label id="dtmgxrqLable"></label>
 					</h5>
 					<h5 class="bj-title2-font">安全问题描述：
 						<input class="bj-input bj-p-black-font" type="text" id="chraqwtbs" name="chraqwtbs" placeholder="安全问题描述" />
@@ -44,14 +45,15 @@
 						<div class="btns">
 							<button id="chbtn"  type="button">选择文件</button>
 						</div>
-						<div id="img-list">
+						<div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
 						</div>
 					</div>
 					<h5 class="bj-title2-font">备注：
 						<input class="bj-input bj-p-black-font" type="text" id="chrzb" name="chrzb" placeholder="备注" />
 					</h5>
 					<h5 class="bj-title2-font">施工负责单位：
-						<input class="bj-input bj-p-black-font" type="text" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" name="intsgdw" placeholder="施工负责单位" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsgdw" name="chrsgdw" placeholder="施工负责单位" />
 					</h5>
 					<h5 class="bj-title2-font">通知施工方日期：
 						<input class="bj-input bj-p-black-font" data-options='{"type":"date"}'  id="dtmtzrq" name="dtmtzrq" placeholder="通知施工方日期" />
@@ -61,7 +63,7 @@
 					</h5>
 					<h5 class="bj-title2-font">报告人：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" name="intbgrid" placeholder="报告人" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="李斯" placeholder="报告人名称" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" name="chrbgrmc" value="" placeholder="报告人名称" />
 					</h5>
 				</div>
 			</form>

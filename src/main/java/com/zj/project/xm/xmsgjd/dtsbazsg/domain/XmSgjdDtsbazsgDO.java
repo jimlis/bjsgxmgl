@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
     @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
@@ -43,6 +45,7 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     private Long intxmid;
     /** 更新日期 */
     @ApiModelProperty(value = "更新日期",name = "dtmgxrq",dataType = "string",required = true,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
     /** 施工位置：栋楼表id */
     @ApiModelProperty(value = "施工位置：栋楼表id ",name = "intsgwz",dataType = "Long",required = true)
@@ -52,12 +55,15 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     private String chrdtbh;
     /** 电梯设备到货日期 */
     @ApiModelProperty(value = "电梯设备到货日期",name = "dtmdhrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmdhrq;
     /** 电梯井道移交日期 */
     @ApiModelProperty(value = "电梯井道移交日期",name = "dtmyjrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmyjrq;
     /** 电梯轨道完成日期 */
     @ApiModelProperty(value = "电梯轨道完成日期",name = "dtmwcrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmwcrq;
     /** 电梯门套完成比例(百分比) */
     @ApiModelProperty(value = "电梯门套完成比例(百分比)",name = "intwcbl",dataType = "Float",required = true)
@@ -67,15 +73,18 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     private Float intazbl;
     /** 电梯试运行日期 */
     @ApiModelProperty(value = "电梯试运行日期",name = "dtmyxrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmyxrq;
     /** 电梯通过验收日期 */
     @ApiModelProperty(value = "电梯通过验收日期",name = "dtmysrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmysrq;
     /** 电梯验收合格证明:存放文件表id，多个用英文逗号隔开 */
     @ApiModelProperty(value = "电梯验收合格证明:存放文件表id，多个用英文逗号隔开",name = "chrhgzm",dataType = "String",required = false,hidden=true)
     private String chrhgzm;
     /** 合格证明到期日期 */
     @ApiModelProperty(value = "合格证明到期日期",name = "dtmdqrq",dataType = "String",required = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmdqrq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required = true)
