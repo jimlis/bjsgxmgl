@@ -81,6 +81,7 @@ var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
 var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 
 /**TODO end Tzx*/
+//博建吐司提醒
 function bjToast(data,fuc){
 	var mask = mui.createMask();//callback为用户点击蒙版时自动执行的回调；
 	mask.show();//显示遮罩
@@ -92,9 +93,12 @@ function bjToast(data,fuc){
 	 	}
 	 }, 1500);
 }
+//博建控制平台信息
 function bjConsole(data){
 	console.log(data);
 }
+//博建调试假数据开关
+var isBjDebug = true;
 /**
  * 将null undefined  "null" 转换为 ""
  * @param {Object} str 字符串
@@ -565,9 +569,9 @@ function getFromData(form){
                 }
                 break;
 			case 'textarea':
-                data[element.name]=element.innerHTML;
+                data[element.id]=element.innerHTML;
             default:
-                data[element.name]=element.value;
+                data[element.id]=element.value;
         }
     }
     return data;

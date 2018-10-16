@@ -1,36 +1,67 @@
 var obj = getRequest();
-if(obj.id){
-	$bjAjax({
-		url:xmzfxcyzxysApiDetail,
-		type:"post",
-		data:{
-			xmZfxcyzxysId:obj.id
-		},
-		success:function(data){
-			document.getElementById("dtmgxrq").innerText=data.dtmgxrq;
-			document.getElementById("intxclb").innerText=data.intxclb;
-			document.getElementById("intxcbm").innerText=data.intxcbm;
-			document.getElementById("chrxcry").innerText=data.chrxcry;
-			document.getElementById("dtmxcrq").innerText=data.dtmxcrq;
-			document.getElementById("chrzb").innerText=data.chrzb;
-			document.getElementById("chrbgrmc").innerText=data.chrbgrmc;
-		}
-	});
-
-}
 window.onload = function(){
-    relPicker("intxclbxs",[{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}],"intxclb");
+	var pageData = isUpdata()||'';
+	//初始化數據
+	init();
+	//判断是否更新；
+	if(pageData==''){
+		//创建数据Model；
+		pageData = buildModel();
+	}
+	//数据绑定
+	var vue = new Vue({
+		el: '#app',
+		data: pageData
+	});
+}
+//判断是否更新
+function isUpdata(){
+	if(obj.id){
+		$bjAjax({
+			url:xmzfxcyzxysApiDetail,
+			type:"post",
+			data:{
+				xmZfxcyzxysId:obj.id
+			},
+			success:function(data){
+				return data;
+			}
+		});
+	}
+	return '';
+}
+//创建数据Model
+function buildModel(){
+	var model = {
+		id:'1',
+		intxmid:'3',
+		dtmgxrq:'2018-9-8',
+		intxclb:'',
+		intxcbm:'',
+		chrxcry:'',
+		dtmxcrq:'',
+		chrzb:'',
+		intbgrid:'52',
+		chrbgrmc:'测试'
+	}
+	return model;
+}
+//初始化下拉框数据
+function init(){
+	relPicker("chrxclb",[{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}],"intxclb");
 
-    relPicker("intxcbmxs",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
+    relPicker("chrxcbm",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
         {"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}],"intxcbm");
 
-    upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
-
     dtPicker('#dtmxcrq');
+    //upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
+
 }
+//保存数据
 function save(){
+	
 	var data = getFromData("myform");
-	data["intxmid"] = getCookie("id");
+	bjConsole(data);
 	if(obj.id){
 		data["id"] = obj.id;
 	}

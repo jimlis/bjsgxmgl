@@ -65,21 +65,25 @@
 	line-height: 44px;
 }
 input.bj-input{
-    line-height: inherit;
-	height: inherit;
-	margin-bottom: inherit;
-	padding: inherit;
+	line-height: 21px ;
+	height: 40px;
+	margin-bottom: 15px;
+	padding: 10px 15px;
 	width: 100%;
 	-webkit-user-select: text;
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 3px;
 	outline: 0;
 	background-color: #fff;
-	-webkit-appearance: none
-    
+	-webkit-appearance: none;
+}
+textarea.bj-input{
+	height: 120px;
+	width: 100%;
 }
 .bj-disable{
 	background-color: gainsboro !important;
+	pointer-events:none;
 }
 .bj-broder{
 	border: 1px dashed gray;
