@@ -21,34 +21,41 @@
 		    <h1 class="mui-title">基础施工</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="list">
-			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">报告日期：
-					<span class="bj-p-gray-font">2018-8-9</span>
-				</h5>
-				<h5 class="bj-title2-font">施工位置：
-					<input class="bj-input bj-p-black-font" type="text" id="showAddress" placeholder="请选择施工位置" />
-				</h5>
-				<h5 class="bj-title2-font">基础类型：
-					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请选择基础类型" />
-				</h5>
-				<h5 class="bj-title2-font">完成量：
-					<input class="bj-input bj-p-black-font" type="text" id="showSume" placeholder="请填写完成量" />
-				</h5>
-				<h5 class="bj-title2-font">浇筑砼日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDateJZS" placeholder="请选择日期" />
-				</h5>
-				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
-				<h5 class="bj-title2-font">照片：</h5>
-				<div id="uploader" class="wu-example">
-				    <!--用来存放文件信息-->
-				    <div class="btns">
-				        <button id="chbtn" >选择文件</button>
-				    </div>
-				    <div id="img-list">
-				    </div>
+		<div class="mui-content" id="app">
+			<form id="myform">
+				<div class="mui-content-padded">
+					<h5 class="bj-title2-font">报告日期：
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="intxclbxs" v-model="dtmgxrq"/>
+					</h5>
+					<h5 class="bj-title2-font">施工位置：
+						<input class="bj-input bj-p-black-font" type="hidden" id="intxclb" v-model="intxclb" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrxclb" v-model="chrxclb" v-on:click="sgPicker" placeholder="请选择" />
+					</h5>
+					<h5 class="bj-title2-font">基础类型：
+						<input class="bj-input bj-p-black-font" type="hidden" id="intxclb" v-model="intxclb" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrxclb" v-model="chrxclb" v-on:click="jcPicker" placeholder="请选择" />
+					</h5>
+					<h5 class="bj-title2-font">完成量：
+						<input class="bj-input bj-p-black-font" type="text" id="chrxcry" v-model="chrxcry" placeholder="请输入" />
+					</h5>
+					<h5 class="bj-title2-font">浇筑砼日期：
+						<input class="bj-input bj-p-black-font" type="text" id="dtmxcrq" v-on:click="datePicker" v-model="dtmxcrq" placeholder="请选择" />
+					</h5>
+					<h5 class="bj-title2-font">报告人：
+						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
+					</h5>
+					<h5 class="bj-title2-font">照片：</h5>
+					<div id="uploader" class="wu-example">
+					    <!--用来存放文件信息-->
+					    <div class="btns">
+					        <button id="chbtn" >选择照片</button>
+					    </div>
+					    <div id="img-list">
+					    </div>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
@@ -56,6 +63,7 @@
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_progress_record_baseAdd.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
