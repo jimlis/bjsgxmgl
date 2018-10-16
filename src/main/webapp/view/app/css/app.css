@@ -81,6 +81,15 @@ input.bj-input{
 .bj-disable{
 	background-color: gainsboro !important;
 }
+.bj-broder{
+	border: 1px dashed gray;
+	margin: 5px auto;
+}
+.bj-line{
+	background-color: gray;
+	height: 1px;
+	margin: 1px 0;
+}
 /*博建项目系统头背景*/
 header.mui-bar.mui-bar-nav{
 	background-color: #00CCFF;

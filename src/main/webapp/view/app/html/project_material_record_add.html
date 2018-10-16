@@ -24,7 +24,7 @@
 		</header>
 		<div class="mui-content" id="list">
 
-			<form id="form">
+			<form id="myform">
 				<div class="mui-content-padded">
 					<h5 class="bj-title2-font">报告日期：
 						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" placeholder="2018-8-8" disabled="disabled" />
@@ -35,11 +35,11 @@
 					</h5>
 					<h5 class="bj-title2-font">施工负责单位：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intsgdw" placeholder="施工负责单位" />
-						<input class="bj-input bj-p-black-font" type="text" id="intsgdw" placeholder="施工负责单位" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsgdw" placeholder="施工负责单位" />
 					</h5>
 					<h5 class="bj-title2-font">是否替代品：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" placeholder="是否替代品" />
-						<input class="bj-input bj-p-black-font" type="text" id="intsfdtp" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsfdtp" placeholder="是否替代品" />
 					</h5>
 					<h5 class="bj-title2-font">材料样板名称：
 						<input class="bj-input bj-p-black-font" type="text" id="chrybmc" placeholder="材料样板名称" />
@@ -47,54 +47,20 @@
 					<h5 class="bj-title2-font">材料使用位置：
 						<input class="bj-input bj-p-black-font" type="text" id="chrybwz" placeholder="材料使用位置" />
 					</h5>
-					<h5 class="bj-title2-font">品牌及技术资料：
-						<table  border="1" cellspacing="5" cellpadding="5">
-							<tr>
-								<td>品牌1</td>
-								<td>品牌2</td>
-								<td>品牌3</td>
-							</tr>
-							<tr style="height: 20px">
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>品牌4</td>
-								<td>品牌5</td>
-								<td>品牌6</td>
-							</tr>
-							<tr style="height: 20px">
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</h5>
-					<h5 class="bj-title2-font">技术资料：
-						<table border="1" cellspacing="5" cellpadding="5">
-							<tr>
-								<td>品牌1</td>
-								<td>品牌2</td>
-								<td>品牌3</td>
-							</tr>
-							<tr style="height: 20px">
-								<td>  </td>
-								<td>  </td>
-								<td>  </td>
-							</tr>
-							<tr>
-								<td>品牌4</td>
-								<td>品牌5</td>
-								<td>品牌6</td>
-							</tr>
-							<tr style="height: 20px">
-								<td> </td>
-								<td>  </td>
-								<td>  </td>
-							</tr>
-						</table>
-					</h5>
+					<h5 class="bj-title2-font">品牌及技术资料：</h5>
+					<div>
+						<div id="pp-list">
+							<!--<div class="bj-broder" id="0">
+								<input class="bj-input bj-p-black-font" type="text" placeholder="品牌" />
+								<input class="bj-input bj-p-black-font" type="text" placeholder="资料" />
+								<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('0')">删除</button>
+							</div>-->
+						</div>
+						<button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" onclick="addpp()">增加品牌</button>
+					</div>
+						
+					
+					
 					<h5 class="bj-title2-font">规范标准：
 						<input class="bj-input bj-p-black-font" type="text" id="chrgfbz" placeholder="规范标准" />
 					</h5>
