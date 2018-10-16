@@ -32,9 +32,9 @@ function getPageData(){
 			return data;
 		}
 	});
-	if(isBjDebug){
-		return{dtmgxrq:'2018-8-9',dtmxcrq:'2016-9-8',intxcbm:'发改委',chrxcry:'李思思',chrzb:'Bad Request 请求出现语法错误,一般是请求参数不对',chrbgrmc:'李思'};
-	}
+//	if(isBjDebug){
+//		return{dtmgxrq:'2018-8-9',dtmxcrq:'2016-9-8',intxcbm:'发改委',chrxcry:'李思思',chrzb:'Bad Request 请求出现语法错误,一般是请求参数不对',chrbgrmc:'李思'};
+//	}
 }
 
 
