@@ -73,7 +73,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictDao, DictDO> implements
         Map<String, List<DictDO>> map= Maps.newHashMap();
         if(StringUtils.isEmpty(types)) return map;
         Arrays.stream(types.trim().split(",")).forEach(type->{
-            QueryWrapper<DictDO> queryWrapper=new QueryWrapper<DictDO>().eq("type",type);
+            QueryWrapper<DictDO> queryWrapper=new QueryWrapper<DictDO>().eq("type",type).eq("delFlag", "0");
             List<DictDO> dictList= dictDao.selectList(queryWrapper);
             if(CollectionUtils.isNotEmpty(dictList)){
                 map.put(type,dictList);

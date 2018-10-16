@@ -49,9 +49,17 @@ public class XmZfxcyzxysDO extends BaseDomain {
     /** 巡查类别：code码 */
     @ApiModelProperty(value = "巡查类别",name = "intxclb",dataType = "string",required = true)
     private String intxclb;
+    /** 巡查类别名称 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "巡查类别名称",name = "chrxclb",dataType = "string",required = true)
+    private String chrxclb;
     /** 巡查部门：code码 */
     @ApiModelProperty(value = "巡查部门",name = "intxcbm",dataType = "string",required = true)
     private String intxcbm;
+    /** 巡查部门名称 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "巡查部门",name = "chrxcbm",dataType = "string",required = true)
+    private String chrxcbm;
     /** 巡查人员 */
     @ApiModelProperty(value = "巡查人员",name = "chrxcry",dataType = "string",required = true)
     private String chrxcry;
@@ -225,4 +233,17 @@ public class XmZfxcyzxysDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public String getChrxclb() {
+		return chrxclb;
+	}
+	public void setChrxclb(String chrxclb) {
+		this.chrxclb = chrxclb;
+	}
+	public String getChrxcbm() {
+		return chrxcbm;
+	}
+	public void setChrxcbm(String chrxcbm) {
+		this.chrxcbm = chrxcbm;
+	}
+    
 }

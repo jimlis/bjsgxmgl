@@ -4,12 +4,14 @@ package com.zj.project.api.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Maps;
 import com.zj.platform.business.dict.domain.DictDO;
 import com.zj.platform.business.dict.service.DictService;
 import com.zj.platform.common.annotation.Log;
@@ -45,6 +47,9 @@ public class ApiDictController extends ApiBaseController {
     @RequiresAuthentication
     public Result<Map<String,List<DictDO>>> getDictMapByTypes(String types) {
         try {
+        	if(StringUtils.isEmpty(types)) {
+        		return Result.ok(Maps.newHashMap());
+        	}
             Map<String, List<DictDO>> map = dictService.dictMap(types);
             return Result.ok(map);
         }catch (Exception e){

@@ -2,7 +2,6 @@ package com.zj.project.api.controller;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
-import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
-import com.zj.project.xm.xmsgjd.jcsg.service.XmSgjdJcsgService;
 import com.zj.project.xm.xmsgjd.ztjgsg.domain.XmSgjdZtjgsgDO;
 import com.zj.project.xm.xmsgjd.ztjgsg.service.XmSgjdZtjgsgService;
-import com.zj.project.xm.xmzpjl.domain.XmZpjlDO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

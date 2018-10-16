@@ -649,3 +649,31 @@ function getXmdwmdData(xmid,lxmd){
 	});
 	return arr;
 }
+
+/**
+ * 根据类型
+ */
+function getDictMapByTypes(types){
+	var obj={};
+	$bj_post_ajax({
+		url:dictApiPath,
+		data:{"types":types},
+		async:false,
+		success:function(data){
+			if(data){
+				for(key in data){
+					var list=data[key];
+					var arr=[];
+					for(i in list){
+						var o={};
+						o["text"]=list[i].name||"";
+						o["value"]=list[i].value||"";
+						arr.push(o);
+					}
+					obj[key]=arr;
+				}
+			}
+		}
+	});
+	return obj;
+}

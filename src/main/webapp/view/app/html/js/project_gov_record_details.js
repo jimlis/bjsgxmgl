@@ -1,13 +1,11 @@
 var obj = getRequest();
-
+var id=obj.id||"";
 //初始化显示数据
 window.onload = function(){
+	debugger;
 	//得到数据
 	var pageData = getPageData();
-	//显示图片
-	var list = document.getElementById('img-list');
-    list.appendChild(createFragment(10,'../images/ly.png'));
-    funLazyLoad('#img-list').refresh(true);
+	
     //数据绑定
 	var vue = new Vue({
 		el: '#app',
@@ -19,22 +17,33 @@ window.onload = function(){
 			}
 		}
 	});
+	
+	if(id){
+		//加载图片
+		initImgList("bj_xm_zfxcyzxys",id,"1","fileIds","img-list",false);
+	}
 }
 //得到显示数据
 function getPageData(){
+	var o={};
 	$bjAjax({
 		url:xmzfxcyzxysApiDetail,
 		type:"post",
+		async:false,
 		data:{
 			xmZfxcyzxysId:obj.id
 		},
 		success:function(data){
-			return data;
+			if(data){
+				o=data;
+			}
 		}
 	});
-//	if(isBjDebug){
-//		return{dtmgxrq:'2018-8-9',dtmxcrq:'2016-9-8',intxcbm:'发改委',chrxcry:'李思思',chrzb:'Bad Request 请求出现语法错误,一般是请求参数不对',chrbgrmc:'李思'};
-//	}
+	return o;
+}
+
+function edit(){
+	toUrl("project_gov_record_add.html?id="+id);
 }
 
 

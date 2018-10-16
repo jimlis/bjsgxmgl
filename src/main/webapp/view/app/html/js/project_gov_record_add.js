@@ -1,11 +1,19 @@
 var obj = getRequest();
 var pageData;
 var vue;
+var id=obj.id||"";
+var systemdate = bjGetSysDate();
+var chrdlrid = getCookie('chrdlrid');//chrbgrmc
+var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
+var intxmid = getCookie('id');//intxmid
 window.onload = function(){
+	debugger;
 	pageData = isUpdata()||'';
+	var dict=getDictMapByTypes("xcbm,xclb");
 	//初始化數據
-	var lbPickerData = [{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}];
-	var bmPickerData = [{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},{"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}];
+	var lbPickerData =dict["xclb"]||{} ;
+	var bmPickerData = dict["xcbm"]||{};
+	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
 	//判断是否更新；
 	if(pageData==''){
 		//创建数据Model；
@@ -27,29 +35,40 @@ window.onload = function(){
 			},
 		}
 	});
+	
+	if(id){
+		//加载图片
+		initImgList("bj_xm_zfxcyzxys",id,"1","fileIds","img-list",true);
+	}
+	
 }
 //判断是否更新
 function isUpdata(){
-	if(obj.id){
+	if(id){
+		var o={};
 		$bjAjax({
 			url:xmzfxcyzxysApiDetail,
 			type:"post",
+			async:false,
 			data:{
 				xmZfxcyzxysId:obj.id
 			},
 			success:function(data){
-				return data;
+				if(data){
+					o=data;
+				}
 			}
 		});
+		return o;
 	}
 	return '';
 }
 //创建数据Model
 function buildModel(){
 	var model = {
-		id:'1',
-		intxmid:'3',
-		dtmgxrq:'2018-9-8',
+		id:id,
+		intxmid:intxmid,
+		dtmgxrq:systemdate,
 		intxclb:'',
 		chrxclb:'',
 		intxcbm:'',
@@ -57,30 +76,16 @@ function buildModel(){
 		chrxcry:'',
 		dtmxcrq:'',
 		chrzb:'',
-		intbgrid:'52',
-		chrbgrmc:'测试'
+		intbgrid:chrdlrid,
+		chrbgrmc:chrdlrmc
 	}
 	return model;
 }
-//初始化下拉框数据
-function init(){
-	xcPickerData = [{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}];
 
-//  relPicker("chrxcbm",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
-//      {"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}],"intxcbm");
-//
-//  dtPicker('#dtmxcrq');
-    //upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
-
-}
 //保存数据
 function save(){
 	
 	var data = getFromData("myform");
-	bjConsole(data);
-	if(obj.id){
-		data["id"] = obj.id;
-	}
 	$bjAjax({
 		url:xmzfxcyzxysApiSave,
 		data:data,
@@ -92,3 +97,5 @@ function save(){
 		}
 	});
 }
+
+

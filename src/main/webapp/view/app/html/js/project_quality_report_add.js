@@ -19,7 +19,6 @@ window.onload = function(){
 			},
 			type:'post',
 			success:function(data){
-				debugger;
 				//服务器返回响应，根据响应结果，分析是否登录成功；
 				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
 				document.getElementById("chrbz").value = data.chrbz||"";
@@ -45,7 +44,6 @@ window.onload = function(){
 				document.getElementById("intsgdw").value = data.intsgdw||"";
 				document.getElementById("chrsgdw").value = data.chrsgdw||"";
 				document.getElementById("intxmid").value = data.intxmid||"";
-				debugger;
 				//加载图片
 				initImgList("bj_xm_zlqxbg",id,"1","fileIds","img-list",true);
 			},

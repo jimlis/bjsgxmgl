@@ -20,7 +20,7 @@
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">政府部门巡查/专项验收记录</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" v-on:click="edit(id)">编辑</button>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
 		</header>
 		<div class="mui-content"  id="app">
 				<div class="mui-content-padded">
@@ -33,7 +33,7 @@
 					<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font" id="chrbgrmc">{{chrbgrmc}}</span></h5>
 					<h5 class="bj-title2-font">照片：</h5>
 					<div id="uploader" class="wu-example">
-						<div id="img-list">
+						<div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
 						</div>
 					</div>
 				</div>

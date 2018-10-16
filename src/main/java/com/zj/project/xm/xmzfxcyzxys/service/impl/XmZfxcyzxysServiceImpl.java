@@ -1,21 +1,24 @@
 package com.zj.project.xm.xmzfxcyzxys.service.impl;
 
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmzfxcyzxys.dao.XmZfxcyzxysDao;
-import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
-import com.zj.project.xm.xmzfxcyzxys.service.XmZfxcyzxysService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.dict.service.DictService;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmzfxcyzxys.dao.XmZfxcyzxysDao;
+import com.zj.project.xm.xmzfxcyzxys.domain.XmZfxcyzxysDO;
+import com.zj.project.xm.xmzfxcyzxys.service.XmZfxcyzxysService;
 
 /**
  * 
@@ -35,7 +38,23 @@ public class XmZfxcyzxysServiceImpl extends BaseServiceImpl<XmZfxcyzxysDao, XmZf
 
     @Autowired
     private FileService fileService;
-
+    
+    @Autowired
+    private DictService dictService;
+    
+    @Override
+    public XmZfxcyzxysDO getById(Serializable id) {
+    	XmZfxcyzxysDO xmZfxcyzxysDO=super.getById(id);
+    	if(xmZfxcyzxysDO!=null) {
+    		String intxcbm = xmZfxcyzxysDO.getIntxcbm();
+    		String intxclb = xmZfxcyzxysDO.getIntxclb();
+    		
+    		xmZfxcyzxysDO.setChrxcbm(dictService.getName("xcbm",intxcbm));
+    		xmZfxcyzxysDO.setChrxclb(dictService.getName("xclb",intxclb));
+    	}
+    	return xmZfxcyzxysDO;
+    }
+    
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
