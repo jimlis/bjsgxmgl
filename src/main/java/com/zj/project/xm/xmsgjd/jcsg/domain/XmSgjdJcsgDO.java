@@ -47,6 +47,9 @@ public class XmSgjdJcsgDO extends BaseDomain {
     /** 施工位置：栋楼表id */
     @ApiModelProperty(value = "施工位置：栋楼表id",name = "intsgwzid",dataType = "Long",required = true)
     private Long intsgwzid;
+    /** 施工位置描述 */
+    @ApiModelProperty(value = "施工位置描述",name = "chrsgwzms",dataType = "String",required = true)
+    private Long chrsgwzms;
     /** 基础类型：1（独立基础），2（筏板），3（桩基础） */
     @ApiModelProperty(value = "基础类型：1（独立基础），2（筏板），3（桩基础）",name = "intjclx",dataType = "Integer",required = true)
     private Integer intjclx;
@@ -237,4 +240,18 @@ public class XmSgjdJcsgDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+    /**
+     * 获取 施工位置描述
+     */
+	public Long getChrsgwzms() {
+		return chrsgwzms;
+	}
+	
+	/**
+     * 设置 施工位置描述
+     */
+	public void setChrsgwzms(Long chrsgwzms) {
+		this.chrsgwzms = chrsgwzms;
+	}
+    
 }

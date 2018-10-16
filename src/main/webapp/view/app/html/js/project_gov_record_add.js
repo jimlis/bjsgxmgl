@@ -7,7 +7,6 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 window.onload = function(){
-	debugger;
 	pageData = isUpdata()||'';
 	var dict=getDictMapByTypes("xcbm,xclb");
 	//初始化數據

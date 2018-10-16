@@ -1,11 +1,20 @@
-var id = getRequest().id;
+var obj=getRequest()
+var id = obj.id||"";
+var xmid=getCookie("id");
+var chrdlrid = getCookie('chrdlrid');//chrbgrmc
+var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
+var sysdate=bjGetSysDate();
 var pageData;
 var vue;
 window.onload = function(){
-	debugger
 	//初始化數據
-	var sgPickerData  ;
+	var sgPickerData=getSG();
+	if(sgPickerData){
+		var oo={"text":"其他","value":"-1"};
+		sgPickerData.push(oo);
+	}
 	var jcPickerData = getJC();
+	upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_jcsg"});
 	//判断是否更新；
 	pageData = isUpdata()||'';
 	if(pageData==''){
@@ -18,21 +27,37 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			sgPicker: function (event) {
-				vuePicker(pageData,"chrxclb",sgPickerData,"intxclb");
+				vuePicker(pageData,"chrsgwzid",sgPickerData,"intsgwzid");
 			},
 			jcPicker: function (event) {
-				vuePicker(pageData,"chrxcbm",jcPickerData,"intxcbm");
+				vuePicker(pageData,"chrjclx",jcPickerData,"intjclx");
 			},
 			datePicker: function (event) {
-				vueDtPicker(pageData,"dtmxcrq");
+				vueDtPicker(pageData,"dtmjzqrq");
 			},
 		}
 	});
+	
+	if(id){
+		//加载图片
+		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",true);
+	}
 }
+
+function setWcl(){
+	var intzjczsl=pageData.intzjczsl||0;
+	var intzjcwcl=pageData.intzjcwcl||0;
+	if(intzjczsl==0||intzjcwcl==0){
+		pageData.intwcl=0;
+	}else{
+		pageData.intwcl=parseInt((intzjcwcl/intzjczsl)*100);
+	}
+}
+
 //判断是否更新
 function isUpdata(){
-	var result={};
 	if(id){
+		var result={};
 		$bjAjax({
 			url:progressJCApiGet,
 			type:"post",
@@ -44,65 +69,50 @@ function isUpdata(){
 				result = data;
 			}
 		});
+		return result;
 	}
-	return result;
+	return '';
 }
 //创建数据Model
 function buildModel(){
 	var model = {
-		id:'1',
-		intxmid:'3',
-		dtmgxrq:'2018-9-8',
-		intxclb:'',
-		chrxclb:'',
-		intxcbm:'',
-		chrxcbm:'',
-		chrxcry:'',
-		dtmxcrq:'',
-		chrzb:'',
-		intbgrid:'52',
-		chrbgrmc:'测试'
+		id:id,
+		intxmid:xmid,
+		dtmbgrq:sysdate,
+		intsgwzid:'',
+		chrsgwzid:'',
+		chrsgwzms:'',
+		intjclx:'',
+		chrjclx:'',
+		intzjczsl:'',
+		intzjcwcl:'',
+		intwcl:'',
+		dtmjzqrq:'',
+		intbgrid:chrdlrid,
+		chrbgrmc:chrdlrmc
 	}
 	return model;
 }
 //初始化下拉框【施工位置】数据
 function getSG(){
-	var result=new Array();
-	$bjAjax({
-			url:----,
-			type:"post",
-			async:false,
-			data:{
-				xmSgjdJcsgId:obj.id
-			},
-			success:function(data){
-				result = data;
-			}
-	});
-	return result;
+	return getXmdlListByXmid(xmid);
 }
 //初始化下拉框【基础类型】数据
 function getJC(){
 	var result=[{"text":"独立基础","value":"1"},{"text":"筏板","value":"2"},{"text":"桩基础","value":"3"}];
-	debugger
 	return result;
 }
 
 //保存数据
 function save(){
-	
 	var data = getFromData("myform");
-	bjConsole(data);
-	if(obj.id){
-		data["id"] = obj.id;
-	}
 	$bjAjax({
-		url:xmzfxcyzxysApiSave,
+		url:progressJcsgSaveApiPath,
 		data:data,
 		type:"post",
-		success:function(data){
+		success:function(result){
 			bjToast("保存成功！",function(){
-				toUrl("project_gov_record_details.html?id="+data.id);
+				toUrl("project_progress_record_BaseDetail.html?id="+result.id);
 			});
 		}
 	});

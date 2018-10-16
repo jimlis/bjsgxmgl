@@ -80,6 +80,9 @@ var quaRecodeListApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgListByXmidAndQxlx
 var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
 var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 
+//施工进度
+var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";
+var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){
@@ -651,7 +654,7 @@ function getXmdwmdData(xmid,lxmd){
 }
 
 /**
- * 根据类型
+ * 根据类型获取编码map集合
  */
 function getDictMapByTypes(types){
 	var obj={};
@@ -676,4 +679,28 @@ function getDictMapByTypes(types){
 		}
 	});
 	return obj;
+}
+
+
+/**
+ * 根据项目id获取栋楼信息
+ */
+function getXmdlListByXmid(xmid){
+	var arr=[];
+	$bj_post_ajax({
+		url:projectApiDl,
+		data:{"xmid":xmid},
+		async:false,
+		success:function(data){
+			if(data){
+					for(i in data){
+						var o={};
+						o["text"]=data[i].chrdlmc||"";
+						o["value"]=data[i].id||"";
+						arr.push(o);
+					}
+			}
+		}
+	});
+	return arr;
 }

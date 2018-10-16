@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
@@ -50,6 +51,9 @@ public class ApiXmdlController extends ApiBaseController {
     @RequiresAuthentication
     public Result<List<XmDlDO>> getXmdlByXmid(Long xmid) {
         try {
+        	if(xmid==null) {
+        		Result.ok(Lists.newArrayList());
+        	}
            XmDlDO xmDlDO=new XmDlDO();
             xmDlDO.setFcbz(1);
             xmDlDO.setIntxmid(xmid);
@@ -70,6 +74,9 @@ public class ApiXmdlController extends ApiBaseController {
     @RequiresAuthentication
     public Result<List<XmDlCsDO>> getXmDlCsByXmDlId(Long xmDlId) {
         try {
+        	if(xmDlId==null) {
+        		Result.ok(Lists.newArrayList());
+        	}
         	XmDlCsDO xmDlCsDO=new XmDlCsDO();
         	xmDlCsDO.setFcbz(1);
         	xmDlCsDO.setIntxmdlid(xmDlId);

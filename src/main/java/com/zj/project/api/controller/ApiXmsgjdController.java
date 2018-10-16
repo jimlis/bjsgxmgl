@@ -59,16 +59,20 @@ public class ApiXmsgjdController extends ApiBaseController{
 	 private XmSgjdYlsgService xmSgjdYlsgService;
 	 
 	 
-	@Log("根据xmid获取基础施工信息")
-    @PostMapping("getXmSgjdJcsgListByXmid")
-    @ApiOperation(value="根据xmid获取基础施工信息",httpMethod="POST")
+	@Log("根据xmid获取施工进度信息")
+    @PostMapping("getXmSgjdListByXmid")
+    @ApiOperation(value="根据xmid获取施工进度信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
-    public Result<Map<String,List>> getXmSgjdJcsgListByXmid(Long xmid) {
+    public Result<Map<String,List>> getXmSgjdListByXmid(Long xmid) {
         try {
         	Map<String,List> map=Maps.newHashMap();
+        	
+        	if(xmid==null) {
+        		return Result.ok(map);
+        	}
         	
         	XmSgjdJcsgDO xmSgjdJcsgDO=new XmSgjdJcsgDO();
         	xmSgjdJcsgDO.setFcbz(1);

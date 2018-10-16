@@ -1,15 +1,16 @@
 //初始化必要条件
+var xmid=getCookie("id");
 window.onload=function(){
 	//初始化新增跳转页面
 	init();
 	//得到数据
-	var PageData = getPageData();
+	var pageData = getPageData();
 	//绑定数据
 	var vue = new Vue({
 		el: '#app',
 		data: {jcs:pageData.jc,
 		zts:pageData.zt,
-		ers:pageData.ec,
+		ecs:pageData.ec,
 		dts:pageData.dt,
 		sws:pageData.sw,
 		yls:pageData.yl},
@@ -90,13 +91,18 @@ function init(){
 }
 //得到基础、主体、二次、电梯、室外、园林信息数据
 function getPageData(){
+	var o={};
 	$bj_post_ajax({
-	    	"url":xmzfxcyzxysApiPath,
+	    	"url":progressMapApiPath,
 	    	"data":{
 	    		"xmid":xmid,
 	    	},
+	    	async:false,
 	    	success:function (data) {
-	    		return data;
+	    		if(data){
+	    			o=data;
+	    		}
 	        }
     });
+	return o;
 }
