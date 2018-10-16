@@ -1,6 +1,8 @@
 var obj = getRequest();
+var pageData;
+var vue;
 window.onload = function(){
-	var pageData = isUpdata()||'';
+	pageData = isUpdata()||'';
 	//初始化數據
 	var lbPickerData = [{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}];
 	var bmPickerData = [{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},{"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}];
@@ -10,18 +12,18 @@ window.onload = function(){
 		pageData = buildModel();
 	}
 	//数据绑定
-	var vue = new Vue({
+	vue = new Vue({
 		el: '#app',
 		data: pageData,
 		methods: {
 			lbPicker: function (event) {
-				vuePicker("chrxclb",lbPickerData,"intxclb");
+				vuePicker(pageData,"chrxclb",lbPickerData,"intxclb");
 			},
 			bmPicker: function (event) {
-				vuePicker("chrxcbm",bmPickerData,"intxcbm");
+				vuePicker(pageData,"chrxcbm",bmPickerData,"intxcbm");
 			},
 			datePicker: function (event) {
-				vueDtPicker("dtmxcrq");
+				vueDtPicker(pageData,"dtmxcrq");
 			},
 		}
 	});
@@ -49,7 +51,9 @@ function buildModel(){
 		intxmid:'3',
 		dtmgxrq:'2018-9-8',
 		intxclb:'',
+		chrxclb:'',
 		intxcbm:'',
+		chrxcbm:'',
 		chrxcry:'',
 		dtmxcrq:'',
 		chrzb:'',

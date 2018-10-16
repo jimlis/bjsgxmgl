@@ -25,43 +25,37 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">基础施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('0')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('0')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">主体结构施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('1')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('1')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">二次结构、装修等施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('2')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('2')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">电梯设备安装施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('3')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('3')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">室外管网施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('4')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('4')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">园林施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('5')">2018-3-15</li>
-				        <li class="mui-table-view-cell mui-collapse" onclick="openNext('5')">2018-3-15</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in list" v-on:click="openDetail(item.id)">2018-3-15</li>
 		    			</ul>
 		        </li>
 		    </ul>
@@ -72,6 +66,7 @@
 		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_progress_record.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

@@ -220,13 +220,12 @@ $bj_post_ajax=function (obj) {
     $bjAjax(obj);
 }
 //vue 日期选择器
-function vueDtPicker(selecter){
-	var _self = document.getElementById(selecter);
+function vueDtPicker(vueData,selecter){
 	var dtPicker = new mui.DtPicker({"type":"date"}); 
     dtPicker.show(function (selectItems) { 
-        console.log(selectItems.y);//{text: "2016",value: 2016} 
-        console.log(selectItems.m);//{text: "05",value: "05"} 
-        _self.value = selectItems.text;
+        vueData[selecter] = selectItems.value;
+        dtPicker.dispose();
+		dtPicker = null;
     })
 }
 /**
@@ -282,15 +281,13 @@ function dtPicker(selecter){
 		}, false);
 	});
 }
-function vuePicker(textSelecter,data,valueSelecter,funResult){
-	var pickerButton = document.getElementById(textSelecter);
+function vuePicker(vueData,textSelecter,data,valueSelecter,funResult){
 	var userPicker = new mui.PopPicker();
 	userPicker.setData(data);
 	userPicker.show(function(items) {
-		pickerButton.value = items[0].text;
+		vueData[textSelecter] = items[0].text;
 		if(valueSelecter){
-            var valueInput = document.getElementById(valueSelecter);
-            valueInput.value=items[0].value;
+           vueData[valueSelecter]=items[0].value;
 		}
 		if(funResult){
 			funResult(items[0]);

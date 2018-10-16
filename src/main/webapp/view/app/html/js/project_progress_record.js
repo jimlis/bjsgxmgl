@@ -1,6 +1,11 @@
 //初始化必要条件
 window.onload=function(){
+	//初始化新增跳转页面
 	init();
+	//得到数据
+	var PageData = getPageData();
+	//绑定数据
+	
 }
 function init(){
 	var btnArray = [{
@@ -22,30 +27,34 @@ function init(){
 			value: '5',
 			text: '园林施工'
 	}];
-	relPicker('confirmBtn',btnArray,null,function(obj){
-		switch (obj.value){
-			case "0":
-			toUrl("project_progress_record_baseAdd.html");
-				break;
-			case "1":
-			toUrl("project_progress_record_bodyAdd.html");
-				break;
-			case "2":
-			toUrl("project_progress_record_SecDetail.html");
-				break;
-			case "3":
-			toUrl("project_progress_record_elevatorAdd.html");
-				break;
-			case "4":
-			toUrl("project_progress_record_outdoorAdd.html");
-				break;
-			case "5":
-			toUrl("project_progress_record_gardenAdd.html");
-				break;
-			default:
-				break;
-		}
-	});
+	document.getElementById("confirmBtn").onclick = function(){
+		vuePicker('confirmBtn',btnArray,null,function(obj){
+			switch (obj.value){
+				case "0":
+				toUrl("project_progress_record_baseAdd.html");
+					break;
+				case "1":
+				toUrl("project_progress_record_bodyAdd.html");
+					break;
+				case "2":
+				toUrl("project_progress_record_SecDetail.html");
+					break;
+				case "3":
+				toUrl("project_progress_record_elevatorAdd.html");
+					break;
+				case "4":
+				toUrl("project_progress_record_outdoorAdd.html");
+					break;
+				case "5":
+				toUrl("project_progress_record_gardenAdd.html");
+					break;
+				default:
+					break;
+			}
+		});
+	}
+	
+	
 }
 function openNext(type,id){
 	switch (type){
@@ -70,4 +79,16 @@ function openNext(type,id){
 			default:
 				break;
 		}
+}
+//得到基础、主体、二次、电梯、室外、园林信息数据
+function getPageData(){
+	$bj_post_ajax({
+	    	"url":xmzfxcyzxysApiPath,
+	    	"data":{
+	    		"xmid":xmid,
+	    	},
+	    	success:function (data) {
+	    		return data;
+	    }
+    });
 }
