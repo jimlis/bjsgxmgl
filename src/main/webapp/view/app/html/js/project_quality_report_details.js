@@ -2,13 +2,12 @@ var obj = getRequest();
 window.onload = function(){
    	var id = obj.id||"";
    	$bjAjax({
-		url:safeReportByIdApiPath,
+		url:quaRecodeByIdApiPath,
 		data:{
 			xmZlqxbgId:id
 		},
 		type:'post',
 		success:function(data){
-			debugger;
 			//服务器返回响应，根据响应结果，分析是否登录成功；
 			document.getElementById("chrbgrmcSpan").innerText = data.chrbgrmc||"";
 			document.getElementById("chrbzSpan").innerText = data.chrbz||"";

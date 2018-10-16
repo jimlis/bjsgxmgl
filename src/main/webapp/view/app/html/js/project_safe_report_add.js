@@ -28,7 +28,6 @@ window.onload = function(){
 				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
 				document.getElementById("chrzb").value = data.chrzb||"";
 				document.getElementById("dtmgxrq").value = data.dtmgxrq||"";
-				document.getElementById("dtmgxrqLable").innerText = data.dtmgxrq||"";
 				document.getElementById("dtmtzrq").value = data.dtmtzrq||"";
 				document.getElementById("dtmwczgrq").value = data.dtmwczgrq||"";
 				document.getElementById("id").value = data.id||"";
@@ -45,7 +44,6 @@ window.onload = function(){
     }else{
     		//新增
     		document.getElementById("dtmgxrq").value = systemdate;
-    		document.getElementById("dtmgxrqLable").innerText = systemdate;
     		document.getElementById("intbgrid").value = chrdlrid;
     		document.getElementById("chrbgrmc").value = chrdlrmc;
     		document.getElementById("intxmid").value=intxmid;
