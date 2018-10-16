@@ -2,7 +2,8 @@ var obj = getRequest();
 window.onload = function(){
 	var pageData = isUpdata()||'';
 	//初始化數據
-	init();
+	var lbPickerData = [{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}];
+	var bmPickerData = [{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},{"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}];
 	//判断是否更新；
 	if(pageData==''){
 		//创建数据Model；
@@ -11,7 +12,18 @@ window.onload = function(){
 	//数据绑定
 	var vue = new Vue({
 		el: '#app',
-		data: pageData
+		data: pageData,
+		methods: {
+			lbPicker: function (event) {
+				vuePicker("chrxclb",lbPickerData,"intxclb");
+			},
+			bmPicker: function (event) {
+				vuePicker("chrxcbm",bmPickerData,"intxcbm");
+			},
+			datePicker: function (event) {
+				vueDtPicker("dtmxcrq");
+			},
+		}
 	});
 }
 //判断是否更新
@@ -48,12 +60,12 @@ function buildModel(){
 }
 //初始化下拉框数据
 function init(){
-	relPicker("chrxclb",[{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}],"intxclb");
+	xcPickerData = [{"text":"定期巡查","value":""},{"text":"非定期巡查","value":""},{"text":"专项验收","value":""},{"text":"竣工验收","value":""}];
 
-    relPicker("chrxcbm",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
-        {"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}],"intxcbm");
-
-    dtPicker('#dtmxcrq');
+//  relPicker("chrxcbm",[{"text":"市规划局","value":""},{"text":"区规划局","value":""},{"text":"质监站巡查","value":""},{"text":"安监站巡查","value":""},
+//      {"text":"业主方巡查","value":""},{"text":"负责验收部门","value":""}],"intxcbm");
+//
+//  dtPicker('#dtmxcrq');
     //upLoadImg('#chbtn',null,{"busType":"bj_xm_zfxcyzxys"});
 
 }
@@ -71,7 +83,7 @@ function save(){
 		type:"post",
 		success:function(data){
 			bjToast("保存成功！",function(){
-				toUrl("project_change_record_details.html"+data.id);
+				toUrl("project_gov_record_details.html?id="+data.id);
 			});
 		}
 	});
