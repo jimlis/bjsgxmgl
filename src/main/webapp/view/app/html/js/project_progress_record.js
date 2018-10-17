@@ -20,15 +20,15 @@ window.onload=function(){
     				toUrl(address);
 			},
 			openZT: function (id) {
-				var address = "project_progress_record_BodyDetail.html?id="+id;
+				var address = "project_progress_record_bodyDetail.html?id="+id;
     				toUrl(address);
 			},
 			openEC: function (id) {
-				var address = "project_progress_record_SecDetail.html?id="+id;
+				var address = "project_progress_record_secDetail.html?id="+id;
     				toUrl(address);
 			},
 			openDT: function (id) {
-				var address = "project_progress_record_ElevatorDetail.html?id="+id;
+				var address = "project_progress_record_elevatorDetail.html?id="+id;
     				toUrl(address);
 			},
 			openSW: function (id) {
@@ -73,7 +73,7 @@ function init(){
 			toUrl("project_progress_record_bodyAdd.html");
 				break;
 			case "2":
-			toUrl("project_progress_record_SecDetail.html");
+			toUrl("project_progress_record_secDetail.html");
 				break;
 			case "3":
 			toUrl("project_progress_record_elevatorAdd.html");

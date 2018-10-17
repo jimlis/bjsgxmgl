@@ -1,30 +1,32 @@
 package com.zj.project.xm.xmsgjd.jcsg.service.impl;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.exception.CommonException;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdl.domain.XmDlDO;
+import com.zj.project.xm.xmdl.service.XmDlService;
 import com.zj.project.xm.xmsgjd.jcsg.dao.XmSgjdJcsgDao;
 import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
 import com.zj.project.xm.xmsgjd.jcsg.service.XmSgjdJcsgService;
 import com.zj.project.xm.xmzpms.domain.XmZpmsDO;
 import com.zj.project.xm.xmzpms.service.XmZpmsService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.springframework.util.Assert;
-
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.web.exception.CommonException;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -48,7 +50,41 @@ public class XmSgjdJcsgServiceImpl extends BaseServiceImpl<XmSgjdJcsgDao, XmSgjd
 	
 	@Autowired
 	private XmZpmsService xmZpmsService;
-
+	
+	@Autowired
+	private XmDlService xmDlService;
+	
+	@Override
+	public XmSgjdJcsgDO getById(Serializable id) {
+		XmSgjdJcsgDO xmSgjdJcsgDO=super.getById(id);
+		if(xmSgjdJcsgDO!=null) {
+			Long intsgwzid = xmSgjdJcsgDO.getIntsgwzid();
+			if(intsgwzid!=null) {
+				if(intsgwzid==-1) {
+					xmSgjdJcsgDO.setChrsgwzmc("其他");
+				}else{
+					XmDlDO xmDlDO = xmDlService.getById(intsgwzid);
+					if(xmDlDO!=null) {
+						xmSgjdJcsgDO.setChrsgwzmc(xmDlDO.getChrdlmc());
+					}
+				}
+			}
+			
+			Integer intjclx = xmSgjdJcsgDO.getIntjclx();
+			if(intjclx!=null) {
+				if(intjclx.equals(1)) {
+					xmSgjdJcsgDO.setChrjclx("独立基础");
+				}else if(intjclx.equals(2)) {
+					xmSgjdJcsgDO.setChrjclx("筏板");
+				}else if(intjclx.equals(3)) {
+					xmSgjdJcsgDO.setChrjclx("桩基础");
+				}
+			}
+			
+		}
+		return xmSgjdJcsgDO;
+	}
+	
 	@Override
 	public boolean removeByParmMap(Map<String, Object> parmMap) {
 		parmMap = parmToColumnMap(tableInfo, parmMap);

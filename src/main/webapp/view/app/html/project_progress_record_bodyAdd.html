@@ -21,30 +21,43 @@
 		    <h1 class="mui-title">主体结构施工</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="list">
+		<div class="mui-content" id="app">
+		<form action="" id="myform">
+		      <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+                <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+                <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">报告日期：
-					<span class="bj-p-gray-font">2018-8-9</span>
+					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq"/>
 				</h5>
 				<h5 class="bj-title2-font">施工位置：
-					<input class="bj-input bj-p-black-font" type="text" id="showAddress" placeholder="请选择施工位置" />
+					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzd" v-model="intsgwzd" placeholder="请选择施工位置" />
+					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzc" v-model="intsgwzc" placeholder="请选择施工位置" />
+					<input class="bj-input bj-p-black-font" type="text" id="chrShowAddress" v-model="chrShowAddress" v-on:click="dlcsPicker"  placeholder="请选择施工位置" />
 				</h5>
 				<h5 class="bj-title2-font">浇筑砼日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDateJZS" placeholder="请选择日期" />
+					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="dtmjzqrq" v-model="dtmjzqrq" v-on:click="datePicker" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
+				<h5 class="bj-title2-font">
+				报告人：<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
+				</h5>
 				<h5 class="bj-title2-font">照片：</h5>
 				<div id="uploader" class="wu-example">
 				    <!--用来存放文件信息-->
 				    <div class="btns">
-				        <button id="chbtn" >选择文件</button>
+				        <button id="chbtn" type="button">选择文件</button>
 				    </div>
-				    <div id="img-list">
+				    <div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
 				    </div>
 				</div>
 			</div>
+			</form>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>

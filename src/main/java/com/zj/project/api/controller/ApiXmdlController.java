@@ -2,6 +2,7 @@ package com.zj.project.api.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,24 @@ public class ApiXmdlController extends ApiBaseController {
             return Result.fail();
         }
     }
-
+    
+    @Log("根据xmid获取项目栋楼和层数信息")
+    @PostMapping("getXmDlAndCsByXmid")
+    @ApiOperation(value="根据xmid获取项目栋楼和层数信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<List<Map<String,Object>>> getXmDlAndCsByXmid(Long xmid) {
+        try {
+        	if(xmid==null) {
+        		Result.ok(Lists.newArrayList());
+        	}
+            return Result.ok(xmDlService.getXmDlAndCsByXmid(xmid));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
 
 }

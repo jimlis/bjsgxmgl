@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 项目基本信息id */
     @ApiModelProperty(value = "项目基本信息id",name = "intxmid",dataType = "Long",required = true)
@@ -43,7 +45,12 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     private Integer intxh;
     /** 报告日期 */
     @ApiModelProperty(value = "报告日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmbgrq;
+    /** 施工位置*/
+    @TableField(exist=false)
+    @ApiModelProperty(value = "施工位置",name = "chrShowAddress",dataType = "String",required = true)
+    private String chrShowAddress;
     /** 施工位置（栋）:栋楼表id */
     @ApiModelProperty(value = "施工位置（栋）:栋楼表id",name = "intsgwzd",dataType = "Long",required = true)
     private Long intsgwzd;
@@ -52,6 +59,7 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     private Long intsgwzc;
     /** 浇筑砼日期 */
     @ApiModelProperty(value = "浇筑砼日期",name = "dtmjzqrq",dataType = "string",required = false,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmjzqrq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required = true)
@@ -192,4 +200,11 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public String getChrShowAddress() {
+		return chrShowAddress;
+	}
+	public void setChrShowAddress(String chrShowAddress) {
+		this.chrShowAddress = chrShowAddress;
+	}
+    
 }

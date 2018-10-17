@@ -27,7 +27,7 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			sgPicker: function (event) {
-				vuePicker(pageData,"chrsgwzid",sgPickerData,"intsgwzid");
+				vuePicker(pageData,"chrsgwzmc",sgPickerData,"intsgwzid");
 			},
 			jcPicker: function (event) {
 				vuePicker(pageData,"chrjclx",jcPickerData,"intjclx");
@@ -59,11 +59,11 @@ function isUpdata(){
 	if(id){
 		var result={};
 		$bjAjax({
-			url:progressJCApiGet,
+			url:progressJcsgByIdApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdJcsgId:obj.id
+				xmSgjdJcsgId:id
 			},
 			success:function(data){
 				result = data;
@@ -80,7 +80,7 @@ function buildModel(){
 		intxmid:xmid,
 		dtmbgrq:sysdate,
 		intsgwzid:'',
-		chrsgwzid:'',
+		chrsgwzmc:'',
 		chrsgwzms:'',
 		intjclx:'',
 		chrjclx:'',
@@ -112,7 +112,7 @@ function save(){
 		type:"post",
 		success:function(result){
 			bjToast("保存成功！",function(){
-				toUrl("project_progress_record_BaseDetail.html?id="+result.id);
+				toUrl("project_progress_record_baseDetail.html?id="+result.id);
 			});
 		}
 	});

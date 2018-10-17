@@ -1,15 +1,23 @@
 package com.zj.project.xm.xmdl.service.impl;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.zj.project.xm.xmdl.dao.XmDlDao;
 import com.zj.project.xm.xmdl.domain.XmDlDO;
 import com.zj.project.xm.xmdl.service.XmDlService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import org.springframework.util.Assert;
+
+import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +47,51 @@ public class XmDlServiceImpl extends BaseServiceImpl<XmDlDao, XmDlDO> implements
     public Collection<XmDlDO> listByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
         return listByMap(parmMap);
+    }
+    
+    /**
+     * 根据xmid获取项目栋楼和层数信息
+     * @param intxmid 项目id
+     * @return
+     */
+    @Override
+    public List<Map<String,Object>> getXmDlAndCsByXmid(Long intxmid){
+    	if(intxmid==null) {
+    		throw new MyApiException("项目id不能为空");
+    	}
+    	 List<Map<String,Object>>  listMap=Lists.newArrayList();
+    	 XmDlDO xmDlDO=new XmDlDO();
+         xmDlDO.setFcbz(1);
+         xmDlDO.setIntxmid(intxmid);
+         QueryWrapper<XmDlDO> queryWrapper=new QueryWrapper<XmDlDO>(xmDlDO).orderByAsc("intxh");
+         List<XmDlDO> list = list(queryWrapper);
+         if(CollectionUtils.isNotEmpty(list)) {
+        	 list.forEach(xmDlDo->{
+        		 
+        		 Map<String,Object> map=Maps.newHashMap();
+        		 map.put("text",xmDlDo.getChrdlmc());
+        		 map.put("value",xmDlDo.getId());
+        		 Integer intcs=xmDlDo.getIntcs();
+        		 List<Map<String,Object>> childrenList=Lists.newArrayList();
+        		 if(intcs==0) {
+        			 map.put("children", childrenList);
+        		 }else {
+        			 for(int i=1;i<=intcs;i++){
+        				 Map<String,Object> childrenMap=Maps.newHashMap();
+        				 childrenMap.put("text",""+i+"层");
+        				 childrenMap.put("value",i);
+        				 childrenList.add(childrenMap);
+        			 }
+        			 map.put("children", childrenList);
+        		 }
+        		 listMap.add(map);
+        	 });
+        	 return listMap;
+         }else {
+        	 return listMap;
+         }
+         
+    	
     }
 
 

@@ -25,13 +25,13 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">基础施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in jcs" v-on:click="openJC(item.id)">{{item.id}}</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in jcs" v-on:click="openJC(item.id)">{{item.chrsgwzmc}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.dtmbgrq}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">主体结构施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in zts" v-on:click="openZT(item.id)">{{item.id}}</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in zts" v-on:click="openZT(item.id)">{{item.chrShowAddress}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.dtmbgrq}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">

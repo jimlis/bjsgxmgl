@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zj.project.xm.xmdl.domain.XmDlDO;
+import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
 import com.zj.project.xm.xmsgjd.ztjgsg.dao.XmSgjdZtjgsgDao;
 import com.zj.project.xm.xmsgjd.ztjgsg.domain.XmSgjdZtjgsgDO;
 import com.zj.project.xm.xmsgjd.ztjgsg.service.XmSgjdZtjgsgService;
@@ -21,6 +24,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +54,27 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
 
 	@Autowired
 	private XmZpmsService xmZpmsService;
+	
+	@Autowired
+	private XmDlService xmDlService;
+	
+	@Override
+	public XmSgjdZtjgsgDO getById(Serializable id) {
+		XmSgjdZtjgsgDO xmSgjdZtjgsgDO=super.getById(id);
+		if(xmSgjdZtjgsgDO!=null) {
+			Long intsgwzd = xmSgjdZtjgsgDO.getIntsgwzd();
+			if(intsgwzd!=null) {
+					XmDlDO xmDlDO = xmDlService.getById(intsgwzd);
+					if(xmDlDO!=null) {
+						xmSgjdZtjgsgDO.setChrShowAddress(xmDlDO.getChrdlmc()+"-"+xmDlDO.getIntcs()+"层");
+					}
+			}
+			
+			
+		}
+		return xmSgjdZtjgsgDO;
+	}
+	
 	@Override
 	public boolean removeByParmMap(Map<String, Object> parmMap) {
 		parmMap = parmToColumnMap(tableInfo, parmMap);

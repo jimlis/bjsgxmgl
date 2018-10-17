@@ -6,6 +6,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmSgjdEcjgzxDO extends BaseDomain {
     @ApiModelProperty(value = "逻辑废除：0（废除），1（正常）",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     @ApiModelProperty(value = "修改新增删除时间",name = "gxsj",dataType = "Date",hidden = true)
     private Date gxsj;
     /** 项目基本信息id */
@@ -44,6 +46,7 @@ public class XmSgjdEcjgzxDO extends BaseDomain {
     private Integer intxh;
     /** 更新日期 */
     @ApiModelProperty(value = "更新日期",name = "dtmgxrq",dataType = "String",required = false,hidden = true,example="2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
     /** 栋楼id：栋楼表id */
     @ApiModelProperty(value = "栋楼id：栋楼表id ",name = "intdid",dataType = "Long",required = true)

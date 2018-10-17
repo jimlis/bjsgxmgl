@@ -1,30 +1,42 @@
 var obj = getRequest();
-$bjAjax({
-	url:photoApiDetailText,
-	type:"post",
-	data:{
-		xmZpjlId:obj.id
-	},
-	success:function(data){
-		document.getElementById("dtmbgrq").innerText = data.dtmbgrq;
-		document.getElementById("intbglb").innerText = data.intbglb;
-		document.getElementById("").innerText = data.dtmbgrq;
-		document.getElementById("chrbgrmc").innerText = data.chrbgrmc;
-	}
-});
-$bjAjax({
-	url:photoApiDetail,
-	type:"post",
-	data:{
-		xmZpjlId:obj.id
-	},
-	success:function(data){
-		
-	}
-});
-
+var id=obj.id||"";
+//初始化显示数据
 window.onload = function(){
-	var list = document.getElementById('list');
-	 list.appendChild(createFragment(10,'../images/ly.png'));
-	 funLazyLoad('#list').refresh(true);
+	//得到数据
+	var pageData = getPageData();
+	
+    //数据绑定
+	var vue = new Vue({
+		el: '#app',
+		data: pageData
+	});
+	
+	if(id){
+		//加载图片
+		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",false);
+	}
 }
+//得到显示数据
+function getPageData(){
+	var o={};
+	$bjAjax({
+		url:xmzfxcyzxysApiDetail,
+		type:"post",
+		async:false,
+		data:{
+			xmZfxcyzxysId:obj.id
+		},
+		success:function(data){
+			if(data){
+				o=data;
+			}
+		}
+	});
+	return o;
+}
+
+function edit(){
+	toUrl("project_photo_record_add.html?id="+id);
+}
+
+

@@ -20,6 +20,8 @@ function login(){
             				setCookie("chrdlrmc",user.name);
             				setCookie("chrdlrid",user.id);
                         setCookie("token",JSON.stringify(token));
+                        console.log(getCookie("chrdlrmc"));
+                        setCookie("chrdlrid",user.id);
 					}catch (e){
 
 					}

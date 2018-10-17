@@ -77,13 +77,15 @@ public class ApiXmsgjdController extends ApiBaseController{
         	XmSgjdJcsgDO xmSgjdJcsgDO=new XmSgjdJcsgDO();
         	xmSgjdJcsgDO.setFcbz(1);
         	xmSgjdJcsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdJcsgDO> queryWrapper1=new QueryWrapper<XmSgjdJcsgDO>(xmSgjdJcsgDO).orderByAsc("dtmbgrq");
+        	QueryWrapper<XmSgjdJcsgDO> queryWrapper1=new QueryWrapper<XmSgjdJcsgDO>(xmSgjdJcsgDO).
+        			select("id","dtmbgrq","(select chrdlmc  from  bj_xm_dl where id=intsgwzid ) as chrsgwzmc").orderByAsc("dtmbgrq");
         	map.put("jc", xmSgjdJcsgService.list(queryWrapper1));
         	
         	XmSgjdZtjgsgDO xmSgjdZtjgsgDO=new XmSgjdZtjgsgDO();
         	xmSgjdZtjgsgDO.setFcbz(1);
         	xmSgjdZtjgsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper2=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByAsc("dtmbgrq");
+        	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper2=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).
+        			select("id","dtmbgrq","concat((select chrdlmc  from  bj_xm_dl where id=intsgwzd ),'-',intsgwzc,'层') as chrShowAddress").orderByAsc("dtmbgrq");
         	map.put("zt", xmSgjdZtjgsgService.list(queryWrapper2));
 
         	XmSgjdEcjgzxDO xmSgjdEcjgzxDO=new XmSgjdEcjgzxDO();

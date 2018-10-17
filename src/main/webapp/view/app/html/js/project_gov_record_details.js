@@ -2,7 +2,6 @@ var obj = getRequest();
 var id=obj.id||"";
 //初始化显示数据
 window.onload = function(){
-	debugger;
 	//得到数据
 	var pageData = getPageData();
 	

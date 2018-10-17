@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -34,6 +35,7 @@ public class XmSgjdJcsgDO extends BaseDomain {
     private Integer fcbz;
     /** 修改新增删除时间 */
     @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
     @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
@@ -43,16 +45,24 @@ public class XmSgjdJcsgDO extends BaseDomain {
     private Long intxmid;
     /** 报告日期 */
     @ApiModelProperty(value = "报告日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmbgrq;
     /** 施工位置：栋楼表id */
     @ApiModelProperty(value = "施工位置：栋楼表id",name = "intsgwzid",dataType = "Long",required = true)
+    /**施工位置名称*/
     private Long intsgwzid;
+    @TableField(exist=false)
+    @ApiModelProperty(value = "施工位置名称",name = "chrsgwzmc",dataType = "String",required = true)
+    private String chrsgwzmc;
     /** 施工位置描述 */
     @ApiModelProperty(value = "施工位置描述",name = "chrsgwzms",dataType = "String",required = true)
-    private Long chrsgwzms;
+    private String chrsgwzms;
     /** 基础类型：1（独立基础），2（筏板），3（桩基础） */
     @ApiModelProperty(value = "基础类型：1（独立基础），2（筏板），3（桩基础）",name = "intjclx",dataType = "Integer",required = true)
     private Integer intjclx;
+    @ApiModelProperty(value = "基础类型：1（独立基础），2（筏板），3（桩基础）",name = "chrjclx",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrjclx;
     /** 如果基础类型为桩基础则需要填总数量 */
     @ApiModelProperty(value = "如果基础类型为桩基础则需要填总数量",name = "intzjczsl",dataType = "Integer",required = false)
     private Integer intzjczsl;
@@ -64,6 +74,7 @@ public class XmSgjdJcsgDO extends BaseDomain {
     private Float intwcl;
     /** 浇筑砼日期 */
     @ApiModelProperty(value = "浇筑砼日期 ",name = "dtmjzqrq",dataType = "string",required = false,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmjzqrq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
@@ -243,15 +254,26 @@ public class XmSgjdJcsgDO extends BaseDomain {
     /**
      * 获取 施工位置描述
      */
-	public Long getChrsgwzms() {
+	public String getChrsgwzms() {
 		return chrsgwzms;
 	}
 	
 	/**
      * 设置 施工位置描述
      */
-	public void setChrsgwzms(Long chrsgwzms) {
+	public void setChrsgwzms(String chrsgwzms) {
 		this.chrsgwzms = chrsgwzms;
 	}
-    
+	public String getChrsgwzmc() {
+		return chrsgwzmc;
+	}
+	public void setChrsgwzmc(String chrsgwzmc) {
+		this.chrsgwzmc = chrsgwzmc;
+	}
+	public String getChrjclx() {
+		return chrjclx;
+	}
+	public void setChrjclx(String chrjclx) {
+		this.chrjclx = chrjclx;
+	}
 }
