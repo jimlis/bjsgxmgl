@@ -73,7 +73,7 @@ function init(){
 			toUrl("project_progress_record_bodyAdd.html");
 				break;
 			case "2":
-			toUrl("project_progress_record_secDetail.html");
+			toUrl("project_progress_record_secAdd.html");
 				break;
 			case "3":
 			toUrl("project_progress_record_elevatorAdd.html");

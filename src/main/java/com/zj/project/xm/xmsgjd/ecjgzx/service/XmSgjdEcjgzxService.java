@@ -23,6 +23,7 @@ public interface XmSgjdEcjgzxService extends BaseService<XmSgjdEcjgzxDO> {
      * 保存施工记录
      * @param xmSgjdEcjgzxDO
      * @param xmSgjdEcjgzxWclJson 完成量对象json
+     * @param deleteWclIds 删除完成量ids
      */
-	public void saveXmZpjlxx(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String xmSgjdEcjgzxWclJson);
+	public void saveXmSgjdEcjgzxxx(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String xmSgjdEcjgzxWclJson,String deleteWclIds);
 }

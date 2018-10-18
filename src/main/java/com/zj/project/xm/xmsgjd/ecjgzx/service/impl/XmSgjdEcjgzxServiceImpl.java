@@ -1,6 +1,7 @@
 package com.zj.project.xm.xmsgjd.ecjgzx.service.impl;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,8 @@ import com.google.gson.reflect.TypeToken;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlJszlDO;
+import com.zj.project.xm.xmdl.domain.XmDlDO;
+import com.zj.project.xm.xmdl.service.XmDlService;
 import com.zj.project.xm.xmsgjd.ecjgzx.dao.XmSgjdEcjgzxDao;
 import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxDO;
 import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxWclDO;
@@ -45,18 +48,28 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
     @Autowired
     private  XmSgjdEcjgzxWclService xmSgjdEcjgzxWclService;
     
+    @Autowired
+    private  XmDlService xmDlService;
+    
     @Override
 	public XmSgjdEcjgzxDO getById(Serializable id) {
     	XmSgjdEcjgzxDO xmSgjdEcjgzxDO = super.getById(id);
-
-		// 完成量
-    	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();
-    	xmSgjdEcjgzxWclDO.setFcbz(1);
-    	xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
-		QueryWrapper<XmSgjdEcjgzxWclDO> queryWrapper = new QueryWrapper<XmSgjdEcjgzxWclDO>(xmSgjdEcjgzxWclDO)
-				.orderByAsc("intxh");
-		List<XmSgjdEcjgzxWclDO> list =xmSgjdEcjgzxWclService.list(queryWrapper);
-		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(list);
+    	if(xmSgjdEcjgzxDO!=null) {
+    		//楼栋名称
+    		Long intdid = xmSgjdEcjgzxDO.getIntdid();
+    		XmDlDO xmDlDO = xmDlService.getById(intdid);
+    		if(xmDlDO!=null) {
+    			xmSgjdEcjgzxDO.setChrdmc(xmDlDO.getChrdlmc());
+    		}
+    		// 完成量
+        	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();
+        	xmSgjdEcjgzxWclDO.setFcbz(1);
+        	xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
+    		QueryWrapper<XmSgjdEcjgzxWclDO> queryWrapper = new QueryWrapper<XmSgjdEcjgzxWclDO>(xmSgjdEcjgzxWclDO)
+    				.orderByAsc("intxh");
+    		List<XmSgjdEcjgzxWclDO> list =xmSgjdEcjgzxWclService.list(queryWrapper);
+    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(list);
+    	}
 
 		return xmSgjdEcjgzxDO;
 	}
@@ -78,9 +91,10 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
      * 保存施工记录
      * @param xmSgjdEcjgzxDO
      * @param xmSgjdEcjgzxWclJson 完成量对象json
+     * @param deleteWclIds 删除的完成量ids
      */
 	@Override
-	public void saveXmZpjlxx(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String xmSgjdEcjgzxWclJson) {
+	public void saveXmSgjdEcjgzxxx(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String xmSgjdEcjgzxWclJson,String deleteWclIds) {
 		Long xmid = xmSgjdEcjgzxDO.getIntxmid();
 		if (xmid == null) {
 			throw new CommonException("xmid不能为空");
@@ -96,7 +110,39 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
 		}
 
 		id = xmSgjdEcjgzxDO.getId();
-
+		
+		List<XmSgjdEcjgzxWclDO> xmSgjdEcjgzxWclList = xmSgjdEcjgzxDO.getXmSgjdEcjgzxWclList();
+		if(CollectionUtils.isNotEmpty(xmSgjdEcjgzxWclList)) {
+			xmSgjdEcjgzxWclList.forEach(xmSgjdEcjgzxWclDO -> {
+				Long xmSgjdEcjgzxWclId = xmSgjdEcjgzxWclDO.getId();
+				String chrlc = xmSgjdEcjgzxWclDO.getChrlc();
+				if(StringUtils.isNotEmpty(chrlc)) {
+					if (xmSgjdEcjgzxWclId == null) {
+						xmSgjdEcjgzxWclDO.setFcbz(1);
+						xmSgjdEcjgzxWclDO.setGxsj(new Date());
+						xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
+						xmSgjdEcjgzxWclService.save(xmSgjdEcjgzxWclDO);
+					} else {
+						xmSgjdEcjgzxWclDO.setGxsj(new Date());
+						xmSgjdEcjgzxWclService.updateById(xmSgjdEcjgzxWclDO);
+					}
+				}
+			});
+		}
+		
+		//删除完成量
+		if(StringUtils.isNotEmpty(deleteWclIds)) {
+			Arrays.stream(deleteWclIds.trim().split(",")).forEach(wclId->{
+				if(StringUtils.isNotEmpty(wclId)) {
+					XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO=new XmSgjdEcjgzxWclDO();
+					xmSgjdEcjgzxWclDO.setId(Long.parseLong(wclId));
+					xmSgjdEcjgzxWclDO.setFcbz(0);
+					xmSgjdEcjgzxWclService.updateById(xmSgjdEcjgzxWclDO);
+				}
+			});
+		}
+		
+		
 		// 完成量
 		if (StringUtils.isNotEmpty(xmSgjdEcjgzxWclJson) && !"[]".equals(xmSgjdEcjgzxWclJson)) {
 			Gson gson = new Gson();

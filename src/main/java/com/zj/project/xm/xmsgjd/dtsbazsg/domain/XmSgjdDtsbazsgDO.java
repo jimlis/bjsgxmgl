@@ -50,6 +50,10 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     /** 施工位置：栋楼表id */
     @ApiModelProperty(value = "施工位置：栋楼表id ",name = "intsgwz",dataType = "Long",required = true)
     private Long intsgwz;
+    /** 施工位置*/
+    @ApiModelProperty(value = "施工位置",name = "chrsgwz",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrsgwz;
     /** 电梯编号 */
     @ApiModelProperty(value = "电梯编号",name = "chrdtbh",dataType = "String",required = true)
     private String chrdtbh;
@@ -336,4 +340,10 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     public String getChrbz() {
         return chrbz;
     }
+	public String getChrsgwz() {
+		return chrsgwz;
+	}
+	public void setChrsgwz(String chrsgwz) {
+		this.chrsgwz = chrsgwz;
+	}
 }

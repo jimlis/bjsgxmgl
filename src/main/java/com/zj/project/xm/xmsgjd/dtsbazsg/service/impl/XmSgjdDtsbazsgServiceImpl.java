@@ -1,5 +1,6 @@
 package com.zj.project.xm.xmsgjd.dtsbazsg.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -15,6 +16,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdl.domain.XmDlDO;
+import com.zj.project.xm.xmdl.service.XmDlService;
 import com.zj.project.xm.xmsgjd.dtsbazsg.dao.XmSgjdDtsbazsgDao;
 import com.zj.project.xm.xmsgjd.dtsbazsg.domain.XmSgjdDtsbazsgDO;
 import com.zj.project.xm.xmsgjd.dtsbazsg.service.XmSgjdDtsbazsgService;
@@ -37,6 +40,22 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
     
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private  XmDlService xmDlService;
+    
+    @Override
+    public XmSgjdDtsbazsgDO getById(Serializable id) {
+    	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=super.getById(id);
+    	if(xmSgjdDtsbazsgDO!=null) {
+    		Long intsgwz = xmSgjdDtsbazsgDO.getIntsgwz();
+    		XmDlDO xmDlDO = xmDlService.getById(intsgwz);
+    		if(xmDlDO!=null) {
+    			xmSgjdDtsbazsgDO.setChrsgwz(xmDlDO.getChrdlmc());
+    		}
+    	}
+		return xmSgjdDtsbazsgDO;
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

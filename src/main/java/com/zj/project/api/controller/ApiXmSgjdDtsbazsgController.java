@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
@@ -45,6 +46,9 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
     @RequiresAuthentication
     public Result<List<XmSgjdDtsbazsgDO>> getXmSgjdDtsbazsgListByXmid(Long xmid) {
         try {
+        	if(xmid==null) {
+       		 Result.ok(Lists.newArrayList());
+        	}
         	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=new XmSgjdDtsbazsgDO();
         	xmSgjdDtsbazsgDO.setFcbz(1);
         	xmSgjdDtsbazsgDO.setIntxmid(xmid);
@@ -80,10 +84,10 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO, String fileIds) {
+    public Result<XmSgjdDtsbazsgDO> save(XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO, String fileIds) {
         try {
         	xmSgjdDtsbazsgService.saveXmSgjdDtsbazsgXx(xmSgjdDtsbazsgDO,fileIds);
-           return Result.ok();
+           return Result.ok(xmSgjdDtsbazsgDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

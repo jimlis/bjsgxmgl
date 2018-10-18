@@ -77,15 +77,16 @@ public class ApiXmSgjdEcjgzxController extends ApiBaseController {
     @PostMapping("save")
     @ApiOperation(value="保存施工进度-二次结构、装修等施工记录信息",httpMethod="POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="xmSgjdEcjgzxWclJson",paramType="form",dataType = "string",required=false,value = "施工完成量对象json串")
+            @ApiImplicitParam(name="xmSgjdEcjgzxWclJson",paramType="form",dataType = "string",required=false,value = "施工完成量对象json串"),
+            @ApiImplicitParam(name="deleteWclIds",paramType="form",dataType = "string",required=false,value = "删除的完成量ids")
     })
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String fileIds,String xmSgjdEcjgzxWclJson) {
+    public Result<XmSgjdEcjgzxDO> save(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String fileIds,String xmSgjdEcjgzxWclJson,String deleteWclIds) {
         try {
-        	xmSgjdEcjgzxService.saveXmZpjlxx(xmSgjdEcjgzxDO,xmSgjdEcjgzxWclJson);
-           return Result.ok();
+        	xmSgjdEcjgzxService.saveXmSgjdEcjgzxxx(xmSgjdEcjgzxDO,xmSgjdEcjgzxWclJson,deleteWclIds);
+           return Result.ok(xmSgjdEcjgzxDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

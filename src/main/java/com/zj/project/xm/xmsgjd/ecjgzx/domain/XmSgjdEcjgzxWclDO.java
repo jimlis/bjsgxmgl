@@ -44,8 +44,8 @@ public class XmSgjdEcjgzxWclDO extends BaseDomain {
     @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
     private Integer intxh;
     /** 楼层 */
-    @ApiModelProperty(value = "楼层",name = "intlc",dataType = "Integer",required = true)
-    private Integer intlc;
+    @ApiModelProperty(value = "楼层",name = "chrlc",dataType = "String",required = true)
+    private String chrlc;
     /** 门窗（百分比） */
     @ApiModelProperty(value = "门窗（百分比）",name = "intmc",dataType = "Float",required = true)
     private Float intmc;
@@ -122,19 +122,13 @@ public class XmSgjdEcjgzxWclDO extends BaseDomain {
     public Integer getIntxh() {
         return intxh;
     }
-    /**
-     * 设置：楼层
-     */
-    public void setIntlc(Integer intlc) {
-        this.intlc = intlc;
-    }
-    /**
-     * 获取：楼层
-     */
-    public Integer getIntlc() {
-        return intlc;
-    }
-    /**
+    public String getChrlc() {
+		return chrlc;
+	}
+	public void setChrlc(String chrlc) {
+		this.chrlc = chrlc;
+	}
+	/**
      * 设置：门窗（百分比）
      */
     public void setIntmc(Float intmc) {

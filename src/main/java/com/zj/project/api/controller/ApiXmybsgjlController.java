@@ -103,10 +103,10 @@ public class ApiXmybsgjlController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmYbsgjlDO xmYbsgjlDO, String fileIds) {
+    public Result<XmYbsgjlDO> save(XmYbsgjlDO xmYbsgjlDO, String fileIds) {
         try {
             xmYbsgjlService.saveXmYbsgjlXx(xmYbsgjlDO,fileIds);
-           return Result.ok();
+           return Result.ok(xmYbsgjlDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

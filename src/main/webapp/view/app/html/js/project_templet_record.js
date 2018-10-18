@@ -9,8 +9,8 @@ window.onload=function(){
 		success:function(array){
 			var tjtemp,jdtemp,zxtemp,yltemp,qttemp
 			mui.each(array,function(index,item){
-			  	var dtmgxrq = item.dtmgxrq;
-			  	var intyblx = item.intyblx;
+			  	var dtmgxrq = item.dtmgxrq||"";
+			  	var intyblx = item.intyblx||"";
 			  	var id = item.id;
 			  	if(intyblx=="1"){
 			  		tjtemp = true;

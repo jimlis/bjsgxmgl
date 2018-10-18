@@ -87,6 +87,10 @@ var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
 var progressJcsgByIdApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgById";
 var progressZtjgSaveApiPath=serverPath+"api/xmsgjdztjgsg/save";
 var progressZtjgByIdApiPath=serverPath+"api/xmsgjdztjgsg/getXmSgjdJcsgById";
+var progressSecSaveApiPath=serverPath+"api/xmsgjdecjgzx/save";
+var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
+var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
+var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){
@@ -463,25 +467,6 @@ function initImgList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
 	});
 }
 
-function initFileList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
-	$bj_post_ajax({
-		url:fileApiPath+"list",
-		data:{"busType":busType,"busId":busId,"type":type},
-		success:function(result){
-			if(result&&result.length>0){
-				var list = document.getElementById(showListDomId);
-				list.innerHTML+=createFragments(result,fileIdsDomId,isEdit);
-			    funLazyLoad('#'+showListDomId).refresh(true);
-			    /*var src=fileApiPath+"down/"+fileId;
-		        var div = document.createElement('div');
-		        	   div.innerHTML='<img class="bj-img-temp" src="'+ src +'" alt="'+fileName +'">' +
-		            '<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>';
-		        mui('#'+showListDomId)[0].appendChild(div);*/
-			}
-		}
-	});
-}
-
 /**
  * 删除文件
  * @param id
@@ -708,3 +693,98 @@ function getXmdlListByXmid(xmid){
 	});
 	return arr;
 }
+
+
+/*
+*文件上传
+*@param  elem “选择文件”按钮的ID
+* @param  bind “上传”按钮的ID
+* @param  data 自定义提交数据
+* @param  done 上传完成后函数
+**/
+function upLoadFile(elem,bind,data,done){
+	layui.use('upload', function(){
+	var upload = layui.upload;
+	//选完文件后不自动上传（js代码，将文件传到后台）
+	upload.render({
+		elem: elem				//“选择文件”按钮的ID
+		,url: fileApiPath+"upload"	//后台接收地址
+		,data: data		//传递到后台的数据
+		,auto: true				//不自动上传设置
+		,accept: 'file'				 //允许上传的文件类型
+		,size: 5000 				//最大允许上传的文件大小
+		,multiple: true				//设置是否多个文件上传
+		,done: done||function(res) {
+			uploadFileDone(res,"fileIds","file-list")
+       		 }
+		});
+	});
+}
+
+/**
+ * 文件上传后回调
+ * @param result 上传成功返回reslut对象
+ * @param fileIdsDomId 文件id串存放的domid
+ * @param showListDomId 附件列表显示domid
+ */
+function  uploadFileDone(result,fileIdsDomId,showListDomId) {
+    var code=result.code;
+    var data=result.data;
+    var msg=result.msg;
+    if(code==0){//成功
+        var $fileIds=mui("#"+fileIdsDomId);
+        var fileId=data.id;
+        var fileName=data.fileName||"";
+        if($fileIds.length>0){
+            var fileIds=$fileIds[0].value;
+            if(isEmpty(fileIds)){
+                fileIds=fileId;
+            }else{
+                fileIds+=","+fileId;
+            }
+            $fileIds[0].value=fileIds;
+        }
+        
+        var list = document.getElementById(showListDomId);
+        var div=document.createElement("div");
+        div.id=fileId;
+        div.fileId=fileId;
+        div.title=fileName;
+        div.className="file-item";
+        var html="<a href=\"javascript:void(0);\" style='color:blue;' onclick=\"openFileByName("+fileId+",\'"+fileName+"\')\">"+ fileName + "</a>" ;
+        	html+="<span class=\"mui-icon mui-icon-trash\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile("+fileId+",\'"+fileIdsDomId+"\',this)\"></span>";
+        div.innerHTML=html;
+        list.appendChild(div);
+    }else{
+    	bjToast(msg);
+	}
+}
+
+function initFileList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
+	$bj_post_ajax({
+		url:fileApiPath+"list",
+		data:{"busType":busType,"busId":busId,"type":type},
+		success:function(result){
+			if(result&&result.length>0){
+				var list = document.getElementById(showListDomId);
+				for(i in result){
+					var fileObj=result[i];
+					var fileId=fileObj.id||"";
+					var fileName=fileObj.fileName||"";
+					var div=document.createElement("div");
+				        div.id=fileId;
+				        div.fileId=fileId;
+				        div.title=fileName;
+				        div.className="file-item";
+				        var html="<a href=\"javascript:void(0);\" style='color:blue;' onclick=\"openFileByName("+fileId+",\'"+fileName+"\')\">"+ fileName + "</a>" ;
+				        if(isEdit){
+				        	html+="<span  class=\"mui-icon mui-icon-trash\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile("+fileId+",\'"+fileIdsDomId+"\',this)\"></span>";
+				        }
+				        div.innerHTML=html;
+				        list.appendChild(div);
+				}
+			}
+		}
+	});
+}
+

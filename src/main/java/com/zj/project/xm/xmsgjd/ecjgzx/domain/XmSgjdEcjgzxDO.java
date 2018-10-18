@@ -51,13 +51,24 @@ public class XmSgjdEcjgzxDO extends BaseDomain {
     /** 栋楼id：栋楼表id */
     @ApiModelProperty(value = "栋楼id：栋楼表id ",name = "intdid",dataType = "Long",required = true)
     private Long intdid;
+    /** 栋楼名称 */
+    @ApiModelProperty(value = "栋楼名称 ",name = "chrdmc",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrdmc;
     /**备注*/
     @ApiModelProperty(value = "备注 ",name = "chrbz",dataType = "String",required = false)
     private String chrbz;
+    /** 报告人id */
+    @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
+    private Long intbgrid;
+    /** 报告人名称 */
+    @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "string",required = true)
+    private String chrbgrmc;
     
     /**
      * 施工进度-二次结构、装修等施工-完成量集合信息
      */
+    @ApiModelProperty(value = "施工进度-二次结构、装修等施工-完成量集合信息 ",name = "xmSgjdEcjgzxWclList",dataType = "List",required = false)
     @TableField(exist=false)
     private List<XmSgjdEcjgzxWclDO>  xmSgjdEcjgzxWclList;
 
@@ -172,8 +183,23 @@ public class XmSgjdEcjgzxDO extends BaseDomain {
 	public void setChrbz(String chrbz) {
 		this.chrbz = chrbz;
 	}
-	
-	
-    
+	public String getChrdmc() {
+		return chrdmc;
+	}
+	public void setChrdmc(String chrdmc) {
+		this.chrdmc = chrdmc;
+	}
+	public Long getIntbgrid() {
+		return intbgrid;
+	}
+	public void setIntbgrid(Long intbgrid) {
+		this.intbgrid = intbgrid;
+	}
+	public String getChrbgrmc() {
+		return chrbgrmc;
+	}
+	public void setChrbgrmc(String chrbgrmc) {
+		this.chrbgrmc = chrbgrmc;
+	}
     
 }

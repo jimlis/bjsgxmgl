@@ -19,15 +19,14 @@ window.onload = function(){
 			type:'post',
 			success:function(data){
 				//服务器返回响应，根据响应结果，分析是否登录成功；
-				document.getElementById("chrbgrmc").value = data.chrbgrmc;
-				document.getElementById("chrbz").value = data.chrbz;
-				document.getElementById("chrybms").value = data.chrybms;
-				document.getElementById("chrybwz").value = data.chrybwz;
-				document.getElementById("dtmgxrq").value = data.dtmgxrq;
-				document.getElementById("dtmsprq").value = data.dtmsprq;
-				document.getElementById("dtmwcrq").value = data.dtmwcrq;
-				document.getElementById("id").value = data.id;
-				document.getElementById("intbgrid").value = data.intbgrid;
+				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
+				document.getElementById("chrbz").value = data.chrbz||"";
+				document.getElementById("chrybms").value = data.chrybms||"";
+				document.getElementById("chrybwz").value = data.chrybwz||"";
+				document.getElementById("dtmgxrq").value = data.dtmgxrq||"";
+				document.getElementById("dtmsprq").value = data.dtmsprq||"";
+				document.getElementById("dtmwcrq").value = data.dtmwcrq||"";
+				document.getElementById("intbgrid").value = data.intbgrid||"";
 				if(data.intyblx=='1'){
 					document.getElementById("chryblx").value = "土建";
 				}else if(data.intyblx=='2'){
@@ -39,14 +38,17 @@ window.onload = function(){
 				}else{
 					document.getElementById("chryblx").value = "其他";
 				}
-				document.getElementById("intyblx").value = data.intyblx;
-				document.getElementById("intxmid").value = data.intxmid;
+				document.getElementById("intyblx").value = data.intyblx||"";
+				if(id){
+					//加载图片
+					initImgList("bj_xm_ybsgjl",id,"1","fileIds","img-list",true);
+				}
 			},
 		});
 	}else{
 		//新增初始化 数据
 		document.getElementById("dtmgxrq").value = systemdate;
-		document.getElementById("chrbgrid").value = chrdlrid;
+		document.getElementById("intbgrid").value = chrdlrid;
 		document.getElementById("chrbgrmc").value = chrdlrmc;
 	}
 }
@@ -59,16 +61,15 @@ function save(){
 	//bjToast("保存成功");
 	
 	var data = getFromData("form");
-	data["id"] = obj.id;
+	data["id"] = obj.id||"";
 	data["intxmid"] = getCookie("id");
 	$bjAjax({
 		url:tempRecodeSaveApiPath,
 		type:"post",
 		data:data,
 		success:function(data){
-			console.log(data);
 			bjToast("保存成功！",function(){
-				toUrl("project_templet_record.html");
+				toUrl("project_templet_record_detail.html?id="+(data.id||""));
 			});
 		}
 	})
