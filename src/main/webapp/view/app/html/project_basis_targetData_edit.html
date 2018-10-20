@@ -18,27 +18,19 @@
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">更新</button>
 		</header>
 		<div class="mui-content" id="app">
-			<ul class="mui-table-view mui-grid-view mui-grid-9" 
-				v-if="list.length>5"
-				>
-				<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3"
-					v-for="item in list">
-					<input class="bj-input-disable" v-model="item.chrzbmc"></input>
-					<input class="bj-input-disable" v-model="item.intzbz"></input>
+			<ul class="mui-table-view mui-grid-view mui-grid-9" >
+				<div :id="item.id" class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12"
+					v-for="item in list" style="border:solid 1px dodgerblue ;">
+					<input class="bj-input" v-model="item.chrzbmc" placeholder="请输入指标"></input>
+					<input class="bj-input" v-model="item.intzbz" placeholder="请输入指标值"></input>
 				</div>
-			</ul>
-			<ul class="mui-table-view mui-grid-view mui-grid-9" v-else>
-				<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12"
-					v-for="item in list">
-					<input class="bj-input-disable" v-model="item.chrzbmc"></input>
-					<input class="bj-input-disable" v-model="item.intzbz"></input>
-				</li>
+				<button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" v-on:click="add">增加品牌</button>
 			</ul>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_basis_targetData.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_basis_targetData_edit.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>
