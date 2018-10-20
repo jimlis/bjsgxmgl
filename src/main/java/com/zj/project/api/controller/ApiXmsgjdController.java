@@ -91,21 +91,23 @@ public class ApiXmsgjdController extends ApiBaseController{
         	XmSgjdEcjgzxDO xmSgjdEcjgzxDO=new XmSgjdEcjgzxDO();
         	xmSgjdEcjgzxDO.setFcbz(1);
         	xmSgjdEcjgzxDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdEcjgzxDO> queryWrapper3=new QueryWrapper<XmSgjdEcjgzxDO>(xmSgjdEcjgzxDO).orderByAsc("dtmgxrq");
+        	QueryWrapper<XmSgjdEcjgzxDO> queryWrapper3=new QueryWrapper<XmSgjdEcjgzxDO>(xmSgjdEcjgzxDO).
+        			select("id","dtmgxrq","(select chrdlmc  from  bj_xm_dl where id=intdid ) as chrdmc").orderByAsc("dtmgxrq");
         	map.put("ec", xmSgjdEcjgzxService.list(queryWrapper3));
         	
         	
         	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=new XmSgjdDtsbazsgDO();
         	xmSgjdDtsbazsgDO.setFcbz(1);
         	xmSgjdDtsbazsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper4=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO).orderByAsc("dtmgxrq");
+        	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper4=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO).
+        			select("id","dtmgxrq","chrdtbh","(select chrdlmc  from  bj_xm_dl where id=intsgwz ) as chrsgwz").orderByAsc("dtmgxrq");
         	map.put("dt", xmSgjdDtsbazsgService.list(queryWrapper4));
         	
         	
         	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=new XmSgjdSwgwsgDO();
         	xmSgjdSwgwsgDO.setFcbz(1);
         	xmSgjdSwgwsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper5=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).select(" distinct intxmid"," dtmgxrq ") .orderByAsc("dtmgxrq");
+        	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper5=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).select(" distinct intxmid"," dtmbgrq ") .orderByAsc("dtmbgrq");
         	map.put("sw", xmSgjdSwgwsgService.list(queryWrapper5));
         	
         	XmSgjdYlsgDO xmSgjdYlsgDO=new XmSgjdYlsgDO();

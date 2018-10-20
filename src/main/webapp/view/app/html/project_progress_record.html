@@ -37,13 +37,13 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">二次结构、装修等施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in ecs" v-on:click="openEC(item.id)">{{item.id}}</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in ecs" v-on:click="openEC(item.id)">{{item.chrdmc}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.dtmgxrq}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">电梯设备安装施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dts" v-on:click="openDT(item.id)">{{item.id}}</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in dts" v-on:click="openDT(item.id)">{{item.chrsgwz}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.chrdtbh}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.dtmgxrq}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">

@@ -21,38 +21,42 @@
 		    <h1 class="mui-title">室外管网施工</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="list">
+		<div class="mui-content" id="app">
+		     <form action="" id="myform">
 			<div class="mui-content-padded">
+			     <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" />
+                 <input class="bj-input bj-p-black-font " type="hidden" id="id" v-model="id"/>
+                 <input class="bj-input bj-p-black-font " type="hidden" id="intxmid" v-model="intxmid"/>
 				<h5 class="bj-title2-font">报告日期：
-					<span class="bj-p-gray-font">2018-8-18</span>
+				    <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq" v-on:click="datePicker('dtmbgrq')"/>
 				</h5>
-				<h5 class="bj-title2-font">最新版csd图纸：
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">选择</button>
-					<div id="csdList"></div>
-				</h5>
+				<h5 class=" bj-title2-font">最新版csd图纸：
+                        <div id="uploader" class="wu-example" style="margin-bottom: 15px;">
+                            <!--用来存放文件信息-->
+                            <div class="btns">
+                                <button id="chbtn" type="button">选择文件</button>
+                            </div>
+                            <div id="file-list">
+                            </div>
+                        </div>
+                </h5>
 				<h5 class="bj-title2-font">CSD图纸通过审批日期：
-					<input class="bj-input bj-p-black-font" data-options='{"type":"date"}' id="showDateSP" placeholder="请选择日期" />
+					<input class="bj-input bj-p-black-font"  id="dtmsprq" v-model="dtmsprq" v-on:click="datePicker('dtmsprq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">类型：
-					<input class="bj-input bj-p-black-font" type="text" id="showLX"placeholder="请选择类型" />
-				</h5>
-				<h5 class="bj-title2-font">施工区域：
-					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
-				</h5>
-				<h5 class="bj-title2-font">完成量：
-					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
-				</h5>
-				<h5 class="bj-title2-font">完成情况：
-					<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">选择</button>
-					<div id="wcList"></div>
-				</h5>
-				<h5 class="bj-title2-font">备注：
-					<input class="bj-input bj-p-black-font" type="text" placeholder="请输入" />
-				</h5>
-				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
+				
+				<ul id="xLul" class="">
+				</ul>
+				
+				<button class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;" v-on:click="addLx">新增类型</button>
+				<h5 class="bj-title2-font">报告人：
+                    <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
+                    <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
+                </h5>
 			</div>
+			</form>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>

@@ -13,6 +13,11 @@
         <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
         <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
         <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
     </head>
         
     <body>
@@ -21,7 +26,7 @@
             <h1 class="mui-title">二次结构、装修等施工</h1>
             <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
         </header>
-        <div class="mui-content" id="app">
+        <div class="mui-content" id="app" v-cloak>
         <form action="" id="myform">
               <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
                 <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
@@ -67,8 +72,8 @@
                         <textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
                     </h5>
                 <h5 class="bj-title2-font">
-                                                报告人：<input class="bj-input bj-p-black-font" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
-                   <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
+                                                报告人：<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
+                   <input class="bj-input bj-p-black-font " type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
                 </h5>
             </div>
             </form>

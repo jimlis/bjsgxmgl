@@ -67,7 +67,7 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
     	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=new XmSgjdSwgwsgDO();
     	xmSgjdSwgwsgDO.setFcbz(1);
     	xmSgjdSwgwsgDO.setIntxmid(xmid);
-    	xmSgjdSwgwsgDO.setDtmgxrq(gxrq);
+    	xmSgjdSwgwsgDO.setDtmbgrq(gxrq);
     	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).orderByDesc("gxsj");
     	List<XmSgjdSwgwsgDO> list=list(queryWrapper);
     	if(CollectionUtils.isNotEmpty(list)) {

@@ -9,6 +9,11 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
 	</head>
 		
 	<body>
@@ -17,7 +22,7 @@
 		    <h1 class="mui-title">主体结构施工</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
 		</header>
-		<div class="mui-content" id="app">
+		<div class="mui-content" id="app" v-cloak>
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">报告日期：<span class="bj-p-gray-font">{{dtmbgrq}}</span></h5>
 				<h5 class="bj-title2-font">施工位置：<span class="bj-p-gray-font">{{chrShowAddress}}</span></h5>

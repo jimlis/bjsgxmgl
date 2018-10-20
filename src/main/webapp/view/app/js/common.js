@@ -93,6 +93,9 @@ var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 
+var progressOutDoorByIdApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgDateListByXmid";
+var progressOutDoorSaveApiPath=serverPath+"api/xmsgjdswgwsg/save";
+
 //规划指标
 var targetDataListApiPath=serverPath+"/api/xmghzb/getXmGhzbByXmid";
 var targetDataSavePath=serverPath+"/api/xmghzb/batchSave";
@@ -713,7 +716,7 @@ function getXmdlListByXmid(xmid){
 * @param  data 自定义提交数据
 * @param  done 上传完成后函数
 **/
-function upLoadFile(elem,bind,data,done){
+function upLoadFile(elem,data,done){
 	layui.use('upload', function(){
 	var upload = layui.upload;
 	//选完文件后不自动上传（js代码，将文件传到后台）
@@ -726,8 +729,10 @@ function upLoadFile(elem,bind,data,done){
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		,done: done||function(res) {
-			uploadFileDone(res,"fileIds","file-list")
-       		 }
+			var fileIdsName=data.fileIdsName||"fileIds";
+			var fileListName=data.fileListName||"file-list";
+			uploadFileDone(res,fileIdsName,fileListName);
+       		}
 		});
 	});
 }
@@ -797,5 +802,13 @@ function initFileList(busType,busId,type,fileIdsDomId,showListDomId,isEdit){
 			}
 		}
 	});
+}
+
+function stopBubble(e)
+{
+    if (e && e.stopPropagation)
+        e.stopPropagation();
+    else
+        window.event.cancelBubble=true;
 }
 

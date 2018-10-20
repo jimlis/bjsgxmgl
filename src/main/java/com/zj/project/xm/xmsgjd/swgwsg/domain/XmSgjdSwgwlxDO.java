@@ -1,13 +1,11 @@
 package com.zj.project.xm.xmsgjd.swgwsg.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -18,13 +16,13 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 
  * <pre>
- * 施工进度-室外管网施工
+ * 施工进度-室外管网类型，没个项目有多个室外管网类型。
  * </pre>
- * <small> 2018-10-14 10:20:56 | lijun</small>
+ * <small> 2018-10-20 20:40:32 | lijun</small>
  */
- @TableName("bj_xm_sgjd_swgwsg")
- @ApiModel(value = "XmSgjdSwgwsgDO",description = "施工进度-室外管网施工")
-public class XmSgjdSwgwsgDO extends BaseDomain {
+ @TableName("bj_xm_sgjd_swgwlx")
+ @ApiModel(value = "XmSgjdSwgwlxDO",description = "施工进度-室外管网类型，没个项目有多个室外管网类型。")
+public class XmSgjdSwgwlxDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
@@ -45,24 +43,9 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     /** 项目基本信息id */
     @ApiModelProperty(value = "项目基本信息id",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
-    /** 更新日期 */
-    @ApiModelProperty(value = "更新日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
-    private Date dtmbgrq;
-    /** csd图纸通过审批日期 */
-    @ApiModelProperty(value = "审批日期",name = "dtmsprq",dataType = "String",required = false,example="2018-10-12")
-    private Date dtmsprq;
-    /** 报告人id */
-    @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
-    private Long intbgrid;
-    /** 报告人名称 */
-    @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "String",required = true)
-    private String chrbgrmc;
-    
-    @TableField(exist=false)
-    /**完成情况list*/
-    @ApiModelProperty(value = "完成情况list",name = "wcqkList",dataType = "List",required = false)
-    List<FileDO> wcqkList;
+    /** 室外管网类型 */
+    @ApiModelProperty(value = "室外管网类型 ",name = "chrswgwlx",dataType = "String",required = true)
+    private String chrswgwlx;
 
     /**
      * 设置：主键id
@@ -125,65 +108,15 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
         return intxmid;
     }
     /**
-     * 设置：更新日期
+     * 设置：室外管网类型
      */
-    public void setDtmbgrq(Date dtmbgrq) {
-        this.dtmbgrq = dtmbgrq;
+    public void setChrswgwlx(String chrswgwlx) {
+        this.chrswgwlx = chrswgwlx;
     }
     /**
-     * 获取：更新日期
+     * 获取：室外管网类型
      */
-    public Date getDtmbgrq() {
-        return dtmbgrq;
+    public String getChrswgwlx() {
+        return chrswgwlx;
     }
-    /**
-     * 设置：csd图纸通过审批日期
-     */
-    public void setDtmsprq(Date dtmsprq) {
-        this.dtmsprq = dtmsprq;
-    }
-    /**
-     * 获取：csd图纸通过审批日期
-     */
-    public Date getDtmsprq() {
-        return dtmsprq;
-    }
-    /**
-     * 设置：报告人id
-     */
-    public void setIntbgrid(Long intbgrid) {
-        this.intbgrid = intbgrid;
-    }
-    /**
-     * 获取：报告人id
-     */
-    public Long getIntbgrid() {
-        return intbgrid;
-    }
-    /**
-     * 设置：报告人名称
-     */
-    public void setChrbgrmc(String chrbgrmc) {
-        this.chrbgrmc = chrbgrmc;
-    }
-    /**
-     * 获取：报告人名称
-     */
-    public String getChrbgrmc() {
-        return chrbgrmc;
-    }
-    
-    /**
-     * 获取完成情况
-     */
-	public List<FileDO> getWcqkList() {
-		return wcqkList;
-	}
-	
-	 /**
-     * 设置完成情况
-     */
-	public void setWcqkList(List<FileDO> wcqkList) {
-		this.wcqkList = wcqkList;
-	}
 }

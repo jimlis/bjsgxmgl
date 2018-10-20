@@ -31,7 +31,6 @@ window.onload= function(){
 
 var deleteGhzbIds="";
 function delGhzb(ghzbid,obj){
-	debugger
 	if(ghzbid){
 		deleteGhzbIds+=ghzbid+",";
 	}
