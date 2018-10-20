@@ -551,7 +551,7 @@ function getCookie(c_name){
 function setCookie(c_name,value,expiredays){
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate()+expiredays);
-	document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+	document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString())+";path=/";
 }
 function removeCookie(key) {
     setCookie(key, '', -1);//这里只需要把Cookie保质期退回一天便可以删除
