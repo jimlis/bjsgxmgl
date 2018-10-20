@@ -7,11 +7,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css" />
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style type="text/css">
+			td input{
+				margin: 0px !important;
+				border-radius: 0px !important;
+			}
+		</style>
 	</head>
 		
 	<body>
@@ -20,23 +27,31 @@
 		    <h1 class="mui-title">工程款申请/支付情况</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="list">
+		<div class="mui-content" id="app">
+			<form id="myform">
+				<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
 			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">2018-3-15</span></h5>
+				<h5 class="bj-title2-font">更新日期：
+					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
+				</h5>
 				<h5 class="bj-title2-font">单位类型：
-					<input class="bj-input bj-p-black-font" type="text" id="showLX" placeholder="请选择" />
+					<input class="bj-input bj-p-black-font" type="hidden" id="intdwlx" v-model="intdwlx" placeholder="请选择" />
+					<input class="bj-input bj-p-black-font" type="text" id="chrdwlx" v-model="chrdwlx" v-on:click="lxPicker" placeholder="请选择" />
 				</h5>
 				<h5 class="bj-title2-font">单位名称：
-					<input class="bj-input bj-p-black-font" type="text" id="showMC" placeholder="请选择" />
+					<input class="bj-input bj-p-black-font" type="hidden" id="intdwmcid" v-model="intdwmcid" placeholder="请选择" />
+					<input class="bj-input bj-p-black-font" type="text" id="chrdwmcid" v-model="chrdwmcid" v-on:click="mcPicker" placeholder="请选择" />
 				</h5>
 				<h5 class="bj-title2-font">本次申请期数：
-					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+					<input class="bj-input bj-p-black-font" type="text" id="intbcsqqs" v-model="intbcsqqs" placeholder="请输入" />
 				</h5>
 				<h5 class="bj-title2-font">本期申请金额：
-					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+					<input class="bj-input bj-p-black-font" type="text" id="intbqsqje" v-model="intbqsqje" placeholder="请输入" />
 				</h5>
 				<h5 class="bj-title2-font">本期核实发放金额：
-					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+					<input class="bj-input bj-p-black-font" type="text" id="intbqhsffje" v-model="intbqhsffje"  placeholder="请输入" />
 				</h5>
 				<h5 class="bj-title2-font">申请/支付情况：</h5>
 				<table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
@@ -89,12 +104,15 @@
 				</h5>
 				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
 			</div>
+			</form>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_pay_record_add.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 

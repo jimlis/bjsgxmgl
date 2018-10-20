@@ -7,24 +7,35 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css" />
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style type="text/css">
+			td input{
+				margin: 0px !important;
+				border-radius: 0px !important;
+				pointer-events:none !important;
+			}
+			[v-cloak] {
+				display: none;
+			}
+		</style>
 	</head>
 		
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">工程款申请/支付情况</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openNext()">编辑</button>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
 		</header>
-		<div class="mui-content" id="list">
+		<div class="mui-content" id="app" v-cloak>
 			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">2018-3-15</span></h5>
-				<h5 class="bj-title2-font">单位类型：<span class="bj-p-gray-font">顾问变更</span></h5>
-				<h5 class="bj-title2-font">单位名称：<span class="bj-p-gray-font">A12388</span></h5>
-				<h5 class="bj-title2-font">本次申请期数：<span class="bj-p-gray-font">1</span></h5>
-				<h5 class="bj-title2-font">本期申请金额：<span class="bj-p-gray-font">2323</span></h5>
-				<h5 class="bj-title2-font">本期核实发放金额：<span class="bj-p-gray-font">123</span></h5>
+				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">{{dtmgxrq}}</span></h5>
+				<h5 class="bj-title2-font">单位类型：<span class="bj-p-gray-font">{{chrdwlx}}</span></h5>
+				<h5 class="bj-title2-font">单位名称：<span class="bj-p-gray-font">{{chrdwmcid}}</span></h5>
+				<h5 class="bj-title2-font">本次申请期数：<span class="bj-p-gray-font">{{intbcsqqs}}</span></h5>
+				<h5 class="bj-title2-font">本期申请金额：<span class="bj-p-gray-font">{{intbqsqje}}</span></h5>
+				<h5 class="bj-title2-font">本期核实发放金额：<span class="bj-p-gray-font">{{intbqhsffje}}</span></h5>
 				<h5 class="bj-title2-font">申请/支付情况：</h5>
 				<table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
 		            	<tr>
@@ -34,10 +45,10 @@
 		            		<th>累计发放金额C</th>
 		            	</tr>
 		            	<tr>
-		            		<td>100</td>
-		            		<td>80</td>
-		            		<td>8</td>
-		            		<td>800</td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
 		            	</tr>
 		            	<tr>
 		            		<th>B/A</th>
@@ -46,10 +57,10 @@
 		            		<th>D/E</th>
 		            	</tr>
 		            	<tr>
-		            		<td>100</td>
-		            		<td>80</td>
-		            		<td>8</td>
-		            		<td>800</td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
 		            	</tr>
 		            	<tr>
 		            		<th>C/A</th>
@@ -58,10 +69,10 @@
 		            		<th>（C+E）/（A+B）</th>
 		            	</tr>
 		            	<tr>
-		            		<td>100</td>
-		            		<td>80</td>
-		            		<td>8</td>
-		            		<td>800</td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
+		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
 		            	</tr>
 	            </table>
 				<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
@@ -75,6 +86,8 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

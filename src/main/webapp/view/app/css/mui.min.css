@@ -1368,7 +1368,7 @@ p {
 }
 
 .mui-bar .mui-segmented-control {
-	top: 7px;
+	/*! top: 7px; */
 	width: auto;
 	margin: 0 auto
 }

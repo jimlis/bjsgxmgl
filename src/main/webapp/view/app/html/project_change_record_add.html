@@ -13,7 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-
+	<style type="text/css">
+		[v-cloak] {
+				display: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -22,49 +26,51 @@
 	<h1 class="mui-title">工程_顾问变更记录</h1>
 	<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 </header>
-<div class="mui-content" id="list">
+<div class="mui-content" id="app" v-cloak>
 
 	<form id="myform">
 		<div class="mui-content-padded">
-			<input type="hidden" id="fileIds" name="fileIds" title="图片ids">
+			<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
 			<h5 class="bj-title2-font">更新日期：
-				<label id="dtmgxrq">2018-10-07</label>
+				<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
 			</h5>
 			<h5 class="bj-title2-font">变更申请类型：
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqlx" placeholder="变更申请类型" />
-				<input class="bj-input bj-p-black-font" type="text" id="intbgsqlxxs"  placeholder="变更申请类型" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqlx"  v-model="intbgsqlx"placeholder="变更申请类型" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqlx" v-model="chrbgsqlx" placeholder="变更申请类型" />
 			</h5>
 			<h5 class="bj-title2-font">变更申请编号：
-				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqbh" placeholder="变更申请编号" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqbh" v-model="chrbgsqbh" placeholder="变更申请编号" />
 			</h5>
 			<h5 class="bj-title2-font">变更申请名称：
-				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqmc" placeholder="变更申请名称" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqmc" v-model="chrbgsqmc" placeholder="变更申请名称" />
 			</h5>
 			<h5 class="bj-title2-font">是否取替之前变更申请：
-				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" placeholder="是否取替之前变更申请" />
-				<input class="bj-input bj-p-black-font" type="text" id="intsfqdxs" placeholder="是否取替之前变更申请" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" v-model="intsfqd" placeholder="是否取替之前变更申请" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrsfqd" v-model="chrsfqd" placeholder="是否取替之前变更申请" />
 			</h5>
 			<h5 class="bj-title2-font">取替变更编号：
-				<input class="bj-input bj-p-black-font" type="hidden" id="chrqtbgbh" placeholder="取替变更编号" />
-				<input class="bj-input bj-p-black-font" type="text" id="qtbgbh" placeholder="取替变更编号" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="" v-model="" placeholder="取替变更编号" />
+				<input class="bj-input bj-p-black-font" type="text" id="" v-model="" placeholder="取替变更编号" />
 			</h5>
 			<h5 class="bj-title2-font">变更详情：
-				<input class="bj-input bj-p-black-font" type="text" id="chrbgxq" placeholder="变更详情" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbgxq" v-model="chrbgxq" placeholder="变更详情" />
 			</h5>
-			<h5 class="bj-title2-font">工期估算：
-				<input class="bj-input bj-p-black-font" type="text" id="chrgqgs" placeholder="工期估算" />
+			<h5 class="bj-title2-font">工期影响：
+				<input class="bj-input bj-p-black-font" type="text" id="intgqyx" v-model="intgqyx" placeholder="工期影响" />
 			</h5>
 			<h5 class="bj-title2-font">变更估算：
-				<input class="bj-input bj-p-black-font" type="text" id="intbggs" placeholder="变更估算" />
+				<input class="bj-input bj-p-black-font" type="text" id="intbggs" v-model="intbggs" placeholder="变更估算" />
 			</h5>
 			<h5 class="bj-title2-font">潜在变更总金额：
-				<input class="bj-input bj-p-black-font" type="text" id="" placeholder="潜在变更总金额" />
+				<input class="bj-input bj-p-black-font" type="text" id="" v-model="" placeholder="潜在变更总金额" />
 			</h5>
 			<h5 class="bj-title2-font">合同占比：
-				<input class="bj-input bj-p-black-font" type="text" id="inthtzb" placeholder="合同占比" />
+				<input class="bj-input bj-p-black-font" type="text" id="" v-model="" placeholder="合同占比" />
 			</h5>
 			<h5 class="bj-title2-font">备注：
-				<input class="bj-input bj-p-black-font" type="text" id="chrbz" placeholder="备注" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注" />
 			</h5>
 
 			<h5 class="bj-title2-font">变更申请文件：</h5>
@@ -77,8 +83,8 @@
 				</div>
 			</div>
 			<h5 class="bj-title2-font">审批流程状态：
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqwj" name="intbgsqwj" placeholder="审批流程状态" />
-				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqwj" name="chrbgsqwj"  placeholder="审批流程状态" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" v-model="dtmgxrq" placeholder="审批流程状态" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrsplczt" name="chrsplczt" v-model="dtmgxrq"  placeholder="审批流程状态" />
 			</h5>
 		</div>
 	</form>
@@ -91,6 +97,7 @@
 <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/project_change_record_add.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
