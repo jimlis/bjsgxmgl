@@ -13,18 +13,18 @@ window.onload = function(){
 	
 	if(id){
 		//加载图片
-		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",false);
+		initImgList("bj_xm_zpjl",id,"1","fileIds","img-list",false);
 	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:xmzfxcyzxysApiDetail,
+		url:photoApiDetailText,
 		type:"post",
 		async:false,
 		data:{
-			xmZfxcyzxysId:obj.id
+			xmZpjlId:id
 		},
 		success:function(data){
 			if(data){

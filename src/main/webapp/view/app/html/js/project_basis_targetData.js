@@ -1,3 +1,5 @@
+var obj=getRequest();
+var id=obj.id||"";
 var intxmid = getCookie("id");
 window.onload= function(){
 	var pageData = getPageData();
@@ -14,11 +16,11 @@ window.onload= function(){
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:xmzfxcyzxysApiDetail,
+		url:targetDataListApiPath,
 		type:"post",
 		async:false,
 		data:{
-			xmZfxcyzxysId:obj.id
+			xmid:intxmid
 		},
 		success:function(data){
 			if(data){

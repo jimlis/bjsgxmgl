@@ -92,6 +92,11 @@ var progressSecSaveApiPath=serverPath+"api/xmsgjdecjgzx/save";
 var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
+
+//规划指标
+var targetDataListApiPath=serverPath+"/api/xmghzb/getXmGhzbByXmid";
+var targetDataSavePath=serverPath+"/api/xmghzb/batchSave";
+var targetDataDelPath=serverPath+"/api/xmghzb/del";
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){
@@ -319,7 +324,7 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 	var userPicker = new mui.PopPicker();
 	userPicker.setData(data);
 	var showUserPickerButton = document.getElementById(textSelecter);
-	showUserPickerButton.addEventListener('tap', function(event) {
+	showUserPickerButton.onclick=function(event) {
 		userPicker.show(function(items) {
 			showUserPickerButton.value = items[0].text;
 			if(valueSelecter){
@@ -332,7 +337,7 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
-	}, false);
+	};
 }
 
 /*照片懒加载1*/
@@ -536,7 +541,6 @@ function getCookieUserValue(key) {
 }
 
 function getCookie(c_name){
-	debugger;
 	if (document.cookie.length>0){
 	  if(document.cookie.indexOf(c_name)==0){
 		  c_start=document.cookie.indexOf(c_name + "=");
@@ -555,7 +559,6 @@ function getCookie(c_name){
 }
 
 function setCookie(c_name,value,expiredays){
-	debugger;
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate()+expiredays);
 	document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString())+";path=/";

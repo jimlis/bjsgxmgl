@@ -33,5 +33,5 @@ public interface XmZpjlService extends BaseService<XmZpjlDO> {
      * @param xmid 项目id
      * @return
      */
-    Map<String,List<XmZpjlDO>> getXmZpjlMapByXmid(Long xmid);
+    Map<String,Object> getXmZpjlMapByXmid(Long xmid);
 }

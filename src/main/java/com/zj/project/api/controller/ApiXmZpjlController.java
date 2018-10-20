@@ -42,7 +42,7 @@ public class ApiXmZpjlController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=Map.class),
     	@ApiResponse(code=1,message="操作失败",response=Map.class)})
     @RequiresAuthentication
-    public Result<Map<String,List<XmZpjlDO>>> getXmZpjlMapByXmid(Long xmid) {
+    public Result<Map<String,Object>> getXmZpjlMapByXmid(Long xmid) {
         try {
             return Result.ok(xmZpjlService.getXmZpjlMapByXmid(xmid));
         }catch (Exception e){
@@ -97,10 +97,10 @@ public class ApiXmZpjlController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmZpjlDO xmZpjlDO, String fileIds,String xmZpmsJson) {
+    public Result<XmZpjlDO> save(XmZpjlDO xmZpjlDO, String fileIds,String xmZpmsJson) {
         try {
             xmZpjlService.saveXmZpjlxx(xmZpjlDO,fileIds,xmZpmsJson);
-           return Result.ok();
+           return Result.ok(xmZpjlDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

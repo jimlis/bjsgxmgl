@@ -47,11 +47,22 @@ public class XmZpjlDO extends BaseDomain {
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmbgrq;
     /** 1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度） */
-    @ApiModelProperty(value = "1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）",name = "intbglb",dataType = "string",required = true)
-    private String intbglb;
+    @ApiModelProperty(value = "1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）",name = "intbglb",dataType = "Integer",required = true)
+    private Integer intbglb;
+    /** 1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度） */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）",name = "chrbglb",dataType = "string",required = true)
+    private String chrbglb;
     /** 根据页面提交存储 */
     @ApiModelProperty(value = "根据页面提交存储",name = "chrpswz",dataType = "string",required = true)
     private String chrpswz;
+    /** 位置描述 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "位置描述",name = "chrpswzms",dataType = "string",required = true)
+    private String chrpswzms;
+    /**其他描述*/
+    @ApiModelProperty(value = "其他描述",name = "chrqtms",dataType = "string",required = true)
+    private String chrqtms;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required = false)
     private Long intbgrid;
@@ -134,13 +145,13 @@ public class XmZpjlDO extends BaseDomain {
     /**
      * 设置：1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）
      */
-    public void setIntbglb(String intbglb) {
-        this.intbglb = intbglb;
-    }
+    public void setIntbglb(Integer intbglb) {
+		this.intbglb = intbglb;
+	}
     /**
      * 获取：1（整体形象进度），2（栋楼形象进度），3（隐蔽工程形象进度）
      */
-    public String getIntbglb() {
+    public Integer getIntbglb() {
         return intbglb;
     }
     /**
@@ -179,4 +190,32 @@ public class XmZpjlDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public String getChrbglb() {
+		return chrbglb;
+	}
+	public void setChrbglb(String chrbglb) {
+		this.chrbglb = chrbglb;
+	}
+	public String getChrpswzms() {
+		return chrpswzms;
+	}
+	public void setChrpswzms(String chrpswzms) {
+		this.chrpswzms = chrpswzms;
+	}
+	/**
+	 * 获取其他描述
+	 */
+	public String getChrqtms() {
+		return chrqtms;
+	}
+	/**
+	 * 设置其他描述
+	 */
+	public void setChrqtms(String chrqtms) {
+		this.chrqtms = chrqtms;
+	}
+	
+    
+    
+    
 }
