@@ -6,6 +6,7 @@ var intxmid = getCookie('id');//intxmid
 window.onload = function(){
 	dtPicker('#dtmtzrq');
     dtPicker('#dtmwczgrq');
+    dtPicker('#dtmzgwcrq');
 	upLoadImg('#chbtn',{"busType":"bj_xm_zlqxbg"});
 	relPicker("chrqxlx",getPageData(),"intqxlx");
 	relPicker("chrsgdw",getXmdwmdData(intxmid,"2"),"intsgdw");

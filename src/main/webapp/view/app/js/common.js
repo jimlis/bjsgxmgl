@@ -45,6 +45,7 @@ var baseApiAddress = serverPath+"api/xmqyjwz/getXmQyjwzByXmid";
 var baseApiAddressSave = serverPath+"api/xmqyjwz/save";
 var baseApiCjdw = serverPath+"api/xmxmcjdw/getXmXmcjdwByXmid";
 var baseApiDwmd = serverPath+"api/xmdwmd/getXmDwmdxxByXmid";
+var dwmdApiDeleteById = serverPath+"api/xmdwmd/del";
 var baseApiDwmdList = serverPath+"api/xmdwmd/getXmDwmdListByXmidAndLxmd";
 var baseApiYjdw = serverPath+"api/xmdwmd/getXmYjDwmdByXmid";
 var baseApiCjdwSave = serverPath+"api/xmxmcjdw/save";
@@ -383,7 +384,7 @@ function funLazyLoad(select){
 * @param  data 自定义提交数据
 * @param  done 上传完成后函数
 **/
-function upLoadImg(elem,bind,data,done){
+function upLoadImg(elem,data,done){
 	layui.use('upload', function(){
 	var upload = layui.upload;
 	//选完文件后不自动上传（js代码，将文件传到后台）

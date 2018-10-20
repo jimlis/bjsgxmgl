@@ -24,6 +24,7 @@ public interface XmClybspjlService extends BaseService<XmClybspjlDO> {
 	 * @param xmClybspjlDO
 	 * @param fileIds 文件ids
 	 * @param xmClybspjlJszlJson 品牌和技术json串
+	 * @param deleteJszlIds 删除的品牌技术资料ids
 	 */
-	public void saveXmZpjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson);
+	public void saveXmZpjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson,String deleteJszlIds);
 }

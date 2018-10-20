@@ -18,17 +18,15 @@ $bjAjax({
 			<h5 class="bj-title2-font">轨道交通：<span class="bj-p-gray-font">`+chrgdjt+`</span></h5>
 			<h5 class="bj-title2-font">周围状况：<span class="bj-p-gray-font">`+chrzwzk+`</span></h5>
 			<h5 class="bj-title2-font">项目效果图：</h5>
+			<div id="uploader" class="wu-example">
+				<div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
+				</div>
+			</div>
 			`;
-		if(fileIds.length!=0){
-			 setimg(fileIds);
-		}
+		initImgList("bj_xm_qyjwz",id,"1","fileIds","img-list",false);
 	}
 })
-function setimg(url){
-	var list = document.getElementById('list');
-	 list.appendChild(createFragments(url));
-	 funLazyLoad('#list').refresh(true);
-}
+
 
 function edit(){
 	var id=document.getElementById("id").value;

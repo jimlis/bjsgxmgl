@@ -1,6 +1,7 @@
 package com.zj.project.xm.xmclybspjl.service.impl;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -87,9 +88,10 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 	 *            文件ids
 	 * @param xmClybspjlJszlJson
 	 *            品牌和技术json串
+	 * @param deleteJszlIds 删除的品牌技术资料ids
 	 */
 	@Override
-	public void saveXmZpjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson) {
+	public void saveXmZpjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson,String deleteJszlIds) {
 		Long xmid = xmClybspjlDO.getIntxmid();
 		if (xmid == null) {
 			throw new CommonException("xmid不能为空");
@@ -139,6 +141,19 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 					}
 				});
 			}
+		}
+		
+		//删除技术资料
+		if(StringUtils.isNotEmpty(deleteJszlIds)) {
+			Arrays.stream(deleteJszlIds.trim().split(",")).forEach(jszlId->{
+				if(StringUtils.isNotEmpty(jszlId)) {
+					XmClybspjlJszlDO xmClybspjlJszl=new XmClybspjlJszlDO();
+					xmClybspjlJszl.setId(Long.parseLong(jszlId));
+					xmClybspjlJszl.setFcbz(0);
+					xmClybspjlJszl.setGxsj(new Date());
+					xmClybspjlJszlService.updateById(xmClybspjlJszl);
+				}
+			});
 		}
 	}
 

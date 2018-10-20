@@ -1,15 +1,19 @@
 var obj = getRequest("id");
 var xmid = getCookie("id");
+var sysdate=bjGetSysDate();
 
 window.onload = function(){
     relPicker("chrclyblx",[{"text":"土建","value":"1"},{"text":"机电","value":"2"},{"text":"装修","value":"3"},{"text":"园林","value":"4"},
         {"text":"其他","value":"5"}],"intclyblx");
 	
-    relPicker("chrsfdtp",[{"text":"是","value":""},{"text":"否","value":""}],"intsfdtp");
+    relPicker("chrsfdtp",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfdtp");
 
     relPicker("chrsplczt",[{"text":"带审批","value":""},{"text":"总部审批A","value":""},{"text":"总部审批B","value":""},{"text":"业主","value":""}],"intsplczt");
 
-    //upLoadImg('#chbtn',{"busType":"bj_xm_clybspjl"});
+    upLoadFile('#chbtn',{"busType":"bj_xm_clybspjl"});
+    
+    isUpdata();
+    
     getSgdw();
     
 }
@@ -28,21 +32,35 @@ function isUpdata(){
 				xmClybspjlId:obj.id
 			},
 			success:function(data){
-				document.getElementById("dtmgxrq").innerText=data.dtmgxrq;
-				document.getElementById("intclyblx").innerText=data.intclyblx;
-				document.getElementById("intsgdw").innerText=data.intsgdw;
-				document.getElementById("intsfdtp").innerText=data.intsfdtp;
-				document.getElementById("chrybmc").innerText=data.chrybmc;
-				document.getElementById("chrybwz").innerText=data.chrybwz;
-				document.getElementById("chrgfbz").innerText=data.chrgfbz;
-				document.getElementById("chrbz").innerText=data.chrbz;
+				var id=data.id||"";
+				document.getElementById("dtmgxrq").value=data.dtmgxrq||"";
+				document.getElementById("intclyblx").value=data.intclyblx||"";
+				document.getElementById("intsgdw").value=data.intsgdw||"";
+				document.getElementById("intsfdtp").value=data.intsfdtp||"";
+				document.getElementById("chrybmc").value=data.chrybmc||"";
+				document.getElementById("chrybwz").value=data.chrybwz||"";
+				document.getElementById("chrgfbz").value=data.chrgfbz||"";
+				document.getElementById("chrbz").value=data.chrbz||"";
+				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
+				var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
+				for(i in xmClybspjlJszlList){
+					addpp(xmClybspjlJszlList[i]);
+				}
 			}
 		});
+	}else{
+		document.getElementById("dtmgxrq").value=sysdate;
 	}
 }
 //增加品牌资料
 var ppSum=0;
-function addpp(){
+function addpp(data){
+	var jszlid="",chrpp="",chrjscl="";
+	if(data){
+		jszlid=data.id||"";
+		chrpp=data.chrpp||"";
+		chrjscl=data.chrjscl||"";
+	}
 	ppSum +=1;
 	var id;
 	if(obj.id){
@@ -54,18 +72,22 @@ function addpp(){
 	addLi.className="bj-broder pp";
 	addLi.id=''+ppSum;
 	addLi.innerHTML+=`
-			<input id="id" class="bj-input bj-p-black-font" type="hidden" />
+			<input id="id" class="bj-input bj-p-black-font" type="hidden" value="`+jszlid+`"/>
 			<input id="intclybspjlid" class="bj-input bj-p-black-font" type="hidden" value="`+id+`" />
-			<input id="chrpp" class="bj-input bj-p-black-font" type="text" placeholder="品牌" />
-			<input id="chrjscl" class="bj-input bj-p-black-font" type="text" placeholder="资料" />
-			<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('`+ppSum+`')">删除</button>
+			<input id="chrpp" class="bj-input bj-p-black-font" type="text" placeholder="品牌" value="`+chrpp+`"/>
+			<input id="chrjscl" class="bj-input bj-p-black-font" type="text" placeholder="资料" value="`+chrjscl+`"/>
+			<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('`+ppSum+`','`+jszlid+`')">删除</button>
 	`;
 	
 	mui("#pp-list")[0].appendChild(addLi);
 }
+var deleteJszlIds="";
 //删除品牌资料
-function deletePp(id){
+function deletePp(id,jszlid){
 	mui("#pp-list")[0].removeChild(mui("#"+id)[0]);
+	if(jszlid){
+		deleteJszlIds+=deleteJszlIds+",";
+	}
 }
 //得到品牌资料json
 function getpp(){
@@ -99,11 +121,14 @@ function getpp(){
 	var dataJson = JSON.stringify(datas);
 	return dataJson;
 }
+
 function save(){
-	getpp();
     var data = getFromData("myform");
 	data["intxmid"] = getCookie("id");
-	data["chrdlrid"] = getCookie("chrdlrid");
+	data["intbgrid"] = getCookie("chrdlrid");
+	data["chrbgrmc"] = getCookie("chrdlrmc");
+	data["deleteJszlIds"] = deleteJszlIds;
+	data["xmClybspjlJszlJson"] = getpp();
 	$bjAjax({
 		url:materialApiSave,
 		data:data,
