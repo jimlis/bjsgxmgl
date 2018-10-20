@@ -1,6 +1,7 @@
 package com.zj.project.xm.xmclybspjl.service.impl;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,8 @@ import com.zj.project.xm.xmclybspjl.domain.XmClybspjlDO;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlJszlDO;
 import com.zj.project.xm.xmclybspjl.service.XmClybspjlJszlService;
 import com.zj.project.xm.xmclybspjl.service.XmClybspjlService;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 
 /**
  * 
@@ -50,19 +53,51 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 	@Autowired
 	private FileService fileService;
 	
+	@Autowired
+	private XmDwmdService xmDwmdService;
+	
 	@Override
 	public XmClybspjlDO getById(Serializable id) {
 		XmClybspjlDO xmClybspjlDO = super.getById(id);
-
-		// 查询品牌技术信息
-		XmClybspjlJszlDO xmClybspjlJszlDO = new XmClybspjlJszlDO();
-		xmClybspjlJszlDO.setFcbz(1);
-		xmClybspjlJszlDO.setIntclybspjlid(xmClybspjlDO.getId());
-		QueryWrapper<XmClybspjlJszlDO> queryWrapper = new QueryWrapper<XmClybspjlJszlDO>(xmClybspjlJszlDO)
-				.orderByAsc("intxh");
-		List<XmClybspjlJszlDO> list = xmClybspjlJszlService.list(queryWrapper);
-		xmClybspjlDO.setXmClybspjlJszlList(list);
-
+		if(xmClybspjlDO!=null) {
+			// 查询品牌技术信息
+			XmClybspjlJszlDO xmClybspjlJszlDO = new XmClybspjlJszlDO();
+			xmClybspjlJszlDO.setFcbz(1);
+			xmClybspjlJszlDO.setIntclybspjlid(xmClybspjlDO.getId());
+			QueryWrapper<XmClybspjlJszlDO> queryWrapper = new QueryWrapper<XmClybspjlJszlDO>(xmClybspjlJszlDO)
+					.orderByAsc("intxh");
+			List<XmClybspjlJszlDO> list = xmClybspjlJszlService.list(queryWrapper);
+			xmClybspjlDO.setXmClybspjlJszlList(list);
+			
+			//施工名称
+			Long intsgdw = xmClybspjlDO.getIntsgdw();
+			if(intsgdw!=null) {
+				XmDwmdDO xmDwmdDO = xmDwmdService.getById(intsgdw);
+				if(xmDwmdDO!=null) {
+					xmClybspjlDO.setChrsgdw(xmDwmdDO.getChrdwmc());
+				}
+			}
+			
+			Integer intclyblx = xmClybspjlDO.getIntclyblx();
+			String chrclyblx ="";
+			if(intclyblx!=null) {
+				if(intclyblx.equals(1)) {
+					chrclyblx="土建";
+				}else if(intclyblx.equals(2)) {
+					chrclyblx="机电";
+				}else if(intclyblx.equals(3)) {
+					chrclyblx="装修";
+				}else if(intclyblx.equals(4)) {
+					chrclyblx="园林";
+				}else if(intclyblx.equals(5)) {
+					chrclyblx="其他";
+				}
+				xmClybspjlDO.setChrclyblx(chrclyblx);
+			}
+			
+			Integer intsfdtp = xmClybspjlDO.getIntsfdtp();
+			xmClybspjlDO.setChrsfdtp((intsfdtp!=null&&intsfdtp.equals(1))?"是":"否");
+		}
 		return xmClybspjlDO;
 	}
 
@@ -87,9 +122,10 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 	 *            文件ids
 	 * @param xmClybspjlJszlJson
 	 *            品牌和技术json串
+	 * @param deleteJszlIds 删除的品牌技术资料ids
 	 */
 	@Override
-	public void saveXmZpjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson) {
+	public void saveXmClybspjlxx(XmClybspjlDO xmClybspjlDO, String fileIds, String xmClybspjlJszlJson,String deleteJszlIds) {
 		Long xmid = xmClybspjlDO.getIntxmid();
 		if (xmid == null) {
 			throw new CommonException("xmid不能为空");
@@ -139,6 +175,19 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 					}
 				});
 			}
+		}
+		
+		//删除技术资料
+		if(StringUtils.isNotEmpty(deleteJszlIds)) {
+			Arrays.stream(deleteJszlIds.trim().split(",")).forEach(jszlId->{
+				if(StringUtils.isNotEmpty(jszlId)) {
+					XmClybspjlJszlDO xmClybspjlJszl=new XmClybspjlJszlDO();
+					xmClybspjlJszl.setId(Long.parseLong(jszlId));
+					xmClybspjlJszl.setFcbz(0);
+					xmClybspjlJszl.setGxsj(new Date());
+					xmClybspjlJszlService.updateById(xmClybspjlJszl);
+				}
+			});
 		}
 	}
 

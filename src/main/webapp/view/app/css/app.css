@@ -117,4 +117,10 @@ header.mui-bar.mui-bar-nav{
 .bj-none{
 	display: none;
 }
+.bj-red{
+	color:red;
+}
+.bj-hand{
+   cursor: pointer;
+｝
 

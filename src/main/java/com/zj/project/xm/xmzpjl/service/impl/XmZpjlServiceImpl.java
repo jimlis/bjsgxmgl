@@ -1,5 +1,20 @@
 package com.zj.project.xm.xmzpjl.service.impl;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
@@ -11,21 +26,13 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdl.domain.XmDlDO;
+import com.zj.project.xm.xmdl.service.XmDlService;
 import com.zj.project.xm.xmzpjl.dao.XmZpjlDao;
 import com.zj.project.xm.xmzpjl.domain.XmZpjlDO;
 import com.zj.project.xm.xmzpjl.service.XmZpjlService;
 import com.zj.project.xm.xmzpms.domain.XmZpmsDO;
 import com.zj.project.xm.xmzpms.service.XmZpmsService;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -48,6 +55,52 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
 
     @Autowired
     private XmZpmsService xmZpmsService;
+    
+    @Autowired
+    private XmDlService xmDlService;
+    
+    @Override
+    public XmZpjlDO getById(Serializable id) {
+    	XmZpjlDO xmZpjlDO=super.getById(id);
+    	if(xmZpjlDO!=null) {
+    		
+    		//设置报告类别名称
+    		Integer intbglb = xmZpjlDO.getIntbglb();
+    		String chrpswz = xmZpjlDO.getChrpswz();
+    		String chrbglb="";
+    		if(intbglb!=null) {
+    			if(intbglb.equals(1)) {
+    				chrbglb="整体形象进度";
+    				xmZpjlDO.setChrpswzms(xmZpjlDO.getChrpswz());
+    			}else if(intbglb.equals(2)) {
+    				chrbglb="栋楼形象进度";
+    				//设置拍摄地址描述
+    				if(StringUtils.isNotEmpty(chrpswz)) {
+    					XmDlDO xmDlDO = xmDlService.getById(Long.parseLong(chrpswz));
+    					if(xmDlDO!=null) {
+    						xmZpjlDO.setChrpswzms(xmDlDO.getChrdlmc());
+    					}
+    				}
+    			}else if(intbglb.equals(3)) {
+    				chrbglb="隐蔽工程形象进度";
+    				String chrpswzms="";
+    				if(StringUtils.isNotEmpty(chrpswz)) {
+    					if("1".equals(chrpswz)) {
+    						chrpswzms="弱电";
+    					}else if("2".equals(chrpswz)) {
+    						chrpswzms="机电";
+    					}else if("3".equals(chrpswz)) {
+    						chrpswzms="其他";
+    					}
+    					xmZpjlDO.setChrpswzms(chrpswzms);
+    				}
+    			}
+    			xmZpjlDO.setChrbglb(chrbglb);
+    		}
+    		
+    	}
+    	return xmZpjlDO;
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
@@ -129,69 +182,101 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
      * @return
      */
     @Override
-    public Map<String,List<XmZpjlDO>> getXmZpjlMapByXmid(Long xmid){
+    public Map<String,Object> getXmZpjlMapByXmid(Long xmid){
         if(xmid==null){
             throw  new CommonException("xmid不能为空");
         }
-        Map<String,List<XmZpjlDO>> map= Maps.newHashMap();
+        XmDlDO xmDlDO=new XmDlDO();
+        xmDlDO.setIntxmid(xmid);
+        xmDlDO.setFcbz(1);
+        QueryWrapper<XmDlDO>  xmDlQuery=new QueryWrapper<XmDlDO>(xmDlDO).orderByAsc("intxh","id");
+        List<XmDlDO> list = xmDlService.list(xmDlQuery);
+        Map<String, String> xmDlMap=Maps.newLinkedHashMap();
+        if(CollectionUtils.isNotEmpty(list)) {
+        	Map<String,String> collect = list.stream().collect(Collectors.toMap(one->Objects.toString(one.getId(), ""),one->one.getChrdlmc()));
+        	xmDlMap.putAll(collect);
+        }
+        
+        Map<String,Object> map= Maps.newHashMap();
         //1（整体形象进度），
         XmZpjlDO xmZpjlDO=new XmZpjlDO();
         xmZpjlDO.setFcbz(1);
         xmZpjlDO.setIntxmid(xmid);
-        xmZpjlDO.setIntbglb("1");
+        xmZpjlDO.setIntbglb(1);
 
         QueryWrapper<XmZpjlDO> queryWrapper=new QueryWrapper<XmZpjlDO>(xmZpjlDO).orderByAsc("dtmbgrq");
         List<XmZpjlDO> list1=list(queryWrapper);
         if(CollectionUtils.isNotEmpty(list1)){
             list1.forEach(one->{
-                String intbglb=one.getIntbglb();
-                if(map.containsKey(intbglb)){
-                    List<XmZpjlDO> add= map.get(intbglb);
+                Integer intbglb=one.getIntbglb();
+                if(map.containsKey(Objects.toString(intbglb, ""))){
+                    List<XmZpjlDO> add=(List<XmZpjlDO>)map.get(Objects.toString(intbglb, ""));
                     add.add(one);
-                    map.put(intbglb,add);
+                    map.put(Objects.toString(intbglb, ""),add);
                 }else{
                     List<XmZpjlDO> add= Lists.newArrayList();
                     add.add(one);
-                    map.put(intbglb,add);
+                    map.put(Objects.toString(intbglb, ""),add);
                 }
             });
         }
         // 2（栋楼形象进度）
-        xmZpjlDO.setIntbglb("2");
+        xmZpjlDO.setIntbglb(2);
         queryWrapper=new QueryWrapper<XmZpjlDO>(xmZpjlDO).orderByAsc("chrpswz","dtmbgrq");
         List<XmZpjlDO> list2=list(queryWrapper);
         if(CollectionUtils.isNotEmpty(list2)){
+        	Map<String,List<XmZpjlDO>> dlMap=Maps.newLinkedHashMap();
             list2.forEach(one->{
-                String intbglb=one.getIntbglb();
-                if(map.containsKey(intbglb)){
-                    List<XmZpjlDO> add= map.get(intbglb);
+            	String chrpswz=Objects.toString(one.getChrpswz(), "");
+            	one.setChrpswzms(xmDlMap.get(chrpswz));
+                if(dlMap.containsKey(chrpswz)){
+                    List<XmZpjlDO> add= dlMap.get(chrpswz);
                     add.add(one);
-                    map.put(intbglb,add);
+                    dlMap.put(chrpswz,add);
                 }else{
                     List<XmZpjlDO> add= Lists.newArrayList();
                     add.add(one);
-                    map.put(intbglb,add);
+                    dlMap.put(chrpswz,add);
                 }
             });
+            Set<String> keySet = dlMap.keySet();
+            Map<String,List<XmZpjlDO>> newDlMap=Maps.newLinkedHashMap();
+            keySet.forEach(key->{
+            	newDlMap.put(xmDlMap.get(key), dlMap.get(key));
+            });
+            map.put("2", dlMap);
         }
 
         // 3（隐蔽工程形象进度）
-        xmZpjlDO.setIntbglb("3");
+        xmZpjlDO.setIntbglb(3);
         queryWrapper=new QueryWrapper<XmZpjlDO>(xmZpjlDO).orderByAsc("chrpswz","dtmbgrq");
         List<XmZpjlDO> list3=list(queryWrapper);
         if(CollectionUtils.isNotEmpty(list3)){
+        	Map<String,List<XmZpjlDO>> ycgcMap=Maps.newLinkedHashMap();
             list3.forEach(one->{
-                String intbglb=one.getIntbglb();
-                if(map.containsKey(intbglb)){
-                    List<XmZpjlDO> add= map.get(intbglb);
+            	String chrpswz = Objects.toString(one.getChrpswz(), "");
+            	String chrpswzms="";
+				if(StringUtils.isNotEmpty(chrpswz)) {
+					if("1".equals(chrpswz)) {
+						chrpswzms="弱电";
+					}else if("2".equals(chrpswz)) {
+						chrpswzms="机电";
+					}else if("3".equals(chrpswz)) {
+						chrpswzms="其他";
+					}
+					one.setChrpswzms(chrpswzms);
+				}
+                if(map.containsKey(chrpswzms)){
+                    List<XmZpjlDO> add= ycgcMap.get(chrpswzms);
                     add.add(one);
-                    map.put(intbglb,add);
+                    ycgcMap.put(chrpswzms,add);
                 }else{
                     List<XmZpjlDO> add= Lists.newArrayList();
                     add.add(one);
-                    map.put(intbglb,add);
+                    ycgcMap.put(chrpswzms,add);
                 }
             });
+            map.put("3", ycgcMap);
         }
 
         return  map;

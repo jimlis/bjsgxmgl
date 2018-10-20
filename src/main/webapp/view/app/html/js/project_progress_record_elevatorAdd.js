@@ -8,7 +8,7 @@ var pageData;
 var vue;
 var dlhData;
 window.onload = function(){
-	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_dtsbazsg"});
+	upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});
 	
 	dlhData=getXmdlListByXmid(xmid);
 	
@@ -34,7 +34,7 @@ window.onload = function(){
 	
 	if(id){
 		//加载图片
-		initFileList("bj_xm_sgjd_dtsbazsg",id,"1","fileIds","file-list",true);
+		initFileList("bj_xm_xkz",id,"1","fileIds","file-list",true);
 	}
 	
 }

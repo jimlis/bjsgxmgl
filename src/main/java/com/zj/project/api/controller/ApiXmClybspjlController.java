@@ -79,14 +79,15 @@ public class ApiXmClybspjlController extends ApiBaseController {
     @PostMapping("save")
     @ApiOperation(value="保存材料样板审批记录信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "图片ids，多个以逗号隔开"),
-            @ApiImplicitParam(name="xmClybspjlJszlJson",paramType="form",dataType = "string",required=false,value = "品牌及技术对象json串")
+            @ApiImplicitParam(name="xmClybspjlJszlJson",paramType="form",dataType = "string",required=false,value = "品牌及技术对象json串"),
+            @ApiImplicitParam(name="deleteJszlIds",paramType="form",dataType = "string",required=false,value = "删除品牌及技术对象ids")
     })
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result<XmClybspjlDO> save(XmClybspjlDO xmClybspjlDO, String fileIds,String xmClybspjlJszlJson) {
+    public Result<XmClybspjlDO> save(XmClybspjlDO xmClybspjlDO, String fileIds,String xmClybspjlJszlJson,String deleteJszlIds) {
         try {
-        	xmClybspjlService.saveXmZpjlxx(xmClybspjlDO,fileIds,xmClybspjlJszlJson);
+        	xmClybspjlService.saveXmClybspjlxx(xmClybspjlDO,fileIds,xmClybspjlJszlJson,deleteJszlIds);
            return Result.ok(xmClybspjlDO);
         }catch (Exception e){
             e.printStackTrace();

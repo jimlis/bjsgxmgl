@@ -21,8 +21,9 @@ public interface XmGhzbService extends BaseService<XmGhzbDO> {
 
     /**
      * 批量保存项目的规划信息
-     * @param xmid
-     * @param json
+     * @param xmid 项目id
+     * @param ghzbJson 项目规划指标对象数组json字符串
+     * @param deleteGhzbIds 删除项目规划指标ids
      */
-    void saveBatchXmGhzbxx(Long xmid, String json);
+    void saveBatchXmGhzbxx(Long xmid, String ghzbJson,String deleteGhzbIds);
 }

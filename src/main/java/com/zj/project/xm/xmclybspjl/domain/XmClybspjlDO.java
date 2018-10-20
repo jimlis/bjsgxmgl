@@ -51,12 +51,23 @@ public class XmClybspjlDO extends BaseDomain {
     /** 材料样板类型：1（土建）2（机电）3（装修）4（园林）5（其他） */
     @ApiModelProperty(value = "材料样板类型：1（土建）2（机电）3（装修）4（园林）5（其他",name = "intclyblx",dataType = "Integer",required = true)
     private Integer intclyblx;
+    @TableField(exist=false)
+    @ApiModelProperty(value = "材料样板类型：1（土建）2（机电）3（装修）4（园林）5（其他",name = "chrclyblx",dataType = "String",required = true)
+    private String chrclyblx;
     /** 施工负责单位：单位名单表施工类别id */
     @ApiModelProperty(value = "施工负责单位：单位名单表施工类别id",name = "intsgdw",dataType = "Long",required = true)
     private Long intsgdw;
+    /** 施工负责单位名称 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "施工负责单位名称",name = "intsgdw",dataType = "String",required = true)
+    private String chrsgdw;
     /** 是否代替品：1（是），0（否） */
     @ApiModelProperty(value = "是否代替品：1（是），0（否）",name = "intsfdtp",dataType = "Integer",required = false)
     private Integer intsfdtp;
+    /** 是否代替品：1（是），0（否） */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "是否代替品：1（是），0（否）",name = "chrsfdtp",dataType = "String",required = false)
+    private String chrsfdtp;
     /** 材料样板名称 */
     @ApiModelProperty(value = "材料样板名称",name = "chrybmc",dataType = "String",required = false)
     private String chrybmc;
@@ -75,6 +86,10 @@ public class XmClybspjlDO extends BaseDomain {
     /** 审批流程状态：code码配置 */
     @ApiModelProperty(value = "审批流程状态：code码配置",name = "intsplczt",dataType = "String",required = true)
     private String intsplczt;
+    /** 审批流程状态名称 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "审批流程状态：code码配置",name = "chrsplczt",dataType = "String",required = true)
+    private String chrsplczt;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required = true)
     private Long intbgrid;
@@ -306,5 +321,54 @@ public class XmClybspjlDO extends BaseDomain {
 	public void setXmClybspjlJszlList(List<XmClybspjlJszlDO> xmClybspjlJszlList) {
 		this.xmClybspjlJszlList = xmClybspjlJszlList;
 	}
-    
+	/**
+	 * 获取施工单位
+	 */
+	public String getChrsgdw() {
+		return chrsgdw;
+	}
+	/**
+	 * 设置施工单位
+	 */
+	public void setChrsgdw(String chrsgdw) {
+		this.chrsgdw = chrsgdw;
+	}
+	/**
+	 * 获取材料样板类型名称
+	 */
+	public String getChrclyblx() {
+		return chrclyblx;
+	}
+	/**
+	 * 设置材料样板类型名称
+	 */
+	public void setChrclyblx(String chrclyblx) {
+		this.chrclyblx = chrclyblx;
+	}
+	/**
+	 * 获取是否代替品
+	 */
+	public String getChrsfdtp() {
+		return chrsfdtp;
+	}
+	/**
+	 * 设置是否代替品
+	 */
+	public void setChrsfdtp(String chrsfdtp) {
+		this.chrsfdtp = chrsfdtp;
+	}
+	/**
+	 * 获取chrsplczt
+	 */
+	public String getChrsplczt() {
+		return chrsplczt;
+	}
+	/**
+	 * 设置chrsplczt
+	 */
+	public void setChrsplczt(String chrsplczt) {
+		this.chrsplczt = chrsplczt;
+	}
+	
+	
 }

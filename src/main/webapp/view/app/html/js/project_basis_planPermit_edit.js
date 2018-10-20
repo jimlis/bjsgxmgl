@@ -1,5 +1,6 @@
 dtPicker('#dtmfzrq');
 dtPicker('#dtmyxrq');
+upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});
 $bjAjax({
 	url:baseApixkz,
 	type:"post",
@@ -8,10 +9,12 @@ $bjAjax({
 		xkzlx:1
 	},
 	success:function(data){
-		document.getElementById("chrxkzbh").value = data.chrxkzbh;
-		document.getElementById("chrffbm").value = data.chrffbm;
-		document.getElementById("dtmfzrq").value = data.dtmfzrq;
-		document.getElementById("dtmyxrq").value = data.dtmyxrq;
+		var id=data.id||"";
+		document.getElementById("chrxkzbh").value = data.chrxkzbh||"";
+		document.getElementById("chrffbm").value = data.chrffbm||"";
+		document.getElementById("dtmfzrq").value = data.dtmfzrq||"";
+		document.getElementById("dtmyxrq").value = data.dtmyxrq||"";
+		initFileList("bj_xm_xkz",id,"1","fileIds","file-list",true);
 	}
 })
 
@@ -25,7 +28,7 @@ function save(){
 		data:data,
 		success:function(data){
 			if(data){
-				toUrl("project_basis_constructionPermit.html");
+				toUrl("project_basis_planPermit.html");
 			}
 			
 		}

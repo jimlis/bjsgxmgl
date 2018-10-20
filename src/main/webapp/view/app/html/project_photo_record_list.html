@@ -9,6 +9,9 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
 	</head>
 		
 	<body>
@@ -21,19 +24,19 @@
 			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">项目整体形象进度照片</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        	<li class="mui-table-view-cell mui-collapse" onclick="openNext()">2018-3-15</li>
+		            	<ul class="mui-table-view bj-background-inherit" id="ztxx"> 
+				        	<li class="mui-table-view-cell mui-collapse" onclick="openNext()"></li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">栋楼形象进度照片</a>
-		            	<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
-				        	<li class="mui-table-view-cell mui-collapse" onclick="openNext()">1#栋未完</li>
+		            	<ul class="mui-table-view bj-title2-font bj-background-inherit" id="dlxx"> 
+				        	<li class="mui-table-view-cell mui-collapse" onclick="openNext()"></li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">隐蔽工程验收照片</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
+		            	<ul class="mui-table-view bj-background-inherit" id="gcys"> 
 					        <li class="mui-table-view-cell mui-collapse">弱点</li>
 					        <li class="mui-table-view-cell mui-collapse">机电</li>
 					        <li class="mui-table-view-cell mui-collapse">其他</li>
@@ -42,6 +45,9 @@
 		    </ul>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_photo_record_list.js" type="text/javascript" charset="utf-8"></script>
 	</body>

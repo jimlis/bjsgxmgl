@@ -1,39 +1,54 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>建设工程施工许可证</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="../css/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
-	</head>
-		
-	<body>
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">建设工程施工许可证</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">更新</button>
-		</header>
-		<div class="mui-content" id="list">
-			<div class="mui-content-padded">
-				<ul class="bj-ul-clear bj-title2-font">文件：
-					<li><a>12345678XX.pdf</a></li>
-					<li><a>12345678XX.pdf</a></li>
-				</ul>
-				<h5 class="bj-title2-font">许可证编号：<span class="bj-p-gray-font" id="chrxkzbh">12345678XX</span></h5>
-				<h5 class="bj-title2-font">发放部门：<span class="bj-p-gray-font" id="chrffbm">重庆市建委</span></h5>
-				<h5 class="bj-title2-font">发证日期：<span class="bj-p-gray-font" id="dtmfzrq">2018年6月20日</span></h5>
-				<h5 class="bj-title2-font">有效截止日期：<span class="bj-p-gray-font" id="dtmyxrq">2020年6月20日</span></h5>
-			</div>
+<head>
+<meta charset="utf-8">
+<title>建设工程施工许可证</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">建设工程施工许可证</h1>
+		<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"
+			onclick="edit()">更新</button>
+	</header>
+	<div class="mui-content" id="list">
+		<div class="mui-content-padded">
+			<h5 class="bj-ul-clear bj-title2-font">
+				文件：
+				<div id="uploader" class="wu-example">
+					<div id="file-list"></div>
+				</div>
+			</h5>
+			<h5 class="bj-title2-font">
+				许可证编号：<span class="bj-p-gray-font" id="chrxkzbh"></span>
+			</h5>
+			<h5 class="bj-title2-font">
+				发放部门：<span class="bj-p-gray-font" id="chrffbm"></span>
+			</h5>
+			<h5 class="bj-title2-font">
+				发证日期：<span class="bj-p-gray-font" id="dtmfzrq"></span>
+			</h5>
+			<h5 class="bj-title2-font">
+				有效截止日期：<span class="bj-p-gray-font" id="dtmyxrq"></span>
+			</h5>
 		</div>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_basis_constructionPermit.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+	</div>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.lazyload.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/mui.lazyload.img.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="js/project_basis_constructionPermit.js"
+		type="text/javascript" charset="utf-8"></script>
+</body>
 
 </html>

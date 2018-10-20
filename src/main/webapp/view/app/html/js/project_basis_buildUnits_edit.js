@@ -46,16 +46,38 @@ function see(){
 		success:function(data){
 			var htmls="";
 			mui.each(data,function(index,item){
-			  	var chrdwlxmc = item.chrdwlxmc;
-		  		var chrdwmc = item.chrdwmc;
+			  	var chrdwlxmc = item.chrdwlxmc||"";
+		  		var chrdwmc = item.chrdwmc||"";
 				htmls +=`
-					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span></h5>
+					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span><span style="position: fixed; right: 10px;" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除<span></h5>
 				`;
 			})
 			mui(".mui-content .mui-table-view .mui-collapse-content")[0].innerHTML =htmls;
 		}
 	})
 }
+
+/**
+ * 删除已建单位
+ * @param id 主键id
+ * @param chrdwmc 单位名称
+ * @param obj 
+ * @returns
+ */
+function delyjdw(id,chrdwmc,obj){
+	if(id){
+		mui.confirm('删除不可以恢复，确定删除"'+chrdwmc+'"单位？',"提示",['确定','取消'],function(data){
+			var index=data.index;
+			if(index==0){//确定
+	            $bj_post_ajax({"url":dwmdApiDeleteById+ "/"+id,success:function (result) {
+	            			obj.parentNode.remove();
+	                }});
+			}
+
+		});
+	}
+}
+
 //保存
 function save(){
 	var data = getFromData("myform");

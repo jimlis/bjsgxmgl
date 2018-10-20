@@ -8,6 +8,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 
 
 /**
@@ -18,27 +21,36 @@ import com.zj.platform.common.web.domain.BaseDomain;
  * <small> 2018-10-04 18:35:49 | lijun</small>
  */
  @TableName("bj_xm_ghzb")
+ @ApiModel(value = "XmGhzbDO",description = "项目基本信息-规划指标数据")
 public class XmGhzbDO extends BaseDomain {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
     /** 主键id */
     @TableId
+    @ApiModelProperty(value = "id",name = "id",dataType = "Long")
     private Long id;
     /** 逻辑废除：0（废除），1（正常） */
+    @ApiModelProperty(value = "废除标志",name = "fcbz",dataType = "Integer",hidden = true)
     private Integer fcbz;
     /** 修改新增删除时间 */
+    @ApiModelProperty(value = "更新时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
     /** 序号 */
+    @ApiModelProperty(value = "序号  ",name = "intxh",dataType = "Integer",required = false,hidden=true)
     private Integer intxh;
     /** 项目id:bj_xmjb */
+    @ApiModelProperty(value = "项目id:bj_xmjb表 ",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 指标名称 */
+    @ApiModelProperty(value = "指标名称  ",name = "chrzbmc",dataType = "String",required = true)
     private String chrzbmc;
     /** 指标值 */
-    private Float intzbz;
+    @ApiModelProperty(value = "指标值  ",name = "chrzbz",dataType = "String",required = true)
+    private String chrzbz;
     /** 值单位 */
+    @ApiModelProperty(value = "值单位 ",name = "chrzdw",dataType = "String",required = false)
     private String chrzdw;
 
     /**
@@ -116,14 +128,14 @@ public class XmGhzbDO extends BaseDomain {
     /**
      * 设置：指标值
      */
-    public void setIntzbz(Float intzbz) {
-        this.intzbz = intzbz;
+    public void setChrzbz(String chrzbz) {
+        this.chrzbz = chrzbz;
     }
     /**
      * 获取：指标值
      */
-    public Float getIntzbz() {
-        return intzbz;
+    public String getChrzbz() {
+        return chrzbz;
     }
     /**
      * 设置：值单位

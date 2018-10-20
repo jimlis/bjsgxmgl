@@ -24,10 +24,17 @@
 		<div class="mui-content" id="list">
 			<div class="mui-content-padded">
 				<form id="myform">
-					<ul class="bj-ul-clear bj-title2-font">文件：
-						<li><a>12345678XX.pdf</a></li>
-						<li><a>12345678XX.pdf</a></li>
-					</ul>
+				    <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+					<h5 class="bj-ul-clear bj-title2-font">文件：
+					    <div id="uploader" class="wu-example">
+	                        <!--用来存放文件信息-->
+	                        <div class="btns">
+	                            <button id="chbtn" type="button">选择文件</button>
+	                        </div>
+	                        <div id="file-list">
+	                        </div>
+                        </div>
+					</h5>
 					<h5 class="bj-title2-font">许可证编号：
 						<input class="bj-input bj-p-black-font" type="text" id="chrxkzbh" placeholder="请输入" />
 					</h5>

@@ -45,6 +45,7 @@ var baseApiAddress = serverPath+"api/xmqyjwz/getXmQyjwzByXmid";
 var baseApiAddressSave = serverPath+"api/xmqyjwz/save";
 var baseApiCjdw = serverPath+"api/xmxmcjdw/getXmXmcjdwByXmid";
 var baseApiDwmd = serverPath+"api/xmdwmd/getXmDwmdxxByXmid";
+var dwmdApiDeleteById = serverPath+"api/xmdwmd/del";
 var baseApiDwmdList = serverPath+"api/xmdwmd/getXmDwmdListByXmidAndLxmd";
 var baseApiYjdw = serverPath+"api/xmdwmd/getXmYjDwmdByXmid";
 var baseApiCjdwSave = serverPath+"api/xmxmcjdw/save";
@@ -91,6 +92,11 @@ var progressSecSaveApiPath=serverPath+"api/xmsgjdecjgzx/save";
 var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
+
+//规划指标
+var targetDataListApiPath=serverPath+"/api/xmghzb/getXmGhzbByXmid";
+var targetDataSavePath=serverPath+"/api/xmghzb/batchSave";
+var targetDataDelPath=serverPath+"/api/xmghzb/del";
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){
@@ -318,7 +324,7 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 	var userPicker = new mui.PopPicker();
 	userPicker.setData(data);
 	var showUserPickerButton = document.getElementById(textSelecter);
-	showUserPickerButton.addEventListener('tap', function(event) {
+	showUserPickerButton.onclick=function(event) {
 		userPicker.show(function(items) {
 			showUserPickerButton.value = items[0].text;
 			if(valueSelecter){
@@ -331,7 +337,7 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
-	}, false);
+	};
 }
 
 /*照片懒加载1*/
@@ -383,7 +389,7 @@ function funLazyLoad(select){
 * @param  data 自定义提交数据
 * @param  done 上传完成后函数
 **/
-function upLoadImg(elem,bind,data,done){
+function upLoadImg(elem,data,done){
 	layui.use('upload', function(){
 	var upload = layui.upload;
 	//选完文件后不自动上传（js代码，将文件传到后台）
@@ -536,13 +542,18 @@ function getCookieUserValue(key) {
 
 function getCookie(c_name){
 	if (document.cookie.length>0){
-	  c_start=document.cookie.indexOf(c_name + "=");
+	  if(document.cookie.indexOf(c_name)==0){
+		  c_start=document.cookie.indexOf(c_name + "=");
+	  }else{
+		  c_name="; "+c_name;
+		  c_start=document.cookie.indexOf(c_name + "=");
+	  }
 	  if (c_start!=-1){ 
-	    c_start=c_start + c_name.length+1 ;
-	    c_end=document.cookie.indexOf(";",c_start);
-	    if (c_end==-1) c_end=document.cookie.length;
-	    return unescape(document.cookie.substring(c_start,c_end));
-	  } 
+		    c_start=c_start + c_name.length+1 ;
+		    c_end=document.cookie.indexOf(";",c_start);
+		    if (c_end==-1) c_end=document.cookie.length;
+		    return unescape(document.cookie.substring(c_start,c_end));
+	      } 
 	}
 	return ""
 }

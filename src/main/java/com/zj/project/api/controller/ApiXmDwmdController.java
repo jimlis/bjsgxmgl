@@ -116,6 +116,7 @@ public class ApiXmDwmdController extends ApiBaseController {
     public Result del(@PathVariable("id") Long id) {
         try {
             XmDwmdDO xmDwmdDO = new XmDwmdDO();
+            xmDwmdDO.setId(id);
             xmDwmdDO.setFcbz(0);
             xmDwmdDO.setGxsj(new Date());
             xmDwmdService.updateById(xmDwmdDO);

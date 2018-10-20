@@ -9,6 +9,11 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style type="text/css"> 
+		  [v-cloak] { 
+		    display: none; 
+		  } 
+		</style> 
 	</head>
 
 	<body>
@@ -17,21 +22,21 @@
 			<h1 class="mui-title">规划指标数据</h1>
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">更新</button>
 		</header>
-		<div class="mui-content" id="app">
+		<div class="mui-content" id="app" v-cloak>
 			<ul class="mui-table-view mui-grid-view mui-grid-9" 
-				v-if="list.length>5"
+				v-if="list.length>5" 
 				>
 				<div class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3"
 					v-for="item in list">
 					<input class="bj-input-disable" v-model="item.chrzbmc"></input>
-					<input class="bj-input-disable" v-model="item.intzbz"></input>
+					<input class="bj-input-disable" v-model="item.chrzbz+'('+item.chrzdw+')'"></input>
 				</div>
 			</ul>
 			<ul class="mui-table-view mui-grid-view mui-grid-9" v-else>
 				<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12"
-					v-for="item in list">
+					v-for="item in list" >
 					<input class="bj-input-disable" v-model="item.chrzbmc"></input>
-					<input class="bj-input-disable" v-model="item.intzbz"></input>
+					<input class="bj-input-disable" v-model="item.chrzbz+'('+item.chrzdw+')'"></input>
 				</li>
 			</ul>
 		</div>

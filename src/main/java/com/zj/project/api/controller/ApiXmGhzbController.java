@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
@@ -48,6 +49,9 @@ public class ApiXmGhzbController extends ApiBaseController {
     @RequiresAuthentication
     public Result<List<XmGhzbDO> > getXmGhzbByXmid(Long xmid) {
         try {
+        	if(xmid==null) {
+        		return Result.ok(Lists.newArrayList());
+        	}
             QueryWrapper<XmGhzbDO> queryWrapper=new QueryWrapper<XmGhzbDO>().eq("fcbz",1).eq("intxmid",xmid).orderByAsc("intxh");
             List<XmGhzbDO> list = xmGhzbService.list(queryWrapper);
             return Result.ok(list);
@@ -62,13 +66,14 @@ public class ApiXmGhzbController extends ApiBaseController {
     @PostMapping("batchSave")
     @ApiOperation(value="批量保存项目规划指标信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
-            @ApiImplicitParam(name="json",paramType="form",dataType = "string",required=true,value = "项目规划指标对象数组json字符串")})
+            @ApiImplicitParam(name="ghzbJson",paramType="form",dataType = "string",required=true,value = "项目规划指标对象数组json字符串"),
+            @ApiImplicitParam(name="deleteGhzbIds",paramType="form",dataType = "string",required=false,value = "删除项目规划指标ids"),})
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result batchSave(Long xmid,String json) {
+    public Result batchSave(Long xmid,String ghzbJson,String deleteGhzbIds) {
         try {
-           xmGhzbService.saveBatchXmGhzbxx(xmid,json);
+           xmGhzbService.saveBatchXmGhzbxx(xmid,ghzbJson,deleteGhzbIds);
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
