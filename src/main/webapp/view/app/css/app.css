@@ -85,6 +85,11 @@ textarea.bj-input{
 	background-color: gainsboro !important;
 	pointer-events:none;
 }
+.bj-input-disable{
+	pointer-events:none;
+	width: 100%;
+	text-align: center;
+}
 .bj-broder{
 	border: 1px dashed gray;
 	margin: 5px auto;
