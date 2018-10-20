@@ -87,7 +87,7 @@ public class ApiXmClybspjlController extends ApiBaseController {
     @RequiresAuthentication
     public Result<XmClybspjlDO> save(XmClybspjlDO xmClybspjlDO, String fileIds,String xmClybspjlJszlJson,String deleteJszlIds) {
         try {
-        	xmClybspjlService.saveXmZpjlxx(xmClybspjlDO,fileIds,xmClybspjlJszlJson,deleteJszlIds);
+        	xmClybspjlService.saveXmClybspjlxx(xmClybspjlDO,fileIds,xmClybspjlJszlJson,deleteJszlIds);
            return Result.ok(xmClybspjlDO);
         }catch (Exception e){
             e.printStackTrace();

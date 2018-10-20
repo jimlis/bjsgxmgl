@@ -8,7 +8,7 @@ window.onload = function(){
 	
     relPicker("chrsfdtp",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfdtp");
 
-    relPicker("chrsplczt",[{"text":"带审批","value":""},{"text":"总部审批A","value":""},{"text":"总部审批B","value":""},{"text":"业主","value":""}],"intsplczt");
+    relPicker("chrsplczt",[{"text":"带审批","value":"1"},{"text":"总部审批A","value":"2"},{"text":"总部审批B","value":"3"},{"text":"业主","value":"4"}],"intsplczt");
 
     upLoadFile('#chbtn',{"busType":"bj_xm_clybspjl"});
     
@@ -35,12 +35,17 @@ function isUpdata(){
 				var id=data.id||"";
 				document.getElementById("dtmgxrq").value=data.dtmgxrq||"";
 				document.getElementById("intclyblx").value=data.intclyblx||"";
+				document.getElementById("chrclyblx").value=data.chrclyblx||"";
 				document.getElementById("intsgdw").value=data.intsgdw||"";
+				document.getElementById("chrsgdw").value=data.chrsgdw||"";
 				document.getElementById("intsfdtp").value=data.intsfdtp||"";
+				document.getElementById("chrsfdtp").value=data.chrsfdtp||"";
 				document.getElementById("chrybmc").value=data.chrybmc||"";
 				document.getElementById("chrybwz").value=data.chrybwz||"";
 				document.getElementById("chrgfbz").value=data.chrgfbz||"";
 				document.getElementById("chrbz").value=data.chrbz||"";
+				document.getElementById("intsplczt").value=data.intsplczt||"";
+				document.getElementById("chrsplczt").value=data.chrsplczt||"";
 				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
 				var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
 				for(i in xmClybspjlJszlList){
@@ -72,7 +77,7 @@ function addpp(data){
 	addLi.className="bj-broder pp";
 	addLi.id=''+ppSum;
 	addLi.innerHTML+=`
-			<input id="id" class="bj-input bj-p-black-font" type="hidden" value="`+jszlid+`"/>
+			<input id="jszlid" class="bj-input bj-p-black-font" type="hidden" value="`+jszlid+`"/>
 			<input id="intclybspjlid" class="bj-input bj-p-black-font" type="hidden" value="`+id+`" />
 			<input id="chrpp" class="bj-input bj-p-black-font" type="text" placeholder="品牌" value="`+chrpp+`"/>
 			<input id="chrjscl" class="bj-input bj-p-black-font" type="text" placeholder="资料" value="`+chrjscl+`"/>
@@ -86,7 +91,7 @@ var deleteJszlIds="";
 function deletePp(id,jszlid){
 	mui("#pp-list")[0].removeChild(mui("#"+id)[0]);
 	if(jszlid){
-		deleteJszlIds+=deleteJszlIds+",";
+		deleteJszlIds+=jszlid+",";
 	}
 }
 //得到品牌资料json
@@ -97,11 +102,11 @@ function getpp(){
 		var item = pps[index].childNodes;
 		var id,intclybspjlid,chrpp,chrjscl;
 		for(i in item){
-			if(item[i].id=="id"){
-				id=item[i].value;
+			if(item[i].id=="jszlid"){
+				id=item[i].value||null;
 			}
 			if(item[i].id=="intclybspjlid"){
-				intclybspjlid=item[i].value;
+				intclybspjlid=item[i].value||null;
 			}
 			if(item[i].id=="chrpp"){
 				chrpp=item[i].value;
@@ -124,10 +129,11 @@ function getpp(){
 
 function save(){
     var data = getFromData("myform");
+    data["id"] = (obj.id||"");
 	data["intxmid"] = getCookie("id");
 	data["intbgrid"] = getCookie("chrdlrid");
 	data["chrbgrmc"] = getCookie("chrdlrmc");
-	data["deleteJszlIds"] = deleteJszlIds;
+	data["deleteJszlIds"] =(deleteJszlIds.length>0?deleteJszlIds.substring(0,deleteJszlIds.length-1):deleteJszlIds);
 	data["xmClybspjlJszlJson"] = getpp();
 	$bjAjax({
 		url:materialApiSave,

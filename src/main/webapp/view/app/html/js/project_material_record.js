@@ -12,28 +12,29 @@ window.onload=function(){
 		success:function(array){
 			var tjl,jdl,zxl,yll,qtl
 			mui.each(array,function(index,item){
-			  	var dtmgxrq = item.dtmgxrq;
-			  	var intyblx = item.intyblx;
+			  	var dtmgxrq = item.dtmgxrq||"";
+			  	var intclyblx = item.intclyblx||"";
+			  	var chrybmc = item.chrybmc||"";
 			  	var id = item.id;
-			  	if(intyblx=="1"){
+			  	if(intclyblx=="1"){
 			  		tjl = true;
-			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
-			  	if(intyblx=="2"){
+			  	if(intclyblx=="2"){
 			  		jdl = true;
-			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
-			  	if(intyblx=="3"){
+			  	if(intclyblx=="3"){
 			  		zxl = true;
-			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
-			  	if(intyblx=="4"){
+			  	if(intclyblx=="4"){
 			  		yll = true;
-			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
-			  	if(intyblx=="5"){
+			  	if(intclyblx=="5"){
 			  		qtl = true;
-			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			});
 			if(!tjl){
