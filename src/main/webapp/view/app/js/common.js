@@ -378,12 +378,12 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 };
 //打开图片
 function openImg(src){
-	
 	var div=document.createElement("div");
 	div.className="bj-zz";
 	div.id="bj-zz";
+	div.onclick=closeImg;
 	div.innerHTML=`
-		<img src="`+src+`" style="margin: auto;" onclick="closeImg()"/>
+		<img id="bj-img1" src="`+src+`" style="margin: auto;"/>
 	`
 	document.body.appendChild(div);
 }

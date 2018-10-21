@@ -138,3 +138,10 @@ header.mui-bar.mui-bar-nav{
 	bottom: 0px;
 	z-index: 9;
 }
+
+.bj-img1{
+    max-width:  100%;
+    width: auto;
+    height: auto;
+}
+
