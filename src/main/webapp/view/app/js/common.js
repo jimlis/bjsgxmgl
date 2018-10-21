@@ -12,7 +12,7 @@ function inPage(){
 	if(tindex!=-1){
 		//判断是否是刷新
 		var s=allokie.lastIndexOf("$-*");
-		var sum = (allokie.length-(s+3);
+		var sum = (allokie.length-(s+3));
 		if(sum==thisHref.length){
 			return;
 		}else{

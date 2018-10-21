@@ -14,14 +14,11 @@ function login(){
 	$bj_post_ajax({"url":userApiPath+"login",data:{"mobile":account,"password":password},success:function (result) {
             	var token=result.token;
             	var user=result.user;
-            	debugger
             	if(token){
             		try{
             				setCookie("chrdlrmc",user.name);
             				setCookie("chrdlrid",user.id);
                         setCookie("token",JSON.stringify(token));
-                        console.log(getCookie("chrdlrmc"));
-                        setCookie("chrdlrid",user.id);
 					}catch (e){
 
 					}
