@@ -134,8 +134,11 @@ var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 
-var progressOutDoorByIdApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgDateListByXmid";
+var progressOutDoorByIdApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgById";
 var progressOutDoorSaveApiPath=serverPath+"api/xmsgjdswgwsg/save";
+
+var progressGardenByIdApiPath=serverPath+"api/xmsgjdylsg/getXmSgjdYlsgById";
+var progressGardenSaveApiPath=serverPath+"api/xmsgjdylsg/save";
 
 //规划指标
 var targetDataListApiPath=serverPath+"/api/xmghzb/getXmGhzbByXmid";
