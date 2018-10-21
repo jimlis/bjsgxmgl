@@ -12,6 +12,7 @@ import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,11 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+    	ShiroHttpServletRequest req=(ShiroHttpServletRequest)request;
+    	String servletPath = req.getServletPath();
+    	if(servletPath.equals("/api/user/login")||servletPath.startsWith("/api/file/")) {
+       	 	return true;
+       }
         if (isLoginAttempt(request, response)) {
         	String error = "请重新登录";
             try {
@@ -78,10 +84,10 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
             }catch (Exception ex) {
             	log.warn(ex.getMessage());
             }
-            log.info(error);
             return false;
         }
-        return true;
+        	return false;
+       
     }
 
 	/**

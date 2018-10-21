@@ -58,6 +58,7 @@ public class JWTUtil {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim(mykey).asString();
         } catch (JWTDecodeException e) {
+        	e.printStackTrace();
             return null;
         }
     }

@@ -206,7 +206,7 @@ $bjAjax = function(obj){
 	var headers={'Content-Type':'application/x-www-form-urlencoded'};
 	var token=getCookie("token");
 	if(token){
-       // headers["Authorization"]=token;
+        headers["Authorization"]=geCookieTokenValue("token");
 	}
 	mui.ajax(obj.url,{
 		data:obj.data,
@@ -554,7 +554,7 @@ function getLocalUserValue(key) {
  * @param key
  */
 function geCookieTokenValue(key) {
-    var token=JSON.parse(window.getCookie("token"));
+    var token=JSON.parse(getCookie("token"));
     return (token&&token[key])||"";
 }
 
@@ -563,7 +563,7 @@ function geCookieTokenValue(key) {
  * @param key
  */
 function getCookieUserValue(key) {
-    var token=JSON.parse(window.getCookie("user"));
+    var token=JSON.parse(getCookie("user"));
     return (token&&token[key])||"";
 }
 
