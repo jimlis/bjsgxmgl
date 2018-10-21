@@ -6,6 +6,7 @@ var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
 var pageData;
 var vue;
+var index=0;
 window.onload = function(){
 	
 	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_swgwsg"});
@@ -16,24 +17,13 @@ window.onload = function(){
 		//创建数据Model；
 		pageData = buildModel();
 	}
-	
 	//数据绑定
 	vue = new Vue({
 		el: '#app',
 		data: pageData,
 		methods: {
 			addLx: function () {
-				var lxDiv=document.createElement("div");
-				lxDiv.setAttribute("name","lxDiv");
-				lxDiv.style.cssText="padding-top: 4px;";
-				lxDiv.innerHTML=
-					'<div><input type="hidden" placeholder="" name="intswgwlxid" >'+
-					'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" style="width:100%"></div>'+
-					'<div></div>'+
-					'<span><button type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addQy({},this)">新增区域</button>'+
-					'<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delLx(\'\',this)">删除类型</button></span>';
-                var xLul=document.getElementById("xLul");
-                xLul.appendChild(lxDiv);
+				newaddLx({});
 			},
 			datePicker: function (name) {
 				vueDtPicker(pageData,name);
@@ -43,8 +33,53 @@ window.onload = function(){
 	
 	if(id){
 		//加载图片
-		upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_swgwsg"});
+		initFileList("bj_xm_sgjd_swgwsg",id,"1","fileIds","file-list",true);
 	}
+	
+	//init 
+	var listMap=pageData.xmSgjdSwgwsgJdListMap;
+	if(listMap){
+		var listMap=pageData.xmSgjdSwgwsgJdListMap;
+		var lxMap=pageData.xmSgjdSwgwsgLxMap||{};
+		for(key in listMap){
+			
+			var addLxDom=newaddLx(lxMap[key]);
+			
+			var list=listMap[key]||[];
+			for(i in list){
+				var tempIndex=index;
+				addQy(list[i],addLxDom);
+				var fileIdName="fileIds"+tempIndex;
+				var chrbtnName="chbtn"+tempIndex;
+				var fileListName="file-list"+tempIndex;
+				
+				//加载文件
+				initFileList("bj_xm_sgjd_swgwsg_jd",list[i].id,"1",fileIdName,fileListName,true);
+			}
+			
+		}
+	}
+	
+}
+
+var lxIndex=0;
+function newaddLx(data){
+	var id=data.id||"";
+	var chrswgwlx=data.chrswgwlx||"";
+	var lxDiv=document.createElement("div");
+	lxDiv.setAttribute("name","lxDiv");
+	lxDiv.style.cssText="padding-top: 4px;";
+	lxDiv.innerHTML=
+		'<div><input type="hidden" placeholder="" name="intswgwlxid" value="'+id+'">'+
+		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%"></div>'+
+		'<div></div>'+
+		'<span><button id="addLx'+lxIndex+'" type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addQy({},this)">新增区域</button>'+
+		'<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delLx(\''+id+'\',this)">删除类型</button></span>';
+    var xLul=document.getElementById("xLul");
+    xLul.appendChild(lxDiv);
+    var tempLxIndex=lxIndex;
+    lxIndex++;
+    return document.getElementById("addLx"+tempLxIndex);
 }
 
 var deleteSwgwlxIds="";
@@ -55,8 +90,12 @@ function delLx(swgwlxId,obj){
 	obj.parentNode.parentNode.remove();
 }
 
-var index=0;
 function addQy(data,obj){
+	    data=data||{};
+	    var id=data.id||"";
+	    var intwcl=data.intwcl||"";
+	    var chrsgqy=data.chrsgqy||"";
+	    var chrbz=data.chrbz||"";
 	var ulDiv=obj.parentNode.previousSibling;
 	var ulDom=document.createElement("ul");
 		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
@@ -66,19 +105,19 @@ function addQy(data,obj){
 	var fileListName="file-list"+index;
 	var delBtnLi=document.createElement("li");
 		delBtnLi.style.cssText="padding: 5px 20px 0px 20px;";
-		delBtnLi.innerHTML='<button class="mui-btn mui-btn-danger" type="button"  onclick="delQy(\'\',this,event)">删除区域</button>';
+		delBtnLi.innerHTML='<button class="mui-btn mui-btn-danger" type="button"  onclick="delQy(\''+id+'\',this,event)">删除区域</button>';
 	
 	var sgqyLi=document.createElement("li");
 		sgqyLi.style.cssText="padding: 5px 20px 0px 20px;";
 	//	sgqyLi.className="mui-table-view-cell mui-collapse";
-		sgqyLi.innerHTML='<input class="bj-input" name="intswgwsgjdid" type="hidden"></input>'+
+		sgqyLi.innerHTML='<input class="bj-input" name="intswgwsgjdid" value="'+id+'" type="hidden"></input>'+
 			'<input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input>'+
-			'施工区域：<input class="bj-input" name="chrsgqy" type="text"></input>';
+			'施工区域：<input class="bj-input" name="chrsgqy" value="'+chrsgqy+'" type="text"></input>';
 		
 	var wclLi=document.createElement("li");
 		wclLi.style.cssText="padding: 5px 20px 0px 20px;";
 		//wclLi.className="mui-table-view-cell mui-collapse";
-		wclLi.innerHTML='完成量：<input class="bj-input" name="intwcl" type="text"></input>';
+		wclLi.innerHTML='完成量：<input class="bj-input" name="intwcl" value="'+intwcl+'" type="number"></input>';
 		
 	var wcqkLi=document.createElement("li");
 		wcqkLi.style.cssText="padding: 5px 20px 0px 20px;";
@@ -89,7 +128,7 @@ function addQy(data,obj){
 	var bzLi=document.createElement("li");
 		bzLi.style.cssText="padding: 5px 20px 0px 20px;";
 		//bzLi.className="mui-table-view-cell mui-collapse";
-		bzLi.innerHTML='备注：<input class="bj-input" name="chrbz" type="text"></input>';
+		bzLi.innerHTML='备注：<input class="bj-input" name="chrbz" value="'+chrbz+'" type="text"></input>';
 		
 		ulDom.appendChild(delBtnLi);
 		ulDom.appendChild(sgqyLi);
@@ -176,7 +215,7 @@ function isUpdata(){
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdJcsgId:id
+				xmSgjdSwgwsgId:id
 			},
 			success:function(data){
 				result = data;
@@ -191,7 +230,7 @@ function buildModel(){
 	var model = {
 		id:id,
 		intxmid:xmid,
-		dtmbgrq:sysdate,
+		dtmgxrq:sysdate,
 		dtmsprq:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc
