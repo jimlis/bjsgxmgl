@@ -52,6 +52,9 @@ public class XmSgjdSwgwsgJdDO extends BaseDomain {
     /** 备注 */
     @ApiModelProperty(value = "备注",name = "chrbz",dataType = "String",required = false)
     private String chrbz;
+    @ApiModelProperty(value = "完全情况关联附件ids",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
 
     /**
      * 设置：主键id
@@ -149,4 +152,18 @@ public class XmSgjdSwgwsgJdDO extends BaseDomain {
     public String getChrbz() {
         return chrbz;
     }
+    /**
+     * 获取完成情况附件ids
+     */
+	public String getFileIds() {
+		return fileIds;
+	}
+	/**
+     * 设置完成情况附件ids
+     */
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
+	}
+    
+    
 }

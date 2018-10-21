@@ -77,14 +77,17 @@ public class ApiXmSgjdSwgwsgController extends ApiBaseController {
     @Log("保存室外管网施工")
     @PostMapping("save")
     @ApiOperation(value="保存室外管网施工",httpMethod="POST")
-    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "文件ids，多个以逗号隔开")
-    })
+    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=false,value = "文件ids，多个以逗号隔开"),
+    	@ApiImplicitParam(name="sglxAndJdJson",paramType="form",dataType = "string",required=false,value = "类型区域json串"),
+	@ApiImplicitParam(name="deleteSwgwlxIds",paramType="form",dataType = "string",required=false,value = "删除的项目室外管网施工类型ids"),
+	@ApiImplicitParam(name="deleteSwgwjdIds",paramType="form",dataType = "string",required=false,value = "删除的项目室外管网施工进度ids")
+    	})
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result<XmSgjdSwgwsgDO> save(XmSgjdSwgwsgDO xmSgjdSwgwsgDO, String fileIds) {
+    public Result<XmSgjdSwgwsgDO> save(XmSgjdSwgwsgDO xmSgjdSwgwsgDO, String fileIds,String sglxAndJdJson,String deleteSwgwlxIds,String deleteSwgwjdIds) {
         try {
-        	xmSgjdSwgwsgService.saveXmSgjdSwgwsgXx(xmSgjdSwgwsgDO,fileIds);
+        	xmSgjdSwgwsgService.saveXmSgjdSwgwsgXx(xmSgjdSwgwsgDO,fileIds,sglxAndJdJson,deleteSwgwlxIds,deleteSwgwjdIds);
            return Result.ok(xmSgjdSwgwsgDO);
         }catch (Exception e){
             e.printStackTrace();

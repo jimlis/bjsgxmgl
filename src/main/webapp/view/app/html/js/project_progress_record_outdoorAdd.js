@@ -24,13 +24,12 @@ window.onload = function(){
 		methods: {
 			addLx: function () {
 				var lxDiv=document.createElement("div");
-				lxDiv.setAttribute("name","lxLi");
+				lxDiv.setAttribute("name","lxDiv");
 				lxDiv.style.cssText="padding-top: 4px;";
-			  
-				//lxLi.className="mui-table-view-cell mui-collapse mui-active";
 				lxDiv.innerHTML=
-					'<a href="#"><input type="text" placeholder="请输入类型名称" style="width:100%"></a>'+
-					'<ul class="mui-table-view bj-background-inherit"></ul>'+
+					'<div><input type="hidden" placeholder="" name="intswgwlxid" >'+
+					'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" style="width:100%"></div>'+
+					'<div></div>'+
 					'<span><button type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addQy({},this)">新增区域</button>'+
 					'<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delLx(\'\',this)">删除类型</button></span>';
                 var xLul=document.getElementById("xLul");
@@ -58,7 +57,10 @@ function delLx(swgwlxId,obj){
 
 var index=0;
 function addQy(data,obj){
-	var ulDom=obj.parentNode.previousSibling;
+	var ulDiv=obj.parentNode.previousSibling;
+	var ulDom=document.createElement("ul");
+		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
+	
 	var fileIdName="fileIds"+index;
 	var chrbtnName="chbtn"+index;
 	var fileListName="file-list"+index;
@@ -69,7 +71,7 @@ function addQy(data,obj){
 	var sgqyLi=document.createElement("li");
 		sgqyLi.style.cssText="padding: 5px 20px 0px 20px;";
 	//	sgqyLi.className="mui-table-view-cell mui-collapse";
-		sgqyLi.innerHTML='<input class="bj-input" name="id" type="hidden"></input>'+
+		sgqyLi.innerHTML='<input class="bj-input" name="intswgwsgjdid" type="hidden"></input>'+
 			'<input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input>'+
 			'施工区域：<input class="bj-input" name="chrsgqy" type="text"></input>';
 		
@@ -95,6 +97,8 @@ function addQy(data,obj){
 		ulDom.appendChild(wcqkLi);
 		ulDom.appendChild(bzLi);
 		
+		ulDiv.appendChild(ulDom);
+		
 		//刷新上传控件
 		upLoadFile('#'+chrbtnName,{"busType":"bj_xm_xkz","fileIdsName":fileIdName,"fileListName":fileListName});
 		index++;
@@ -105,11 +109,62 @@ function delQy(swgwjdId,obj){
 	if(swgwjdId){
 		deleteSwgwjdIds+=swgwjdId+",";
 	}
-	obj.parentNode.nextSibling.remove();
-	obj.parentNode.nextSibling.remove();
-	obj.parentNode.nextSibling.remove();
-	obj.parentNode.nextSibling.remove();
-	obj.parentNode.remove();
+	obj.parentNode.parentNode.remove();
+}
+
+function getSglxAndJdJson(){
+	var lxDivDom=document.getElementsByName("lxDiv");
+	var arr=[];
+	for(var index=0;index<lxDivDom.length;index++){
+		var item = lxDivDom[index].childNodes;
+		var lxObj={};
+		var intswgwlxid=null,chrswgwlx="",xmSgjdSwgwsgJdList=[];
+		var lxDiv=item[0];
+		var lxDivNodes=lxDiv.childNodes;
+		for(var j=0;j<lxDivNodes.length;j++){
+			if(lxDivNodes[j].name=="intswgwlxid"){
+				intswgwlxid=lxDivNodes[j].value||null;
+			}
+			if(lxDivNodes[j].name=="chrswgwlx"){
+				chrswgwlx=lxDivNodes[j].value||"";
+			}
+		}
+		
+		var qydiv=item[1];
+		var qyulNodes=qydiv.childNodes;
+		for(var j=0;j<qyulNodes.length;j++){
+			var qyUl=qyulNodes[j];
+			var qyLiNodes=qyUl.childNodes;
+			var qyObj={};
+			for(var k=0;k<qyLiNodes.length;k++){
+				var qyLi=qyLiNodes[k];
+				var qyLiNodesDom=qyLi.childNodes;
+				for(var m=0;m<qyLiNodesDom.length;m++){
+					if(qyLiNodesDom[m].name=="intswgwsgjdid"){
+						qyObj["id"]=qyLiNodesDom[m].value||null;
+					}
+					if(qyLiNodesDom[m].name=="fileIds"){
+						qyObj["fileIds"]=qyLiNodesDom[m].value||"";
+					}
+					if(qyLiNodesDom[m].name=="chrsgqy"){
+						qyObj["chrsgqy"]=qyLiNodesDom[m].value||"";
+					}
+					if(qyLiNodesDom[m].name=="intwcl"){
+						qyObj["intwcl"]=qyLiNodesDom[m].value||null;
+					}
+					if(qyLiNodesDom[m].name=="chrbz"){
+						qyObj["chrbz"]=qyLiNodesDom[m].value||"";
+					}
+				}
+			}
+			xmSgjdSwgwsgJdList.push(qyObj);
+		}
+		lxObj["id"]=intswgwlxid;
+		lxObj["chrswgwlx"]=chrswgwlx;
+		lxObj.xmSgjdSwgwsgJdList=xmSgjdSwgwsgJdList;
+		arr.push(lxObj);
+	}
+	return JSON.stringify(arr);
 }
 
 //判断是否更新
@@ -147,6 +202,9 @@ function buildModel(){
 //保存数据
 function save(){
 	var data = getFromData("myform");
+		data["sglxAndJdJson"]=getSglxAndJdJson();
+		data["deleteSwgwlxIds"]=deleteSwgwlxIds;
+		data["deleteSwgwjdIds"]=deleteSwgwjdIds;
 	$bjAjax({
 		url:progressOutDoorSaveApiPath,
 		data:data,

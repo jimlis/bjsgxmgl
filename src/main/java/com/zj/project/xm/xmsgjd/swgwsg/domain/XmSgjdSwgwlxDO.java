@@ -1,6 +1,7 @@
 package com.zj.project.xm.xmsgjd.swgwsg.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  @TableName("bj_xm_sgjd_swgwlx")
  @ApiModel(value = "XmSgjdSwgwlxDO",description = "施工进度-室外管网类型，没个项目有多个室外管网类型。")
 public class XmSgjdSwgwlxDO extends BaseDomain {
+	 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     
@@ -46,6 +48,10 @@ public class XmSgjdSwgwlxDO extends BaseDomain {
     /** 室外管网类型 */
     @ApiModelProperty(value = "室外管网类型 ",name = "chrswgwlx",dataType = "String",required = true)
     private String chrswgwlx;
+    
+    @TableField(exist=false)
+    @ApiModelProperty(value = "项目施工进度集合",name = "xmSgjdSwgwsgJdList",dataType = "List",required = false)
+    List<XmSgjdSwgwsgJdDO> xmSgjdSwgwsgJdList;
 
     /**
      * 设置：主键id
@@ -119,4 +125,13 @@ public class XmSgjdSwgwlxDO extends BaseDomain {
     public String getChrswgwlx() {
         return chrswgwlx;
     }
+	public List<XmSgjdSwgwsgJdDO> getXmSgjdSwgwsgJdList() {
+		return xmSgjdSwgwsgJdList;
+	}
+	
+	public void setXmSgjdSwgwsgJdList(List<XmSgjdSwgwsgJdDO> xmSgjdSwgwsgJdList) {
+		this.xmSgjdSwgwsgJdList = xmSgjdSwgwsgJdList;
+	}
+    
+    
 }

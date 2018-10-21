@@ -32,6 +32,9 @@ public interface XmSgjdSwgwsgService extends BaseService<XmSgjdSwgwsgDO> {
 	 * 保存施工进度-室外管网施工信息
 	 * @param xmSgjdSwgwsgDO
 	 * @param fileIds 附件ids
+	 * @param sglxAndJdJson 类型区域json串
+	 * @param deleteSwgwlxIds 删除的项目室外管网施工类型ids
+	 * @param deleteSwgwjdIds 删除的项目室外管网施工进度ids
 	 */
-	public void saveXmSgjdSwgwsgXx(XmSgjdSwgwsgDO xmSgjdSwgwsgDO, String fileIds);
+	public void saveXmSgjdSwgwsgXx(XmSgjdSwgwsgDO xmSgjdSwgwsgDO, String fileIds,String sglxAndJdJson,String deleteSwgwlxIds,String deleteSwgwjdIds);
 }
