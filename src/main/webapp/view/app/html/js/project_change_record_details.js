@@ -28,3 +28,6 @@ function edit(){
     var address = "project_change_record_add.html?id="+obj.id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_change_record.html");
+}

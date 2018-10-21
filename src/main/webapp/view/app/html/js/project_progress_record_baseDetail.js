@@ -40,3 +40,6 @@ function edit(){
 }
 
 
+function outPage(){
+	toUrl("project_progress_record.html");
+}

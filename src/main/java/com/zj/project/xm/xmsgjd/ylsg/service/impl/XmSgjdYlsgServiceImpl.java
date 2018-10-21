@@ -1,5 +1,7 @@
 package com.zj.project.xm.xmsgjd.ylsg.service.impl;
 
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -14,12 +16,16 @@ import org.springframework.util.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmsgjd.ylsg.dao.XmSgjdYlsgDao;
 import com.zj.project.xm.xmsgjd.ylsg.domain.XmSgjdYlsgDO;
+import com.zj.project.xm.xmsgjd.ylsg.domain.XmSgjdYlsgJdDO;
+import com.zj.project.xm.xmsgjd.ylsg.service.XmSgjdYlsgJdService;
 import com.zj.project.xm.xmsgjd.ylsg.service.XmSgjdYlsgService;
 
 /**
@@ -40,6 +46,23 @@ public class XmSgjdYlsgServiceImpl extends BaseServiceImpl<XmSgjdYlsgDao, XmSgjd
     
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private XmSgjdYlsgJdService xmSgjdYlsgJdService;
+    
+    @Override
+    public XmSgjdYlsgDO getById(Serializable id){
+    	XmSgjdYlsgDO xmSgjdYlsgDO=super.getById(id);
+    	if(xmSgjdYlsgDO!=null) {
+    		XmSgjdYlsgJdDO xmSgjdYlsgJdDO=new XmSgjdYlsgJdDO();
+    		xmSgjdYlsgJdDO.setFcbz(1);
+    		xmSgjdYlsgJdDO.setIntylsgid(xmSgjdYlsgDO.getId());
+    		QueryWrapper<XmSgjdYlsgJdDO> queryWrapper=new QueryWrapper<XmSgjdYlsgJdDO>(xmSgjdYlsgJdDO).orderByAsc("id");
+    		List<XmSgjdYlsgJdDO> list = xmSgjdYlsgJdService.list(queryWrapper);
+    		xmSgjdYlsgDO.setXmSgjdYlsgJdList(list);
+    	}
+    	return xmSgjdYlsgDO;
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
@@ -75,16 +98,6 @@ public class XmSgjdYlsgServiceImpl extends BaseServiceImpl<XmSgjdYlsgDao, XmSgjd
     	xmSgjdYlsgDO.setDtmgxrq(gxrq);
     	QueryWrapper<XmSgjdYlsgDO> queryWrapper=new QueryWrapper<XmSgjdYlsgDO>(xmSgjdYlsgDO).orderByDesc("gxsj");
     	List<XmSgjdYlsgDO> list=list(queryWrapper);
-    	if(CollectionUtils.isNotEmpty(list)) {
-    		list.forEach(xmSgjdYlsgDOOne->{
-    			FileDO fileDO=new FileDO();
-    			fileDO.setBusId(xmSgjdYlsgDOOne.getId());
-    			fileDO.setBusType(tableInfo.getTableName());
-    			fileDO.setType("2");//完成情况
-    			QueryWrapper<FileDO> fileQuery=new QueryWrapper<FileDO>(fileDO);
-    			xmSgjdYlsgDOOne.setWcqkList(fileService.list(fileQuery));
-    		});
-    	}
     	
 		return list;
     }
@@ -93,9 +106,11 @@ public class XmSgjdYlsgServiceImpl extends BaseServiceImpl<XmSgjdYlsgDao, XmSgjd
 	 * 保存施工进度-园林施工信息
 	 * @param xmSgjdYlsgDO
 	 * @param fileIds 文件ids
+	 * @param ylsgJdJson 施工进度json 
+	 * @param deleteYlsgjdIds 删除施工进度ids
 	 */
 	@Override
-	public void saveXmSgjdYlsgXx(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds) {
+	public void saveXmSgjdYlsgXx(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds,String ylsgJdJson,String deleteYlsgjdIds) {
 		Long xmid = xmSgjdYlsgDO.getIntxmid();
 		if (xmid == null) {
 			throw new CommonException("xmid不能为空");
@@ -125,6 +140,58 @@ public class XmSgjdYlsgServiceImpl extends BaseServiceImpl<XmSgjdYlsgDao, XmSgjd
 				}
 			}
 		}
+		
+		//新增施工进度
+		if(StringUtils.isNotEmpty(ylsgJdJson)&&!"[]".equals(ylsgJdJson)) {
+			Gson gson=new Gson();
+			List<XmSgjdYlsgJdDO> xmSgjdYlsgJdList=gson.fromJson(ylsgJdJson, new TypeToken<List<XmSgjdYlsgJdDO>>() {
+			}.getType());
+			if(CollectionUtils.isNotEmpty(xmSgjdYlsgJdList)) {
+				xmSgjdYlsgJdList.forEach(xmSgjdYlsgJdDO->{
+					//保存类型
+					String chrlxmc = xmSgjdYlsgJdDO.getChrlxmc();
+					if(StringUtils.isNotEmpty(chrlxmc)) {
+						Long xmYlsgId=xmSgjdYlsgJdDO.getId();
+						String wcqkFileIds=xmSgjdYlsgJdDO.getFileIds();
+						if(xmYlsgId==null) {
+							xmSgjdYlsgJdDO.setFcbz(1);
+							xmSgjdYlsgJdDO.setGxsj(new Date());
+							xmSgjdYlsgJdDO.setIntylsgid(xmSgjdYlsgDO.getId());
+							xmSgjdYlsgJdService.save(xmSgjdYlsgJdDO);
+						}else {
+							xmSgjdYlsgJdDO.setGxsj(new Date());
+							xmSgjdYlsgJdService.updateById(xmSgjdYlsgJdDO);
+						}
+						
+						//更新附件信息
+						// 更新文件信息
+						if (StringUtils.isNotEmpty(wcqkFileIds)) {
+							String[] fileArr = wcqkFileIds.trim().split(",");
+							for (String fileid : fileArr) {
+								if (StringUtils.isNotEmpty(fileid.trim())) {
+									FileDO fileDO = new FileDO();
+									fileDO.setId(Long.parseLong(fileid.trim()));
+									fileDO.setBusType(XmSgjdYlsgJdServiceImpl.tableInfo.getTableName());
+									fileDO.setBusId(xmSgjdYlsgJdDO.getId());
+									fileService.updateById(fileDO);
+								}
+							}
+						}
+					}
+				});
+			}
+		}
+		
+		//删除施工进度
+		if(StringUtils.isNotEmpty(deleteYlsgjdIds)) {
+			Arrays.stream(deleteYlsgjdIds.trim().split(",")).forEach(sgjdId->{
+				XmSgjdYlsgJdDO xmSgjdYlsgJdDO=new XmSgjdYlsgJdDO();
+				xmSgjdYlsgJdDO.setId(Long.parseLong(sgjdId));
+				xmSgjdYlsgJdDO.setFcbz(0);
+				xmSgjdYlsgJdDO.setGxsj(new Date());
+				xmSgjdYlsgJdService.updateById(xmSgjdYlsgJdDO);
+			});
+		}
 	}
-
+	
 }

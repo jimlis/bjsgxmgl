@@ -35,3 +35,6 @@ function openDetails(id){
 }
 
 
+function outPage(){
+	toUrl("project_detail_list.html");
+}

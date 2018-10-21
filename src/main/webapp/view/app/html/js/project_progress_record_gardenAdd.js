@@ -1,3 +1,4 @@
+
 var obj=getRequest()
 var id = obj.id||"";
 var xmid=getCookie("id");

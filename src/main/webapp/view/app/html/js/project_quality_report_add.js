@@ -80,3 +80,6 @@ function save(){
 		}
 	})
 }
+function outPage(){
+	toUrl("project_quality_report.html");
+}

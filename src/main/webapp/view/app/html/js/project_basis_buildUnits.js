@@ -51,3 +51,6 @@ $bjAjax({
 function edit(){
 	toUrl("project_basis_buildUnits_edit.html");
 }
+function outPage(){
+	toUrl("project_basis_list.html");
+}

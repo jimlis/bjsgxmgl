@@ -105,3 +105,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_progress_record.html");
+}

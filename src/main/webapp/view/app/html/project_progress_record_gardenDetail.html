@@ -1,96 +1,76 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>园林施工</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" href="../css/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
-	</head>
-		
-	<body>
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
-			<h1 class="mui-title">
-				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll" id="title-scroll">
+<head>
+<meta charset="utf-8">
+<title>园林施工</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+<style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+</style> 
+</head>
 
-					</div>
-				</div>
-			</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="openNext()">编辑</button>
-		</header>
-		<div class="mui-content" id="list">
-			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">2018-8-10</span></h5>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-icon mui-icon-left-nav mui-pull-left"
+			href="javascript:void(0);" onclick="outPage()"></a>
+		<h1 class="mui-title">
+			<div
+				class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div class="mui-scroll" id="title-scroll"></div>
 			</div>
-			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
-		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">园林结构</a>
-		            <div class="mui-collapse-content">
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">80%</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            		<hr />
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            </div>
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">饰面施工</a>
-		            <div class="mui-collapse-content">
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">80%</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            		<hr />
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            
-		            </div>
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">室外道路</a>
-		            <div class="mui-collapse-content">
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">80%</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            		<hr />
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            
-		            </div>
-		        </li>
-		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">绿化施工</a>
-		            <div class="mui-collapse-content">
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">80%</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            		<hr />
-		            		<h5 class="bj-title2-font">完成量：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">完成情况：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">单位</span></h5>
-		            		<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">备注</span></h5>
-		            
-		            </div>
-		        </li>
-		    </ul>
+		</h1>
+		<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"
+			onclick="edit()">编辑</button>
+	</header>
+	<div class="mui-content" id="app" v-cloak>
+		<div class="mui-content-padded">
+			<h5 class="bj-title2-font">
+				更新日期：<span class="bj-p-gray-font">{{dtmgxrq}}</span>
+			</h5>
+			<h5 class="bj-title2-font">
+				最新版csd图纸：
+				<div id="file-list"></div>
 		</div>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_progress_record.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+		</h5>
+		<h5 class="bj-title2-font">
+			CSD图纸通过审批日期：<span class="bj-p-gray-font">{{dtmsprq}}</span>
+		</h5>
+		<ul class="mui-table-view bj-title2-font bj-background-inherit">
+			<li class="mui-table-view-cell mui-collapse"
+				v-for="row in xmSgjdYlsgJdList">
+				<a
+				class="mui-navigate-right" href="#">{{row.chrlxmc}}</a>
+				<div class="mui-collapse-content">
+					<div  style="padding: 5px">
+						<h5 class="bj-title2-font">
+							完成量：<span class="bj-p-gray-font">{{row.intwcl}}</span>
+						</h5>
+						<h5 class="bj-title2-font">
+							完成情况：
+							<div :id="'fileIds_'+row.id"></div>
+						</h5>
+						<h5 class="bj-title2-font">
+							备注：<span class="bj-p-gray-font">{{row.chzb}}</span>
+						</h5>
+					</div>
+				</div></li>
+		</ul>
+		<h5 class="bj-title2-font">
+			报告人：<span class="bj-p-gray-font" id="chrbgrmc">{{chrbgrmc}}</span>
+		</h5>
+	</div>
+	<script src="../js/mui.min.js"></script>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/project_progress_record_gardenDetail.js" type="text/javascript"
+		charset="utf-8"></script>
+</body>
 </html>

@@ -57,6 +57,22 @@ public class ApiXmSgjdYlsgController extends ApiBaseController {
         }
     }
     
+    @Log("根据xmSgjdYlsgId获取园林施工信息")
+    @PostMapping("getXmSgjdYlsgById")
+    @ApiOperation(value="根据xmSgjdSwgwsgId获取园林施工信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmSgjdYlsgId",paramType="form",dataType = "Long",required=true,value = "室外管网施工信息id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdYlsgDO.class),
+    	@ApiResponse(code=1,message="操作失败",response=XmSgjdYlsgDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdYlsgDO> getXmSgjdYlsgById(Long xmSgjdYlsgId) {
+        try {
+            return Result.ok(xmSgjdYlsgService.getById(xmSgjdYlsgId));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
     @Log("根据xmid和gxrq获取园林施工信息")
     @PostMapping("getXmSgjdYlsgListByXmidAndGxrq")
     @ApiOperation(value="根据xmid和gxrq获取园林施工信息",httpMethod="POST")
@@ -77,15 +93,17 @@ public class ApiXmSgjdYlsgController extends ApiBaseController {
     @Log("保存园林施工信息")
     @PostMapping("save")
     @ApiOperation(value="保存园林施工信息",httpMethod="POST")
-    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "文件ids，多个以逗号隔开")
+    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "文件ids，多个以逗号隔开"),
+    	@ApiImplicitParam(name="ylsgJdJson",paramType="form",dataType = "string",required=false,value = "ylsgJdJson 施工进度json "),
+    	@ApiImplicitParam(name="deleteYlsgjdIds",paramType="form",dataType = "string",required=false,value = "删除施工进度ids")
     })
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds) {
+    public Result<XmSgjdYlsgDO> save(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds,String ylsgJdJson,String deleteYlsgjdIds) {
         try {
-        	xmSgjdYlsgService.saveXmSgjdYlsgXx(xmSgjdYlsgDO,fileIds);
-           return Result.ok();
+        	xmSgjdYlsgService.saveXmSgjdYlsgXx(xmSgjdYlsgDO,fileIds, ylsgJdJson, deleteYlsgjdIds);
+           return Result.ok(xmSgjdYlsgDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

@@ -1,10 +1,13 @@
 package com.zj.project.xm.xmsgjd.swgwsg.service.impl;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +19,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
@@ -54,7 +59,57 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
     
     @Autowired
     private XmSgjdSwgwlxService xmSgjdSwgwlxService;
-
+    
+    @Override
+    public XmSgjdSwgwsgDO getById(Serializable id){
+    	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=super.getById(id);
+    	if(xmSgjdSwgwsgDO!=null) {
+    		XmSgjdSwgwlxDO xmSgjdSwgwlxDO=new XmSgjdSwgwlxDO();
+    		xmSgjdSwgwlxDO.setFcbz(1);
+    		xmSgjdSwgwlxDO.setIntxmid(xmSgjdSwgwsgDO.getIntxmid());
+    		QueryWrapper<XmSgjdSwgwlxDO> queryWrapper1=new QueryWrapper<XmSgjdSwgwlxDO>(xmSgjdSwgwlxDO).orderByAsc("id");
+    		List<XmSgjdSwgwlxDO> list = xmSgjdSwgwlxService.list(queryWrapper1);
+    		Map<Long,XmSgjdSwgwlxDO> lxMaps=Maps.newHashMap();
+    		if(CollectionUtils.isNotEmpty(list)) {
+    			lxMaps.putAll(list.stream().collect(Collectors.toMap(xmSgjdSwgwlx->xmSgjdSwgwlx.getId() ,xmSgjdSwgwlx->xmSgjdSwgwlx) ));
+    		}
+    		xmSgjdSwgwsgDO.setXmSgjdSwgwsgLxMap(lxMaps);
+    		
+    		//设置 施工进度
+    		XmSgjdSwgwsgJdDO xmSgjdSwgwsgJdDO=new XmSgjdSwgwsgJdDO();
+    		xmSgjdSwgwsgJdDO.setFcbz(1);
+    		xmSgjdSwgwsgJdDO.setIntswgwsgid(xmSgjdSwgwsgDO.getId());
+    		QueryWrapper<XmSgjdSwgwsgJdDO> queryWrapper=new QueryWrapper<XmSgjdSwgwsgJdDO>(xmSgjdSwgwsgJdDO).orderByAsc("id");
+    		List<XmSgjdSwgwsgJdDO> xmSgjdSwgwsgJdList = xmSgjdSwgwsgJdService.list(queryWrapper);
+    		if(CollectionUtils.isNotEmpty(xmSgjdSwgwsgJdList)) {
+    			Map<Long,List<XmSgjdSwgwsgJdDO>> maps=Maps.newLinkedHashMap();
+    			xmSgjdSwgwsgJdList.forEach(xmSgjdSwgwsgJd->{
+    				Long intswgwlxid = xmSgjdSwgwsgJd.getIntswgwlxid();
+    				if(intswgwlxid!=null) {
+    					xmSgjdSwgwsgJd.setChrswgwlxid(lxMaps.get(intswgwlxid).getChrswgwlx());
+        				if(maps.containsKey(intswgwlxid)) {
+        					maps.get(intswgwlxid).add(xmSgjdSwgwsgJd);
+        				}else {
+        					List<XmSgjdSwgwsgJdDO> newList=Lists.newArrayList();
+        					newList.add(xmSgjdSwgwsgJd);
+        					maps.put(intswgwlxid, newList);
+        				}
+    				}
+    			});
+    			
+    			if(!maps.isEmpty()) {
+    				Map<String,List<XmSgjdSwgwsgJdDO>> newMaps=Maps.newLinkedHashMap();
+    				Set<Long> keySet = maps.keySet();
+    				for(Long key : keySet) {
+    					newMaps.put(lxMaps.get(key).getChrswgwlx(), maps.get(key));
+    				}
+    				xmSgjdSwgwsgDO.setXmSgjdSwgwsgJdListMap(maps);
+    			}
+    		}
+    	}
+    	return xmSgjdSwgwsgDO;
+    }
+    
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
@@ -81,19 +136,9 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
     	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=new XmSgjdSwgwsgDO();
     	xmSgjdSwgwsgDO.setFcbz(1);
     	xmSgjdSwgwsgDO.setIntxmid(xmid);
-    	xmSgjdSwgwsgDO.setDtmbgrq(gxrq);
+    	xmSgjdSwgwsgDO.setDtmgxrq(gxrq);
     	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).orderByDesc("gxsj");
     	List<XmSgjdSwgwsgDO> list=list(queryWrapper);
-    	if(CollectionUtils.isNotEmpty(list)) {
-    		list.forEach(xmSgjdSwgwsgDOOne->{
-    			FileDO fileDO=new FileDO();
-    			fileDO.setBusId(xmSgjdSwgwsgDOOne.getId());
-    			fileDO.setBusType(tableInfo.getTableName());
-    			fileDO.setType("2");//完成情况
-    			QueryWrapper<FileDO> fileQuery=new QueryWrapper<FileDO>(fileDO);
-    			xmSgjdSwgwsgDOOne.setWcqkList(fileService.list(fileQuery));
-    		});
-    	}
     	
 		return list;
 	}

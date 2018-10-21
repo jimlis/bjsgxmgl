@@ -93,3 +93,6 @@ function openNext(id){
 function add(){
 		toUrl("project_photo_record_add.html");
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

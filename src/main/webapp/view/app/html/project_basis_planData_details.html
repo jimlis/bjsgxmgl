@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>规划指标数据</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+
+					</div>
+				</div>
+			</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">更新</button>
+		</header>
+		<div class="mui-content" id="app">
+			<ul class="mui-table-view" v-show="pageData.length<1" style="display: none;" >
+					<li class="mui-table-view-cell">没有数据，请更新数据</li>
+			</ul>
+			<div class="mui-row">
+				<div class="mui-col-sm-3 mui-col-xs-6 bj-broder"  v-for="item in pageData" >
+					<input class="bj-input bj-p-black-font bj-disable-w" style="margin-bottom: 0;" type="text" name="" id="" v-model="item.a" placeholder="名称" />
+					<input class="bj-input bj-p-black-font  bj-disable-w" style="margin-bottom: 0;" type="text" name="" id="" v-model="item.b" placeholder="数据" />
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageData;
+			var vue;
+			var xmid = getCookie("id");
+			window.onload = function(){
+				//根据项目id获得数据
+				$bjAjax({
+					url:materialApiList,
+					type:"post",
+					async:false,
+					data:{
+						xmid:xmid
+					},
+					success:function(data){
+						pagData = data;
+					}
+				});
+				//绑定数据
+				vue = new Vue({
+					el: '#app',
+					data: pageData,
+					methods: {
+						
+					}
+				});
+			}
+			function edit(){
+				toUrl("project_basis_planData_add.html?id="+xmid);
+			}
+			
+		</script>	
+	</body>
+
+</html>

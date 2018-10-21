@@ -71,3 +71,6 @@ function add(){
     var address = "project_material_record_add.html";
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

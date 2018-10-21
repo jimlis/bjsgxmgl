@@ -107,13 +107,13 @@ public class ApiXmsgjdController extends ApiBaseController{
         	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=new XmSgjdSwgwsgDO();
         	xmSgjdSwgwsgDO.setFcbz(1);
         	xmSgjdSwgwsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper5=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).select(" distinct intxmid"," dtmbgrq ") .orderByAsc("dtmbgrq");
+        	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper5=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).select("id","intxmid","dtmgxrq") .orderByAsc("dtmgxrq");
         	map.put("sw", xmSgjdSwgwsgService.list(queryWrapper5));
         	
         	XmSgjdYlsgDO xmSgjdYlsgDO=new XmSgjdYlsgDO();
         	xmSgjdYlsgDO.setFcbz(1);
         	xmSgjdYlsgDO.setIntxmid(xmid);
-        	QueryWrapper<XmSgjdYlsgDO> queryWrapper6=new QueryWrapper<XmSgjdYlsgDO>(xmSgjdYlsgDO).select(" distinct intxmid"," dtmgxrq ") .orderByAsc("dtmgxrq");
+        	QueryWrapper<XmSgjdYlsgDO> queryWrapper6=new QueryWrapper<XmSgjdYlsgDO>(xmSgjdYlsgDO).select("id","intxmid","dtmgxrq") .orderByAsc("dtmgxrq");
         	map.put("yl", xmSgjdYlsgService.list(queryWrapper6));
             
             return Result.ok(map);

@@ -43,6 +43,10 @@ public class XmSgjdSwgwsgJdDO extends BaseDomain {
     /** 室外管网类型id：bj_xm_sgjd_swgwlx表，用于关联具体类型 */
     @ApiModelProperty(value = "室外管网类型id：bj_xm_sgjd_swgwlx表，用于关联具体类型 ",name = "intswgwlxid",dataType = "Long",required = true)
     private Long intswgwlxid;
+    /**室外管网类型名称*/
+    @ApiModelProperty(value = "室外管网类型名称 ",name = "chrswgwlxid",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrswgwlxid;
     /** 施工区域 */
     @ApiModelProperty(value = "施工区域 ",name = "chrsgqy",dataType = "chrsgqy",required = false)
     private String chrsgqy;
@@ -164,6 +168,19 @@ public class XmSgjdSwgwsgJdDO extends BaseDomain {
 	public void setFileIds(String fileIds) {
 		this.fileIds = fileIds;
 	}
+	/**
+	 * 获取室外管网类型名称
+	 */
+	public String getChrswgwlxid() {
+		return chrswgwlxid;
+	}
+	/**
+	 * 设置室外管网类型名称
+	 */
+	public void setChrswgwlxid(String chrswgwlxid) {
+		this.chrswgwlxid = chrswgwlxid;
+	}
     
+	
     
 }

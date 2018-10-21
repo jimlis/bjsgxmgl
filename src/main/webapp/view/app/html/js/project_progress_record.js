@@ -106,3 +106,6 @@ function getPageData(){
     });
 	return o;
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

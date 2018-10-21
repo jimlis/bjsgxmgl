@@ -2,12 +2,12 @@ package com.zj.project.xm.xmsgjd.swgwsg.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -46,10 +46,11 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     @ApiModelProperty(value = "项目基本信息id",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 更新日期 */
-    @ApiModelProperty(value = "更新日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
+    @ApiModelProperty(value = "更新日期",name = "dtmgxrq",dataType = "string",required = true,example = "2018-10-12")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
-    private Date dtmbgrq;
+    private Date dtmgxrq;
     /** csd图纸通过审批日期 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     @ApiModelProperty(value = "审批日期",name = "dtmsprq",dataType = "String",required = false,example="2018-10-12")
     private Date dtmsprq;
     /** 报告人id */
@@ -60,9 +61,14 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     private String chrbgrmc;
     
     @TableField(exist=false)
-    /**完成情况list*/
-    @ApiModelProperty(value = "完成情况list",name = "wcqkList",dataType = "List",required = false)
-    List<FileDO> wcqkList;
+    /**施工进度listMap*/
+    @ApiModelProperty(value = "施工进度listMap",name = "xmSgjdSwgwsgJdListMap",dataType = "map",required = false)
+    Map<Long,List<XmSgjdSwgwsgJdDO>> xmSgjdSwgwsgJdListMap;
+    
+    @ApiModelProperty(value = "施工类型listMap",name = "xmSgjdSwgwsgLxMap",dataType = "map",required = false)
+    /**施工类型listMap*/
+    @TableField(exist=false)
+    Map<Long,XmSgjdSwgwlxDO> xmSgjdSwgwsgLxMap;
 
     /**
      * 设置：主键id
@@ -127,14 +133,14 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     /**
      * 设置：更新日期
      */
-    public void setDtmbgrq(Date dtmbgrq) {
-        this.dtmbgrq = dtmbgrq;
+    public void setDtmgxrq(Date dtmgxrq) {
+        this.dtmgxrq = dtmgxrq;
     }
     /**
      * 获取：更新日期
      */
-    public Date getDtmbgrq() {
-        return dtmbgrq;
+    public Date getDtmgxrq() {
+        return dtmgxrq;
     }
     /**
      * 设置：csd图纸通过审批日期
@@ -172,18 +178,17 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public Map<Long,List<XmSgjdSwgwsgJdDO>> getXmSgjdSwgwsgJdListMap() {
+		return xmSgjdSwgwsgJdListMap;
+	}
+	public void setXmSgjdSwgwsgJdListMap(Map<Long,List<XmSgjdSwgwsgJdDO>> xmSgjdSwgwsgJdListMap) {
+		this.xmSgjdSwgwsgJdListMap = xmSgjdSwgwsgJdListMap;
+	}
+	public Map<Long, XmSgjdSwgwlxDO> getXmSgjdSwgwsgLxMap() {
+		return xmSgjdSwgwsgLxMap;
+	}
+	public void setXmSgjdSwgwsgLxMap(Map<Long, XmSgjdSwgwlxDO> xmSgjdSwgwsgLxMap) {
+		this.xmSgjdSwgwsgLxMap = xmSgjdSwgwsgLxMap;
+	}
     
-    /**
-     * 获取完成情况
-     */
-	public List<FileDO> getWcqkList() {
-		return wcqkList;
-	}
-	
-	 /**
-     * 设置完成情况
-     */
-	public void setWcqkList(List<FileDO> wcqkList) {
-		this.wcqkList = wcqkList;
-	}
 }

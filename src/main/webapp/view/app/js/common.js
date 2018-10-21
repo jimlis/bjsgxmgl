@@ -1,76 +1,33 @@
+setNavbar();
+function setNavbar(){
 	try{
-		inPage();
-	}catch(e){
-		bjToast("进入页面出错");
-	}
-//进入页面操作
-function inPage(){
-	//判断是否是刷新或者点击当前
-	var thisHref = window.location.href;
-	var allokie = getCookie("path");
-	var tindex = allokie.indexOf(thisHref);
-	if(tindex!=-1){
-		//判断是否是刷新
-		var s=allokie.lastIndexOf("$-*");
-		var sum = (allokie.length-(s+3));
-		if(sum==thisHref.length){
-			return;
+		var intxmlx = getCookie("xmlx")||"";
+		var xmlxmc='';
+		if(intxmlx==1){
+			xmlxmc = "PMC项目";
 		}else{
-			//判断是否是导航跳转
-			var end=tindex+thisHref.length;
-			var newHref=allokie.substring(0,end);
-			setCookie("path",newHref);
-			return;
+			xmlxmc = "EPC项目";
 		}
-		
-	}
-	//判断是否是返回页面，如果返回跳过
-	if((getRequest().isBack)!="1"){
-		//设置地址与页面名称到cookie
-		var allHref = getCookie("path")+"$-*"+thisHref;
-		setCookie("path",allHref);
-		var thisTitle =document.getElementsByTagName("title")[0].innerText;
-		var allTitle = getCookie("title")+"$-*"+thisTitle;
-		setCookie("title",allTitle);
-		//设置地址与title名称到页面
-		var hrefs = allHref.split("$-*");
-		var titles = allTitle.split("$-*");
 		var nav = document.getElementById("title-scroll");
-		for(index in titles){
-			var para=document.createElement("a");//创建需要增加的元素节点
-			para.innerText=" / "+titles[index];
-			para.href=hrefs[index];
-			if(index==(titles.length-1)){
-				para.style.color="#fff";
-			}
-			nav.appendChild(para);
-		}
+		nav.innerHTML = `
+			<a href="../main.html">博建施工项目管理&nbsp;/</a>
+			<a href="project_list.html">`+xmlxmc+`列表&nbsp;/</a>
+			<a href="project_detail_list.html">`+getCookie("chrxmmc")+`&nbsp;/</a>
+			<a href="#" style="color: #fff;">`+mui("title")[0].innerText+`</a>
+		`;
+		
+	}catch(e){
+		//TODO handle the exception
 	}
-	
-}
-//后退操作
-function outPage(){
-	//删除当前页面地址与页面名称
-	var allHref = getCookie("path");
-	var end=allHref.lastIndexOf("$-*");
-	var newHref=allHref.substring(0,end);
-	setCookie("path",newHref);
-	var allTitle = getCookie("title");
-	end=allTitle.lastIndexOf("$-*");
-	var newTitle=allTitle.substring(0,end);
-	setCookie("title",newTitle);
-	//得到返回地址
-	var start=newHref.lastIndexOf("$-*");
-	var href=newHref.substring(start+3,newHref.length);
-	if ( href.indexOf( "?" ) != -1 ) {
-		href+="&isBack=1";
-	}else{
-		href+="?isBack=1";
+	try{
+		mui('.mui-scroll-wrapper').scroll().scrollTo(-1000,0,500);//100毫秒滚动到顶
+	}catch(e){
+		//TODO handle the exception
 	}
-	toUrl(href);
 }
+
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://192.168.0.103:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -414,7 +371,7 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 		var obj=files[i];
 		var fileId=obj.id||"";
 		var src=fileApiPath+"down/"+fileId;
-		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">`;
+		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`" onclick="openImg('`+src+`')">`;
 			if(isEdit){
 				html+='<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>'
 			}
@@ -422,11 +379,27 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 	}
 	return html;
 };
+//打开图片
+function openImg(src){
+	var div=document.createElement("div");
+	div.className="bj-zz";
+	div.id="bj-zz";
+	div.onclick=closeImg;
+	div.innerHTML=`
+		<img id="bj-img1" src="`+src+`" style="margin: auto;"/>
+	`
+	document.body.appendChild(div);
+}
+//关闭图片
+function closeImg(){
+	var div=document.getElementById("bj-zz");
+	document.body.removeChild(div);
+}
 
 /*照片懒加载2*/
 function funLazyLoad(select){
 	var lazyLoad = mui(select).imageLazyload({
-    placeholder: '../images/bj_building.png',
+    placeholder: '../images/onload.gif',
     destroy: false
 	});
 	return lazyLoad;

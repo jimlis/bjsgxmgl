@@ -108,3 +108,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_photo_record_list.html");
+}

@@ -57,6 +57,22 @@ public class ApiXmSgjdSwgwsgController extends ApiBaseController {
         }
     }
     
+    @Log("根据xmSgjdSwgwsgId获取室外管网施工信息")
+    @PostMapping("getXmSgjdSwgwsgById")
+    @ApiOperation(value="根据xmSgjdSwgwsgId获取室外管网施工信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmSgjdSwgwsgId",paramType="form",dataType = "Long",required=true,value = "室外管网施工信息id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdSwgwsgDO.class),
+    	@ApiResponse(code=1,message="操作失败",response=XmSgjdSwgwsgDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdSwgwsgDO> getXmSgjdSwgwsgById(Long xmSgjdSwgwsgId) {
+        try {
+            return Result.ok(xmSgjdSwgwsgService.getById(xmSgjdSwgwsgId));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
     @Log("根据xmid和gxrq获取室外管网施工信息")
     @PostMapping("getXmSgjdSwgwsgListByXmidAndGxrq")
     @ApiOperation(value="根据xmid和gxrq获取室外管网施工信息",httpMethod="POST")

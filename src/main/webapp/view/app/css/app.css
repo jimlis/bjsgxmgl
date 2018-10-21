@@ -44,6 +44,7 @@
 	font-size: 11pt;
 	color: #000000;
 }
+
 .bj-ul-clear{
 	list-style: none;
 	margin: 0;
@@ -108,6 +109,9 @@ header.mui-bar.mui-bar-nav{
 	/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
 	margin-top: -1px;
 }
+#img-list{
+	background-color: inherit !important;
+}
 
 .mui-content-padded p{
 	text-indent:2em;
@@ -122,5 +126,22 @@ header.mui-bar.mui-bar-nav{
 }
 .bj-hand{
    cursor: pointer;
-｝
+}
+#bj-zz{
+	background: gray; 
+	display: flex; 
+	content: ' '; 
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	right: 0px;
+	bottom: 0px;
+	z-index: 9;
+}
+
+.bj-img1{
+    max-width:  100%;
+    width: auto;
+    height: auto;
+}
 

@@ -73,3 +73,6 @@ function buildModel(){
 function edit(){
 	toUrl("project_progress_record_elevatorAdd.html?id="+id);
 }
+function outPage(){
+	toUrl("project_progress_record.html");
+}

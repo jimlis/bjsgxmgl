@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.common.web.domain.BaseDomain;
 
 import io.swagger.annotations.ApiModel;
@@ -55,27 +54,15 @@ public class XmSgjdYlsgDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "String",required = true)
     private String chrbgrmc;
-    /** 园林施工类型id：code码配置 */
-    @ApiModelProperty(value = "园林施工类型id：code码配置 ",name = "intlx",dataType = "String",required = true)
-    private String intlx;
-    /** 完成量（百分比） */
-    @ApiModelProperty(value = " 完成量（百分比） ",name = "intwcl",dataType = "Float",required = true)
-    private Float intwcl;
-    /** 完成情况：文件地址，多个英文逗号隔开 */
-    @ApiModelProperty(value = "完成情况：文件地址，多个英文逗号隔开 ",name = "chrwcqk",dataType = "String",required = false,hidden=true)
-    private String chrwcqk;
-    /** 备注 */
-    @ApiModelProperty(value = "备注 ",name = "chrzb",dataType = "String",required = false)
-    private String chrzb;
     /** 审批日期 */
     @ApiModelProperty(value = "审批日期",name = "dtmsprq",dataType = "String",required = false,example="2018-10-12")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmsprq;
     
     @TableField(exist=false)
-    /**完成情况list*/
-    @ApiModelProperty(value = "完成情况list",name = "wcqkList",dataType = "List",required = false)
-    List<FileDO> wcqkList;
+    /**施工进度list*/
+    @ApiModelProperty(value = "施工进度list",name = "xmSgjdYlsgJdList",dataType = "List",required = false)
+    List<XmSgjdYlsgJdDO> xmSgjdYlsgJdList;
 
     /**
      * 设置：主键id
@@ -174,54 +161,6 @@ public class XmSgjdYlsgDO extends BaseDomain {
         return chrbgrmc;
     }
     /**
-     * 设置：园林施工类型id：code码配置
-     */
-    public void setIntlx(String intlx) {
-        this.intlx = intlx;
-    }
-    /**
-     * 获取：园林施工类型id：code码配置
-     */
-    public String getIntlx() {
-        return intlx;
-    }
-    /**
-     * 设置：完成量（百分比）
-     */
-    public void setIntwcl(Float intwcl) {
-        this.intwcl = intwcl;
-    }
-    /**
-     * 获取：完成量（百分比）
-     */
-    public Float getIntwcl() {
-        return intwcl;
-    }
-    /**
-     * 设置：完成情况：文件地址，多个英文逗号隔开
-     */
-    public void setChrwcqk(String chrwcqk) {
-        this.chrwcqk = chrwcqk;
-    }
-    /**
-     * 获取：完成情况：文件地址，多个英文逗号隔开
-     */
-    public String getChrwcqk() {
-        return chrwcqk;
-    }
-    /**
-     * 设置：备注
-     */
-    public void setChrzb(String chrzb) {
-        this.chrzb = chrzb;
-    }
-    /**
-     * 获取：备注
-     */
-    public String getChrzb() {
-        return chrzb;
-    }
-    /**
      * 设置：审批日期
      */
     public void setDtmsprq(Date dtmsprq) {
@@ -233,18 +172,11 @@ public class XmSgjdYlsgDO extends BaseDomain {
     public Date getDtmsprq() {
         return dtmsprq;
     }
-    /**
-     * 获取完成情况
-     */
-	public List<FileDO> getWcqkList() {
-		return wcqkList;
+	public List<XmSgjdYlsgJdDO> getXmSgjdYlsgJdList() {
+		return xmSgjdYlsgJdList;
 	}
-	
-	 /**
-     * 设置完成情况
-     */
-	public void setWcqkList(List<FileDO> wcqkList) {
-		this.wcqkList = wcqkList;
+	public void setXmSgjdYlsgJdList(List<XmSgjdYlsgJdDO> xmSgjdYlsgJdList) {
+		this.xmSgjdYlsgJdList = xmSgjdYlsgJdList;
 	}
-    
+   
 }

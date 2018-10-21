@@ -12,19 +12,24 @@ window.onload = function(){
 	});
 	
 	if(id){
-		//加载图片
-		initImgList("bj_xm_sgjd_ztjgsg",id,"1","fileIds","img-list",false);
+		initFileList("bj_xm_sgjd_ylsg",id,"1","fileIds","file-list",false);
+	}
+	
+	//加载施工进度完成情况
+	var list=pageData.xmSgjdYlsgJdList||[];
+	for(i in list){
+		initFileList("bj_xm_sgjd_ylsg_jd",list[i].id,"1","","fileIds_"+list[i].id,false);
 	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:progressZtjgByIdApiPath,
+		url:progressGardenByIdApiPath,
 		type:"post",
 		async:false,
 		data:{
-			xmSgjdJcsgId:obj.id
+			xmSgjdYlsgId:id
 		},
 		success:function(data){
 			if(data){
@@ -36,8 +41,5 @@ function getPageData(){
 }
 
 function edit(){
-	toUrl("project_progress_record_bodyAdd.html?id="+id);
-}
-function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_gardenAdd.html?id="+id);
 }

@@ -1,6 +1,24 @@
 mui("title")[0].innerText = getCookie("chrxmmc");
-mui("header .mui-title")[0].innerHTML = getCookie("chrxmmc");
-
+(function setNavbar(){
+	try{
+		var intxmlx = getCookie("xmlx")||"";
+		var xmlxmc='';
+		if(intxmlx==1){
+			xmlxmc = "PMC项目";
+		}else{
+			xmlxmc = "EPC项目";
+		}
+		var nav = document.getElementById("title-scrollT");
+		nav.innerHTML = `
+			<a href="../main.html">博建施工项目管理&nbsp;/</a>
+			<a href="project_list.html">`+xmlxmc+`列表&nbsp;/</a>
+			<a href="#" style="color: #fff;">`+mui("title")[0].innerText+`</a>
+		`;
+		mui('.mui-scroll-wrapper').scroll().scrollTo(-1000,0,500);//100毫秒滚动到顶
+	}catch(e){
+		//TODO handle the exception
+	}
+})();
 /**
  * 跳转项目具体信息
  */
@@ -11,7 +29,8 @@ function openNext(id){
 		address="project_basis_list.html"
 			break;
 		case 2:
-		address="project_basis_list.html"
+		//address="";
+		bjToast("正在开发中...");
 			break;
 		case 3:
 		address="project_photo_record_list.html"
@@ -44,4 +63,7 @@ function openNext(id){
 			break;
 	}
 	toUrl(address);
+}
+function outPage(){
+	toUrl("project_list.html");
 }

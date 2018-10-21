@@ -33,6 +33,8 @@ public interface XmSgjdYlsgService extends BaseService<XmSgjdYlsgDO> {
 	 * 保存施工进度-园林施工信息
 	 * @param xmSgjdYlsgDO
 	 * @param fileIds 文件ids
+	 * @param ylsgJdJson 施工进度json 
+	 * @param deleteYlsgjdIds 删除施工进度ids
 	 */
-	public void saveXmSgjdYlsgXx(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds);
+	public void saveXmSgjdYlsgXx(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds,String ylsgJdJson,String deleteYlsgjdIds);
 }
