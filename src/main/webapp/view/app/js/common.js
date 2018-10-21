@@ -1,35 +1,76 @@
-//window.onload=function(){
-//	var href = window.location.href
-//	var path = getCookie("path");
-//	if(path){
-//		setCookie("path",path+","+href);
-//	}else{
-//		setCookie("path",href);
-//	}
-//	path = getCookie("path");
-//	if ( path.indexOf( "," ) != -1 ) {
-//		var arrs = path.split(",");
-//		//bjToast(arrs.length);
-//	}
-//	
-//	window.addEventListener("popstate", function(e) {
-//		//bjToast(window.history.state);//根据自己的需求实现自己的功能
-//		if(window.history.state){
-//			window.history.back(-1);
-//			return
-//		}
-//	}, false);
-//	//pushHistory();
-//	function pushHistory() {
-//		var state = {
-//		title: "title",
-//      url:"#"
-//		};
-//		window.history.pushState(state, "title", "#");
-//	}
-//}
+	try{
+		inPage();
+	}catch(e){
+		bjToast("进入页面出错");
+	}
+//进入页面操作
+function inPage(){
+	//判断是否是刷新或者点击当前
+	var thisHref = window.location.href;
+	var allokie = getCookie("path");
+	var tindex = allokie.indexOf(thisHref);
+	if(tindex!=-1){
+		//判断是否是刷新
+		var s=allokie.lastIndexOf("$-*");
+		var sum = (allokie.length-(s+3);
+		if(sum==thisHref.length){
+			return;
+		}else{
+			//判断是否是导航跳转
+			var end=tindex+thisHref.length;
+			var newHref=allokie.substring(0,end);
+			setCookie("path",newHref);
+			return;
+		}
+		
+	}
+	//判断是否是返回页面，如果返回跳过
+	if((getRequest().isBack)!="1"){
+		//设置地址与页面名称到cookie
+		var allHref = getCookie("path")+"$-*"+thisHref;
+		setCookie("path",allHref);
+		var thisTitle =document.getElementsByTagName("title")[0].innerText;
+		var allTitle = getCookie("title")+"$-*"+thisTitle;
+		setCookie("title",allTitle);
+		//设置地址与title名称到页面
+		var hrefs = allHref.split("$-*");
+		var titles = allTitle.split("$-*");
+		var nav = document.getElementById("title-scroll");
+		for(index in titles){
+			var para=document.createElement("a");//创建需要增加的元素节点
+			para.innerText=" / "+titles[index];
+			para.href=hrefs[index];
+			if(index==(titles.length-1)){
+				para.style.color="#fff";
+			}
+			nav.appendChild(para);
+		}
+	}
+	
+}
+//后退操作
+function outPage(){
+	//删除当前页面地址与页面名称
+	var allHref = getCookie("path");
+	var end=allHref.lastIndexOf("$-*");
+	var newHref=allHref.substring(0,end);
+	setCookie("path",newHref);
+	var allTitle = getCookie("title");
+	end=allTitle.lastIndexOf("$-*");
+	var newTitle=allTitle.substring(0,end);
+	setCookie("title",newTitle);
+	//得到返回地址
+	var start=newHref.lastIndexOf("$-*");
+	var href=newHref.substring(start+3,newHref.length);
+	if ( href.indexOf( "?" ) != -1 ) {
+		href+="&isBack=1";
+	}else{
+		href+="?isBack=1";
+	}
+	toUrl(href);
+}
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://192.168.0.103:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -198,9 +239,9 @@ function openFileByName(fileId,fileName) {
  */
 $bjAjax = function(obj){
 	var headers={'Content-Type':'application/x-www-form-urlencoded'};
-	var token=getLocalTokenValue("token");
+	var token=getCookie("token");
 	if(token){
-        headers["Authorization"]=token;
+       // headers["Authorization"]=token;
 	}
 	mui.ajax(obj.url,{
 		data:obj.data,
@@ -216,9 +257,11 @@ $bjAjax = function(obj){
 			if(code==0){
 	            obj.success(data.data);
 			}else if(code==2){//重新登录
-			localStorage.removeItem("token");
-			localStorage.removeItem("user");
-			window.location.href="login/login.html";
+				bjToast("认证失败！请重新登录");
+				setCookie("token","");
+				setCookie("chrdlrmc","");
+				setCookie("chrdlrid","");
+				window.location.href="login/login.html";
 			}else{
 	            bjToast(msg);
 			}

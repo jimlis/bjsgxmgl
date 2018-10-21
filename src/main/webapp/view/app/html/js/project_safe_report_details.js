@@ -18,7 +18,7 @@ window.onload = function(){
 			document.getElementById("dtmtzrqSpan").innerText = data.dtmtzrq||"";
 			document.getElementById("dtmwczgrqSpan").innerText = data.dtmwczgrq||"";
 			document.getElementById("chrsgdwSpan").innerText = data.chrsgdw||"";
-			debugger;
+			 ;
 			//加载图片
 			initImgList("bj_xm_aqbg",id,"1","fileIds","img-list",false);
 		},

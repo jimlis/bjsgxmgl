@@ -18,7 +18,7 @@ if(obj.id){
 			document.getElementById("chrwz").value = chrwz;
 			document.getElementById("chrgdjt").value = chrgdjt;
 			document.getElementById("chrzwzk").value = chrzwzk;
-			debugger;
+			 ;
 			initImgList("bj_xm_qyjwz",id,"1","fileIds","img-list",true);
 		}
 	})

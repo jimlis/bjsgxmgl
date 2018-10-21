@@ -26,7 +26,7 @@ window.onload = function(){
 
 //判断是否更新
 function isUpdata(){
-	debugger;
+	 ;
 	if(id){
 		var result={};
 		$bjAjax({

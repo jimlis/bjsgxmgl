@@ -1,27 +1,99 @@
-
+var obj = getRequest();
+var pageData;
+var vue;
+var id=obj.id||"";
+var systemdate = bjGetSysDate();
+var chrdlrid = getCookie('chrdlrid');//chrbgrmc
+var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
+var intxmid = getCookie('id');//intxmid
 window.onload = function(){
-	relPicker("showLX",getPageData("lx"));
-	relPicker("showMC",getPageData("mc"));
-	relPicker("showSPZT",getPageData("spzt"));
-}
-function getPageData(type){
-	var data;
-	switch (type){
-		case "lx":
-		data = [{text:"顾问单位",value:"1"}];
-			break;
-		case "mc":
-		data = [{text:"顾问单位",value:"1"}];
-			break;
-		case "spzt":
-		data = [{text:"待审批",value:"1"}];
-			break;
-		default:
-			break;
+	pageData = isUpdata()||'';
+	var dict=getDictMapByTypes("xcbm,xclb");
+	//初始化數據
+	var lbPickerData =dict["xclb"]||{} ;
+	var bmPickerData = dict["xcbm"]||{};
+	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
+	//判断是否更新；
+	if(pageData==''){
+		//创建数据Model；
+		pageData = buildModel();
+	}
+	//数据绑定
+	vue = new Vue({
+		el: '#app',
+		data: pageData,
+		methods: {
+			lxPicker: function (event) {
+				vuePicker(pageData,"chrdwlx",lbPickerData,"intdwlx");
+			},
+			mcPicker: function (event) {
+				vuePicker(pageData,"chrdwmcid",bmPickerData,"intdwmcid");
+			},
+			datePicker: function (event) {
+				vueDtPicker(pageData,"dtmxcrq");
+			},
+		}
+	});
+	
+	if(id){
+		//加载文件
+		initImgList("bj_xm_zfxcyzxys",id,"1","fileIds","img-list",true);
 	}
 	
-	return data;
 }
+//判断是否更新
+function isUpdata(){
+	if(id){
+		var o={};
+		$bjAjax({
+			url:xmzfxcyzxysApiDetail,
+			type:"post",
+			async:false,
+			data:{
+				xmZfxcyzxysId:obj.id
+			},
+			success:function(data){
+				if(data){
+					o=data;
+				}
+			}
+		});
+		return o;
+	}
+	return '';
+}
+//创建数据Model
+function buildModel(){
+	var model = {
+		id:id,
+		intxmid:intxmid,
+		dtmgxrq:systemdate,
+		intdwlx:'',
+		intdwmcid:'',
+		intbcsqqs:'',
+		intbqsqje:'',
+		intbqhsffje:'',
+		inthtje:'',
+		chrbz:'',
+		intsplcztid:'',
+		intbgrid:chrdlrid,
+		chrbgrmc:chrdlrmc
+	}
+	return model;
+}
+
+//保存数据
 function save(){
-	bjToast("保存成功");
+	
+	var data = getFromData("myform");
+	$bjAjax({
+		url:xmzfxcyzxysApiSave,
+		data:data,
+		type:"post",
+		success:function(data){
+			bjToast("保存成功！",function(){
+				toUrl("project_pay_record_detail.html?id="+data.id);
+			});
+		}
+	});
 }

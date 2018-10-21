@@ -16,7 +16,7 @@ function openAdd(){
 }
 
 function showList(idName){
-	debugger
+
 	$bjAjax({
 		url:safeReportListApiPath,
 		type:"post",

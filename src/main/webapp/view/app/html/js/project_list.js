@@ -24,7 +24,6 @@ $bjAjax({
  */
 var allcookies="";
 function openNext(id,chrxmmc){
-	debugger;
 	 allcookies = document.cookie;
 		setCookie("chrxmmc",chrxmmc);
 		setCookie("id",id);

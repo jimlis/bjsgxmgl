@@ -22,7 +22,7 @@ $bjAjax({
 		var tempOne="";
 		var tempTwo="";
 		var index=0;
-		debugger;
+		 ;
 		for(i in xmClybspjlJszlList){
 			var jszlObj=xmClybspjlJszlList[i];
 			var chrpp=jszlObj.chrpp||"";

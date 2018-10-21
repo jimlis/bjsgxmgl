@@ -43,7 +43,7 @@ window.onload = function(){
 				document.getElementById("lcnum").value=parseInt(lcnum)+1;
 			},
 			v_deletelc:function(id,obj){
-				debugger;
+				 ;
 				deletelc(id,obj.currentTarget);
 			}
 		}
