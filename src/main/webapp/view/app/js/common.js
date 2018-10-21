@@ -19,8 +19,13 @@ function setNavbar(){
 	}catch(e){
 		//TODO handle the exception
 	}
+	try{
+		mui('.mui-scroll-wrapper').scroll().scrollTo(-1000,0,500);//100毫秒滚动到顶
+	}catch(e){
+		//TODO handle the exception
+	}
 }
-mui('.mui-scroll-wrapper').scroll().scrollTo(-1000,0,500);//100毫秒滚动到顶
+
 /**服务端地址*/
 var serverPath="http://192.168.0.103:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
@@ -363,7 +368,7 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 		var obj=files[i];
 		var fileId=obj.id||"";
 		var src=fileApiPath+"down/"+fileId;
-		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`">`;
+		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`" onclick="openImg('`+src+`')">`;
 			if(isEdit){
 				html+='<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>'
 			}
@@ -371,6 +376,22 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 	}
 	return html;
 };
+//打开图片
+function openImg(src){
+	
+	var div=document.createElement("div");
+	div.className="bj-zz";
+	div.id="bj-zz";
+	div.innerHTML=`
+		<img src="`+src+`" style="margin: auto;" onclick="closeImg()"/>
+	`
+	document.body.appendChild(div);
+}
+//关闭图片
+function closeImg(){
+	var div=document.getElementById("bj-zz");
+	document.body.removeChild(div);
+}
 
 /*照片懒加载2*/
 function funLazyLoad(select){

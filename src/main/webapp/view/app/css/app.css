@@ -44,6 +44,7 @@
 	font-size: 11pt;
 	color: #000000;
 }
+
 .bj-ul-clear{
 	list-style: none;
 	margin: 0;
@@ -125,5 +126,15 @@ header.mui-bar.mui-bar-nav{
 }
 .bj-hand{
    cursor: pointer;
-｝
-
+}
+#bj-zz{
+	background: gray; 
+	display: flex; 
+	content: ' '; 
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	right: 0px;
+	bottom: 0px;
+	z-index: 9;
+}
