@@ -28,3 +28,6 @@ $bjAjax({
 function openNext(id,chrbt){
 		toUrl("notice_detail.html?id="+id+"&chrbt="+chrbt);
 }
+function outPage(){
+	toUrl("../main.html");
+}

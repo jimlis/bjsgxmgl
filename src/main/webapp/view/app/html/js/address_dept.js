@@ -40,3 +40,6 @@ function openNext(lx,id,name){
 	toUrl(url);
 }
 
+function outPage(){
+	toUrl("../main.html");
+}

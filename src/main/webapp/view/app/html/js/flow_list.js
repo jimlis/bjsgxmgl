@@ -25,3 +25,6 @@ $bjAjax({
 function openNext(id,fileName){
     openFileByName(id,fileName);
 }
+function outPage(){
+	toUrl("../main.html");
+}

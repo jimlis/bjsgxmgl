@@ -18,3 +18,6 @@ openFile(id);
 function openFile(id) {
 	document.getElementById("fileIframe").setAttribute("src",serverPath+"plugins/PDFViewer/web/viewer.html?file="+serverPath+"api/file/down/"+id);
 }
+function outPage(){
+	toUrl("../main.html");
+}

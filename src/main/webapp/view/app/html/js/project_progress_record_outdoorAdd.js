@@ -256,5 +256,5 @@ function save(){
 	});
 }
 function outPage(){
-	toUrl("123123");
+	toUrl("project_progress_record.html");
 }

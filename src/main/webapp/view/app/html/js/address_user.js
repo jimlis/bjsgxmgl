@@ -34,7 +34,9 @@ $bjAjax({
 			`;
 	},
 });
-
+function outPage(){
+	toUrl("../main.html");
+}
 
 
 

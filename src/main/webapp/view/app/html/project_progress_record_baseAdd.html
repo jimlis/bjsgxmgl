@@ -38,14 +38,14 @@
 					</h5>
 					<h5 class="bj-title2-font">施工位置：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzid" v-model="intsgwzid" placeholder="请选择" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrsgwzmc" v-model="chrsgwzmc" v-on:click="sgPicker" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgwzmc" v-model="chrsgwzmc" v-on:click="sgPicker" placeholder="请选择" />
 					</h5>
 					<h5 class="bj-title2-font " v-if="intsgwzid==-1">施工位置描述：
 					   <textarea  class="bj-input bj-p-black-font" type="text" id="chrsgwzms" v-model="chrsgwzms" placeholder="施工位置描述"></textarea>
                     </h5>
 					<h5 class="bj-title2-font">基础类型：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intjclx" v-model="intjclx" placeholder="请选择" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrjclx" v-model="chrjclx" v-on:click="jcPicker" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrjclx" v-model="chrjclx" v-on:click="jcPicker" placeholder="请选择" />
 					</h5>
 					<h5 class="bj-title2-font " v-if="intjclx==3">桩基础总数量：
                        <input  class="bj-input bj-p-black-font" type="text" onchange="setWcl()" id="intzjczsl" v-model="intzjczsl" placeholder="桩基础总数量"/>
@@ -57,7 +57,7 @@
 						<input class="bj-input bj-p-black-font" type="text" id="intwcl" v-model="intwcl" placeholder="请输入" />
 					</h5>
 					<h5 class="bj-title2-font">浇筑砼日期：
-						<input class="bj-input bj-p-black-font" type="text" id="dtmjzqrq" v-on:click="datePicker" v-model="dtmjzqrq" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" id="dtmjzqrq" v-on:click="datePicker" v-model="dtmjzqrq" placeholder="请选择" />
 					</h5>
 					<h5 class="bj-title2-font">报告人：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
