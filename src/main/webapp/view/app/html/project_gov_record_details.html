@@ -13,7 +13,11 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-		
+		<style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
 	</head>
 		
 	<body >
@@ -28,7 +32,7 @@
 			</h1>
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
 		</header>
-		<div class="mui-content"  id="app">
+		<div class="mui-content"  id="app" v-cloak>
 				<div class="mui-content-padded">
 					<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font" id="dtmgxrq">{{dtmgxrq}}</span></h5>
 					<h5 class="bj-title2-font">巡查类别：<span class="bj-p-gray-font" id="dtmxcrq">{{chrxclb}}</span></h5>

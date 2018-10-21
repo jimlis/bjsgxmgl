@@ -38,7 +38,7 @@
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font">{{dtmgxrq}}</span></h5>
 				<h5 class="bj-title2-font">单位类型：<span class="bj-p-gray-font">{{chrdwlx}}</span></h5>
-				<h5 class="bj-title2-font">单位名称：<span class="bj-p-gray-font">{{chrdwmcid}}</span></h5>
+				<h5 class="bj-title2-font">单位名称：<span class="bj-p-gray-font">{{chrdwmc}}</span></h5>
 				<h5 class="bj-title2-font">本次申请期数：<span class="bj-p-gray-font">{{intbcsqqs}}</span></h5>
 				<h5 class="bj-title2-font">本期申请金额：<span class="bj-p-gray-font">{{intbqsqje}}</span></h5>
 				<h5 class="bj-title2-font">本期核实发放金额：<span class="bj-p-gray-font">{{intbqhsffje}}</span></h5>
@@ -82,18 +82,19 @@
 		            	</tr>
 	            </table>
 				<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">备注</span></h5>
-				<ul class="bj-ul-clear bj-title2-font">支付证书：
-					<li><a>12345678XX.pdf</a></li>
-					<li><a>12345678XX.pdf</a></li>
-				</ul>
-				<h5 class="bj-title2-font">审批流程状态：<span class="bj-p-gray-font">待审核</span></h5>
-				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
+				<h5 class="bj-ul-clear bj-title2-font">支付证书：
+				    <div id="file-list">
+                    </div>
+				</h5>
+				<h5 class="bj-title2-font">审批流程状态：<span class="bj-p-gray-font">{{chrsplczt}}</span></h5>
+				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_pay_record_detail.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

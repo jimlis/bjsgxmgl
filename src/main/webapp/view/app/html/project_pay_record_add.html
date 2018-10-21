@@ -1,125 +1,156 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>工程款申请/支付情况</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css" />
-		<link rel="stylesheet" href="../css/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-		<style type="text/css">
-			td input{
-				margin: 0px !important;
-				border-radius: 0px !important;
-			}
-		</style>
-	</head>
-		
-	<body>
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
-			<h1 class="mui-title">
-				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll" id="title-scroll">
+<head>
+<meta charset="utf-8">
+<title>工程款申请/支付情况</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css"
+	href="../libs/layui/css/layui.css" />
+<link rel="stylesheet" href="../css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
+<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+<style type="text/css">
+td input {
+	margin: 0px !important;
+	border-radius: 0px !important;
+}
+</style>
+</head>
 
-					</div>
-				</div>
-			</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
-		</header>
-		<div class="mui-content" id="app">
-			<form id="myform">
-				<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-icon mui-icon-left-nav mui-pull-left"
+			href="javascript:void(0);" onclick="outPage()"></a>
+		<h1 class="mui-title">
+			<div
+				class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div class="mui-scroll" id="title-scroll"></div>
+			</div>
+		</h1>
+		<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"
+			onclick="save()">保存</button>
+	</header>
+	<div class="mui-content" id="app">
+		<form id="myform">
+			<input class="bj-input bj-p-black-font" type="hidden" id="intxmid"
+				v-model="intxmid" placeholder="项目id" /> <input
+				class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id"
+				placeholder="业务id" /> <input class="bj-input bj-p-black-font"
+				type="hidden" id="fileIds" placeholder="文件ids" />
 			<div class="mui-content-padded">
-				<h5 class="bj-title2-font">更新日期：
-					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
+				<h5 class="bj-title2-font">
+					更新日期： <input class="bj-input bj-p-black-font bj-disable"
+						type="text" id="dtmgxrq" v-model="dtmgxrq" />
 				</h5>
-				<h5 class="bj-title2-font">单位类型：
-					<input class="bj-input bj-p-black-font" type="hidden" id="intdwlx" v-model="intdwlx" placeholder="请选择" />
-					<input class="bj-input bj-p-black-font" type="text" id="chrdwlx" v-model="chrdwlx" v-on:click="lxPicker" placeholder="请选择" />
+				<h5 class="bj-title2-font">
+					单位类型： <input class="bj-input bj-p-black-font" type="hidden"
+						id="intdwlx" v-model="intdwlx" placeholder="请选择" /> <input
+						class="bj-input bj-p-black-font" type="text" id="chrdwlx"
+						v-model="chrdwlx" v-on:click="lxPicker" placeholder="请选择" />
 				</h5>
-				<h5 class="bj-title2-font">单位名称：
-					<input class="bj-input bj-p-black-font" type="hidden" id="intdwmcid" v-model="intdwmcid" placeholder="请选择" />
-					<input class="bj-input bj-p-black-font" type="text" id="chrdwmcid" v-model="chrdwmcid" v-on:click="mcPicker" placeholder="请选择" />
+				<h5 class="bj-title2-font">
+					单位名称： <input class="bj-input bj-p-black-font" type="hidden"
+						id="intdwmcid" v-model="intdwmcid" placeholder="请选择" /> <input
+						class="bj-input bj-p-black-font" type="text" id="chrdwmc"
+						v-model="chrdwmc" v-on:click="dwPicker" placeholder="请选择" />
 				</h5>
-				<h5 class="bj-title2-font">本次申请期数：
-					<input class="bj-input bj-p-black-font" type="text" id="intbcsqqs" v-model="intbcsqqs" placeholder="请输入" />
+				<h5 class="bj-title2-font">
+					本次申请期数： <input class="bj-input bj-p-black-font" type="number"
+						id="intbcsqqs" v-model="intbcsqqs" placeholder="请输入" />
 				</h5>
-				<h5 class="bj-title2-font">本期申请金额：
-					<input class="bj-input bj-p-black-font" type="text" id="intbqsqje" v-model="intbqsqje" placeholder="请输入" />
+				<h5 class="bj-title2-font">
+					本期申请金额： <input class="bj-input bj-p-black-font" type="number"
+						id="intbqsqje" v-model="intbqsqje" placeholder="请输入" />
 				</h5>
-				<h5 class="bj-title2-font">本期核实发放金额：
-					<input class="bj-input bj-p-black-font" type="text" id="intbqhsffje" v-model="intbqhsffje"  placeholder="请输入" />
+				<h5 class="bj-title2-font">
+					本期核实发放金额： <input class="bj-input bj-p-black-font" type="number"
+						id="intbqhsffje" v-model="intbqhsffje" placeholder="请输入" />
 				</h5>
 				<h5 class="bj-title2-font">申请/支付情况：</h5>
-				<table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
-		            	<tr>
-		            		<th>合同金额A</th>
-		            		<th>潜在变更总金额B</th>
-		            		<th>累计已发放期数</th>
-		            		<th>累计发放金额C</th>
-		            	</tr>
-		            	<tr>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            	</tr>
-		            	<tr>
-		            		<th>B/A</th>
-		            		<th>本次申请金额D</th>
-		            		<th>本期核实发放金额E</th>
-		            		<th>D/E</th>
-		            	</tr>
-		            	<tr>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            	</tr>
-		            	<tr>
-		            		<th>C/A</th>
-		            		<th>（C+E）/A</th>
-		            		<th>C/（A+B）</th>
-		            		<th>（C+E）/（A+B）</th>
-		            	</tr>
-		            	<tr>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            		<td><input class="bj-input bj-p-black-font" type="text" /></td>
-		            	</tr>
-	            </table>
-				<h5 class="bj-title2-font">备注：
-					<input class="bj-input bj-p-black-font" type="text" id="showType" placeholder="请输入" />
+				<table width="100%" class="bj-p-black-font" border="1px"
+					style="text-align: center;">
+					<tr>
+						<th>合同金额A</th>
+						<th>潜在变更总金额B</th>
+						<th>累计已发放期数</th>
+						<th>累计发放金额C</th>
+					</tr>
+					<tr>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+					</tr>
+					<tr>
+						<th>B/A</th>
+						<th>本次申请金额D</th>
+						<th>本期核实发放金额E</th>
+						<th>D/E</th>
+					</tr>
+					<tr>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+					</tr>
+					<tr>
+						<th>C/A</th>
+						<th>（C+E）/A</th>
+						<th>C/（A+B）</th>
+						<th>（C+E）/（A+B）</th>
+					</tr>
+					<tr>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+						<td><input class="bj-input bj-p-black-font" type="text" /></td>
+					</tr>
+				</table>
+				<h5 class="bj-title2-font">
+					备注： <input class="bj-input bj-p-black-font" type="text" id="chrbz"
+						v-model="chrbz" placeholder="请输入" />
 				</h5>
-				<ul class="bj-ul-clear bj-title2-font">支付证书：
-					<li><a>12345678XX.pdf</a></li>
-					<li><a>12345678XX.pdf</a></li>
-				</ul>
+				<h5 class="bj-ul-clear bj-title2-font">
+					支付证书：
+					<div id="uploader" class="wu-example">
+						<!--用来存放文件信息-->
+						<div class="btns">
+							<button id="chbtn" type="button">选择文件</button>
+						</div>
+						<div id="file-list"></div>
+					</div>
+				</h5>
 				<h5 class="bj-title2-font">审批流程状态：
-					<input class="bj-input bj-p-black-font" type="text" id="showSPZT" placeholder="请选择" />
-				</h5>
-				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">李斯</span></h5>
+                    <input class="bj-input bj-p-black-font" type="hidden" id="intsplcztid" name="intsplcztid" v-model="intsplcztid" placeholder="审批流程状态" />
+                    <input class="bj-input bj-p-black-font" type="text" id="chrsplczt" name="chrsplczt" v-model="chrsplczt" v-on:click="splcPicker()"  placeholder="审批流程状态" />
+                </h5>
+				<h5 class="bj-title2-font">报告人：
+                        <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
+                        <input class="bj-input bj-p-black-font " type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
+                </h5>
 			</div>
-			</form>
-		</div>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_pay_record_add.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+		</form>
+	</div>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.picker.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/mui.poppicker.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/mui.picker.min.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../libs/layui/layui.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/project_pay_record_add.js" type="text/javascript"
+		charset="utf-8"></script>
+</body>
 
 </html>

@@ -7,7 +7,7 @@ window.onload = function(){
 		data: {list:pageData},
 		methods: {
 			openDetail: function (id) {
-				var address = "project_gov_record_details.html?id="+id;
+				var address = "project_pay_record_detail.html?id="+id;
     				toUrl(address);
 			}
 		}
@@ -17,14 +17,14 @@ window.onload = function(){
  *新增
  */
 function openAdd(){
-    var address = "project_gov_record_add.html?id=&xmid="+xmid;
+    var address = "project_pay_record_add.html?id=&xmid="+xmid;
     toUrl(address);
 }
 //得到巡查信息数据
 function getPageData(){
 	var obj={};
 	$bj_post_ajax({
-	    	"url":xmzfxcyzxysApiPath,
+	    	"url":payApiList,
 	    	"data":{
 	    		"xmid":xmid,
 	    	},
@@ -42,9 +42,9 @@ function getPageData(){
  *详情
  */
 function openDetails(id){
-    var address = "project_gov_record_details.html?id="+id;
+    var address = "project_pay_record_details.html?id="+id;
     toUrl(address);
 }
 function outPage(){
-	toUrl("project_detail_list.html");
+	toUrl("project_pay_record.html");
 }

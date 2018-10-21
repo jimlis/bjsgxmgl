@@ -8,29 +8,22 @@ window.onload = function(){
     //数据绑定
 	var vue = new Vue({
 		el: '#app',
-		data: pageData,
-		methods: {
-//			edit: function (id) {
-//				var address = "project_gov_record_add.html?id="+id;
-//  			toUrl(address);
-//			}
-		}
+		data: pageData
 	});
 	
 	if(id){
-		//加载图片
-		initImgList("bj_xm_zfxcyzxys",id,"1","fileIds","img-list",false);
+		initFileList("bj_xm_gckyzfqk",id,"1","fileIds","file-list",false);
 	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:xmzfxcyzxysApiDetail,
+		url:payApiDetail,
 		type:"post",
 		async:false,
 		data:{
-			xmZfxcyzxysId:obj.id
+			xmGckyzfqkId:id
 		},
 		success:function(data){
 			if(data){
@@ -42,7 +35,7 @@ function getPageData(){
 }
 
 function edit(){
-	toUrl("project_gov_record_add.html?id="+id);
+	toUrl("project_pay_record_add.html?id="+id);
 }
 
 

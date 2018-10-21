@@ -1,22 +1,25 @@
 package com.zj.project.xm.xmgckyzfqk.service.impl;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmgckyzfqk.dao.XmGckyzfqkDao;
-import com.zj.project.xm.xmgckyzfqk.domain.XmGckyzfqkDO;
-import com.zj.project.xm.xmgckyzfqk.service.XmGckyzfqkService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
+import com.zj.project.xm.xmgckyzfqk.dao.XmGckyzfqkDao;
+import com.zj.project.xm.xmgckyzfqk.domain.XmGckyzfqkDO;
+import com.zj.project.xm.xmgckyzfqk.service.XmGckyzfqkService;
 
 /**
  * 
@@ -36,6 +39,52 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private XmDwmdService xmDwmdService;
+    
+    @Override
+    public XmGckyzfqkDO getById(Serializable id) {
+    	XmGckyzfqkDO xmGckyzfqkDO=super.getById(id);
+    	if(xmGckyzfqkDO!=null) {
+    		Integer intdwlx = xmGckyzfqkDO.getIntdwlx();
+    		if(intdwlx!=null) {
+    			String chrdwlx="";
+    			if(intdwlx.equals(1)) {
+    				chrdwlx="顾问单位";
+    			}else if(intdwlx.equals(2)) {
+    				chrdwlx="施工单位";
+    			}if(intdwlx.equals(3)) {
+    				chrdwlx="其他单位";
+    			}
+    			xmGckyzfqkDO.setChrdwlx(chrdwlx);
+    		}
+    		
+    		Long intdwmcid = xmGckyzfqkDO.getIntdwmcid();
+    		if(intdwmcid!=null) {
+    			XmDwmdDO xmDwmdDO = xmDwmdService.getById(intdwmcid);
+    			if(xmDwmdDO!=null) {
+    				xmGckyzfqkDO.setChrdwmc(xmDwmdDO.getChrdwmc());
+    			}
+    		}
+    		
+    		String intsplczt = xmGckyzfqkDO.getIntsplcztid();
+    		if(StringUtils.isNotEmpty(intsplczt)) {
+    			String chrsplczt="";
+    			if(intsplczt.equals("1")) {
+    				chrsplczt="带审批";
+    			}else if(intsplczt.equals("2")) {
+    				chrsplczt="总部审批A";
+    			}else if(intsplczt.equals("3")) {
+    				chrsplczt="总部审批B";
+    			}else if(intsplczt.equals("4")) {
+    				chrsplczt="业务";
+    			}
+    			xmGckyzfqkDO.setChrsplczt(chrsplczt);
+    		}
+    	}
+    	return xmGckyzfqkDO;
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

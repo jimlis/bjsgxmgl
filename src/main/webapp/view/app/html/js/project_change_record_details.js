@@ -1,33 +1,43 @@
-var obj = getRequest("id");
-$bjAjax({
+var obj = getRequest();
+var id=obj.id||"";
+//初始化显示数据
+window.onload = function(){
+	//得到数据
+	var pageData = getPageData();
+	
+    //数据绑定
+	var vue = new Vue({
+		el: '#app',
+		data: pageData
+	});
+	
+	if(id){
+		initFileList("bj_xm_bgsqjl",id,"1","fileIds","file-list",false);
+	}
+}
+//得到显示数据
+function getPageData(){
+	var o={};
+	$bjAjax({
 		url:changeApiDetail,
 		type:"post",
+		async:false,
 		data:{
-			xmZfxcyzxysId:obj.id
+			xmBgsqjlId:id
 		},
 		success:function(data){
-			document.getElementById("dtmgxrq").innerText=data.dtmgxrq;
-			document.getElementById("intbgsqlx").innerText=data.intbgsqlx;
-			document.getElementById("chrbgsqbh").innerText=data.chrbgsqbh;
-			document.getElementById("chrbgsqmc").innerText=data.chrbgsqmc;
-			document.getElementById("intsfqd").innerText=data.intsfqd;
-			document.getElementById("").innerText=data.;
-			document.getElementById("chrbgxq").innerText=data.chrbgxq;
-			document.getElementById("intgqyx").innerText=data.intgqyx;
-			document.getElementById("intbggs").innerText=data.intbggs;
-			document.getElementById("").innerText=data.;
-			document.getElementById("inthtzb").innerText=data.inthtzb;
-			document.getElementById("chrbz").innerText=data.chrbz;
+			if(data){
+				o=data;
+			}
 		}
-});
+	});
+	return o;
+}
 
-/**
- *编辑
- */
 function edit(){
-    var address = "project_change_record_add.html?id="+obj.id;
-    toUrl(address);
+	toUrl("project_change_record_add.html?id="+id);
 }
 function outPage(){
 	toUrl("project_change_record.html");
 }
+

@@ -12,17 +12,18 @@ function showList(type){
     	"url":changeApiList,
     	"data":{
     		"xmid":xmid,
-    		"bgsqlx":bgsqlx
+    		"bgsqlx":type
     	},
     	success:function (data) {
-    		bjConsole(data)
+    		var html="";
     		mui.each(data,function(index,item){
-    			var dtmxcrq = item.dtmxcrq
-    			var id = item.id
-    			document.getElementById(xcbm).innerHTML+=`
-    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmxcrq+`</li>
+    			var dtmgxrq = item.dtmgxrq||"";
+    			var id = item.id||"";
+    			html+=`
+    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`</li>
     			`;
 			})
+			document.getElementById(type).innerHTML=html;
         }
     });
 }

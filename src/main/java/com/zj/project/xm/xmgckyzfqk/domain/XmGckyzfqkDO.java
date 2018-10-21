@@ -50,9 +50,16 @@ public class XmGckyzfqkDO extends BaseDomain {
     /** 单位类型：1（顾问单位）2（施工单位）3（其他单位） */
     @ApiModelProperty(value = "单位类型：1（顾问单位）2（施工单位）3（其他单位）",name = "intdwlx",dataType = "Integer",required = true)
     private Integer intdwlx;
+    @ApiModelProperty(value = "单位类型名称",name = "chrdwlx",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrdwlx;
     /** 单位名称：单位名单表id */
     @ApiModelProperty(value = "单位名称：单位名单表id",name = "intdwmcid",dataType = "Long",required = true)
     private Long intdwmcid;
+    /**单位名称名称*/
+    @TableField(exist=false)
+    @ApiModelProperty(value = "单位名称名称",name = "chrdwmcmc",dataType = "String",required = true)
+    private String chrdwmc;
     /** 本次申请期数 */
     @ApiModelProperty(value = "本次申请期数",name = "intbcsqqs",dataType = "Integer",required = false)
     private Integer intbcsqqs;
@@ -74,12 +81,16 @@ public class XmGckyzfqkDO extends BaseDomain {
     /** 审批流程状态：code码配置 */
     @ApiModelProperty(value = "审批流程状态：code码配置 ",name = "intsplcztid",dataType = "String",required = false)
     private String intsplcztid;
+    @TableField(exist=false)
+    @ApiModelProperty(value = "审批流程状态 ",name = "chrsplczt",dataType = "String",required = false)
+    private String chrsplczt;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
     private Long intbgrid;
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "String",required = true)
     private String chrbgrmc;
+  
 
     /**
      * 设置：主键id
@@ -285,4 +296,22 @@ public class XmGckyzfqkDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public String getChrdwlx() {
+		return chrdwlx;
+	}
+	public void setChrdwlx(String chrdwlx) {
+		this.chrdwlx = chrdwlx;
+	}
+	public String getChrdwmc() {
+		return chrdwmc;
+	}
+	public void setChrdwmc(String chrdwmc) {
+		this.chrdwmc = chrdwmc;
+	}
+	public String getChrsplczt() {
+		return chrsplczt;
+	}
+	public void setChrsplczt(String chrsplczt) {
+		this.chrsplczt = chrsplczt;
+	}
 }

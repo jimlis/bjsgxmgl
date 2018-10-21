@@ -50,7 +50,7 @@ public class ApiXmGckyzfqkController extends ApiBaseController {
         	xmGckyzfqkDO.setFcbz(1);
         	xmGckyzfqkDO.setIntxmid(xmid);
         	xmGckyzfqkDO.setIntdwlx(dwlx);
-        	QueryWrapper<XmGckyzfqkDO> queryWrapper=new QueryWrapper<XmGckyzfqkDO>(xmGckyzfqkDO).orderByAsc("dtmgxrq");
+        	QueryWrapper<XmGckyzfqkDO> queryWrapper=new QueryWrapper<XmGckyzfqkDO>(xmGckyzfqkDO).select("id","dtmgxrq","intdwmcid","intdwlx","(select chrdwmc from bj_xm_dwmd where id=intdwmcid) as chrdwmc").orderByAsc("dtmgxrq");
             return Result.ok(xmGckyzfqkService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();
@@ -82,10 +82,10 @@ public class ApiXmGckyzfqkController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功"),
             @ApiResponse(code=1,message="操作失败")})
     @RequiresAuthentication
-    public Result save(XmGckyzfqkDO xmGckyzfqkDO, String fileIds) {
+    public Result<XmGckyzfqkDO> save(XmGckyzfqkDO xmGckyzfqkDO, String fileIds) {
         try {
         	xmGckyzfqkService.saveXmGckyzfqkXx(xmGckyzfqkDO,fileIds);
-           return Result.ok();
+           return Result.ok(xmGckyzfqkDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

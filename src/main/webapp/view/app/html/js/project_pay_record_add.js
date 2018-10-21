@@ -6,13 +6,12 @@ var systemdate = bjGetSysDate();
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
+var dwData=[];
 window.onload = function(){
+	upLoadFile('#chbtn',{"busType":"bj_xm_gckyzfqk"});
+	
 	pageData = isUpdata()||'';
-	var dict=getDictMapByTypes("xcbm,xclb");
-	//初始化數據
-	var lbPickerData =dict["xclb"]||{} ;
-	var bmPickerData = dict["xcbm"]||{};
-	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
+	
 	//判断是否更新；
 	if(pageData==''){
 		//创建数据Model；
@@ -24,20 +23,26 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			lxPicker: function (event) {
-				vuePicker(pageData,"chrdwlx",lbPickerData,"intdwlx");
+				vuePicker(pageData,"chrdwlx",[{"text":"顾问单位","value":"1"},{"text":"施工单位","value":"2"},{"text":"其他单位","value":"3"}],"intdwlx");
 			},
-			mcPicker: function (event) {
-				vuePicker(pageData,"chrdwmcid",bmPickerData,"intdwmcid");
+			dwPicker: function (event) {
+				vuePicker(pageData,"chrdwmc",dwData,"intdwmcid");
 			},
-			datePicker: function (event) {
-				vueDtPicker(pageData,"dtmxcrq");
-			},
+			splcPicker: function () {
+				vuePicker(pageData,"chrsplczt",[{"text":"待审批","value":"1"},{"text":"总部审批A","value":"2"},
+					{"text":"总部审批B","value":"3"},{"text":"业主","value":"4"}],"intsplcztid");
+			}
+		},
+		watch:{
+			intdwlx:function(val,old){
+				dwData=getXmdwmdData(intxmid,val);
+			}
 		}
 	});
 	
 	if(id){
 		//加载文件
-		initImgList("bj_xm_zfxcyzxys",id,"1","fileIds","img-list",true);
+		initFileList("bj_xm_gckyzfqk",id,"1","fileIds","file-list",true);
 	}
 	
 }
@@ -46,11 +51,11 @@ function isUpdata(){
 	if(id){
 		var o={};
 		$bjAjax({
-			url:xmzfxcyzxysApiDetail,
+			url:payApiDetail,
 			type:"post",
 			async:false,
 			data:{
-				xmZfxcyzxysId:obj.id
+				xmGckyzfqkId:id
 			},
 			success:function(data){
 				if(data){
@@ -69,13 +74,15 @@ function buildModel(){
 		intxmid:intxmid,
 		dtmgxrq:systemdate,
 		intdwlx:'',
+		chrdwlx:'',
 		intdwmcid:'',
+		chrdwmc:'',
 		intbcsqqs:'',
 		intbqsqje:'',
 		intbqhsffje:'',
-		inthtje:'',
 		chrbz:'',
 		intsplcztid:'',
+		chrsplczt:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc
 	}
@@ -87,7 +94,7 @@ function save(){
 	
 	var data = getFromData("myform");
 	$bjAjax({
-		url:xmzfxcyzxysApiSave,
+		url:payApiSave,
 		data:data,
 		type:"post",
 		success:function(data){

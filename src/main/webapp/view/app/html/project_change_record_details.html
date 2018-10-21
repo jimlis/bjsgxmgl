@@ -54,8 +54,8 @@
 			<h5 class="bj-title2-font">是否取替之前变更申请：
 				<span class="bj-p-gray-font" id="intsfqd">{{chrsfqd}}</span>
 			</h5>
-			<h5 class="bj-title2-font">取替变更编号：
-				<span class="bj-p-gray-font" id="">{{}}</span>
+			<h5 class="bj-title2-font" v-if="intsfqd==0">取替变更编号：
+				<span class="bj-p-gray-font" id="">{{chrqtbgbh}}</span>
 			</h5>
 			<h5 class="bj-title2-font">变更详情：
 				<span class="bj-p-gray-font" id="chrbgxq">{{chrbgxq}}</span>
@@ -67,19 +67,18 @@
 				<span class="bj-p-gray-font" id="intbggs">{{intbggs}}</span>
 			</h5>
 			<h5 class="bj-title2-font">潜在变更总金额：
-				<span class="bj-p-gray-font" id="">{{dtmgxrq}}</span>
+				<span class="bj-p-gray-font" id="">{{intqzbgzje}}</span>
 			</h5>
 			<h5 class="bj-title2-font">合同占比：
-				<span class="bj-p-gray-font" id="inthtzb">{{dtmgxrq}}</span>
+				<span class="bj-p-gray-font" id="inthtzb">{{inthtzb}}</span>
 			</h5>
 			<h5 class="bj-title2-font">备注：
 				<span class="bj-p-gray-font" id="chrbz">{{chrbz}}</span>
 			</h5>
-
-			<ul class="bj-ul-clear bj-title2-font">变更申请文件：
-				<li><a>12345678XX.pdf</a></li>
-				<li><a>12345678XX.pdf</a></li>
-			</ul>
+			<h5 class="bj-ul-clear bj-title2-font">变更申请文件：
+			      <div id="file-list">
+                  </div>
+			</h5>
 			<h5 class="bj-title2-font">审批流程状态：
 				<span class="bj-p-gray-font">{{chrsplczt}}</span>
 			</h5>

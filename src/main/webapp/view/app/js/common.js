@@ -27,7 +27,7 @@ function setNavbar(){
 }
 
 /**服务端地址*/
-var serverPath="http://192.168.0.103:8080/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -59,6 +59,11 @@ var photoApiSave = serverPath+"api/zpjl/save";
 var changeApiList = serverPath+"api/xmbgsqjl/getXmBgsqjlListByXmidAndBgsqlx";
 var changeApiDetail = serverPath+"api/xmbgsqjl/getXmBgsqjlById";
 var changeApiSave = serverPath+"api/xmbgsqjl/save";
+
+var payApiList = serverPath+"api/xmgckyzfqk/getXmGckyzfqkListByXmidAndDwlx";
+var payApiDetail = serverPath+"api/xmgckyzfqk/getXmGckyzfqkById";
+var payApiSave = serverPath+"api/xmgckyzfqk/save";
+
 var materialApiList = serverPath +"api/xmclybspjl/getXmClybspjlListByXmidAndClyblx";
 var materialApiDetail = serverPath +"api/xmclybspjl/getXmClybspjlById";
 var materialApiSave = serverPath +"api/xmclybspjl/save";

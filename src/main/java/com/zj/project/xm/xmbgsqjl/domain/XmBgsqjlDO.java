@@ -49,6 +49,10 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 变更申请类型：1（顾问变更）2（工程变更）3（其他） */
     @ApiModelProperty(value = "变更申请类型：1（顾问变更）2（工程变更）3（其他） ",name = "intbgsqlx",dataType = "Integer",required = true)
     private Integer intbgsqlx;
+    /** 变更申请类型名称 */
+    @ApiModelProperty(value = "变更申请类型名称",name = "chrbgsqlx",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrbgsqlx;
     /** 变更申请编号 */
     @ApiModelProperty(value = "变更申请编号 ",name = "chrbgsqbh",dataType = "string")
     private String chrbgsqbh;
@@ -58,6 +62,13 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 是否取代之前变更申请：1（是）0（否） */
     @ApiModelProperty(value = "是否取代之前变更申请：1（是）0（否） ",name = "intsfqd",dataType = "Integer")
     private Integer intsfqd;
+    /** 是否取代之前变更申请名称*/
+    @TableField(exist=false)
+    @ApiModelProperty(value = "是否取代之前变更申请：1（是）0（否） ",name = "chrsfqd",dataType = "String")
+    private String chrsfqd;
+    /**取替变更编号*/
+    @ApiModelProperty(value = "是否取代之前变更申请：1（是）0（否） ",name = "chrqtbgbh",dataType = "String")
+    private String chrqtbgbh;
     /** 变更详情 */
     @ApiModelProperty(value = "变更详情 ",name = "chrbgxq",dataType = "String")
     private String chrbgxq;
@@ -67,6 +78,12 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 变更估算 */
     @ApiModelProperty(value = "变更估算 ",name = "intbggs",dataType = "Float")
     private Float intbggs;
+    /** 潜在金额变更总金额 */
+    @ApiModelProperty(value = "潜在金额变更总金额 ",name = "intqzbgzje",dataType = "Float")
+    private Float intqzbgzje;
+    /** 合同占比 */
+    @ApiModelProperty(value = "合同占比 ",name = "inthtzb",dataType = "Float")
+    private Float inthtzb;
     /** 备注 */
     @ApiModelProperty(value = "备注 ",name = "chrbz",dataType = "String")
     private String chrbz;
@@ -76,6 +93,10 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 审批流程状态：code码表 */
     @ApiModelProperty(value = "审批流程状态：code码表 ",name = "intsplczt",dataType = "String")
     private String intsplczt;
+    /** 审批流程状态名称 */
+    @ApiModelProperty(value = "审批流程状态名称",name = "chrsplczt",dataType = "String")
+    @TableField(exist=false)
+    private String chrsplczt;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required=true)
     private Long intbgrid;
@@ -299,4 +320,40 @@ public class XmBgsqjlDO extends BaseDomain {
     public String getChrbgrmc() {
         return chrbgrmc;
     }
+	public String getChrbgsqlx() {
+		return chrbgsqlx;
+	}
+	public void setChrbgsqlx(String chrbgsqlx) {
+		this.chrbgsqlx = chrbgsqlx;
+	}
+	public String getChrsfqd() {
+		return chrsfqd;
+	}
+	public void setChrsfqd(String chrsfqd) {
+		this.chrsfqd = chrsfqd;
+	}
+	public String getChrsplczt() {
+		return chrsplczt;
+	}
+	public void setChrsplczt(String chrsplczt) {
+		this.chrsplczt = chrsplczt;
+	}
+	public Float getIntqzbgzje() {
+		return intqzbgzje;
+	}
+	public void setIntqzbgzje(Float intqzbgzje) {
+		this.intqzbgzje = intqzbgzje;
+	}
+	public Float getInthtzb() {
+		return inthtzb;
+	}
+	public void setInthtzb(Float inthtzb) {
+		this.inthtzb = inthtzb;
+	}
+	public String getChrqtbgbh() {
+		return chrqtbgbh;
+	}
+	public void setChrqtbgbh(String chrqtbgbh) {
+		this.chrqtbgbh = chrqtbgbh;
+	}
 }
