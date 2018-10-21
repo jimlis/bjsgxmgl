@@ -10,3 +10,6 @@ function getPageData(){
 function save(){
 	bjToast("保存成功");
 }
+function outPage(){
+	toUrl("project_progress_record.html");
+}

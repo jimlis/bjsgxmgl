@@ -36,3 +36,6 @@ function edit(){
 	}
 	toUrl("project_basis_address_edit.html");
 }
+function outPage(){
+	toUrl("project_basis_list.html");
+}

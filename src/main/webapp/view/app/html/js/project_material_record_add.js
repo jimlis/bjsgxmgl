@@ -147,3 +147,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_material_record.html");
+}

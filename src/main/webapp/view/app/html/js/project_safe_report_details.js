@@ -34,3 +34,6 @@ function  openAdd() {
     var address = "project_saft_report_add.html?id=" + obj.id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_safe_report.html");
+}

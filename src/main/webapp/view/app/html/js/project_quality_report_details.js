@@ -44,3 +44,6 @@ function  edit() {
     var address = "project_quality_report_add.html?id=" + obj.id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_quality_report.html");
+}

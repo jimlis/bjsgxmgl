@@ -65,3 +65,6 @@ function save(){
 })
 	
 }
+function outPage(){
+	toUrl("project_safe_report.html");
+}

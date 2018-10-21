@@ -28,3 +28,6 @@ function openNext(id){
 	}
 	toUrl(address);
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

@@ -40,3 +40,6 @@ function save(){
 	});
 }
 upLoadImg('#chbtn',{"busType":"bj_xm_qyjwz"});
+function outPage(){
+	toUrl("project_basis_list.html");
+}

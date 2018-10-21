@@ -111,3 +111,6 @@ function save(){
 function edit(){
 	toUrl("project_basis_targetData_edit.html?id="+intxmid);
 }
+function outPage(){
+	toUrl("project_basis_list.html");
+}

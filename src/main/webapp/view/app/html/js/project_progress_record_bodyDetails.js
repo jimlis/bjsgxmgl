@@ -38,3 +38,6 @@ function getPageData(){
 function edit(){
 	toUrl("project_progress_record_bodyAdd.html?id="+id);
 }
+function outPage(){
+	toUrl("project_progress_record.html");
+}

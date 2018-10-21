@@ -57,6 +57,8 @@ function openNext(id){
 function openAdd(){
 	toUrl("project_templet_record_add.html");
 }
-
+function outPage(){
+	toUrl("project_detail_list.html");
+}
 
 

@@ -45,3 +45,6 @@ function openDetails(id){
     var address = "project_gov_record_details.html?id="+id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

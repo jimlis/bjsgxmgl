@@ -42,3 +42,6 @@ function  openNext() {
     var address = "project_templet_record_add.html?id=" + obj.id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_templet_record.html");
+}

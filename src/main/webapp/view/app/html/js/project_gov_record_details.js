@@ -46,3 +46,6 @@ function edit(){
 }
 
 
+function outPage(){
+	toUrl("project_gov_record.html");
+}

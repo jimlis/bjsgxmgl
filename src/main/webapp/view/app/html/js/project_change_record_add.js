@@ -100,3 +100,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_change_record.html");
+}

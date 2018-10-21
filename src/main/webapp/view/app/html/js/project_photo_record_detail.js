@@ -38,5 +38,7 @@ function getPageData(){
 function edit(){
 	toUrl("project_photo_record_add.html?id="+id);
 }
-
+function outPage(){
+	toUrl("project_photo_record_list.html");
+}
 

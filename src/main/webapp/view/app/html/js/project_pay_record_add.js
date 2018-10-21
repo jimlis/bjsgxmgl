@@ -97,3 +97,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_pay_record.html");
+}

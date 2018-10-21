@@ -42,3 +42,6 @@ function isUpdata(){
 function edit(){
 	toUrl("project_progress_record_secAdd.html?id="+id);
 }
+function outPage(){
+	toUrl("project_progress_record.html");
+}

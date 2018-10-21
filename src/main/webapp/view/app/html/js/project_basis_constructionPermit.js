@@ -18,3 +18,6 @@ $bjAjax({
 function edit(){
 	toUrl("project_basis_constructionPermit_edit.html");
 }
+function outPage(){
+	toUrl("project_basis_list.html");
+}

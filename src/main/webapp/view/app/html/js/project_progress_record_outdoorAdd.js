@@ -216,3 +216,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("123123");
+}

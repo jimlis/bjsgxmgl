@@ -62,3 +62,6 @@ function  edit() {
     var address = "project_material_record_add.html?id="+id;
     toUrl(address);
 }
+function outPage(){
+	toUrl("project_material_record.html");
+}

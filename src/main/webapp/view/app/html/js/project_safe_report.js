@@ -42,3 +42,6 @@ function showList(idName){
 		}
 	})
 }
+function outPage(){
+	toUrl("project_detail_list.html");
+}

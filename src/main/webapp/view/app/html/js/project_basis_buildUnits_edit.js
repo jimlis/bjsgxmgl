@@ -95,3 +95,6 @@ function save(){
 		}
 	});
 }
+function outPage(){
+	toUrl("project_basis_list.html");
+}

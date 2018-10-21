@@ -76,3 +76,6 @@ function save(){
 	
 	
 }
+function outPage(){
+	toUrl("project_templet_record.html");
+}
