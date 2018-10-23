@@ -1,3 +1,4 @@
+tyclClick("#list");
 
 /**
  *详情
@@ -37,7 +38,7 @@ function showList(idName){
 			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
 			})
 			mui("#" + idName)[0].innerHTML =html;
-			
+			tyclClick("#list");
 			//mui("#" + idName)[0].style.display="none";
 		}
 	})

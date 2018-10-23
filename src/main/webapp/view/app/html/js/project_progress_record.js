@@ -42,6 +42,9 @@ window.onload=function(){
 		}
 	});
 	
+	
+
+	tyclClick("#app");
 }
 //初始化新增跳转页面
 function init(){

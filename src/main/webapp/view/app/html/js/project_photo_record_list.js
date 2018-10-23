@@ -52,6 +52,9 @@ $bjAjax({
 });
 
 
+tyclClick("#list");
+
+
 function selectDate(key,lx){
 	var nowData=[];
 		if(lx==1){

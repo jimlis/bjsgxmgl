@@ -2,7 +2,6 @@
 var xmid = getCookie("id");
 //初始化必要条件
 window.onload=function(){
-	bjConsole(123);
 	$bjAjax({
 		url:materialApiList,
 		type:"post",
@@ -52,6 +51,7 @@ window.onload=function(){
 			  	if(!qtl){
 			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" )">没有相关数据，请上传数据</li>`;
 			  	}
+			  	tyclClick("#list");
 		}
 	})
 }

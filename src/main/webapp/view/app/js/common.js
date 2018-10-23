@@ -836,3 +836,36 @@ function stopBubble(e)
         window.event.cancelBubble=true;
 }
 
+/**
+ * 批量绑定点击事件
+ * @param parent 父元素选择器
+ * @param child 子元素选择器
+ * @returns
+ */
+function addMuiClick(parent,child){
+	mui(parent).on('tap',child, function (event) {
+			this.click();
+		});
+}
+
+/**
+ * 取消绑定点击事件
+ * @param parent 父元素选择器
+ * @param child 子元素选择器
+ * @returns
+ */
+function removeMuiClick(parent,child){
+	mui(parent).off('tap',child);
+}
+
+/**
+ * 通用出来click事件
+ * @param id
+ * @returns
+ */
+function tyclClick(id){
+	removeMuiClick(id,"a");
+	addMuiClick(id,"a");
+	removeMuiClick(id,"li");
+	addMuiClick(id,"li");
+}

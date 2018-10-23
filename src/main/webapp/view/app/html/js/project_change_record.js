@@ -1,4 +1,6 @@
 var xmid = getCookie("id");
+
+tyclClick("#list");
 /**
  *新增
  */
@@ -24,6 +26,8 @@ function showList(type){
     			`;
 			})
 			document.getElementById(type).innerHTML=html;
+    		
+    		tyclClick("#list");
         }
     });
 }

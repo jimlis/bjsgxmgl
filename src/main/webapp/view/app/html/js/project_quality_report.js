@@ -1,6 +1,7 @@
 
 //初始化必要条件
 window.onload=function(){
+	tyclClick("#list");
 }
 function openDetails(id){
 	toUrl("project_quality_report_details.html?id="+id);
@@ -33,6 +34,7 @@ function showQuaReportList(temptype,idName){
 			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxwz+`</li>`;
 			})
 			mui("#" + idName)[0].innerHTML=html;
+			tyclClick("#list");
 			//mui("#" + idName)[0].style.display="none";
 		}
 	})

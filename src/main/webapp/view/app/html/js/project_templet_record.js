@@ -50,6 +50,9 @@ window.onload=function(){
 			  	}
 		}
 	})
+	
+
+	tyclClick("#list");
 }
 function openNext(id){
 	toUrl("project_templet_record_detail.html?id="+id);

@@ -12,6 +12,7 @@ window.onload = function(){
 			}
 		}
 	});
+	tyclClick("#app");
 }
 /**
  *新增
