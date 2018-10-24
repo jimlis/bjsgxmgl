@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>前期报建</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/app.css" />
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+            <h1 class="mui-title">
+                <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div class="mui-scroll" id="title-scroll">
+
+                    </div>
+                </div>
+            </h1>
+            <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">更新</button>
+        </header>
+        <div class="mui-content" id="app" v-cloak>
+            <h5 id="node" class="mui-table-view mui-grid-view mui-grid-9" >
+                <div name="nodeDiv" class="mui-media mui-col-xs-12 mui-col-sm-12"
+                    v-for="(item,index) in list" style="border-bottom:solid 1px dodgerblue ;padding: 11px 15px;">
+                    <input class="bj-input" name="id" v-model="item.id" type="hidden" placeholder=""></input>
+                    <input class="bj-input" name="intxh" v-model="item.intxh" type="number" placeholder="请输入序号"></input>
+                    <input class="bj-input" name="chrjdmc" v-model="item.chrjdmc" type="text" placeholder="请输入名称"></input>
+                    <input class="bj-input" name="dtmjhwcsj" v-model="item.dtmjhwcsj" readonly="readonly" :id="'dtmjhwcsj'+index" v-on:click="datePicker(index,'dtmjhwcsj')" type="text" placeholder="请输入计划完成时间"></input>
+                  <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_delNode(item.id,$event)">删除</button>
+                </div>
+            </h5>
+            <button v-if="gqjdbjid==''" class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;margin-left: 15px" v-on:click="addNode">增加节点</button>
+        </div>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison_yjedit.js" type="text/javascript" charset="utf-8"></script>
+        
+    </body>
+
+</html>

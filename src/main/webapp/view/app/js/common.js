@@ -103,9 +103,15 @@ var progressGardenByIdApiPath=serverPath+"api/xmsgjdylsg/getXmSgjdYlsgById";
 var progressGardenSaveApiPath=serverPath+"api/xmsgjdylsg/save";
 
 //规划指标
-var targetDataListApiPath=serverPath+"/api/xmghzb/getXmGhzbByXmid";
-var targetDataSavePath=serverPath+"/api/xmghzb/batchSave";
-var targetDataDelPath=serverPath+"/api/xmghzb/del";
+var targetDataListApiPath=serverPath+"api/xmghzb/getXmGhzbByXmid";
+var targetDataSavePath=serverPath+"api/xmghzb/batchSave";
+var targetDataDelPath=serverPath+"api/xmghzb/del";
+
+//工期节点
+var timenodeListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjList";
+var timenodeSaveBatchPath=serverPath+"api/gqjdbj/batchSave";
+var timenodeDelPath=serverPath+"api/gqjdbj/del";
+
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){
@@ -252,6 +258,16 @@ function vueDtPicker(vueData,selecter){
 	var dtPicker = new mui.DtPicker({"type":"date"}); 
     dtPicker.show(function (selectItems) { 
         vueData[selecter] = selectItems.value;
+        dtPicker.dispose();
+		dtPicker = null;
+    })
+}
+
+//vue 日期选择器 参数为数组
+function vueArrDtPicker(vueData,index,selecter){
+	var dtPicker = new mui.DtPicker({"type":"date"}); 
+    dtPicker.show(function (selectItems) { 
+        vueData[index][selecter] = selectItems.value;
         dtPicker.dispose();
 		dtPicker = null;
     })

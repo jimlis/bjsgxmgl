@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>主要工期节点比较</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+    </head>
+        
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+            <h1 class="mui-title">
+                <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div class="mui-scroll" id="title-scroll">
+
+                    </div>
+                </div>
+            </h1>
+            <button id="confirmBtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">新增</button>
+        </header>
+        <div class="mui-content" id="app">
+            <ul class="mui-table-view"> 
+                <li class="mui-table-view-cell" v-on:click="openQqbj">前期报建</li>
+                <li class="mui-table-view-cell" v-on:click="openJc">基础</li>
+                <li class="mui-table-view-cell" v-on:click="openZt">主体</li>
+                <li class="mui-table-view-cell" v-on:click="openZxjg">专项及竣工验收</li>
+            </ul>
+        </div>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>

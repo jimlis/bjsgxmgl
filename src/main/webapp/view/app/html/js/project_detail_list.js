@@ -29,8 +29,7 @@ function openNext(id){
 		address="project_basis_list.html"
 			break;
 		case 2:
-		//address="";
-		bjToast("正在开发中...");
+	    address="project_timenode_comparison.html"
 			break;
 		case 3:
 		address="project_photo_record_list.html"

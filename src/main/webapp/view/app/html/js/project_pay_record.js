@@ -47,5 +47,5 @@ function openDetails(id){
     toUrl(address);
 }
 function outPage(){
-	toUrl("project_pay_record.html");
+	toUrl("project_detail_list.html");
 }
