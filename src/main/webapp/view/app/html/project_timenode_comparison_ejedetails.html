@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>前期报建/竣工及验收详情</title>
+        <title>基础/主体详情</title>
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -32,6 +32,7 @@
             <h5 id="node" class="mui-table-view mui-grid-view mui-grid-9" >
                 <table width="100%" class="bj-p-black-font" border="1px"
                     style="text-align: center;">
+                    <thead>
                     <tr style="height: 40px">
                         <th>序号</th>
                         <th>名称</th>
@@ -40,24 +41,35 @@
                         <th>工期+提前）（-延后）</th>
                         <th>操作</th>
                     </tr>
-                    <tr v-for="item in list">
-                        <td>{{item.intxh}}</td>
-                        <td>{{item.chrjdmc}}</td>
-                        <td>{{item.dtmjhwcsj}}</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="updateNode(item.id)">更新</button>
-                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="deleteNode(item.id,$event)">删除</button>
-                        </td>
-                    </tr>
+                    </thead>
+                    <tbody v-for="(value,key) in map">
+                        <tr style="height: 40px" >
+                            <td colspan="5" align="left">{{parentMap[key]["chrjdmc"]}}</td>
+                            <td>
+                                <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="updateNode(parentMap[key]['id'])">更新</button>
+                                <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="deleteNode(parentMap[key]['id'],1,$event)">删除</button>
+                            </td>
+                        </tr>
+                        <tr v-for="item in value" :name="parentMap[key]['id']">
+	                        <td>{{item.intxh}}</td>
+	                        <td>{{item.chrjdmc}}</td>
+	                        <td>{{item.dtmjhwcsj}}</td>
+	                        <td></td>
+	                        <td></td>
+	                        <td>
+	                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="updateNode(item.id)">更新</button>
+	                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="deleteNode(item.id,0,$event)">删除</button>
+	                        </td>
+                        </tr>
+                    </tbody>
+                    
                 </table>
             </h5>
         </div>
         <script src="../js/mui.min.js"></script>
         <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/project_timenode_comparison_yjedetails.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison_ejedetails.js" type="text/javascript" charset="utf-8"></script>
         
     </body>
 

@@ -15,11 +15,11 @@ window.onload=function(){
     				toUrl(address);
 			},
 			openJc: function (id) {
-				var address = "project_timenode_comparison_ejedit.html?chrjdlx=jc";
+				var address = "project_timenode_comparison_ejedetails.html?chrjdlx=jc";
     				toUrl(address);
 			},
 			openZt: function (id) {
-				var address = "project_timenode_comparison_ejedit.html?chrjdlx=zt";
+				var address = "project_timenode_comparison_ejedetails.html?chrjdlx=zt";
     				toUrl(address);
 			},
 			openZxjg: function (id) {

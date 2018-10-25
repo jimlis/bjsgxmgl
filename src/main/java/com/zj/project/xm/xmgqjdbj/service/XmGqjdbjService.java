@@ -29,4 +29,13 @@ public interface XmGqjdbjService extends BaseService<XmGqjdbjDO> {
      * @date:2018年10月24日 下午10:20:17
      */
 	void saveBatchXmGqjdbjXx(Long xmid, String jdlx, String gqjdbjJson, String deleteGqjdbjIds);
+	
+	/**
+     * <p>Title: 删除节点类型</p>  
+     * <p>Description: </p> 
+     * @param gqjdbjId
+     * @author zhujujun
+     * @date:2018年10月25日 下午9:09:22
+     */
+	void deleteGqjdbjById(Long gqjdbjId);
 }

@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.gson.Gson;
@@ -74,7 +75,7 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
               List<XmGqjdbjDO> list = gson.fromJson(gqjdbjJson, new TypeToken<List<XmGqjdbjDO>>() {
               }.getType());
               
-              //保存规划指标
+              //保存
               if(CollectionUtils.isNotEmpty(list)){
                   list.forEach(xmGqjdbjDO->{
                       Long id=xmGqjdbjDO.getId();
@@ -90,25 +91,70 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
                         	   xmGqjdbjDO.setGxsj(new Date());
                                updateById(xmGqjdbjDO);
                            }
+                      	   Long parentId= xmGqjdbjDO.getId();
+                      	 List<XmGqjdbjDO> childList = xmGqjdbjDO.getChildList();
+                      	 if(CollectionUtils.isNotEmpty(childList)) {
+                      		childList.forEach(one->{
+                      			 String nowchrjdmc=one.getChrjdmc();
+                      			 if(StringUtils.isNotEmpty(nowchrjdmc)) {
+                      				 Long nowId=one.getId();
+                      				if(nowId==null){
+                      					one.setFcbz(1);
+                      					one.setGxsj(new Date());
+                      					one.setIntxmid(xmid);
+                      					one.setChrjdlx(jdlx);
+                      					one.setIntfjdid(parentId);
+                                        save(one);
+                                    }else{
+                                    	one.setGxsj(new Date());
+                                        updateById(one);
+                                    }
+                      			 }
+                      		});
+                      	 }
                       }
                   });
               }
     	  }
           
-          //删除规划指标
+          //删除
           if(StringUtils.isNotEmpty(deleteGqjdbjIds)) {
           	Arrays.stream(deleteGqjdbjIds.trim().split(",")).forEach(gqjdbjId->{
           		if(StringUtils.isNotEmpty(gqjdbjId)) {
-          			XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
-          			xmGqjdbjDO.setId(Long.parseLong(gqjdbjId));
-          			xmGqjdbjDO.setFcbz(0);
-          			xmGqjdbjDO.setGxsj(new Date());
-          			updateById(xmGqjdbjDO);
-          			
-          			
+          			 deleteGqjdbjById(Long.parseLong(gqjdbjId));
           		}
           	});
           }
+    }
+    
+    /**
+     * <p>Title: 删除节点类型</p>  
+     * <p>Description: </p> 
+     * @param gqjdbjId
+     * @author zhujujun
+     * @date:2018年10月25日 下午9:09:22
+     */
+    @Override
+    public void  deleteGqjdbjById(Long gqjdbjId) {
+    	 if(gqjdbjId==null) {
+    		 return;
+    	 }
+    	 XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
+			xmGqjdbjDO.setId(gqjdbjId);
+			xmGqjdbjDO.setFcbz(0);
+			xmGqjdbjDO.setGxsj(new Date());
+			updateById(xmGqjdbjDO);
+			//删除子节点的
+			
+			XmGqjdbjDO updateWhere=new XmGqjdbjDO();
+			updateWhere.setFcbz(1);
+			updateWhere.setIntfjdid(gqjdbjId);
+			UpdateWrapper<XmGqjdbjDO> updateWrapper=new UpdateWrapper<XmGqjdbjDO>(updateWhere);
+			
+			XmGqjdbjDO updateDo=new XmGqjdbjDO();
+			updateDo.setFcbz(0);
+			updateDo.setGxsj(new Date());
+			update(updateDo, updateWrapper);
     }
 
 

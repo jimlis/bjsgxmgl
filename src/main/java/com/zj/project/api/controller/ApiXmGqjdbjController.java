@@ -98,11 +98,7 @@ public class ApiXmGqjdbjController extends ApiBaseController {
     @RequiresAuthentication
     public Result del(@PathVariable("id") Long id) {
         try {
-        	XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
-        	xmGqjdbjDO.setId(id);
-        	xmGqjdbjDO.setFcbz(0);
-        	xmGqjdbjDO.setGxsj(new Date());
-        	xmGqjdbjService.updateById(xmGqjdbjDO);
+        	xmGqjdbjService.deleteGqjdbjById(id);
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();

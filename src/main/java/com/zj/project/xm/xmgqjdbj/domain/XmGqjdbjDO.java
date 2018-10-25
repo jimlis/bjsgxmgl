@@ -1,6 +1,7 @@
 package com.zj.project.xm.xmgqjdbj.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -61,8 +62,22 @@ public class XmGqjdbjDO extends BaseDomain {
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmsjwcsj;
     /** 时间提前与滞后比较 */
-    @ApiModelProperty(value = "时间提前与滞后比较",name = "intsjbj",dataType = "Integer",hidden = false)
+    @ApiModelProperty(value = "时间提前与滞后比较",name = "intsjbj",dataType = "Integer")
     private Integer intsjbj;
+    
+    /**
+     * 节点类型 1-父节点 0-子节点
+     */
+    @ApiModelProperty(value = " 节点类型 1-父节点 0-子节点",name = "chrlx",dataType = "String")
+    @TableField(exist=false)
+    private String chrlx;
+    
+    /**
+     * 节点类型 1-父节点 0-子节点
+     */
+    @ApiModelProperty(value = "子节点信息",name = "childList",dataType = "List")
+    @TableField(exist=false)
+    private List<XmGqjdbjDO> childList;
 
     /**
      * 设置：主键id
@@ -196,4 +211,16 @@ public class XmGqjdbjDO extends BaseDomain {
     public Integer getIntsjbj() {
         return intsjbj;
     }
+	public String getChrlx() {
+		return chrlx;
+	}
+	public void setChrlx(String chrlx) {
+		this.chrlx = chrlx;
+	}
+	public List<XmGqjdbjDO> getChildList() {
+		return childList;
+	}
+	public void setChildList(List<XmGqjdbjDO> childList) {
+		this.childList = childList;
+	}
 }
