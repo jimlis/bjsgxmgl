@@ -33,7 +33,7 @@
 				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font" >{{dtmgxrq}}</span></h5>
 				<h5 class="bj-title2-font">楼栋号：<span class="bj-p-gray-font">{{chrdmc}}</span></h5>
 				<h5 class="bj-title2-font">完成量：</h5>
-	            <table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
+	            <!--<table width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
 		            	<thead>
 			            	<tr>
 			            		<th>楼层</th>
@@ -53,7 +53,29 @@
                             <td>{{item.intqt}}</td>
                             <td>{{item.intzx}}</td> 
                         </tr>
-	            </table>
+	            </table>-->
+	            <table>
+				  <thead>
+				    <tr>
+				      <th>楼层</th>
+				      <th>门窗</th>
+				      <th>防水</th>
+				      <th>内保温</th>
+				      <th>砌墙</th>
+				      <th>装修</th>
+				    </tr>
+				  </thead>
+				  <tbody id="wclTableTbody">
+				    <tr v-for="(item,index) in xmSgjdEcjgzxWclList">
+				      <td data-label="楼层">{{item.chrlc}}</td>
+				      <td data-label="门窗">{{item.intmc}}</td>
+				      <td data-label="防水">{{item.intfs}}</td>
+				      <td data-label="内保温">{{item.intnbw}}</td>
+				      <td data-label="砌墙">{{item.intqt}}</td>
+				      <td data-label="装修">{{item.intzx}}</td>
+				    </tr>
+				  </tbody>
+				</table>
 				<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">{{chrbz}}</span></h5>
 				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
 			</div>

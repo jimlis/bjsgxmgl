@@ -29,10 +29,10 @@
 <!--             <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">更新</button> -->
         </header>
         <div class="mui-content" id="app" v-cloak>
-            <h5 id="node" class="mui-table-view mui-grid-view mui-grid-9" >
+            <!--<h5 id="node" class="mui-table-view mui-grid-view mui-grid-9" >
                 <table width="100%" class="bj-p-black-font" border="1px"
                     style="text-align: center;">
-                    <tr style="height: 40px">
+                    <tr style="height: 20px">
                         <th>序号</th>
                         <th>名称</th>
                         <th>计划完成时间</th>
@@ -47,12 +47,38 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="updateNode(item.id)">更新</button>
-                            <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="deleteNode(item.id,$event)">删除</button>
+                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="updateNode(item.id)">更新</button>
+                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="deleteNode(item.id,$event)">删除</button>
                         </td>
                     </tr>
                 </table>
-            </h5>
+            </h5>-->
+                 <table>
+				  <thead>
+				    <tr>
+				      <th>序号</th>
+				      <th>名称</th>
+				      <th>计划完成时间</th>
+				      <th>实际完成时间</th>
+				      <th>工期(+提前-延后)</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr v-for="item in list">
+				      <td data-label="序号">{{item.intxh}}</td>
+				      <td data-label="名称">{{item.chrjdmc}}</td>
+				      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
+				      <td data-label="实际完成时间">无</td>
+				      <td data-label="工期(+提前-延后)">无</td>
+				      <td>
+                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="updateNode(item.id)">更新</button>
+                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="deleteNode(item.id,$event)">删除</button>
+                      </td>
+				    </tr>
+				  </tbody>
+				</table>
+            
         </div>
         <script src="../js/mui.min.js"></script>
         <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
