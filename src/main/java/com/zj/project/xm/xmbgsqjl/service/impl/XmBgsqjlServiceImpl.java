@@ -71,7 +71,7 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     		if(StringUtils.isNotEmpty(intsplczt)) {
     			String chrsplczt="";
     			if(intsplczt.equals("1")) {
-    				chrsplczt="带审批";
+    				chrsplczt="待审批";
     			}else if(intsplczt.equals("2")) {
     				chrsplczt="总部审批A";
     			}else if(intsplczt.equals("3")) {

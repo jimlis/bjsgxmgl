@@ -394,7 +394,7 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 		var src=fileApiPath+"down/"+fileId;
 		html+=`<li class="mui-table-view-cell mui-media mui-col-xs-4"><a><img class="mui-media-object mui-pull-left" data-lazyload="`+src+`" onclick="openImg('`+src+`')">`;
 			if(isEdit){
-				html+='<a href=\"javascript:void(0);\" class=\"glyphicon glyphicon-remove\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\">x</a>'
+				html+='<a href=\"javascript:void(0);\" class=\"mui-icon mui-icon-trash\" style=\"color: red\" aria-hidden=\"false\" onclick=\"removeFile(\''+fileId+'\',\''+fileIdsDomId+'\',this)\"></a>'
 			}
 			html+=`</a></li>`;
 	}

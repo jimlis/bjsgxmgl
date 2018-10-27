@@ -1,5 +1,11 @@
 package com.zj.platform.shiro.util;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -9,11 +15,6 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zj.platform.common.type.EnumErrorCode;
 import com.zj.platform.common.web.exception.MyApiException;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExpiredCredentialsException;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
 
 /**
