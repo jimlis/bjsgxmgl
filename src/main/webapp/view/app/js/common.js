@@ -530,7 +530,7 @@ function  removeFile(id,fileIdsDomId,obj) {
                          if($fileIds.length>0){
                              var fileIds=$fileIds[0].value;
                                     fileIds=fileIds.split(",");
-                             var index = $.inArray(id,fileIds);
+                             var index = inArray(id,fileIds);
                              if(index>=0){//存在 就删除
                                  fileIds.splice(index,1);
                                  $fileIds[0].value=fileIds.join(",");
@@ -545,6 +545,17 @@ function  removeFile(id,fileIdsDomId,obj) {
 		}
 
 	});
+}
+
+function inArray(element,arr){
+	if(!arr||arr.length==0){
+		return -1;
+	}
+	for(i in arr){
+		if(arr[i]==element){
+			return i;
+		}
+	}
 }
 
 /**

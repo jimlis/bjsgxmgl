@@ -204,7 +204,7 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
         xmZpjlDO.setIntxmid(xmid);
         xmZpjlDO.setIntbglb(1);
 
-        QueryWrapper<XmZpjlDO> queryWrapper=new QueryWrapper<XmZpjlDO>(xmZpjlDO).orderByAsc("dtmbgrq");
+        QueryWrapper<XmZpjlDO> queryWrapper=new QueryWrapper<XmZpjlDO>(xmZpjlDO).orderByDesc("dtmbgrq");
         List<XmZpjlDO> list1=list(queryWrapper);
         if(CollectionUtils.isNotEmpty(list1)){
             list1.forEach(one->{
