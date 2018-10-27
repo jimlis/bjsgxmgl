@@ -2,9 +2,18 @@ var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
 	var pageData = getPageData();
+	var sghj=getDataByXcbm(pageData,'sghj');
+	var qghj=getDataByXcbm(pageData,'qghj');
+	var zjzxc=getDataByXcbm(pageData,'zjzxc');
+	var ajzxc=getDataByXcbm(pageData,'ajzxc');
+	var yzfxc=getDataByXcbm(pageData,'yzfxc');
+	
+	var zxys=getDataByXclb(pageData,'zxys');
+	var jgys=getDataByXclb(pageData,'jgys');
 	var vue = new Vue({
 		el: '#app',
-		data: {list:pageData},
+		data: {sghj:sghj,qghj:qghj,zjzxc:zjzxc,ajzxc:ajzxc,yzfxc:yzfxc,
+			zxys:zxys,jgys:jgys},
 		methods: {
 			openDetail: function (id) {
 				var address = "project_gov_record_details.html?id="+id;
@@ -14,6 +23,33 @@ window.onload = function(){
 	});
 	tyclClick("#app");
 }
+
+function getDataByXcbm(data,xcbm){
+	var arr=[];
+	if(!data||data.length==0){
+		return arr;
+	}
+	for(i in data){
+		if(data[i].intxcbm==xcbm){
+			arr.push(data[i]);
+		}
+	}
+	return arr;
+}
+
+function getDataByXclb(data,xclb){
+	var arr=[];
+	if(!data||data.length==0){
+		return arr;
+	}
+	for(i in data){
+		if(data[i].intxclb==xclb){
+			arr.push(data[i]);
+		}
+	}
+	return arr;
+}
+
 /**
  *新增
  */

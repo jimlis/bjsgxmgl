@@ -1,5 +1,8 @@
-tyclClick("#list");
 
+window.onload=function(){
+	showList('aqjcjl');
+	tyclClick("#list");
+}
 /**
  *详情
  */
@@ -27,6 +30,7 @@ function showList(idName){
 		success:function(array){
 			
 			if(array.length==0){
+				mui("#" + idName+"Span")[0].innerText=0;
 				mui("#" + idName)[0].innerHTML=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
 				return;
 			}
@@ -37,8 +41,9 @@ function showList(idName){
 			  	var chraqwtwz=item.chraqwtwz||'';
 			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
 			})
+			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML =html;
-			tyclClick("#list");
+			//tyclClick("#list");
 			//mui("#" + idName)[0].style.display="none";
 		}
 	})

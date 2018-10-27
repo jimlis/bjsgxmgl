@@ -1,6 +1,11 @@
 
 //初始化必要条件
 window.onload=function(){
+	showQuaReportList('1','tjQua');
+	showQuaReportList('2','jdQua');
+	showQuaReportList('3','zxQua');
+	showQuaReportList('4','ylQua');
+	showQuaReportList('5','qtQua');
 	tyclClick("#list");
 }
 function openDetails(id){
@@ -23,6 +28,7 @@ function showQuaReportList(temptype,idName){
 		success:function(array){
 			
 			if(array.length==0){
+				mui("#" + idName+"Span")[0].innerText=0;
 				mui("#" + idName)[0].innerHTML=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
 				return;
 			}
@@ -33,8 +39,9 @@ function showQuaReportList(temptype,idName){
 			  	var chrqxwz = item.chrqxwz||"";
 			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxwz+`</li>`;
 			})
+			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML=html;
-			tyclClick("#list");
+			//tyclClick("#list");
 			//mui("#" + idName)[0].style.display="none";
 		}
 	})

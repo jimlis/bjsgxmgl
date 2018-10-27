@@ -9,7 +9,8 @@ window.onload=function(){
 			xmid:xmid
 		},
 		success:function(array){
-			var tjl,jdl,zxl,yll,qtl
+			var tjl,jdl,zxl,yll,qtl;
+			var tjlnum=0,jdlnum=0,zxlnum=0,yllnum=0,qtlnum=0;
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq||"";
 			  	var intclyblx = item.intclyblx||"";
@@ -17,22 +18,27 @@ window.onload=function(){
 			  	var id = item.id;
 			  	if(intclyblx=="1"){
 			  		tjl = true;
+			  		tjlnum++;
 			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="2"){
 			  		jdl = true;
+			  		jdlnum++;
 			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="3"){
 			  		zxl = true;
+			  		zxlnum++;
 			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="4"){
 			  		yll = true;
+			  		yllnum++;
 			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="5"){
 			  		qtl = true;
+			  		qtlnum++;
 			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			});
@@ -51,6 +57,11 @@ window.onload=function(){
 			  	if(!qtl){
 			  		mui("#qtl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" )">没有相关数据，请上传数据</li>`;
 			  	}
+			  	mui("#tjlSpan")[0].innerText=tjlnum;
+			  	mui("#jdlSpan")[0].innerText=jdlnum;
+			  	mui("#zxlSpan")[0].innerText=zxlnum;
+			  	mui("#yllSpan")[0].innerText=yllnum;
+			  	mui("#qtlSpan")[0].innerText=qtlnum;
 			  	tyclClick("#list");
 		}
 	})
