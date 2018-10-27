@@ -20,7 +20,20 @@ public interface ApiUserService extends BaseService<UserDO> {
      * 获取ApiUserVO
      * @param mobile
      * @param password
+     * @param flag true-免登陆-不需要验证密码  false-正常登陆-需要验证密码
      * @return
      */
-    ApiUserVO getApiUserVo(String mobile, String password);
+    ApiUserVO getApiUserVo(String mobile, String password,Boolean flag);
+    
+    /**
+     * <p>Title:免登录：根据手机号获取token </p>  
+     * <p>Description: </p> 
+     * @param tel
+     * @param token
+     * @return
+     * @author zhujujun
+     * @throws Exception 
+     * @date:2018年10月27日 下午2:16:01
+     */
+	TokenVO logonFree(String tel, String token) throws Exception;
 }

@@ -5,6 +5,7 @@ import com.zj.platform.business.user.dao.UserDao;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.config.CacheConfiguration;
 import com.zj.platform.common.config.ProjectConfig;
+import com.zj.platform.common.security.DesUtils;
 import com.zj.platform.common.type.EnumErrorCode;
 import com.zj.platform.common.util.MD5Utils;
 import com.zj.platform.common.util.SpringContextHolder;
@@ -38,6 +39,23 @@ public class ApiUserServiceImpl extends BaseServiceImpl<UserDao,UserDO> implemen
             throw new MyApiException(EnumErrorCode.apiAuthorizationLoginFailed.getCodeStr());
         }
         return createToken(user);
+    }
+	
+	@Override
+    public TokenVO logonFree(String tel,String token) throws Exception {
+		if(StringUtils.isEmpty(tel)||StringUtils.isEmpty(token)) {
+   		 	throw new MyApiException("参数错误");
+	   	 }
+	   	 String tokenDe=DesUtils.decryption(token, "bjsgxmgl_lfj");
+	   	 String mobile=tokenDe.split("_")[0];
+	   	 if(!mobile.equals(tel)) {
+	   		 throw new MyApiException("token校验失败");
+	   	 }
+         UserDO user = getOne(new QueryWrapper<UserDO>().eq("mobile", mobile));
+         if (null == user) {
+            throw new MyApiException(EnumErrorCode.apiAuthorizationLoginFailed.getCodeStr());
+         }
+         return createToken(user);
     }
 
     @Override
@@ -107,16 +125,21 @@ public class ApiUserServiceImpl extends BaseServiceImpl<UserDao,UserDO> implemen
 	 * 获取ApiUserVO
 	 * @param mobile
 	 * @param password
+	 * @param flag true-免登陆-不需要验证密码  false-正常登陆-需要验证密码
 	 * @return
 	 */
 	@Override
-	public ApiUserVO getApiUserVo(String mobile, String password) {
+	public ApiUserVO getApiUserVo(String mobile, String password,Boolean flag) {
 		UserDO user = getOne(new QueryWrapper<UserDO>().eq("mobile", mobile));
 		ApiUserVO apiUserVO=new ApiUserVO();
-		if (null != user&&user.getPassword().equals(MD5Utils.encrypt(user.getMobile(), password))) {
+		if(null != user) {
+			if(flag) {//免登陆
 				BeanUtils.copyProperties(user,apiUserVO);
-		}else{
-
+	        }else {
+	        	if(user.getPassword().equals(MD5Utils.encrypt(user.getMobile(), password))) {
+	        		BeanUtils.copyProperties(user,apiUserVO);
+	        	}
+	        }
 		}
 		return  apiUserVO;
 	}

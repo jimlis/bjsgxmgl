@@ -54,13 +54,29 @@ public class ApiUserController extends ApiBaseController {
         Map<String,Object> map= Maps.newHashMap();
         TokenVO token = apiUserService.getToken(userDo.getMobile(), userDo.getPassword());
         if(token!=null){
-            ApiUserVO apiUserVO=apiUserService.getApiUserVo(userDo.getMobile(), userDo.getPassword());
+            ApiUserVO apiUserVO=apiUserService.getApiUserVo(userDo.getMobile(), userDo.getPassword(),false);
             map.put("user",apiUserVO);
         }
         map.put("token",token);
         map.put("sysdate",DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
         return Result.build(Result.CODE_SUCCESS,"登录成功",map);
     }
+    
+    @PostMapping("logonFree")
+    @Log("api-免登录")
+    @ApiOperation("api-免登录")
+     public Result<?> logonFree(String tel,String token) throws Exception {
+    	 
+         Map<String,Object> map= Maps.newHashMap();
+         TokenVO tokenVo = apiUserService.logonFree(tel,token);
+         if(token!=null){
+             ApiUserVO apiUserVO=apiUserService.getApiUserVo(tel,"",true);
+             map.put("user",apiUserVO);
+         }
+         map.put("token",tokenVo);
+         map.put("sysdate",DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
+         return Result.build(Result.CODE_SUCCESS,"登录成功",map);
+     }
     
     @PostMapping("refresh")
 //    @Log("api测试-刷新token")
