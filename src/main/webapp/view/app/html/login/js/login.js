@@ -97,6 +97,7 @@ function mlogin2(data,info){
 				url:serverPath+"getDDUserInfo",
 				success:function(userInfo){
 					var info = JSON.parse(userInfo);
+					setCookie("tel",info.mobile);
 					$bj_post_ajax({
 						url:userApiPath+"logonFree",
 						data:{"tel":info.mobile,"token":getToken()},
