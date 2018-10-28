@@ -1,6 +1,7 @@
 package com.zj.platform.business.login.controller;
 
 
+import com.dingtalk.oapi.lib.aes.DingTalkJsApiSingnature;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.common.domain.Tree;
@@ -10,13 +11,12 @@ import com.zj.platform.business.menu.domain.MenuDO;
 import com.zj.platform.business.menu.service.MenuService;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.type.EnumErrorCode;
+import com.zj.platform.common.util.CommonUtils;
 import com.zj.platform.common.util.Constant;
-import com.zj.platform.common.util.HexUtils;
 import com.zj.platform.common.util.MD5Utils;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.AdminBaseController;
 import com.zj.platform.shiro.util.ShiroUtils;
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,62 +115,68 @@ public class LoginController extends AdminBaseController {
     @ResponseBody
     Result<Map<String ,String>> getToken(HttpServletRequest request,String code) {
         Map<String ,String> resultConfig =new HashMap<>();
-        String corpid = environment.getProperty("corpid");
+        String corpid = environment.getProperty("corpId");
         String corpsecret = environment.getProperty("corpsecret");
         String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
+        String accessToken = "";//token
+        String ticket = "";//jsapi_ticket
+        String signature = "";//前端鉴权-计算签名信息
         try {
-            URL url = new URL(getTokenPath);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5 * 1000);
-            conn.setRequestMethod("GET");
-            InputStream inStream = conn.getInputStream();
-            byte[] data = toByteArray(inStream);
-            String result = new String(data, "UTF-8");
+            //得到token
+            String tokenResult= CommonUtils.HttpURLConnectionGet(getTokenPath);
             java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {}.getType();
-            Map<String, String> map = new Gson().fromJson(result, type);
-            System.out.println(map.get("access_token"));
+            Map<String ,String> tokenMap = new Gson().fromJson(tokenResult, type);
+            accessToken = tokenMap.get("access_token");
+            resultConfig.put("access_token",tokenMap.get("access_token"));
             //获取jsapi_ticket
-            String getTicketPath ="https://oapi.dingtalk.com/get_jsapi_ticket?access_token="+map.get("access_token");
-            url = new URL(getTicketPath);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5 * 1000);
-            conn.setRequestMethod("GET");
-            inStream = conn.getInputStream();
-            data = toByteArray(inStream);
-            result = new String(data, "UTF-8");
+            String getTicketPath ="https://oapi.dingtalk.com/get_jsapi_ticket?access_token="+accessToken;
+            String ticketResult = CommonUtils.HttpURLConnectionGet(getTicketPath);
             type = new TypeToken<HashMap<String, String>>() {}.getType();
-            map = new Gson().fromJson(result, type);
-            System.out.println(map.get("ticket"));
+            Map<String ,String> ticketMap = new Gson().fromJson(ticketResult, type);
+            ticket = ticketMap.get("ticket");
             //返回前端鉴权-计算签名信息
+            String urlString = request.getRequestURL().toString();
+            String queryString = request.getQueryString();
+            String queryStringEncode = null;
+            String baseUrl;
+            if (queryString != null) {
+                queryStringEncode = URLDecoder.decode(queryString);
+                baseUrl = urlString + "?" + queryStringEncode;
+            } else {
+                baseUrl = urlString;
+            }
             long timeStamp = System.currentTimeMillis();
-            String baseUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
-            String signature = sign(map.get("ticket"),timeStamp+"",timeStamp,baseUrl);
-            System.out.println(signature);
+            signature = CommonUtils.sign(ticket,timeStamp+"",timeStamp,baseUrl);
             //组装数据返回前端
             resultConfig.put("url",baseUrl);
-            resultConfig.put("nonceStr",timeStamp+"");
+            resultConfig.put("nonceStr","abcdefg");
             resultConfig.put("agentId",environment.getProperty("agentId"));
-            resultConfig.put("timeStamp",timeStamp+"");
+            resultConfig.put("timeStamp",System.currentTimeMillis() / 1000+"");
             resultConfig.put("corpId",environment.getProperty("corpId"));
             resultConfig.put("signature",signature);
+            resultConfig.put("access_token",accessToken);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Result.ok(resultConfig);
     }
-    public String sign(String ticket, String nonceStr, long timeStamp, String url) {
-        String plain = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + String.valueOf(timeStamp)
-                + "&url=" + url;
-        try {
-            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-            sha1.reset();
-            sha1.update(plain.getBytes("UTF-8"));
-            return HexUtils.bytesToHexString(sha1.digest());
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return "";
+    @Log("得到钉钉用户id")
+    @GetMapping("/getDDUser")
+    @ResponseBody
+    Result<Map<String ,String>> getDDUser(HttpServletRequest request,String access_token,String code) {
+        String url = "https://oapi.dingtalk.com/user/getuserinfo?access_token="+access_token+"&code="+code;
+        String userResult = CommonUtils.HttpURLConnectionGet(url);
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {}.getType();
+        Map<String ,String> userMap = new Gson().fromJson(userResult, type);
+        return Result.ok(userMap);
     }
-
+    @Log("得到钉钉用户信息")
+    @GetMapping("/getDDUserInfo")
+    @ResponseBody
+    Result<String> getDDUserInfo(HttpServletRequest request,String access_token,String userid) {
+        String url = "https://oapi.dingtalk.com/user/get?access_token="+access_token+"&userid="+userid;
+        String userInfo = CommonUtils.HttpURLConnectionGet(url);
+        return Result.ok(userInfo);
+    }
 
 }

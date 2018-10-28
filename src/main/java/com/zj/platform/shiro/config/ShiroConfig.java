@@ -134,6 +134,8 @@ public class ShiroConfig {
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/api/**", "jwt"); // api
         filterChainDefinitionMap.put("/getToken", "anon"); // token
+        filterChainDefinitionMap.put("/getDDUser", "anon"); //
+        filterChainDefinitionMap.put("/getDDUserInfo", "anon"); //
         filterChainDefinitionMap.put("/swagger-ui.html**", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
