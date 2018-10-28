@@ -14,6 +14,8 @@ $bjAjax({
 	}
 });
 
+see();
+
 
 relPicker("intlxmdxs",[{"text":"顾问单位名单","value":"1"},{"text":"施工单位名单","value":"2"},{"text":"其他工作单位名单","value":"3"}],"intlxmd");
 
@@ -49,10 +51,10 @@ function see(){
 			  	var chrdwlxmc = item.chrdwlxmc||"";
 		  		var chrdwmc = item.chrdwmc||"";
 				htmls +=`
-					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span><span style="position: fixed; right: 10px;" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除<span></h5>
+					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span><span style="position: absolute; right: 10px;" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除<span></h5>
 				`;
 			})
-			mui(".mui-content .mui-table-view .mui-collapse-content")[0].innerHTML =htmls;
+			mui("#yjdwDiv")[0].innerHTML =htmls;
 		}
 	})
 }

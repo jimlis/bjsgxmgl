@@ -34,7 +34,8 @@ function  intbglbChange(result){
 	}else if(value==3){//隐蔽工程形象进度
 		chrpswzms.value="";
 		chrpswz.value="";
-		relPicker("chrpswzms",[{"text":"弱电","value":"1"},{"text":"机电","value":"2"},{"text":"其他","value":"3"}],"chrpswz",chrpswzmsChange);
+		relPicker("chrpswzms",[{"text":"土建","value":"1"},{"text":"机电","value":"2"},{"text":"装饰","value":"3"}
+		,{"text":"装修","value":"4"},{"text":"园林","value":"5"},{"text":"其他","value":"6"}],"chrpswz",chrpswzmsChange);
 		qtms.style.display="none";
 	}
 }
@@ -43,7 +44,7 @@ function chrpswzmsChange(result){
 	var value=result.value||"";
 	var qtms=document.getElementById("qtms");
 	var chrqtms=document.getElementById("chrqtms");
-	if(value==3){//其他
+	if(value==6){//其他
 		qtms.style.display="block";
 	}else{
 		chrqtms.value="";

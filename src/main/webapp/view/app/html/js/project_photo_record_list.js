@@ -1,6 +1,7 @@
 var xmid = getCookie("id");
 var dlxxObj={};
 var ycgcObj={};
+var dlData=getXmdlListByXmid(xmid);
 $bjAjax({
 	url:photoApiList,
 	type:"post",
@@ -28,7 +29,8 @@ $bjAjax({
 				var html="";
 				dlxxObj=dlxx;
 				for(key in dlxx){
-				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="selectDate('`+key+`','1')">`+key+`</li>`;
+					var dlMc=getDlMc(dlData,key);
+				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="selectDate('`+key+`','1')">`+dlMc+`</li>`;
 				}
 				dlxxDom.innerHTML=html;
 			}else{
@@ -53,6 +55,18 @@ $bjAjax({
 
 
 tyclClick("#list");
+
+function getDlMc(data,dlid){
+	if(!data||data.length==0){
+		return "";
+	}
+	for( i in data){
+		if(data[i].value==dlid){
+			return data[i].text||"";
+		}
+	}
+	return "";
+}
 
 
 function selectDate(key,lx){

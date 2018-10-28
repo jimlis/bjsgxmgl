@@ -85,13 +85,7 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
     				chrbglb="隐蔽工程形象进度";
     				String chrpswzms="";
     				if(StringUtils.isNotEmpty(chrpswz)) {
-    					if("1".equals(chrpswz)) {
-    						chrpswzms="弱电";
-    					}else if("2".equals(chrpswz)) {
-    						chrpswzms="机电";
-    					}else if("3".equals(chrpswz)) {
-    						chrpswzms="其他";
-    					}
+    					chrpswzms=getChrPswzms(chrpswz);
     					xmZpjlDO.setChrpswzms(chrpswzms);
     				}
     			}
@@ -257,16 +251,10 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
             	String chrpswz = Objects.toString(one.getChrpswz(), "");
             	String chrpswzms="";
 				if(StringUtils.isNotEmpty(chrpswz)) {
-					if("1".equals(chrpswz)) {
-						chrpswzms="弱电";
-					}else if("2".equals(chrpswz)) {
-						chrpswzms="机电";
-					}else if("3".equals(chrpswz)) {
-						chrpswzms="其他";
-					}
+					chrpswzms=getChrPswzms(chrpswz);
 					one.setChrpswzms(chrpswzms);
 				}
-                if(map.containsKey(chrpswzms)){
+                if(ycgcMap.containsKey(chrpswzms)){
                     List<XmZpjlDO> add= ycgcMap.get(chrpswzms);
                     add.add(one);
                     ycgcMap.put(chrpswzms,add);
@@ -280,6 +268,24 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
         }
 
         return  map;
+    }
+    
+    private String getChrPswzms(String chrpswz) {
+    	String chrpswzms="";
+    	if("1".equals(chrpswz)) {
+			chrpswzms="土建";
+		}else if("2".equals(chrpswz)) {
+			chrpswzms="机电";
+		}else if("3".equals(chrpswz)) {
+			chrpswzms="装饰";
+		}else if("4".equals(chrpswz)) {
+			chrpswzms="装修";
+		}else if("5".equals(chrpswz)) {
+			chrpswzms="园林";
+		}else if("6".equals(chrpswz)) {
+			chrpswzms="其他";
+		}
+    	return chrpswzms;
     }
 
 
