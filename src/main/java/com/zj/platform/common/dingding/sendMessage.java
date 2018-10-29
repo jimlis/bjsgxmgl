@@ -22,7 +22,7 @@ public class sendMessage {
     /*
         contentTest:发送内容
         agentid：应用id
-        touser：接收人
+        touser：接收人，多个用|分开
      */
     public static String sendMessage(String corpid,String corpsecret,String contentTest,String agentid,String touser) throws Exception{
         String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
