@@ -53,7 +53,7 @@ public class JWTAuthenticationFilter extends BasicHttpAuthenticationFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
     	ShiroHttpServletRequest req=(ShiroHttpServletRequest)request;
     	String servletPath = req.getServletPath();
-    	if(servletPath.equals("/api/user/login")||servletPath.startsWith("/api/file/")) {
+    	if(servletPath.equals("/api/user/login")||servletPath.startsWith("/api/file/")||servletPath.startsWith("/api/user/logonFree")) {
        	 	return true;
        }
         if (isLoginAttempt(request, response)) {
