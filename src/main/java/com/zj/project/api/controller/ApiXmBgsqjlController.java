@@ -36,20 +36,28 @@ public class ApiXmBgsqjlController extends ApiBaseController {
     @Autowired
     private XmBgsqjlService xmBgsqjlService;
 
-    @Log("根据xmid和bgsqlx获取工程/顾问工作变更申请记录信息")
-    @PostMapping("getXmBgsqjlListByXmidAndBgsqlx")
-    @ApiOperation(value="根据xmid和bgsqlx获取工程/顾问工作变更申请记录信息",httpMethod="POST")
+    @Log("根据xmid和bgsqlx等参数获取工程/顾问工作变更申请记录信息")
+    @PostMapping("getXmBgsqjlListByParam")
+    @ApiOperation(value="根据xmid和bgsqlx等参数获取工程/顾问工作变更申请记录信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
-            @ApiImplicitParam(name="bgsqlx",paramType="form",dataType = "Integer",required=true,value = "变更申请类型")})
+            @ApiImplicitParam(name="bgsqlx",paramType="form",dataType = "Integer",required=true,value = "变更申请类型"),
+            @ApiImplicitParam(name="dwmcid",paramType="form",dataType = "Long",required=true,value = "单位id"),
+            @ApiImplicitParam(name="bgthid",paramType="form",dataType = "Long",required=true,value = "变更id")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
-    public Result<List<XmBgsqjlDO>> getXmBgsqjlListByXmidAndBgsqlx(Long xmid,Integer bgsqlx) {
+    public Result<List<XmBgsqjlDO>> getXmBgsqjlListByParam(Long xmid,Integer bgsqlx,Long dwmcid,Long bgthid) {
         try {
         	XmBgsqjlDO xmBgsqjlDO=new XmBgsqjlDO();
         	xmBgsqjlDO.setFcbz(1);
         	xmBgsqjlDO.setIntxmid(xmid);
         	xmBgsqjlDO.setIntbgsqlx(bgsqlx);
+        	if(dwmcid!=null) {
+        		xmBgsqjlDO.setIntdwmcid(dwmcid);
+        	}
+        	if(bgthid!=null) {
+        		xmBgsqjlDO.setIntbgthid(bgthid);
+        	}
             QueryWrapper<XmBgsqjlDO> queryWrapper=new QueryWrapper<XmBgsqjlDO>(xmBgsqjlDO).orderByAsc("dtmgxrq");
             return Result.ok(xmBgsqjlService.list(queryWrapper));
         }catch (Exception e){

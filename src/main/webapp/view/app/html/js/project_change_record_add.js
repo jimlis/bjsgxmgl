@@ -7,6 +7,8 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 var bgbhData=[];
+var dwData=[];
+var nowHtje=0;
 window.onload = function(){
 	upLoadFile('#chbtn',{"busType":"bj_xm_bgsqjl"});
 	pageData = isUpdata()||'';
@@ -24,6 +26,11 @@ window.onload = function(){
 				vuePicker(pageData,"chrbgsqlx",[{"text":"顾问变更","value":"1"},{"text":"工程变更","value":"2"},
 					{"text":"其他","value":"3"}],"intbgsqlx");
 			},
+			dwPicker: function (event) {
+				vuePicker(pageData,"chrdwmc",dwData,"intdwmcid",function(result){
+					nowHtje=result.inthtje||0;
+				});
+			},
 			splcPicker: function () {
 				vuePicker(pageData,"chrsplczt",[{"text":"待审批","value":"1"},{"text":"总部审批A","value":"2"},
 					{"text":"总部审批B","value":"3"},{"text":"业主","value":"4"}],"intsplczt");
@@ -32,17 +39,29 @@ window.onload = function(){
 				vuePicker(pageData,"chrsfqd",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfqd");
 			},
 			qtbgbhPicker: function () {
-				vuePicker(pageData,"chrqtbgbh",bgbhData,"");
+				vuePicker(pageData,"chrqtbgbh",bgbhData,intbgthid);
 			}
 		},
 		watch:{
 			intbgsqlx:function(val,oldVal){
 				bglxChange(val);
+			},
+			intdwmcid:function(val,oldVal){
+				dwChange(val);
 			}
 		}
 	});
-	
+	console.log(pageData)
 	if(id){
+		bglxChange(pageData.intbgsqlx||"");
+		if(dwData){
+			for(i in dwData){
+				if(dwData[i].value==pageData.intdwmcid){
+					nowHtje=dwData[i].inthtje||0;
+					break;
+				}
+			}
+		}
 		//加载图片
 		initFileList("bj_xm_bgsqjl",id,"1","fileIds","file-list",true);
 	}
@@ -50,7 +69,11 @@ window.onload = function(){
 }
 
 function bglxChange(bgsqlx){
-	getBgbhList(bgsqlx);
+	dwData=getXmdwmdData(intxmid,bgsqlx);
+}
+
+function dwChange(dwid){
+	getBgbhList(pageData.intbgsqlx||"",dwid);
 	pageData.chrsfqd="";
 	pageData.chrqtbgbh="";
 	pageData.intqzbgzje="";
@@ -86,6 +109,9 @@ function buildModel(){
 		dtmgxrq:systemdate,
 		intbgsqlx:'',
 		chrbgsqlx:'',
+		intdwmcid:'',
+		chrdwmc:'',
+		intbgthid:'',
 		chrbgsqbh:'',
 		chrbgsqmc:'',
 		intsfqd:'',
@@ -103,7 +129,7 @@ function buildModel(){
 	return model;
 }
 
-function getBgbhList(bgsqlx){
+function getBgbhList(bgsqlx,dwmcid){
 	if(bgsqlx){
 		$bjAjax({
 			url:changeApiList,
@@ -111,7 +137,9 @@ function getBgbhList(bgsqlx){
 			async:false,
 			data:{
 				xmid:intxmid,
-				bgsqlx:bgsqlx
+				bgsqlx:bgsqlx,
+				dwmcid:dwmcid,
+				bgthid:-1
 			},
 			success:function(data){
 				if(data){
@@ -128,19 +156,37 @@ function getBgbhList(bgsqlx){
 	}
 }
 
+/**
+ * 设置潜在变更金额
+ * @returns
+ */
 function setGgjeSum(){
 	var intqzbgzjeDom=document.getElementById("intqzbgzje");
 	if(bgbhData){
-		var intbggs=document.getElementById("intbggs").value||0;
+		var intbggs=Number(document.getElementById("intbggs").value||0);
 		for(i in bgbhData){
 			if(bgbhData[i].intsfqd==0){
 				intbggs+=Number(bgbhData[i].intbggs||0);
 			}
 		}
 		intqzbgzjeDom.value=intbggs;
+		setHtzb(intbggs);
 		return;
 	}
 	intqzbgzjeDom.value=0;
+	setHtzb(0);
+}
+/**
+ * 设置合同占比
+ * @returns
+ */
+function setHtzb(qzbgzje){
+	var inthtzbDom=document.getElementById("inthtzb");
+	if(nowHtje==0){
+		inthtzbDom.value=0;
+		return;
+	}
+	inthtzbDom.value=new Number((qzbgzje/nowHtje)*100).toFixed(3);
 }
 
 //保存数据

@@ -56,7 +56,7 @@ var photoApiList = serverPath+"api/zpjl/getXmZpjlMapByXmid";
 var photoApiDetail = serverPath+"api/zpjl/getXmZpmsListByXmZpjlid";
 var photoApiDetailText = serverPath+"api/zpjl/getXmZpjlById";
 var photoApiSave = serverPath+"api/zpjl/save";
-var changeApiList = serverPath+"api/xmbgsqjl/getXmBgsqjlListByXmidAndBgsqlx";
+var changeApiList = serverPath+"api/xmbgsqjl/getXmBgsqjlListByParam";
 var changeApiDetail = serverPath+"api/xmbgsqjl/getXmBgsqjlById";
 var changeApiSave = serverPath+"api/xmbgsqjl/save";
 
@@ -700,6 +700,7 @@ function getXmdwmdData(xmid,lxmd){
 					var obj={};
 					obj["text"]=data[i].chrdwmc||"";
 					obj["value"]=data[i].id||"";
+					obj["inthtje"]=data[i].inthtje||0;
 					arr.push(obj);
 				}
 			}

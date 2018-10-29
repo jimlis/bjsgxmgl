@@ -1,24 +1,25 @@
 package com.zj.project.xm.xmbgsqjl.service.impl;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmbgsqjl.dao.XmBgsqjlDao;
-import com.zj.project.xm.xmbgsqjl.domain.XmBgsqjlDO;
-import com.zj.project.xm.xmbgsqjl.service.XmBgsqjlService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmbgsqjl.dao.XmBgsqjlDao;
+import com.zj.project.xm.xmbgsqjl.domain.XmBgsqjlDO;
+import com.zj.project.xm.xmbgsqjl.service.XmBgsqjlService;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 
 /**
  * 
@@ -39,6 +40,9 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     @Autowired
     private FileService fileService;
     
+    @Autowired
+    private XmDwmdService xmDwmdService;
+    
     @Override
     public XmBgsqjlDO getById(Serializable id) {
     	XmBgsqjlDO xmBgsqjlDO=super.getById(id);
@@ -56,10 +60,18 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     			xmBgsqjlDO.setChrbgsqlx(chrbgsqlx);
     		}
     		
+    		Long intdwmcid = xmBgsqjlDO.getIntdwmcid();
+    		if(intdwmcid!=null) {
+    			XmDwmdDO xmDwmdDO = xmDwmdService.getById(intdwmcid);
+    			if(xmDwmdDO!=null) {
+    				xmBgsqjlDO.setChrdwmc(xmDwmdDO.getChrdwmc());
+    			}
+    		}
+    		
     		Integer intsfqd = xmBgsqjlDO.getIntsfqd();
     		if(intsfqd!=null) {
     			String chrsfqd="";
-    			if(intbgsqlx.equals(1)) {
+    			if(intsfqd.equals(1)) {
     				chrsfqd="是";
     			}else if(intsfqd.equals(0)) {
     				chrsfqd="否";

@@ -8,6 +8,7 @@ import com.zj.platform.common.web.domain.BaseDomain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -54,7 +55,9 @@ public class XmDwmdDO extends BaseDomain {
     /** 单位名称 */
     @ApiModelProperty(value = "单位名称  ",name = "chrdwmc",dataType = "String",required = true)
     private String chrdwmc;
-
+    /** 合同金额*/
+    @ApiModelProperty(value = "合同金额 ",name = "inthtje",dataType = "BigDecimal",required = true)
+    private BigDecimal inthtje;
     /**
      * 设置：主键id
      */
@@ -164,6 +167,17 @@ public class XmDwmdDO extends BaseDomain {
 	public void setChrdwlxmc(String chrdwlxmc) {
 		this.chrdwlxmc = chrdwlxmc;
 	}
-    
+	/**
+	 *获取:合同金额  
+	 */
+	public BigDecimal getInthtje() {
+		return inthtje;
+	}
+	/**
+	 *设置:合同金额  
+	 */
+	public void setInthtje(BigDecimal inthtje) {
+		this.inthtje = inthtje;
+	}
     
 }

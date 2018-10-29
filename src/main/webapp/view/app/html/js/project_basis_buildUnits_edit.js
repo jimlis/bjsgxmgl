@@ -50,8 +50,11 @@ function see(){
 			mui.each(data,function(index,item){
 			  	var chrdwlxmc = item.chrdwlxmc||"";
 		  		var chrdwmc = item.chrdwmc||"";
+		  		var inthtje = item.inthtje||"";
 				htmls +=`
-					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span><span style="position: absolute; right: 10px;" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除<span></h5>
+					<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span>`+
+					`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同金额：<span class="bj-p-gray-font">`+inthtje+`</span>`+
+					`<span style="position: absolute; right: 10px;" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除<span></h5>
 				`;
 			})
 			mui("#yjdwDiv")[0].innerHTML =htmls;

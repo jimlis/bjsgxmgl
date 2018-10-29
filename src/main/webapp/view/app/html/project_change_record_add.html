@@ -46,6 +46,12 @@
 				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqlx"  v-model="intbgsqlx"placeholder="变更申请类型" />
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqlx" v-model="chrbgsqlx" v-on:click="bglxPicker()" placeholder="变更申请类型" />
 			</h5>
+			<h5 class="bj-title2-font">
+                                          单位名称： <input class="bj-input bj-p-black-font" type="hidden"
+                        id="intdwmcid" v-model="intdwmcid" placeholder="请选择" /> <input
+                        class="bj-input bj-p-black-font" type="text" id="chrdwmc"
+                        v-model="chrdwmc" v-on:click="dwPicker" placeholder="请选择" />
+            </h5>
 			<h5 class="bj-title2-font">变更申请编号：
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqbh" v-model="chrbgsqbh" placeholder="变更申请编号" />
 			</h5>
@@ -58,6 +64,7 @@
 			</h5>
 			<h5 class="bj-title2-font" v-if="intsfqd==1">取替变更编号：
 				<input class="bj-input bj-p-black-font" type="text" id="chrqtbgbh" v-model="chrqtbgbh" v-on:click="qtbgbhPicker()" placeholder="取替变更编号" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="intbgthid" v-model="intbgthid"  placeholder="取替变更id" />
 			</h5> 
 			<h5 class="bj-title2-font">变更详情：
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgxq" v-model="chrbgxq" placeholder="变更详情" />
@@ -69,10 +76,10 @@
 				<input class="bj-input bj-p-black-font" type="number" id="intbggs" v-model="intbggs" onblur="setGgjeSum()" placeholder="变更估算" />
 			</h5>
 			<h5 class="bj-title2-font">潜在变更总金额：
-				<input class="bj-input bj-p-black-font" type="number" id="intqzbgzje" v-model="intqzbgzje" placeholder="潜在变更总金额" />
+				<input class="bj-input bj-p-black-font bj-disable" type="number" id="intqzbgzje" v-model="intqzbgzje" placeholder="潜在变更总金额" />
 			</h5>
 			<h5 class="bj-title2-font">合同占比：
-				<input class="bj-input bj-p-black-font" type="number" id="inthtzb" v-model="inthtzb" placeholder="合同占比" />
+				<input class="bj-input bj-p-black-font bj-disable" type="number" id="inthtzb" v-model="inthtzb" placeholder="合同占比" />
 			</h5> 
 			<h5 class="bj-title2-font">备注：
 				<input class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注" />

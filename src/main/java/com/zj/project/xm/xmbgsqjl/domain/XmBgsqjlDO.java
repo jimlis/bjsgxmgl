@@ -53,6 +53,13 @@ public class XmBgsqjlDO extends BaseDomain {
     @ApiModelProperty(value = "变更申请类型名称",name = "chrbgsqlx",dataType = "String",required = true)
     @TableField(exist=false)
     private String chrbgsqlx;
+    /** 单位名称：单位名单表id */
+    @ApiModelProperty(value = "单位名称：单位名单表id",name = "intdwmcid",dataType = "Long",required = true)
+    private Long intdwmcid;
+    /**单位名称名称*/
+    @TableField(exist=false)
+    @ApiModelProperty(value = "单位名称名称",name = "chrdwmcmc",dataType = "String",required = true)
+    private String chrdwmc;
     /** 变更申请编号 */
     @ApiModelProperty(value = "变更申请编号 ",name = "chrbgsqbh",dataType = "string")
     private String chrbgsqbh;
@@ -103,6 +110,10 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称  ",name = "chrbgrmc",dataType = "String",required=true)
     private String chrbgrmc;
+    /** 变更替换id 默认-1 替换就入替换的主键id */
+    @ApiModelProperty(value = "变更替换id 默认-1 替换就入替换的主键id",name = "intbgthid",dataType = "Long",required=false)
+    private Long   intbgthid;
+  
 
     /**
      * 设置：主键id
@@ -355,5 +366,36 @@ public class XmBgsqjlDO extends BaseDomain {
 	}
 	public void setChrqtbgbh(String chrqtbgbh) {
 		this.chrqtbgbh = chrqtbgbh;
+	}
+	 /**
+     * 设置：单位名称：单位名单表id
+     */
+    public void setIntdwmcid(Long intdwmcid) {
+        this.intdwmcid = intdwmcid;
+    }
+    /**
+     * 获取：单位名称：单位名单表id
+     */
+    public Long getIntdwmcid() {
+        return intdwmcid;
+    }
+    public String getChrdwmc() {
+		return chrdwmc;
+	}
+	public void setChrdwmc(String chrdwmc) {
+		this.chrdwmc = chrdwmc;
+	}
+	/**
+	 * 获取变更替换id 默认-1 替换就入替换的主键id
+	 */
+	public Long getIntbgthid() {
+		return intbgthid;
+	}
+	
+	/**
+	 * 设置变更替换id 默认-1 替换就入替换的主键id
+	 */
+	public void setIntbgthid(Long intbgthid) {
+		this.intbgthid = intbgthid;
 	}
 }
