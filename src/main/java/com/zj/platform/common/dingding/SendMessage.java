@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by jimli on 2018/10/29.
  */
-public class sendMessage {
+public class SendMessage {
     //得到token
     private static String getToken(String getTokenPath) throws Exception{
         String tokenResult= CommonUtils.HttpURLConnectionGet(getTokenPath);
@@ -26,7 +26,7 @@ public class sendMessage {
      */
     public static String sendMessage(String corpid,String corpsecret,String contentTest,String agentid,String touser) throws Exception{
         String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
-        String access_token = sendMessage.getToken(getTokenPath);
+        String access_token = SendMessage.getToken(getTokenPath);
 
         JSONObject image=new JSONObject();
         JSONObject text=new JSONObject();
