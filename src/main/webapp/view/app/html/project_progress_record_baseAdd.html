@@ -48,7 +48,7 @@
 					<h5 class="bj-title2-font " v-if="intsgwzid==-1">施工位置描述：
 					   <textarea  class="bj-input bj-p-black-font" type="text" id="chrsgwzms" v-model="chrsgwzms" placeholder="施工位置描述"></textarea>
                     </h5>
-					<h5 class="bj-title2-font">基础类型：
+					<h5 class="bj-title2-font" v-if="intsgwzid!=-1">基础类型：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intjclx" v-model="intjclx" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrjclx" v-model="chrjclx" v-on:click="jcPicker" placeholder="请选择" />
 					</h5>

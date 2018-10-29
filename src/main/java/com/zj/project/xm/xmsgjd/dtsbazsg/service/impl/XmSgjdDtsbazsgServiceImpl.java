@@ -16,8 +16,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import com.zj.project.xm.xmdl.domain.XmDlDO;
-import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmsgjd.dtsbazsg.dao.XmSgjdDtsbazsgDao;
 import com.zj.project.xm.xmsgjd.dtsbazsg.domain.XmSgjdDtsbazsgDO;
 import com.zj.project.xm.xmsgjd.dtsbazsg.service.XmSgjdDtsbazsgService;
@@ -42,16 +42,16 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
     private FileService fileService;
     
     @Autowired
-    private  XmDlService xmDlService;
+    private  XmGqjdbjService xmGqjdbjService;
     
     @Override
     public XmSgjdDtsbazsgDO getById(Serializable id) {
     	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=super.getById(id);
     	if(xmSgjdDtsbazsgDO!=null) {
     		Long intsgwz = xmSgjdDtsbazsgDO.getIntsgwz();
-    		XmDlDO xmDlDO = xmDlService.getById(intsgwz);
-    		if(xmDlDO!=null) {
-    			xmSgjdDtsbazsgDO.setChrsgwz(xmDlDO.getChrdlmc());
+    		XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwz);
+    		if(xmGqjdbjDO!=null) {
+    			xmSgjdDtsbazsgDO.setChrsgwz(xmGqjdbjDO.getChrjdmc());
     		}
     	}
 		return xmSgjdDtsbazsgDO;

@@ -9,7 +9,7 @@ var vue;
 var dlhData;
 window.onload = function(){
 	
-	dlhData=getXmdlListByXmid(xmid);
+	dlhData=getXmjdListByParam(xmid,'jc',1,"");
 	
 	//判断是否更新；
 	pageData = isUpdata()||'';
@@ -29,7 +29,8 @@ window.onload = function(){
 			addlc:function(event){
 				var wclTableTbody=document.getElementById("wclTableTbody");
 				var lcnum=document.getElementById("lcnum").value;
-				var html=' <tr >'+
+				var tr=document.createElement("tr");
+				tr.innerHTML=''+
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].id"  class="bj-input bj-p-black-font" type="hidden" />'+
                          '<input id="xmSgjdEcjgzxWclList['+lcnum+'].chrlc"  class="bj-input bj-p-black-font" type="text" /></td>'+
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intmc"  class="bj-input bj-p-black-font" type="text" /></td>'+
@@ -38,8 +39,8 @@ window.onload = function(){
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intqt"  class="bj-input bj-p-black-font" type="text" /></td>'+
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intzx"  class="bj-input bj-p-black-font" type="text" /></td>'+
                          ' <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletelc(\'\',this)">删除</button></td>'+
-                         '</tr>';
-				wclTableTbody.innerHTML+=html;
+                         '';
+				wclTableTbody.appendChild(tr);
 				document.getElementById("lcnum").value=parseInt(lcnum)+1;
 			},
 			v_deletelc:function(id,obj){

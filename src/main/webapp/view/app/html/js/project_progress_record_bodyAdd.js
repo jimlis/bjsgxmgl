@@ -7,16 +7,20 @@ var sysdate=bjGetSysDate();
 var pageData;
 var vue;
 var dlcsData;
+var ztPickerData=[];
+var sgPickerData=[];
 window.onload = function(){
 	upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_ztjgsg"});
 	
-	dlcsData=getDLAndCsData(xmid);
 	//判断是否更新；
 	pageData = isUpdata()||'';
 	if(pageData==''){
 		//创建数据Model；
 		pageData = buildModel();
 	}
+	sgPickerData=getSG();
+	
+	getZt(pageData.intsgwzd||"");
 	
 	//数据绑定
 	vue = new Vue({
@@ -24,11 +28,20 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			dlcsPicker:function(event){
-				initDLAndCs(pageData,"chrShowAddress","intsgwzd","intsgwzc");
+				vuePicker(pageData,"chrShowAddress",sgPickerData,"intsgwzd");
 			},
 			datePicker: function (event) {
 				vueDtPicker(pageData,"dtmjzqrq");
+			},
+			ztPicker: function (event) {
+				vuePicker(pageData,"chrsgwzc",ztPickerData,"intsgwzc");
 			}
+		},
+		watch: {
+			intsgwzd: function(curVal,oldVal){
+					getZt(curVal);
+				this.chrsgwzc="";
+		    }
 		}
 	});
 	
@@ -38,7 +51,15 @@ window.onload = function(){
 	}
 }
 
-function initDLAndCs(vueData,address,dl,cs,funResult){
+function getSG(){
+	return getXmjdListByParam(xmid,'zt',1,"");
+}
+
+function getZt(parentId){
+	ztPickerData=getXmjdListByParam(xmid,'zt',0,parentId);
+}
+
+/*function initDLAndCs(vueData,address,dl,cs,funResult){
 	var userPicker = new mui.PopPicker({
 		layer:2
 	});
@@ -72,7 +93,7 @@ function getDLAndCsData(xmid){
 		}
 	});
 	return arr;
-}
+}*/
 
 //判断是否更新
 function isUpdata(){
@@ -102,6 +123,7 @@ function buildModel(){
 		chrShowAddress:'',
 		intsgwzd:'',
 		intsgwzc:'',
+		chrsgwzc:'',
 		dtmjzqrq:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc

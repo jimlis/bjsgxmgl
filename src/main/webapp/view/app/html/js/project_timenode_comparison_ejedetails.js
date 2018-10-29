@@ -76,12 +76,14 @@ function getPageData(){
 	}
 	
 	var arr={};
-	for(i in o){
-		if(o[i].intfjdid){//父节点
-			var list=arr[o[i].intfjdid]||[];
-			    list.push(o[i]);
-			    arr[o[i].intfjdid]=list;
+	for(key in parentMap){
+		var list=arr[key]||[];
+		for(i in o){
+			if(o[i].intfjdid==key){//父节点
+				    list.push(o[i]);
+			}
 		}
+		arr[key]=list;
 	}
 	return arr;
 }

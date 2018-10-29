@@ -38,9 +38,12 @@
 				</h5>
 				<h5 class="bj-title2-font">施工位置：
 					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzd" v-model="intsgwzd" placeholder="请选择施工位置" />
-					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzc" v-model="intsgwzc" placeholder="请选择施工位置" />
 					<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrShowAddress" v-model="chrShowAddress" v-on:click="dlcsPicker"  placeholder="请选择施工位置" readonly="readonly"/>
 				</h5>
+				<h5 class="bj-title2-font">主体类型：
+                        <input class="bj-input bj-p-black-font" type="hidden" id="intsgwzc" v-model="intsgwzc" placeholder="请选择" />
+                        <input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgwzc" v-model="chrsgwzc" v-on:click="ztPicker" placeholder="请选择" />
+                </h5>
 				<h5 class="bj-title2-font">浇筑砼日期：
 					<input class="bj-input bj-p-black-font"  readonly="readonly"  data-options='{"type":"date"}' id="dtmjzqrq" v-model="dtmjzqrq" v-on:click="datePicker" placeholder="请选择日期" readonly="readonly"/>
 				</h5>

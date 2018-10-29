@@ -6,6 +6,7 @@ var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
 var pageData;
 var vue;
+var jcPickerData=[];
 window.onload = function(){
 	//初始化數據
 	var sgPickerData=getSG();
@@ -13,14 +14,17 @@ window.onload = function(){
 		var oo={"text":"其他","value":"-1"};
 		sgPickerData.push(oo);
 	}
-	var jcPickerData = getJC();
 	upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_jcsg"});
 	//判断是否更新；
 	pageData = isUpdata()||'';
+	
 	if(pageData==''){
 		//创建数据Model；
 		pageData = buildModel();
 	}
+	
+	getJC(pageData.intsgwzid||"");
+	
 	//数据绑定
 	vue = new Vue({
 		el: '#app',
@@ -34,7 +38,17 @@ window.onload = function(){
 			},
 			datePicker: function (event) {
 				vueDtPicker(pageData,"dtmjzqrq");
-			},
+			}
+		},
+		watch: {
+			intsgwzid: function(curVal,oldVal){
+				if(curVal!=-1){
+					getJC(curVal);
+				}
+				this.chrsgwzms="";
+				this.intjclx="";
+				this.chrjclx="";
+		    },
 		}
 	});
 	
@@ -95,12 +109,13 @@ function buildModel(){
 }
 //初始化下拉框【施工位置】数据
 function getSG(){
-	return getXmdlListByXmid(xmid);
+	return getXmjdListByParam(xmid,'jc',1,"");
 }
 //初始化下拉框【基础类型】数据
-function getJC(){
-	var result=[{"text":"独立基础","value":"1"},{"text":"筏板","value":"2"},{"text":"桩基础","value":"3"}];
-	return result;
+function getJC(parentId){
+	//var result=[{"text":"独立基础","value":"1"},{"text":"筏板","value":"2"},{"text":"桩基础","value":"3"}];
+	//return result;
+	jcPickerData=getXmjdListByParam(xmid,'jc',0,parentId);
 }
 
 //保存数据

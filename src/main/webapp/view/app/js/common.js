@@ -111,6 +111,7 @@ var targetDataDelPath=serverPath+"api/xmghzb/del";
 var timenodeListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjList";
 var timenodeSaveBatchPath=serverPath+"api/gqjdbj/batchSave";
 var timenodeDelPath=serverPath+"api/gqjdbj/del";
+var timenodeListByParamApiPath=serverPath+"api/gqjdbj/getXmGqjdbjListByParam";
 
 /**TODO end Tzx*/
 //博建吐司提醒
@@ -895,4 +896,31 @@ function tyclClick(id){
 	addMuiClick(id,"a");
 	removeMuiClick(id,"li");
 	addMuiClick(id,"li");
+}
+
+/**
+ * 根据项目id、节点类型等参数获取信息
+ * @param xmid 项目id
+ * @param jdlx 节点类型
+ * @param isParent 1-是父节点 0-不是
+ * @param parentId 父节点id
+ */
+function getXmjdListByParam(xmid, jdlx, isParent, parentId){
+	var arr=[];
+	$bj_post_ajax({
+		url:timenodeListByParamApiPath,
+		data:{"xmid":xmid,"jdlx":jdlx,"isParent":isParent,"parentId":parentId},
+		async:false,
+		success:function(data){
+			if(data){
+					for(i in data){
+						var o={};
+						o["text"]=data[i].chrjdmc||"";
+						o["value"]=data[i].id||"";
+						arr.push(o);
+					}
+			}
+		}
+	});
+	return arr;
 }

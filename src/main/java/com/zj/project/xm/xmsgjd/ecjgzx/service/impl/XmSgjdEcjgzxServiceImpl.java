@@ -21,8 +21,8 @@ import com.google.gson.reflect.TypeToken;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlJszlDO;
-import com.zj.project.xm.xmdl.domain.XmDlDO;
-import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmsgjd.ecjgzx.dao.XmSgjdEcjgzxDao;
 import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxDO;
 import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxWclDO;
@@ -49,7 +49,7 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
     private  XmSgjdEcjgzxWclService xmSgjdEcjgzxWclService;
     
     @Autowired
-    private  XmDlService xmDlService;
+    private  XmGqjdbjService xmGqjdbjService;
     
     @Override
 	public XmSgjdEcjgzxDO getById(Serializable id) {
@@ -57,9 +57,9 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
     	if(xmSgjdEcjgzxDO!=null) {
     		//楼栋名称
     		Long intdid = xmSgjdEcjgzxDO.getIntdid();
-    		XmDlDO xmDlDO = xmDlService.getById(intdid);
-    		if(xmDlDO!=null) {
-    			xmSgjdEcjgzxDO.setChrdmc(xmDlDO.getChrdlmc());
+    		XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intdid);
+    		if(xmGqjdbjDO!=null) {
+    			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
     		}
     		// 完成量
         	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();

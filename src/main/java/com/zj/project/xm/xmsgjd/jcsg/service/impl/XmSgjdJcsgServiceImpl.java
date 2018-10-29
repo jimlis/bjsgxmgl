@@ -20,8 +20,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import com.zj.project.xm.xmdl.domain.XmDlDO;
-import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmsgjd.jcsg.dao.XmSgjdJcsgDao;
 import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
 import com.zj.project.xm.xmsgjd.jcsg.service.XmSgjdJcsgService;
@@ -52,7 +52,7 @@ public class XmSgjdJcsgServiceImpl extends BaseServiceImpl<XmSgjdJcsgDao, XmSgjd
 	private XmZpmsService xmZpmsService;
 	
 	@Autowired
-	private XmDlService xmDlService;
+	private XmGqjdbjService xmGqjdbjService;
 	
 	@Override
 	public XmSgjdJcsgDO getById(Serializable id) {
@@ -63,22 +63,19 @@ public class XmSgjdJcsgServiceImpl extends BaseServiceImpl<XmSgjdJcsgDao, XmSgjd
 				if(intsgwzid==-1) {
 					xmSgjdJcsgDO.setChrsgwzmc("其他");
 				}else{
-					XmDlDO xmDlDO = xmDlService.getById(intsgwzid);
-					if(xmDlDO!=null) {
-						xmSgjdJcsgDO.setChrsgwzmc(xmDlDO.getChrdlmc());
+					XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzid);
+					if(xmGqjdbjDO!=null) {
+						xmSgjdJcsgDO.setChrsgwzmc(xmGqjdbjDO.getChrjdmc());
 					}
 				}
 			}
 			
 			Integer intjclx = xmSgjdJcsgDO.getIntjclx();
 			if(intjclx!=null) {
-				if(intjclx.equals(1)) {
-					xmSgjdJcsgDO.setChrjclx("独立基础");
-				}else if(intjclx.equals(2)) {
-					xmSgjdJcsgDO.setChrjclx("筏板");
-				}else if(intjclx.equals(3)) {
-					xmSgjdJcsgDO.setChrjclx("桩基础");
-				}
+					XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intjclx);
+					if(xmGqjdbjDO!=null) {
+						xmSgjdJcsgDO.setChrjclx(xmGqjdbjDO.getChrjdmc());
+					}
 			}
 			
 		}

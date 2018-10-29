@@ -78,21 +78,21 @@ public class ApiXmsgjdController extends ApiBaseController{
         	xmSgjdJcsgDO.setFcbz(1);
         	xmSgjdJcsgDO.setIntxmid(xmid);
         	QueryWrapper<XmSgjdJcsgDO> queryWrapper1=new QueryWrapper<XmSgjdJcsgDO>(xmSgjdJcsgDO).
-        			select("id","dtmbgrq","(select chrdlmc  from  bj_xm_dl where id=intsgwzid ) as chrsgwzmc").orderByAsc("dtmbgrq");
+        			select("id","dtmbgrq","concat((select chrjdmc  from  bj_xm_gqjdbj where id=intsgwzid ),'-',(select chrjdmc  from  bj_xm_gqjdbj where id=intjclx )) as chrsgwzmc").orderByAsc("dtmbgrq");
         	map.put("jc", xmSgjdJcsgService.list(queryWrapper1));
         	
         	XmSgjdZtjgsgDO xmSgjdZtjgsgDO=new XmSgjdZtjgsgDO();
         	xmSgjdZtjgsgDO.setFcbz(1);
         	xmSgjdZtjgsgDO.setIntxmid(xmid);
         	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper2=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).
-        			select("id","dtmbgrq","concat((select chrdlmc  from  bj_xm_dl where id=intsgwzd ),'-',intsgwzc,'层') as chrShowAddress").orderByAsc("dtmbgrq");
+        			select("id","dtmbgrq","concat((select chrjdmc  from  bj_xm_gqjdbj where id=intsgwzd ),'-',(select chrjdmc  from  bj_xm_gqjdbj where id=intsgwzc )) as chrShowAddress").orderByAsc("dtmbgrq");
         	map.put("zt", xmSgjdZtjgsgService.list(queryWrapper2));
 
         	XmSgjdEcjgzxDO xmSgjdEcjgzxDO=new XmSgjdEcjgzxDO();
         	xmSgjdEcjgzxDO.setFcbz(1);
         	xmSgjdEcjgzxDO.setIntxmid(xmid);
         	QueryWrapper<XmSgjdEcjgzxDO> queryWrapper3=new QueryWrapper<XmSgjdEcjgzxDO>(xmSgjdEcjgzxDO).
-        			select("id","dtmgxrq","(select chrdlmc  from  bj_xm_dl where id=intdid ) as chrdmc").orderByAsc("dtmgxrq");
+        			select("id","dtmgxrq","(select chrjdmc  from  bj_xm_gqjdbj where id=intdid ) as chrdmc").orderByAsc("dtmgxrq");
         	map.put("ec", xmSgjdEcjgzxService.list(queryWrapper3));
         	
         	
@@ -100,7 +100,7 @@ public class ApiXmsgjdController extends ApiBaseController{
         	xmSgjdDtsbazsgDO.setFcbz(1);
         	xmSgjdDtsbazsgDO.setIntxmid(xmid);
         	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper4=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO).
-        			select("id","dtmgxrq","chrdtbh","(select chrdlmc  from  bj_xm_dl where id=intsgwz ) as chrsgwz").orderByAsc("dtmgxrq");
+        			select("id","dtmgxrq","chrdtbh","(select chrjdmc  from  bj_xm_gqjdbj where id=intsgwz ) as chrsgwz").orderByAsc("dtmgxrq");
         	map.put("dt", xmSgjdDtsbazsgService.list(queryWrapper4));
         	
         	

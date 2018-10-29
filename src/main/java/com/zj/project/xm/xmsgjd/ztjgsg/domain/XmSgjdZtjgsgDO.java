@@ -51,12 +51,16 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     @TableField(exist=false)
     @ApiModelProperty(value = "施工位置",name = "chrShowAddress",dataType = "String",required = true)
     private String chrShowAddress;
-    /** 施工位置（栋）:栋楼表id */
-    @ApiModelProperty(value = "施工位置（栋）:栋楼表id",name = "intsgwzd",dataType = "Long",required = true)
+    /** 施工位置  */
+    @ApiModelProperty(value = "施工位置 ",name = "intsgwzd",dataType = "Long",required = true)
     private Long intsgwzd;
-    /** 施工位置（层）：层表id */
+    /** 主体id */
     @ApiModelProperty(value = "施工位置（层）：层表id",name = "intsgwzc",dataType = "Long",required = true)
     private Long intsgwzc;
+    /** 主体类型 */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "主体类型",name = "chrsgwzc",dataType = "string",required = true)
+    private String chrsgwzc;
     /** 浇筑砼日期 */
     @ApiModelProperty(value = "浇筑砼日期",name = "dtmjzqrq",dataType = "string",required = false,example = "2018-10-12")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
@@ -205,6 +209,12 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
 	}
 	public void setChrShowAddress(String chrShowAddress) {
 		this.chrShowAddress = chrShowAddress;
+	}
+	public String getChrsgwzc() {
+		return chrsgwzc;
+	}
+	public void setChrsgwzc(String chrsgwzc) {
+		this.chrsgwzc = chrsgwzc;
 	}
     
 }

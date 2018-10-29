@@ -10,7 +10,7 @@ var dlhData;
 window.onload = function(){
 	upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});
 	
-	dlhData=getXmdlListByXmid(xmid);
+	dlhData=getXmjdListByParam(xmid,'jc',1,"");
 	
 	//判断是否更新；
 	pageData = isUpdata()||'';

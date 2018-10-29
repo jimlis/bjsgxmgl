@@ -1,35 +1,32 @@
 package com.zj.project.xm.xmsgjd.ztjgsg.service.impl;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmdl.domain.XmDlDO;
-import com.zj.project.xm.xmdl.service.XmDlService;
-import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
-import com.zj.project.xm.xmsgjd.ztjgsg.dao.XmSgjdZtjgsgDao;
-import com.zj.project.xm.xmsgjd.ztjgsg.domain.XmSgjdZtjgsgDO;
-import com.zj.project.xm.xmsgjd.ztjgsg.service.XmSgjdZtjgsgService;
-import com.zj.project.xm.xmzpms.domain.XmZpmsDO;
-import com.zj.project.xm.xmzpms.service.XmZpmsService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.springframework.util.Assert;
-
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.web.exception.CommonException;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.web.exception.CommonException;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
+import com.zj.project.xm.xmsgjd.ztjgsg.dao.XmSgjdZtjgsgDao;
+import com.zj.project.xm.xmsgjd.ztjgsg.domain.XmSgjdZtjgsgDO;
+import com.zj.project.xm.xmsgjd.ztjgsg.service.XmSgjdZtjgsgService;
+import com.zj.project.xm.xmzpms.domain.XmZpmsDO;
+import com.zj.project.xm.xmzpms.service.XmZpmsService;
 
 /**
  * 
@@ -56,7 +53,9 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
 	private XmZpmsService xmZpmsService;
 	
 	@Autowired
-	private XmDlService xmDlService;
+	private XmGqjdbjService xmGqjdbjService;
+	
+	
 	
 	@Override
 	public XmSgjdZtjgsgDO getById(Serializable id) {
@@ -64,12 +63,19 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
 		if(xmSgjdZtjgsgDO!=null) {
 			Long intsgwzd = xmSgjdZtjgsgDO.getIntsgwzd();
 			if(intsgwzd!=null) {
-					XmDlDO xmDlDO = xmDlService.getById(intsgwzd);
-					if(xmDlDO!=null) {
-						xmSgjdZtjgsgDO.setChrShowAddress(xmDlDO.getChrdlmc()+"-"+xmDlDO.getIntcs()+"层");
+				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzd);
+					if(xmGqjdbjDO!=null) {
+						xmSgjdZtjgsgDO.setChrShowAddress(xmGqjdbjDO.getChrjdmc());
 					}
 			}
 			
+			Long intsgwzc = xmSgjdZtjgsgDO.getIntsgwzc();
+			if(intsgwzc!=null) {
+				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzc);
+					if(xmGqjdbjDO!=null) {
+						xmSgjdZtjgsgDO.setChrsgwzc(xmGqjdbjDO.getChrjdmc());
+					}
+			}
 			
 		}
 		return xmSgjdZtjgsgDO;
