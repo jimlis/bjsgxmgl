@@ -39,7 +39,7 @@ function mlogin1(){
 								dd.runtime.permission.requestAuthCode({
 									corpId: data.corpId,
 									onSuccess: function(info) {
-										mlogin2(data,info);
+											mlogin2(data,info);
 									},
 									onFail : function(err) {}
 										
@@ -67,8 +67,8 @@ function mlogin1(){
 							DingTalkPC.runtime.permission.requestAuthCode({
 									corpId : data.corpId,
 									onSuccess : function(info) {
-										bjToast("电脑");
-										mlogin2(data,info);
+											mlogin2(data,info);
+										
 									}
 									
 								});

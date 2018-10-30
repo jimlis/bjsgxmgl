@@ -1,7 +1,7 @@
 package com.zj.platform.business.login.controller;
 
 
-import com.dingtalk.oapi.lib.aes.DingTalkJsApiSingnature;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.common.domain.Tree;
@@ -30,15 +30,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.io.ByteStreams.toByteArray;
 
 /**
 *登录控制器
@@ -123,9 +119,9 @@ public class LoginController extends AdminBaseController {
         String signature = "";//前端鉴权-计算签名信息
         try {
             //得到token
-            String tokenResult= CommonUtils.HttpURLConnectionGet(getTokenPath);
+            JSONObject tokenResult= CommonUtils.httpGet(getTokenPath);
             java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {}.getType();
-            Map<String ,String> tokenMap = new Gson().fromJson(tokenResult, type);
+            Map<String ,String> tokenMap = new Gson().fromJson(tokenResult.toJSONString(), type);
             accessToken = tokenMap.get("access_token");
             resultConfig.put("access_token",tokenMap.get("access_token"));
             //获取jsapi_ticket

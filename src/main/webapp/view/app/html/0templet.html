@@ -8,8 +8,35 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/app.css"/ charset="UTF-8">
 		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			 table {
+    border: 1px solid #ccc;
+    width: 98%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+  }
+
+  table tr {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+
+  table th, table td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  table th {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav" >
@@ -18,19 +45,46 @@
 			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">编辑</button>
 		</header>
 		<div class="mui-content">
-			<input class="bj-p-black-font" type="" name="" id="" value="" />
-				<!--这里放置真实显示的DOM内容-->
-				<ul class="mui-table-view">
-				    <li class="mui-table-view-cell">
-				        <a class="mui-navigate-right">博建项目施工管理</a>
-				    </li>
-				     
-				</ul>
+			<div style="height: 300px;" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<table class="mui-scroll" style="height: auto">
+				            	<thead>
+						    <tr>
+						      <th>合同金额A</th>
+						      <th>潜在变更总金额B</th>
+						      <th>累计已发放期数</th>
+						      <th>累计发放金额C</th>
+						      <th>合同金额A</th>
+						      <th>潜在变更总金额B</th>
+						      <th>累计已发放期数</th>
+						      <th>累计发放金额C</th>
+						      <th>合同金额A</th>
+						      <th>潜在变更总金额B</th>
+						      <th>累计已发放期数</th>
+						      <th>累计发放金额C</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td data-label="合同金额A">测试</td>
+						      <td data-label="潜在变更总金额B">测试</td>
+						      <td data-label="累计已发放期数">测试</td>
+						      <td data-label="累计发放金额C">测试</td>
+						       <td data-label="合同金额A">测试</td>
+						      <td data-label="潜在变更总金额B">测试</td>
+						      <td data-label="累计已发放期数">测试</td>
+						      <td data-label="累计发放金额C">测试</td>
+						       <td data-label="合同金额A">测试</td>
+						      <td data-label="潜在变更总金额B">测试</td>
+						      <td data-label="累计已发放期数">测试</td>
+						      <td data-label="累计发放金额C">测试</td>
+						    </tr>
+						  </tbody>
+			            </table>
+				</div>
 			
 		</div>
-		<div id="bj-zz">
-			<img src="../images/bj_building.png" style="margin: auto;"/>
-		</div>
-		
+		<script type="text/javascript">
+			mui('.mui-scroll-wrapper').scroll().scrollTo(0,0,500);//100毫秒滚动到顶
+		</script>
 	</body>
 </html>
