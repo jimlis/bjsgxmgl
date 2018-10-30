@@ -63,6 +63,7 @@ var changeApiSave = serverPath+"api/xmbgsqjl/save";
 var payApiList = serverPath+"api/xmgckyzfqk/getXmGckyzfqkListByXmidAndDwlx";
 var payApiDetail = serverPath+"api/xmgckyzfqk/getXmGckyzfqkById";
 var payApiSave = serverPath+"api/xmgckyzfqk/save";
+var payApiGetQsAndJe = serverPath+"api/xmgckyzfqk/getXmGcyfqsAndJe";
 
 var materialApiList = serverPath +"api/xmclybspjl/getXmClybspjlListByXmidAndClyblx";
 var materialApiDetail = serverPath +"api/xmclybspjl/getXmClybspjlById";

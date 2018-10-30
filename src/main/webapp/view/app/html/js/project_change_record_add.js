@@ -171,7 +171,6 @@ function getBgbhList(bgsqlx,dwmcid,nowId){
  * @returns
  */
 function setGgjeSum(){
-	debugger;
 	var intqzbgzjeDom=document.getElementById("intqzbgzje");
 	if(bgbhData){
 		var intbggs=Number(document.getElementById("intbggs").value||0);

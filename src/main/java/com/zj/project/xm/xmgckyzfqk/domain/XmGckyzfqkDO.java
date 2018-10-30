@@ -1,5 +1,6 @@
 package com.zj.project.xm.xmgckyzfqk.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -65,13 +66,13 @@ public class XmGckyzfqkDO extends BaseDomain {
     private Integer intbcsqqs;
     /** 本期申请金额 */
     @ApiModelProperty(value = "本期申请金额 ",name = "intbqsqje",dataType = "Float",required = false)
-    private Float intbqsqje;
+    private BigDecimal intbqsqje;
     /** 本期核实发放金额 */
     @ApiModelProperty(value = "本期核实发放金额 ",name = "intbqhsffje",dataType = "Float",required = false)
-    private Float intbqhsffje;
+    private BigDecimal intbqhsffje;
     /** 合同金额 */
     @ApiModelProperty(value = "合同金额 ",name = "inthtje",dataType = "Float",required = false)
-    private Float inthtje;
+    private BigDecimal inthtje;
     /** 备注 */
     @ApiModelProperty(value = "备注 ",name = "chrbz",dataType = "String",required = false)
     private String chrbz;
@@ -203,37 +204,37 @@ public class XmGckyzfqkDO extends BaseDomain {
     /**
      * 设置：本期申请金额
      */
-    public void setIntbqsqje(Float intbqsqje) {
+    public void setIntbqsqje(BigDecimal intbqsqje) {
         this.intbqsqje = intbqsqje;
     }
     /**
      * 获取：本期申请金额
      */
-    public Float getIntbqsqje() {
+    public BigDecimal getIntbqsqje() {
         return intbqsqje;
     }
     /**
      * 设置：本期核实发放金额
      */
-    public void setIntbqhsffje(Float intbqhsffje) {
+    public void setIntbqhsffje(BigDecimal intbqhsffje) {
         this.intbqhsffje = intbqhsffje;
     }
     /**
      * 获取：本期核实发放金额
      */
-    public Float getIntbqhsffje() {
+    public BigDecimal getIntbqhsffje() {
         return intbqhsffje;
     }
     /**
      * 设置：合同金额
      */
-    public void setInthtje(Float inthtje) {
+    public void setInthtje(BigDecimal inthtje) {
         this.inthtje = inthtje;
     }
     /**
      * 获取：合同金额
      */
-    public Float getInthtje() {
+    public BigDecimal getInthtje() {
         return inthtje;
     }
     /**
