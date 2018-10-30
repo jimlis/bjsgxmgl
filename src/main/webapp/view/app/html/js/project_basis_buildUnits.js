@@ -26,30 +26,33 @@ $bjAjax({
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
 			var inthtje = item.inthtje||"";
-			mui("#gw")[0].innerHTML +=`
-				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span>`+
-				`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同金额：<span class="bj-p-gray-font">`+inthtje+`</span>`+
-				`</h5>`;
+			mui("#gwdwNr")[0].innerHTML +=`<tr>
+						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
+						      <td data-label="单位名称">`+chrdwmc+`</td>
+						      <td data-label="合同金额">`+inthtje+`</td>
+						    </tr>`;
 		})
 		var two=data["2"]||[];
 		mui.each(two,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
 			var inthtje = item.inthtje||"";
-			mui("#sg")[0].innerHTML +=`
-				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span>`+
-				`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同金额：<span class="bj-p-gray-font">`+inthtje+`</span>`+
-				`</h5>`;
+			mui("#sgdwNr")[0].innerHTML +=`<tr>
+						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
+						      <td data-label="单位名称">`+chrdwmc+`</td>
+						      <td data-label="合同金额">`+inthtje+`</td>
+						    </tr>`;
 		})
 		var three=data["3"]||[];
 		mui.each(three,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
 			var inthtje = item.inthtje||"";
-			mui("#qt")[0].innerHTML +=`
-				<h5 class="bj-title2-font">`+chrdwlxmc+`：<span class="bj-p-gray-font">`+chrdwmc+`</span>`+
-				`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合同金额：<span class="bj-p-gray-font">`+inthtje+`</span>`+
-				`</h5>`;
+			mui("#qtdwNr")[0].innerHTML +=`<tr>
+						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
+						      <td data-label="单位名称">`+chrdwmc+`</td>
+						      <td data-label="合同金额">`+inthtje+`</td>
+						    </tr>`;
 		})
 	}
 });

@@ -24,13 +24,13 @@ public class SendMessage {
         agentid：应用id
         touser：接收人，多个用|分开
      */
-    public static String sendMessage(String corpid,String corpsecret,String contentTest,String agentid,String touser) throws Exception{
+    public static String sendMessage(String corpid,String corpsecret,String agentid,String contentText,String touser) throws Exception{
         String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
         String access_token = SendMessage.getToken(getTokenPath);
 
         JSONObject image=new JSONObject();
         JSONObject text=new JSONObject();
-        text.put("content",contentTest);
+        text.put("content",contentText);
         image.put("text", text);
         image.put("msgtype","text");
         image.put("agentid",agentid);

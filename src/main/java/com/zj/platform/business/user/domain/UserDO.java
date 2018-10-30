@@ -116,7 +116,10 @@ public class UserDO extends BaseDomain {
      */
     @TableField(exist = false)
     private Long fileId;
-
+    /**
+     * 钉钉UserId
+     */
+    private String chrUserId;
 
     /**
      * 设置：用户名
@@ -429,6 +432,14 @@ public class UserDO extends BaseDomain {
 
     public void setFileId(Long fileId) {
         this.fileId = fileId;
+    }
+
+    public String getChrUserId() {
+        return chrUserId;
+    }
+
+    public void setChrUserId(String chrUserId) {
+        this.chrUserId = chrUserId;
     }
 
     @Override

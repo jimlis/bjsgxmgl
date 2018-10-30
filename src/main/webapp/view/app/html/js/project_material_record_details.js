@@ -27,32 +27,36 @@ $bjAjax({
 			var jszlObj=xmClybspjlJszlList[i];
 			var chrpp=jszlObj.chrpp||"";
 			var chrjscl=jszlObj.chrjscl||"";
-			if(i%3==0){
-				tempOne="<tr style=\"height: 20px\"><td>"+chrpp+"</td>";
-				tempTwo="<tr style=\"height: 20px\"><td>"+chrjscl+"</td>";
-				index=0;
-			}else if(i%3==1){
-				tempOne+="<td>"+chrpp+"</td>";
-				tempTwo+="<td>"+chrjscl+"</td>";
-				index=1;
-			}if(i%3==2){
-				tempOne+="<td>"+chrpp+"</td></tr>";
-				tempTwo+="<td>"+chrjscl+"</td></tr>";
-				index=2;
-				html+=tempOne+tempTwo;
-			}
+//			if(i%3==0){
+//				tempOne="<tr style=\"height: 20px\"><td>"+chrpp+"</td>";
+//				tempTwo="<tr style=\"height: 20px\"><td>"+chrjscl+"</td>";
+//				index=0;
+//			}else if(i%3==1){
+//				tempOne+="<td>"+chrpp+"</td>";
+//				tempTwo+="<td>"+chrjscl+"</td>";
+//				index=1;
+//			}if(i%3==2){
+//				tempOne+="<td>"+chrpp+"</td></tr>";
+//				tempTwo+="<td>"+chrjscl+"</td></tr>";
+//				index=2;
+//				html+=tempOne+tempTwo;
+//			}
+			html+=` <tr>
+				      <td data-label="品牌">`+chrpp+`</td>
+				      <td data-label="技术资料">`+chrjscl+`</td>
+					</tr>`
 		}
-		if(index==0){
-			tempOne+="<td></td>";
-			tempTwo+="<td></td>";
-			index=1;
-		}
-		if(index==1){
-			tempOne+="<td></td></tr>";
-			tempTwo+="<td></td></tr>";
-			html+=tempOne+tempTwo;
-		}
-		document.getElementById("jszlTable").innerHTML=html;
+//		if(index==0){
+//			tempOne+="<td></td>";
+//			tempTwo+="<td></td>";
+//			index=1;
+//		}
+//		if(index==1){
+//			tempOne+="<td></td></tr>";
+//			tempTwo+="<td></td></tr>";
+//			html+=tempOne+tempTwo;
+//		}
+		document.getElementById("jszlNr").innerHTML=html;
 	}
 });
 /*
