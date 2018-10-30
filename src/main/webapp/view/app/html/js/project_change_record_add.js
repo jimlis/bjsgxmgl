@@ -39,7 +39,7 @@ window.onload = function(){
 				vuePicker(pageData,"chrsfqd",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfqd");
 			},
 			qtbgbhPicker: function () {
-				vuePicker(pageData,"chrqtbgbh",bgbhData,intbgthid);
+				vuePicker(pageData,"chrqtbgbh",bgbhData,"intbgthid");
 			}
 		},
 		watch:{
@@ -48,10 +48,18 @@ window.onload = function(){
 			},
 			intdwmcid:function(val,oldVal){
 				dwChange(val);
+			},
+			intsfqd:function(val,oldVal){
+				this.intbgthid="";
+				this.intqzbgzje="";
+				this.inthtzb="";
+			},
+			intbgthid:function(val,oldVal){
+				this.intqzbgzje="";
+				this.inthtzb="";
 			}
 		}
 	});
-	console.log(pageData)
 	if(id){
 		bglxChange(pageData.intbgsqlx||"");
 		if(dwData){
@@ -62,6 +70,7 @@ window.onload = function(){
 				}
 			}
 		}
+		getBgbhList(pageData.intbgsqlx||"",pageData.intdwmcid||"",id)
 		//加载图片
 		initFileList("bj_xm_bgsqjl",id,"1","fileIds","file-list",true);
 	}
@@ -73,7 +82,7 @@ function bglxChange(bgsqlx){
 }
 
 function dwChange(dwid){
-	getBgbhList(pageData.intbgsqlx||"",dwid);
+	getBgbhList(pageData.intbgsqlx||"",dwid,id);
 	pageData.chrsfqd="";
 	pageData.chrqtbgbh="";
 	pageData.intqzbgzje="";
@@ -129,7 +138,7 @@ function buildModel(){
 	return model;
 }
 
-function getBgbhList(bgsqlx,dwmcid){
+function getBgbhList(bgsqlx,dwmcid,nowId){
 	if(bgsqlx){
 		$bjAjax({
 			url:changeApiList,
@@ -139,7 +148,8 @@ function getBgbhList(bgsqlx,dwmcid){
 				xmid:intxmid,
 				bgsqlx:bgsqlx,
 				dwmcid:dwmcid,
-				bgthid:-1
+				bgthid:-1,
+				nowBgsqjlId:(nowId||"")
 			},
 			success:function(data){
 				if(data){
@@ -161,19 +171,22 @@ function getBgbhList(bgsqlx,dwmcid){
  * @returns
  */
 function setGgjeSum(){
+	debugger;
 	var intqzbgzjeDom=document.getElementById("intqzbgzje");
 	if(bgbhData){
 		var intbggs=Number(document.getElementById("intbggs").value||0);
+		var intsfqd=pageData.intsfqd||"";
+		var intbgthid=pageData.intbgthid||"";
 		for(i in bgbhData){
-			if(bgbhData[i].intsfqd==0){
+			if(bgbhData[i].intsfqd==0&&(!(intsfqd==1&&intbgthid==bgbhData[i].value))){
 				intbggs+=Number(bgbhData[i].intbggs||0);
 			}
 		}
-		intqzbgzjeDom.value=intbggs;
+		pageData.intqzbgzje=intbggs;
 		setHtzb(intbggs);
 		return;
 	}
-	intqzbgzjeDom.value=0;
+	pageData.intqzbgzje=0;
 	setHtzb(0);
 }
 /**
@@ -183,10 +196,10 @@ function setGgjeSum(){
 function setHtzb(qzbgzje){
 	var inthtzbDom=document.getElementById("inthtzb");
 	if(nowHtje==0){
-		inthtzbDom.value=0;
+		pageData.inthtzb=0;
 		return;
 	}
-	inthtzbDom.value=new Number((qzbgzje/nowHtje)*100).toFixed(3);
+	pageData.inthtzb=new Number((qzbgzje/nowHtje)*100).toFixed(3);
 }
 
 //保存数据

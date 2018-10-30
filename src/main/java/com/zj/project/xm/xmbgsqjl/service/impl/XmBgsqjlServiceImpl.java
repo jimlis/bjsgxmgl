@@ -14,7 +14,9 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.xm.xmbgsqjl.dao.XmBgsqjlDao;
 import com.zj.project.xm.xmbgsqjl.domain.XmBgsqjlDO;
 import com.zj.project.xm.xmbgsqjl.service.XmBgsqjlService;
@@ -121,6 +123,13 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
 	public void saveXmBgsqjlXx(XmBgsqjlDO xmBgsqjlDO, String fileIds) {
 		Long id = xmBgsqjlDO.getId();
         if(id==null){
+        	try {
+				UserDO appUserDO = ShiroUtils.getAppUserDO();
+				xmBgsqjlDO.setIntbgrid(appUserDO.getId());
+				xmBgsqjlDO.setChrbgrmc(appUserDO.getName());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
         	xmBgsqjlDO.setGxsj(new Date());
         	xmBgsqjlDO.setFcbz(1);
             save(xmBgsqjlDO);

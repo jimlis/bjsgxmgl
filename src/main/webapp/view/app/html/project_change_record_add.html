@@ -62,7 +62,7 @@
 				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" v-model="intsfqd" placeholder="是否取替之前变更申请" />
 				<input class="bj-input bj-p-black-font" type="text" id="chrsfqd" v-model="chrsfqd" v-on:click="sfPicker()" placeholder="是否取替之前变更申请" />
 			</h5>
-			<h5 class="bj-title2-font" v-if="intsfqd==1">取替变更编号：
+			<h5 class="bj-title2-font" v-show="intsfqd==1">取替变更编号：
 				<input class="bj-input bj-p-black-font" type="text" id="chrqtbgbh" v-model="chrqtbgbh" v-on:click="qtbgbhPicker()" placeholder="取替变更编号" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="intbgthid" v-model="intbgthid"  placeholder="取替变更id" />
 			</h5> 
