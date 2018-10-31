@@ -3,13 +3,18 @@ var pageData;
 var vue;
 var id=obj.id||"";
 var systemdate = bjGetSysDate();
+var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 var dwData=[];
 var inthtje=0;
 var bgbhData=[];
+var splctzs = new Array();
 window.onload = function(){
+	//得到审批流程状态内容
+	getSplcList("zfqk");
+	
 	upLoadFile('#chbtn',{"busType":"bj_xm_gckyzfqk"});
 	
 	pageData = isUpdata()||'';
@@ -44,8 +49,14 @@ window.onload = function(){
 				});
 			},
 			splcPicker: function () {
-				vuePicker(pageData,"chrsplczt",[{"text":"待审批","value":"1"},{"text":"总部审批A","value":"2"},
-					{"text":"总部审批B","value":"3"},{"text":"业主","value":"4"}],"intsplcztid");
+				vuePicker(pageData,"chrsprmc",splctzs,"intsplcztid",function(item){
+					pageData.chruserid = item.chruserid;
+				});
+			},
+			txsp:function(){
+				var contentText = pageData.chrsprmc+"，您有一个关于“工程款申请/支付情况待审批！”\n"+systemdate1
+				var userid = pageData.chruserid;
+				ftxsp(contentText,userid);
 			}
 		},
 		watch:{
@@ -235,11 +246,56 @@ function buildModel(){
 		intbqhsffje:'',
 		chrbz:'',
 		intsplcztid:'',
-		chrsplczt:'',
+		chrsprmc:'',
+		chruserid:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc
 	}
 	return model;
+}
+
+//根据splclx审批流程状态获取list数据
+function getSplcList(lx){
+	$bjAjax({
+			url:splcztBySplclxApiPath,
+			type:"post",
+			async:false,
+			data:{
+				splclx:lx
+			},
+			success:function(data){
+				if(data){
+					for(i in data){
+						var obj ={text:"",value:"",chruserid:""};
+						obj.text = data[i].chrsprmc;
+						obj.value = data[i].id;
+						obj.chruserid = data[i].chruserid;
+						splctzs.push(obj);
+					}
+				}
+			}
+		});
+}
+//提醒审批
+function ftxsp(contentText,chruserid){
+	if(chruserid){
+		$bjAjax({
+			url:splcTxByUseridApiPath,
+			type:"post",
+			async:false,
+			data:{
+				contentText:contentText,
+				userId:chruserid
+			},
+			success:function(data){
+				if(data){
+					bjToast("已提醒！")
+				}
+			}
+		});
+	}else{
+		bjToast("该流程未设置UserId，不能进行提醒，联系管理员添加。")
+	}
 }
 
 //保存数据

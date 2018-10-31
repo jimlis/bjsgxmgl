@@ -28,7 +28,7 @@
 			</h1>
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="list">
+		<div class="mui-content" id="app">
 
 			<form id="myform">
                 <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" />
@@ -45,8 +45,8 @@
 						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgdw" placeholder="施工负责单位" />
 					</h5>
 					<h5 class="bj-title2-font">是否替代品：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" placeholder="是否替代品" />
-						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsfdtp" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" v-model="intsfdtp" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsfdtp" v-model="chrsfdtp" v-on:click="sfPicker()" onblur="onShqt()" placeholder="是否替代品" />
 					</h5>
 					<h5 class="bj-title2-font">材料样板名称：
 						<input class="bj-input bj-p-black-font" type="text" id="chrybmc" placeholder="材料样板名称" />
@@ -85,8 +85,10 @@
                         </div>
                     </h5>
 					<h5 class="bj-title2-font">审批流程状态：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" placeholder="审批流程状态" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrsplczt" name="chrsplczt" placeholder="审批流程状态" />
+				
+						<input class="bj-input bj-p-black-font" type="hidden" id="intsplcztid" name="intsplcztid" v-model="intsplcztid" placeholder="审批流程状态" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批流程状态" />
+						<button class="mui-btn mui-btn-blue" v-on:click="txsp">提醒审批</button>
 					</h5>
 				</div>
 			</form>
@@ -97,6 +99,7 @@
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_material_record_add.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 

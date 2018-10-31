@@ -3,6 +3,7 @@ var pageData;
 var vue;
 var id=obj.id||"";
 var systemdate = bjGetSysDate();
+var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
@@ -44,7 +45,7 @@ window.onload = function(){
 				vuePicker(pageData,"chrqtbgbh",bgbhData,"intbgthid");
 			},
 			txsp:function(){
-				var contentText = pageData.chrsprmc+"，您有一个关于“工程/顾问变更记录待审批！”"
+				var contentText = pageData.chrsprmc+"，您有一个关于“工程/顾问变更记录待审批！”\n"+systemdate1
 				var userid = pageData.chruserid;
 				ftxsp(contentText,userid);
 			}
@@ -232,8 +233,8 @@ function getSplcList(lx){
 			},
 			success:function(data){
 				if(data){
-					var obj ={text:"",value:"",chruserid:""};
 					for(i in data){
+						var obj ={text:"",value:"",chruserid:""};
 						obj.text = data[i].chrsprmc;
 						obj.value = data[i].id;
 						obj.chruserid = data[i].chruserid;
@@ -256,7 +257,7 @@ function ftxsp(contentText,chruserid){
 			},
 			success:function(data){
 				if(data){
-					
+					bjToast("已提醒！")
 				}
 			}
 		});

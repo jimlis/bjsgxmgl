@@ -672,13 +672,13 @@ function hasPermission(bs){
 	return true;
 }
 
-function bjGetSysDate(){
+function bjGetSysDate(dfm){
 	var data1 ="";
 	$bjAjax({
 			url:getSysDate,
 			async:false,
 			data:{
-				dfm:"yyyy-MM-dd"
+				dfm:(dfm==null||typeof(dfm)=="undefined"||dfm=="null")?"yyyy-MM-dd":dfm
 			},
 			type:'post',
 			success:function(data){
