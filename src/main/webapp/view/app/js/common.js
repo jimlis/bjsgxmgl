@@ -114,6 +114,10 @@ var timenodeSaveBatchPath=serverPath+"api/gqjdbj/batchSave";
 var timenodeDelPath=serverPath+"api/gqjdbj/del";
 var timenodeListByParamApiPath=serverPath+"api/gqjdbj/getXmGqjdbjListByParam";
 
+//审批流程状态
+var splcztBySplclxApiPath = serverPath +"api/splczt/getSplcZtBySplclx";
+var splcTxByUseridApiPath = serverPath+"api/common/sendMessage";
+
 /**TODO end Tzx*/
 //博建吐司提醒
 function bjToast(data,fuc){

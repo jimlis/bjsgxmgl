@@ -69,10 +69,8 @@ public class ApiCommonController extends ApiBaseController {
             @ApiResponse(code=1,message="操作失败",response=String.class)})
     @RequiresAuthentication
     public Result<String> sendMessage(HttpServletRequest request,String contentText,String userId) {
-        UserDO user = userService.getById(userId);
-        String touser = user.getChrUserId();
         try {
-          String result = SendMessage.sendMessage(environment.getProperty("corpid"),environment.getProperty("corpsecret"),environment.getProperty("agentId"),contentText,touser);
+          String result = SendMessage.sendMessage(environment.getProperty("corpId"),environment.getProperty("corpsecret"),environment.getProperty("agentId"),contentText,userId);
           return Result.ok(result);
         }catch (Exception e){
             e.printStackTrace();

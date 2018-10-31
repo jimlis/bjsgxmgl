@@ -9,6 +9,7 @@ var intxmid = getCookie('id');//intxmid
 var bgbhData=[];
 var dwData=[];
 var nowHtje=0;
+var splctzs = new Array();
 window.onload = function(){
 	upLoadFile('#chbtn',{"busType":"bj_xm_bgsqjl"});
 	pageData = isUpdata()||'';
@@ -32,14 +33,20 @@ window.onload = function(){
 				});
 			},
 			splcPicker: function () {
-				vuePicker(pageData,"chrsplczt",[{"text":"待审批","value":"1"},{"text":"总部审批A","value":"2"},
-					{"text":"总部审批B","value":"3"},{"text":"业主","value":"4"}],"intsplczt");
+				vuePicker(pageData,"chrsprmc",splctzs,"intsplcztid",function(item){
+					pageData.chruserid = item.chruserid;
+				});
 			},
 			sfPicker: function () {
 				vuePicker(pageData,"chrsfqd",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfqd");
 			},
 			qtbgbhPicker: function () {
 				vuePicker(pageData,"chrqtbgbh",bgbhData,"intbgthid");
+			},
+			txsp:function(){
+				var contentText = pageData.chrsprmc+"，您有一个关于“工程/顾问变更记录待审批！”"
+				var userid = pageData.chruserid;
+				ftxsp(contentText,userid);
 			}
 		},
 		watch:{
@@ -132,8 +139,9 @@ function buildModel(){
 		intqzbgzje:'',
 		inthtzb:'',
 		chrbz:'',
-		intsplczt:'',
-		chrsplczt:''
+		intsplcztid:'',
+		chrsprmc:'',
+		chruserid:''
 	}
 	return model;
 }
@@ -200,7 +208,62 @@ function setHtzb(qzbgzje){
 	}
 	pageData.inthtzb=new Number((qzbgzje/nowHtje)*100).toFixed(3);
 }
-
+//监听是否取替之前变更申请，得到审批流程状态内容
+function onShqt(){
+	splctzs=[];
+	var sfqt = pageData.intsfqd;
+	if(sfqt==1){
+		//是,获取审批类型为“变更记录是”
+		getSplcList("bgjls");
+	}else if(sfqt==0){
+		//是,获取审批类型为“变更记录是”
+		getSplcList("bgjlf");
+		
+	}
+}
+//根据splclx审批流程状态获取list数据
+function getSplcList(lx){
+	$bjAjax({
+			url:splcztBySplclxApiPath,
+			type:"post",
+			async:false,
+			data:{
+				splclx:lx
+			},
+			success:function(data){
+				if(data){
+					var obj ={text:"",value:"",chruserid:""};
+					for(i in data){
+						obj.text = data[i].chrsprmc;
+						obj.value = data[i].id;
+						obj.chruserid = data[i].chruserid;
+						splctzs.push(obj);
+					}
+				}
+			}
+		});
+}
+//提醒审批
+function ftxsp(contentText,chruserid){
+	if(chruserid){
+		$bjAjax({
+			url:splcTxByUseridApiPath,
+			type:"post",
+			async:false,
+			data:{
+				contentText:contentText,
+				userId:chruserid
+			},
+			success:function(data){
+				if(data){
+					
+				}
+			}
+		});
+	}else{
+		bjToast("该流程未设置UserId，不能进行提醒，联系管理员添加。")
+	}
+}
 //保存数据
 function save(){
 	

@@ -60,7 +60,7 @@
 			</h5>
 			<h5 class="bj-title2-font">是否取替之前变更申请：
 				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" v-model="intsfqd" placeholder="是否取替之前变更申请" />
-				<input class="bj-input bj-p-black-font" type="text" id="chrsfqd" v-model="chrsfqd" v-on:click="sfPicker()" placeholder="是否取替之前变更申请" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrsfqd" v-model="chrsfqd" v-on:click="sfPicker()" onblur="onShqt()" placeholder="是否取替之前变更申请" />
 			</h5>
 			<h5 class="bj-title2-font" v-show="intsfqd==1">取替变更编号：
 				<input class="bj-input bj-p-black-font" type="text" id="chrqtbgbh" v-model="chrqtbgbh" v-on:click="qtbgbhPicker()" placeholder="取替变更编号" />
@@ -95,9 +95,12 @@
 				</div>
 			</div>
 			<h5 class="bj-title2-font">审批流程状态：
-				<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" v-model="intsplczt" placeholder="审批流程状态" />
-				<input class="bj-input bj-p-black-font" type="text" id="chrsplczt" name="chrsplczt" v-model="chrsplczt" v-on:click="splcPicker()"  placeholder="审批流程状态" />
+				
+				<input class="bj-input bj-p-black-font" type="hidden" id="intsplcztid" name="intsplcztid" v-model="intsplcztid" placeholder="审批流程状态" />
+				<input class="bj-input bj-p-black-font" type="text" id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批流程状态" />
+				<button class="mui-btn mui-btn-blue" v-on:click="txsp">提醒审批</button>
 			</h5>
+			
 		</div>
 	</form>
 </div>
