@@ -69,6 +69,9 @@ public class XmZpjlDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称",name = "chrbgrmc",dataType = "String",required = false)
     private String chrbgrmc;
+    /** 照片描述 */
+    @ApiModelProperty(value = "照片描述",name = "@chrzpms",dataType = "String",required = false)
+    private String chrzpms;
 
     /**
      * 设置：主键id
@@ -214,8 +217,11 @@ public class XmZpjlDO extends BaseDomain {
 	public void setChrqtms(String chrqtms) {
 		this.chrqtms = chrqtms;
 	}
-	
-    
-    
+	public String getChrzpms() {
+		return chrzpms;
+	}
+	public void setChrzpms(String chrzpms) {
+		this.chrzpms = chrzpms;
+	}
     
 }

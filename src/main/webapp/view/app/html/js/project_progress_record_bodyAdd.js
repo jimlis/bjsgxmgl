@@ -124,6 +124,7 @@ function buildModel(){
 		intsgwzd:'',
 		intsgwzc:'',
 		chrsgwzc:'',
+		intwcl:'',
 		dtmjzqrq:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc

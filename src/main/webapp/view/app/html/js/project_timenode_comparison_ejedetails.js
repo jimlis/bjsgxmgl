@@ -5,6 +5,7 @@ var chrjdlx=obj.chrjdlx||"";
 var pageData ={};
 var parentMap={};
 var title=chrjdlx=="jc"?"基础":(chrjdlx=="zt"?"主体":"");
+var sysDate=bjGetSysDate();
 window.onload= function(){
 	//document.getElementsByTagName("title")[0].innerText=title+"详情";
     pageData =getPageData();
@@ -45,6 +46,41 @@ window.onload= function(){
 							}
 						}
 					});
+				}
+			},
+			computedDay:function(key,index){
+				var row=this.map[key][index];
+				var dtmjhwcsj=row.dtmjhwcsj;//计划完成时间
+				if(!dtmjhwcsj){
+					return "";
+				}
+				var dtmsjwcsj=row.dtmsjwcsj||"";//时间完成时间
+				if(dtmsjwcsj){
+					var wcsj=dtmsjwcsj;
+					var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
+						wcsj=new Date(wcsj.replace(/-/g, "/"));
+						var days = wcsj.getTime() - jhwcsj.getTime();
+						var day = parseInt(days / (1000 * 60 * 60 * 24));
+					if(day==0){
+						return "0";
+					}else if(day<0){
+						return ""+String(day)+"天";
+					}else{
+						return "+"+String(day)+"天";
+					}
+				}else{
+					var wcsj=sysDate;
+					var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
+						wcsj=new Date(wcsj.replace(/-/g, "/"));
+						var days = jhwcsj.getTime() - wcsj.getTime();
+						var day = parseInt(days / (1000 * 60 * 60 * 24));
+					if(day==0){
+						return "0";
+					}else if(day<0){
+						return ""+String(day)+"天";
+					}else{
+						return "+"+String(day)+"天";
+					}
 				}
 			}
 		}

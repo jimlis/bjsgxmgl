@@ -47,7 +47,7 @@ public class ApiXmGqjdbjController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
-    public Result<List<XmGqjdbjDO> > getXmGqjdbjList(Long gqjdbjid,Long xmid,String jdlx) {
+    public Result<List<XmGqjdbjDO>> getXmGqjdbjList(Long gqjdbjid,Long xmid,String jdlx) {
         try {
         	if(xmid==null) {
         		return Result.ok(Lists.newArrayList());
@@ -57,6 +57,17 @@ public class ApiXmGqjdbjController extends ApiBaseController {
         	xmGqjdbjDO.setFcbz(1);
         	xmGqjdbjDO.setChrjdlx(jdlx);
             QueryWrapper<XmGqjdbjDO> queryWrapper=new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO).eq("intxmid",xmid).orderByAsc("intxh");
+            if("jc".equals(jdlx)) {
+            	queryWrapper=queryWrapper.select("id","intxmid","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+            			"dtmjhwcsj","intsjbj","(SELECT a.wcsj	FROM (SELECT intxmid as xmid, intsgwzid,intjclx,min(dtmbgrq) AS wcsj FROM " + 
+            			"					bj_xm_sgjd_jcsg 	WHERE intwcl >= 100 AND intsgwzid !=- 1 AND fcbz = 1 GROUP BY intxmid,intsgwzid,intjclx) a " + 
+            			"		WHERE	a.intsgwzid = intfjdid AND a.intjclx = id and a.xmid=intxmid ) dtmsjwcsj ");
+            }else if("zt".equals(jdlx)) {
+            	queryWrapper=queryWrapper.select("id","intxmid","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+            			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj 	FROM ( SELECT intxmid as xmid,intsgwzd,intsgwzc,	min(dtmbgrq) AS wcsj\n" + 
+            					"				FROM	bj_xm_sgjd_ztjgsg	WHERE intwcl >= 100	AND fcbz = 1 GROUP BY	intxmid,	intsgwzd,intsgwzc ) a\n" + 
+            					"		WHERE	a.intsgwzd = intfjdid	AND a.intsgwzc = id	and a.xmid=intxmid ) dtmsjwcsj ");
+            }
             List<XmGqjdbjDO> list = xmGqjdbjService.list(queryWrapper);
             return Result.ok(list);
         }catch (Exception e){

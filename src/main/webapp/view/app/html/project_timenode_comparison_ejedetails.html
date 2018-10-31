@@ -73,12 +73,12 @@
                             <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="deleteNode(parentMap[key]['id'],1,$event)">删除</button>
                         </td>
                         </tr>
-				    <tr v-for="item in value" :name="parentMap[key]['id']" style="margin-left: 5%;">
+				    <tr v-for="(item,index) in value" :name="parentMap[key]['id']" style="margin-left: 5%;">
 				      <td data-label="序号">{{item.intxh}}</td>
 				      <td data-label="名称">{{item.chrjdmc}}</td>
 				      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
-				      <td data-label="实际完成时间">无</td>
-				      <td data-label="工期(+提前-延后)">无</td>
+				      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
+				      <td data-label="工期(+提前-延后)">{{computedDay(key,index)}}</td>
 				      <td>
                             <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="updateNode(item.id)">更新</button>
                             <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="deleteNode(item.id,$event)">删除</button>

@@ -61,6 +61,9 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     @TableField(exist=false)
     @ApiModelProperty(value = "主体类型",name = "chrsgwzc",dataType = "string",required = true)
     private String chrsgwzc;
+    /** 完成量（百分比） */
+    @ApiModelProperty(value = "完成量（百分比）",name = "intwcl",dataType = "Float",required = false)
+    private Float intwcl;
     /** 浇筑砼日期 */
     @ApiModelProperty(value = "浇筑砼日期",name = "dtmjzqrq",dataType = "string",required = false,example = "2018-10-12")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
@@ -216,5 +219,17 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
 	public void setChrsgwzc(String chrsgwzc) {
 		this.chrsgwzc = chrsgwzc;
 	}
+	 /**
+     * 设置：完成量（百分比）
+     */
+    public void setIntwcl(Float intwcl) {
+        this.intwcl = intwcl;
+    }
+    /**
+     * 获取：完成量（百分比）
+     */
+    public Float getIntwcl() {
+        return intwcl;
+    }
     
 }

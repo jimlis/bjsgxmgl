@@ -71,6 +71,7 @@ function isUpdate(){
 				document.getElementById("chrqtms").value = data.chrqtms||"";
 				document.getElementById("intbgrid").value = data.intbgrid||"";
 				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
+				document.getElementById("chrzpms").value = data.chrzpms||"";
 				initImgList("bj_xm_zpjl",id,"1","fileIds","img-list",true);
 				if(intbglb==2){
 					relPicker("chrpswzms",ldData,"chrpswz");
