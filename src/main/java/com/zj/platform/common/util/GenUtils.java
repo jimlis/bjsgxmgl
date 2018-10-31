@@ -1,13 +1,18 @@
 package com.zj.platform.common.util;
 
-import com.zj.platform.business.config.domain.ConfigDO;
-import com.zj.platform.business.config.service.ConfigService;
-import com.zj.platform.business.generator.domain.ColumnDO;
-import com.zj.platform.business.generator.domain.TableDO;
-import com.zj.platform.business.generator.type.EnumGen;
-import com.zj.platform.common.type.EnumErrorCode;
-import com.zj.platform.common.web.exception.CommonException;
-import org.apache.commons.io.IOUtils;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.velocity.Template;
@@ -17,10 +22,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-import java.io.*;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import com.zj.platform.business.config.domain.ConfigDO;
+import com.zj.platform.business.config.service.ConfigService;
+import com.zj.platform.business.generator.domain.ColumnDO;
+import com.zj.platform.business.generator.domain.TableDO;
+import com.zj.platform.business.generator.type.EnumGen;
 
 /**
  * 代码生成器 工具类

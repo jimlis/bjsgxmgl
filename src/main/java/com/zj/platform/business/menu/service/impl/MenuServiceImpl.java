@@ -1,19 +1,29 @@
 package com.zj.platform.business.menu.service.impl;
 
-import com.zj.platform.business.common.domain.Tree;
-import com.zj.platform.business.menu.dao.MenuDao;
-import com.zj.platform.business.menu.domain.MenuDO;
-import com.zj.platform.business.menu.service.MenuService;
-import com.zj.platform.business.role.dao.RoleMenuDao;
-import com.zj.platform.common.util.BuildTree;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import com.zj.platform.business.common.domain.Tree;
+import com.zj.platform.business.menu.dao.MenuDao;
+import com.zj.platform.business.menu.domain.MenuDO;
+import com.zj.platform.business.menu.service.MenuService;
+import com.zj.platform.business.role.dao.RoleMenuDao;
+import com.zj.platform.business.user.domain.UserDO;
+import com.zj.platform.common.util.BuildTree;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 
 
 @Service
@@ -148,5 +158,6 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, MenuDO> implements
         List<Tree<MenuDO>> list = BuildTree.buildList(trees, "0");
         return list;
     }
-
+    
+   
 }

@@ -44,4 +44,5 @@ public interface MenuService extends BaseService<MenuDO> {
      * @return 树形菜单
      */
     Set<String> listPerms(Long userId);
+    
 }

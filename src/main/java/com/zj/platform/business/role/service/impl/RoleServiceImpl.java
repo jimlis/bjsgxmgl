@@ -8,7 +8,12 @@ import com.zj.platform.business.role.domain.RoleMenuDO;
 import com.zj.platform.business.role.service.RoleService;
 import com.zj.platform.business.user.dao.UserDao;
 import com.zj.platform.business.user.dao.UserRoleDao;
+import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,6 +24,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -133,6 +139,31 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDao, RoleDO> implements
             roleMenuMapper.batchSave(rms);
         }
         return retBool(r);
+    }
+    
+    /**
+     * 判断app当前用户是否有角色、功能模块、操作权限
+     * @param roleName
+     * @param menuName
+     * @param perms
+     * @return true-有 false-没有
+     */
+    @Override
+    public boolean checkPerms(String roleName,String menuName,String perms) {
+    	  boolean flag=false;
+    	  Long userId=null;
+    	  if(StringUtils.isEmpty(roleName)&&StringUtils.isEmpty(menuName)&&
+    			  StringUtils.isEmpty(perms)) return false;
+    	  try {
+			UserDO appUserDO = ShiroUtils.getAppUserDO();
+			userId=appUserDO.getId();
+			List<Map<String,Object>> list = baseMapper.checkPerms(userId, roleName, menuName, perms);
+			return CollectionUtils.isNotEmpty(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag=false;
+			return flag;
+		}
     }
 
 }

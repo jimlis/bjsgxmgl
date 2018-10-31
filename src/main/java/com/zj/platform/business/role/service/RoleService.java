@@ -19,4 +19,13 @@ public interface RoleService extends BaseService<RoleDO> {
      * @return 角色列表
      */
     List<RoleDO> findListByUserId(Serializable id);
+    
+    /**
+     * 判断app当前用户是否有角色、功能模块、操作权限
+     * @param roleName
+     * @param menuName
+     * @param perms
+     * @return true-有 false-没有
+     */
+	boolean checkPerms(String roleName, String menuName, String perms);
 }

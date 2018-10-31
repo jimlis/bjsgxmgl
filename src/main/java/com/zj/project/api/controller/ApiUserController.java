@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Maps;
+import com.zj.platform.business.role.service.RoleService;
 import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.business.user.service.UserService;
 import com.zj.platform.common.annotation.Log;
@@ -46,6 +47,9 @@ public class ApiUserController extends ApiBaseController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private RoleService roleService;
 
     @PostMapping("login")
    @Log("api-登录")
@@ -128,6 +132,25 @@ public class ApiUserController extends ApiBaseController {
           @ApiResponse(code=1,message="操作失败",response=UserDO.class)})
   public Result<?> getUserById(String userId) {
       return Result.build(Result.CODE_SUCCESS,"获取成功",userService.getById(userId));
+  }
+  
+  @Log("判断app用户是否有角色、功能模块、操作权限")
+  @PostMapping("checkPerms")
+  @ApiOperation(value="判断app用户是否有角色、功能模块、操作权限",httpMethod="POST")
+  @ApiImplicitParams({@ApiImplicitParam(name="roleName",paramType="form",dataType = "string",required=false,value = "角色名称"),
+	  @ApiImplicitParam(name="menuName",paramType="form",dataType = "string",required=false,value = "菜单名称"),
+	  @ApiImplicitParam(name="perms",paramType="form",dataType = "string",required=false,value = "操作权限")})
+  @ApiResponses({@ApiResponse(code=0,message="操作成功",response=Boolean.class),
+  	@ApiResponse(code=1,message="操作失败",response=Boolean.class)})
+  @RequiresAuthentication
+  public Result<Boolean> checkPerms(String roleName,String menuName,String perms) {
+      try {
+          return Result.ok(roleService.checkPerms(roleName, menuName, perms));
+      }catch (Exception e){
+          e.printStackTrace();
+          return Result.fail();
+      }
+
   }
 
 }

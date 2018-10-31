@@ -2,5 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zj.platform.business.role.dao.RoleDao">
-
+     <select id="checkPerms" resultType="hashmap">
+       select u.userId,r.roleName,m.name menuName,m.perms  from sys_user_role u inner join  sys_role r on u.roleId=r.id 
+       inner join sys_role_menu rm on r.id=rm.roleid inner join sys_menu m on rm.menuId=m.id
+       <where>
+            u.userId=#{userId}
+           <if test='roleName !=null and roleName !="" '>
+               and r.roleName=#{roleName}
+           </if>
+           <if test=' menuName !=null and menuName !="" '>
+               and m.name=#{menuName}
+           </if>
+           <if test=' perms !=null and perms !="" '>
+               and m.perms=#{perms}
+           </if>
+       </where>
+    </select>
 </mapper>
