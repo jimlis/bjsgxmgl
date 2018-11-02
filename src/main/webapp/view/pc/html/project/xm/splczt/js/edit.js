@@ -1,5 +1,9 @@
 var prefix = urlPath+"/project/splcZt";
+var dictPrefix=urlPath+"/sys/sysDict";
 $().ready(function() {
+	debugger;
+	initSel("chrsplclx",dictPrefix+"/list/splc",{},"name","value");
+	  $('#chrsplclx').selectpicker('val', $("#chrsplclxValue").val());
 	validateRule();
 });
 
