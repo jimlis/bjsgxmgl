@@ -55,21 +55,7 @@ window.onload= function(){
 					return "";
 				}
 				var dtmsjwcsj=row.dtmsjwcsj||"";//时间完成时间
-				if(dtmsjwcsj){
-					var wcsj=dtmsjwcsj;
-					var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
-						wcsj=new Date(wcsj.replace(/-/g, "/"));
-						var days = wcsj.getTime() - jhwcsj.getTime();
-						var day = parseInt(days / (1000 * 60 * 60 * 24));
-					if(day==0){
-						return "0";
-					}else if(day<0){
-						return ""+String(day)+"天";
-					}else{
-						return "+"+String(day)+"天";
-					}
-				}else{
-					var wcsj=sysDate;
+					var wcsj=dtmsjwcsj||sysDate;
 					var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
 						wcsj=new Date(wcsj.replace(/-/g, "/"));
 						var days = jhwcsj.getTime() - wcsj.getTime();
@@ -82,7 +68,6 @@ window.onload= function(){
 						return "+"+String(day)+"天";
 					}
 				}
-			}
 		}
 	});
 }
