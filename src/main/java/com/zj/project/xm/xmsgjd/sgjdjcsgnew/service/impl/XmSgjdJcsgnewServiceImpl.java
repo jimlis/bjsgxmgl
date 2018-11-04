@@ -164,7 +164,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	if(xmid==null) {
     		return null;
     	}
-    	if(xmid==sgwzid) {
+    	if(sgwzid==null) {
     		return null;
     	}
     	XmSgjdJcsgnewDO xmSgjdJcsgnewDO=new XmSgjdJcsgnewDO();
