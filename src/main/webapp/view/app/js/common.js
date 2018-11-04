@@ -89,6 +89,7 @@ var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 //施工进度
 var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";
 var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
+var progressJcsgNewSaveApiPath=serverPath+"api/xmsgjdjcsg/newsave";
 var progressJcsgByIdApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgById";
 var progressZtjgSaveApiPath=serverPath+"api/xmsgjdztjgsg/save";
 var progressZtjgByIdApiPath=serverPath+"api/xmsgjdztjgsg/getXmSgjdJcsgById";
@@ -269,6 +270,15 @@ function vueDtPicker(vueData,selecter){
     })
 }
 
+//vue 日期选择器1
+function getDtPicker(fun){
+	var dtPicker = new mui.DtPicker({"type":"date"}); 
+    dtPicker.show(function (selectItems) { 
+        fun(selectItems);
+        dtPicker.dispose();
+    })
+}
+
 //vue 日期选择器 参数为数组
 function vueArrDtPicker(vueData,index,selecter){
 	var dtPicker = new mui.DtPicker({"type":"date"}); 
@@ -371,6 +381,15 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 			//return false;
 		});
 	};
+}
+function getRelPicker(data,funResult){
+	var picker = new mui.PopPicker();
+	 picker.setData(data);
+	 picker.show(function (selectItems) {
+	 	funResult(selectItems);
+//	    console.log(selectItems[0].text);//智子
+//	    console.log(selectItems[0].value);//zz 
+	  })
 }
 
 /*照片懒加载1*/
@@ -930,3 +949,46 @@ function getXmjdListByParam(xmid, jdlx, isParent, parentId){
 	});
 	return arr;
 }
+//还原vue.$data
+var restore = function (vueObject) {
+    var result = null;
+    var type = Object.prototype.toString.call(vueObject);
+
+    switch (type) {
+        case '[object Array]':
+            result = toArray(vueObject);
+            break;
+
+        case '[object Object]':
+            result = toObject(vueObject);
+            break;
+
+        default:
+            result = vueObject;
+            break;
+    }
+
+    function toArray(vueArray) {
+        var array = [];
+
+        for (var index in vueArray) {
+            var item = restore(vueArray[index]);
+            array.push(item);
+        }
+
+        return array;
+    }
+
+    function toObject(vueObject) {
+        var obj = new Object();
+
+        for (var index in vueObject) {
+            var item = restore(vueObject[index]);
+            obj[index] = item;
+        }
+
+        return obj;
+    }
+
+    return result;
+};
