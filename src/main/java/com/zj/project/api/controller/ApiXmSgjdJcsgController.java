@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
@@ -50,6 +51,9 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
     @RequiresAuthentication
     public Result<List<XmSgjdJcsgDO>> getXmSgjdJcsgListByXmid(Long xmid) {
         try {
+        	if(xmid==null) {
+        		return Result.ok(Lists.newArrayList());
+        	}
         	XmSgjdJcsgDO xmSgjdJcsgDO=new XmSgjdJcsgDO();
         	xmSgjdJcsgDO.setFcbz(1);
         	xmSgjdJcsgDO.setIntxmid(xmid);
@@ -60,6 +64,30 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
             return Result.fail();
         }
     }
+   
+   @Log("根据xmid获取其他基础施工信息")
+   @PostMapping("getXmSgjdJcsgQtListByXmid")
+   @ApiOperation(value="根据xmid获取基础施工信息",httpMethod="POST")
+   @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
+   @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+   	@ApiResponse(code=1,message="操作失败",response=List.class)})
+   @RequiresAuthentication
+   public Result<List<XmSgjdJcsgnewDO>> getXmSgjdJcsgQtListByXmid(Long xmid) {
+       try {
+    	if(xmid==null) {
+       		return Result.ok(Lists.newArrayList());
+       	}
+    	XmSgjdJcsgnewDO xmSgjdJcsgnewDO=new XmSgjdJcsgnewDO();
+    	xmSgjdJcsgnewDO.setFcbz(1);
+    	xmSgjdJcsgnewDO.setIntxmid(xmid);
+    	xmSgjdJcsgnewDO.setIntsgwzid(-1L);
+       	QueryWrapper<XmSgjdJcsgnewDO> queryWrapper=new QueryWrapper<XmSgjdJcsgnewDO>(xmSgjdJcsgnewDO).orderByAsc("dtmbgrq");
+           return Result.ok(xmSgjdJcsgnewService.list(queryWrapper));
+       }catch (Exception e){
+           e.printStackTrace();
+           return Result.fail();
+       }
+   }
    
    @Log("根据xmid和施sgwzid获取基础施工信息")
    @PostMapping("getXmSgjdJcsgListByXmidAndSgwzid")
