@@ -152,7 +152,7 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdJcsgnewDO.class),
             @ApiResponse(code=1,message="操作失败",response=XmSgjdJcsgnewDO.class)})
     @RequiresAuthentication
-    public Result<XmSgjdJcsgnewDO> save(XmSgjdJcsgnewDO xmSgjdJcsgnewDO,String fileIds, String dljcsJson,String zjcsJson) {
+    public Result<XmSgjdJcsgnewDO> newsave(XmSgjdJcsgnewDO xmSgjdJcsgnewDO,String fileIds, String dljcsJson,String zjcsJson) {
         try {
         	xmSgjdJcsgnewService.saveXmSgjdJcsgnewXx(xmSgjdJcsgnewDO,fileIds, dljcsJson, zjcsJson);
            return Result.ok(xmSgjdJcsgnewDO);
