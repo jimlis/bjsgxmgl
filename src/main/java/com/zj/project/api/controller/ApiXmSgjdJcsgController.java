@@ -15,6 +15,8 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.xm.xmsgjd.jcsg.domain.XmSgjdJcsgDO;
 import com.zj.project.xm.xmsgjd.jcsg.service.XmSgjdJcsgService;
+import com.zj.project.xm.xmsgjd.sgjdjcsgnew.domain.XmSgjdJcsgnewDO;
+import com.zj.project.xm.xmsgjd.sgjdjcsgnew.service.XmSgjdJcsgnewService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,6 +37,9 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
 
     @Autowired
     private XmSgjdJcsgService  xmSgjdJcsgService;
+    
+    @Autowired
+    private XmSgjdJcsgnewService xmSgjdJcsgnewService;
 
    @Log("根据xmid获取基础施工信息")
     @PostMapping("getXmSgjdJcsgListByXmid")
@@ -55,6 +60,23 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
             return Result.fail();
         }
     }
+   
+   @Log("根据xmid和施sgwzid获取基础施工信息")
+   @PostMapping("getXmSgjdJcsgListByXmidAndSgwzid")
+   @ApiOperation(value="根据xmid和施sgwzid获取基础施工信息",httpMethod="POST")
+   @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
+	   @ApiImplicitParam(name="sgwzid",paramType="form",dataType = "Long",required=true,value = "施工位置id")})
+   @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdJcsgnewDO.class),
+   	@ApiResponse(code=1,message="操作失败",response=XmSgjdJcsgnewDO.class)})
+   @RequiresAuthentication
+   public Result<XmSgjdJcsgnewDO> getXmSgjdJcsgListByXmid(Long xmid,Long sgwzid) {
+       try {
+           return Result.ok(xmSgjdJcsgnewService.getXmSgjdJcsgnewByXmidAndSgwzid(xmid, sgwzid));
+       }catch (Exception e){
+           e.printStackTrace();
+           return Result.fail();
+       }
+   }
 
     @Log("根据xmSgjdJcsgId获取基础施工信息")
     @PostMapping("getXmSgjdJcsgById")
@@ -85,6 +107,27 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
         try {
         	xmSgjdJcsgService.saveXmSgjdJcsgXx(xmSgjdJcsgDO,fileIds,xmZpmsJson);
            return Result.ok(xmSgjdJcsgDO);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+
+    }
+    
+    @Log("保存新的基础施工信息")
+    @PostMapping("newsave")
+    @ApiOperation(value="保存新的基础施工信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "图片ids，多个以逗号隔开"),
+    	@ApiImplicitParam(name="dljcs",paramType="form",dataType = "string",required=true,value = " 独立基础json"),
+            @ApiImplicitParam(name="zjcs",paramType="form",dataType = "string",required=false,value = "独立基础json")
+    })
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdJcsgnewDO.class),
+            @ApiResponse(code=1,message="操作失败",response=XmSgjdJcsgnewDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdJcsgnewDO> save(XmSgjdJcsgnewDO xmSgjdJcsgnewDO,String fileIds, String dljcs,String zjcs) {
+        try {
+        	xmSgjdJcsgnewService.saveXmSgjdJcsgnewXx(xmSgjdJcsgnewDO,fileIds, dljcs, zjcs);
+           return Result.ok(xmSgjdJcsgnewDO);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

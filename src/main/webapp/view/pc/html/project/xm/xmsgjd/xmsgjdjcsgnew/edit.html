@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${xmSgjdJcsgnew.id}"  type="hidden">
+<div class="form-group">	
+								<label class="col-sm-3 control-label">逻辑废除：0（废除），1（正常）：</label>
+								<div class="col-sm-8">
+									<input id="fcbz" name="fcbz" th:value="${xmSgjdJcsgnew.fcbz}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">修改新增删除时间：</label>
+								<div class="col-sm-8">
+									<input id="gxsj" name="gxsj" th:value="${xmSgjdJcsgnew.gxsj}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">序号：</label>
+								<div class="col-sm-8">
+									<input id="intxh" name="intxh" th:value="${xmSgjdJcsgnew.intxh}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">项目基本信息id：</label>
+								<div class="col-sm-8">
+									<input id="intxmid" name="intxmid" th:value="${xmSgjdJcsgnew.intxmid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmbgrq" name="dtmbgrq" th:value="${xmSgjdJcsgnew.dtmbgrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">施工位置：栋楼表id，-1代表其他使用下面描述字段：</label>
+								<div class="col-sm-8">
+									<input id="intsgwzid" name="intsgwzid" th:value="${xmSgjdJcsgnew.intsgwzid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">施工位置描述：</label>
+								<div class="col-sm-8">
+									<input id="chrsgwzms" name="chrsgwzms" th:value="${xmSgjdJcsgnew.chrsgwzms}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">是否完成：0（未完成），1（完成）：</label>
+								<div class="col-sm-8">
+									<input id="intsfwc" name="intsfwc" th:value="${xmSgjdJcsgnew.intsfwc}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">完成日期：</label>
+								<div class="col-sm-8">
+									<input id="dtmwcrq" name="dtmwcrq" th:value="${xmSgjdJcsgnew.dtmwcrq}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人id：</label>
+								<div class="col-sm-8">
+									<input id="intbgrid" name="intbgrid" th:value="${xmSgjdJcsgnew.intbgrid}" class="form-control" type="text">
+								</div>
+							</div>
+<div class="form-group">	
+								<label class="col-sm-3 control-label">报告人名称：</label>
+								<div class="col-sm-8">
+									<input id="chrbgrmc" name="chrbgrmc" th:value="${xmSgjdJcsgnew.chrbgrmc}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="js/edit.js" th:src="@{/view/pc/html/project/xm/xmsgjd/xmsgjdjcsgnew/js/edit.js}">
+	</script>
+</body>
+</html>
