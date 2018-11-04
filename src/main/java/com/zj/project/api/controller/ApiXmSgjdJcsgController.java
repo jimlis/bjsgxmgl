@@ -118,15 +118,15 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
     @PostMapping("newsave")
     @ApiOperation(value="保存新的基础施工信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "图片ids，多个以逗号隔开"),
-    	@ApiImplicitParam(name="dljcs",paramType="form",dataType = "string",required=true,value = " 独立基础json"),
-            @ApiImplicitParam(name="zjcs",paramType="form",dataType = "string",required=false,value = "独立基础json")
+    	@ApiImplicitParam(name="dljcsJson",paramType="form",dataType = "string",required=true,value = " 独立基础json"),
+            @ApiImplicitParam(name="zjcsJson",paramType="form",dataType = "string",required=false,value = "独立基础json")
     })
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdJcsgnewDO.class),
             @ApiResponse(code=1,message="操作失败",response=XmSgjdJcsgnewDO.class)})
     @RequiresAuthentication
-    public Result<XmSgjdJcsgnewDO> save(XmSgjdJcsgnewDO xmSgjdJcsgnewDO,String fileIds, String dljcs,String zjcs) {
+    public Result<XmSgjdJcsgnewDO> save(XmSgjdJcsgnewDO xmSgjdJcsgnewDO,String fileIds, String dljcsJson,String zjcsJson) {
         try {
-        	xmSgjdJcsgnewService.saveXmSgjdJcsgnewXx(xmSgjdJcsgnewDO,fileIds, dljcs, zjcs);
+        	xmSgjdJcsgnewService.saveXmSgjdJcsgnewXx(xmSgjdJcsgnewDO,fileIds, dljcsJson, zjcsJson);
            return Result.ok(xmSgjdJcsgnewDO);
         }catch (Exception e){
             e.printStackTrace();
