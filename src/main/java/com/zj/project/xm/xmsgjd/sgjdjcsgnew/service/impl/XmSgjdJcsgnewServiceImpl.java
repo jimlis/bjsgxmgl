@@ -191,9 +191,9 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		Integer intsfwc = newObj.getIntsfwc();
     		if(intsfwc!=null) {
     			String chrsfwc="";
-    			if(intsfwc.equals("0")){
+    			if(intsfwc.equals(0)){
     				chrsfwc="未完成";
-    			}else if(intsfwc.equals("1")) {
+    			}else if(intsfwc.equals(1)) {
     				chrsfwc="完成";
     			}
     			newObj.setChrsfwc(chrsfwc);
