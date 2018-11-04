@@ -20,6 +20,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmsgjd.sgjdjcsgkz.domain.XmSgjdJcsgKzDO;
 import com.zj.project.xm.xmsgjd.sgjdjcsgkz.service.XmSgjdJcsgKzService;
 import com.zj.project.xm.xmsgjd.sgjdjcsgnew.dao.XmSgjdJcsgnewDao;
@@ -44,6 +46,9 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     
     @Autowired
     private XmSgjdJcsgKzService xmSgjdJcsgKzService;
+    
+    @Autowired
+    private XmGqjdbjService xmGqjdbjService;
     
     @Autowired
     private FileService fileService;
@@ -172,6 +177,27 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		return xmSgjdJcsgnewDO;
     	}else {
     		XmSgjdJcsgnewDO newObj=list.get(0);
+    		
+    		//施工位置
+    		Long intsgwzid = newObj.getIntsgwzid();
+    		if(intsgwzid!=null) {
+    			XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzid);
+    			if(xmGqjdbjDO!=null) {
+    				newObj.setChrsgwz(xmGqjdbjDO.getChrjdmc());
+    			}
+    		}
+    		
+    		//完成
+    		Integer intsfwc = newObj.getIntsfwc();
+    		if(intsfwc!=null) {
+    			String chrsfwc="";
+    			if(intsfwc.equals("0")){
+    				chrsfwc="未完成";
+    			}else if(intsfwc.equals("1")) {
+    				chrsfwc="完成";
+    			}
+    			newObj.setChrsfwc(chrsfwc);
+    		}
     		
     		//查询装基础
     		XmSgjdJcsgKzDO zjqObj=new XmSgjdJcsgKzDO();

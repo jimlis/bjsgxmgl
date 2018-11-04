@@ -52,12 +52,18 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
     /** 施工位置：栋楼表id，-1代表其他使用下面描述字段 */
     @ApiModelProperty(value = "施工位置：栋楼表id，-1代表其他使用下面描述字段 ",name = "intsgwzid",dataType = "Long",required = true)
     private Long intsgwzid;
+    /** 施工位置：栋楼表id，-1代表其他使用下面描述字段 */
+    @ApiModelProperty(value = "施工位置：栋楼表id，-1代表其他使用下面描述字段 ",name = "chrsgwz",dataType = "String",required = true)
+    private String chrsgwz;
     /** 施工位置描述 */
     @ApiModelProperty(value = "施工位置描述 ",name = "chrsgwzms",dataType = "String",required = false)
     private String chrsgwzms;
     /** 是否完成：0（未完成），1（完成） */
     @ApiModelProperty(value = "是否完成：0（未完成），1（完成） ",name = "intsfwc",dataType = "Integer",required = true)
     private Integer intsfwc;
+    /** 是否完成：0（未完成），1（完成） */
+    @ApiModelProperty(value = "是否完成：0（未完成），1（完成） ",name = "intsfwc",dataType = "String",required = true)
+    private String chrsfwc;
     /** 完成日期 */
     @ApiModelProperty(value = "完成日期 ",name = "dtmwcrq",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
@@ -233,4 +239,18 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
 	public void setZjcs(List<XmSgjdJcsgKzDO> zjcs) {
 		this.zjcs = zjcs;
 	}
+	public String getChrsgwz() {
+		return chrsgwz;
+	}
+	public void setChrsgwz(String chrsgwz) {
+		this.chrsgwz = chrsgwz;
+	}
+	public String getChrsfwc() {
+		return chrsfwc;
+	}
+	public void setChrsfwc(String chrsfwc) {
+		this.chrsfwc = chrsfwc;
+	}
+	
+	
 }
