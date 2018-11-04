@@ -179,7 +179,13 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		zjqObj.setFcbz(1);
     		zjqObj.setChrjclx("zjc");
     		QueryWrapper<XmSgjdJcsgKzDO> zjcWrapper=new QueryWrapper<XmSgjdJcsgKzDO>(zjqObj).orderByAsc("id");
-    		newObj.setZjcs(xmSgjdJcsgKzService.list(zjcWrapper));
+    		List<XmSgjdJcsgKzDO> zjcList = xmSgjdJcsgKzService.list(zjcWrapper);
+    		if(CollectionUtils.isNotEmpty(zjcList)) {
+    			zjcList.forEach(one->{
+    				one.setId(null);
+    			});
+    			newObj.setZjcs(zjcList);
+    		}
     		
     		//独立基础
     		XmSgjdJcsgKzDO dljcObj=new XmSgjdJcsgKzDO();
@@ -187,7 +193,14 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		dljcObj.setFcbz(1);
     		dljcObj.setChrjclx("dljc");
     		QueryWrapper<XmSgjdJcsgKzDO> dljcWrapper=new QueryWrapper<XmSgjdJcsgKzDO>(dljcObj).orderByAsc("id");
-    		newObj.setZjcs(xmSgjdJcsgKzService.list(dljcWrapper));
+    		List<XmSgjdJcsgKzDO> dljcList = xmSgjdJcsgKzService.list(dljcWrapper);
+    		if(CollectionUtils.isNotEmpty(dljcList)) {
+    			dljcList.forEach(one->{
+    				one.setId(null);
+    			});
+    			newObj.setDljcs(dljcList);
+    		}
+    		
     		
     		return newObj;
     	}
