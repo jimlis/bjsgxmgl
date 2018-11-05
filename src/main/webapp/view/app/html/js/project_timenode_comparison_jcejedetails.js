@@ -14,8 +14,8 @@ window.onload= function(){
 		el: '#app',
 		data: {list:pageData,gqjdbjid:gqjdbjid,parentMap:parentMap},
 		methods: {
-			updateNode:function(nodeid,lx){
-				toUrl("project_timenode_comparison_ejedit.html?chrjdlx="+chrjdlx+"&gqjdbjid="+nodeid+"&lx="+lx);
+			updateNode:function(nodeid){
+				toUrl("project_timenode_comparison_jcejedit.html?chrjdlx="+chrjdlx+"&gqjdbjid="+nodeid);
 			},
 			deleteNode:function(nodeid,event){
 				if(nodeid){
@@ -27,17 +27,29 @@ window.onload= function(){
 							
 							bjToast("删除成功！",function(){
 								event.target.parentNode.parentNode.remove();
+								/*if(lx==1){//删除子类型
+									var nodes=document.getElementsByName(nodeid);
+									for(i in nodes){
+										nodes[0].remove();
+									}
+								}*/
 							});
 						}
 					});
 				}else{
 					bjToast("删除成功！",function(){
 						event.target.parentNode.parentNode.remove();
+						/*if(lx==1){//删除子类型
+							var nodes=document.getElementsByName(nodeid);
+							for(i in nodes){
+								nodes[i].remove();
+							}
+						}*/
 					});
 				}
 			},
-			computedDay:function(key,index){
-				var row=this.list[key]["childList"][index];
+			computedDay:function(index){
+				var row=this.list[index];
 				var dtmjhwcsj=row.dtmjhwcsj;//计划完成时间
 				if(!dtmjhwcsj){
 					return "";
@@ -64,7 +76,7 @@ window.onload= function(){
 function getPageData(){
 	var o=[];
 	$bjAjax({
-		url:timenodeZtListApiPath,
+		url:timenodeListApiPath,
 		type:"post",
 		async:false,
 		data:{
@@ -78,6 +90,7 @@ function getPageData(){
 			}
 		}
 	});
+	
 	return o;
 }
 

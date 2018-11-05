@@ -115,7 +115,7 @@ var timenodeListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjList";
 var timenodeSaveBatchPath=serverPath+"api/gqjdbj/batchSave";
 var timenodeDelPath=serverPath+"api/gqjdbj/del";
 var timenodeListByParamApiPath=serverPath+"api/gqjdbj/getXmGqjdbjListByParam";
-
+var timenodeZtListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjZtList";
 //审批流程状态
 var splcztBySplclxApiPath = serverPath +"api/splczt/getSplcZtBySplclx";
 var splcTxByUseridApiPath = serverPath+"api/common/sendMessage";

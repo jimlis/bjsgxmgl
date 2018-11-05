@@ -15,7 +15,7 @@ window.onload=function(){
     				toUrl(address);
 			},
 			openJc: function (id) {
-				var address = "project_timenode_comparison_ejedetails.html?chrjdlx=jc";
+				var address = "project_timenode_comparison_jcejedetails.html?chrjdlx=jc";
     				toUrl(address);
 			},
 			openZt: function (id) {
@@ -50,13 +50,17 @@ function init(){
 	relPicker('confirmBtn',btnArray,null,function(obj){
 		switch (obj.value){
 			case "0":
-			toUrl("project_timenode_comparison_yjedit.html?chrjdlx=qqbj");
+				toUrl("project_timenode_comparison_yjedit.html?chrjdlx=qqbj");
 				break;
 			case "1":
-			toUrl("project_timenode_comparison_ejedit.html?chrjdlx=jc");
+				toUrl("project_timenode_comparison_jcejedit.html?chrjdlx=jc");
 				break;
 			case "2":
-			toUrl("project_timenode_comparison_ejedit.html?chrjdlx=zt");
+				if(getJcList().length==0){
+					bjToast("请先新增基础然后再新增主体");
+				}else{
+					toUrl("project_timenode_comparison_ejedit.html?chrjdlx=zt");
+				}
 				break;
 			case "3":
 				toUrl("project_timenode_comparison_yjedit.html?chrjdlx=zxjq");
@@ -69,4 +73,23 @@ function init(){
 
 function outPage(){
 	toUrl("project_detail_list.html");
+}
+
+function getJcList(){
+	var o=[];
+	$bjAjax({
+		url:timenodeListApiPath,
+		type:"post",
+		async:false,
+		data:{
+			xmid:xmid,
+			jdlx:"jc"
+		},
+		success:function(data){
+			if(data){
+				o=data;
+			}
+		}
+	});
+	return o;
 }

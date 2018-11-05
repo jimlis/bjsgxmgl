@@ -254,5 +254,4 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
 		this.chrsfwc = chrsfwc;
 	}
 	
-	
 }

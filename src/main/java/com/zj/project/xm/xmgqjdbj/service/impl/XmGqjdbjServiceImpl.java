@@ -5,15 +5,18 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.common.web.exception.MyApiException;
@@ -156,6 +159,51 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
 			updateDo.setGxsj(new Date());
 			update(updateDo, updateWrapper);
     }
+    
+    /**
+     * <p>Title:获取主体施工信息 </p>  
+     * <p>Description: </p> 
+     * @param gqjdbjid
+     * @param xmid
+     * @param jdlx
+     * @return
+     * @author zhujujun
+     * @date:2018年11月6日 上午1:07:50
+     */
+    @Override
+    public List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid,Long xmid,String jdlx) {
 
+  	    if(xmid==null){
+            throw  new MyApiException("44005");
+        }
+  	    
+  	    XmGqjdbjDO jcXmGqjdbjDO=new XmGqjdbjDO();
+  	    			jcXmGqjdbjDO.setIntxmid(xmid);
+  	    			jcXmGqjdbjDO.setFcbz(1);
+  	    			jcXmGqjdbjDO.setChrjdlx("jc");
+  	    			if(gqjdbjid!=null) {
+  	    				jcXmGqjdbjDO.setId(gqjdbjid);
+  	    			}
+  	    QueryWrapper<XmGqjdbjDO> jcQueryWrapper=new QueryWrapper<XmGqjdbjDO>(jcXmGqjdbjDO).orderByAsc("intxh");
+  	    List<XmGqjdbjDO> jcList=list(jcQueryWrapper);
+  	    
+  	    if(CollectionUtils.isNotEmpty(jcList)) {
+  	        XmGqjdbjDO ztXmGqjdbjDO=new XmGqjdbjDO();
+  	        ztXmGqjdbjDO.setIntxmid(xmid);
+	  	    ztXmGqjdbjDO.setFcbz(1);
+	  	    ztXmGqjdbjDO.setChrjdlx("zt");
+			QueryWrapper<XmGqjdbjDO> ztQueryWrapper=new QueryWrapper<XmGqjdbjDO>(ztXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+        			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM (SELECT	intsgwzd,intxmid as xmid,max(dtmwcrq) AS wcsj " + 
+					"		FROM	bj_xm_sgjd_ztjgsg WHERE intsgwzd !=- 1 AND intsfwc = 1 AND fcbz = 1 GROUP BY intsgwzd,	intxmid ) a WHERE  a.intsgwzd = id and a.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
+			List<XmGqjdbjDO> ztList=list(ztQueryWrapper);
+			jcList.forEach(one->{
+				one.setChildList(ztList.stream().filter(two->two.getIntfjdid()!=null&&two.getIntfjdid().equals(one.getId())).collect(Collectors.toList()));
+			});
+			return jcList;
+  	    }else {
+  	    	return Lists.newArrayList();
+  	    }
+    }
+    
 
 }

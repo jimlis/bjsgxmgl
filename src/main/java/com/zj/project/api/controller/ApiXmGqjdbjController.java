@@ -58,15 +58,13 @@ public class ApiXmGqjdbjController extends ApiBaseController {
         	xmGqjdbjDO.setChrjdlx(jdlx);
             QueryWrapper<XmGqjdbjDO> queryWrapper=new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO).eq("intxmid",xmid).orderByAsc("intxh");
             if("jc".equals(jdlx)) {
-            	queryWrapper=queryWrapper.select("id","intxmid","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-            			"dtmjhwcsj","intsjbj","(SELECT a.wcsj	FROM (SELECT intxmid as xmid, intsgwzid,intjclx,min(dtmbgrq) AS wcsj FROM " + 
-            			"					bj_xm_sgjd_jcsg 	WHERE intwcl >= 100 AND intsgwzid !=- 1 AND fcbz = 1 GROUP BY intxmid,intsgwzid,intjclx) a " + 
-            			"		WHERE	a.intsgwzid = intfjdid AND a.intjclx = id and a.xmid=intxmid ) dtmsjwcsj ");
+            	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+            			"dtmjhwcsj","intsjbj"," ( select a.wcsj  from (select intsgwzid,intxmid as xmid,max(dtmwcrq) as wcsj from bj_xm_sgjd_jcsgnew where intsgwzid!=-1 and intsfwc=1 and fcbz=1  GROUP BY intsgwzid,intxmid ) a  " + 
+            			"		WHERE  a.intsgwzid = id and a.xmid=intxmid ) dtmsjwcsj ");
             }else if("zt".equals(jdlx)) {
-            	queryWrapper=queryWrapper.select("id","intxmid","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-            			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj 	FROM ( SELECT intxmid as xmid,intsgwzd,intsgwzc,	min(dtmbgrq) AS wcsj\n" + 
-            					"				FROM	bj_xm_sgjd_ztjgsg	WHERE intwcl >= 100	AND fcbz = 1 GROUP BY	intxmid,	intsgwzd,intsgwzc ) a\n" + 
-            					"		WHERE	a.intsgwzd = intfjdid	AND a.intsgwzc = id	and a.xmid=intxmid ) dtmsjwcsj ");
+            	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+            			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM (SELECT	intsgwzd,intxmid as xmid,max(dtmwcrq) AS wcsj " + 
+            					"		FROM	bj_xm_sgjd_ztjgsg WHERE intsgwzd !=- 1 AND intsfwc = 1 AND fcbz = 1 GROUP BY intsgwzd,	intxmid ) a WHERE  a.intsgwzd = id and a.xmid=intxmid ) dtmsjwcsj");
             }
             List<XmGqjdbjDO> list = xmGqjdbjService.list(queryWrapper);
             return Result.ok(list);
@@ -146,6 +144,27 @@ public class ApiXmGqjdbjController extends ApiBaseController {
         		}
         	}
             List<XmGqjdbjDO> list = xmGqjdbjService.list(queryWrapper);
+            return Result.ok(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据项目id获取工期主体节点比较信息")
+    @PostMapping("getXmGqjdbjZtList")
+    @ApiOperation(value="根据项目id获取工期主体节点比较信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="gqjdbjid",paramType="form",dataType = "Long",required=false,value = "工期节点比较id"),
+    	@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<List<XmGqjdbjDO>> getXmGqjdbjZtList(Long gqjdbjid,Long xmid,String jdlx) {
+        try {
+        	if(xmid==null) {
+        		return Result.ok(Lists.newArrayList());
+        	}
+            List<XmGqjdbjDO> list = xmGqjdbjService.getXmGqjdbjZtList(gqjdbjid, xmid, jdlx);
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();

@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>主体</title>
+        <title>基础</title>
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -37,13 +37,7 @@
         </header>
         <div class="mui-content" id="app" v-cloak>
 	        <div id="div" class="">
-	              <div v-if="item.intfjdid==null" name="oneDiv" style="padding-top: 4px;" v-for="(item,index) in list">
-	                    <div><input type="hidden" placeholder="" name="intgqjdbjid" :value="item.id"><input type="text" placeholder="请输入栋楼名称" name="chrjdmc" :value="item.chrjdmc" style="width:100%">
-	                    </div><div>
-	                       <ul v-for="(row,xh) in item.childList" class="mui-table-view bj-background-inherit" id="oneUl" name="oneUl">
-                                  <li style="padding: 5px 20px 0px 20px;">
-                                       <button class="mui-btn mui-btn-danger" type="button"  :onclick="'delOne(\''+row.id+'\',this,event)'">删除{{msg}}</button>
-                                  </li>
+                 <div  name="oneDiv" style="padding-top: 4px;" v-for="(row,index) in list"><ul class="mui-table-view bj-background-inherit" id="oneUl" name="oneUl"><li style="padding: 5px 20px 0px 20px;"><button class="mui-btn mui-btn-danger" type="button"  :onclick="'delOne(\''+row.id+'\',this,event)'">删除栋楼</button></li>
                                   <li style="padding: 5px 20px 0px 20px;">
                                         <input class="bj-input" name="intgqjdbjid" id="intgqjdbjid" type="hidden" :value="row.id"></input>
                                                                                             序号：<input class="bj-input" name="intxh" id="intxh" type="text" :value="row.intxh"></input>
@@ -55,27 +49,9 @@
                                                                                                 完成时间：<input class="bj-input" name="dtmjhwcsj" id="dtmjhwcsj" v-on:click="datePicker('dtmjhwcsj')" type="text" :value="row.dtmjhwcsj"></input>
                                   </li>
                            </ul>
-	                    </div><span><button v-if="chrjdlx=='zt'" type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addOne({},this)">新增{{msg}}</button> 
-	                    </span>
-	                </div>
-	                
-                 <div v-if="row.intfjdid!=null&&chrjdlx=='zt'" name="oneDiv" style="padding-top: 4px;" v-for="(row,index) in list">
-                           <ul class="mui-table-view bj-background-inherit" id="oneUl" name="oneUl">
-                                  <li style="padding: 5px 20px 0px 20px;"><button class="mui-btn mui-btn-danger" type="button"  :onclick="'delNewOne(\''+row.id+'\',this,event)'">删除{{msg}}</button>
-                                  </li>
-                                  <li style="padding: 5px 20px 0px 20px;">
-                                        <input class="bj-input" name="intgqjdbjid" id="intgqjdbjid" type="hidden" :value="row.id"></input>
-                                                                                            序号：<input class="bj-input" name="intxh" id="intxh" type="text" :value="row.intxh"></input>
-                                  </li>
-                                  <li style="padding: 5px 20px 0px 20px;">
-                                                                                               名称：<input class="bj-input" name="chrjdmc" id="chrjdmc" type="text" :value="row.chrjdmc"></input>
-                                  </li>
-                                  <li style="padding: 5px 20px 0px 20px;">
-                                                                                                完成时间：<input class="bj-input" name="dtmjhwcsj" id="dtmjhwcsj" v-on:click="datePicker('dtmjhwcsj',index)" type="text" :value="row.dtmjhwcsj"></input>
-                                  </li>
-                           </ul>
-	               </div> 
+	            </div> 
 	           </div>
+	           <button v-if="gqjdbjid==''" class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;" v-on:click="addDl()">新增栋楼</button>
            </div>
         <script src="../js/mui.min.js"></script>
         <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -83,6 +59,6 @@
         <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/project_timenode_comparison_ejedit.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison_jcejedit.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>

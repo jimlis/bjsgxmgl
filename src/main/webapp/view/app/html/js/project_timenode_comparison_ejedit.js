@@ -6,21 +6,22 @@ var intxmid=getCookie("id");
 var pageData;
 var vue;
 var index=0;
+var lx=obj.lx||"";
 var msg=chrjdlx=="jc"?"基础":(chrjdlx=="zt"?"主体":"");
 window.onload = function(){
 	debugger;
-    pageData =gqjdbjid?getPageData():[];
+    pageData =(gqjdbjid&&lx=='zt')?getPageData():getZtPageData();
     index=pageData?pageData.length:0;
 		//数据绑定
 	var vue = new Vue({
 			el: '#app',
-			data: {list:pageData,gqjdbjid:gqjdbjid,msg:msg},
+			data: {list:pageData,gqjdbjid:gqjdbjid,msg:msg,chrjdlx:chrjdlx},
 			methods: {
 				addDl: function () {
 					newaddDl({});
 				},
-				datePicker: function (name) {
-					vueDtPicker(pageData,name);
+				datePicker: function (name,index) {
+					vueArrDtPicker(pageData,index,name);
 				}
 			}
 	});
@@ -53,13 +54,17 @@ function newaddDl(data){
 	var lxDiv=document.createElement("div");
 	lxDiv.setAttribute("name","oneDiv");
 	lxDiv.style.cssText="padding-top: 4px;";
-	lxDiv.innerHTML=
-		'<div><input type="hidden" placeholder="" name="intgqjdbjid" value="'+id+'">'+
+		
+	var html='<div><input type="hidden" placeholder="" name="intgqjdbjid" value="'+id+'">'+
 		'<input type="hidden" placeholder="" name="chrlx" value="1">'+
 		'<input type="text" placeholder="请输入栋楼名称" name="chrjdmc" value="'+chrjdmc+'"  style="width:100%"></div>'+
 		'<div></div>'+
-		'<span><button id="addOne'+lxIndex+'" type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addOne({},this)">新增'+msg+'</button>'+
-		'<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delOne(\''+id+'\',this)">删除栋楼</button></span>';
+		'<span>';
+	if(chrjdlx=='zt'){
+		html+='<button id="addOne'+lxIndex+'" type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addOne({},this)">新增'+msg+'</button>';
+	}
+	    html+='<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delOne(\''+id+'\',this)">删除栋楼</button></span>';
+	    lxDiv.innerHTML=html;
     var div=document.getElementById("div");
     div.appendChild(lxDiv);
     var tempLxIndex=lxIndex;
@@ -112,6 +117,13 @@ function delOne(gqjdbjId,obj){
 		deleteGqjdbjIds+=gqjdbjId+",";
 	}
 	obj.parentNode.parentNode.remove();
+}
+
+function delNewOne(gqjdbjId,obj){
+	if(gqjdbjId){
+		deleteGqjdbjIds+=gqjdbjId+",";
+	}
+	obj.parentNode.parentNode.parentNode.remove();
 }
 
 function getGqjdbjJson(){
@@ -178,6 +190,27 @@ function getPageData(){
 	var o={};
 	$bjAjax({
 		url:timenodeListApiPath,
+		type:"post",
+		async:false,
+		data:{
+			gqjdbjid:gqjdbjid,
+			xmid:intxmid,
+			jdlx:chrjdlx
+		},
+		success:function(data){
+			if(data){
+				o=data;
+			}
+		}
+	});
+	return o;
+}
+
+//得到显示数据
+function getZtPageData(){
+	var o={};
+	$bjAjax({
+		url:timenodeZtListApiPath,
 		type:"post",
 		async:false,
 		data:{

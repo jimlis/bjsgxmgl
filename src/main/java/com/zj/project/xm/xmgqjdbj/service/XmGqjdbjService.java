@@ -3,6 +3,7 @@ package com.zj.project.xm.xmgqjdbj.service;
 import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
 import  com.zj.platform.common.web.service.BaseService;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -38,4 +39,16 @@ public interface XmGqjdbjService extends BaseService<XmGqjdbjDO> {
      * @date:2018年10月25日 下午9:09:22
      */
 	void deleteGqjdbjById(Long gqjdbjId);
+	
+	/**
+     * <p>Title:获取主体施工信息 </p>  
+     * <p>Description: </p> 
+     * @param gqjdbjid
+     * @param xmid
+     * @param jdlx
+     * @return
+     * @author zhujujun
+     * @date:2018年11月6日 上午1:07:50
+     */
+	List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid, Long xmid, String jdlx);
 }
