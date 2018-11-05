@@ -90,6 +90,7 @@ var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";
 var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
 var progressJcsgNewSaveApiPath=serverPath+"api/xmsgjdjcsg/newsave";
+var progressJcsgByXmidAndSgwzidApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgListByXmidAndSgwzid";
 var progressJcsgByIdApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgById";
 var progressZtjgSaveApiPath=serverPath+"api/xmsgjdztjgsg/save";
 var progressZtjgByIdApiPath=serverPath+"api/xmsgjdztjgsg/getXmSgjdJcsgById";

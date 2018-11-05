@@ -22,13 +22,16 @@ window.onload = function(){
 		el: '#app',
 		data: {
 			pagedata:pageData,
+			zjcs:[],
+			dljcs:[],
 			zjcinfo:{zjcmc:"",zjcjzsrq:""},
 			dljcinfo:{zjcmc:"",zjcjzsrq:""},
-			chrsfwc:''
+			chrsfwc:'',
+			fileIds:'',
 		},
 		methods: {
 			sfwcPicker: function (event) {
-				getRelPicker([{value:'1',text:'是'},{value:'0',text:'否'}],function(selectItems){
+				getRelPicker([{value:'1',text:'完成'},{value:'0',text:'未完成'}],function(selectItems){
 					vue.pagedata.intsfwc=selectItems[0].value;
 					vue.chrsfwc = selectItems[0].text;
 				});
@@ -42,26 +45,26 @@ window.onload = function(){
 			},
 			setdataPicker:function(type,index,value){
 				if(type=="zjc"){
-					vue.$set(this.pagedata.zjcs[index],"dtmjzsrq",value);
+					vue.$set(this.zjcs[index],"dtmjzsrq",value);
 				}else if(type=="dljc"){
-					vue.$set(this.pagedata.dljcs[index],"dtmjzsrq",value);
+					vue.$set(this.dljcs[index],"dtmjzsrq",value);
 				}else{
 					vue.$set(this.pagedata,"dtmwcrq",value);
 				}
 			},
 			addzjc:function(){
 				var zjcinfo = {chrjcmc:"",dtmjzsrq:""}
-				this.pagedata.zjcs.push(zjcinfo);
+				this.zjcs.push(zjcinfo);
 			},
 			delzjc:function(key){
-				this.pagedata.zjcs.splice(key,1);
+				this.zjcs.splice(key,1);
 			},
 			adddljc:function(){
 				var dljcinfo = {chrjcmc:"",dtmjzsrq:""}
-				this.pagedata.dljcs.push(dljcinfo);
+				this.dljcs.push(dljcinfo);
 			},
 			deldljc:function(key){
-				this.pagedata.dljcs.splice(key,1);
+				this.dljcs.splice(key,1);
 			}
 		},
 		watch: {
@@ -77,14 +80,15 @@ window.onload = function(){
 
 //判断是否更新
 function isUpdata(){
-	if(id){
+	if(intsgwzid&&id){
 		var result={};
 		$bjAjax({
-			url:progressJcsgByIdApiPath,
+			url:progressJcsgByXmidAndSgwzidApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdJcsgId:id
+				xmid:xmid,
+				sgwzid:intsgwzid
 			},
 			success:function(data){
 				result = data;
@@ -106,9 +110,7 @@ function buildModel(){
 		dtmwcrq:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc,
-		zjcs:[],
-		dljcs:[],
-		fileIds:'',
+		
 	}
 	return model;
 }
@@ -117,6 +119,12 @@ function buildModel(){
 function save(){
 	
 	var data = restore(this.vue.$data.pagedata);
+	var dljcsJson = JSON.stringify(this.vue.$data.dljcs);
+	var zjcsJson = JSON.stringify(this.vue.$data.zjcs);
+	var fileIds = "";
+	data["dljcsJson"] = dljcsJson;
+	data["zjcsJson"] = zjcsJson;
+	data["fileIds"] = fileIds;
 	console.log(data);
 	$bjAjax({
 		url:progressJcsgNewSaveApiPath,
