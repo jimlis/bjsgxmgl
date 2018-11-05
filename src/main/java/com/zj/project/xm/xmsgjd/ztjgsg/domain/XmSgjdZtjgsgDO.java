@@ -1,12 +1,14 @@
 package com.zj.project.xm.xmsgjd.ztjgsg.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zj.platform.common.web.domain.BaseDomain;
+import com.zj.project.xm.xmsgjd.sgjdztjgsgkz.domain.XmSgjdZtjgsgKzDO;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -61,6 +63,20 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     @TableField(exist=false)
     @ApiModelProperty(value = "主体类型",name = "chrsgwzc",dataType = "string",required = true)
     private String chrsgwzc;
+    /** 施工位置描述 */
+    @ApiModelProperty(value = "施工位置描述 ",name = "chrsgwzms",dataType = "String",required = false)
+    private String chrsgwzms;
+    /** 是否完成：0（未完成），1（完成） */
+    @ApiModelProperty(value = "是否完成：0（未完成），1（完成） ",name = "intsfwc",dataType = "Integer",required = true)
+    private Integer intsfwc;
+    /** 是否完成：0（未完成），1（完成） */
+    @ApiModelProperty(value = "是否完成：0（未完成），1（完成） ",name = "intsfwc",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrsfwc;
+    /** 完成日期 */
+    @ApiModelProperty(value = "完成日期 ",name = "dtmwcrq",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmwcrq;
     /** 完成量（百分比） */
     @ApiModelProperty(value = "完成量（百分比）",name = "intwcl",dataType = "Float",required = false)
     private Float intwcl;
@@ -74,6 +90,10 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称",name = "chrbgrmc",dataType = "String",required = true)
     private String chrbgrmc;
+    
+    @TableField(exist=false)
+    @ApiModelProperty(value = "主体结构拓展结婚",name = "ztjgKzList",dataType = "List",required = true)
+    private List<XmSgjdZtjgsgKzDO> ztjgKzList;
 
     /**
      * 设置：主键id
@@ -231,5 +251,35 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     public Float getIntwcl() {
         return intwcl;
     }
+	public String getChrsgwzms() {
+		return chrsgwzms;
+	}
+	public void setChrsgwzms(String chrsgwzms) {
+		this.chrsgwzms = chrsgwzms;
+	}
+	public Integer getIntsfwc() {
+		return intsfwc;
+	}
+	public void setIntsfwc(Integer intsfwc) {
+		this.intsfwc = intsfwc;
+	}
+	public String getChrsfwc() {
+		return chrsfwc;
+	}
+	public void setChrsfwc(String chrsfwc) {
+		this.chrsfwc = chrsfwc;
+	}
+	public Date getDtmwcrq() {
+		return dtmwcrq;
+	}
+	public void setDtmwcrq(Date dtmwcrq) {
+		this.dtmwcrq = dtmwcrq;
+	}
+	public List<XmSgjdZtjgsgKzDO> getZtjgKzList() {
+		return ztjgKzList;
+	}
+	public void setZtjgKzList(List<XmSgjdZtjgsgKzDO> ztjgKzList) {
+		this.ztjgKzList = ztjgKzList;
+	}
     
 }

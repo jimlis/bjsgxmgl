@@ -26,4 +26,20 @@ public interface XmSgjdZtjgsgService extends BaseService<XmSgjdZtjgsgDO> {
      * @param xmZpmsJson 图片描述对象json串
      */
 	public void saveXmSgjdZtjgsgXx(XmSgjdZtjgsgDO xmSgjdZtjgsgDO, String fileIds, String xmZpmsJson);
+	
+	 /**
+     * 保存新的主体施工信息
+     * @param xmSgjdZtjgsgDO
+     * @fileIds 文件ids
+     * @param ztjdsJson  主体节点json
+     */
+	void saveNewXmSgjdZtsgXx(XmSgjdZtjgsgDO xmSgjdZtjgsgDO, String fileIds, String ztjdsJson);
+	
+	 /**
+	 * 根据项目id和施工位置获取主体结构施工信息
+	 * @param xmid 项目id
+	 * @param sgwzd 施工位置
+	 * @return XmSgjdJcsgnewDO
+	 */
+	XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid, Long sgwzd);
 }

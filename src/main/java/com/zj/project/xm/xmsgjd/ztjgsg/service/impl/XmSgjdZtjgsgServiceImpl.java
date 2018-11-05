@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.gson.Gson;
@@ -19,9 +20,12 @@ import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.web.exception.CommonException;
+import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
 import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
+import com.zj.project.xm.xmsgjd.sgjdztjgsgkz.domain.XmSgjdZtjgsgKzDO;
+import com.zj.project.xm.xmsgjd.sgjdztjgsgkz.service.XmSgjdZtjgsgKzService;
 import com.zj.project.xm.xmsgjd.ztjgsg.dao.XmSgjdZtjgsgDao;
 import com.zj.project.xm.xmsgjd.ztjgsg.domain.XmSgjdZtjgsgDO;
 import com.zj.project.xm.xmsgjd.ztjgsg.service.XmSgjdZtjgsgService;
@@ -54,6 +58,10 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
 	
 	@Autowired
 	private XmGqjdbjService xmGqjdbjService;
+	
+	@Autowired
+	private XmSgjdZtjgsgKzService xmSgjdZtjgsgKzService;
+	
 	
 	
 	
@@ -157,5 +165,150 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
 			}
 		}
 	}
-
+	
+	
+	
+	 /**
+     * 保存新的主体施工信息
+     * @param xmSgjdZtjgsgDO
+     * @fileIds 文件ids
+     * @param ztjdsJson  主体节点json
+     */
+    @Override
+    public void saveNewXmSgjdZtsgXx(XmSgjdZtjgsgDO xmSgjdZtjgsgDO,String fileIds,String ztjdsJson) {
+    	Long id = xmSgjdZtjgsgDO.getId();
+    	Long intxmid = xmSgjdZtjgsgDO.getIntxmid();
+    	if(intxmid==null) {
+    		throw new MyApiException("xmid不能为空");
+    	}
+    	if(id==null) {
+    		xmSgjdZtjgsgDO.setGxsj(new Date());
+    		xmSgjdZtjgsgDO.setFcbz(1);
+    		save(xmSgjdZtjgsgDO);
+    	}else {
+    		xmSgjdZtjgsgDO.setGxsj(new Date());
+    		updateById(xmSgjdZtjgsgDO);
+    	}
+    	
+    	Long newId=xmSgjdZtjgsgDO.getId();
+    	
+    	
+    	// 更新图片信息
+		if (StringUtils.isNotEmpty(fileIds)) {
+			String[] fileArr = fileIds.trim().split(",");
+			for (String fileid : fileArr) {
+				if (StringUtils.isNotEmpty(fileid.trim())) {
+					FileDO fileDO = new FileDO();
+					fileDO.setId(Long.parseLong(fileid.trim()));
+					fileDO.setBusType(tableInfo.getTableName());
+					fileDO.setBusId(id);
+					fileService.updateById(fileDO);
+				}
+			}
+		}
+    	
+    	Gson gson=new Gson();
+    	//新增主体节点
+    	if(StringUtils.isNotBlank(ztjdsJson)&&!"[]".equals(ztjdsJson)) {
+    		List<XmSgjdZtjgsgKzDO> list = gson.fromJson(ztjdsJson, new TypeToken<List<XmSgjdZtjgsgKzDO>>() {
+    				}.getType());
+    		if(CollectionUtils.isNotEmpty(list)) {
+    			list.forEach(one->{
+    				Long tzId=one.getId();
+    				if(tzId==null) {
+    					one.setGxsj(new Date());
+    					one.setFcbz(1);
+    					one.setIntxmid(intxmid);
+    					one.setIntztsgid(newId);
+    					xmSgjdZtjgsgKzService.save(one);
+    					}else {
+    						one.setGxsj(new Date());
+    						xmSgjdZtjgsgKzService.updateById(one);
+    					}
+    			});
+    		}
+    	}
+    	
+    }
+    
+    /**
+     * 根据项目id和施工位置获取主体结构施工信息
+     * @param xmid 项目id
+     * @param sgwzd 施工位置
+     * @return XmSgjdJcsgnewDO
+     */
+    @Override 
+    public  XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid,Long sgwzd) {
+    	if(xmid==null) {
+    		return null;
+    	}
+    	
+    	if(sgwzd==null) {
+    		return null;
+    	}
+    	
+    	XmSgjdZtjgsgDO xmSgjdZtjgsgDO=new XmSgjdZtjgsgDO();
+    	xmSgjdZtjgsgDO.setIntxmid(xmid);
+    	xmSgjdZtjgsgDO.setIntsgwzd(sgwzd);
+    	xmSgjdZtjgsgDO.setFcbz(1);
+    	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByDesc("id");
+    	List<XmSgjdZtjgsgDO> list=list(queryWrapper);
+    	if(CollectionUtils.isEmpty(list)) {
+    		return xmSgjdZtjgsgDO;
+    	}else {
+    		XmSgjdZtjgsgDO newObj=list.get(0);
+    		
+    		/*XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
+    		xmGqjdbjDO.setFcbz(1);
+    		xmGqjdbjDO.setIntxmid(xmid);
+    		xmGqjdbjDO.setChrjdlx("zt");
+    		List<XmGqjdbjDO> gqjdList=xmGqjdbjService.list(new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO));
+    		Map<Long,String> gqjdMap=Maps.newHashMap();
+    		if(CollectionUtils.isNotEmpty(gqjdList)) {
+    			gqjdMap.putAll(gqjdList.stream().collect(Collectors.toMap(one->one.getId(), one->one.getChrjdmc())));
+    		}*/
+    		
+    		//施工位置
+    		Long intsgwzid = newObj.getIntsgwzd();
+    		if(intsgwzid!=null) {
+    			if(intsgwzid.equals(-1L)) {
+    				newObj.setChrShowAddress("其他");
+    			}else {
+    				XmGqjdbjDO xmGqjdbjDO=xmGqjdbjService.getById(intsgwzid);
+    				if(xmGqjdbjDO!=null) {
+    					newObj.setChrShowAddress(xmGqjdbjDO.getChrjdmc());
+    				}
+    			}
+    		}
+    		
+    		//完成
+    		Integer intsfwc = newObj.getIntsfwc();
+    		if(intsfwc!=null) {
+    			String chrsfwc="";
+    			if(intsfwc.equals(0)){
+    				chrsfwc="未完成";
+    			}else if(intsfwc.equals(1)) {
+    				chrsfwc="完成";
+    			}
+    			newObj.setChrsfwc(chrsfwc);
+    		}
+    		
+    		//查询节点
+    		XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
+    		ztjgKzObj.setIntztsgid(newObj.getId());
+    		ztjgKzObj.setFcbz(1);
+    		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
+    		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);
+    		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
+    			ztjgKzList.forEach(one->{
+    				one.setId(null);
+    			});
+    			newObj.setZtjgKzList(ztjgKzList);
+    		}
+    		return newObj;
+    	}
+    	
+      }
+           
+           
 }

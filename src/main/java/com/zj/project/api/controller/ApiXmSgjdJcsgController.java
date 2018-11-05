@@ -146,7 +146,7 @@ public class ApiXmSgjdJcsgController extends ApiBaseController {
     @PostMapping("newsave")
     @ApiOperation(value="保存新的基础施工信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="fileIds",paramType="form",dataType = "string",required=true,value = "图片ids，多个以逗号隔开"),
-    	@ApiImplicitParam(name="dljcsJson",paramType="form",dataType = "string",required=true,value = " 独立基础json"),
+    	@ApiImplicitParam(name="dljcsJson",paramType="form",dataType = "string",required=false,value = " 独立基础json"),
             @ApiImplicitParam(name="zjcsJson",paramType="form",dataType = "string",required=false,value = "独立基础json")
     })
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdJcsgnewDO.class),

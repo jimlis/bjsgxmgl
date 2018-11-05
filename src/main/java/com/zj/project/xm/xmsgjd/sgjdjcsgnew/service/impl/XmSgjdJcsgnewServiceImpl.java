@@ -181,9 +181,13 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		//施工位置
     		Long intsgwzid = newObj.getIntsgwzid();
     		if(intsgwzid!=null) {
-    			XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzid);
-    			if(xmGqjdbjDO!=null) {
-    				newObj.setChrsgwz(xmGqjdbjDO.getChrjdmc());
+    			if(intsgwzid.equals(-1)) {
+    				newObj.setChrsgwz("其他");
+    			}else {
+    				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intsgwzid);
+        			if(xmGqjdbjDO!=null) {
+        				newObj.setChrsgwz(xmGqjdbjDO.getChrjdmc());
+        			}
     			}
     		}
     		
