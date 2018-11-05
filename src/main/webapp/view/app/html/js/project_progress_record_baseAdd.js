@@ -1,83 +1,101 @@
-var obj=getRequest()
-var id = obj.id||"";
+var obj=getRequest();
+var intsgwzid = obj.intsgwzid||"";
+var chrsgwzmc = obj.chrsgwzmc||"";
 var xmid=getCookie("id");
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
 var pageData;
+var zjcs=[];
+var	dljcs=[];
 var vue;
-var jcPickerData=[];
 window.onload = function(){
-	//初始化數據
-	var sgPickerData=getSG();
-	if(sgPickerData){
-		var oo={"text":"其他","value":"-1"};
-		sgPickerData.push(oo);
-	}
 	upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_jcsg"});
 	//判断是否更新；
-	pageData = isUpdata()||'';
+	var result = isUpdata()||'';
 	
 	if(pageData==''){
 		//创建数据Model；
 		pageData = buildModel();
+	}else{
+		zjcs = result.zjcs;
+		dljcs = result.dljcs;
+		pageData = result;
+		delete pageData.zjcs;
+		delete pageData.dljcs;
 	}
-	
-	getJC(pageData.intsgwzid||"");
 	
 	//数据绑定
 	vue = new Vue({
 		el: '#app',
-		data: pageData,
+		data: {
+			pagedata:pageData,
+			zjcs:zjcs,
+			dljcs:dljcs,
+			zjcinfo:{zjcmc:"",zjcjzsrq:""},
+			dljcinfo:{zjcmc:"",zjcjzsrq:""},
+			fileIds:'',
+		},
 		methods: {
-			sgPicker: function (event) {
-				vuePicker(pageData,"chrsgwzmc",sgPickerData,"intsgwzid");
+			sfwcPicker: function (event) {
+				getRelPicker([{value:'1',text:'完成'},{value:'0',text:'未完成'}],function(selectItems){
+					vue.pagedata.intsfwc=selectItems[0].value;
+					vue.pagedata.chrsfwc = selectItems[0].text;
+				});
 			},
-			jcPicker: function (event) {
-				vuePicker(pageData,"chrjclx",jcPickerData,"intjclx");
+			datePicker: function (type,index) {
+				var selectItems = getDtPicker(function(selectItems){
+					var value = selectItems.value;
+					vue.setdataPicker(type,index,value);
+				});
+				
 			},
-			datePicker: function (event) {
-				vueDtPicker(pageData,"dtmjzqrq");
+			setdataPicker:function(type,index,value){
+				if(type=="zjc"){
+					vue.$set(this.zjcs[index],"dtmjzsrq",value);
+				}else if(type=="dljc"){
+					vue.$set(this.dljcs[index],"dtmjzsrq",value);
+				}else{
+					vue.$set(this.pagedata,"dtmwcrq",value);
+				}
+			},
+			addzjc:function(){
+				var zjcinfo = {chrjcmc:"",dtmjzsrq:""}
+				this.zjcs.push(zjcinfo);
+			},
+			delzjc:function(key){
+				this.zjcs.splice(key,1);
+			},
+			adddljc:function(){
+				var dljcinfo = {chrjcmc:"",dtmjzsrq:""}
+				this.dljcs.push(dljcinfo);
+			},
+			deldljc:function(key){
+				this.dljcs.splice(key,1);
 			}
 		},
 		watch: {
-			intsgwzid: function(curVal,oldVal){
-				if(curVal!=-1){
-					getJC(curVal);
-				}
-				this.chrsgwzms="";
-				this.intjclx="";
-				this.chrjclx="";
-		    },
 		}
 	});
 	
-	if(id){
-		//加载图片
-		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",true);
-	}
+//	if(id){
+//		//加载图片
+//		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",true);
+//	}
 }
 
-function setWcl(){
-	var intzjczsl=pageData.intzjczsl||0;
-	var intzjcwcl=pageData.intzjcwcl||0;
-	if(intzjczsl==0||intzjcwcl==0){
-		pageData.intwcl=0;
-	}else{
-		pageData.intwcl=parseInt((intzjcwcl/intzjczsl)*100);
-	}
-}
 
 //判断是否更新
 function isUpdata(){
-	if(id){
+	if(intsgwzid&&xmid){
 		var result={};
 		$bjAjax({
-			url:progressJcsgByIdApiPath,
+			url:progressJcsgByXmidAndSgwzidApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdJcsgId:id
+				xmid:xmid,
+				sgwzid:intsgwzid
 			},
 			success:function(data){
 				result = data;
@@ -90,48 +108,48 @@ function isUpdata(){
 //创建数据Model
 function buildModel(){
 	var model = {
-		id:id,
 		intxmid:xmid,
 		dtmbgrq:sysdate,
-		intsgwzid:'',
-		chrsgwzmc:'',
+		intsgwzid:intsgwzid,
+		chrsgwz:chrsgwzmc,
 		chrsgwzms:'',
-		intjclx:'',
-		chrjclx:'',
-		intzjczsl:'',
-		intzjcwcl:'',
-		intwcl:'',
-		dtmjzqrq:'',
+		intsfwc:'',
+		chrsfwc:'',
+		dtmwcrq:'',
 		intbgrid:chrdlrid,
-		chrbgrmc:chrdlrmc
+		chrbgrmc:chrdlrmc,
+		
 	}
 	return model;
-}
-//初始化下拉框【施工位置】数据
-function getSG(){
-	return getXmjdListByParam(xmid,'jc',1,"");
-}
-//初始化下拉框【基础类型】数据
-function getJC(parentId){
-	//var result=[{"text":"独立基础","value":"1"},{"text":"筏板","value":"2"},{"text":"桩基础","value":"3"}];
-	//return result;
-	jcPickerData=getXmjdListByParam(xmid,'jc',0,parentId);
 }
 
 //保存数据
 function save(){
-	var data = getFromData("myform");
-	$bjAjax({
-		url:progressJcsgSaveApiPath,
-		data:data,
-		type:"post",
-		success:function(result){
-			bjToast("保存成功！",function(){
-				toUrl("project_progress_record_baseDetail.html?id="+result.id);
+	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+		console.log(seletitem);
+		if(seletitem.index==0){
+			var data = restore(this.vue.$data.pagedata);
+			var dljcsJson = JSON.stringify(this.vue.$data.dljcs);
+			var zjcsJson = JSON.stringify(this.vue.$data.zjcs);
+			var fileIds = "";
+			data["dljcsJson"] = dljcsJson;
+			data["zjcsJson"] = zjcsJson;
+			data["fileIds"] = fileIds;
+			console.log(data);
+			$bjAjax({
+				url:progressJcsgNewSaveApiPath,
+				data:data,
+				type:"post",
+				success:function(result){
+					bjToast("保存成功！");
+				}
 			});
 		}
 	});
+	
 }
 function outPage(){
 	toUrl("project_progress_record.html");
 }
+
+

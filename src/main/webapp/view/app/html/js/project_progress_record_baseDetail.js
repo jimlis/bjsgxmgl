@@ -1,5 +1,7 @@
 var obj = getRequest();
-var id=obj.id||"";
+var sgwzid=obj.sgwzid||"";
+var chrsgwzmc = obj.chrsgwzmc||"";
+var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
 	//得到数据
@@ -10,33 +12,40 @@ window.onload = function(){
 		el: '#app',
 		data: pageData
 	});
-	
-	if(id){
-		//加载图片
-		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",false);
-	}
+//	
+//	if(xmid){
+//		//加载图片
+//		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",false);
+//	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:progressJcsgByIdApiPath,
+		url:progressJcsgByXmidAndSgwzidApiPath,
 		type:"post",
 		async:false,
 		data:{
-			xmSgjdJcsgId:id
+			sgwzid:sgwzid,
+			xmid:xmid
 		},
 		success:function(data){
+			console.log(data);
 			if(data){
+				
 				o=data;
+				
+			}else{
+				bjToast("无数据，请更新数据");
 			}
 		}
 	});
+	
 	return o;
 }
 
 function edit(){
-	toUrl("project_progress_record_baseAdd.html?id="+id);
+	toUrl("project_progress_record_baseAdd.html?intsgwzid="+sgwzid+"&chrsgwzmc="+chrsgwzmc);
 }
 
 

@@ -157,11 +157,12 @@ header.mui-bar.mui-bar-nav{
   }
 
   table tr {
-    border: 1px solid #ddd;
+    
     padding: 2.5px;
   }
 
   table th, table td {
+  	border: 1px solid #ddd;
     padding: 1px 5px;
     text-align: center;
     min-width: 100px;

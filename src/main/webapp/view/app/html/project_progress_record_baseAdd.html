@@ -17,6 +17,7 @@
           [v-cloak] { 
             display: none; 
           } 
+          
         </style> 
 	</head>
 		
@@ -33,41 +34,60 @@
 		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="app" v-cloak>
-			<form id="myform">
-			            <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" />
-			            <input class="bj-input bj-p-black-font " type="hidden" id="id" v-model="id"/>
-			            <input class="bj-input bj-p-black-font " type="hidden" id="intxmid" v-model="intxmid"/>
 				<div class="mui-content-padded">
 					<h5 class="bj-title2-font">报告日期：
-						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq"/>
+						<input class="bj-input bj-p-black-font bj-disable" type="text" v-model="pagedata.dtmbgrq"/>
 					</h5>
 					<h5 class="bj-title2-font">施工位置：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzid" v-model="intsgwzid" placeholder="请选择" />
-						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgwzmc" v-model="chrsgwzmc" v-on:click="sgPicker" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font bj-disable"  readonly="readonly"  type="text" v-model="pagedata.chrsgwz" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font " v-if="intsgwzid==-1">施工位置描述：
-					   <textarea  class="bj-input bj-p-black-font" type="text" id="chrsgwzms" v-model="chrsgwzms" placeholder="施工位置描述"></textarea>
+					<h5 class="bj-title2-font " v-if="pagedata.intsgwzid==-1">施工位置描述：
+					   <textarea  class="bj-input bj-p-black-font" type="text" v-model="pagedata.chrsgwzms" placeholder="施工位置描述"></textarea>
                     </h5>
-					<h5 class="bj-title2-font" v-if="intsgwzid!=-1">基础类型：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intjclx" v-model="intjclx" placeholder="请选择" />
-						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrjclx" v-model="chrjclx" v-on:click="jcPicker" placeholder="请选择" />
+					<h5 class="bj-title2-font">是否完成：
+						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="hidden" v-model="pagedata.intsfwc" placeholder="请选择" />
+						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" v-model="pagedata.chrsfwc" v-on:click="sfwcPicker" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font " v-if="intjclx==3">桩基础总数量：
-                       <input  class="bj-input bj-p-black-font" type="text" onchange="setWcl()" id="intzjczsl" v-model="intzjczsl" placeholder="桩基础总数量"/>
-                    </h5>
-                    <h5 class="bj-title2-font " v-if="intjclx==3">桩基础完成数量：
-                       <input  class="bj-input bj-p-black-font" type="text" onchange="setWcl()" id="intzjcwcl" v-model="intzjcwcl" placeholder="桩基础完成数量"/>
-                    </h5>
-					<h5 class="bj-title2-font">完成量(百分比)：
-						<input class="bj-input bj-p-black-font" type="number" id="intwcl" v-model="intwcl" placeholder="请输入" />
+					<h5 class="bj-title2-font" v-if="pagedata.intsfwc==1">完成日期：
+						<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker()" v-model="pagedata.dtmwcrq" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font">浇筑砼日期：
-						<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" id="dtmjzqrq" v-on:click="datePicker" v-model="dtmjzqrq" placeholder="请选择" />
-					</h5>
-					<h5 class="bj-title2-font">报告人：
-						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
-						<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
-					</h5>
+					<h5 class="bj-title2-font">桩基础：{{zjcs.length}}</h5>
+					<table>
+					  <thead>
+					    <tr>
+					      <th>名称</th>
+					      <th>浇筑砼日期</th>
+					      <th style="width: 30px;">操作</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr v-for="(item , key) in zjcs">
+					      <td data-label="名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjcmc" placeholder="请输入" /></td>
+					      <td data-label="浇筑砼日期"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('zjc',key)" v-model="item.dtmjzsrq" placeholder="请选择" /></td>
+					      <td style="width: 30px;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="delzjc(key)">-</button></td>
+					    </tr>
+					  </tbody>
+					</table>
+					<button class="mui-btn mui-btn-primary" type="button" v-on:click="addzjc">+</button>
+					<h5 class="bj-title2-font">独立基础：{{dljcs.length}}</span></h5>
+					<table>
+					  <thead>
+					    <tr>
+					      <th>名称</th>
+					      <th>浇筑砼日期</th>
+					      <th style="width: 30px;">操作</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr v-for="(item , key) in dljcs">
+					      <td data-label="名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjcmc" placeholder="请输入" /></td>
+					      <td data-label="浇筑砼日期"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('dljc',key)" v-model="item.dtmjzsrq" placeholder="请选择" /></td>
+					      <td style="width: 30px;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="deldljc(key)">-</button></td>
+					    </tr>
+					  </tbody>
+					</table>
+					<button class="mui-btn mui-btn-primary" type="button" v-on:click="adddljc">+</button>
+					
 					<h5 class="bj-title2-font">照片：</h5>
 					<div id="uploader" class="wu-example">
 					    <!--用来存放文件信息-->
@@ -77,8 +97,11 @@
 					    <div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
 					    </div>
 					</div>
+					<h5 class="bj-title2-font">报告人：
+						<input class="bj-input bj-p-black-font" type="hidden" v-model="pagedata.intbgrid" placeholder="报告人" />
+						<input class="bj-input bj-p-black-font bj-disable" type="text" v-model="pagedata.chrbgrmc" placeholder="报告人名称" />
+					</h5>
 				</div>
-			</form>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>

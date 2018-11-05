@@ -35,7 +35,7 @@ function openNext(id){
 		address="project_photo_record_list.html"
 			break;
 		case 4:
-		address="project_progress_record1.html"
+		address="project_progress_record.html"
 			break;
 		case 5:
 		address="project_templet_record.html"
