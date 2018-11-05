@@ -54,6 +54,7 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
     private Long intsgwzid;
     /** 施工位置：栋楼表id，-1代表其他使用下面描述字段 */
     @ApiModelProperty(value = "施工位置：栋楼表id，-1代表其他使用下面描述字段 ",name = "chrsgwz",dataType = "String",required = true)
+    @TableField(exist=false)
     private String chrsgwz;
     /** 施工位置描述 */
     @ApiModelProperty(value = "施工位置描述 ",name = "chrsgwzms",dataType = "String",required = false)
@@ -63,6 +64,7 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
     private Integer intsfwc;
     /** 是否完成：0（未完成），1（完成） */
     @ApiModelProperty(value = "是否完成：0（未完成），1（完成） ",name = "intsfwc",dataType = "String",required = true)
+    @TableField(exist=false)
     private String chrsfwc;
     /** 完成日期 */
     @ApiModelProperty(value = "完成日期 ",name = "dtmwcrq",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
