@@ -31,8 +31,9 @@ public interface XmSgjdJcsgnewService extends BaseService<XmSgjdJcsgnewDO> {
 	 /**
      * 根据项目id和施工位置获取基础施工信息
      * @param xmid 项目id
-     * @param sgwzid 丝攻位置
+     * @param sgwzid 施工位置
+     * @param fxlx 访问类型 xz---新增 查询-cx
      * @return XmSgjdJcsgnewDO
      */
-	XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid, Long sgwzid);
+	XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid, Long sgwzid,String fxlx);
 }

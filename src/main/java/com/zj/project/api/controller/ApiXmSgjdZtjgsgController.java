@@ -123,13 +123,14 @@ public class ApiXmSgjdZtjgsgController extends ApiBaseController {
     @PostMapping("getXmSgjdZtjgsgListByXmidAndSgwzd")
     @ApiOperation(value="根据xmid和sgwzid获取主体结构施工信息",httpMethod="POST")
     @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
- 	   @ApiImplicitParam(name="sgwzd",paramType="form",dataType = "Long",required=true,value = "施工位置id")})
+ 	   @ApiImplicitParam(name="sgwzd",paramType="form",dataType = "Long",required=true,value = "施工位置id"),
+ 	   @ApiImplicitParam(name="fwlx",paramType="form",dataType = "Long",required=false,value = "访问类型 xz---新增 查询-cx")})
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdZtjgsgDO.class),
     	@ApiResponse(code=1,message="操作失败",response=XmSgjdZtjgsgDO.class)})
     @RequiresAuthentication
-    public Result<XmSgjdZtjgsgDO> getXmSgjdZtjgsgListByXmidAndSgwzd(Long xmid,Long sgwzd) {
+    public Result<XmSgjdZtjgsgDO> getXmSgjdZtjgsgListByXmidAndSgwzd(Long xmid,Long sgwzd,String fwlx) {
         try {
-            return Result.ok(xmSgjdZtjgsgService.getXmSgjdZtsgByXmidAndSgwzid(xmid, sgwzd));
+            return Result.ok(xmSgjdZtjgsgService.getXmSgjdZtsgByXmidAndSgwzid(xmid, sgwzd,fwlx));
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

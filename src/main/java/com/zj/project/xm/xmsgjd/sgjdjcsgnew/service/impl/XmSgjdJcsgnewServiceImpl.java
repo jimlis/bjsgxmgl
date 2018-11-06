@@ -159,11 +159,12 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     /**
      * 根据项目id和施工位置获取基础施工信息
      * @param xmid 项目id
-     * @param sgwzid 丝攻位置
+     * @param sgwzid 施工位置
+     * @param fwlx 访问类型 xz---新增 查询-cx
      * @return XmSgjdJcsgnewDO
      */
     @Override 
-    public  XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid,Long sgwzid) {
+    public  XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid,Long sgwzid,String fwlx) {
     	if(xmid==null) {
     		return null;
     	}
@@ -178,6 +179,15 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	QueryWrapper<XmSgjdJcsgnewDO> queryWrapper=new QueryWrapper<XmSgjdJcsgnewDO>(xmSgjdJcsgnewDO).orderByDesc("id");
     	List<XmSgjdJcsgnewDO> list=list(queryWrapper);
     	if(CollectionUtils.isEmpty(list)) {
+    		if(StringUtils.isNotEmpty(fwlx)) {
+    			if("xz".equals(fwlx)) {
+    				xmSgjdJcsgnewDO.setDtmbgrq(new Date());
+    	    		xmSgjdJcsgnewDO.setChrbgrmc(appUserDO.getName());
+    	    		xmSgjdJcsgnewDO.setIntbgrid(appUserDO.getId());
+        		}else if("cx".equals(fwlx)) {
+        			
+        		}
+    		}
     		xmSgjdJcsgnewDO.setDljcs(Lists.newArrayList());
     		xmSgjdJcsgnewDO.setZjcs(Lists.newArrayList());
     		xmSgjdJcsgnewDO.setIntxh(0);
@@ -192,9 +202,6 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
         			}
     			}
     		}
-    		xmSgjdJcsgnewDO.setDtmbgrq(new Date());
-    		xmSgjdJcsgnewDO.setChrbgrmc(appUserDO.getName());
-    		xmSgjdJcsgnewDO.setIntbgrid(appUserDO.getId());
     		return xmSgjdJcsgnewDO;
     	}else {
     		XmSgjdJcsgnewDO newObj=list.get(0);

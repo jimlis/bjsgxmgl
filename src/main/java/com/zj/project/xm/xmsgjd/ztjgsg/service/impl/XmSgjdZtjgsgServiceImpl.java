@@ -238,10 +238,11 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
      * 根据项目id和施工位置获取主体结构施工信息
      * @param xmid 项目id
      * @param sgwzd 施工位置
+     * @param fwlx 访问类型 xz---新增 查询-cx
      * @return XmSgjdJcsgnewDO
      */
     @Override 
-    public  XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid,Long sgwzd) {
+    public  XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid,Long sgwzd,String fwlx) {
     	if(xmid==null) {
     		return null;
     	}
@@ -259,22 +260,28 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByDesc("id");
     	List<XmSgjdZtjgsgDO> list=list(queryWrapper);
     	if(CollectionUtils.isEmpty(list)) {
-    		xmSgjdZtjgsgDO.setIntxh(0);
-    		//施工位置
-    		if(sgwzd!=null) {
-    			if(sgwzd.equals(-1L)) {
-    				xmSgjdZtjgsgDO.setChrShowAddress("其他");
-    			}else {
-    				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(sgwzd);
-        			if(xmGqjdbjDO!=null) {
-        				xmSgjdZtjgsgDO.setChrShowAddress(xmGqjdbjDO.getChrjdmc());
+    		if(StringUtils.isNotEmpty(fwlx)) {
+    			if("xz".equals(fwlx)) {
+    				xmSgjdZtjgsgDO.setDtmbgrq(new Date());
+            		xmSgjdZtjgsgDO.setChrbgrmc(appUserDO.getName());
+            		xmSgjdZtjgsgDO.setIntbgrid(appUserDO.getId());
+        		}else if("cx".equals(fwlx)) {
+        			
+        		}
+        		//施工位置
+        		if(sgwzd!=null) {
+        			if(sgwzd.equals(-1L)) {
+        				xmSgjdZtjgsgDO.setChrShowAddress("其他");
+        			}else {
+        				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(sgwzd);
+            			if(xmGqjdbjDO!=null) {
+            				xmSgjdZtjgsgDO.setChrShowAddress(xmGqjdbjDO.getChrjdmc());
+            			}
         			}
-    			}
+        		}
+        		xmSgjdZtjgsgDO.setIntxh(0);
+        		xmSgjdZtjgsgDO.setZtjgKzList(Lists.newArrayList());
     		}
-    		xmSgjdZtjgsgDO.setDtmbgrq(new Date());
-    		xmSgjdZtjgsgDO.setChrbgrmc(appUserDO.getName());
-    		xmSgjdZtjgsgDO.setIntbgrid(appUserDO.getId());
-    		xmSgjdZtjgsgDO.setZtjgKzList(Lists.newArrayList());
     		return xmSgjdZtjgsgDO;
     	}else {
     		XmSgjdZtjgsgDO newObj=list.get(0);
