@@ -177,6 +177,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	if(CollectionUtils.isEmpty(list)) {
     		xmSgjdJcsgnewDO.setDljcs(Lists.newArrayList());
     		xmSgjdJcsgnewDO.setZjcs(Lists.newArrayList());
+    		xmSgjdJcsgnewDO.setIntxh(0);
     		//施工位置
     		if(sgwzid!=null) {
     			if(sgwzid.equals(-1L)) {

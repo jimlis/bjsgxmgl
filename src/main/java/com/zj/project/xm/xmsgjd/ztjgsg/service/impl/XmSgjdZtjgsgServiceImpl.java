@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
@@ -254,6 +255,19 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByDesc("id");
     	List<XmSgjdZtjgsgDO> list=list(queryWrapper);
     	if(CollectionUtils.isEmpty(list)) {
+    		xmSgjdZtjgsgDO.setIntxh(0);
+    		//施工位置
+    		if(sgwzd!=null) {
+    			if(sgwzd.equals(-1L)) {
+    				xmSgjdZtjgsgDO.setChrShowAddress("其他");
+    			}else {
+    				XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(sgwzd);
+        			if(xmGqjdbjDO!=null) {
+        				xmSgjdZtjgsgDO.setChrShowAddress(xmGqjdbjDO.getChrjdmc());
+        			}
+    			}
+    		}
+    		xmSgjdZtjgsgDO.setZtjgKzList(Lists.newArrayList());
     		return xmSgjdZtjgsgDO;
     	}else {
     		XmSgjdZtjgsgDO newObj=list.get(0);
@@ -304,6 +318,8 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     				one.setId(null);
     			});
     			newObj.setZtjgKzList(ztjgKzList);
+    		}else {
+    			newObj.setZtjgKzList(Lists.newArrayList());
     		}
     		return newObj;
     	}
