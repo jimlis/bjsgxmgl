@@ -19,8 +19,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
 import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmsgjd.sgjdjcsgkz.domain.XmSgjdJcsgKzDO;
@@ -168,6 +170,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	if(sgwzid==null) {
     		return null;
     	}
+    	UserDO appUserDO = ShiroUtils.getAppUserDO();
     	XmSgjdJcsgnewDO xmSgjdJcsgnewDO=new XmSgjdJcsgnewDO();
     	xmSgjdJcsgnewDO.setIntxmid(xmid);
     	xmSgjdJcsgnewDO.setIntsgwzid(sgwzid);
@@ -189,6 +192,9 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
         			}
     			}
     		}
+    		xmSgjdJcsgnewDO.setDtmbgrq(new Date());
+    		xmSgjdJcsgnewDO.setChrbgrmc(appUserDO.getName());
+    		xmSgjdJcsgnewDO.setIntbgrid(appUserDO.getId());
     		return xmSgjdJcsgnewDO;
     	}else {
     		XmSgjdJcsgnewDO newObj=list.get(0);
