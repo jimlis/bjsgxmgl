@@ -193,8 +193,9 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
 	  	    ztXmGqjdbjDO.setFcbz(1);
 	  	    ztXmGqjdbjDO.setChrjdlx("zt");
 			QueryWrapper<XmGqjdbjDO> ztQueryWrapper=new QueryWrapper<XmGqjdbjDO>(ztXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-        			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM (SELECT	intsgwzd,intxmid as xmid,max(dtmwcrq) AS wcsj " + 
-					"		FROM	bj_xm_sgjd_ztjgsg WHERE intsgwzd !=- 1 AND intsfwc = 1 AND fcbz = 1 GROUP BY intsgwzd,	intxmid ) a WHERE  a.intsgwzd = id and a.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
+        			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM " + 
+        					"(select k.dtmwcsj  wcsj,k.intxmid xmid,k.intgqjdbjid intgqjdbjid from (select max(id) id,intxmid,intsgwzd from bj_xm_sgjd_ztjgsg where  fcbz=1 and intsgwzd!=-1 and intsfwc=1   group by intxmid,intsgwzd) " + 
+        					" z inner join bj_xm_sgjd_ztjgsg_kz k on z.id =k.intztsgid )  a WHERE  a.intgqjdbjid = id and a.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
 			List<XmGqjdbjDO> ztList=list(ztQueryWrapper);
 			jcList.forEach(one->{
 				one.setChildList(ztList.stream().filter(two->two.getIntfjdid()!=null&&two.getIntfjdid().equals(one.getId())).collect(Collectors.toList()));

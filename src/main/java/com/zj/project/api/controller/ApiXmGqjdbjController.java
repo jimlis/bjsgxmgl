@@ -59,7 +59,8 @@ public class ApiXmGqjdbjController extends ApiBaseController {
             QueryWrapper<XmGqjdbjDO> queryWrapper=new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO).eq("intxmid",xmid).orderByAsc("intxh");
             if("jc".equals(jdlx)) {
             	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-            			"dtmjhwcsj","intsjbj"," ( select a.wcsj  from (select intsgwzid,intxmid as xmid,max(dtmwcrq) as wcsj from bj_xm_sgjd_jcsgnew where intsgwzid!=-1 and intsfwc=1 and fcbz=1  GROUP BY intsgwzid,intxmid ) a  " + 
+            			"dtmjhwcsj","intsjbj"," ( select a.wcsj  from ( 		select j.intsgwzid, j.intxmid as xmid,j.dtmwcrq as wcsj from (select intsgwzid, intxmid as xmid, max(id) as id from bj_xm_sgjd_jcsgnew " + 
+            					"			where intsgwzid != -1	and intsfwc = 1	and fcbz = 1 group by intsgwzid, intxmid ) jj inner join bj_xm_sgjd_jcsgnew j on jj.id=j.id		 ) a  " + 
             			"		WHERE  a.intsgwzid = id and a.xmid=intxmid ) dtmsjwcsj ");
             }else if("zt".equals(jdlx)) {
             	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
