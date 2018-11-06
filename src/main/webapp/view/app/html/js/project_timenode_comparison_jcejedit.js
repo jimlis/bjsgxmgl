@@ -8,7 +8,7 @@ var vue;
 var index=0;
 var msg=chrjdlx=="jc"?"基础":(chrjdlx=="zt"?"主体":"");
 window.onload = function(){
-    pageData =gqjdbjid?getPageData():[];
+    pageData =gqjdbjid?getPageData():getPageData();
     index=pageData?pageData.length:0;
 		//数据绑定
 	var vue = new Vue({
@@ -39,7 +39,7 @@ function addOne(data){
 		var div=document.getElementById("div");
 			div.appendChild(lxDiv);
 	var ulDom=document.createElement("ul");
-		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
+		ulDom.className='mui-table-view bj-background-inherit';
 	
 	var delBtnLi=document.createElement("li");
 		delBtnLi.style.cssText="padding: 5px 20px 0px 20px;";
@@ -49,7 +49,7 @@ function addOne(data){
 		xhLi.style.cssText="padding: 5px 20px 0px 20px;";
 		xhLi.innerHTML='<input class="bj-input" name="intgqjdbjid" value="'+id+'" type="hidden"></input>'+
 		    '<input class="bj-input" name="chrlx" value="0" type="hidden"></input>'+
-			'序号：<input class="bj-input" name="intxh" value="'+intxh+'" type="number"></input>';
+			'序号：<input class="bj-input" size="4" length="4" name="intxh" value="'+intxh+'" type="number"></input>';
 		
 	var jdmcLi=document.createElement("li");
 		jdmcLi.style.cssText="padding: 5px 20px 0px 20px;";

@@ -40,10 +40,10 @@
                  <div  name="oneDiv" style="padding-top: 4px;" v-for="(row,index) in list"><ul class="mui-table-view bj-background-inherit" id="oneUl" name="oneUl"><li style="padding: 5px 20px 0px 20px;"><button class="mui-btn mui-btn-danger" type="button"  :onclick="'delOne(\''+row.id+'\',this,event)'">删除栋楼</button></li>
                                   <li style="padding: 5px 20px 0px 20px;">
                                         <input class="bj-input" name="intgqjdbjid" id="intgqjdbjid" type="hidden" :value="row.id"></input>
-                                                                                            序号：<input class="bj-input" name="intxh" id="intxh" type="text" :value="row.intxh"></input>
+                                                                                            序号：<input class="bj-input" name="intxh" id="intxh" type="number" maxlength="4" :value="row.intxh"></input>
                                   </li>
                                   <li style="padding: 5px 20px 0px 20px;">
-                                                                                               名称：<input class="bj-input" name="chrjdmc" id="chrjdmc" type="text" :value="row.chrjdmc"></input>
+                                                                                               名称：<input size="4" length="4" class="bj-input" name="chrjdmc" id="chrjdmc" type="text" :value="row.chrjdmc"></input>
                                   </li>
                                   <li style="padding: 5px 20px 0px 20px;">
                                                                                                 完成时间：<input class="bj-input" name="dtmjhwcsj" id="dtmjhwcsj" v-on:click="datePicker('dtmjhwcsj')" type="text" :value="row.dtmjhwcsj"></input>
