@@ -4,6 +4,6 @@
 <mapper namespace="com.zj.project.xm.xmsgjd.sgjdztjgsgkz.dao.XmSgjdZtjgsgKzDao">
         <select id="getXmSgjdZtKzListByXmidAndZtsgid" parameterType="map" resultType="xmSgjdZtjgsgKzDO">
             select k.id,k.fcbz,k.gxsj,k.intxh,ifnull(k.intxmid,g.intxmid) intxmid,k.intztsgid,ifnull(k.intgqjdbjid,g.id) intgqjdbjid,ifnull(k.chrjdmc,g.chrjdmc) chrjdmc,k.dtmwcsj from  bj_xm_gqjdbj g LEFT JOIN bj_xm_sgjd_ztjgsg_kz k on  g.intxmid=k.intxmid and g.id=k.intgqjdbjid and intztsgid=#{intztsgid}   and k.fcbz=1 
-            where g.fcbz=1 and  g.intxmid=#{intxmid} and g.chrjdlx='zt' 
+            where g.fcbz=1 and  g.intxmid=#{intxmid} and g.chrjdlx='zt'  and  g.intfjdid=#{sgwzd}
         </select>
 </mapper>

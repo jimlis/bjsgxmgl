@@ -295,6 +295,7 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
             		Map<String,Object> map=Maps.newHashMap();
             		map.put("intxmid", xmid);
             		map.put("intztsgid", xmSgjdZtjgsgDO.getId());
+            		map.put("sgwzd",sgwzd);
             		ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
         		}
         		
@@ -348,6 +349,7 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
         		Map<String,Object> map=Maps.newHashMap();
         		map.put("intxmid", xmid);
         		map.put("intztsgid", newObj.getId());
+				map.put("sgwzd",sgwzd);
         		ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
     		}
     		

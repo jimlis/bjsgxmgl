@@ -36,16 +36,17 @@ window.onload = function(){
 	}else{
 		//判断是否更新；
 		var result = isUpdata()||'';
-		if(!result.id){
-			//创建数据Model；
-			pageData = buildModel();
-			pageData["intsgwzd"] = result.intsgwzd;
-			pageData["chrShowAddress"] = result.chrShowAddress;
-		}else{
+//		if(!result.id){
+//			//创建数据Model；
+//			pageData = buildModel();
+//			pageData["intsgwzd"] = result.intsgwzd;
+//			pageData["chrShowAddress"] = result.chrShowAddress;
+//			ztjdsJson = result.ztjgKzList||"";
+//		}else{
 			ztjdsJson = result.ztjgKzList||"";
 			delete result.ztjgKzList;
 			pageData=result;
-		}
+//		}
 	}
 	
 	
