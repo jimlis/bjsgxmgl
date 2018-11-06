@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import org.springframework.util.Assert;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +40,15 @@ public class XmSgjdZtjgsgKzServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgKzDao
     public Collection<XmSgjdZtjgsgKzDO> listByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
         return listByMap(parmMap);
+    }
+    
+    /**
+     * <p>Title: 根据Xmid和Ztsgid获取扩展id</p>  
+     */
+    @Override
+    public List<XmSgjdZtjgsgKzDO> getXmSgjdZtKzListByXmidAndZtsgid(Map<String,Object> map){
+    	return baseMapper.getXmSgjdZtKzListByXmidAndZtsgid(map);
+    	
     }
 
 

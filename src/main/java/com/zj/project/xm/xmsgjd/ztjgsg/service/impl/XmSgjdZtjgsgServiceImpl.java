@@ -16,6 +16,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
@@ -322,11 +323,15 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     		}
     		
     		//查询节点
-    		XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
+    		Map<String,Object> map=Maps.newHashMap();
+    		map.put("intxmid", xmid);
+    		map.put("intztsgid", newObj.getId());
+    		/*XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
     		ztjgKzObj.setIntztsgid(newObj.getId());
     		ztjgKzObj.setFcbz(1);
     		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
-    		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);
+    		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);*/
+    		List<XmSgjdZtjgsgKzDO> ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
     		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
     			ztjgKzList.forEach(one->{
     				one.setId(null);
