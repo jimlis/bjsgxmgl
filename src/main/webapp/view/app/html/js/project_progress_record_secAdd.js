@@ -38,7 +38,7 @@ window.onload = function(){
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intnbw"  class="bj-input bj-p-black-font" type="text" /></td>'+
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intqt"  class="bj-input bj-p-black-font" type="text" /></td>'+
                          ' <td><input id="xmSgjdEcjgzxWclList['+lcnum+'].intzx"  class="bj-input bj-p-black-font" type="text" /></td>'+
-                         ' <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletelc(\'\',this)">删除</button></td>'+
+                         ' <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletelc(\'\',this)">-</button></td>'+
                          '';
 				wclTableTbody.appendChild(tr);
 				document.getElementById("lcnum").value=parseInt(lcnum)+1;

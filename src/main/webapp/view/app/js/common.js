@@ -92,6 +92,7 @@ var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
 var progressJcsgNewSaveApiPath=serverPath+"api/xmsgjdjcsg/newsave";
 var progressJcsgByXmidAndSgwzidApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgListByXmidAndSgwzid";
 var progressJcsgByIdApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgById";
+var 	progressZtjgPath = serverPath+"api/xmsgjdztjgsg/";
 var progressZtjgSaveApiPath=serverPath+"api/xmsgjdztjgsg/save";
 var progressZtjgByIdApiPath=serverPath+"api/xmsgjdztjgsg/getXmSgjdJcsgById";
 var progressSecSaveApiPath=serverPath+"api/xmsgjdecjgzx/save";

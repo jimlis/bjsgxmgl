@@ -51,7 +51,7 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">主体结构施工</a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openZT(item.value)">{{item.text}}</li>
+				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span></li>
 				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="ztShow">
 						    	<li class="mui-table-view-cell">Item 1</li>

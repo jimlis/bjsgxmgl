@@ -1,131 +1,108 @@
 var obj=getRequest()
-var id = obj.id||"";
+var sgwzid = obj.sgwzid||"";
+var chrsgwz = obj.chrsgwz||"";
 var xmid=getCookie("id");
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
 var pageData;
+var ztjdsJson=[];
 var vue;
-var dlcsData;
-var ztPickerData=[];
-var sgPickerData=[];
 window.onload = function(){
 	upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_ztjgsg"});
-	
+	//获取层数
+	var ztPickerData=getXmjdListByParam(xmid,'zt',0,parentId);
+	if(ztPickerData){
+		ztjdsJson=ztPickerData;
+	}
 	//判断是否更新；
-	pageData = isUpdata()||'';
-	if(pageData==''){
+	var result = isUpdata()||'';
+	if(result==''){
 		//创建数据Model；
 		pageData = buildModel();
+	}else{
+		ztjdsJson = result.ztjdsJson;
+		delete result.ztjdsJson;
+		pageData=result;
 	}
-	sgPickerData=getSG();
-	
-	getZt(pageData.intsgwzd||"");
 	
 	//数据绑定
 	vue = new Vue({
 		el: '#app',
-		data: pageData,
-		methods: {
-			dlcsPicker:function(event){
-				vuePicker(pageData,"chrShowAddress",sgPickerData,"intsgwzd");
-			},
-			datePicker: function (event) {
-				vueDtPicker(pageData,"dtmjzqrq");
-			},
-			ztPicker: function (event) {
-				vuePicker(pageData,"chrsgwzc",ztPickerData,"intsgwzc");
-			}
+		data: {
+			pagedata:pageData,
+			ztjdsJson:ztjdsJson
 		},
-		watch: {
-			intsgwzd: function(curVal,oldVal){
-					getZt(curVal);
-				this.chrsgwzc="";
-		    }
-		}
+		methods: {
+			sfwcPicker: function (event) {
+				getRelPicker([{value:'1',text:'完成'},{value:'0',text:'未完成'}],function(selectItems){
+					vue.pagedata.intsfwc=selectItems[0].value;
+					vue.pagedata.chrsfwc = selectItems[0].text;
+				});
+			},
+			datePicker: function (type,index) {
+				var selectItems = getDtPicker(function(selectItems){
+					var value = selectItems.value;
+					vue.setdataPicker(type,index,value);
+				});
+				
+			},
+			setdataPicker:function(type,index,value){
+				if(type=="lc"){
+					vue.$set(this.ztjdsJson[index],"dtmwcsj",value);
+				}else{
+					vue.$set(this.pagedata,"dtmwcrq",value);
+				}
+			},
+			addlc:function(){
+				var zjcinfo = {chrjdmc:"",dtmwcsj:""}
+				this.ztjdsJson.push(zjcinfo);
+			},
+			dellc:function(key){
+				this.ztjdsJson.splice(key,1);
+			},
+		},
 	});
 	
-	if(id){
-		//加载图片
-		initImgList("bj_xm_sgjd_ztjgsg",id,"1","fileIds","img-list",true);
-	}
+//	if(id){
+//		//加载图片
+//		initImgList("bj_xm_sgjd_ztjgsg",id,"1","fileIds","img-list",true);
+//	}
 }
 
-function getSG(){
-	return getXmjdListByParam(xmid,'zt',1,"");
-}
-
-function getZt(parentId){
-	ztPickerData=getXmjdListByParam(xmid,'zt',0,parentId);
-}
-
-/*function initDLAndCs(vueData,address,dl,cs,funResult){
-	var userPicker = new mui.PopPicker({
-		layer:2
-	});
-	userPicker.setData(dlcsData);
-	userPicker.show(function(items) {
-		vueData[address] = items[0].text+"-"+items[1].text;
-		if(dl){
-           vueData[dl]=items[0].value;
-		}
-		if(cs){
-	       vueData[cs]=items[1].value;
-		}
-		if(funResult){
-			funResult(items);
-		}
-		//返回 false 可以阻止选择框的关闭
-		//return false;
-	});
-}
-
-function getDLAndCsData(xmid){
-	var arr=[];
-	$bj_post_ajax({
-		url:projectApiDlAndCs,
-		data:{"xmid":xmid},
-		async:false,
-		success:function(data){
-			if(data){
-				arr=data;
-			}
-		}
-	});
-	return arr;
-}*/
 
 //判断是否更新
 function isUpdata(){
-	if(id){
-		var result={};
-		$bjAjax({
-			url:progressZtjgByIdApiPath,
-			type:"post",
-			async:false,
-			data:{
-				xmSgjdJcsgId:id
-			},
-			success:function(data){
-				result = data;
-			}
-		});
-		return result;
-	}
-	return '';
+//	if(id){
+//		var result={};
+//		$bjAjax({
+//			url:progressZtjgByIdApiPath,
+//			type:"post",
+//			async:false,
+//			data:{
+//				xmSgjdJcsgId:id
+//			},
+//			success:function(data){
+//				result = data;
+//			}
+//		});
+//		return result;
+//	}
+//	return '';
 }
 //创建数据Model
 function buildModel(){
 	var model = {
-		id:id,
 		intxmid:xmid,
 		dtmbgrq:sysdate,
-		chrShowAddress:'',
 		intsgwzd:'',
-		intsgwzc:'',
-		chrsgwzc:'',
-		intwcl:'',
-		dtmjzqrq:'',
+		chrsgwz:chrsgwz,
+		intsgwzid:'',
+		chrsgwzms:'',
+		intsfwc:'',
+		chrsfwc:'',
+		dtmwcrq:'',
+		chrsgwzms:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc
 	}
@@ -134,17 +111,26 @@ function buildModel(){
 
 //保存数据
 function save(){
-	var data = getFromData("myform");
-	$bjAjax({
-		url:progressZtjgSaveApiPath,
-		data:data,
-		type:"post",
-		success:function(result){
-			bjToast("保存成功！",function(){
-				toUrl("project_progress_record_bodyDetail.html?id="+result.id);
+	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+		console.log(seletitem);
+		if(seletitem.index==0){
+			var data = restore(this.vue.$data.pagedata);
+			var ztjdsJson = JSON.stringify(this.vue.$data.ztjdsJson);
+			var fileIds = "";
+			data["ztjdsJson"] = ztjdsJson;
+			data["fileIds"] = fileIds;
+			console.log(data);
+			$bjAjax({
+				url:progressZtjgPath+"newsave",
+				data:data,
+				type:"post",
+				success:function(result){
+					bjToast("保存成功！");
+				}
 			});
 		}
 	});
+	
 }
 function outPage(){
 	toUrl("project_progress_record.html");

@@ -35,15 +35,15 @@ window.onload=function(){
 			},
 			addQT:function(type){
 				console.log(type)
-				var address = "project_progress_record_baseAdd1.html?intsgwzid=-1&chrsgwzmc=其他";
+				var address = "project_progress_record_baseAdd.html?intsgwzid=-1&chrsgwzmc=其他";
     				toUrl(address);
 			},
 			openJC: function (sgwzid,chrsgwzmc) {
 				var address = "project_progress_record_baseDetail.html?sgwzid="+sgwzid+"&chrsgwzmc="+chrsgwzmc;
     				toUrl(address);
 			},
-			openZT: function (id) {
-				var address = "project_progress_record_bodyDetail.html?id="+id;
+			openZT: function (sgwzid,chrsgwzmc) {
+				var address = "project_progress_record_bodyDetail.html?sgwzid="+sgwzid+"&chrsgwz="+chrsgwzmc;;
     				toUrl(address);
 			},
 			openEC: function (id) {

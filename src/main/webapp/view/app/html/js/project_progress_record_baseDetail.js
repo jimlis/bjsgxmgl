@@ -6,7 +6,12 @@ var xmid=getCookie("id");
 window.onload = function(){
 	//得到数据
 	var pageData = getPageData();
-	
+	if(!pageData.zjcs){
+		pageData.zjcs=[];
+	};
+	if(!pageData.dljcs){
+		pageData.dljcs=[];
+	};
     //数据绑定
 	var vue = new Vue({
 		el: '#app',

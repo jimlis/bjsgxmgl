@@ -29,30 +29,43 @@
 		</header>
 		<div class="mui-content" id="app">
 		<form action="" id="myform">
-		      <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
-                <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
-                <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+            <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
 			<div class="mui-content-padded">
 				<h5 class="bj-title2-font">报告日期：
-					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq"/>
+					<input class="bj-input bj-p-black-font bj-disable" type="text"  v-model="pagedata.dtmbgrq"/>
 				</h5>
 				<h5 class="bj-title2-font">施工位置：
-					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwzd" v-model="intsgwzd" placeholder="请选择施工位置" />
-					<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrShowAddress" v-model="chrShowAddress" v-on:click="dlcsPicker"  placeholder="请选择施工位置" readonly="readonly"/>
+					<input class="bj-input bj-p-black-font  bj-disable"  readonly="readonly"  type="text" v-model="pagedata.chrsgwz" placeholder="请选择施工位置"/>
 				</h5>
-				<h5 class="bj-title2-font">主体类型：
-                        <input class="bj-input bj-p-black-font" type="hidden" id="intsgwzc" v-model="intsgwzc" placeholder="请选择" />
-                        <input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgwzc" v-model="chrsgwzc" v-on:click="ztPicker" placeholder="请选择" />
-                </h5>
-                <h5 class="bj-title2-font">完成量(百分比)：
-                        <input class="bj-input bj-p-black-font" type="number" id="intwcl" v-model="intwcl" placeholder="请输入" />
-                </h5>
-				<h5 class="bj-title2-font">浇筑砼日期：
-					<input class="bj-input bj-p-black-font"  readonly="readonly"  data-options='{"type":"date"}' id="dtmjzqrq" v-model="dtmjzqrq" v-on:click="datePicker" placeholder="请选择日期" readonly="readonly"/>
+				<h5 class="bj-title2-font " v-if="pagedata.intsgwzid==-1">施工位置描述：
+					   <textarea  class="bj-input bj-p-black-font" type="text" v-model="pagedata.chrsgwzms" placeholder="施工位置描述"></textarea>
+                 </h5>
+                <h5 class="bj-title2-font">是否完成：
+						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" v-model="pagedata.chrsfwc" v-on:click="sfwcPicker" placeholder="请选择" />
 				</h5>
-				<h5 class="bj-title2-font">
-				报告人：<input class="bj-input bj-p-black-font  bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
+				<h5 class="bj-title2-font" v-if="pagedata.intsfwc==1">完成日期：
+					<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker()" v-model="pagedata.dtmwcrq" placeholder="请选择" />
+				</h5>
+				<h5 class="bj-title2-font">楼层数：{{ztjdsJson.length}}</h5>
+				<table>
+					  <thead>
+					    <tr>
+					      <th>楼层名称</th>
+					      <th>完成日期</th>
+					      <th style="width: 30px;">操作</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr v-for="(item , key) in ztjdsJson">
+					      <td data-label="楼层名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjdmc" placeholder="请输入" /></td>
+					      <td data-label="完成日期"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('lc',key)" v-model="item.dtmwcsj" placeholder="请选择" /></td>
+					      <td style="width: 30px !important;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="dellc(key)">-</button></td>
+					    </tr>
+					  </tbody>
+				</table>
+				<button class="mui-btn mui-btn-primary" type="button" v-on:click="addlc">+</button>
+				<h5 class="bj-title2-font">报告人：
+					<input class="bj-input bj-p-black-font  bj-disable" type="text"  v-model="pagedata.chrbgrmc"   placeholder="报告人" />
 				</h5>
 				<h5 class="bj-title2-font">照片：</h5>
 				<div id="uploader" class="wu-example">

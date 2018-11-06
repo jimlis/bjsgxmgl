@@ -1,5 +1,8 @@
 var obj = getRequest();
 var id=obj.id||"";
+var sgwzid=obj.sgwzid||"";
+var chrsgwz = obj.chrsgwz||"";
+var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
 	//得到数据
@@ -20,11 +23,12 @@ window.onload = function(){
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:progressZtjgByIdApiPath,
+		url:progressZtjgPath+"getXmSgjdZtjgsgListByXmidAndSgwzd",
 		type:"post",
 		async:false,
 		data:{
-			xmSgjdJcsgId:obj.id
+			sgwzd:sgwzid,
+			xmid:xmid
 		},
 		success:function(data){
 			if(data){
@@ -36,7 +40,7 @@ function getPageData(){
 }
 
 function edit(){
-	toUrl("project_progress_record_bodyAdd.html?id="+id);
+	toUrl("project_progress_record_bodyAdd.html?sgwzid="+sgwzid+"&chrsgwz="+chrsgwz);
 }
 function outPage(){
 	toUrl("project_progress_record.html");
