@@ -281,17 +281,17 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
         			}
         		}
         		xmSgjdZtjgsgDO.setIntxh(0);
+        		List<XmSgjdZtjgsgKzDO> ztjgKzList =null;
+        		if(sgwzd.equals(-1L)) {
+            		ztjgKzList = Lists.newArrayList();
+        		}else {
+        			//查询节点
+            		Map<String,Object> map=Maps.newHashMap();
+            		map.put("intxmid", xmid);
+            		map.put("intztsgid", xmSgjdZtjgsgDO.getId());
+            		ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
+        		}
         		
-        		//查询节点
-        		Map<String,Object> map=Maps.newHashMap();
-        		map.put("intxmid", xmid);
-        		map.put("intztsgid", xmSgjdZtjgsgDO.getId());
-        		/*XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
-        		ztjgKzObj.setIntztsgid(newObj.getId());
-        		ztjgKzObj.setFcbz(1);
-        		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
-        		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);*/
-        		List<XmSgjdZtjgsgKzDO> ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
         		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
         			ztjgKzList.forEach(one->{
         				one.setId(null);
@@ -340,16 +340,21 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     			newObj.setChrsfwc(chrsfwc);
     		}
     		
-    		//查询节点
-    		Map<String,Object> map=Maps.newHashMap();
-    		map.put("intxmid", xmid);
-    		map.put("intztsgid", newObj.getId());
-    		/*XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
-    		ztjgKzObj.setIntztsgid(newObj.getId());
-    		ztjgKzObj.setFcbz(1);
-    		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
-    		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);*/
-    		List<XmSgjdZtjgsgKzDO> ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
+    		List<XmSgjdZtjgsgKzDO> ztjgKzList =null;
+    		if(sgwzd.equals(-1L)) {
+    			XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
+        		ztjgKzObj.setIntztsgid(newObj.getId());
+        		ztjgKzObj.setFcbz(1);
+        		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
+        		ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);
+    		}else {
+    			//查询节点
+        		Map<String,Object> map=Maps.newHashMap();
+        		map.put("intxmid", xmid);
+        		map.put("intztsgid", newObj.getId());
+        		ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
+    		}
+    		
     		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
     			ztjgKzList.forEach(one->{
     				one.setId(null);
