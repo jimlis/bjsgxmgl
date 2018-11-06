@@ -61,11 +61,20 @@ window.onload= function(){
 						var days = jhwcsj.getTime() - wcsj.getTime();
 						var day = parseInt(days / (1000 * 60 * 60 * 24));
 					if(day==0){
-						return "0";
+						if(dtmsjwcsj){
+							return "0";
+						}else{
+							return "";
+						}
 					}else if(day<0){
 						return ""+String(day)+"天";
 					}else{
-						return "+"+String(day)+"天";
+						if(dtmsjwcsj){
+							return "+"+String(day)+"天";
+						}else{
+							return "";
+						}
+						
 					}
 				}
 		}
