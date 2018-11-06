@@ -8,11 +8,20 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/app.css"/>
+		<style type="text/css">
+			.mui-active{
+				color: #fff !important;
+				background-color: gray !important;
+			}
+			.mui-table-view-cell{
+				border: 1px solid #ccc !important;
+			}
+		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav" >
 			<h1 class="mui-title" >博建项目施工管理</h1>
-			 <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><a href="html/0templet.html">测试滚动</a></button>
+			<!-- <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><a href="./html/login/login.html">退出</a></button>-->
 		</header>
 		<div class="mui-content">
 		        <ul id="list" class="mui-table-view mui-grid-view mui-grid-9">
@@ -34,7 +43,6 @@
 		            <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4">
 		                    <div class="mui-media-body"> </div>
 		                    <div class="mui-media-body"> </div></li>
-		             <hr />
 		            <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4" type="1" url='html/project_list.html'>
 		                    <div class="mui-media-body">PMC项目</div>
 		                    <div class="mui-media-body"></div></li>

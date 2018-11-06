@@ -86,8 +86,9 @@ var quaRecodeListApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgListByXmidAndQxlx
 var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
 var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 
-//施工进度
+//施工进度 
 var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";
+var progressJcsgPath=serverPath+"api/xmsgjdjcsg/";
 var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";
 var progressJcsgNewSaveApiPath=serverPath+"api/xmsgjdjcsg/newsave";
 var progressJcsgByXmidAndSgwzidApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgListByXmidAndSgwzid";

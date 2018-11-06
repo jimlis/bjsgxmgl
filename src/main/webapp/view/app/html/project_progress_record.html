@@ -44,7 +44,7 @@
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openJC(item.value,item.text)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('JC')">+</span></li>
 				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="jcShow">
-						    	<li class="mui-table-view-cell">Item 1</li>
+						    	<li class="mui-table-view-cell" v-for="item in qts.jc"  v-on:click="openQT('jc',item.intsgwzid,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
 		    			</ul>
 		        </li>
@@ -54,7 +54,7 @@
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span></li>
 				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="ztShow">
-						    	<li class="mui-table-view-cell">Item 1</li>
+						    	<li class="mui-table-view-cell" v-for="item in qts.zt"  v-on:click="openQT('zt',item.intsgwzd,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
 		    			</ul>
 		        </li>

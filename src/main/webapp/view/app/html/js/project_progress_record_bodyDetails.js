@@ -1,5 +1,4 @@
 var obj = getRequest();
-var id=obj.id||"";
 var sgwzid=obj.sgwzid||"";
 var chrsgwz = obj.chrsgwz||"";
 var xmid=getCookie("id");
@@ -14,21 +13,24 @@ window.onload = function(){
 		data: pageData
 	});
 	
-	if(id){
+	if(pageData.id){
 		//加载图片
-		initImgList("bj_xm_sgjd_ztjgsg",id,"1","fileIds","img-list",false);
+		initImgList("bj_xm_sgjd_ztjgsg",pageData.id,"1","fileIds","img-list",false);
 	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
+	var id = (obj.jcid?obj.jcid:"");
 	$bjAjax({
 		url:progressZtjgPath+"getXmSgjdZtjgsgListByXmidAndSgwzd",
 		type:"post",
 		async:false,
 		data:{
 			sgwzd:sgwzid,
-			xmid:xmid
+			xmid:xmid,
+			fwlx:"xh",
+			id:id
 		},
 		success:function(data){
 			if(data){
@@ -40,7 +42,8 @@ function getPageData(){
 }
 
 function edit(){
-	toUrl("project_progress_record_bodyAdd.html?sgwzid="+sgwzid+"&chrsgwz="+chrsgwz);
+	var id = (obj.jcid?obj.jcid:"");
+	toUrl("project_progress_record_bodyAdd.html?sgwzid="+sgwzid+"&jcid="+id);
 }
 function outPage(){
 	toUrl("project_progress_record.html");

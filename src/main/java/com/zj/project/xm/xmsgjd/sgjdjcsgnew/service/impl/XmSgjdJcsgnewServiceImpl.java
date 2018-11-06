@@ -103,7 +103,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
 					FileDO fileDO = new FileDO();
 					fileDO.setId(Long.parseLong(fileid.trim()));
 					fileDO.setBusType(tableInfo.getTableName());
-					fileDO.setBusId(id);
+					fileDO.setBusId(newId);
 					fileService.updateById(fileDO);
 				}
 			}

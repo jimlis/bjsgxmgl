@@ -35,9 +35,9 @@
 					<input class="bj-input bj-p-black-font bj-disable" type="text"  v-model="pagedata.dtmbgrq"/>
 				</h5>
 				<h5 class="bj-title2-font">施工位置：
-					<input class="bj-input bj-p-black-font  bj-disable"  readonly="readonly"  type="text" v-model="pagedata.chrsgwz" placeholder="请选择施工位置"/>
+					<input class="bj-input bj-p-black-font  bj-disable"  readonly="readonly"  type="text" v-model="pagedata.chrShowAddress" placeholder="请选择施工位置"/>
 				</h5>
-				<h5 class="bj-title2-font " v-if="pagedata.intsgwzid==-1">施工位置描述：
+				<h5 class="bj-title2-font " v-if="pagedata.intsgwzd==-1">施工位置描述：
 					   <textarea  class="bj-input bj-p-black-font" type="text" v-model="pagedata.chrsgwzms" placeholder="施工位置描述"></textarea>
                  </h5>
                 <h5 class="bj-title2-font">是否完成：
@@ -52,18 +52,18 @@
 					    <tr>
 					      <th>楼层名称</th>
 					      <th>完成日期</th>
-					      <th style="width: 30px;">操作</th>
+					       <th style="width: 30px;" v-if="pagedata.intsgwzd==-1">操作</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr v-for="(item , key) in ztjdsJson">
 					      <td data-label="楼层名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjdmc" placeholder="请输入" /></td>
 					      <td data-label="完成日期"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('lc',key)" v-model="item.dtmwcsj" placeholder="请选择" /></td>
-					      <td style="width: 30px !important;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="dellc(key)">-</button></td>
+					    	 <td style="width: 30px;" v-if="pagedata.intsgwzd==-1"><button class="mui-btn mui-btn-danger" type="button" v-on:click="dellc(key)">-</button></td>
 					    </tr>
 					  </tbody>
 				</table>
-				<button class="mui-btn mui-btn-primary" type="button" v-on:click="addlc">+</button>
+				<button class="mui-btn mui-btn-primary" type="button" v-on:click="addlc" v-if="pagedata.intsgwzd==-1">+</button>
 				<h5 class="bj-title2-font">报告人：
 					<input class="bj-input bj-p-black-font  bj-disable" type="text"  v-model="pagedata.chrbgrmc"   placeholder="报告人" />
 				</h5>
@@ -88,7 +88,7 @@
 		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_progress_record_bodyAdd.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_bodyAdd.js?v=12" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

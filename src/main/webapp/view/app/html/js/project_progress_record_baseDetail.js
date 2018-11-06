@@ -17,22 +17,25 @@ window.onload = function(){
 		el: '#app',
 		data: pageData
 	});
-//	
-//	if(xmid){
-//		//加载图片
-//		initImgList("bj_xm_sgjd_jcsg",id,"1","fileIds","img-list",false);
-//	}
+	
+	if(pageData.id){
+		//加载图片
+		initImgList("bj_xm_sgjd_jcsgnew",pageData.id,"1","fileIds","img-list",false);
+	}
 }
 //得到显示数据
 function getPageData(){
 	var o={};
+	var id = (obj.jcid?obj.jcid:"");
 	$bjAjax({
 		url:progressJcsgByXmidAndSgwzidApiPath,
 		type:"post",
 		async:false,
 		data:{
 			sgwzid:sgwzid,
-			xmid:xmid
+			xmid:xmid,
+			fwlx:"cx",
+			id:id
 		},
 		success:function(data){
 			console.log(data);
@@ -50,7 +53,8 @@ function getPageData(){
 }
 
 function edit(){
-	toUrl("project_progress_record_baseAdd.html?intsgwzid="+sgwzid+"&chrsgwzmc="+chrsgwzmc);
+	var id = (obj.jcid?obj.jcid:"");
+	toUrl("project_progress_record_baseAdd.html?intsgwzid="+sgwzid+"&chrsgwzmc="+chrsgwzmc+"&jcid="+id);
 }
 
 
