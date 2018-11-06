@@ -281,7 +281,25 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
         			}
         		}
         		xmSgjdZtjgsgDO.setIntxh(0);
-        		xmSgjdZtjgsgDO.setZtjgKzList(Lists.newArrayList());
+        		
+        		//查询节点
+        		Map<String,Object> map=Maps.newHashMap();
+        		map.put("intxmid", xmid);
+        		map.put("intztsgid", xmSgjdZtjgsgDO.getId());
+        		/*XmSgjdZtjgsgKzDO ztjgKzObj=new XmSgjdZtjgsgKzDO();
+        		ztjgKzObj.setIntztsgid(newObj.getId());
+        		ztjgKzObj.setFcbz(1);
+        		QueryWrapper<XmSgjdZtjgsgKzDO> ztjgKzWrapper=new QueryWrapper<XmSgjdZtjgsgKzDO>(ztjgKzObj).orderByAsc("id");
+        		List<XmSgjdZtjgsgKzDO> ztjgKzList = xmSgjdZtjgsgKzService.list(ztjgKzWrapper);*/
+        		List<XmSgjdZtjgsgKzDO> ztjgKzList =xmSgjdZtjgsgKzService.getXmSgjdZtKzListByXmidAndZtsgid(map);
+        		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
+        			ztjgKzList.forEach(one->{
+        				one.setId(null);
+        			});
+        			xmSgjdZtjgsgDO.setZtjgKzList(ztjgKzList);
+        		}else {
+        			xmSgjdZtjgsgDO.setZtjgKzList(Lists.newArrayList());
+        		}
     		}
     		return xmSgjdZtjgsgDO;
     	}else {
