@@ -248,7 +248,9 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		List<XmSgjdJcsgKzDO> zjcList = xmSgjdJcsgKzService.list(zjcWrapper);
     		if(CollectionUtils.isNotEmpty(zjcList)) {
     			zjcList.forEach(one->{
-    				one.setId(null);
+    				if(!intsgwzid.equals(-1L)) {
+    					one.setId(null);
+    				}
     			});
     			newObj.setZjcs(zjcList);
     		}
@@ -262,7 +264,9 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		List<XmSgjdJcsgKzDO> dljcList = xmSgjdJcsgKzService.list(dljcWrapper);
     		if(CollectionUtils.isNotEmpty(dljcList)) {
     			dljcList.forEach(one->{
-    				one.setId(null);
+    				if(!intsgwzid.equals(-1L)) {
+    					one.setId(null);
+    				}
     			});
     			newObj.setDljcs(dljcList);
     		}

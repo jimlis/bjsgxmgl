@@ -353,7 +353,9 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     		
     		if(CollectionUtils.isNotEmpty(ztjgKzList)) {
     			ztjgKzList.forEach(one->{
-    				one.setId(null);
+    				if(!sgwzd.equals(-1L)) {
+    					one.setId(null);
+    				}
     			});
     			newObj.setZtjgKzList(ztjgKzList);
     		}else {
