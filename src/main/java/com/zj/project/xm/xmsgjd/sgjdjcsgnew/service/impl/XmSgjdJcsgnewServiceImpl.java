@@ -161,10 +161,11 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
      * @param xmid 项目id
      * @param sgwzid 施工位置
      * @param fwlx 访问类型 xz---新增 查询-cx
+     * @param id 主键id
      * @return XmSgjdJcsgnewDO
      */
     @Override 
-    public  XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid,Long sgwzid,String fwlx) {
+    public  XmSgjdJcsgnewDO getXmSgjdJcsgnewByXmidAndSgwzid(Long xmid,Long sgwzid,String fwlx,Long id) {
     	if(xmid==null) {
     		return null;
     	}
@@ -172,12 +173,19 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     		return null;
     	}
     	UserDO appUserDO = ShiroUtils.getAppUserDO();
+    	List<XmSgjdJcsgnewDO> list=Lists.newArrayList();
     	XmSgjdJcsgnewDO xmSgjdJcsgnewDO=new XmSgjdJcsgnewDO();
-    	xmSgjdJcsgnewDO.setIntxmid(xmid);
-    	xmSgjdJcsgnewDO.setIntsgwzid(sgwzid);
-    	xmSgjdJcsgnewDO.setFcbz(1);
-    	QueryWrapper<XmSgjdJcsgnewDO> queryWrapper=new QueryWrapper<XmSgjdJcsgnewDO>(xmSgjdJcsgnewDO).orderByDesc("id");
-    	List<XmSgjdJcsgnewDO> list=list(queryWrapper);
+    	if(id!=null) {
+    		list.add(getById(id));
+    	}else {
+        	xmSgjdJcsgnewDO.setIntxmid(xmid);
+        	xmSgjdJcsgnewDO.setIntsgwzid(sgwzid);
+        	xmSgjdJcsgnewDO.setFcbz(1);
+        	QueryWrapper<XmSgjdJcsgnewDO> queryWrapper=new QueryWrapper<XmSgjdJcsgnewDO>(xmSgjdJcsgnewDO).orderByDesc("id");
+            list=list(queryWrapper);
+    	}
+    	
+
     	if(CollectionUtils.isEmpty(list)) {
     		if(StringUtils.isNotEmpty(fwlx)) {
     			if("xz".equals(fwlx)) {

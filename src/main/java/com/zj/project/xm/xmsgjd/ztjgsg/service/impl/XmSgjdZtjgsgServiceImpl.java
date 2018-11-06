@@ -240,10 +240,11 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
      * @param xmid 项目id
      * @param sgwzd 施工位置
      * @param fwlx 访问类型 xz---新增 查询-cx
+     * @param Long id 主键id
      * @return XmSgjdJcsgnewDO
      */
     @Override 
-    public  XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid,Long sgwzd,String fwlx) {
+    public  XmSgjdZtjgsgDO getXmSgjdZtsgByXmidAndSgwzid(Long xmid,Long sgwzd,String fwlx,Long id) {
     	if(xmid==null) {
     		return null;
     	}
@@ -253,13 +254,18 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     	}
     	
     	UserDO appUserDO = ShiroUtils.getAppUserDO();
-    	
+    	List<XmSgjdZtjgsgDO> list=Lists.newArrayList();
     	XmSgjdZtjgsgDO xmSgjdZtjgsgDO=new XmSgjdZtjgsgDO();
-    	xmSgjdZtjgsgDO.setIntxmid(xmid);
-    	xmSgjdZtjgsgDO.setIntsgwzd(sgwzd);
-    	xmSgjdZtjgsgDO.setFcbz(1);
-    	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByDesc("id");
-    	List<XmSgjdZtjgsgDO> list=list(queryWrapper);
+    	if(id!=null) {
+    		list.add(getById(id));
+    	}else {
+        	xmSgjdZtjgsgDO.setIntxmid(xmid);
+        	xmSgjdZtjgsgDO.setIntsgwzd(sgwzd);
+        	xmSgjdZtjgsgDO.setFcbz(1);
+        	QueryWrapper<XmSgjdZtjgsgDO> queryWrapper=new QueryWrapper<XmSgjdZtjgsgDO>(xmSgjdZtjgsgDO).orderByDesc("id");
+        	list=list(queryWrapper);
+    	}
+    	
     	if(CollectionUtils.isEmpty(list)) {
     		if(StringUtils.isNotEmpty(fwlx)) {
     			if("xz".equals(fwlx)) {
@@ -304,16 +310,6 @@ public class XmSgjdZtjgsgServiceImpl extends BaseServiceImpl<XmSgjdZtjgsgDao, Xm
     		return xmSgjdZtjgsgDO;
     	}else {
     		XmSgjdZtjgsgDO newObj=list.get(0);
-    		
-    		/*XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
-    		xmGqjdbjDO.setFcbz(1);
-    		xmGqjdbjDO.setIntxmid(xmid);
-    		xmGqjdbjDO.setChrjdlx("zt");
-    		List<XmGqjdbjDO> gqjdList=xmGqjdbjService.list(new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO));
-    		Map<Long,String> gqjdMap=Maps.newHashMap();
-    		if(CollectionUtils.isNotEmpty(gqjdList)) {
-    			gqjdMap.putAll(gqjdList.stream().collect(Collectors.toMap(one->one.getId(), one->one.getChrjdmc())));
-    		}*/
     		
     		//施工位置
     		Long intsgwzid = newObj.getIntsgwzd();
