@@ -1,6 +1,7 @@
 var obj=getRequest()
 var id = obj.id||"";
 var xmid=getCookie("id");
+var sgwz=obj.sgwz||"";
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
@@ -8,16 +9,12 @@ var pageData;
 var vue;
 var dlhData;
 window.onload = function(){
-	upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});
+	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_dtsbazsg"});
 	
-	dlhData=getXmjdListByParam(xmid,'jc',1,"");
+	//dlhData=getXmjdListByParam(xmid,'jc',1,"");
 	
 	//判断是否更新；
-	pageData = isUpdata()||'';
-	if(pageData==''){
-		//创建数据Model；
-		pageData = buildModel();
-	}
+	pageData = isUpdata();
 	
 	//数据绑定
 	vue = new Vue({
@@ -34,7 +31,7 @@ window.onload = function(){
 	
 	if(id){
 		//加载图片
-		initFileList("bj_xm_xkz",id,"1","fileIds","file-list",true);
+		initFileList("bj_xm_sgjd_dtsbazsg",id,"1","fileIds","file-list",true);
 	}
 	
 }
@@ -49,22 +46,22 @@ function deletelc(id,obj){
 
 //判断是否更新
 function isUpdata(){
-	if(id){
 		var result={};
 		$bjAjax({
-			url:progressElevatorByIdApiPath,
+			url:progressElevatorByParamApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdDtsbazsgId:id
+				xmSgjdDtsbazsgId:id,
+				xmid:xmid,
+				sgwz:sgwz,
+				fwlx:"xz"
 			},
 			success:function(data){
 				result = data;
 			}
 		});
 		return result;
-	}
-	return '';
 }
 //创建数据Model
 function buildModel(){
@@ -93,7 +90,6 @@ function buildModel(){
 //保存数据
 function save(){
 	var data = getFromData("myform");
-	data.deleteWclIds=(deleteIds.length>0?deleteIds.substring(0,deleteIds.length-1):deleteIds);
 	$bjAjax({
 		url:progressElevatorSaveApiPath,
 		data:data,
@@ -106,5 +102,5 @@ function save(){
 	});
 }
 function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_elevatorDetail.html?id="+id);
 }

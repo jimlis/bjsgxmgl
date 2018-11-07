@@ -1,15 +1,13 @@
 var obj=getRequest()
 var id = obj.id||"";
+var sgwz=obj.sgwz||"";
+var xmid=getCookie("id");
 var pageData;
 var vue;
 window.onload = function(){
 	
 	//判断是否更新；
-	pageData = isUpdata()||'';
-	if(pageData==''){
-		//创建数据Model；
-		pageData = buildModel();
-	}
+	pageData = isUpdata();
 	
 	//数据绑定
 	vue = new Vue({
@@ -17,32 +15,32 @@ window.onload = function(){
 		data: pageData
 	});
 	
-	if(id){
+	if(pageData.id){
 		//加载图片
-		initFileList("bj_xm_sgjd_dtsbazsg",id,"1","fileIds","file-list",false);
+		initFileList("bj_xm_sgjd_dtsbazsg",pageData.id,"1","fileIds","file-list",false);
 	}
 	
 }
 
 //判断是否更新
 function isUpdata(){
-	 ;
-	if(id){
 		var result={};
 		$bjAjax({
-			url:progressElevatorByIdApiPath,
+			url:progressElevatorByParamApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdDtsbazsgId:id
+				xmSgjdDtsbazsgId:id,
+				xmid:xmid,
+				sgwz:sgwz,
+				fwlx:"cx"
 			},
 			success:function(data){
+				id=data.id||"";
 				result = data;
 			}
 		});
 		return result;
-	}
-	return '';
 }
 
 //创建数据Model
@@ -71,7 +69,7 @@ function buildModel(){
 
 
 function edit(){
-	toUrl("project_progress_record_elevatorAdd.html?id="+id);
+	toUrl("project_progress_record_elevatorAdd.html?id="+id+"&sgwz="+sgwz);
 }
 function outPage(){
 	toUrl("project_progress_record.html");

@@ -94,6 +94,11 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
     @TableField(exist=false)
     @ApiModelProperty(value = "主体结构拓展结婚",name = "ztjgKzList",dataType = "List",required = true)
     private List<XmSgjdZtjgsgKzDO> ztjgKzList;
+    
+    /**相关附件ids*/
+    @ApiModelProperty(value = "相关附件ids ",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
 
     /**
      * 设置：主键id
@@ -280,6 +285,13 @@ public class XmSgjdZtjgsgDO extends BaseDomain {
 	}
 	public void setZtjgKzList(List<XmSgjdZtjgsgKzDO> ztjgKzList) {
 		this.ztjgKzList = ztjgKzList;
+	}
+	
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
 	}
     
 }

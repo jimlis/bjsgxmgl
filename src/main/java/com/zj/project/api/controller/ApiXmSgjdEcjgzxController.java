@@ -93,5 +93,24 @@ public class ApiXmSgjdEcjgzxController extends ApiBaseController {
         }
 
     }
+    
+    @Log("根据xmSgjdEcjgzxId获取施工进度-二次结构、装修等施工记录信息")
+    @PostMapping("getXmSgjdEcjgzxByParam")
+    @ApiOperation(value="根据xmSgjdEcjgzxId获取施工进度-二次结构、装修等施工记录信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmSgjdEcjgzxId",paramType="form",dataType = "Long",required=false,value = "施工记录id"),
+    	@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=false,value = "项目id"),
+    	@ApiImplicitParam(name="did",paramType="form",dataType = "Long",required=false,value = "栋id"),
+    	@ApiImplicitParam(name="fwlx",paramType="form",dataType = "Long",required=false,value = "发起类型 xz-新增  cx-查询")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdEcjgzxDO.class),
+            @ApiResponse(code=1,message="操作失败",response=XmSgjdEcjgzxDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdEcjgzxDO> getXmSgjdEcjgzxByParam(Long xmSgjdEcjgzxId,Long xmid,Long did,String fwlx) {
+        try {
+            return Result.ok(xmSgjdEcjgzxService.getXmSgjdEcjgzxByParam(xmSgjdEcjgzxId,xmid,did,fwlx));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
 
 }

@@ -188,7 +188,7 @@ function save(){
 	
 }
 function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_baseDetail.html?sgwzid="+intsgwzid);
 }
 
 

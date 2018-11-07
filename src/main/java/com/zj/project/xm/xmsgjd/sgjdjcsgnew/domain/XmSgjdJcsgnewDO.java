@@ -84,6 +84,12 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
     @ApiModelProperty(value = "桩基础集合 ",name = "zjcs",dataType = "List",required = false)
     @TableField(exist=false)
     private List<XmSgjdJcsgKzDO> zjcs;
+    
+    /**相关附件ids*/
+    @ApiModelProperty(value = "相关附件ids ",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
+
 
     /**
      * 设置：主键id
@@ -252,6 +258,13 @@ public class XmSgjdJcsgnewDO extends BaseDomain {
 	}
 	public void setChrsfwc(String chrsfwc) {
 		this.chrsfwc = chrsfwc;
+	}
+	
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
 	}
 	
 }

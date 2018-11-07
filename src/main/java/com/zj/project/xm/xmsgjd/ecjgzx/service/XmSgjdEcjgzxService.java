@@ -26,4 +26,14 @@ public interface XmSgjdEcjgzxService extends BaseService<XmSgjdEcjgzxDO> {
      * @param deleteWclIds 删除完成量ids
      */
 	public void saveXmSgjdEcjgzxxx(XmSgjdEcjgzxDO xmSgjdEcjgzxDO, String xmSgjdEcjgzxWclJson,String deleteWclIds);
+	
+	/**
+	 * 获取施工记录id
+	 * @param xmSgjdEcjgzxId 二次施工进度id
+	 * @param xmid 项目id
+	 * @param did 栋id
+	 * @param fwlx xz-新增  cx-查询
+	 * 
+	 */
+	public XmSgjdEcjgzxDO getXmSgjdEcjgzxByParam(Long xmSgjdEcjgzxId, Long xmid, Long did,String fwlx);
 }

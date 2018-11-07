@@ -16,10 +16,13 @@ import org.springframework.util.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlJszlDO;
 import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
 import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
@@ -163,6 +166,73 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
 				});
 			}
 		}
+	}
+	
+	/**
+	 * 获取施工记录id
+	 * @param xmSgjdEcjgzxId 二次施工进度id
+	 * @param xmid 项目id
+	 * @param did 栋id
+	 * @param fwlx 发起类型 xz-新增  cx-查询
+	 */
+	@Override
+	public XmSgjdEcjgzxDO getXmSgjdEcjgzxByParam(Long xmSgjdEcjgzxId, Long xmid, Long did,String fwlx) {
+		if(xmSgjdEcjgzxId==null&&(xmid==null||did==null)) {
+				return null;
+		}
+		
+		UserDO appUserDO = ShiroUtils.getAppUserDO();
+		
+		XmSgjdEcjgzxDO xmSgjdEcjgzxDO=null;
+		//主键存在 优先主键查询 否则查询最新记录
+		if(xmSgjdEcjgzxId!=null) {
+			xmSgjdEcjgzxDO=getById(xmSgjdEcjgzxId);
+		}else {
+			xmSgjdEcjgzxDO=new XmSgjdEcjgzxDO();
+			xmSgjdEcjgzxDO.setFcbz(1);
+			xmSgjdEcjgzxDO.setIntxmid(xmid);
+			xmSgjdEcjgzxDO.setIntdid(did);
+			QueryWrapper<XmSgjdEcjgzxDO> queryWrapper=new QueryWrapper<XmSgjdEcjgzxDO>(xmSgjdEcjgzxDO).orderByDesc("id");
+			List<XmSgjdEcjgzxDO> list=list(queryWrapper);
+			if(CollectionUtils.isNotEmpty(list)) {
+				xmSgjdEcjgzxDO=list.get(0);
+				
+				//楼栋名称
+	    		Long intdid = xmSgjdEcjgzxDO.getIntdid();
+	    		XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intdid);
+	    		if(xmGqjdbjDO!=null) {
+	    			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
+	    		}
+	    		// 完成量
+	        	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();
+	        	xmSgjdEcjgzxWclDO.setFcbz(1);
+	        	xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
+	    		QueryWrapper<XmSgjdEcjgzxWclDO> wclQueryWrapper = new QueryWrapper<XmSgjdEcjgzxWclDO>(xmSgjdEcjgzxWclDO)
+	    				.orderByAsc("intxh");
+	    		List<XmSgjdEcjgzxWclDO> wclList =xmSgjdEcjgzxWclService.list(wclQueryWrapper);
+	    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(wclList);
+			}else {//不存在 就构造一个新的
+				
+				if("xz".equals(fwlx)) {//新增
+					xmSgjdEcjgzxDO.setChrbgrmc(appUserDO.getName());
+					xmSgjdEcjgzxDO.setIntbgrid(appUserDO.getId());
+					xmSgjdEcjgzxDO.setDtmgxrq(new Date());
+				}
+				
+				xmSgjdEcjgzxDO.setIntxh(0);
+				
+				//楼栋名称
+	    		Long intdid = xmSgjdEcjgzxDO.getIntdid();
+	    		XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(intdid);
+	    		if(xmGqjdbjDO!=null) {
+	    			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
+	    		}
+	    		// 完成量
+	    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(Lists.newArrayList());
+			}
+		}
+		
+		return xmSgjdEcjgzxDO;
 	}
 
 

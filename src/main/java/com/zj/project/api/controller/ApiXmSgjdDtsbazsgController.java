@@ -16,6 +16,7 @@ import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
 import com.zj.project.xm.xmsgjd.dtsbazsg.domain.XmSgjdDtsbazsgDO;
 import com.zj.project.xm.xmsgjd.dtsbazsg.service.XmSgjdDtsbazsgService;
+import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxDO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -93,6 +94,25 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
             return Result.fail();
         }
 
+    }
+    
+    @Log("根据xmSgjdEcjgzxId获取电梯设置安装施工记录信息")
+    @PostMapping("getXmSgjdDtsbazsgByParam")
+    @ApiOperation(value="根据xmSgjdEcjgzxId获取电梯设置安装施工记录信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmSgjdDtsbazsgId",paramType="form",dataType = "Long",required=false,value = "电梯安装记录id"),
+    	@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=false,value = "项目id"),
+    	@ApiImplicitParam(name="sgwz",paramType="form",dataType = "Long",required=false,value = "施工位置"),
+    	@ApiImplicitParam(name="fwlx",paramType="form",dataType = "Long",required=false,value = "发起类型 xz-新增  cx-查询")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdDtsbazsgDO.class),
+            @ApiResponse(code=1,message="操作失败",response=XmSgjdDtsbazsgDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdDtsbazsgDO> getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId,Long xmid,Long sgwz,String fwlx) {
+        try {
+            return Result.ok(xmSgjdDtsbazsgService.getXmSgjdDtsbazsgByParam(xmSgjdDtsbazsgId,xmid,sgwz,fwlx));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
     }
 
 }

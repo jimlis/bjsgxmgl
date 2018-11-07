@@ -35,15 +35,15 @@
         <div class="mui-content" id="app" v-cloak>
         <form action="" id="myform">
               <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
-                <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+                <!-- <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" /> -->
                 <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
             <div class="mui-content-padded">
                 <h5 class="bj-title2-font">更新日期：
                     <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
                 </h5>
                 <h5 class="bj-title2-font">栋楼号：
-                    <input class="bj-input bj-p-black-font" type="hidden" id="intdid" v-model="intdid"  placeholder="栋楼号" />
-                    <input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrdmc" v-model="chrdmc" v-on:click="dlhPicker"  placeholder="栋楼号" />
+                    <input class="bj-input bj-p-black-font"  type="hidden" id="intdid" v-model="intdid"  placeholder="栋楼号" />
+                    <input class="bj-input bj-p-black-font bj-disable"   readonly="readonly"  type="text" id="chrdmc" v-model="chrdmc" v-on:click="dlhPicker"  placeholder="栋楼号" />
                 </h5>
                 <h5 class="bj-title2-font">完成量：</h5>
                     
@@ -61,13 +61,13 @@
                         </thead>
                         <tbody >
                            <tr v-for="(item,index) in xmSgjdEcjgzxWclList">
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].id'" v-model="item.id" class="bj-input bj-p-black-font" type="hidden" />
-                            <input id="'xmSgjdEcjgzxWclList['+index+'].chrlc'" v-model="item.chrlc" class="bj-input bj-p-black-font" type="text" /></td>
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intmc'" v-model="item.intmc" class="bj-input bj-p-black-font" type="text" /></td>
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intfs'" v-model="item.intfs" class="bj-input bj-p-black-font" type="text" /></td>
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intnbw'" v-model="item.intnbw" class="bj-input bj-p-black-font" type="text" /></td>
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intqt'" v-model="item.intqt" class="bj-input bj-p-black-font" type="text" /></td>
-                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intzx'" v-model="item.intzx" class="bj-input bj-p-black-font" type="text" /></td> 
+                            <td><input  v-model="item.id" class="bj-input bj-p-black-font" type="hidden" />
+                            <input :id="'xmSgjdEcjgzxWclList['+index+'].chrlc'" v-model="item.chrlc" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intmc'" v-model="item.intmc" class="bj-input bj-p-black-font" type="number" /></td>
+                            <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intfs'" v-model="item.intfs" class="bj-input bj-p-black-font" type="number" /></td>
+                            <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intnbw'" v-model="item.intnbw" class="bj-input bj-p-black-font" type="number" /></td>
+                            <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intqt'" v-model="item.intqt" class="bj-input bj-p-black-font" type="number" /></td>
+                            <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intzx'" v-model="item.intzx" class="bj-input bj-p-black-font" type="number" /></td> 
                             <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_deletelc(item.id,$event)">-</button></td>
                         </tr>
                         </tbody>

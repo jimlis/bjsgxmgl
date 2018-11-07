@@ -170,5 +170,5 @@ function save(){
 	
 }
 function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_bodyDetail.html?sgwzid="+sgwzid);
 }

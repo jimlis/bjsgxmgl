@@ -99,6 +99,10 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
     /** 备注 */
     @ApiModelProperty(value = "备注 ",name = "chrbz",dataType = "String",required = false)
     private String chrbz;
+    /**相关附件ids*/
+    @ApiModelProperty(value = "相关附件ids ",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
 
     /**
      * 设置：主键id
@@ -346,4 +350,11 @@ public class XmSgjdDtsbazsgDO extends BaseDomain {
 	public void setChrsgwz(String chrsgwz) {
 		this.chrsgwz = chrsgwz;
 	}
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
+	}
+	
 }

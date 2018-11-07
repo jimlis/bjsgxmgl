@@ -1,15 +1,13 @@
 var obj=getRequest()
 var id = obj.id||"";
+var did = obj.did||"";
+var xmid=getCookie("id");
 var vue;
+var pageData={};
 window.onload = function(){
 	
-	
 	//判断是否更新；
-	pageData = isUpdata()||'';
-	if(pageData==''){
-		//创建数据Model；
-		pageData = buildModel();
-	}
+	pageData = isUpdata();
 	
 	//数据绑定
 	vue = new Vue({
@@ -21,26 +19,27 @@ window.onload = function(){
 
 //判断是否更新
 function isUpdata(){
-	if(id){
 		var result={};
 		$bjAjax({
-			url:progressSecByIdApiPath,
+			url:progressSecByParamApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdEcjgzxId:id
+				xmSgjdEcjgzxId:id,
+				xmid:xmid,
+				did:did,
+				fwlx:"cx"
 			},
 			success:function(data){
+				id=data.id||"";
 				result = data;
 			}
 		});
 		return result;
-	}
-	return '';
 }
 
 function edit(){
-	toUrl("project_progress_record_secAdd.html?id="+id);
+	toUrl("project_progress_record_secAdd.html?id="+id+"&did="+did);
 }
 function outPage(){
 	toUrl("project_progress_record.html");

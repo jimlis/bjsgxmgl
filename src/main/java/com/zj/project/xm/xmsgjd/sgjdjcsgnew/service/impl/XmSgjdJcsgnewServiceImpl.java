@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -83,6 +85,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	if(intxmid==null) {
     		throw new MyApiException("xmid不能为空");
     	}
+    	UserDO appUserDO = ShiroUtils.getAppUserDO();
     	if(id==null) {
     		xmSgjdJcsgnewDO.setGxsj(new Date());
     		xmSgjdJcsgnewDO.setFcbz(1);
@@ -96,15 +99,30 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	
     	
     	// 更新图片信息
-		if (StringUtils.isNotEmpty(fileIds)) {
+    	if (StringUtils.isNotEmpty(fileIds)) {
 			String[] fileArr = fileIds.trim().split(",");
 			for (String fileid : fileArr) {
 				if (StringUtils.isNotEmpty(fileid.trim())) {
-					FileDO fileDO = new FileDO();
-					fileDO.setId(Long.parseLong(fileid.trim()));
-					fileDO.setBusType(tableInfo.getTableName());
-					fileDO.setBusId(newId);
-					fileService.updateById(fileDO);
+					//查询附件是否已经关联业务数据 如果关联复制附件信息指向同一个文件
+					FileDO fileDO = fileService.getById(Long.parseLong(fileid.trim()));
+					if(fileDO!=null&&StringUtils.isNotEmpty(fileDO.getBusType())&&fileDO.getBusId()!=null) {
+						fileDO.setId(null);
+						fileDO.setBusType(tableInfo.getTableName());
+						fileDO.setBusId(newId);
+					    fileDO.setCreateUserId(appUserDO.getId());
+				        fileDO.setCreateUserName(appUserDO.getName());
+				        fileDO.setCreateDeptId(appUserDO.getDeptId());
+				        fileDO.setCreateDeptName(appUserDO.getDeptName());
+				        fileDO.setCreateDate(new Date());
+				        fileService.save(fileDO);
+					}else {
+						FileDO newFileDO =	new FileDO();
+						newFileDO.setId(Long.parseLong(fileid.trim()));
+						newFileDO.setBusType(tableInfo.getTableName());
+						newFileDO.setBusId(newId);
+						fileService.updateById(newFileDO);
+					}
+					
 				}
 			}
 		}
@@ -214,6 +232,16 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
     	}else {
     		XmSgjdJcsgnewDO newObj=list.get(0);
     		
+    		//查询附件
+        	FileDO fileDO=new FileDO();
+        	fileDO.setBusId(newObj.getId());
+        	fileDO.setBusType(tableInfo.getTableName());
+        	QueryWrapper<FileDO> queryWrapper=new QueryWrapper<FileDO>(fileDO).orderByAsc("id");
+        	List<FileDO> fileList=fileService.list(queryWrapper);
+        	if(CollectionUtils.isNotEmpty(fileList)) {
+        		newObj.setFileIds(fileList.stream().map(one->Objects.toString(one.getId(), "")).collect(Collectors.joining(",")));
+        	}
+    		
     		//施工位置
     		Long intsgwzid = newObj.getIntsgwzid();
     		if(intsgwzid!=null) {
@@ -226,6 +254,7 @@ public class XmSgjdJcsgnewServiceImpl extends BaseServiceImpl<XmSgjdJcsgnewDao, 
         			}
     			}
     		}
+    		
     		
     		//完成
     		Integer intsfwc = newObj.getIntsfwc();

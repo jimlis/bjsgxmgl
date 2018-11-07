@@ -82,12 +82,12 @@ window.onload=function(){
 				var address = "project_progress_record_bodyDetail.html?sgwzid="+sgwzid+"&chrsgwz="+chrsgwzmc;;
     				toUrl(address);
 			},
-			openEC: function (id) {
-				var address = "project_progress_record_secDetail.html?id="+id;
+			openEC: function (did,chrdmc) {
+				var address = "project_progress_record_secDetail.html?did="+did;
     				toUrl(address);
 			},
-			openDT: function (id) {
-				var address = "project_progress_record_elevatorDetail.html?id="+id;
+			openDT: function (sgwz,chrsgwz) {
+				var address = "project_progress_record_elevatorDetail.html?sgwz="+sgwz;
     				toUrl(address);
 			},
 			openSW: function () {
