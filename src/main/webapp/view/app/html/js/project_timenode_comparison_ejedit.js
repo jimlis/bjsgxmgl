@@ -9,7 +9,6 @@ var index=0;
 var lx=obj.lx||"";
 var msg=chrjdlx=="jc"?"基础":(chrjdlx=="zt"?"主体":"");
 window.onload = function(){
-	debugger;
     pageData =(gqjdbjid&&lx=='zt')?getPageData():getZtPageData();
     index=pageData?pageData.length:0;
 		//数据绑定
@@ -80,7 +79,7 @@ function addOne(data,obj){
 	    var dtmjhwcsj=data.dtmjhwcsj||"";
 	var ulDiv=obj.parentNode.previousSibling;
 	var ulDom=document.createElement("ul");
-		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
+		ulDom.className='mui-table-view bj-background-inherit';
 	
 	var delBtnLi=document.createElement("li");
 		delBtnLi.style.cssText="padding: 5px 20px 0px 20px;";

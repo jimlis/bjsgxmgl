@@ -63,11 +63,9 @@
 				  </thead>
 				  <tbody  v-for="(value,key) in list">
 				  	<tr>
-				  		<td class="visibility"></td>
+				  		<td ></td>
                         <td data-label="栋楼">{{value["chrjdmc"]}}</td>
-                        <td  class="visibility"></td>
-                        <td  class="visibility"></td>
-                        <td  class="visibility"></td>
+                        <td  colspan="3"></td>
                         <td>
                             <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="updateNode(value['id'],'jc')">更新</button>
                         </td>

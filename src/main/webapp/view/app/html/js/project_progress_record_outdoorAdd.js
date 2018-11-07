@@ -98,7 +98,7 @@ function addQy(data,obj){
 	    var chrbz=data.chrbz||"";
 	var ulDiv=obj.parentNode.previousSibling;
 	var ulDom=document.createElement("ul");
-		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
+		ulDom.className='mui-table-view bj-background-inherit';
 	
 	var fileIdName="fileIds"+index;
 	var chrbtnName="chbtn"+index;

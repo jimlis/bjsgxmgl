@@ -66,7 +66,7 @@ function newaddLx(data){
 		lxDiv.style.cssText="padding-top: 4px;";    
 	
 	var ulDom=document.createElement("ul");
-		ulDom.className='<ul class="mui-table-view bj-background-inherit"';
+		ulDom.className='mui-table-view bj-background-inherit';
 	
 	var fileIdName="fileIds"+index;
 	var chrbtnName="chbtn"+index;
