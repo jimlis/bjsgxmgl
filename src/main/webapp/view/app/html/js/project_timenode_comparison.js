@@ -19,7 +19,7 @@ window.onload=function(){
     				toUrl(address);
 			},
 			openZt: function (id) {
-				var address = "project_timenode_comparison_ejedetails.html?chrjdlx=zt";
+				var address = "project_timenode_comparison_ztdetail.html?chrjdlx=zt";
     				toUrl(address);
 			},
 			openZxjg: function (id) {
