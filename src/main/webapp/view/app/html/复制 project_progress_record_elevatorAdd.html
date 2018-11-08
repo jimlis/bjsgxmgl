@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>电梯设备安装施工</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css"/>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+
+					</div>
+				</div>
+			</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		</header>
+		<div class="mui-content" id="app">
+		<form action="" id="myform">
+		    <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+            <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+            <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+			<div class="mui-content-padded">
+				<h5 class="bj-title2-font">报告日期：
+					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
+				</h5>
+				<h5 class="bj-title2-font">施工位置：
+					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwz" v-model="intsgwz" placeholder="请选择施工位置" />
+					<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrsgwz" v-model="chrsgwz" v-on:click="dlhPicker()" placeholder="请选择施工位置" />
+				</h5>
+				<h5 class="bj-title2-font">电梯编号：
+					<input class="bj-input bj-p-black-font" type="text" id="chrdtbh" v-model="chrdtbh" placeholder="请填写电梯编号" />
+				</h5>
+				<h5 class="bj-title2-font">电梯设备到货日期：
+					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmdhrq" v-model="dtmdhrq" v-on:click="dataPicker('dtmdhrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">电梯井道移交日期：
+					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmyjrq" v-model="dtmyjrq" v-on:click="dataPicker('dtmyjrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">电梯轨道完成日期：
+					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmwcrq" v-model="dtmwcrq" v-on:click="dataPicker('dtmwcrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">电梯门套完成比例：
+					<input class="bj-input bj-p-black-font" id="intwcbl" v-model="intwcbl" type="text" placeholder="请填写完比例" />
+				</h5>
+				<h5 class="bj-title2-font">机房设备安装比例：
+					<input class="bj-input bj-p-black-font" id="intazbl" v-model="intazbl" type="text" placeholder="请填写完比例" />
+				</h5>
+				<h5 class="bj-title2-font">电梯试运行日期：
+					<input class="bj-input bj-p-black-font"  readonly="readonly" id="dtmyxrq" v-model="dtmyxrq" v-on:click="dataPicker('dtmyxrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">电梯通过验收日期：
+					<input class="bj-input bj-p-black-font"   readonly="readonly" id="dtmysrq" v-model="dtmysrq" v-on:click="dataPicker('dtmysrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">电梯验收合格证明：
+				    <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
+                        <div class="btns">
+                            <button id="chbtn" type="button">选择文件</button>
+                        </div>
+                        <div id="file-list">
+                        </div>
+                    </div>
+				</h5>
+				<h5 class="bj-title2-font">合格证明到期日期：
+					<input class="bj-input bj-p-black-font"  readonly="readonly"  id="dtmdqrq" v-model="dtmdqrq" v-on:click="dataPicker('dtmdqrq')" placeholder="请选择日期" />
+				</h5>
+				<h5 class="bj-title2-font">备注：
+					<textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
+				</h5>
+				<h5 class="bj-title2-font">报告人：
+                    <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
+                    <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
+                </h5>
+			</div>
+			</form>
+		</div>
+		<script src="../js/mui.min.js"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_elevatorAdd.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

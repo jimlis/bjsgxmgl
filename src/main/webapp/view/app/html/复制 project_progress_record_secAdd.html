@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>二次结构、装修等施工</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css"/>
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
+    </head>
+        
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+            <h1 class="mui-title">
+                <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div class="mui-scroll" id="title-scroll">
+
+                    </div>
+                </div>
+            </h1>
+            <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+        </header>
+        <div class="mui-content" id="app" v-cloak>
+        <form action="" id="myform">
+              <input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+                <input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+                <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+            <div class="mui-content-padded">
+                <h5 class="bj-title2-font">更新日期：
+                    <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
+                </h5>
+                <h5 class="bj-title2-font">栋楼号：
+                    <input class="bj-input bj-p-black-font" type="hidden" id="intdid" v-model="intdid"  placeholder="栋楼号" />
+                    <input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrdmc" v-model="chrdmc" v-on:click="dlhPicker"  placeholder="栋楼号" />
+                </h5>
+                <h5 class="bj-title2-font">完成量：</h5>
+                <table id="wclTable" width="100%" class="bj-p-black-font" border="1px" style="text-align: center;">
+                        <thead>
+                            <tr>
+	                            <th>楼层<input id="lcnum" v-model="xmSgjdEcjgzxWclList.length" class="bj-input bj-p-black-font" type="hidden" /></th>
+	                            <th>门窗</th>
+	                            <th>防水</th>
+	                            <th>内保温</th>
+	                            <th>砌墙</th>
+	                            <th>装修</th>
+	                            <th>操作</th>
+                             </tr>
+                        </thead>
+                        <tbody >
+                           <tr v-for="(item,index) in xmSgjdEcjgzxWclList">
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].id'" v-model="item.id" class="bj-input bj-p-black-font" type="hidden" />
+                            <input id="'xmSgjdEcjgzxWclList['+index+'].chrlc'" v-model="item.chrlc" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intmc'" v-model="item.intmc" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intfs'" v-model="item.intfs" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intnbw'" v-model="item.intnbw" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intqt'" v-model="item.intqt" class="bj-input bj-p-black-font" type="text" /></td>
+                            <td><input id="'xmSgjdEcjgzxWclList['+index+'].intzx'" v-model="item.intzx" class="bj-input bj-p-black-font" type="text" /></td> 
+                            <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_deletelc(item.id,$event)">删除</button></td>
+                        </tr>
+                        </tbody>
+                        <tbody id="wclTableTbody">
+                        </tbody>
+                </table>
+                <h5><button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" v-on:click="addlc()">增加楼层</button></h5>
+                <h5 class="bj-title2-font">备注：
+                        <textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
+                    </h5>
+                <h5 class="bj-title2-font">报告人：
+                		<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc"   placeholder="报告人" />
+                		<input class="bj-input bj-p-black-font " type="hidden" id="intbgrid" v-model="intbgrid"   placeholder="报告人" />
+                </h5>
+            </div>
+            </form>
+        </div>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_progress_record_secAdd.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+
+</html>

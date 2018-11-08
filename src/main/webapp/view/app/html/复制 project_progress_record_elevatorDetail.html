@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>电梯设备安装施工</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+
+					</div>
+				</div>
+			</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="edit()">编辑</button>
+		</header>
+		<div class="mui-content" id="app" v-cloak>
+			<div class="mui-content-padded">
+				<h5 class="bj-title2-font">更新日期：<span class="bj-p-gray-font" >{{dtmgxrq}}</span></h5>
+				<h5 class="bj-title2-font">施工位置：<span class="bj-p-gray-font">{{chrsgwz}}</span></h5>
+				<h5 class="bj-title2-font">电梯编号：<span class="bj-p-gray-font">{{chrdtbh}}</span></h5>
+				<h5 class="bj-title2-font">电梯设备到货日期：<span class="bj-p-gray-font">{{dtmdhrq}}</span></h5>
+				<h5 class="bj-title2-font">电梯井道移交日期：<span class="bj-p-gray-font">{{dtmyjrq}}</span></h5>
+				<h5 class="bj-title2-font">电梯轨道完成日期：<span class="bj-p-gray-font">{{dtmwcrq}}</span></h5>
+				<h5 class="bj-title2-font">电梯门套完成比例：<span class="bj-p-gray-font">{{intwcbl}}</span></h5>
+				<h5 class="bj-title2-font">机房设备安装比例：<span class="bj-p-gray-font">{{intazbl}}</span></h5>
+				<h5 class="bj-title2-font">电梯试运行日期：<span class="bj-p-gray-font">{{dtmyxrq}}</span></h5>
+				<h5 class="bj-title2-font">电梯通过验收日期：<span class="bj-p-gray-font">{{dtmysrq}}</span></h5>
+				<h5 class="bj-title2-font">电梯验收合格证明：
+				    <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
+                        <div id="file-list">
+                        </div>
+                    </div>
+				</h5>
+				<h5 class="bj-title2-font">合格证明到期日期：<span class="bj-p-gray-font">{{dtmdqrq}}</span></h5>
+				<h5 class="bj-title2-font">备注：<span class="bj-p-gray-font">{{chrbz}}</span></h5>
+				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
+			</div>
+		</div>
+	</body>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_progress_record_elevatorDetail.js" type="text/javascript" charset="utf-8"></script>
+</html>

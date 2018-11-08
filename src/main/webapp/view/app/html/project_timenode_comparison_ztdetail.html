@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>主体工期节点比较</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <link rel="stylesheet" href="../css/app.css" />
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+          .addbtn{
+          	font-size: 14px;
+			padding: 10px 30px !important;
+			background-color: rgba(0,0,0,.15)
+          }
+        </style> 
+        
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+            <h1 class="mui-title">
+                <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div class="mui-scroll" id="title-scroll">
+
+                    </div>
+                </div>
+            </h1>
+            <!--<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">更新</button>--> 
+        </header>
+        <div class="mui-content" id="app" v-cloak>
+			<ul class="mui-table-view bj-title2-font bj-background-inherit">
+		        <li class="mui-table-view-cell mui-collapse" v-for="item in pageData">
+		            <a class="mui-navigate-right" href="javascript:void(0);">{{item.chrjdmc}}<span class="mui-badge addbtn"  v-on:click.stop="add(item.id)">+</span></a>
+		            	<ul class="mui-table-view " style="overflow-x: scroll;"> 
+		            		<table style="margin: 15px 20px;">
+				        		<thead>
+						    		<tr>
+									<th>名称</th>
+									<th>计划完成时间</th>
+									<th>实际完成时间</th>
+									<th>工期(+提前-延后)</th>
+						    		</tr>
+						  	</thead>
+						  	<tbody>
+						    		<tr v-for="child in item.childList">
+						    			<td data-label="名称">{{child.chrjdmc}}</td>
+									<td data-label="计划完成时间">{{child.dtmjhwcsj}}</td>
+									<td data-label="实际完成时间">{{child.dtmsjwcsj}}</td>
+									<td data-label="工期(+提前-延后)">{{computedDay(child.dtmjhwcsj,child.dtmsjwcsj)}}</td>
+						    		</tr>
+						  </tbody>
+					  </table>
+		    			</ul>
+		        </li>
+			</ul>
+        </div>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison_ztdetail.js" type="text/javascript" charset="utf-8"></script>
+        
+    </body>
+
+</html>
