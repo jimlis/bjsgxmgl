@@ -110,5 +110,23 @@ public class ApiXmSgjdYlsgController extends ApiBaseController {
         }
 
     }
+    
+    @Log("根据param获取园林施工信息")
+    @PostMapping("getXmSgjdYlsgByParam")
+    @ApiOperation(value="根据param获取园林施工信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmSgjdYlsgId",paramType="form",dataType = "Long",required=false,value = "园林施工信息id"),
+    	@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=false,value = "项目id"),
+    	@ApiImplicitParam(name="fwlx",paramType="form",dataType = "Long",required=false,value = "发起类型 xz-新增  cx-查询")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmSgjdYlsgDO.class),
+            @ApiResponse(code=1,message="操作失败",response=XmSgjdYlsgDO.class)})
+    @RequiresAuthentication
+    public Result<XmSgjdYlsgDO> getXmSgjdYlsgByParam(Long xmSgjdYlsgId,Long xmid,String fwlx) {
+        try {
+            return Result.ok(xmSgjdYlsgService.getXmSgjdYlsgByParam(xmid,fwlx,xmSgjdYlsgId));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
 
 }

@@ -104,9 +104,11 @@ var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsg
 var progressElevatorByParamApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgByParam";
 
 var progressOutDoorByIdApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgById";
+var progressOutDoorByParamApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgByParam";
 var progressOutDoorSaveApiPath=serverPath+"api/xmsgjdswgwsg/save";
 
 var progressGardenByIdApiPath=serverPath+"api/xmsgjdylsg/getXmSgjdYlsgById";
+var progressGardenByParamApiPath=serverPath+"api/xmsgjdylsg/getXmSgjdYlsgByParam";
 var progressGardenSaveApiPath=serverPath+"api/xmsgjdylsg/save";
 
 //规划指标

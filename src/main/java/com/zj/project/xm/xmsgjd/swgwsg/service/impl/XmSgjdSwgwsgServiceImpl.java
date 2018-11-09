@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,8 +26,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.xm.xmsgjd.swgwsg.dao.XmSgjdSwgwsgDao;
 import com.zj.project.xm.xmsgjd.swgwsg.domain.XmSgjdSwgwlxDO;
 import com.zj.project.xm.xmsgjd.swgwsg.domain.XmSgjdSwgwsgDO;
@@ -86,6 +89,18 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
     			xmSgjdSwgwsgJdList.forEach(xmSgjdSwgwsgJd->{
     				Long intswgwlxid = xmSgjdSwgwsgJd.getIntswgwlxid();
     				if(intswgwlxid!=null) {
+    					
+    					//设置附件ids
+    					//查询附件
+    		        	FileDO fileDO=new FileDO();
+    		        	fileDO.setBusId(xmSgjdSwgwsgJd.getId());
+    		        	fileDO.setBusType(XmSgjdSwgwsgJdServiceImpl.tableInfo.getTableName());
+    		        	QueryWrapper<FileDO> fileQueryWrapper=new QueryWrapper<FileDO>(fileDO).orderByAsc("id");
+    		        	List<FileDO> fileList=fileService.list(fileQueryWrapper);
+    		        	if(CollectionUtils.isNotEmpty(fileList)) {
+    		        		xmSgjdSwgwsgJd.setFileIds(fileList.stream().map(one->Objects.toString(one.getId(), "")).collect(Collectors.joining(",")));
+    		        	}
+    		        	
     					xmSgjdSwgwsgJd.setChrswgwlxid(lxMaps.get(intswgwlxid).getChrswgwlx());
         				if(maps.containsKey(intswgwlxid)) {
         					maps.get(intswgwlxid).add(xmSgjdSwgwsgJd);
@@ -106,6 +121,16 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
     				xmSgjdSwgwsgDO.setXmSgjdSwgwsgJdListMap(maps);
     			}
     		}
+    		
+    		//查询附件
+        	FileDO fileDO=new FileDO();
+        	fileDO.setBusId(xmSgjdSwgwsgDO.getId());
+        	fileDO.setBusType(tableInfo.getTableName());
+        	QueryWrapper<FileDO> fileQueryWrapper=new QueryWrapper<FileDO>(fileDO).orderByAsc("id");
+        	List<FileDO> fileList=fileService.list(fileQueryWrapper);
+        	if(CollectionUtils.isNotEmpty(fileList)) {
+        		xmSgjdSwgwsgDO.setFileIds(fileList.stream().map(one->Objects.toString(one.getId(), "")).collect(Collectors.joining(",")));
+        	}
     	}
     	return xmSgjdSwgwsgDO;
     }
@@ -165,17 +190,34 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
 		}
 
 		id = xmSgjdSwgwsgDO.getId();
-
-		// 更新文件信息
+		
+		UserDO appUserDO = ShiroUtils.getAppUserDO();
+		
+		// 更新附件信息
 		if (StringUtils.isNotEmpty(fileIds)) {
 			String[] fileArr = fileIds.trim().split(",");
 			for (String fileid : fileArr) {
 				if (StringUtils.isNotEmpty(fileid.trim())) {
-					FileDO fileDO = new FileDO();
-					fileDO.setId(Long.parseLong(fileid.trim()));
-					fileDO.setBusType(tableInfo.getTableName());
-					fileDO.setBusId(id);
-					fileService.updateById(fileDO);
+					//查询附件是否已经关联业务数据 如果关联复制附件信息指向同一个文件
+					FileDO fileDO = fileService.getById(Long.parseLong(fileid.trim()));
+					if(fileDO!=null&&StringUtils.isNotEmpty(fileDO.getBusType())&&fileDO.getBusId()!=null) {
+						fileDO.setId(null);
+						fileDO.setBusType(tableInfo.getTableName());
+						fileDO.setBusId(id);
+					    fileDO.setCreateUserId(appUserDO.getId());
+				        fileDO.setCreateUserName(appUserDO.getName());
+				        fileDO.setCreateDeptId(appUserDO.getDeptId());
+				        fileDO.setCreateDeptName(appUserDO.getDeptName());
+				        fileDO.setCreateDate(new Date());
+				        fileService.save(fileDO);
+					}else {
+						FileDO newFileDO =	new FileDO();
+						newFileDO.setId(Long.parseLong(fileid.trim()));
+						newFileDO.setBusType(tableInfo.getTableName());
+						newFileDO.setBusId(id);
+						fileService.updateById(newFileDO);
+					}
+					
 				}
 			}
 		}
@@ -222,16 +264,31 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
 									}
 									
 									//更新附件信息
-									// 更新文件信息
+									
 									if (StringUtils.isNotEmpty(wcqkFileIds)) {
 										String[] fileArr = wcqkFileIds.trim().split(",");
 										for (String fileid : fileArr) {
 											if (StringUtils.isNotEmpty(fileid.trim())) {
-												FileDO fileDO = new FileDO();
-												fileDO.setId(Long.parseLong(fileid.trim()));
-												fileDO.setBusType(XmSgjdSwgwsgJdServiceImpl.tableInfo.getTableName());
-												fileDO.setBusId(xmSgjdSwgwsgJdDO.getId());
-												fileService.updateById(fileDO);
+												//查询附件是否已经关联业务数据 如果关联复制附件信息指向同一个文件
+												FileDO fileDO = fileService.getById(Long.parseLong(fileid.trim()));
+												if(fileDO!=null&&StringUtils.isNotEmpty(fileDO.getBusType())&&fileDO.getBusId()!=null) {
+													fileDO.setId(null);
+													fileDO.setBusType(XmSgjdSwgwsgJdServiceImpl.tableInfo.getTableName());
+													fileDO.setBusId(xmSgjdSwgwsgJdDO.getId());
+												    fileDO.setCreateUserId(appUserDO.getId());
+											        fileDO.setCreateUserName(appUserDO.getName());
+											        fileDO.setCreateDeptId(appUserDO.getDeptId());
+											        fileDO.setCreateDeptName(appUserDO.getDeptName());
+											        fileDO.setCreateDate(new Date());
+											        fileService.save(fileDO);
+												}else {
+													FileDO newFileDO =	new FileDO();
+													newFileDO.setId(Long.parseLong(fileid.trim()));
+													newFileDO.setBusType(XmSgjdSwgwsgJdServiceImpl.tableInfo.getTableName());
+													newFileDO.setBusId(xmSgjdSwgwsgJdDO.getId());
+													fileService.updateById(newFileDO);
+												}
+												
 											}
 										}
 									}
@@ -279,6 +336,56 @@ public class XmSgjdSwgwsgServiceImpl extends BaseServiceImpl<XmSgjdSwgwsgDao, Xm
 			});
 		}
 	}
+	
+	
+	 /**
+     * 根据项目id获取室外网管信息
+     * @param xmid 项目id
+     * @param fwlx 访问类型 xz---新增 查询-cx
+     * @param Long id 主键id
+     * @return XmSgjdSwgwsgDO
+     */
+    @Override 
+    public  XmSgjdSwgwsgDO getXmSgjdDtsbazsgByParam(Long xmid,String fwlx,Long id) {
+    	if(xmid==null) {
+    		return null;
+    	}
+    	
+    	UserDO appUserDO = ShiroUtils.getAppUserDO();
+    	
+    	List<XmSgjdSwgwsgDO> list=Lists.newArrayList();
+    	XmSgjdSwgwsgDO xmSgjdSwgwsgDO=new XmSgjdSwgwsgDO();
+    	if(id!=null) {
+    		return getById(id);
+    	}else {
+    		xmSgjdSwgwsgDO.setIntxmid(xmid);
+    		xmSgjdSwgwsgDO.setFcbz(1);
+        	QueryWrapper<XmSgjdSwgwsgDO> queryWrapper=new QueryWrapper<XmSgjdSwgwsgDO>(xmSgjdSwgwsgDO).orderByDesc("id");
+        	list=list(queryWrapper);
+    	}
+    	
+    	if(CollectionUtils.isEmpty(list)) {
+    		if(StringUtils.isNotEmpty(fwlx)) {
+    			if("xz".equals(fwlx)) {
+    				xmSgjdSwgwsgDO.setDtmgxrq(new Date());
+    				xmSgjdSwgwsgDO.setChrbgrmc(appUserDO.getName());
+    				xmSgjdSwgwsgDO.setIntbgrid(appUserDO.getId());
+        		}else if("cx".equals(fwlx)) {
+        			
+        		}
+    			
+    			xmSgjdSwgwsgDO.setIntxh(0);
+        		
+    			xmSgjdSwgwsgDO.setXmSgjdSwgwsgJdListMap(Maps.newHashMap());
+    			xmSgjdSwgwsgDO.setXmSgjdSwgwsgLxMap(Maps.newHashMap());
+    		}
+    		return xmSgjdSwgwsgDO;
+    	}else {
+    		XmSgjdSwgwsgDO newObj=list.get(0);
+    		return getById(newObj.getId());
+    	}
+    	
+      }
 
 
 }

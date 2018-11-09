@@ -69,6 +69,12 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
     /**施工类型listMap*/
     @TableField(exist=false)
     Map<Long,XmSgjdSwgwlxDO> xmSgjdSwgwsgLxMap;
+    
+
+    /**相关附件ids*/
+    @ApiModelProperty(value = "相关附件ids ",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
 
     /**
      * 设置：主键id
@@ -189,6 +195,12 @@ public class XmSgjdSwgwsgDO extends BaseDomain {
 	}
 	public void setXmSgjdSwgwsgLxMap(Map<Long, XmSgjdSwgwlxDO> xmSgjdSwgwsgLxMap) {
 		this.xmSgjdSwgwsgLxMap = xmSgjdSwgwsgLxMap;
+	}
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
 	}
     
 }

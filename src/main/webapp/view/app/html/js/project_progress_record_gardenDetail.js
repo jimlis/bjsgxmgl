@@ -1,5 +1,6 @@
 var obj = getRequest();
 var id=obj.id||"";
+var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
 	//得到数据
@@ -10,7 +11,7 @@ window.onload = function(){
 		el: '#app',
 		data: pageData
 	});
-	
+	debugger;
 	if(id){
 		initFileList("bj_xm_sgjd_ylsg",id,"1","fileIds","file-list",false);
 	}
@@ -25,14 +26,17 @@ window.onload = function(){
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:progressGardenByIdApiPath,
+		url:progressGardenByParamApiPath,
 		type:"post",
 		async:false,
 		data:{
-			xmSgjdYlsgId:id
+			xmSgjdYlsgId:id,
+			xmid:xmid,
+			fwlx:"cx"
 		},
 		success:function(data){
 			if(data){
+				id=data.id||"";
 				o=data;
 			}
 		}

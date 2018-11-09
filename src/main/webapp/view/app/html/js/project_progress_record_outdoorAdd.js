@@ -42,19 +42,13 @@ window.onload = function(){
 		var listMap=pageData.xmSgjdSwgwsgJdListMap;
 		var lxMap=pageData.xmSgjdSwgwsgLxMap||{};
 		for(key in listMap){
-			
+			var tempLxIndex=lxIndex;
 			var addLxDom=newaddLx(lxMap[key]);
 			
 			var list=listMap[key]||[];
 			for(i in list){
 				var tempIndex=index;
-				addQy(list[i],addLxDom);
-				var fileIdName="fileIds"+tempIndex;
-				var chrbtnName="chbtn"+tempIndex;
-				var fileListName="file-list"+tempIndex;
-				
-				//加载文件
-				initFileList("bj_xm_sgjd_swgwsg_jd",list[i].id,"1",fileIdName,fileListName,true);
+				addQyTable([list[i]],"tbody"+tempLxIndex);
 			}
 			
 		}
@@ -66,17 +60,30 @@ var lxIndex=0;
 function newaddLx(data){
 	var id=data.id||"";
 	var chrswgwlx=data.chrswgwlx||"";
+	var fileIds=data.fileIds||"";
+	
 	var lxDiv=document.createElement("div");
+	var table=document.createElement("table");
+	var thead=document.createElement("thead");
+	var tbody=document.createElement("tbody");
+	var tbodyId="tbody"+lxIndex;
+	    tbody.setAttribute("id",tbodyId);
 	lxDiv.setAttribute("name","lxDiv");
 	lxDiv.style.cssText="padding-top: 4px;";
 	lxDiv.innerHTML=
-		'<div><input type="hidden" placeholder="" name="intswgwlxid" value="'+id+'">'+
-		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%"></div>'+
-		'<div></div>'+
-		'<span><button id="addLx'+lxIndex+'" type="button" class="mui-btn mui-btn-primary" style="margin-top: 2px;margin-right:65px" onclick="addQy({},this)">新增区域</button>'+
-		'<button type="button" class="mui-btn mui-btn-danger" style="margin-top: 2px;" onclick="delLx(\''+id+'\',this)">删除类型</button></span>';
+		'<input type="hidden" placeholder="" name="intswgwlxid" value="'+id+'">'+
+		'<input type="hidden" placeholder="" name="fileIds" value="'+fileIds+'">'+
+		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%">'+
+		'<button type="button" class="mui-btn mui-btn-danger" style="margin: 2px;" onclick="delLx(\''+id+'\',this)">删除类型</button>'+
+		'<button type="button" class="mui-btn mui-btn-primary" style="margin: 2px;" onclick="addQyTable([],\''+tbodyId+'\')">新增区域</button>';
     var xLul=document.getElementById("xLul");
+		thead.innerHTML='<tr><th>施工区域</th><th>完成量</th>'+
+		'<th>完成情况</th><th>备注</th><th style="width: 30px;">操作</th></tr>';
+		table.appendChild(thead);
+		table.appendChild(tbody);
+		lxDiv.appendChild(table);
     xLul.appendChild(lxDiv);
+   // addQyTable([],tbodyId);
     var tempLxIndex=lxIndex;
     lxIndex++;
     return document.getElementById("addLx"+tempLxIndex);
@@ -87,7 +94,54 @@ function delLx(swgwlxId,obj){
 	if(swgwlxId){
 		deleteSwgwlxIds+=swgwlxId+",";
 	}
-	obj.parentNode.parentNode.remove();
+	obj.parentNode.remove();
+}
+
+function addQyTable(data,tbodyid){
+	var fileIdName="fileIds"+index;
+	var chrbtnName="chbtn"+index;
+	var fileListName="file-list"+index;
+	var tbody=document.getElementById(tbodyid);
+	var html="";
+	    if(data&&data.length>0){
+	    	for(i in data){
+	    		var rowData=data[i];
+	    		var rowid=rowData.id||"";
+	    		var fileIds=rowData.fileIds||"";
+	    		var chrsgqy=rowData.chrsgqy||"";
+	    		var intwcl=rowData.intwcl||"";
+	    		var chrbz=rowData.chrbz||"";
+		    	var tr=document.createElement("tr");
+		    	tr.innerHTML=
+				'<td data-label="施工区域"><input class="bj-input bj-p-black-font" type="hidden" name="intswgwsgjdid" value="'+rowid+'"  placeholder="请输入" />'+
+				'<input class="bj-input bj-p-black-font" name="chrsgqy" type="text" value="'+chrsgqy+'"   placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds"  value="'+fileIds+'"  type="hidden"></input></td>'+
+				'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number" value="'+intwcl+'"  placeholder="请输入" /></td>'+
+				'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
+				'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text" value="'+chrbz+'"  placeholder="请输入" /></td>'+
+				'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>';
+		    	tbody.appendChild(tr);
+		    	//刷新上传控件
+				upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_swgwsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
+				initFileList("bj_xm_sgjd_swgwsg_jd",rowData.id,"1",fileIdName,fileListName,true);
+				index++;
+	    	}
+	    	
+	    }else{
+	    	var tr=document.createElement("tr");
+	    	tr.innerHTML=
+			'<td data-label="施工区域"><input class="bj-input bj-p-black-font" type="hidden" name="intswgwsgjdid"   placeholder="请输入" />'+
+			'<input class="bj-input bj-p-black-font" name="chrsgqy" type="text"  placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input></td>'+
+			'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number"  placeholder="请输入" /></td>'+
+			'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
+			'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text"  placeholder="请输入" /></td>'+
+			'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>';
+	    	tbody.appendChild(tr);
+	    	//刷新上传控件
+			upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_swgwsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
+			index++;
+	    }
+		
+		
 }
 
 function addQy(data,obj){
@@ -157,48 +211,44 @@ function getSglxAndJdJson(){
 	for(var index=0;index<lxDivDom.length;index++){
 		var item = lxDivDom[index].childNodes;
 		var lxObj={};
-		var intswgwlxid=null,chrswgwlx="",xmSgjdSwgwsgJdList=[];
-		var lxDiv=item[0];
-		var lxDivNodes=lxDiv.childNodes;
-		for(var j=0;j<lxDivNodes.length;j++){
-			if(lxDivNodes[j].name=="intswgwlxid"){
-				intswgwlxid=lxDivNodes[j].value||null;
-			}
-			if(lxDivNodes[j].name=="chrswgwlx"){
-				chrswgwlx=lxDivNodes[j].value||"";
-			}
-		}
+		var intswgwlxid=null,fileIds="",chrswgwlx="",xmSgjdSwgwsgJdList=[];
+		var intswgwlxid=item[0].value||null;
+		var fileIds=item[1].value||"";
+		var chrswgwlx=item[2].value||"";
 		
-		var qydiv=item[1];
-		var qyulNodes=qydiv.childNodes;
-		for(var j=0;j<qyulNodes.length;j++){
-			var qyUl=qyulNodes[j];
-			var qyLiNodes=qyUl.childNodes;
+		var qytrNodes=lxDivDom[index].lastElementChild.childNodes[1].childNodes;
+		for(var j=0;j<qytrNodes.length;j++){
+			var qyTr=qytrNodes[j];
+			var qyTdNodes=qyTr.childNodes;
 			var qyObj={};
-			for(var k=0;k<qyLiNodes.length;k++){
-				var qyLi=qyLiNodes[k];
-				var qyLiNodesDom=qyLi.childNodes;
-				for(var m=0;m<qyLiNodesDom.length;m++){
-					if(qyLiNodesDom[m].name=="intswgwsgjdid"){
-						qyObj["id"]=qyLiNodesDom[m].value||null;
+			for(var k=0;k<qyTdNodes.length;k++){
+				var qyTd=qyTdNodes[k];
+				var qyTdNodesDom=qyTd.childNodes;
+				for(var m=0;m<qyTdNodesDom.length;m++){
+					if(qyTdNodesDom[m].name=="intswgwsgjdid"){
+					//	qyObj["id"]=qyTdNodesDom[m].value||null;
 					}
-					if(qyLiNodesDom[m].name=="fileIds"){
-						qyObj["fileIds"]=qyLiNodesDom[m].value||"";
+					if(qyTdNodesDom[m].name=="fileIds"){
+							qyObj["fileIds"]=qyTdNodesDom[m].value||"";
 					}
-					if(qyLiNodesDom[m].name=="chrsgqy"){
-						qyObj["chrsgqy"]=qyLiNodesDom[m].value||"";
+					if(qyTdNodesDom[m].name=="fileIds"){
+						qyObj["fileIds"]=qyTdNodesDom[m].value||"";
 					}
-					if(qyLiNodesDom[m].name=="intwcl"){
-						qyObj["intwcl"]=qyLiNodesDom[m].value||null;
+					if(qyTdNodesDom[m].name=="chrsgqy"){
+						qyObj["chrsgqy"]=qyTdNodesDom[m].value||"";
 					}
-					if(qyLiNodesDom[m].name=="chrbz"){
-						qyObj["chrbz"]=qyLiNodesDom[m].value||"";
+					if(qyTdNodesDom[m].name=="intwcl"){
+						qyObj["intwcl"]=qyTdNodesDom[m].value||null;
+					}
+					if(qyTdNodesDom[m].name=="chrbz"){
+						qyObj["chrbz"]=qyTdNodesDom[m].value||"";
 					}
 				}
 			}
 			xmSgjdSwgwsgJdList.push(qyObj);
 		}
 		lxObj["id"]=intswgwlxid;
+		lxObj["fileIds"]=fileIds;
 		lxObj["chrswgwlx"]=chrswgwlx;
 		lxObj.xmSgjdSwgwsgJdList=xmSgjdSwgwsgJdList;
 		arr.push(lxObj);
@@ -215,7 +265,9 @@ function isUpdata(){
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdSwgwsgId:id
+				xmSgjdSwgwsgId:id,
+				xmid:xmid,
+				fwlx:"xz"
 			},
 			success:function(data){
 				result = data;
@@ -256,5 +308,5 @@ function save(){
 	});
 }
 function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_outdoorDetail.html?id="+id);
 }

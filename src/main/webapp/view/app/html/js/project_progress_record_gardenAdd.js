@@ -24,7 +24,7 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			addLx: function () {
-				newaddLx({});
+				newaddLx([]);
 			},
 			datePicker: function (name) {
 				vueDtPicker(pageData,name);
@@ -39,75 +39,59 @@ window.onload = function(){
 	
 	//init 
 	var list=pageData.xmSgjdYlsgJdList||[];
-			debugger;
-	for(i in list){
-		var tempIndex=index;
-		newaddLx(list[i]);
-		var fileIdName="fileIds"+tempIndex;
-		var chrbtnName="chbtn"+tempIndex;
-		var fileListName="file-list"+tempIndex;
-		
-		//加载文件
-		initFileList("bj_xm_sgjd_ylsg_jd",list[i].id,"1",fileIdName,fileListName,true);
-	}
+	    newaddLx(list);
 			
 }
 
 function newaddLx(data){
-	    data=data||{};
-	    var id=data.id||"";
-	    var intwcl=data.intwcl||"";
-	    var chrlxmc=data.chrlxmc||"";
-	    var chrsgqy=data.chrsgqy||"";
-	    var chrzb=data.chrzb||"";
-	    
-	    var lxDiv=document.createElement("div");
-		lxDiv.setAttribute("name","lxDiv");
-		lxDiv.style.cssText="padding-top: 4px;";    
-	
-	var ulDom=document.createElement("ul");
-		ulDom.className='mui-table-view bj-background-inherit';
-	
-	var fileIdName="fileIds"+index;
-	var chrbtnName="chbtn"+index;
-	var fileListName="file-list"+index;
-	var delBtnLi=document.createElement("li");
-		delBtnLi.style.cssText="padding: 5px 0px 0px 0px;";
-		delBtnLi.innerHTML='<button class="mui-btn mui-btn-danger" type="button"  onclick="delLx(\''+id+'\',this,event)">删除区域</button>';
-	
-	var lxmcLi=document.createElement("li");
-		lxmcLi.style.cssText="padding: 5px 0px 0px 0px;";
-		lxmcLi.innerHTML='<input class="bj-input" name="intylsgjdid" value="'+id+'" type="hidden"></input>'+
-		'<input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input>'+
-		'类型名称：<input class="bj-input" name="chrlxmc" value="'+chrlxmc+'" type="text"></input>';
+		var fileIdName="",chrbtnName="",fileListName="";
 		
+		var tbody=document.getElementById("one_tbody");
+		var html="";
+		    if(data&&data.length>0){
+		    	for(i in data){
+		    		fileIdName="fileIds"+index;
+		    		chrbtnName="chbtn"+index;
+		    		fileListName="file-list"+index;
+		    		var rowData=data[i];
+		    		var rowid=rowData.id||"";
+		    		var fileIds=rowData.fileIds||"";
+		    		var chrlxmc=rowData.chrlxmc||"";
+		    		var intwcl=rowData.intwcl||"";
+		    		var chrzb=rowData.chrzb||"";
+			    	var tr=document.createElement("tr");
+			    	tr.innerHTML=
+					'<td data-label="类型名称"><input class="bj-input bj-p-black-font" type="hidden" name="intylsgjdid" value="'+rowid+'"  placeholder="请输入" />'+
+					'<input class="bj-input bj-p-black-font" name="chrlxmc" type="text" value="'+chrlxmc+'"   placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds"  value="'+fileIds+'"  type="hidden"></input></td>'+
+					'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number" value="'+intwcl+'"  placeholder="请输入" /></td>'+
+					'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
+					'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrzb" type="text" value="'+chrzb+'"  placeholder="请输入" /></td>'+
+					'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delLx(\'\',this)">-</button></td>';
+			    	tbody.appendChild(tr);
+			    	//刷新上传控件
+					upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_swgwsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
+					initFileList("bj_xm_sgjd_ylsg_jd",rowData.id,"1",fileIdName,fileListName,true);
+					index++;
+		    	}
+		    	
+		    }else{
+		    	var tr=document.createElement("tr");
+		    	fileIdName="fileIds"+index;
+	    		chrbtnName="chbtn"+index;
+	    		fileListName="file-list"+index;
+		    	tr.innerHTML=
+				'<td data-label="类型名称"><input class="bj-input bj-p-black-font" type="hidden" name="intylsgjdid"   placeholder="请输入" />'+
+				'<input class="bj-input bj-p-black-font" name="chrlxmc" type="text"  placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input></td>'+
+				'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number"  placeholder="请输入" /></td>'+
+				'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
+				'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrzb" type="text"  placeholder="请输入" /></td>'+
+				'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delLx(\'\',this)">-</button></td>';
+		    	tbody.appendChild(tr);
+		    	//刷新上传控件
+				upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_ylsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
+				index++;
+		    }
 		
-	var wclLi=document.createElement("li");
-		wclLi.style.cssText="padding: 5px 0px 0px 0px;";
-		wclLi.innerHTML='完成量：<input class="bj-input" name="intwcl" value="'+intwcl+'" type="number"></input>';
-		
-	var wcqkLi=document.createElement("li");
-		wcqkLi.style.cssText="padding: 5px 0px 0px 0px;";
-		wcqkLi.innerHTML='完成情况：<div id="uploader" class="wu-example"><div class="btns">'+
-			'<button id="'+chrbtnName+'" type="button">选择文件</button></div><div id="'+fileListName+'"></div>';
-	
-	var bzLi=document.createElement("li");
-		bzLi.style.cssText="padding: 5px 0px 0px 0px;";
-		bzLi.innerHTML='备注：<input class="bj-input" name="chrzb" value="'+chrzb+'" type="text"></input>';
-		
-		ulDom.appendChild(delBtnLi);
-		ulDom.appendChild(lxmcLi);
-		ulDom.appendChild(wclLi);
-		ulDom.appendChild(wcqkLi);
-		ulDom.appendChild(bzLi);
-		
-		lxDiv.appendChild(ulDom);
-		
-		document.getElementById("xLul").appendChild(lxDiv);
-		
-		//刷新上传控件
-		upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_ylsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
-		index++;
 }
 
 var deleteYlsgjdIds="";
@@ -115,34 +99,33 @@ function delLx(ylsgjdId,obj){
 	if(ylsgjdId){
 		deleteYlsgjdIds+=ylsgjdId+",";
 	}
-	obj.parentNode.parentNode.parentNode.remove();
+	obj.parentNode.parentNode.remove();
 }
 
 function getylsglxAndJdJson(){
-	var lxDivDom=document.getElementsByName("lxDiv");
+	var one_tbody=document.getElementById("one_tbody");
+	var trNodes=one_tbody.childNodes;
 	var arr=[];
-	for(var index=0;index<lxDivDom.length;index++){
-		var item = lxDivDom[index].childNodes;
-		var lxUl=item[0];
-		var lxLiNodes=lxUl.childNodes;
+	for(var i=0;i<trNodes.length;i++){
+		var tdNodes = trNodes[i].childNodes;
 		var lxObj={};
-		for(var j=0;j<lxLiNodes.length;j++){
-				var lxLiNodesDom=lxLiNodes[j].childNodes;
-				for(var m=0;m<lxLiNodesDom.length;m++){
-					if(lxLiNodesDom[m].name=="intylsgjdid"){
-						lxObj["id"]=lxLiNodesDom[m].value||null;
+		for(var j=0;j<tdNodes.length;j++){
+				var tdNodesDom=tdNodes[j].childNodes;
+				for(var m=0;m<tdNodesDom.length;m++){
+					if(tdNodesDom[m].name=="intylsgjdid"){
+					//	lxObj["id"]=tdNodesDom[m].value||null;
 					}
-					if(lxLiNodesDom[m].name=="chrlxmc"){
-						lxObj["chrlxmc"]=lxLiNodesDom[m].value||"";
+					if(tdNodesDom[m].name=="chrlxmc"){
+						lxObj["chrlxmc"]=tdNodesDom[m].value||"";
 					}
-					if(lxLiNodesDom[m].name=="fileIds"){
-						lxObj["fileIds"]=lxLiNodesDom[m].value||"";
+					if(tdNodesDom[m].name=="fileIds"){
+						lxObj["fileIds"]=tdNodesDom[m].value||"";
 					}
-					if(lxLiNodesDom[m].name=="intwcl"){
-						lxObj["intwcl"]=lxLiNodesDom[m].value||null;
+					if(tdNodesDom[m].name=="intwcl"){
+						lxObj["intwcl"]=tdNodesDom[m].value||null;
 					}
-					if(lxLiNodesDom[m].name=="chrzb"){
-						lxObj["chrzb"]=lxLiNodesDom[m].value||"";
+					if(tdNodesDom[m].name=="chrzb"){
+						lxObj["chrzb"]=tdNodesDom[m].value||"";
 					}
 			}
 		}
@@ -156,11 +139,13 @@ function isUpdata(){
 	if(id){
 		var result={};
 		$bjAjax({
-			url:progressGardenByIdApiPath,
+			url:progressGardenByParamApiPath,
 			type:"post",
 			async:false,
 			data:{
-				xmSgjdYlsgId:id
+				xmSgjdYlsgId:id,
+				xmid:xmid,
+				fwlx:"xz"
 			},
 			success:function(data){
 				result = data;
@@ -200,5 +185,5 @@ function save(){
 	});
 }
 function outPage(){
-	toUrl("project_progress_record.html");
+	toUrl("project_progress_record_gardenDetail.html?id="+id);
 }

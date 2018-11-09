@@ -1,5 +1,6 @@
 var obj = getRequest();
 var id=obj.id||"";
+var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
 	//得到数据
@@ -34,15 +35,17 @@ window.onload = function(){
 function getPageData(){
 	var o={};
 	$bjAjax({
-		url:progressOutDoorByIdApiPath,
+		url:progressOutDoorByParamApiPath,
 		type:"post",
 		async:false,
 		data:{
-			xmSgjdSwgwsgId:id
+			xmSgjdSwgwsgId:id,
+			xmid:xmid,
+			fwlx:"cx"
 		},
 		success:function(data){
-			debugger
 			if(data){
+				id=data.id||"";
 				o=data;
 			}
 		}

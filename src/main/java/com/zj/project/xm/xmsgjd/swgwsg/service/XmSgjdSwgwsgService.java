@@ -37,4 +37,13 @@ public interface XmSgjdSwgwsgService extends BaseService<XmSgjdSwgwsgDO> {
 	 * @param deleteSwgwjdIds 删除的项目室外管网施工进度ids
 	 */
 	public void saveXmSgjdSwgwsgXx(XmSgjdSwgwsgDO xmSgjdSwgwsgDO, String fileIds,String sglxAndJdJson,String deleteSwgwlxIds,String deleteSwgwjdIds);
+	
+	 /**
+     * 根据项目id获取室外网管信息
+     * @param xmid 项目id
+     * @param fwlx 访问类型 xz---新增 查询-cx
+     * @param Long id 主键id
+     * @return XmSgjdSwgwsgDO
+     */
+	XmSgjdSwgwsgDO getXmSgjdDtsbazsgByParam(Long xmid, String fwlx, Long id);
 }

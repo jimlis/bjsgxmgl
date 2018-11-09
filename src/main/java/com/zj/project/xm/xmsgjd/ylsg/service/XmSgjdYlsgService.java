@@ -37,4 +37,13 @@ public interface XmSgjdYlsgService extends BaseService<XmSgjdYlsgDO> {
 	 * @param deleteYlsgjdIds 删除施工进度ids
 	 */
 	public void saveXmSgjdYlsgXx(XmSgjdYlsgDO xmSgjdYlsgDO, String fileIds,String ylsgJdJson,String deleteYlsgjdIds);
+	
+	 /**
+     * 根据项目id获取园林施工信息
+     * @param xmid 项目id
+     * @param fwlx 访问类型 xz---新增 查询-cx
+     * @param Long id 主键id
+     * @return XmSgjdSwgwsgDO
+     */
+	XmSgjdYlsgDO getXmSgjdYlsgByParam(Long xmid, String fwlx, Long id);
 }

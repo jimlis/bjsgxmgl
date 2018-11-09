@@ -30,8 +30,8 @@
 		<div class="mui-content" id="app">
 		     <form action="" id="myform">
 			<div class="mui-content-padded">
-			     <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" />
-                 <input class="bj-input bj-p-black-font " type="hidden" id="id" v-model="id"/>
+			     <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" v-model="fileIds"/>
+                 <input class="bj-input bj-p-black-font " type="hidden"  v-model="id"/>
                  <input class="bj-input bj-p-black-font " type="hidden" id="intxmid" v-model="intxmid"/>
 				<h5 class="bj-title2-font">更新日期：
 				    <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq" v-on:click="datePicker('dtmgxrq')"/>
@@ -81,6 +81,7 @@
 				</ul>
 				
 				<button class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;" v-on:click="addLx">新增类型</button>
+				
 				<h5 class="bj-title2-font">报告人：
                     <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
                     <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />

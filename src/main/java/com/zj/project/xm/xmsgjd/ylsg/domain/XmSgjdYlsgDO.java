@@ -63,6 +63,11 @@ public class XmSgjdYlsgDO extends BaseDomain {
     /**施工进度list*/
     @ApiModelProperty(value = "施工进度list",name = "xmSgjdYlsgJdList",dataType = "List",required = false)
     List<XmSgjdYlsgJdDO> xmSgjdYlsgJdList;
+    
+    /**相关附件ids*/
+    @ApiModelProperty(value = "相关附件ids ",name = "fileIds",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String fileIds;
 
     /**
      * 设置：主键id
@@ -177,6 +182,12 @@ public class XmSgjdYlsgDO extends BaseDomain {
 	}
 	public void setXmSgjdYlsgJdList(List<XmSgjdYlsgJdDO> xmSgjdYlsgJdList) {
 		this.xmSgjdYlsgJdList = xmSgjdYlsgJdList;
+	}
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
 	}
    
 }
