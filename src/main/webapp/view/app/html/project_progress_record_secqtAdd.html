@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>新增施工进度-二次施工-其他类型</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css" />
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0);" onclick="outPage()"></a>
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+
+					</div>
+				</div>
+			</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		</header>
+		<div class="mui-content" id="app">
+			<form id="myform">
+				<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+				<div class="mui-content-padded">
+					<h5 class="bj-title2-font">报告日期：
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq"/>
+					</h5>
+					<h5 class="bj-title2-font">报告位置：
+						<input class="bj-input bj-p-black-font"  type="text" id="chrwz" v-model="chrwz"  placeholder="请选择" />
+					</h5>
+					<h5 class="bj-title2-font">施工位置：
+						<input class="bj-input bj-p-black-font"  type="text" id="chrsgwz" v-model="chrsgwz" placeholder="请选择" />
+					</h5>
+					<h5 class="bj-title2-font">备注：
+						<textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
+					</h5>
+					<h5 class="bj-title2-font">报告人：
+						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
+					</h5>
+					<!-- <h5 class="bj-title2-font">照片：</h5>
+					<div id="uploader" class="wu-example">
+						<div class="btns">
+							<button id="chbtn" type="button">选择照片</button>
+						</div>
+						<div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
+					</div> -->
+				</div>
+			</form>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_secqtAdd.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

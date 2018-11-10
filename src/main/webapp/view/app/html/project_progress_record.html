@@ -64,7 +64,7 @@
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openEC(item.value)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('EC')">+</span></li>
 				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="ecShow">
-						    	<li class="mui-table-view-cell">Item 1</li>
+						    	<li class="mui-table-view-cell" v-for="item in qts.ec" v-on:click="openQT('ec','',item.id)">{{item.chrsgwz}}</li>
 						</ul>		
 		    			</ul>
 		        </li>

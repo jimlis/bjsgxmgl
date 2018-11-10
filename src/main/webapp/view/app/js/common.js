@@ -96,9 +96,14 @@ var progressJcsgByIdApiPath=serverPath+"api/xmsgjdjcsg/getXmSgjdJcsgById";
 var 	progressZtjgPath = serverPath+"api/xmsgjdztjgsg/";
 var progressZtjgSaveApiPath=serverPath+"api/xmsgjdztjgsg/save";
 var progressZtjgByIdApiPath=serverPath+"api/xmsgjdztjgsg/getXmSgjdJcsgById";
+
 var progressSecSaveApiPath=serverPath+"api/xmsgjdecjgzx/save";
 var progressSecByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxById";
 var progressSecByParamApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxByParam";
+var progressSecSaveQtApiPath=serverPath+"api/xmsgjdecjgzx/saveqt";
+var progressSecQtByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxQtById";
+var progressSecQtListByXmidApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxQtListByXmid";
+
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 var progressElevatorByParamApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgByParam";

@@ -40,6 +40,18 @@ window.onload=function(){
 					console.log(qt);
 				}
 			});
+			$bjAjax({
+				url:progressSecQtListByXmidApiPath,
+				data:{
+					xmid:xmid
+				},
+				type:"post",
+				success:function(result){
+					
+					qt["ec"]=result;
+					console.log(qt);
+				}
+			});
 		},
 		methods: {
 			toggle:function(type){
@@ -66,11 +78,11 @@ window.onload=function(){
 				var address;
 				if(type=="JC"){
 					address = "project_progress_record_baseAdd.html?intsgwzid=-1&chrsgwzmc=其他";
-				}
-				if(type=="ZT"){
+				}else if(type=="ZT"){
 					address = "project_progress_record_bodyAdd.html?intsgwzid=-1&chrsgwzmc=其他";
+				}else if(type=="EC"){
+					address = "project_progress_record_secqtAdd.html";
 				}
-				
 				
     				toUrl(address);
 			},
@@ -102,9 +114,10 @@ window.onload=function(){
 				var address;
 				if(type=="jc"){
 					address = "project_progress_record_baseDetail.html?sgwzid="+sgwzid+"&jcid="+id;
-				}
-				if(type=="zt"){
+				}else if(type=="zt"){
 					address = "project_progress_record_bodyDetail.html?sgwzid="+sgwzid+"&jcid="+id;
+				}else if(type=="ec"){
+					address = "project_progress_record_secqtDetail.html?id="+id;
 				}
 				toUrl(address);
 			}
