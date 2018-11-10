@@ -1,5 +1,6 @@
 //初始化必要条件
 var xmid=getCookie("id");
+var isclick= true;
 window.onload=function(){
 	//得到数据
 	var pageData = getDl();
@@ -55,22 +56,28 @@ window.onload=function(){
 		},
 		methods: {
 			toggle:function(type){
-				switch (type){
-					case 'jc':
-					this.jcShow = !this.jcShow;
-						break;
-					case 'zt':
-					this.ztShow = !this.ztShow;
-						break;
-					case 'ec':
-					this.ecShow = !this.ecShow;
-						break;
-					case 'dt':
-					this.dtShow = !this.dtShow;
-						break;
-					default:
-						break;
-				}
+			    if(isclick){
+			        isclick= false;
+					switch (type){
+						case 'jc':
+						this.jcShow = !this.jcShow;
+							break;
+						case 'zt':
+						this.ztShow = !this.ztShow;
+							break;
+						case 'ec':
+						this.ecShow = !this.ecShow;
+							break;
+						case 'dt':
+						this.dtShow = !this.dtShow;
+							break;
+						default:
+							break;
+					}
+			 setTimeout(function(){ 
+				            isclick = true;
+				        }, 500);
+				    }
 				
 			},
 			addQT:function(type){
@@ -124,7 +131,7 @@ window.onload=function(){
 		}
 	});
 	
-	
+tyclClick("#app");
 
 }
 //得到【栋楼】数据

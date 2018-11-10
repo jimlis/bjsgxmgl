@@ -61,6 +61,7 @@ window.onload= function(){
 			}
 		}
 	});
+	tyclClick("#app");
 }
 
 //得到显示数据
