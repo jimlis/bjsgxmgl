@@ -90,6 +90,7 @@ function getGhzbJson(){
 }
 
 function save(){
+isSure(function(){
 	var data = {};
 	data["xmid"]=intxmid;
 	data["deleteGhzbIds"]=(deleteGhzbIds.length>0?deleteGhzbIds.substring(0,deleteGhzbIds.length-1):deleteGhzbIds);
@@ -105,6 +106,7 @@ function save(){
 			});
 		}
 	})
+})
 }
 
 //更新

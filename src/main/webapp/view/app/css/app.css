@@ -37,8 +37,8 @@
 	line-height: 130%;
 }
 .bj-p-gray-font{
-	font-size: 14px;
-	color: #BBBBBB;
+	font-size: 90%;
+	/*color: #BBBBBB;*/
 }
 .bj-p-black-font{
 	font-size: 14px;
@@ -60,7 +60,7 @@
 	margin: 5px 5px;
 }
 .bj-background-inherit{
-	background-color: inherit;
+	/*background-color: inherit;*/
 }
 .mui-pull-right.bj-header-right{
 	line-height: 44px;

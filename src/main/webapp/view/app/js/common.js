@@ -1004,3 +1004,12 @@ var restore = function (vueObject) {
 
     return result;
 };
+
+function isSure(funs,funf){
+	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+		console.log(seletitem);
+		if(seletitem.index==0){
+			funs();
+		}
+	});
+}

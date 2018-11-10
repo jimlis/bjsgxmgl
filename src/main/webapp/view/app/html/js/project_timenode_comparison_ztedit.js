@@ -67,6 +67,7 @@ function inputTest(childList){
 }
 
 function save(){
+isSure(function(){
 	var data = {};
 	data["xmid"]=intxmid;
 	data["jdlx"]="zt";
@@ -93,6 +94,7 @@ function save(){
 			});
 		}
 	})
+})
 }
 
 function outPage(){

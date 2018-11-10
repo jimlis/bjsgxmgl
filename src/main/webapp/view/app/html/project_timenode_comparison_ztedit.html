@@ -34,7 +34,8 @@
         <div class="mui-content" id="app" >
         		<div class="mui-content-padded">
             <h5 class="bj-title2-font">主体名称：{{pageData.chrjdmc}}</h5>
-			<table>
+            <ul class="mui-table-view " style="overflow-x: scroll;">
+			<table style="margin: 15px 20px;">
 			  <thead>
 			    <tr>
 			      <th>序号：</th>
@@ -52,6 +53,7 @@
 			    </tr>
 			  </tbody>
 			</table>
+			</ul>
 			<button class="mui-btn mui-btn-primary" type="button" v-on:click="add">+</button>
         </div>
         </div>

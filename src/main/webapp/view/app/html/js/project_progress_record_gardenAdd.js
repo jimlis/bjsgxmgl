@@ -170,6 +170,7 @@ function buildModel(){
 
 //保存数据
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 		data["ylsgJdJson"]=getylsglxAndJdJson();
 		data["deleteYlsgjdIds"]=deleteYlsgjdIds;
@@ -183,6 +184,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 function outPage(){
 	toUrl("project_progress_record_gardenDetail.html?id="+id);

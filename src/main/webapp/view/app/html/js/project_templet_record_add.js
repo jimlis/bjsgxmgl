@@ -59,7 +59,7 @@ function getPageData(){
 }
 function save(){
 	//bjToast("保存成功");
-	
+isSure(function(){
 	var data = getFromData("form");
 	data["id"] = obj.id||"";
 	data["intxmid"] = getCookie("id");
@@ -73,7 +73,7 @@ function save(){
 			});
 		}
 	})
-	
+})	
 	
 }
 function outPage(){

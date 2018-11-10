@@ -66,7 +66,7 @@ function getPageData(){
 
 function save(){
 	//bjToast("保存成功");
-	
+	isSure(function(){
 	var data = getFromData("form");
 	$bjAjax({
 		url:quaRecodeSaveApiPath,
@@ -79,6 +79,7 @@ function save(){
 			});
 		}
 	})
+})
 }
 function outPage(){
 	toUrl("project_quality_report.html");

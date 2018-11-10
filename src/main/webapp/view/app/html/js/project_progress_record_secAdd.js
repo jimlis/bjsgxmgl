@@ -94,6 +94,7 @@ function buildModel(){
 
 //保存数据
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	data.deleteWclIds=(deleteIds.length>0?deleteIds.substring(0,deleteIds.length-1):deleteIds);
 	$bjAjax({
@@ -106,6 +107,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 function outPage(){
 	toUrl("project_progress_record_secDetail.html?id="+id);

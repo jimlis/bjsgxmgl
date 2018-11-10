@@ -19,6 +19,8 @@ $bjAjax({
 })
 
 function save(){
+isSure(function(){
+
 	var data = getFromData("myform");
 	data["intxkzlx"] = "2";
 	data["intxmid"] = getCookie("id");
@@ -33,6 +35,8 @@ function save(){
 			
 		}
 	})
+
+})
 
 }
 function outPage(){

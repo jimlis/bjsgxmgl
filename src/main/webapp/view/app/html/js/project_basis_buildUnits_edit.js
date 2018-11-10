@@ -85,6 +85,8 @@ function delyjdw(id,chrdwmc,obj){
 
 //保存
 function save(){
+isSure(function(){
+
 	var data = getFromData("myform");
 	data["intxmid"] = getCookie("id");
 	
@@ -99,6 +101,8 @@ function save(){
 			});
 		}
 	});
+
+});
 }
 function outPage(){
 	toUrl("project_basis_list.html");

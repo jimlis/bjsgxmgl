@@ -90,6 +90,7 @@ function isUpdate(){
 }
 
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	var intbglb=data.intbglb||"";
 	var chrpswzms=data.chrpswzms||"";
@@ -109,6 +110,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 function outPage(){
 	toUrl("project_photo_record_list.html");

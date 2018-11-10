@@ -292,6 +292,7 @@ function buildModel(){
 
 //保存数据
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 		data["sglxAndJdJson"]=getSglxAndJdJson();
 		data["deleteSwgwlxIds"]=deleteSwgwlxIds;
@@ -306,6 +307,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 function outPage(){
 	toUrl("project_progress_record_outdoorDetail.html?id="+id);

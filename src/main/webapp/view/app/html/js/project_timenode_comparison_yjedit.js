@@ -102,6 +102,7 @@ function getGqjdbjJson(){
 }
 
 function save(){
+isSure(function(){
 	var data = {};
 	data["xmid"]=intxmid;
 	data["jdlx"]=chrjdlx;
@@ -117,6 +118,7 @@ function save(){
 			});
 		}
 	})
+})
 }
 
 

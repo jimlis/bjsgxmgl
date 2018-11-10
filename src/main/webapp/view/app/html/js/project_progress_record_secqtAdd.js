@@ -68,6 +68,7 @@ function buildModel(){
 
 //保存数据
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	$bjAjax({
 		url:progressSecSaveQtApiPath,
@@ -79,6 +80,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 
 

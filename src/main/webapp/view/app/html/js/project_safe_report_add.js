@@ -51,6 +51,7 @@ window.onload = function(){
 }
 
 function save(){
+isSure(function(){
 	var data = getFromData("form");
 	$bjAjax({
 	url:safeReportSaveApiPath,
@@ -62,6 +63,7 @@ function save(){
 			toUrl("project_safe_report.html");
 		});
 	}
+	})
 })
 	
 }

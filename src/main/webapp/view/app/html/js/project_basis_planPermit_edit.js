@@ -19,6 +19,7 @@ $bjAjax({
 })
 
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	data["intxkzlx"] = "1";
 	data["intxmid"] = getCookie("id");
@@ -33,7 +34,7 @@ function save(){
 			
 		}
 	})
-
+})
 }
 function outPage(){
 	toUrl("project_basis_list.html");

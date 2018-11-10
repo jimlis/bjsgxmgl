@@ -89,6 +89,7 @@ function buildModel(){
 
 //保存数据
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	$bjAjax({
 		url:progressElevatorSaveApiPath,
@@ -100,6 +101,7 @@ function save(){
 			});
 		}
 	});
+})
 }
 function outPage(){
 	toUrl("project_progress_record_elevatorDetail.html?id="+id);

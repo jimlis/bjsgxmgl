@@ -25,6 +25,7 @@ if(obj.id){
 }
 
 function save(){
+isSure(function(){
 	var data = getFromData("myform");
 	data["intxmid"] = getCookie("id");
 	data["id"] = obj.id||"";
@@ -38,6 +39,8 @@ function save(){
 			});
 		}
 	});
+});
+
 }
 upLoadImg('#chbtn',{"busType":"bj_xm_qyjwz"});
 function outPage(){
