@@ -39,6 +39,20 @@ window.onload=function(){
 					}
 				}
 			});
+			$bjAjax({
+				url:timenodeZxjgMapListByXmidApiPath,
+				type:"post",
+				async:false,
+				data:{
+					xmid:xmid
+				},
+				success:function(data){
+					if(data){
+						vue.$data.zxys =data.zxys||[];
+						vue.$data.jgys =data.jgys||[];
+					}
+				}
+			});
 		},
 		methods: {
 			add:function(nodeid){
