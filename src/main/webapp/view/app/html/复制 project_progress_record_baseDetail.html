@@ -3,13 +3,13 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>项目管理平台</title>
+		<title>基础施工</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
-		<style type="text/css"> 
+        <style type="text/css"> 
           [v-cloak] { 
             display: none; 
           } 
@@ -30,36 +30,14 @@
 		</header>
 		<div class="mui-content" id="app" v-cloak>
 			<div class="mui-content-padded">
-				<h5 id="bj-xmmc">xx项目</h5>
-				<h5 style="margin-left: 16px;"><span id="toright"></span>项目进度记录</h5>
-				<h5 style="margin-left: 32px;"><span id="toright"></span>主体结构施工</h5>
-				<hr />
 				<h5 class="bj-title2-font">报告日期：<span class="bj-p-gray-font">{{dtmbgrq}}</span></h5>
-				<h5 class="bj-title2-font">施工位置：<span class="bj-p-gray-font">{{chrShowAddress}}</span></h5>
-				<h5 class="bj-title2-font " v-if="intsgwzd==-1">施工位置描述：
-						<span class="bj-p-gray-font">{{chrsgwzms}}</span>
-                    </h5>
-					<h5 class="bj-title2-font">是否完成：
-						<span class="bj-p-gray-font">{{chrsfwc}}</span>
-					</h5>
-					<h5 class="bj-title2-font" v-if="intsfwc==1">完成日期：
-						<span class="bj-p-gray-font">{{dtmwcrq}}</span>
-					</h5>
-				<h5 class="bj-title2-font">楼层：{{ztjgKzList.length}}</h5>
-					<table>
-					  <thead>
-					    <tr>
-					      <th>楼层名称</th>
-					      <th>完成日期</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr v-for="(item , key) in ztjgKzList">
-					      <td data-label="名称"><span class="bj-p-gray-font">{{item.chrjdmc}}</span></td>
-					      <td data-label="浇筑砼日期"><span class="bj-p-gray-font">{{item.dtmwcsj}}</span></td>
-					    </tr>
-					  </tbody>
-					</table>
+				<h5 class="bj-title2-font">施工位置：<span class="bj-p-gray-font">{{chrsgwzmc}}</span></h5>
+				<h5 class="bj-title2-font" v-if="intsgwzid==-1">施工位置描述：<span class="bj-p-gray-font">{{chrsgwzms}}</span></h5>
+				<h5 class="bj-title2-font">基础类型：<span class="bj-p-gray-font">{{chrjclx}}</span></h5>
+				<h5 class="bj-title2-font" v-if="intjclx==3">桩基础总数量：<span class="bj-p-gray-font">{{intzjczsl}}</span></h5>
+				<h5 class="bj-title2-font" v-if="intjclx==3">桩基础完成数量：<span class="bj-p-gray-font">{{intzjcwcl}}</span></h5>
+				<h5 class="bj-title2-font">完成量(百分比)：<span class="bj-p-gray-font">{{intwcl}}</span></h5>
+				<h5 class="bj-title2-font">浇筑砼日期：<span class="bj-p-gray-font">{{dtmjzqrq}}</span></h5>
 				<h5 class="bj-title2-font">报告人：<span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
 				<h5 class="bj-title2-font">照片：</h5>
 				<div id="uploader" class="wu-example">
@@ -69,11 +47,13 @@
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
-		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/project_progress_record_bodyDetails.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_progress_record_baseDetail.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

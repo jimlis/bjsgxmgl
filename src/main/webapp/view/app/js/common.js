@@ -4,6 +4,7 @@ function setNavbar(){
 		var nav = document.getElementById("title-scroll");
 		nav.innerHTML = `
 			<a href="../main.html">首页</a>
+			<a class="mui-action-back">前一页</a>
 			<a href="/app/html/project_list.html?intxmlx=1">PMC项目</a>
 			<a href="/app/html/project_list.html?intxmlx=2">PMC项目</a>
 		`;
@@ -435,14 +436,16 @@ var createFragments = function(files,fileIdsDomId,isEdit) {
 };
 //打开图片
 function openImg(src){
-	var div=document.createElement("div");
-	div.className="bj-zz";
-	div.id="bj-zz";
-	div.onclick=closeImg;
-	div.innerHTML=`
-		<img id="bj-img1" src="`+src+`" style="display: block;height: auto;max-width: 100%;"/>
-	`
-	document.body.appendChild(div);
+//	var div=document.createElement("div");
+//	div.className="bj-zz";
+//	div.id="bj-zz";
+//	div.onclick=closeImg;
+//	div.innerHTML=`
+//		<img id="bj-img1" src="`+src+`" style="display: block;height: auto;max-width: 100%;"/>
+//	`
+//	document.body.appendChild(div);
+
+toUrl("/app/html/openimg.html?src="+src);
 }
 //关闭图片
 function closeImg(){

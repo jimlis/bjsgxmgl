@@ -19,6 +19,9 @@
 			.addbtn{
 				padding: 10px 30px
 			}
+			.mleft10{
+				margin-left: 10px!important;
+			}
 			.mleft30{
 				margin-left: 30px!important;
 			}
@@ -27,7 +30,7 @@
 		
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 			<h1 class="mui-title">
 				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll" id="title-scroll">
@@ -37,41 +40,41 @@
 			</h1>
 		</header>
 		<div class="mui-content" id="app">
-			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
+			<ul class="mui-table-view bj-title2-font"> 
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">基础施工</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openJC(item.value,item.text)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('JC')">+</span></li>
-				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="jcShow">
+		            	<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse  mleft10" v-for="item in dls" v-on:click="openJC(item.value,item.text)">{{item.text}}</li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('JC')">+</span></li>
+				        <ul class="mui-table-view  mleft30" v-show="jcShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.jc"  v-on:click="openQT('jc',item.intsgwzid,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">主体结构施工</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span></li>
-				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="ztShow">
+		            	<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span></li>
+				        <ul class="mui-table-view  mleft30" v-show="ztShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.zt"  v-on:click="openQT('zt',item.intsgwzd,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">二次结构、装修等施工</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openEC(item.value)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('EC')">+</span></li>
-				        <ul class="mui-table-view  bj-background-inherit mleft30" v-show="ecShow">
+		            	<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openEC(item.value)">{{item.text}}</li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('EC')">+</span></li>
+				        <ul class="mui-table-view  mleft30" v-show="ecShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.ec" v-on:click="openQT('ec','',item.id)">{{item.chrsgwz}}</li>
 						</ul>		
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">电梯设备安装施工</a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in dls" v-on:click="openDT(item.value)">{{item.text}}</li>
+		            	<ul class="mui-table-view"> 
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openDT(item.value)">{{item.text}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse"  v-on:click="openSW()">

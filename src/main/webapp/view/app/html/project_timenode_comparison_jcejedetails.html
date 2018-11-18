@@ -18,7 +18,7 @@
 
     <body>
         <header class="mui-bar mui-bar-nav">
-            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
             <h1 class="mui-title">
                 <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                     <div class="mui-scroll" id="title-scroll">
@@ -50,15 +50,15 @@
                         </tr>
                     </tbody>
                 </table>-->
-                <ul class="mui-table-view " style="overflow-x: scroll;">
-                <table style="margin: 15px 20px;">
+                <div class="mui-content-padded" style="overflow-x: scroll;">
+                <table>
 				  <thead>
 				    <tr>
 				      <th>序号</th>
 				      <th>名称</th>
 				      <th>计划完成时间</th>
 				      <th>实际完成时间</th>
-				      <th>工期(+提前-延后)</th>
+				      <th>工期(+)提前/(-)延后</th>
 				      <th>操作</th>
 				    </tr>
 				  </thead>
@@ -67,14 +67,14 @@
 			      <td data-label="名称">{{item.chrjdmc}}</td>
 			      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
 			      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
-			      <td data-label="工期(+提前-延后)">{{computedDay(index)}}</td>
+			      <td data-label="工期(+)提前/(-)延后">{{computedDay(index)}}</td>
 			      <td>
                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="updateNode(item.id)">更新</button>
                            <button class="mui-btn mui-btn-danger" style="margin-top: 2px;" v-on:click="deleteNode(item.id,$event)">删除</button>
                      </td>
 			    </tr>
 				</table>
-				</ul>
+				</div>
             </h5>
         </div>
         <script src="../js/mui.min.js"></script>

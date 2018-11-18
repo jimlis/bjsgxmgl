@@ -1131,8 +1131,8 @@ p {
 }
 
 .mui-bar .mui-title {
-	right: 40px;
-	left: 40px;
+	right: 50px;
+	left: 0px;
 	display: inline-block;
 	overflow: hidden;
 	width: auto;
