@@ -42,7 +42,7 @@ window.onload=function(){
 			$bjAjax({
 				url:timenodeZxjgMapListByXmidApiPath,
 				type:"post",
-				async:false,
+				//async:false,
 				data:{
 					xmid:xmid
 				},
