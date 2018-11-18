@@ -2,6 +2,7 @@ package com.zj.project.api.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
 import com.zj.platform.common.web.controller.ApiBaseController;
@@ -160,17 +162,59 @@ public class ApiXmGqjdbjController extends ApiBaseController {
     @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
     	@ApiResponse(code=1,message="操作失败",response=List.class)})
     @RequiresAuthentication
-    public Result<List<XmGqjdbjDO>> getXmGqjdbjZtList(Long gqjdbjid,Long xmid,String jdlx) {
+    public Result<List<XmGqjdbjDO>> getXmGqjdbjZtList(Long gqjdbjid,Long xmid) {
         try {
         	if(xmid==null) {
         		return Result.ok(Lists.newArrayList());
         	}
-            List<XmGqjdbjDO> list = xmGqjdbjService.getXmGqjdbjZtList(gqjdbjid, xmid, jdlx);
+            List<XmGqjdbjDO> list = xmGqjdbjService.getXmGqjdbjZtList(gqjdbjid, xmid);
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();
         }
+    }
+    
+    
+    @Log("根据项目id获取工期专项竣工节点比较信息")
+    @PostMapping("getXmGqjdbjZxjgMapListByXmid")
+    @ApiOperation(value="根据项目id获取工期专项竣工节点比较信息",httpMethod="POST")
+    @ApiImplicitParams({
+    	@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=List.class),
+    	@ApiResponse(code=1,message="操作失败",response=List.class)})
+    @RequiresAuthentication
+    public Result<Map<String, List<XmGqjdbjDO>>> getXmGqjdbjZxjgMapListByXmid(Long xmid) {
+        try {
+        	if(xmid==null) {
+        		return Result.ok(Maps.newHashMap());
+        	}
+              Map<String, List<XmGqjdbjDO>> maps = xmGqjdbjService.getXmGqjdbjZxjgMapListByXmid(xmid);
+            return Result.ok(maps);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("批量保存项目专项竣工工期节点信息")
+    @PostMapping("batchSaveXmZxjgGqjdbjXx")
+    @ApiOperation(value="批量保存项目工期节点信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
+            @ApiImplicitParam(name="gqjdbjJson",paramType="form",dataType = "string",required=true,value = "项目工期节点比较对象数组json字符串"),
+            @ApiImplicitParam(name="deleteGqjdbjIds",paramType="form",dataType = "string",required=false,value = "删除项目工期节点比较ids"),})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功"),
+            @ApiResponse(code=1,message="操作失败")})
+    @RequiresAuthentication
+    public Result batchSaveXmZxjgGqjdbjXx(Long xmid,String gqjdbjJson,String deleteGqjdbjIds) {
+        try {
+        	xmGqjdbjService.batchSaveXmZxjgGqjdbjXx(xmid,gqjdbjJson,deleteGqjdbjIds);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+
     }
 
 

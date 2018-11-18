@@ -21,7 +21,7 @@ function setNavbar(){
 }
 
 /**服务端地址*/
-var serverPath="http://192.168.1.103:8080/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -118,9 +118,11 @@ var targetDataDelPath=serverPath+"api/xmghzb/del";
 //工期节点
 var timenodeListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjList";
 var timenodeSaveBatchPath=serverPath+"api/gqjdbj/batchSave";
+var timenodeSaveBatchZxjgPath=serverPath+"api/gqjdbj/batchSaveXmZxjgGqjdbjXx";
 var timenodeDelPath=serverPath+"api/gqjdbj/del";
 var timenodeListByParamApiPath=serverPath+"api/gqjdbj/getXmGqjdbjListByParam";
 var timenodeZtListApiPath=serverPath+"api/gqjdbj/getXmGqjdbjZtList";
+var timenodeZxjgMapListByXmidApiPath=serverPath+"api/gqjdbj/getXmGqjdbjZxjgMapListByXmid";
 //审批流程状态
 var splcztBySplclxApiPath = serverPath +"api/splczt/getSplcZtBySplclx";
 var splcTxByUseridApiPath = serverPath+"api/common/sendMessage";

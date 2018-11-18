@@ -45,10 +45,29 @@ public interface XmGqjdbjService extends BaseService<XmGqjdbjDO> {
      * <p>Description: </p> 
      * @param gqjdbjid
      * @param xmid
-     * @param jdlx
      * @return
      * @author zhujujun
      * @date:2018年11月6日 上午1:07:50
      */
-	List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid, Long xmid, String jdlx);
+	List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid, Long xmid);
+	
+	 /**
+     * <p>Title:获取专项竣工验收信息 </p>  
+     * <p>Description: </p> 
+     * @param xmid
+     * @return
+     * @author zhujujun
+     * @date:2018年11月6日 上午1:07:50
+     */
+	Map<String, List<XmGqjdbjDO>> getXmGqjdbjZxjgMapListByXmid(Long xmid);
+	
+	 /**
+     * <p>Title:批量保存项目专项竣工工期节点信息 </p>  
+     * <p>Description: </p> 
+     * @param xmid 项目id
+     * @param gqjdbjJson 工期对象json、
+     * @param deleteGqjdbjIds 删除工期对象ids
+     * @date:2018年10月24日 下午10:20:17
+     */
+	void batchSaveXmZxjgGqjdbjXx(Long xmid, String gqjdbjJson, String deleteGqjdbjIds);
 }

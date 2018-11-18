@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.common.web.exception.MyApiException;
@@ -165,13 +166,12 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
      * <p>Description: </p> 
      * @param gqjdbjid
      * @param xmid
-     * @param jdlx
      * @return
      * @author zhujujun
      * @date:2018年11月6日 上午1:07:50
      */
     @Override
-    public List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid,Long xmid,String jdlx) {
+    public List<XmGqjdbjDO> getXmGqjdbjZtList(Long gqjdbjid,Long xmid) {
 
   	    if(xmid==null){
             throw  new MyApiException("44005");
@@ -204,6 +204,98 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
   	    }else {
   	    	return Lists.newArrayList();
   	    }
+    }
+    
+    /**
+     * <p>Title:获取专项竣工验收信息 </p>  
+     * <p>Description: </p> 
+     * @param gqjdbjid
+     * @param xmid
+     * @param jdlx
+     * @return
+     * @author zhujujun
+     * @date:2018年11月6日 上午1:07:50
+     */
+    @Override
+    public Map<String,List<XmGqjdbjDO>> getXmGqjdbjZxjgMapListByXmid(Long xmid) {
+
+  	    if(xmid==null){
+            throw  new MyApiException("44005");
+        }
+  	    
+  	    Map<String,List<XmGqjdbjDO>> maps=Maps.newHashMap();
+  	    		
+  	    XmGqjdbjDO zxXmGqjdbjDO=new XmGqjdbjDO();
+			  	   zxXmGqjdbjDO.setIntxmid(xmid);
+			  	   zxXmGqjdbjDO.setFcbz(1);
+			  	   zxXmGqjdbjDO.setChrjdlx("zxys");
+  	    QueryWrapper<XmGqjdbjDO> zxQueryWrapper=new QueryWrapper<XmGqjdbjDO>(zxXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+    			"dtmjhwcsj","intsjbj").orderByAsc("intxh");
+  	    List<XmGqjdbjDO> zxList=list(zxQueryWrapper);
+  	    
+  	    maps.put("zxys", zxList);
+  	    
+  	    
+  	    XmGqjdbjDO jgXmGqjdbjDO=new XmGqjdbjDO();
+			  	   jgXmGqjdbjDO.setIntxmid(xmid);
+			  	   jgXmGqjdbjDO.setFcbz(1);
+			  	   jgXmGqjdbjDO.setChrjdlx("jgys");
+	  QueryWrapper<XmGqjdbjDO> jgQueryWrapper=new QueryWrapper<XmGqjdbjDO>(jgXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+		"dtmjhwcsj","intsjbj").orderByAsc("intxh");
+	   List<XmGqjdbjDO> jgList=list(jgQueryWrapper);
+	   
+	   maps.put("jgys", jgList);
+  	    return maps;
+    }
+    
+    /**
+     * <p>Title:批量保存项目专项竣工工期节点信息 </p>  
+     * <p>Description: </p> 
+     * @param xmid 项目id
+     * @param gqjdbjJson 工期对象json、
+     * @param deleteGqjdbjIds 删除工期对象ids
+     * @date:2018年10月24日 下午10:20:17
+     */
+    @Override
+    public void batchSaveXmZxjgGqjdbjXx(Long xmid,String gqjdbjJson,String  deleteGqjdbjIds) {
+    	
+    	  if(xmid==null){
+              throw  new MyApiException("44005");
+          }
+    	  
+    	  if(StringUtils.isNotEmpty(gqjdbjJson)&&!"[]".equals(gqjdbjJson)) {
+    		  Gson gson=new Gson();
+              List<XmGqjdbjDO> list = gson.fromJson(gqjdbjJson, new TypeToken<List<XmGqjdbjDO>>() {
+              }.getType());
+              
+              //保存
+              if(CollectionUtils.isNotEmpty(list)){
+                  list.forEach(xmGqjdbjDO->{
+                      Long id=xmGqjdbjDO.getId();
+                      String chrjdmc=xmGqjdbjDO.getChrjdmc();
+                      if(StringUtils.isNotEmpty(chrjdmc)) {
+                      	 if(id==null){
+                      		   xmGqjdbjDO.setFcbz(1);
+                      		   xmGqjdbjDO.setGxsj(new Date());
+                      		   xmGqjdbjDO.setIntxmid(xmid);
+                               save(xmGqjdbjDO);
+                           }else{
+                        	   xmGqjdbjDO.setGxsj(new Date());
+                               updateById(xmGqjdbjDO);
+                           }
+                      	 }
+                  });
+              }
+    	  }
+          
+          //删除
+          if(StringUtils.isNotEmpty(deleteGqjdbjIds)) {
+          	Arrays.stream(deleteGqjdbjIds.trim().split(",")).forEach(gqjdbjId->{
+          		if(StringUtils.isNotEmpty(gqjdbjId)) {
+          			 deleteGqjdbjById(Long.parseLong(gqjdbjId));
+          		}
+          	});
+          }
     }
     
 

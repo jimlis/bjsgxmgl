@@ -12,6 +12,17 @@
         <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
         <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
         <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+        <style type="text/css">
+            .icon{
+                height: 15px!important
+            }
+            .addbtn{
+                padding: 10px 30px
+            }
+            .mleft30{
+                margin-left: 30px!important;
+            }
+        </style>
     </head>
         
     <body>
@@ -31,7 +42,51 @@
                 <li class="mui-table-view-cell" v-on:click="openQqbj">前期报建</li>
                 <li class="mui-table-view-cell" v-on:click="openJc">基础</li>
                 <li class="mui-table-view-cell" v-on:click="openZt">主体</li>
-                <li class="mui-table-view-cell" v-on:click="openZxjg">专项及竣工验收</li>
+                <li class="mui-table-view-cell mui-collapse">
+                    <a class="mui-navigate-right" href="#"><img class="mui-media-object  icon" >专项及竣工</a>
+                        <ul class="mui-table-view bj-background-inherit"> 
+	                        <li class="mui-table-view-cell mui-collapse" >专项验收</li>
+	                        <ul class="mui-table-view  bj-background-inherit mleft30" >
+	                                <li class="mui-table-view-cell">
+	                                   <table>
+	                                       <tr>
+		                                       <td>名称</td>
+		                                       <td>计划完成时间</td>
+		                                       <td>实际完成时间</td>
+		                                       <td>工期(+提前,-延后)</td>
+	                                       </tr>
+	                                       <tr v-for="item in zxys">
+                                               <td>{{item.chrjdmc}}</td>
+                                               <td>{{item.dtmjhwcsj}}</td>
+                                               <td>实际完成时间</td>
+                                               <td>工期(+提前,-延后)</td>
+                                           </tr>
+	                                   </table>
+	                                </li>
+	                        </ul>       
+                        </ul>
+                        <ul class="mui-table-view bj-background-inherit"> 
+                            <li class="mui-table-view-cell mui-collapse" >竣工验收</span></li>
+                            <ul class="mui-table-view  bj-background-inherit mleft30" >
+                                    <li class="mui-table-view-cell">
+                                       <table>
+                                           <tr>
+                                               <td>名称</td>
+                                               <td>计划完成时间</td>
+                                               <td>实际完成时间</td>
+                                               <td>工期(+提前,-延后)</td>
+                                           </tr>
+                                           <tr v-for="item in jgys">
+                                               <td>{{item.chrjdmc}}</td>
+                                               <td>{{item.dtmjhwcsj}}</td>
+                                               <td>实际完成时间</td>
+                                               <td>工期(+提前,-延后)</td>
+                                           </tr>
+                                       </table>
+                                    </li>
+                            </ul>       
+                        </ul>
+                </li>
             </ul>
         </div>
         <script src="../js/mui.min.js"></script>

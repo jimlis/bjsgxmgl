@@ -1,10 +1,15 @@
 //初始化必要条件
 var xmid=getCookie("id");
+var zxys=[];
+var jgys=[];
 window.onload=function(){
 	//初始化新增跳转页面
 	init();
 	//得到数据
 	var pageData = {};
+	initZxjgData();
+	pageData["zxys"]=zxys;
+	pageData["jgys"]=jgys;
 	//绑定数据
 	var vue = new Vue({
 		el: '#app',
@@ -63,7 +68,7 @@ function init(){
 				}
 				break;
 			case "3":
-				toUrl("project_timenode_comparison_yjedit.html?chrjdlx=zxjq");
+				toUrl("project_project_timenode_comparison_zxysedit.html");
 					break;
 			default:
 				break;
@@ -92,4 +97,25 @@ function getJcList(){
 		}
 	});
 	return o;
+}
+
+//初始化专项竣工数据
+function initZxjgData(){
+	var result={};
+	$bjAjax({
+		url:timenodeZxjgMapListByXmidApiPath,
+		type:"post",
+		async:false,
+		data:{
+			xmid:xmid
+		},
+		success:function(data){
+			if(data){
+				zxys=data.zxys||[];
+				jgys=data.jgys||[];
+				result = data;
+			}
+		}
+	});
+	return result;
 }
