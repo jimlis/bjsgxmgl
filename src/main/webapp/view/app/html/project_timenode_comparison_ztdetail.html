@@ -39,13 +39,13 @@
 		        <li class="mui-table-view-cell mui-collapse" v-for="item in pageData">
 		            <a class="mui-navigate-right" href="javascript:void(0);">{{item.chrjdmc}}<span class="mui-badge addbtn"  v-on:click.stop="add(item.id)">+</span></a>
 		            	<ul class="mui-table-view " style="overflow-x: scroll;"> 
-		            		<table style="margin: 15px 20px;">
+		            		<table>
 				        		<thead>
 						    		<tr>
 									<th>名称</th>
 									<th>计划完成时间</th>
 									<th>实际完成时间</th>
-									<th>工期(+提前-延后)</th>
+									<th>工期(+)提前/(-)延后</th>
 						    		</tr>
 						  	</thead>
 						  	<tbody>
@@ -53,7 +53,7 @@
 						    			<td data-label="名称">{{child.chrjdmc}}</td>
 									<td data-label="计划完成时间">{{child.dtmjhwcsj}}</td>
 									<td data-label="实际完成时间">{{child.dtmsjwcsj}}</td>
-									<td data-label="工期(+提前-延后)">{{computedDay(child.dtmjhwcsj,child.dtmsjwcsj)}}</td>
+									<td data-label="工期(+)提前/(-)延后">{{computedDay(child.dtmjhwcsj,child.dtmsjwcsj)}}</td>
 						    		</tr>
 						  </tbody>
 					  </table>
