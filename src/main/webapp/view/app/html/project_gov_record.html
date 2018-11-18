@@ -40,42 +40,42 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">区规划局巡查记录<span class="mui-badge mui-badge-primary" v-cloak>{{qghj.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="qghj"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in qghj" v-if="item.intxcbm=='qghj'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in qghj" v-if="item.intxcbm=='qghj'" v-on:click="openDetail(item.id,'qghj')">{{item.dtmgxrq}}</li>
 				        	 <li v-if="qghj.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse" >
 		            <a class="mui-navigate-right" href="#">质监站巡查记录<span class="mui-badge mui-badge-primary" v-cloak>{{zjzxc.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="zjzxc"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in zjzxc" v-if="item.intxcbm=='zjzxc'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in zjzxc" v-if="item.intxcbm=='zjzxc'" v-on:click="openDetail(item.id,'zjzxc')">{{item.dtmgxrq}}</li>
 				        	 <li v-if="zjzxc.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">安监站巡查记录<span class="mui-badge mui-badge-primary" v-cloak>{{ajzxc.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="ajzxc"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in ajzxc" v-if="item.intxcbm=='ajzxc'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in ajzxc" v-if="item.intxcbm=='ajzxc'" v-on:click="openDetail(item.id,'ajzxc')">{{item.dtmgxrq}}</li>
 				        	 <li v-if="ajzxc.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">业主方巡查记录<span class="mui-badge mui-badge-primary" v-cloak>{{yzfxc.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="yzfxc"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in yzfxc" v-if="item.intxcbm=='yzfxc'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in yzfxc" v-if="item.intxcbm=='yzfxc'" v-on:click="openDetail(item.id,'yzfxc')">{{item.dtmgxrq}}</li>
 				        	 <li v-if="yzfxc.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">专项验收记录<span class="mui-badge mui-badge-primary" v-cloak>{{zxys.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="zxys"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in zxys" v-if="item.intxclb=='zxys'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in zxys"  v-on:click="openDetail(item.id,'zxys')">{{item.chrjdmc}}</li>
 				        	 <li v-if="zxys.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">竣工验收记录<span class="mui-badge mui-badge-primary" v-cloak>{{jgys.length}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit" id="jgys"> 
-				        	<li class="mui-table-view-cell mui-collapse" v-for="item in jgys" v-if="item.intxclb=='jgys'" v-on:click="openDetail(item.id)">{{item.dtmgxrq}}</li>
+				        	<li class="mui-table-view-cell mui-collapse" v-for="item in jgys"  v-on:click="openDetail(item.id,'jgys')">{{item.chrjdmc}}</li>
 				        	 <li v-if="jgys.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
 		        </li>

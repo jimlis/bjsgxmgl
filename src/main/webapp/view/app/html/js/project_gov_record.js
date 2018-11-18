@@ -1,22 +1,27 @@
 var xmid=getCookie("id");
 //初始化显示数据
+var zxysArr=[];
+var jgysArr=[];
 window.onload = function(){
 	var pageData = getPageData();
+	initZxjgData();
 	var sghj=getDataByXcbm(pageData,'sghj');
 	var qghj=getDataByXcbm(pageData,'qghj');
 	var zjzxc=getDataByXcbm(pageData,'zjzxc');
 	var ajzxc=getDataByXcbm(pageData,'ajzxc');
 	var yzfxc=getDataByXcbm(pageData,'yzfxc');
 	
-	var zxys=getDataByXclb(pageData,'zxys');
-	var jgys=getDataByXclb(pageData,'jgys');
+	//var zxys=getDataByXclb(pageData,'zxys');
+	//var jgys=getDataByXclb(pageData,'jgys');
+	var zxys=zxysArr;
+	var jgys=jgysArr;
 	var vue = new Vue({
 		el: '#app',
 		data: {sghj:sghj,qghj:qghj,zjzxc:zjzxc,ajzxc:ajzxc,yzfxc:yzfxc,
 			zxys:zxys,jgys:jgys},
 		methods: {
-			openDetail: function (id) {
-				var address = "project_gov_record_details.html?id="+id;
+			openDetail: function (id,type) {
+				var address = "project_gov_record_details.html?id="+id+"&type="+type;
     				toUrl(address);
 			}
 		}
@@ -73,6 +78,27 @@ function getPageData(){
 	        }
     });
 	return obj;
+}
+
+//初始化专项竣工数据
+function initZxjgData(){
+	var result={};
+	$bjAjax({
+		url:timenodeZxjgMapListByXmidApiPath,
+		type:"post",
+		async:false,
+		data:{
+			xmid:xmid
+		},
+		success:function(data){
+			if(data){
+				zxysArr=data.zxys||[];
+				jgysArr=data.jgys||[];
+				result = data;
+			}
+		}
+	});
+	return result;
 }
 
 /**

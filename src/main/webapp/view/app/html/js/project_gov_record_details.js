@@ -1,5 +1,6 @@
 var obj = getRequest();
 var id=obj.id||"";
+var type=obj.type||"";
 //初始化显示数据
 window.onload = function(){
 	//得到数据
