@@ -32,7 +32,7 @@
 			<form id="myform">
 				<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
-				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" v-model="fileIds" placeholder="文件ids" />
 				<div class="mui-content-padded">
 					<h5 id="bj-xmmc">xx项目</h5>
 					<h5 style="margin-left: 16px;"><span id="toright"></span>政府部门巡查/专项验收记录详情</h5>
@@ -44,6 +44,10 @@
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="hidden" id="intxclb" v-model="intxclb" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="text" id="chrxclb" v-model="chrxclb" v-on:click="lbPicker" placeholder="请选择" />
 					</h5>
+					<h5 class="bj-title2-font" v-if="intxclb=='zxys' || intxclb=='jgys'">类型：
+                        <input class="bj-input bj-p-black-font " readonly="readonly" type="hidden" id="intgqjdid" v-model="intgqjdid" placeholder="请选择" />
+                        <input class="bj-input bj-p-black-font  bj-disable" readonly="readonly" type="text" id="chrgqjdmc" v-model="chrgqjdmc"  placeholder="请选择" />
+                    </h5>
 					<h5 class="bj-title2-font">验收部门：
 						<input class="bj-input bj-p-black-font" type="hidden" id="intxcbm" v-model="intxcbm" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="text" id="chrxcbm" v-model="chrxcbm" v-on:click="bmPicker" placeholder="请选择" />

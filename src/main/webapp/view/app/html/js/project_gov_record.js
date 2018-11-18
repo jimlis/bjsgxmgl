@@ -20,8 +20,13 @@ window.onload = function(){
 		data: {sghj:sghj,qghj:qghj,zjzxc:zjzxc,ajzxc:ajzxc,yzfxc:yzfxc,
 			zxys:zxys,jgys:jgys},
 		methods: {
-			openDetail: function (id,type) {
-				var address = "project_gov_record_details.html?id="+id+"&type="+type;
+			openDetail: function (id,xclb) {
+				var address="";
+				if(xclb=="zxys"||xclb=="jgys"){
+					address = "project_gov_record_details.html?xclb="+xclb+"&gqjdid="+id;
+				}else{
+					address = "project_gov_record_details.html?id="+id+"&xclb="+xclb;
+				}
     				toUrl(address);
 			}
 		}

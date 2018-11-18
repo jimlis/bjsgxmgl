@@ -47,6 +47,9 @@ var baseApixkzSave = serverPath+"api/xmxkz/save";
 var xmzfxcyzxysApiPath = serverPath+"api/xmzfxcyzxys/getXmZfxcyzxys";
 var xmzfxcyzxysApiDetail = serverPath+"api/xmzfxcyzxys/getXmZfxcyzxysById";
 var xmzfxcyzxysApiSave = serverPath+"api/xmzfxcyzxys/save";
+
+var xmzxyszfxcyzxysApi = serverPath+"api/xmzfxcyzxys/getXmZxysZfxcyzxys";
+
 var photoApiList = serverPath+"api/zpjl/getXmZpjlMapByXmid";
 var photoApiDetail = serverPath+"api/zpjl/getXmZpmsListByXmZpjlid";
 var photoApiDetailText = serverPath+"api/zpjl/getXmZpjlById";

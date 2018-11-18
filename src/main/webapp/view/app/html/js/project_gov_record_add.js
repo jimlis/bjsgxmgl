@@ -2,16 +2,20 @@ var obj = getRequest();
 var pageData;
 var vue;
 var id=obj.id||"";
+var xclb=obj.xclb||"";
+var gqjdid=obj.gqjdid||"";
 var systemdate = bjGetSysDate();
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
+var flag=false;
 window.onload = function(){
 	pageData = isUpdata()||'';
 	var dict=getDictMapByTypes("xcbm,xclb");
 	//初始化數據
-	var lbPickerData =dict["xclb"]||{} ;
-	var bmPickerData = dict["xcbm"]||{};
+	var lbPickerData =dict["xclb"]||[] ;
+		removeZxjg(lbPickerData);
+	var bmPickerData = dict["xcbm"]||[];
 	upLoadImg('#chbtn',{"busType":"bj_xm_zfxcyzxys"});
 	//判断是否更新；
 	if(pageData==''){
@@ -24,6 +28,9 @@ window.onload = function(){
 		data: pageData,
 		methods: {
 			lbPicker: function (event) {
+				if(flag){
+					return;
+				}
 				vuePicker(pageData,"chrxclb",lbPickerData,"intxclb");
 			},
 			bmPicker: function (event) {
@@ -41,24 +48,65 @@ window.onload = function(){
 	}
 	
 }
+
+function removeZxjg(arr){
+	if(arr){
+		for(i in arr){
+			if(arr[i].value=="zxys"){
+				arr.splice(i,1);
+			}
+		}
+		
+		for(i in arr){
+			if(arr[i].value=="jgys"){
+				arr.splice(i,1);
+			}
+		}
+	}
+}
+
 //判断是否更新
 function isUpdata(){
-	if(id){
+	if(xclb=="zxys"||xclb=="jgys"){
 		var o={};
+		flag=true;
+		document.getElementById("chrxclb").classList.add("bj-disable");
 		$bjAjax({
-			url:xmzfxcyzxysApiDetail,
+			url:xmzxyszfxcyzxysApi,
 			type:"post",
 			async:false,
 			data:{
-				xmZfxcyzxysId:obj.id
+				xmid:intxmid,
+				xclb:xclb,
+				gqjdid:gqjdid,
+				fwlx:"xz"
 			},
 			success:function(data){
 				if(data){
+					id=data.id||"";
 					o=data;
 				}
 			}
 		});
 		return o;
+	}else{
+		if(id){
+			var o={};
+			$bjAjax({
+				url:xmzfxcyzxysApiDetail,
+				type:"post",
+				async:false,
+				data:{
+					xmZfxcyzxysId:obj.id
+				},
+				success:function(data){
+					if(data){
+						o=data;
+					}
+				}
+			});
+			return o;
+		}
 	}
 	return '';
 }
@@ -85,13 +133,16 @@ function buildModel(){
 function save(){
 	
 	var data = getFromData("myform");
+	if(xclb=="zxys"||xclb=="jgys"){
+		data["id"]="";
+	}
 	$bjAjax({
 		url:xmzfxcyzxysApiSave,
 		data:data,
 		type:"post",
 		success:function(data){
 			bjToast("保存成功！",function(){
-				toUrl("project_gov_record_details.html?id="+data.id);
+				toUrl("project_gov_record_details.html?id="+data.id+"&xclb="+xclb+"&gqjdid="+gqjdid);
 			});
 		}
 	});

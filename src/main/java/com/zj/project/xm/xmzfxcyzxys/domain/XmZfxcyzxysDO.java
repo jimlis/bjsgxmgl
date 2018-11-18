@@ -76,7 +76,18 @@ public class XmZfxcyzxysDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称",name = "chrbgrmc",dataType = "string",required = true)
     private String chrbgrmc;
-
+    /** 工期节点id 巡查类型为：专项和竣工验收时录入 */
+    @ApiModelProperty(value = "工期节点id 巡查类型为：专项和竣工验收时录入",name = "intgqjdid",dataType = "Long",required = false)
+    private Long intgqjdid;
+    /** 工期节点名称*/
+    @ApiModelProperty(value = "工期节点名称",name = "chrgqjdmc",dataType = "String",required = false)
+    @TableField(exist=false)
+    private String chrgqjdmc;
+    /** 图片ids */
+    @TableField(exist=false)
+    @ApiModelProperty(value = "图片ids",name = "fileIds",dataType = "String",required = false)
+    private String fileIds;
+    
     /**
      * 设置：主键id
      */
@@ -244,6 +255,24 @@ public class XmZfxcyzxysDO extends BaseDomain {
 	}
 	public void setChrxcbm(String chrxcbm) {
 		this.chrxcbm = chrxcbm;
+	}
+	public Long getIntgqjdid() {
+		return intgqjdid;
+	}
+	public void setIntgqjdid(Long intgqjdid) {
+		this.intgqjdid = intgqjdid;
+	}
+	public String getFileIds() {
+		return fileIds;
+	}
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
+	}
+	public String getChrgqjdmc() {
+		return chrgqjdmc;
+	}
+	public void setChrgqjdmc(String chrgqjdmc) {
+		this.chrgqjdmc = chrgqjdmc;
 	}
     
 }

@@ -25,4 +25,14 @@ public interface XmZfxcyzxysService extends BaseService<XmZfxcyzxysDO> {
      * @param fileIds  图片ids
      */
     void  saveXmZfxcyzxysxx(XmZfxcyzxysDO xmZfxcyzxysDO, String fileIds);
+    
+    /**
+     * 获取专项竣工验收政府巡查记录
+     * @param xmid 项目id
+     * @param xclb 巡查类别
+     * @param gqjdid 工期节点id
+     * @param fwlx "xz"-新增  "cx"-查询
+     * @return
+     */
+	XmZfxcyzxysDO getXmZxysZfxcyzxys(Long xmid, String xclb, Long gqjdid,String fwlx);
 }

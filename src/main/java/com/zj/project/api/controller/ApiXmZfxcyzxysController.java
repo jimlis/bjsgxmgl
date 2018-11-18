@@ -93,5 +93,24 @@ public class ApiXmZfxcyzxysController extends ApiBaseController {
         }
 
     }
+    
+    @Log("获取专项/竣工巡查信息")
+    @PostMapping("getXmZxysZfxcyzxys")
+    @ApiOperation(value="获取专项/竣工巡查信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="xmid",paramType="form",dataType = "Long",required=true,value = "项目id"),
+    	@ApiImplicitParam(name="xclb",paramType="form",dataType = "String",required=true,value = "巡查类别"),
+    	@ApiImplicitParam(name="gqjdid",paramType="form",dataType = "Long",required=true,value = "工期节点比较id"),
+    	@ApiImplicitParam(name="fwlx",paramType="form",dataType = "String",required=true,value = "访问类型 xz-新增 cx-查询")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=XmZfxcyzxysDO.class),
+    	@ApiResponse(code=1,message="操作失败",response=XmZfxcyzxysDO.class)})
+    @RequiresAuthentication
+    public Result<XmZfxcyzxysDO> getXmZxysZfxcyzxys(Long xmid,String xclb,Long gqjdid,String fwlx) {
+        try {
+            return Result.ok(xmZfxcyzxysService.getXmZxysZfxcyzxys(xmid, xclb, gqjdid, fwlx));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
 
 }
