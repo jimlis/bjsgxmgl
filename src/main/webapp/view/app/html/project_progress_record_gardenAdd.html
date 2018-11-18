@@ -17,7 +17,7 @@
 		
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 			<h1 class="mui-title">
 				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 					<div class="mui-scroll" id="title-scroll">
@@ -33,6 +33,10 @@
                 <input class="bj-input bj-p-black-font " type="hidden"  v-model="id"/>
                 <input class="bj-input bj-p-black-font " type="hidden" id="intxmid" v-model="intxmid"/>
 				<div class="mui-content-padded">
+					<h5 id="bj-xmmc">xx项目</h5>
+					<h5 style="margin-left: 16px;"><span id="toright"></span>项目进度记录</h5>
+					<h5 style="margin-left: 32px;"><span id="toright"></span>园林施工</h5>
+					<hr />
 				        <h5 class="bj-title2-font">更新日期：
 		                    <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq" v-on:click="datePicker('dtmgxrq')"/>
 		                </h5>

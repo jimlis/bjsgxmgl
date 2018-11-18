@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>项目管理平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			#openimg{
+				display: inline-block;
+				width: auto;
+				height: auto;
+				max-height: 100%;
+				max-width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>
+		<img id="openimg"/>
+	</body>
+	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var obj = getRequest();
+		var src=obj.src||"";	
+		document.getElementById("openimg").src=src;
+	</script>
+</html>
