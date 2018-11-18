@@ -89,8 +89,13 @@ figure {
 }
 
 hr {
-	box-sizing: content-box;
-	height: 0
+	/*box-sizing: content-box;
+	height: 1px;*/
+	background-color:#e6e6e6;
+	height:1px;
+	margin:10px 0;
+	border:0;
+	clear:both
 }
 
 pre {

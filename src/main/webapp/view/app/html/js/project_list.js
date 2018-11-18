@@ -1,17 +1,9 @@
-var intxmlx = getCookie("xmlx")||"";
+var obj = getRequest();
+var intxmlx=obj.intxmlx||"";
+setCookie("xmlx",intxmlx);
+
 var xmlxmc='';
-if(intxmlx==1){
-	xmlxmc = "PMC项目";
-}else{
-	xmlxmc = "EPC项目";
-}
-window.onload=function(){
-	var nav = document.getElementById("title-scrollT");
-	nav.innerHTML = `
-		<a href="../main.html">博建施工项目管理&nbsp;/</a>
-		<a href="#" style="color: #fff;">`+xmlxmc+`列表</a>
-	`;
-}
+
 $bjAjax({
 	url:projectApiBase,
 	data:{xmlx:intxmlx},
@@ -41,7 +33,4 @@ function openNext(id,chrxmmc){
 		setCookie("chrxmmc",chrxmmc);
 		setCookie("id",id);
 		toUrl("project_detail_list.html");
-}
-function outPage(){
-	toUrl("../main.html");
 }

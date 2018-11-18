@@ -11,6 +11,9 @@
 }
 
 /*hm开头的表示仅为 Hello MUI示例定义*/
+body{
+	font-size: 14px !important;
+}
 .hm-description{
 	margin: .5em 0;
 }
@@ -23,6 +26,17 @@
 /*
  * 这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
  * 博建项目系统独有样式*/
+
+#toright{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/to-right.png);
+}
+
+#title-scroll a{
+	padding: 10px;
+}
 .bj-header-font{
 	font-size: 14px;
 	color: #000000;
@@ -165,7 +179,7 @@ header.mui-bar.mui-bar-nav{
   	border: 1px solid #ddd;
     padding: 1px 5px;
     text-align: center;
-    min-width: 120px;
+    max-width: 100px;
   }
 
   table th {

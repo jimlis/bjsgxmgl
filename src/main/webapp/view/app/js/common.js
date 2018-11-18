@@ -1,33 +1,27 @@
 setNavbar();
 function setNavbar(){
 	try{
-		var intxmlx = getCookie("xmlx")||"";
-		var xmlxmc='';
-		if(intxmlx==1){
-			xmlxmc = "PMC项目";
-		}else{
-			xmlxmc = "EPC项目";
-		}
 		var nav = document.getElementById("title-scroll");
 		nav.innerHTML = `
-			<a href="../main.html">博建施工项目管理&nbsp;/</a>
-			<a href="project_list.html">`+xmlxmc+`列表&nbsp;/</a>
-			<a href="project_detail_list.html">`+getCookie("chrxmmc")+`&nbsp;/</a>
-			<a href="#" style="color: #fff;">`+mui("title")[0].innerText+`</a>
+			<a href="../main.html">首页</a>
+			<a href="/app/html/project_list.html?intxmlx=1">PMC项目</a>
+			<a href="/app/html/project_list.html?intxmlx=2">PMC项目</a>
 		`;
-		
+		mui('.mui-scroll-wrapper').scroll().scrollTo(0,0,500);//100毫秒滚动到顶
 	}catch(e){
-		//TODO handle the exception
+		
 	}
 	try{
-		mui('.mui-scroll-wrapper').scroll().scrollTo(-1000,0,500);//100毫秒滚动到顶
+		var navxmmc = document.getElementById("bj-xmmc");
+		navxmmc.innerText = getCookie("chrxmmc");
 	}catch(e){
-		//TODO handle the exception
+		
 	}
+	
 }
 
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://192.168.1.103:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -444,7 +438,7 @@ function openImg(src){
 	div.id="bj-zz";
 	div.onclick=closeImg;
 	div.innerHTML=`
-		<img id="bj-img1" src="`+src+`" style="margin: auto;"/>
+		<img id="bj-img1" src="`+src+`" style="display: block;height: auto;max-width: 100%;"/>
 	`
 	document.body.appendChild(div);
 }
@@ -479,7 +473,7 @@ function upLoadImg(elem,data,done){
 		,data: data		//传递到后台的数据
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
-		,exts: 'png|jpg|bmp' 			//设置智能上传图片格式文件
+		,exts: 'png|jpg|bmp|gif|jpeg' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		/*,bindAction: bind		//“上传”按钮的ID
