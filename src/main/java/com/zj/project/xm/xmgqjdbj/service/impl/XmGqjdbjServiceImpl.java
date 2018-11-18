@@ -194,7 +194,7 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
 	  	    ztXmGqjdbjDO.setChrjdlx("zt");
 			QueryWrapper<XmGqjdbjDO> ztQueryWrapper=new QueryWrapper<XmGqjdbjDO>(ztXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
         			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM " + 
-        					"(select k.dtmwcsj  wcsj,k.intxmid xmid,k.intgqjdbjid intgqjdbjid from (select max(id) id,intxmid,intsgwzd from bj_xm_sgjd_ztjgsg where  fcbz=1 and intsgwzd!=-1 and intsfwc=1   group by intxmid,intsgwzd) " + 
+        					"(select k.dtmwcsj  wcsj,k.intxmid xmid,k.intgqjdbjid intgqjdbjid from (select max(id) id,intxmid,intsgwzd from bj_xm_sgjd_ztjgsg where  fcbz=1 and intsgwzd!=-1 and intsfwc=1 and  intxmid="+xmid+"  group by intxmid,intsgwzd) " + 
         					" z inner join bj_xm_sgjd_ztjgsg_kz k on z.id =k.intztsgid )  a WHERE  a.intgqjdbjid = id and a.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
 			List<XmGqjdbjDO> ztList=list(ztQueryWrapper);
 			jcList.forEach(one->{
@@ -230,7 +230,10 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
 			  	   zxXmGqjdbjDO.setFcbz(1);
 			  	   zxXmGqjdbjDO.setChrjdlx("zxys");
   	    QueryWrapper<XmGqjdbjDO> zxQueryWrapper=new QueryWrapper<XmGqjdbjDO>(zxXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-    			"dtmjhwcsj","intsjbj").orderByAsc("intxh");
+    			"dtmjhwcsj","intsjbj",
+    					"( SELECT c.wcsj FROM  " + 
+    					"        					(select z.dtmxcrq  wcsj,a.intxmid xmid,a.intxclb intxclb,a.intgqjdid intgqjdid from (select max(id) id,intxmid,intxclb,intgqjdid from bj_xm_zfxcyzxys where intxclb='"+zxXmGqjdbjDO.getChrjdlx()+"'  and  fcbz=1 and  intxmid="+xmid+"  and dtmxcrq is not null  and  intgqjdid is not null group by intxmid,intxclb,intgqjdid)  " + 
+    					"        					  a inner join bj_xm_zfxcyzxys z on a.id=z.id   ) c WHERE  c.intgqjdid = id and c.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
   	    List<XmGqjdbjDO> zxList=list(zxQueryWrapper);
   	    
   	    maps.put("zxys", zxList);
@@ -241,7 +244,10 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
 			  	   jgXmGqjdbjDO.setFcbz(1);
 			  	   jgXmGqjdbjDO.setChrjdlx("jgys");
 	  QueryWrapper<XmGqjdbjDO> jgQueryWrapper=new QueryWrapper<XmGqjdbjDO>(jgXmGqjdbjDO).select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
-		"dtmjhwcsj","intsjbj").orderByAsc("intxh");
+		"dtmjhwcsj","intsjbj",
+		"( SELECT c.wcsj FROM  " + 
+		"        					(select z.dtmxcrq  wcsj,a.intxmid xmid,a.intxclb intxclb,a.intgqjdid intgqjdid from (select max(id) id,intxmid,intxclb,intgqjdid from bj_xm_zfxcyzxys where intxclb='"+jgXmGqjdbjDO.getChrjdlx()+"'  and  fcbz=1  and dtmxcrq is not null and intxmid="+xmid+"   and  intgqjdid is not null group by intxmid,intxclb,intgqjdid)  " + 
+		"        					  a inner join bj_xm_zfxcyzxys z on a.id=z.id   ) c WHERE  c.intgqjdid = id and c.xmid=intxmid ) dtmsjwcsj").orderByAsc("intxh");
 	   List<XmGqjdbjDO> jgList=list(jgQueryWrapper);
 	   
 	   maps.put("jgys", jgList);

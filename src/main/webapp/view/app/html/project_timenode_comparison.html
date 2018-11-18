@@ -25,6 +25,9 @@
             .mleft30{
                 margin-left: 30px!important;
             }
+          [v-cloak] { 
+            display: none; 
+          } 
         </style>
     </head>
         
@@ -40,7 +43,7 @@
             </h1>
             <button id="confirmBtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">新增</button>
         </header>
-        <div class="mui-content" id="app">
+        <div class="mui-content" id="app" v-cloak>
             <ul class="mui-table-view"> 
                 <li class="mui-table-view-cell" v-on:click="openQqbj">前期报建</li>
                 <li class="mui-table-view-cell" v-on:click="openJc">基础</li>
@@ -86,8 +89,8 @@
 	                                       <tr v-for="item in zxys">
                                                <td>{{item.chrjdmc}}</td>
                                                <td>{{item.dtmjhwcsj}}</td>
-                                               <td>实际完成时间</td>
-                                               <td>工期(+提前,-延后)</td>
+                                               <td>{{item.dtmsjwcsj}}</td>
+                                               <td>{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
                                            </tr>
 	                                   </table>
 	                                </li>
@@ -107,8 +110,8 @@
                                            <tr v-for="item in jgys">
                                                <td>{{item.chrjdmc}}</td>
                                                <td>{{item.dtmjhwcsj}}</td>
-                                               <td>实际完成时间</td>
-                                               <td>工期(+提前,-延后)</td>
+                                               <td>{{item.dtmsjwcsj}}</td>
+                                               <td>{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
                                            </tr>
                                        </table>
                                     </li>
