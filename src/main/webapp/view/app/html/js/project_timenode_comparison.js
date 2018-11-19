@@ -4,6 +4,7 @@ var sysDate=bjGetSysDate();
 var vue;
 var zxys=[];
 var jgys=[];
+var isclick= true;
 window.onload=function(){
 	//初始化新增跳转页面
 	init();
@@ -21,6 +22,7 @@ window.onload=function(){
 			zt:[],
 			zxys:[],
 			jgys:[],
+			ztShow:false,
 			
 		},
 		beforeCreate: function(){
@@ -55,6 +57,23 @@ window.onload=function(){
 			});
 		},
 		methods: {
+			toggle:function(type){
+			    if(isclick){
+			        isclick= false;
+					switch (type){
+						case 'zt':
+						console.log(this.ztShow);
+						this.ztShow = !this.ztShow;
+							break;
+						default:
+							break;
+					}
+			 setTimeout(function(){ 
+				            isclick = true;
+				        }, 500);
+				    }
+				
+			},
 			add:function(nodeid){
 				toUrl("project_timenode_comparison_ztedit.html?gqjdbjid="+nodeid);
 			},
@@ -139,7 +158,7 @@ function init(){
 				}
 				break;
 			case "3":
-				toUrl("project_project_timenode_comparison_zxysedit.html");
+				toUrl("project_timenode_comparison_zxysedit.html");
 					break;
 			default:
 				break;

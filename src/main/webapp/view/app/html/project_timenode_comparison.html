@@ -47,8 +47,8 @@
             <ul class="mui-table-view"> 
                 <li class="mui-table-view-cell" v-on:click="openQqbj">前期报建</li>
                 <li class="mui-table-view-cell" v-on:click="openJc">基础</li>
-                <li class="mui-table-view-cell" v-on:click="openZt">主体</li>
-                <ul class="mui-table-view bj-background-inherit mleft10">
+                <li class="mui-table-view-cell" v-on:click="toggle('zt')">主体</li>
+                <ul class="mui-table-view bj-background-inherit mleft10" v-show="ztShow">
 			        <li class="mui-table-view-cell mui-collapse" v-for="item in zt">
 			            <a class="mui-navigate-right" href="javascript:void(0);">{{item.chrjdmc}}<span class="mui-badge addbtn"  v-on:click.stop="add(item.id)">+</span></a>
 			            	<ul class="mui-table-view " style="overflow-x: scroll;"> 

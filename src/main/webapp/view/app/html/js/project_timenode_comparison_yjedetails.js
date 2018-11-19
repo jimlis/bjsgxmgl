@@ -2,6 +2,7 @@ var obj=getRequest();
 var intxmid = getCookie("id");
 var gqjdbjid=obj.gqjdbjid||"";
 var chrjdlx=obj.chrjdlx||"";
+var sysDate=bjGetSysDate();
 var pageData ={};
 window.onload= function(){
     pageData =getPageData();
