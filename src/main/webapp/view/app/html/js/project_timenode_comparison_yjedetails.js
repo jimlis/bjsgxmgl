@@ -30,7 +30,36 @@ window.onload= function(){
 						event.target.parentNode.parentNode.remove();
 					});
 				}
-			}
+			},
+			computedDay:function(index){
+				var row=this.list[index];
+				var dtmjhwcsj=row.dtmjhwcsj;//计划完成时间
+				if(!dtmjhwcsj){
+					return "";
+				}
+				var dtmsjwcsj=row.dtmsjwcsj||"";//时间完成时间
+					var wcsj=dtmsjwcsj||sysDate;
+					var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
+						wcsj=new Date(wcsj.replace(/-/g, "/"));
+						var days = jhwcsj.getTime() - wcsj.getTime();
+						var day = parseInt(days / (1000 * 60 * 60 * 24));
+					if(day==0){
+						if(dtmsjwcsj){
+							return "0";
+						}else{
+							return "";
+						}
+					}else if(day<0){
+						return ""+String(day)+"天";
+					}else{
+						if(dtmsjwcsj){
+							return "+"+String(day)+"天";
+						}else{
+							return "";
+						}
+						
+					}
+				}
 		}
 	});
 }

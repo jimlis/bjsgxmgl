@@ -41,6 +41,12 @@
 		</header>
 		<div class="mui-content" id="app">
 			<ul class="mui-table-view bj-title2-font"> 
+			     <li class="mui-table-view-cell mui-collapse">
+                    <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">前期报建</a>
+                        <ul class="mui-table-view"> 
+                            <li class="mui-table-view-cell mui-collapse  mleft10" v-for="item in qqbj" v-on:click="openQqbj(item.id,item.chrjdmc)">{{item.chrjdmc}}</li>
+                        </ul>
+                </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">基础施工</a>
 		            	<ul class="mui-table-view"> 

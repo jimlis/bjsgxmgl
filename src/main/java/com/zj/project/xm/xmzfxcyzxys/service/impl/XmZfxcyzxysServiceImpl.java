@@ -197,7 +197,11 @@ public class XmZfxcyzxysServiceImpl extends BaseServiceImpl<XmZfxcyzxysDao, XmZf
     	QueryWrapper<XmZfxcyzxysDO> queryWrapper=new QueryWrapper<XmZfxcyzxysDO>(xmZfxcyzxysDO).orderByDesc("id");
     	List<XmZfxcyzxysDO> list = list(queryWrapper);
     	if(CollectionUtils.isNotEmpty(list)) {
-    		return getById(list.get(0).getId());
+    		XmZfxcyzxysDO zfxc = getById(list.get(0).getId());
+    		if("xz".equals(fwlx)) {
+    			xmZfxcyzxysDO.setDtmgxrq(new Date());
+    		}
+    		return zfxc;
     	}else {
         		String intxclb = xmZfxcyzxysDO.getIntxclb();
         		xmZfxcyzxysDO.setChrxclb(dictService.getName("xclb",intxclb));

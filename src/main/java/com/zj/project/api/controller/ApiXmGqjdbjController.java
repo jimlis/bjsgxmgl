@@ -59,15 +59,20 @@ public class ApiXmGqjdbjController extends ApiBaseController {
         	xmGqjdbjDO.setFcbz(1);
         	xmGqjdbjDO.setChrjdlx(jdlx);
             QueryWrapper<XmGqjdbjDO> queryWrapper=new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO).eq("intxmid",xmid).orderByAsc("intxh");
-            if("jc".equals(jdlx)) {
+            if("qqbj".equals(jdlx)) {
+            	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
+            			"dtmjhwcsj","intsjbj"," ( select a.wcsj  from ( 		select j.intgqjdid, j.intxmid as xmid,j.dtmwcrq as wcsj from (select intgqjdid, intxmid as xmid, max(id) as id from bj_xm_sgjd_qqbj " + 
+            					"            								where dtmwcrq is not null  and fcbz = 1 and  intxmid="+xmid+" group by intgqjdid, intxmid ) jj inner join bj_xm_sgjd_qqbj j on jj.id=j.id		 ) a   " + 
+            					"            					WHERE  a.intgqjdid = id and a.xmid=intxmid ) dtmsjwcsj ");
+            }else if("jc".equals(jdlx)) {
             	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
             			"dtmjhwcsj","intsjbj"," ( select a.wcsj  from ( 		select j.intsgwzid, j.intxmid as xmid,j.dtmwcrq as wcsj from (select intsgwzid, intxmid as xmid, max(id) as id from bj_xm_sgjd_jcsgnew " + 
-            					"			where intsgwzid != -1	and intsfwc = 1	and fcbz = 1 group by intsgwzid, intxmid ) jj inner join bj_xm_sgjd_jcsgnew j on jj.id=j.id		 ) a  " + 
+            					"			where intsgwzid != -1 and intxmid="+xmid+"	and intsfwc = 1	and fcbz = 1 group by intsgwzid, intxmid ) jj inner join bj_xm_sgjd_jcsgnew j on jj.id=j.id		 ) a  " + 
             			"		WHERE  a.intsgwzid = id and a.xmid=intxmid ) dtmsjwcsj ");
             }else if("zt".equals(jdlx)) {
             	queryWrapper=queryWrapper.select("id","intxmid","chrjdlx","intxh","intfjdid","chrjdmc",
             			"dtmjhwcsj","intsjbj"," ( SELECT a.wcsj FROM (SELECT	intsgwzd,intxmid as xmid,max(dtmwcrq) AS wcsj " + 
-            					"		FROM	bj_xm_sgjd_ztjgsg WHERE intsgwzd !=- 1 AND intsfwc = 1 AND fcbz = 1 GROUP BY intsgwzd,	intxmid ) a WHERE  a.intsgwzd = id and a.xmid=intxmid ) dtmsjwcsj");
+            					"		FROM	bj_xm_sgjd_ztjgsg WHERE intsgwzd !=- 1 and intxmid="+xmid+" AND intsfwc = 1 AND fcbz = 1 GROUP BY intsgwzd,	intxmid ) a WHERE  a.intsgwzd = id and a.xmid=intxmid ) dtmsjwcsj");
             }
             List<XmGqjdbjDO> list = xmGqjdbjService.list(queryWrapper);
             return Result.ok(list);

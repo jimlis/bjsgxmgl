@@ -85,6 +85,8 @@ var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
 var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 
 //施工进度 
+var progressGetQqbjApiPath=serverPath+"api/xmsgjdqqbj/getXmSgjdQqbj";
+var progressQqbjSaveApiPath=serverPath+"api/xmsgjdqqbj/save";
 var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";
 var progressJcsgPath=serverPath+"api/xmsgjdjcsg/";
 var progressJcsgSaveApiPath=serverPath+"api/xmsgjdjcsg/save";

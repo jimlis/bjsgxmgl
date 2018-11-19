@@ -1,20 +1,24 @@
 //初始化必要条件
 var xmid=getCookie("id");
 var isclick= true;
+var vue;
 window.onload=function(){
 	//得到数据
 	var pageData = getDl();
 	var qt={};
+	var qqbj=[];
 	//绑定数据
-	var vue = new Vue({
+	 vue = new Vue({
 		el: '#app',
 		data: {
+			qqShow:false,
 			jcShow:false,
 			ztShow:false,
 			ecShow:false,
 			dtShow:false,
 			dls:pageData,
-			qts:qt
+			qts:qt,
+			qqbj:qqbj
 		},
 		beforeCreate: function(){
 			$bjAjax({
@@ -53,12 +57,28 @@ window.onload=function(){
 					console.log(qt);
 				}
 			});
+			$bjAjax({
+				url:timenodeListApiPath,
+				type:"post",
+				data:{
+					xmid:xmid,
+					jdlx:'qqbj'
+				},
+				success:function(data){
+					if(data){
+						vue.$data.qqbj=data||[];
+					}
+				}
+			});
 		},
 		methods: {
 			toggle:function(type){
 			    if(isclick){
 			        isclick= false;
 					switch (type){
+						case 'qq':
+						this.qqShow = !this.qqShow;
+							break;
 						case 'jc':
 						this.jcShow = !this.jcShow;
 							break;
@@ -91,6 +111,10 @@ window.onload=function(){
 					address = "project_progress_record_secqtAdd.html";
 				}
 				
+    				toUrl(address);
+			},
+			openQqbj: function (gqjdid,chrjdmc) {
+				var address = "project_progress_record_qqbjDetail.html?gqjdid="+gqjdid+"&chrjdmc="+chrjdmc;
     				toUrl(address);
 			},
 			openJC: function (sgwzid,chrsgwzmc) {
