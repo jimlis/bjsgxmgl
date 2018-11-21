@@ -199,7 +199,7 @@ function init(){
 				if(getJcList().length==0){
 					bjToast("请先新增基础然后再新增主体");
 				}else{
-					toUrl("project_timenode_comparison_ejedit.html?chrjdlx=zt");
+					toUrl("project_timenode_comparison_ztedit.html?chrjdlx=zt");
 				}
 				break;
 			case "3":

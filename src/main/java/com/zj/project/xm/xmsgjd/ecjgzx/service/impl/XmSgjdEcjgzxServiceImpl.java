@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.user.domain.UserDO;
@@ -65,13 +66,16 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
     			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
     		}
     		// 完成量
-        	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();
-        	xmSgjdEcjgzxWclDO.setFcbz(1);
-        	xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
-    		QueryWrapper<XmSgjdEcjgzxWclDO> queryWrapper = new QueryWrapper<XmSgjdEcjgzxWclDO>(xmSgjdEcjgzxWclDO)
-    				.orderByAsc("intxh");
-    		List<XmSgjdEcjgzxWclDO> list =xmSgjdEcjgzxWclService.list(queryWrapper);
-    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(list);
+    		Map<String,Object> map=Maps.newHashMap();
+    		map.put("intecjgzxid", xmSgjdEcjgzxDO.getId());
+    		map.put("intxmid", xmSgjdEcjgzxDO.getIntxmid());
+    		map.put("did", xmSgjdEcjgzxDO.getIntdid());
+    		List<XmSgjdEcjgzxWclDO> list =xmSgjdEcjgzxWclService.getXXmSgjdEcjgzxWclListByEcjgzxidAndLcid(map);
+    		if(CollectionUtils.isNotEmpty(list)) {
+    			xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(list);
+    		}else {
+    			xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(Lists.newArrayList());
+    		}
     	}
 
 		return xmSgjdEcjgzxDO;
@@ -194,6 +198,14 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
 			xmSgjdEcjgzxDO.setIntdid(did);
 			QueryWrapper<XmSgjdEcjgzxDO> queryWrapper=new QueryWrapper<XmSgjdEcjgzxDO>(xmSgjdEcjgzxDO).orderByDesc("id");
 			List<XmSgjdEcjgzxDO> list=list(queryWrapper);
+			
+			//查询层数
+			XmGqjdbjDO xmGqjdbjJcDO=new XmGqjdbjDO();
+			xmGqjdbjJcDO.setFcbz(1);
+			xmGqjdbjJcDO.setIntxmid(xmid);
+			xmGqjdbjJcDO.setIntfjdid(did);
+			xmGqjdbjJcDO.setChrjdlx("zt");
+			List<XmGqjdbjDO> xmGqjdbjJcList=xmGqjdbjService.list(new QueryWrapper<XmGqjdbjDO>(xmGqjdbjJcDO));
 			if(CollectionUtils.isNotEmpty(list)) {
 				xmSgjdEcjgzxDO=list.get(0);
 				
@@ -203,14 +215,19 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
 	    		if(xmGqjdbjDO!=null) {
 	    			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
 	    		}
+	    		
 	    		// 完成量
-	        	XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO = new XmSgjdEcjgzxWclDO();
-	        	xmSgjdEcjgzxWclDO.setFcbz(1);
-	        	xmSgjdEcjgzxWclDO.setIntecjgzxid(xmSgjdEcjgzxDO.getId());
-	    		QueryWrapper<XmSgjdEcjgzxWclDO> wclQueryWrapper = new QueryWrapper<XmSgjdEcjgzxWclDO>(xmSgjdEcjgzxWclDO)
-	    				.orderByAsc("intxh");
-	    		List<XmSgjdEcjgzxWclDO> wclList =xmSgjdEcjgzxWclService.list(wclQueryWrapper);
-	    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(wclList);
+	    		Map<String,Object> map=Maps.newHashMap();
+	    		map.put("intecjgzxid", xmSgjdEcjgzxDO.getId());
+	    		map.put("intxmid", xmSgjdEcjgzxDO.getIntxmid());
+	    		map.put("did", xmSgjdEcjgzxDO.getIntdid());
+	    		List<XmSgjdEcjgzxWclDO> wclList =xmSgjdEcjgzxWclService.getXXmSgjdEcjgzxWclListByEcjgzxidAndLcid(map);
+	    		if(CollectionUtils.isNotEmpty(wclList)) {
+	    			xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(wclList);
+	    		}else {
+	    			xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(Lists.newArrayList());
+	    		}
+	    		
 			}else {//不存在 就构造一个新的
 				
 				if("xz".equals(fwlx)) {//新增
@@ -227,8 +244,19 @@ public class XmSgjdEcjgzxServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxDao, Xm
 	    		if(xmGqjdbjDO!=null) {
 	    			xmSgjdEcjgzxDO.setChrdmc(xmGqjdbjDO.getChrjdmc());
 	    		}
+	    		
+	    		List<XmSgjdEcjgzxWclDO> wclList=Lists.newArrayList();
+	    		if(CollectionUtils.isNotEmpty(xmGqjdbjJcList)) {
+	    			xmGqjdbjJcList.forEach(one->{
+	    				XmSgjdEcjgzxWclDO xmSgjdEcjgzxWclDO=new XmSgjdEcjgzxWclDO();
+	    				xmSgjdEcjgzxWclDO.setChrlc(one.getChrjdmc());
+	    				xmSgjdEcjgzxWclDO.setIntlcid(one.getId());
+	    				wclList.add(xmSgjdEcjgzxWclDO);
+	    			});
+	    		}
+	    		
 	    		// 完成量
-	    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(Lists.newArrayList());
+	    		xmSgjdEcjgzxDO.setXmSgjdEcjgzxWclList(wclList);
 			}
 		}
 		

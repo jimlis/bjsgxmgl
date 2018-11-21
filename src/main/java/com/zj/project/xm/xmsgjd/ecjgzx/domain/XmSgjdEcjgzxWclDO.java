@@ -46,6 +46,9 @@ public class XmSgjdEcjgzxWclDO extends BaseDomain {
     /** 楼层 */
     @ApiModelProperty(value = "楼层",name = "chrlc",dataType = "String",required = true)
     private String chrlc;
+    /** 楼层id */
+    @ApiModelProperty(value = "楼层id",name = "intlcid",dataType = "Long",required = true)
+    private Long intlcid;
     /** 门窗（百分比） */
     @ApiModelProperty(value = "门窗（百分比）",name = "intmc",dataType = "Float",required = true)
     private Float intmc;
@@ -188,4 +191,11 @@ public class XmSgjdEcjgzxWclDO extends BaseDomain {
     public Float getIntzx() {
         return intzx;
     }
+	public Long getIntlcid() {
+		return intlcid;
+	}
+	public void setIntlcid(Long intlcid) {
+		this.intlcid = intlcid;
+	}
+    
 }

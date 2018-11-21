@@ -60,26 +60,27 @@
 	                            <th>内保温</th>
 	                            <th>砌墙</th>
 	                            <th>装修</th>
-	                            <th>操作</th>
+	                           <!--  <th>操作</th> -->
                              </tr>
                         </thead>
                         <tbody >
                            <tr v-for="(item,index) in xmSgjdEcjgzxWclList">
                             <td><input  v-model="item.id" class="bj-input bj-p-black-font" type="hidden" />
-                            <input :id="'xmSgjdEcjgzxWclList['+index+'].chrlc'" v-model="item.chrlc" class="bj-input bj-p-black-font" type="text" /></td>
+                            <input :id="'xmSgjdEcjgzxWclList['+index+'].intlcid'" v-model="item.intlcid" class="bj-input bj-p-black-font " type="hidden" />
+                            <input :id="'xmSgjdEcjgzxWclList['+index+'].chrlc'" v-model="item.chrlc" class="bj-input bj-p-black-font bj-disable" type="text" /></td>
                             <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intmc'" v-model="item.intmc" class="bj-input bj-p-black-font" type="number" /></td>
                             <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intfs'" v-model="item.intfs" class="bj-input bj-p-black-font" type="number" /></td>
                             <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intnbw'" v-model="item.intnbw" class="bj-input bj-p-black-font" type="number" /></td>
                             <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intqt'" v-model="item.intqt" class="bj-input bj-p-black-font" type="number" /></td>
                             <td><input :id="'xmSgjdEcjgzxWclList['+index+'].intzx'" v-model="item.intzx" class="bj-input bj-p-black-font" type="number" /></td> 
-                            <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_deletelc(item.id,$event)">-</button></td>
+                           <!--  <td><button type="button" class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_deletelc(item.id,$event)">-</button></td> -->
                         </tr>
                         </tbody>
                         <tbody id="wclTableTbody">
                         </tbody>
                 </table>
                 </ul>
-                <h5><button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" v-on:click="addlc()">+</button></h5>
+                <!-- <h5><button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" v-on:click="addlc()">+</button></h5> -->
                 <h5 class="bj-title2-font">备注：
                         <textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
                     </h5>

@@ -5,7 +5,7 @@ var chrjdlx=obj.chrjdlx||"";
 var pageData ={};
 var num=0;
 window.onload= function(){
-    pageData =gqjdbjid?getPageData():[];
+    pageData =getPageData();
     num=pageData?pageData.length:0;
 	//数据绑定
 	var vue = new Vue({
@@ -60,6 +60,7 @@ function getPageData(){
 			jdlx:chrjdlx
 		},
 		success:function(data){
+			debugger;
 			if(data){
 				o=data;
 			}

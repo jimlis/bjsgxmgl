@@ -90,7 +90,8 @@ isSure(function(){
 		data:data,
 		success:function(data){
 			bjToast("保存成功！",function(){
-				toUrl("project_timenode_comparison_ejedetails.html?chrjdlx="+chrjdlx);
+				debugger;
+				toUrl("project_timenode_comparison_ztdetail.html?chrjdlx=");
 			});
 		}
 	})

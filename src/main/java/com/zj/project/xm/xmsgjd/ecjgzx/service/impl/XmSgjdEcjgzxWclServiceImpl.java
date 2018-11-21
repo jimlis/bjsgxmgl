@@ -1,16 +1,18 @@
 package com.zj.project.xm.xmsgjd.ecjgzx.service.impl;
 
-import org.springframework.stereotype.Service;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmsgjd.ecjgzx.dao.XmSgjdEcjgzxWclDao;
 import com.zj.project.xm.xmsgjd.ecjgzx.domain.XmSgjdEcjgzxWclDO;
 import com.zj.project.xm.xmsgjd.ecjgzx.service.XmSgjdEcjgzxWclService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * 
@@ -39,6 +41,15 @@ public class XmSgjdEcjgzxWclServiceImpl extends BaseServiceImpl<XmSgjdEcjgzxWclD
     public Collection<XmSgjdEcjgzxWclDO> listByParmMap(Map<String, Object> parmMap) {
         parmMap=parmToColumnMap(tableInfo, parmMap);
         return listByMap(parmMap);
+    }
+    
+    /**
+     * <p>Title: 根据ecjgzxid和lcid获取完成量</p>  
+     */
+    @Override
+    public List<XmSgjdEcjgzxWclDO> getXXmSgjdEcjgzxWclListByEcjgzxidAndLcid(Map<String,Object> map){
+    	return baseMapper.getXXmSgjdEcjgzxWclListByEcjgzxidAndLcid(map);
+    	
     }
 
 
