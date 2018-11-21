@@ -22,10 +22,47 @@ window.onload=function(){
 			zt:[],
 			zxys:[],
 			jgys:[],
+			qqShow:false,
+			jcShow:false,
 			ztShow:false,
+			zxjgShow:false,
+			
 			
 		},
 		beforeCreate: function(){
+			//获取前期报建数据
+			$bjAjax({
+				url:timenodeListApiPath,
+				type:"post",
+//				async:false,
+				data:{
+					gqjdbjid:"",
+					xmid:xmid,
+					jdlx:"qqbj"
+				},
+				success:function(data){
+					if(data){
+						vue.$data.qqbj = data;
+					}
+				}
+			});
+			//获取基础施工数据
+			$bjAjax({
+				url:timenodeListApiPath,
+				type:"post",
+//				async:false,
+				data:{
+					gqjdbjid:"",
+					xmid:xmid,
+					jdlx:"jc"
+				},
+				success:function(data){
+					if(data){
+						vue.$data.jc = data;
+					}
+				}
+			});
+			//获取主体施工数据
 			$bjAjax({
 				url:timenodeZtListApiPath,
 				type:"post",
@@ -41,6 +78,7 @@ window.onload=function(){
 					}
 				}
 			});
+			//获取专项与竣工数据
 			$bjAjax({
 				url:timenodeZxjgMapListByXmidApiPath,
 				type:"post",
@@ -61,10 +99,17 @@ window.onload=function(){
 			    if(isclick){
 			        isclick= false;
 					switch (type){
+						case 'qqbj':
+						this.qqShow = !this.qqShow;
+							break;
+						case 'jc':
+						this.jcShow = !this.jcShow;
+							break;
 						case 'zt':
-						console.log(this.ztShow);
 						this.ztShow = !this.ztShow;
 							break;
+						case 'zxjg':
+						this.zxjgShow = !this.zxjgShow;
 						default:
 							break;
 					}
@@ -105,10 +150,10 @@ window.onload=function(){
 					
 				}
 			},
-			openQqbj: function (id) {
-				var address = "project_timenode_comparison_yjedetails.html?chrjdlx=qqbj";
-    				toUrl(address);
-			},
+//			openQqbj: function (id) {
+//				var address = "project_timenode_comparison_yjedetails.html?chrjdlx=qqbj";
+//  				toUrl(address);
+//			},
 			openJc: function (id) {
 				var address = "project_timenode_comparison_jcejedetails.html?chrjdlx=jc";
     				toUrl(address);

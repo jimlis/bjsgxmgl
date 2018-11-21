@@ -45,8 +45,46 @@
         </header>
         <div class="mui-content" id="app" v-cloak>
             <ul class="mui-table-view"> 
-                <li class="mui-table-view-cell" v-on:click="openQqbj">前期报建</li>
-                <li class="mui-table-view-cell" v-on:click="openJc">基础</li>
+                <li class="mui-table-view-cell" v-on:click="toggle('qqbj')">前期报建</li>
+	                <div class="mui-content-padded " style="overflow-x: scroll;"  v-show="qqShow"> 
+		                <table>
+						  <thead>
+						    <tr>
+						      <th>名称</th>
+						      <th>计划完成时间</th>
+						      <th>实际完成时间</th>
+						      <th>工期(+)提前/(-)延后</th>
+						    </tr>
+						  </thead>
+					    <tr v-for="(item,index) in qqbj" :name="item.id">
+					      <td data-label="名称">{{item.chrjdmc}}</td>
+					      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
+					      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
+					      <td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+					    </tr>
+						</table>
+					</div>
+                <li class="mui-table-view-cell" v-on:click="toggle('jc')">基础</li>
+	                <div class="mui-content-padded" style="overflow-x: scroll;" v-show="jcShow">
+		                <table>
+						  <thead>
+						    <tr>
+						      <th>名称</th>
+						      <th>计划完成时间</th>
+						      <th>实际完成时间</th>
+						      <th>工期(+)提前/(-)延后</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr v-for="(item,index) in jc" :name="item.id" style="margin-left: 5%;">
+						      <td data-label="名称">{{item.chrjdmc}}</td>
+						      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
+						      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
+						      <td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+						    </tr>
+						   </tbody>
+						</table>
+					</div>
                 <li class="mui-table-view-cell" v-on:click="toggle('zt')">主体</li>
                 <ul class="mui-table-view bj-background-inherit mleft10" v-show="ztShow">
 			        <li class="mui-table-view-cell mui-collapse" v-for="item in zt">
@@ -73,51 +111,47 @@
 			    			</ul>
 			        </li>
 				</ul>
-                <li class="mui-table-view-cell mui-collapse">
-                    <a class="mui-navigate-right" href="#"><img class="mui-media-object  icon" >专项及竣工</a>
-                        <ul class="mui-table-view bj-background-inherit"> 
-	                        <li class="mui-table-view-cell mui-collapse" >专项验收</li>
-	                        <ul class="mui-table-view  bj-background-inherit mleft30" >
-	                                <li class="mui-table-view-cell">
-	                                   <table>
-	                                       <tr>
-		                                       <td>名称</td>
-		                                       <td>计划完成时间</td>
-		                                       <td>实际完成时间</td>
-		                                       <td>工期(+提前,-延后)</td>
-	                                       </tr>
-	                                       <tr v-for="item in zxys">
-                                               <td>{{item.chrjdmc}}</td>
-                                               <td>{{item.dtmjhwcsj}}</td>
-                                               <td>{{item.dtmsjwcsj}}</td>
-                                               <td>{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
-                                           </tr>
-	                                   </table>
-	                                </li>
-	                        </ul>       
-                        </ul>
-                        <ul class="mui-table-view bj-background-inherit"> 
-                            <li class="mui-table-view-cell mui-collapse" >竣工验收</span></li>
-                            <ul class="mui-table-view  bj-background-inherit mleft30" >
-                                    <li class="mui-table-view-cell">
-                                       <table>
-                                           <tr>
-                                               <td>名称</td>
-                                               <td>计划完成时间</td>
-                                               <td>实际完成时间</td>
-                                               <td>工期(+提前,-延后)</td>
-                                           </tr>
-                                           <tr v-for="item in jgys">
-                                               <td>{{item.chrjdmc}}</td>
-                                               <td>{{item.dtmjhwcsj}}</td>
-                                               <td>{{item.dtmsjwcsj}}</td>
-                                               <td>{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
-                                           </tr>
-                                       </table>
-                                    </li>
-                            </ul>       
-                        </ul>
-                </li>
+				<li class="mui-table-view-cell" v-on:click="toggle('zxjg')">专项及竣工</li>
+	                <div class="mui-content-padded" style="overflow-x: scroll;" v-show="zxjgShow">
+						<span>专项验收</span>
+						<table>
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>计划完成时间</th>
+									<th>实际完成时间</th>
+									<th>工期(+)提前/(-)延后</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in zxys">
+									<td data-label="名称">{{item.chrjdmc}}</td>
+									<td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
+									<td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
+									<td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+								</tr>
+							</tbody>
+						</table>	
+	                  <span>竣工验收</span>
+                       <table>
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>计划完成时间</th>
+									<th>实际完成时间</th>
+									<th>工期(+)提前/(-)延后</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in jgys">
+									<td data-label="名称">{{item.chrjdmc}}</td>
+									<td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
+									<td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
+									<td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+								</tr>
+							</tbody>
+						</table>	
+				</div>
             </ul>
         </div>
         <script src="../js/mui.min.js"></script>
