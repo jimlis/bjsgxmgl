@@ -241,3 +241,18 @@ tr .visibility{
 }
 
 /*自适应表格结束*/
+span.nav-right{
+	position: absolute !important;
+	display: inline !important;
+	right: 15px;
+}
+.nav-right:after{
+	content: '\e580';
+	font-family: Muiicons;
+	color: #bbb;
+}
+.nav-right.mui-active:after{
+	content: '\e581';
+	font-family: Muiicons;
+	color: #bbb;
+}

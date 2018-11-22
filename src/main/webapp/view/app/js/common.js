@@ -22,7 +22,7 @@ function setNavbar(){
 }
 
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://192.168.0.100:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";

@@ -101,15 +101,36 @@ window.onload=function(){
 					switch (type){
 						case 'qqbj':
 						this.qqShow = !this.qqShow;
+						if(this.qqShow){
+							this.jcShow = !this.qqShow ;
+							this.ztShow = !this.qqShow ;
+							this.zxjgShow = !this.qqShow ;
+						}
+						
 							break;
 						case 'jc':
 						this.jcShow = !this.jcShow;
+						if(this.qqShow){
+							this.qqShow = !this.jcShow;
+							this.ztShow = !this.jcShow;
+							this.zxjgShow = !this.jcShow;
+						}
 							break;
 						case 'zt':
 						this.ztShow = !this.ztShow;
+						if(this.qqShow){
+							this.qqShow = !this.ztShow;
+							this.jcShow = !this.ztShow;
+							this.zxjgShow = !this.ztShow;
+						}
 							break;
 						case 'zxjg':
 						this.zxjgShow = !this.zxjgShow;
+						if(this.qqShow){
+							this.ztShow = !this.zxjgShow;
+							this.qqShow = !this.zxjgShow;
+							this.jcShow = !this.zxjgShow;
+						}
 						default:
 							break;
 					}
