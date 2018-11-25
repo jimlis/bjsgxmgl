@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>电梯设备安装施工</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -37,38 +37,38 @@
 				<h5 style="margin-left: 16px;"><span id="toright"></span>项目进度记录</h5>
 				<h5 style="margin-left: 32px;"><span id="toright"></span>电梯设备安装施工</h5>
 				<hr />
-				<h5 class="bj-title2-font">报告日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
 					<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
 				</h5>
-				<h5 class="bj-title2-font">施工位置：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">施工位置：</span>
 					<input class="bj-input bj-p-black-font" type="hidden" id="intsgwz" v-model="intsgwz" placeholder="请选择施工位置" />
 					<input class="bj-input bj-p-black-font bj-disable"  readonly="readonly"  type="text" id="chrsgwz" v-model="chrsgwz" v-on:click="dlhPicker()" placeholder="请选择施工位置" />
 				</h5>
-				<h5 class="bj-title2-font">电梯编号：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯编号：</span>
 					<input class="bj-input bj-p-black-font" type="text" id="chrdtbh" v-model="chrdtbh" placeholder="请填写电梯编号" />
 				</h5>
-				<h5 class="bj-title2-font">电梯设备到货日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯设备到货日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmdhrq" v-model="dtmdhrq" v-on:click="dataPicker('dtmdhrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">电梯井道移交日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯井道移交日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmyjrq" v-model="dtmyjrq" v-on:click="dataPicker('dtmyjrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">电梯轨道完成日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯轨道完成日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmwcrq" v-model="dtmwcrq" v-on:click="dataPicker('dtmwcrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">电梯门套完成比例：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯门套完成比例：</span>
 					<input class="bj-input bj-p-black-font" id="intwcbl" v-model="intwcbl" type="number" placeholder="请填写完比例" />
 				</h5>
-				<h5 class="bj-title2-font">机房设备安装比例：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">机房设备安装比例：</span>
 					<input class="bj-input bj-p-black-font" id="intazbl" v-model="intazbl" type="number" placeholder="请填写完比例" />
 				</h5>
-				<h5 class="bj-title2-font">电梯试运行日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯试运行日期：</span>
 					<input class="bj-input bj-p-black-font"  readonly="readonly" id="dtmyxrq" v-model="dtmyxrq" v-on:click="dataPicker('dtmyxrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">电梯通过验收日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯通过验收日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly" id="dtmysrq" v-model="dtmysrq" v-on:click="dataPicker('dtmysrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">电梯验收合格证明：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">电梯验收合格证明：</span>
 				    <div id="uploader" class="wu-example">
                         <!--用来存放文件信息-->
                         <div class="btns">
@@ -78,13 +78,13 @@
                         </div>
                     </div>
 				</h5>
-				<h5 class="bj-title2-font">合格证明到期日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">合格证明到期日期：</span>
 					<input class="bj-input bj-p-black-font"  readonly="readonly"  id="dtmdqrq" v-model="dtmdqrq" v-on:click="dataPicker('dtmdqrq')" placeholder="请选择日期" />
 				</h5>
-				<h5 class="bj-title2-font">备注：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span>
 					<textarea  class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注"></textarea>
 				</h5>
-				<h5 class="bj-title2-font">报告人：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
                     <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
                     <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
                 </h5>

@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>室外管网施工</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -37,10 +37,10 @@
 			     <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" v-model="fileIds"/>
                  <input class="bj-input bj-p-black-font " type="hidden"  v-model="id"/>
                  <input class="bj-input bj-p-black-font " type="hidden" id="intxmid" v-model="intxmid"/>
-				<h5 class="bj-title2-font">更新日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span>
 				    <input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq" v-on:click="datePicker('dtmgxrq')"/>
 				</h5>
-				<h5 class=" bj-title2-font">最新版csd图纸：
+				<h5 class=" bj-title2-font"><span class="bj-title-p-font">最新版csd图纸：</span>
                         <div id="uploader" class="wu-example" style="margin-bottom: 15px;">
                             <!--用来存放文件信息-->
                             <div class="btns">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                 </h5>
-				<h5 class="bj-title2-font">CSD图纸通过审批日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">CSD图纸通过审批日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly"  id="dtmsprq" v-model="dtmsprq" v-on:click="datePicker('dtmsprq')" placeholder="请选择日期" />
 				</h5>
 				
@@ -86,7 +86,7 @@
 				
 				<button class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;" v-on:click="addLx">新增类型</button>
 				
-				<h5 class="bj-title2-font">报告人：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
                     <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
                     <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
                 </h5>

@@ -155,8 +155,19 @@ window.onload=function(){
 		}
 	});
 	
-tyclClick("#app");
-
+	tyclClick("#app");
+	mui(".mui-table-view-cell").on('tap','.addbtn',function(){
+	  	var type = this.getAttribute("type");
+	  	var address;
+	  	if(type=="JC"){
+			address = "project_progress_record_baseAdd.html?intsgwzid=-1&chrsgwzmc=其他";
+		}else if(type=="ZT"){
+			address = "project_progress_record_bodyAdd.html?intsgwzid=-1&chrsgwzmc=其他";
+		}else if(type=="EC"){
+			address = "project_progress_record_secqtAdd.html";
+		}
+		toUrl(address);
+	});
 }
 //得到【栋楼】数据
 function getDl(){

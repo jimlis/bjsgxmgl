@@ -1,12 +1,12 @@
-setNavbar();
-function setNavbar(){
+initdata();
+function initdata(){
 	try{
 		var nav = document.getElementById("title-scroll");
 		nav.innerHTML = `
 			<a href="../main.html">首页</a>
 			<a class="mui-action-back">前一页</a>
 			<a href="/app/html/project_list.html?intxmlx=1">PMC项目</a>
-			<a href="/app/html/project_list.html?intxmlx=2">PMC项目</a>
+			<a href="/app/html/project_list.html?intxmlx=2">EPC项目</a>
 		`;
 		mui('.mui-scroll-wrapper').scroll().scrollTo(0,0,500);//100毫秒滚动到顶
 	}catch(e){
@@ -18,11 +18,28 @@ function setNavbar(){
 	}catch(e){
 		
 	}
+	try{
+		var navxmmc = document.getElementById("bj-xmmc");
+		navxmmc.innerText = getCookie("chrxmmc");
+	}catch(e){
+		
+	}
+//	try{
+//		var nodename = mui(".bj-title2-font");
+//		for(i in nodename){
+//			
+//			var i = nodename[i].firstChild;
+//			console.log(i.width);
+//		}
+//		
+//	}catch(e){
+//		
+//	}
 	
 }
 
 /**服务端地址*/
-var serverPath="http://192.168.0.100:8080/bjsgxmgl/";
+var serverPath="http://192.168.1.103:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";

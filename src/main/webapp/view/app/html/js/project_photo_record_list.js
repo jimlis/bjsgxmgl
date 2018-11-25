@@ -9,12 +9,14 @@ $bjAjax({
 		xmid:xmid
 	},
 	success:function(data){
+		var ztnum=0;var dlnum=0; var ysnum=0;
 		if(data){
 			var ztxx=data["1"];
 			var ztxxDom=document.getElementById("ztxx");
 			if(ztxx&&ztxx.length>0){
 				var html="";
 				for(i in ztxx){
+					ztnum++;
 					var dtmbgrq = ztxx[i].dtmbgrq||"";
 				  	var id = ztxx[i].id||"";
 				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmbgrq+`</li>`;
@@ -29,6 +31,7 @@ $bjAjax({
 				var html="";
 				dlxxObj=dlxx;
 				for(key in dlxx){
+					dlnum++;
 					var dlMc=getDlMc(dlData,key);
 				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="selectDate('`+key+`','1')">`+dlMc+`</li>`;
 				}
@@ -43,6 +46,7 @@ $bjAjax({
 				var html="";
 				ycgcObj=gcys;
 				for(key in gcys){
+					ysnum++;
 				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="selectDate('`+key+`','2')">`+key+`</li>`;
 				}
 				gcysDom.innerHTML=html;
@@ -50,6 +54,9 @@ $bjAjax({
 				gcysDom.innerHTML=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
 			}
 		}
+		mui("#zttempspan")[0].innerText=ztnum;
+		mui("#dltempspan")[0].innerText=dlnum;
+		mui("#ystempspan")[0].innerText=ysnum;
 	}
 });
 

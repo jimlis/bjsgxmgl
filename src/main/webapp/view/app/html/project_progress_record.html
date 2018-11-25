@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>施工进度记录</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -43,13 +43,13 @@
 		<div class="mui-content" id="app">
 			<ul class="mui-table-view bj-title2-font"> 
 			     <li class="mui-table-view-cell mui-collapse">
-                    <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">前期报建</a>
+                    <a class="mui-navigate-right" href="#">前期报建</a>
                         <ul class="mui-table-view"> 
                             <li class="mui-table-view-cell mui-collapse  mleft10" v-for="item in qqbj" v-on:click="openQqbj(item.id,item.chrjdmc)">{{item.chrjdmc}}</li>
                         </ul>
                 </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">基础施工</a>
+		            <a class="mui-navigate-right" href="#">基础施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse  mleft10" v-for="item in dls" v-on:click="openJC(item.value,item.text)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('JC')">+</span><span :class="jcShow?'nav-right':'nav-right mui-active'"></li>
@@ -59,7 +59,7 @@
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">主体结构施工</a>
+		            <a class="mui-navigate-right" href="#">主体结构施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span><span :class="ztShow?'nav-right':'nav-right mui-active'"></li>
@@ -69,7 +69,7 @@
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">二次结构、装修等施工</a>
+		            <a class="mui-navigate-right" href="#">二次结构、装修等施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openEC(item.value)">{{item.text}}</li>
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('EC')">+</span></li>
@@ -79,17 +79,17 @@
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#"><img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">电梯设备安装施工</a>
+		            <a class="mui-navigate-right" href="#">电梯设备安装施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openDT(item.value)">{{item.text}}</li>
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse"  v-on:click="openSW()">
-		        	<img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">
+		        	
 		            室外管网施工
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse"  v-on:click="openYL()">
-		        	<img class="mui-media-object mui-pull-left icon" src="../images/bj_building.png">
+		        	
 		        		园林施工
 		        </li>
 		    </ul>

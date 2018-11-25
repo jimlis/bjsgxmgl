@@ -73,12 +73,12 @@ function newaddLx(data){
 	lxDiv.innerHTML=
 		'<input type="hidden" placeholder="" name="intswgwlxid" value="'+id+'">'+
 		'<input type="hidden" placeholder="" name="fileIds" value="'+fileIds+'">'+
-		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%">'+
-		'<button type="button" class="mui-btn mui-btn-danger" style="margin: 2px;" onclick="delLx(\''+id+'\',this)">删除类型</button>'+
-		'<button type="button" class="mui-btn mui-btn-primary" style="margin: 2px;" onclick="addQyTable([],\''+tbodyId+'\')">新增区域</button>';
+		'<button type="button" class="mui-btn mui-btn-danger" style="margin: 2px;" onclick="delLx(\''+id+'\',this)">-</button>'+
+		'<button type="button" class="mui-btn mui-btn-primary" style="margin: 2px;" onclick="addQyTable([],\''+tbodyId+'\')">+</button>'+
+		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%">';
     var xLul=document.getElementById("xLul");
-		thead.innerHTML='<tr><th>施工区域</th><th>完成量</th>'+
-		'<th>完成情况</th><th>备注</th><th style="width: 30px;">操作</th></tr>';
+		thead.innerHTML='<tr><th style="width: 30px;">操作</th><th>施工区域</th><th>完成量</th>'+
+		'<th>完成情况</th><th>备注</th></tr>';
 		table.appendChild(thead);
 		table.appendChild(tbody);
 		lxDiv.appendChild(table);
@@ -113,12 +113,12 @@ function addQyTable(data,tbodyid){
 	    		var chrbz=rowData.chrbz||"";
 		    	var tr=document.createElement("tr");
 		    	tr.innerHTML=
+		    		'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>'+
 				'<td data-label="施工区域"><input class="bj-input bj-p-black-font" type="hidden" name="intswgwsgjdid" value="'+rowid+'"  placeholder="请输入" />'+
 				'<input class="bj-input bj-p-black-font" name="chrsgqy" type="text" value="'+chrsgqy+'"   placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds"  value="'+fileIds+'"  type="hidden"></input></td>'+
 				'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number" value="'+intwcl+'"  placeholder="请输入" /></td>'+
 				'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
-				'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text" value="'+chrbz+'"  placeholder="请输入" /></td>'+
-				'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>';
+				'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text" value="'+chrbz+'"  placeholder="请输入" /></td>';
 		    	tbody.appendChild(tr);
 		    	//刷新上传控件
 				upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_swgwsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});
@@ -129,12 +129,12 @@ function addQyTable(data,tbodyid){
 	    }else{
 	    	var tr=document.createElement("tr");
 	    	tr.innerHTML=
+	   	 	'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>'+
 			'<td data-label="施工区域"><input class="bj-input bj-p-black-font" type="hidden" name="intswgwsgjdid"   placeholder="请输入" />'+
 			'<input class="bj-input bj-p-black-font" name="chrsgqy" type="text"  placeholder="请输入" /><input class="bj-input" id="'+fileIdName+'" name="fileIds" type="hidden"></input></td>'+
 			'<td data-label="完成量"><input class="bj-input bj-p-black-font" name="intwcl" type="number"  placeholder="请输入" /></td>'+
 			'<td data-label="完成情况"><div  id="uploader" class="wu-example"><div class="btns" style="text-align: left;">'+'<button id="'+chrbtnName+'" type="button" style="text-align: left;">选择文件</button></div><div id="'+fileListName+'"></div>'+'</td>'+
-			'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text"  placeholder="请输入" /></td>'+
-			'<td ><button class="mui-btn mui-btn-danger" type="button" onclick="delQy(\'\',this)">-</button></td>';
+			'<td data-label="备注"><input class="bj-input bj-p-black-font" name="chrbz" type="text"  placeholder="请输入" /></td>';
 	    	tbody.appendChild(tr);
 	    	//刷新上传控件
 			upLoadFile('#'+chrbtnName,{"busType":"bj_xm_sgjd_swgwsg_jd","fileIdsName":fileIdName,"fileListName":fileListName});

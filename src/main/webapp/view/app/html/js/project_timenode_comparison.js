@@ -1,13 +1,13 @@
 //初始化必要条件
 var xmid=getCookie("id");
-var sysDate=bjGetSysDate();
+//var sysDate=bjGetSysDate();
 var vue;
 var zxys=[];
 var jgys=[];
 var isclick= true;
 window.onload=function(){
 	//初始化新增跳转页面
-	init();
+//	init();
 	//得到数据
 	var pageData = {};
 //	initZxjgData();
@@ -101,36 +101,36 @@ window.onload=function(){
 					switch (type){
 						case 'qqbj':
 						this.qqShow = !this.qqShow;
-						if(this.qqShow){
-							this.jcShow = !this.qqShow ;
-							this.ztShow = !this.qqShow ;
-							this.zxjgShow = !this.qqShow ;
-						}
+//						if(this.qqShow){
+//							this.jcShow = !this.qqShow ;
+//							this.ztShow = !this.qqShow ;
+//							this.zxjgShow = !this.qqShow ;
+//						}
 						
 							break;
 						case 'jc':
 						this.jcShow = !this.jcShow;
-						if(this.qqShow){
-							this.qqShow = !this.jcShow;
-							this.ztShow = !this.jcShow;
-							this.zxjgShow = !this.jcShow;
-						}
+//						if(this.qqShow){
+//							this.qqShow = !this.jcShow;
+//							this.ztShow = !this.jcShow;
+//							this.zxjgShow = !this.jcShow;
+//						}
 							break;
 						case 'zt':
 						this.ztShow = !this.ztShow;
-						if(this.qqShow){
-							this.qqShow = !this.ztShow;
-							this.jcShow = !this.ztShow;
-							this.zxjgShow = !this.ztShow;
-						}
+//						if(this.qqShow){
+//							this.qqShow = !this.ztShow;
+//							this.jcShow = !this.ztShow;
+//							this.zxjgShow = !this.ztShow;
+//						}
 							break;
 						case 'zxjg':
 						this.zxjgShow = !this.zxjgShow;
-						if(this.qqShow){
-							this.ztShow = !this.zxjgShow;
-							this.qqShow = !this.zxjgShow;
-							this.jcShow = !this.zxjgShow;
-						}
+//						if(this.qqShow){
+//							this.ztShow = !this.zxjgShow;
+//							this.qqShow = !this.zxjgShow;
+//							this.jcShow = !this.zxjgShow;
+//						}
 						default:
 							break;
 					}
@@ -149,7 +149,7 @@ window.onload=function(){
 					return "";
 				}
 				var dtmsjwcsj=dtmsjwcsj||"";//时间完成时间
-				var wcsj=dtmsjwcsj||sysDate;
+				var wcsj=dtmsjwcsj;
 				var jhwcsj=new Date(dtmjhwcsj.replace(/-/g, "/"));
 					wcsj=new Date(wcsj.replace(/-/g, "/"));
 					var days = jhwcsj.getTime() - wcsj.getTime();
@@ -191,6 +191,18 @@ window.onload=function(){
 	});
 
 	tyclClick("#app");
+	mui(".mui-table-view-cell").on('tap','.addbtn',function(){
+	  	var type = this.getAttribute("type");
+	  	var address;
+	  	if(type=="qq"){
+			address = "project_timenode_comparison_yjedit.html?chrjdlx=qqbj";
+		}else if(type=="jc"){
+			address = "project_timenode_comparison_jcejedit.html?chrjdlx=jc";
+		}else if(type=="zx"){
+			address = "project_timenode_comparison_zxysedit.html";
+		}
+		toUrl(address);
+	});
 }
 
 //初始化新增跳转页面

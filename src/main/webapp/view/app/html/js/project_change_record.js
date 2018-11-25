@@ -30,9 +30,10 @@ function showList(type){
     		var html="";
     		mui.each(data,function(index,item){
     			var dtmgxrq = item.dtmgxrq||"";
+    			var chrbgsqmc = item.chrbgsqmc||"";
     			var id = item.id||"";
     			html+=`
-    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`</li>
+    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+"&nbsp;"+chrbgsqmc+`</li>
     			`;
 			})
 			document.getElementById(type).innerHTML=html;

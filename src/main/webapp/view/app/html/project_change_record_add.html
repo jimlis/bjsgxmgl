@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>新增工程_顾问变更记录</title>
+	<title>项目管理平台</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -42,49 +42,49 @@
 			<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
-			<h5 class="bj-title2-font">更新日期：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span>
 				<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
 			</h5>
-			<h5 class="bj-title2-font">变更申请类型：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更申请类型：</span>
 				<input class="bj-input bj-p-black-font" type="hidden" id="intbgsqlx"  v-model="intbgsqlx"placeholder="变更申请类型" />
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqlx" v-model="chrbgsqlx" v-on:click="bglxPicker()" placeholder="变更申请类型" />
 			</h5>
 			<h5 class="bj-title2-font">
-                                          单位名称： <input class="bj-input bj-p-black-font" type="hidden"
+                                          <span class="bj-title-p-font">单位名称：</span> <input class="bj-input bj-p-black-font" type="hidden"
                         id="intdwmcid" v-model="intdwmcid" placeholder="请选择" /> <input
                         class="bj-input bj-p-black-font" type="text" id="chrdwmc"
                         v-model="chrdwmc" v-on:click="dwPicker" placeholder="请选择" />
             </h5>
-			<h5 class="bj-title2-font">变更申请编号：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更申请编号：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqbh" v-model="chrbgsqbh" placeholder="变更申请编号" />
 			</h5>
-			<h5 class="bj-title2-font">变更申请名称：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更申请名称：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgsqmc" v-model="chrbgsqmc" placeholder="变更申请名称" />
 			</h5>
-			<h5 class="bj-title2-font">是否取替之前变更申请：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">是否取替之前变更申请：</span>
 				<input class="bj-input bj-p-black-font" type="hidden" id="intsfqd" v-model="intsfqd" placeholder="是否取替之前变更申请" />
 				<input class="bj-input bj-p-black-font" type="text" id="chrsfqd" v-model="chrsfqd" v-on:click="sfPicker()" onblur="onShqt()" placeholder="是否取替之前变更申请" />
 			</h5>
-			<h5 class="bj-title2-font" v-show="intsfqd==1">取替变更编号：
+			<h5 class="bj-title2-font" v-show="intsfqd==1"><span class="bj-title-p-font">取替变更编号：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="chrqtbgbh" v-model="chrqtbgbh" v-on:click="qtbgbhPicker()" placeholder="取替变更编号" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="intbgthid" v-model="intbgthid"  placeholder="取替变更id" />
 			</h5> 
-			<h5 class="bj-title2-font">变更详情：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更详情：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="chrbgxq" v-model="chrbgxq" placeholder="变更详情" />
 			</h5>
-			<h5 class="bj-title2-font">工期影响：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">工期影响：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="intgqyx" v-model="intgqyx" placeholder="工期影响" />
 			</h5>
-			<h5 class="bj-title2-font">变更估算：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算：</span>
 				<input class="bj-input bj-p-black-font" type="number" id="intbggs" v-model="intbggs" onblur="setGgjeSum()" placeholder="变更估算" />
 			</h5>
-			<h5 class="bj-title2-font">潜在变更总金额：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">潜在变更总金额：</span>
 				<input class="bj-input bj-p-black-font bj-disable" type="number" id="intqzbgzje" v-model="intqzbgzje" placeholder="潜在变更总金额" />
 			</h5>
-			<h5 class="bj-title2-font">合同占比：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">合同占比：</span>
 				<input class="bj-input bj-p-black-font bj-disable" type="number" id="inthtzb" v-model="inthtzb" placeholder="合同占比" />
 			</h5> 
-			<h5 class="bj-title2-font">备注：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span>
 				<input class="bj-input bj-p-black-font" type="text" id="chrbz" v-model="chrbz" placeholder="备注" />
 			</h5>
 
@@ -97,7 +97,7 @@
 				<div id="file-list">
 				</div>
 			</div>
-			<h5 class="bj-title2-font">审批流程状态：
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">审批流程状态：</span>
 				
 				<input class="bj-input bj-p-black-font" type="hidden" id="intsplcztid" name="intsplcztid" v-model="intsplcztid" placeholder="审批流程状态" />
 				<input class="bj-input bj-p-black-font" type="text" id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批流程状态" />

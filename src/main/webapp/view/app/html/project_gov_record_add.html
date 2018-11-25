@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>新增政府部门巡查/专项验收记录</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -37,31 +37,31 @@
 					<h5 id="bj-xmmc">xx项目</h5>
 					<h5 style="margin-left: 16px;"><span id="toright"></span>政府部门巡查/专项验收记录详情</h5>
 					<hr />
-					<h5 class="bj-title2-font">更新日期：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span>
 						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" v-model="dtmgxrq"/>
 					</h5>
-					<h5 class="bj-title2-font">验收类别：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收类别：</span>
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="hidden" id="intxclb" v-model="intxclb" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="text" id="chrxclb" v-model="chrxclb" v-on:click="lbPicker" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font" v-if="intxclb=='zxys' || intxclb=='jgys'">类型：
+					<h5 class="bj-title2-font" v-if="intxclb=='zxys' || intxclb=='jgys'"><span class="bj-title-p-font">类型：</span>
                         <input class="bj-input bj-p-black-font " readonly="readonly" type="hidden" id="intgqjdid" v-model="intgqjdid" placeholder="请选择" />
                         <input class="bj-input bj-p-black-font  bj-disable" readonly="readonly" type="text" id="chrgqjdmc" v-model="chrgqjdmc"  placeholder="请选择" />
                     </h5>
-					<h5 class="bj-title2-font">验收部门：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收部门：</span>
 						<input class="bj-input bj-p-black-font" type="hidden" id="intxcbm" v-model="intxcbm" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="text" id="chrxcbm" v-model="chrxcbm" v-on:click="bmPicker" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font">验收人员：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收人员：</span>
 						<input class="bj-input bj-p-black-font" type="text" id="chrxcry" v-model="chrxcry" placeholder="请输入" />
 					</h5>
-					<h5 class="bj-title2-font">验收日期：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收日期：</span>
 						<input class="bj-input bj-p-black-font"  readonly="readonly" type="text" id="dtmxcrq" v-on:click="datePicker" v-model="dtmxcrq" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font">备注：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span>
 						<textarea  class="bj-input bj-p-black-font" type="text" id="chrzb" v-model="chrzb" placeholder="备注"></textarea>
 					</h5>
-					<h5 class="bj-title2-font">报告人：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
 						<input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
 						<input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
 					</h5>

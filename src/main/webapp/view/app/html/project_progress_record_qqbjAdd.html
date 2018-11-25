@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>基础施工</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -43,17 +43,17 @@
 					<h5 style="margin-left: 16px;"><span id="toright"></span>项目进度记录</h5>
 					<h5 style="margin-left: 32px;"><span id="toright"></span>前期报建</h5>
 					<hr />
-					<h5 class="bj-title2-font">报告日期：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
 						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmbgrq" v-model="dtmbgrq"/>
 					</h5>
-					<h5 class="bj-title2-font">报建名称：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报建名称：</span>
 						<input class="bj-input bj-p-black-font bj-disable"  readonly="readonly" id="chrgqjdmc"  type="text" v-model="chrgqjdmc" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font bj-disable"  readonly="readonly" id="intgqjdid"  type="hidden" v-model="intgqjdid" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font" >完成日期：
+					<h5 class="bj-title2-font" ><span class="bj-title-p-font">完成日期：</span>
 						<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" id="dtmwcrq" v-on:click="dataPicker('dtmwcrq')" v-model="dtmwcrq" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-ul-clear bj-title2-font">文件：
+					<h5 class="bj-ul-clear bj-title2-font"><span class="bj-title-p-font">文件：</span>
                         <div id="uploader" class="wu-example">
                             <!--用来存放文件信息-->
                             <div class="btns">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </h5>
-					<h5 class="bj-title2-font">报告人：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
 						<input class="bj-input bj-p-black-font"  id="intbgrid" type="hidden" v-model="intbgrid" placeholder="报告人" />
 						<input class="bj-input bj-p-black-font bj-disable" id="chrbgrmc" type="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
 					</h5>

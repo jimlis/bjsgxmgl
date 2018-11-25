@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>照片记录</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -35,21 +35,21 @@
 				<hr />
 				<form id="myform">
 				    <input class="bj-input bj-p-black-font " type="hidden" id="fileIds" />
-					<h5 class="bj-title2-font">报告日期：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
 						<input class="bj-input bj-p-black-font bj-disable" disabled="disabled" id="dtmbgrq" />
 					</h5>
-					<h5 class="bj-title2-font">报告记录类别：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告记录类别：</span>
 						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrbglb" placeholder="请选择类别" />
 						<input class="bj-input bj-p-black-font" type="hidden" id="intbglb" placeholder="请选择类别" />
 					</h5>
-					<h5 class="bj-title2-font">拍摄位置：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">拍摄位置：</span>
 						<input class="bj-input bj-p-black-font"     type="text" id="chrpswzms" placeholder="请选择拍摄位置" />
 						<input class="bj-input bj-p-black-font" type="hidden" id="chrpswz" placeholder="请选择拍摄位置" />
 					</h5>
-					<h5 class="bj-title2-font bj-none" id="qtms">其他描述：
+					<h5 class="bj-title2-font bj-none" id="qtms"><span class="bj-title-p-font">其他描述：</span>
                         <input class="bj-input bj-p-black-font" type="text" id="chrqtms" placeholder="其他描述" />
                     </h5>
-					<h5 class="bj-title2-font">报告人：
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
                         <input class="bj-input bj-p-black-font" type="hidden" id="intbgrid" v-model="intbgrid" placeholder="报告人" />
                         <input class="bj-input bj-p-black-font bj-disable" type="text" id="chrbgrmc" v-model="chrbgrmc" placeholder="报告人名称" />
                     </h5>
@@ -61,7 +61,7 @@
 	                    </div>
 	                    <div id="img-list" class="mui-table-view mui-table-view-chevron mui-grid-view">
                     </div>
-                    <h5 class="bj-title2-font" id="qtms">照片描述：
+                    <h5 class="bj-title2-font" id="qtms"><span class="bj-title-p-font">照片描述：</span>
                         <textarea type="text" placeholder="照片描述" id="chrzpms"  class="bj-input bj-p-black-font"></textarea>
                     </h5>
                 </div>

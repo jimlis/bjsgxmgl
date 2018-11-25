@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>主体结构施工</title>
+		<title>项目管理平台</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -35,22 +35,22 @@
 				<h5 style="margin-left: 16px;"><span id="toright"></span>项目进度记录</h5>
 				<h5 style="margin-left: 32px;"><span id="toright"></span>主体结构施工</h5>
 				<hr />
-				<h5 class="bj-title2-font">报告日期：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
 					<input class="bj-input bj-p-black-font bj-disable" type="text"  v-model="pagedata.dtmbgrq"/>
 				</h5>
-				<h5 class="bj-title2-font">施工位置：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">施工位置：</span>
 					<input class="bj-input bj-p-black-font  bj-disable"  readonly="readonly"  type="text" v-model="pagedata.chrShowAddress" placeholder="请选择施工位置"/>
 				</h5>
-				<h5 class="bj-title2-font " v-if="pagedata.intsgwzd==-1">施工位置描述：
+				<h5 class="bj-title2-font " v-if="pagedata.intsgwzd==-1"><span class="bj-title-p-font">施工位置描述：</span>
 					   <textarea  class="bj-input bj-p-black-font" type="text" v-model="pagedata.chrsgwzms" placeholder="施工位置描述"></textarea>
                  </h5>
-                <h5 class="bj-title2-font">是否完成：
+                <h5 class="bj-title2-font"><span class="bj-title-p-font">是否完成：</span>
 						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" v-model="pagedata.chrsfwc" v-on:click="sfwcPicker" placeholder="请选择" />
 				</h5>
-				<h5 class="bj-title2-font" v-if="pagedata.intsfwc==1">完成日期：
+				<h5 class="bj-title2-font" v-if="pagedata.intsfwc==1"><span class="bj-title-p-font">完成日期：</span>
 					<input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker()" v-model="pagedata.dtmwcrq" placeholder="请选择" />
 				</h5>
-				<h5 class="bj-title2-font">楼层数：{{ztjdsJson.length}}</h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">楼层数：</span>{{ztjdsJson.length}}</h5>
 				<table style="margin: 15px 20px;">
 					  <thead>
 					    <tr>
@@ -68,10 +68,10 @@
 					  </tbody>
 				</table>
 				<button class="mui-btn mui-btn-primary" type="button" v-on:click="addlc" v-if="pagedata.intsgwzd==-1">+</button>
-				<h5 class="bj-title2-font">报告人：
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span>
 					<input class="bj-input bj-p-black-font  bj-disable" type="text"  v-model="pagedata.chrbgrmc"   placeholder="报告人" />
 				</h5>
-				<h5 class="bj-title2-font">照片：</h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">照片：</span></h5>
 				<div id="uploader" class="wu-example">
 				    <!--用来存放文件信息-->
 				    <div class="btns">

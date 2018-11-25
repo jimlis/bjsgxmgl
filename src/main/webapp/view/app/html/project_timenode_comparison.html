@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>主要工期节点比较</title>
+        <title>项目管理平台</title>
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -50,17 +50,17 @@
 		                <table>
 						  <thead>
 						    <tr>
-						      <th>名称</th>
-						      <th>计划完成时间</th>
-						      <th>实际完成时间</th>
-						      <th>工期(+)提前/(-)延后</th>
+						      <th style="width: 25%;">名称</th>
+						      <th style="width: 30%;">计划<br />完成时间</th>
+						      <th style="width: 30%;">实际<br />完成时间</th>
+						      <th style="width: 15%;">(+)提前<br />(-)延后</th>
 						    </tr>
 						  </thead>
 					    <tr v-for="(item,index) in qqbj" :name="item.id">
 					      <td data-label="名称">{{item.chrjdmc}}</td>
 					      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
 					      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
-					      <td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+					      <td data-label="(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
 					    </tr>
 						</table>
 					</div>
@@ -69,10 +69,10 @@
 		                <table>
 						  <thead>
 						    <tr>
-						      <th>名称</th>
-						      <th>计划完成时间</th>
-						      <th>实际完成时间</th>
-						      <th>工期(+)提前/(-)延后</th>
+						       <th style="width: 25%;">名称</th>
+						      <th style="width: 30%;">计划<br />完成时间</th>
+						      <th style="width: 30%;">实际<br />完成时间</th>
+						      <th style="width: 15%;">(+)提前<br />(-)延后</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -80,7 +80,7 @@
 						      <td data-label="名称">{{item.chrjdmc}}</td>
 						      <td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
 						      <td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
-						      <td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+						      <td data-label="(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
 						    </tr>
 						   </tbody>
 						</table>
@@ -93,10 +93,10 @@
 			            		<table>
 					        		<thead>
 							    		<tr>
-										<th>名称</th>
-										<th>计划完成时间</th>
-										<th>实际完成时间</th>
-										<th>工期(+)提前/(-)延后</th>
+										 <th style="width: 25%;">名称</th>
+						      <th style="width: 30%;">计划<br />完成时间</th>
+						      <th style="width: 30%;">实际<br />完成时间</th>
+						      <th style="width: 15%;">(+)提前<br />(-)延后</th>
 							    		</tr>
 							  	</thead>
 							  	<tbody>
@@ -104,23 +104,23 @@
 							    			<td data-label="名称">{{child.chrjdmc}}</td>
 										<td data-label="计划完成时间">{{child.dtmjhwcsj}}</td>
 										<td data-label="实际完成时间">{{child.dtmsjwcsj}}</td>
-										<td data-label="工期(+)提前/(-)延后">{{computedDay(child.dtmjhwcsj,child.dtmsjwcsj)}}</td>
+										<td data-label="(+)提前/(-)延后">{{computedDay(child.dtmjhwcsj,child.dtmsjwcsj)}}</td>
 							    		</tr>
 							  </tbody>
 						  </table>
 			    			</ul>
 			        </li>
 				</ul>
-				<li class="mui-table-view-cell" v-on:click="toggle('zxjg')">专项及竣工<span :class="zxjgShow?'nav-right':'nav-right mui-active'"></span></li>
+				<li class="mui-table-view-cell" v-on:click="toggle('zxjg')">专项及竣工验收<span :class="zxjgShow?'nav-right':'nav-right mui-active'"></span></li>
 	                <div class="mui-content-padded" style="overflow-x: scroll;" v-show="zxjgShow">
 						<span>专项验收</span>
 						<table>
 							<thead>
 								<tr>
-									<th>名称</th>
-									<th>计划完成时间</th>
-									<th>实际完成时间</th>
-									<th>工期(+)提前/(-)延后</th>
+									 <th style="width: 25%;">名称</th>
+						      <th style="width: 30%;">计划<br />完成时间</th>
+						      <th style="width: 30%;">实际<br />完成时间</th>
+						      <th style="width: 15%;">(+)提前<br />(-)延后</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -128,7 +128,7 @@
 									<td data-label="名称">{{item.chrjdmc}}</td>
 									<td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
 									<td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
-									<td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+									<td data-label="(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
 								</tr>
 							</tbody>
 						</table>	
@@ -136,10 +136,10 @@
                        <table>
 							<thead>
 								<tr>
-									<th>名称</th>
-									<th>计划完成时间</th>
-									<th>实际完成时间</th>
-									<th>工期(+)提前/(-)延后</th>
+									 <th style="width: 25%;">名称</th>
+						      <th style="width: 30%;">计划<br />完成时间</th>
+						      <th style="width: 30%;">实际<br />完成时间</th>
+						      <th style="width: 15%;">(+)提前<br />(-)延后</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -147,7 +147,7 @@
 									<td data-label="名称">{{item.chrjdmc}}</td>
 									<td data-label="计划完成时间">{{item.dtmjhwcsj}}</td>
 									<td data-label="实际完成时间">{{item.dtmsjwcsj}}</td>
-									<td data-label="工期(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
+									<td data-label="(+)提前/(-)延后">{{computedDay(item.dtmjhwcsj,item.dtmsjwcsj)}}</td>
 								</tr>
 							</tbody>
 						</table>	
