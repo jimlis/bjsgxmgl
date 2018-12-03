@@ -47,6 +47,7 @@ function showList(idName){
 			  	var id = item.id;
 			  	var chraqwtwz=item.chraqwtwz||'';
 			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
+			  	
 			})
 			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML =html;

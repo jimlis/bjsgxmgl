@@ -52,7 +52,7 @@
 		            <a class="mui-navigate-right" href="#">基础施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse  mleft10" v-for="item in dls" v-on:click="openJC(item.value,item.text)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('JC')">+</span><span :class="jcShow?'nav-right':'nav-right mui-active'"></li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('jc')">其他<span class="mui-badge addbtn" type="JC">+</span><span :class="jcShow?'nav-right':'nav-right mui-active'"></li>
 				        <ul class="mui-table-view  mleft30" v-show="jcShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.jc"  v-on:click="openQT('jc',item.intsgwzid,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
@@ -62,7 +62,7 @@
 		            <a class="mui-navigate-right" href="#">主体结构施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openZT(item.value,item.text)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('ZT')">+</span><span :class="ztShow?'nav-right':'nav-right mui-active'"></li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('zt')">其他<span class="mui-badge addbtn"  type="ZT">+</span><span :class="ztShow?'nav-right':'nav-right mui-active'"></li>
 				        <ul class="mui-table-view  mleft30" v-show="ztShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.zt"  v-on:click="openQT('zt',item.intsgwzd,item.id)">{{item.chrsgwzms}}</li>
 						</ul>		
@@ -72,7 +72,7 @@
 		            <a class="mui-navigate-right" href="#">二次结构、装修等施工</a>
 		            	<ul class="mui-table-view"> 
 				        <li class="mui-table-view-cell mui-collapse mleft10" v-for="item in dls" v-on:click="openEC(item.value)">{{item.text}}</li>
-				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn" v-on:click.stop="addQT('EC')">+</span></li>
+				        <li class="mui-table-view-cell mui-collapse mleft10" v-on:click="toggle('ec')">其他<span class="mui-badge addbtn"  type="EC">+</span></li>
 				        <ul class="mui-table-view  mleft30" v-show="ecShow">
 						    	<li class="mui-table-view-cell" v-for="item in qts.ec" v-on:click="openQT('ec','',item.id)">{{item.chrsgwz}}</li>
 						</ul>		

@@ -38,18 +38,18 @@
 					<table>
 					  <thead>
 					    <tr>
-					      <th>序号</th>
-					      <th>名称</th>
+<!--					      <th>序号</th>
+-->					      <th>名称</th>
 					      <th>计划完成日期</th>
 					      <th style="width: 30px;">操作</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr v-for="(item , key) in zxys">
-					      <td data-label="序号">
+					      <!--<td data-label="序号">
 					       <input class="bj-input bj-p-black-font" type="hidden" v-model="item.id" placeholder="请输入" />
 					       <input class="bj-input bj-p-black-font" type="number" v-model="item.intxh" placeholder="请输入" />
-					       </td>
+					       </td>-->
 					      <td data-label="名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjdmc" placeholder="请输入" /></td>
 					      <td data-label="计划完成日期"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('zxys',key)" v-model="item.dtmjhwcsj" placeholder="请选择" /></td>
 					      <td style="width: 30px;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="delzxys(key)">-</button></td>

@@ -17,7 +17,8 @@
                 height: 15px!important
             }
             .addbtn{
-                padding: 10px 30px
+                padding: 10px 30px;
+                margin-right: 20px;
             }
             .mleft10{
 				margin-left: 10px!important;
@@ -41,11 +42,11 @@
                     </div>
                 </div>
             </h1>
-            <button id="confirmBtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">新增</button>
+            <!--<button id="confirmBtn" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">新增</button>-->
         </header>
         <div class="mui-content" id="app" v-cloak>
             <ul class="mui-table-view"> 
-                <li class="mui-table-view-cell" v-on:click="toggle('qqbj')">前期报建<span :class="qqShow?'nav-right':'nav-right mui-active'"></span></li>
+                <li class="mui-table-view-cell" v-on:click="toggle('qqbj')">前期报建<span class="mui-badge addbtn"  type="qq">+</span><span :class="qqShow?'nav-right':'nav-right mui-active'"></span></li>
 	                <div class="mui-content-padded " style="overflow-x: scroll;"  v-show="qqShow"> 
 		                <table>
 						  <thead>
@@ -64,7 +65,7 @@
 					    </tr>
 						</table>
 					</div>
-                <li class="mui-table-view-cell" v-on:click="toggle('jc')">基础<span :class="jcShow?'nav-right':'nav-right mui-active'"></span></li>
+                <li class="mui-table-view-cell" v-on:click="toggle('jc')">基础<span class="mui-badge addbtn"  type="jc">+</span><span :class="jcShow?'nav-right':'nav-right mui-active'"></span></li>
 	                <div class="mui-content-padded" style="overflow-x: scroll;" v-show="jcShow">
 		                <table>
 						  <thead>
@@ -111,7 +112,7 @@
 			    			</ul>
 			        </li>
 				</ul>
-				<li class="mui-table-view-cell" v-on:click="toggle('zxjg')">专项及竣工验收<span :class="zxjgShow?'nav-right':'nav-right mui-active'"></span></li>
+				<li class="mui-table-view-cell" v-on:click="toggle('zxjg')">专项及竣工验收<span class="mui-badge addbtn"  type="zx">+</span><span :class="zxjgShow?'nav-right':'nav-right mui-active'"></span></li>
 	                <div class="mui-content-padded" style="overflow-x: scroll;" v-show="zxjgShow">
 						<span>专项验收</span>
 						<table>
