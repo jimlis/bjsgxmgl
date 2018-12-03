@@ -1,25 +1,30 @@
 package com.zj.project.xm.xmxmcjdw.service.impl;
 
-import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
-import com.zj.project.xm.xmdwmd.service.XmDwmdService;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.common.util.MyStringUtils;
+import com.zj.platform.common.web.exception.CommonException;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
+import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 import com.zj.project.xm.xmxmcjdw.dao.XmXmcjdwDao;
 import com.zj.project.xm.xmxmcjdw.domain.XmXmcjdwDO;
 import com.zj.project.xm.xmxmcjdw.service.XmXmcjdwService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-
-import com.zj.platform.common.web.exception.CommonException;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * 
@@ -39,6 +44,19 @@ public class XmXmcjdwServiceImpl extends BaseServiceImpl<XmXmcjdwDao, XmXmcjdwDO
 
     @Autowired
     private XmDwmdService xmDwmdService;
+    
+    @Override
+    public boolean updateById(XmXmcjdwDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmXmcjdwDO> updateWrapper=new UpdateWrapper<XmXmcjdwDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

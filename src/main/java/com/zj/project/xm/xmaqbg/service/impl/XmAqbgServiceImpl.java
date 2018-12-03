@@ -3,6 +3,7 @@ package com.zj.project.xm.xmaqbg.service.impl;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,10 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmaqbg.dao.XmAqbgDao;
 import com.zj.project.xm.xmaqbg.domain.XmAqbgDO;
@@ -42,6 +48,19 @@ public class XmAqbgServiceImpl extends BaseServiceImpl<XmAqbgDao, XmAqbgDO> impl
     
     @Autowired
     private XmDwmdService xmDwmdService;
+    
+    @Override
+    public boolean updateById(XmAqbgDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmAqbgDO> updateWrapper=new UpdateWrapper<XmAqbgDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

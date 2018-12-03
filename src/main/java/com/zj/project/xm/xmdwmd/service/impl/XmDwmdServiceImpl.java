@@ -10,10 +10,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.common.collect.Lists;
 import com.zj.platform.business.dict.domain.DictDO;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmdwmd.dao.XmDwmdDao;
@@ -34,6 +39,19 @@ public class XmDwmdServiceImpl extends BaseServiceImpl<XmDwmdDao, XmDwmdDO> impl
 
     static {
         tableInfo=TableInfoHelper.getTableInfo( XmDwmdDO.class);
+    }
+    
+    @Override
+    public boolean updateById(XmDwmdDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmDwmdDO> updateWrapper=new UpdateWrapper<XmDwmdDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
     }
 
     @Override

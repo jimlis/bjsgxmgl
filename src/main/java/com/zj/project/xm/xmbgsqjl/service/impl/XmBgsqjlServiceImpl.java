@@ -3,6 +3,7 @@ package com.zj.project.xm.xmbgsqjl.service.impl;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,11 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.user.domain.UserDO;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.xm.xmbgsqjl.dao.XmBgsqjlDao;
@@ -44,6 +50,19 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     
     @Autowired
     private XmDwmdService xmDwmdService;
+    
+    @Override
+    public boolean updateById(XmBgsqjlDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmBgsqjlDO> updateWrapper=new UpdateWrapper<XmBgsqjlDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
     
     @Override
     public XmBgsqjlDO getById(Serializable id) {

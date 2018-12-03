@@ -2,27 +2,27 @@ package com.zj.project.xm.xmybsgjl.service.impl;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import com.google.common.collect.Lists;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
-import com.zj.platform.common.util.Result;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.exception.MyApiException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmybsgjl.dao.XmYbsgjlDao;
 import com.zj.project.xm.xmybsgjl.domain.XmYbsgjlDO;
 import com.zj.project.xm.xmybsgjl.service.XmYbsgjlService;
@@ -45,6 +45,19 @@ public class XmYbsgjlServiceImpl extends BaseServiceImpl<XmYbsgjlDao, XmYbsgjlDO
 
     @Autowired
     private FileService fileService;
+    
+    @Override
+    public boolean updateById(XmYbsgjlDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmYbsgjlDO> updateWrapper=new UpdateWrapper<XmYbsgjlDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
 
     @Override
     public boolean removeByParmMap(Map<String, Object> parmMap) {

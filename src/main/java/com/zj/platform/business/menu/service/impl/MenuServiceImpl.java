@@ -8,30 +8,53 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.common.domain.Tree;
 import com.zj.platform.business.menu.dao.MenuDao;
 import com.zj.platform.business.menu.domain.MenuDO;
 import com.zj.platform.business.menu.service.MenuService;
 import com.zj.platform.business.role.dao.RoleMenuDao;
-import com.zj.platform.business.user.domain.UserDO;
 import com.zj.platform.common.util.BuildTree;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import com.zj.platform.shiro.util.ShiroUtils;
 
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class MenuServiceImpl extends BaseServiceImpl<MenuDao, MenuDO> implements MenuService {
-
+	
+	public static TableInfo tableInfo = null;
+	
+	static {
+    	tableInfo=TableInfoHelper.getTableInfo(MenuDO.class);
+    }
+	
     @Autowired
     RoleMenuDao roleMenuMapper;
+    
+    @Override
+    public boolean updateById(MenuDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<MenuDO> updateWrapper=new UpdateWrapper<MenuDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
 
     /**
      * 根据用户id获取树形目录、菜单

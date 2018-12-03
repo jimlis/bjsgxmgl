@@ -1,6 +1,26 @@
 package com.zj.platform.business.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.common.domain.Tree;
 import com.zj.platform.business.dept.dao.DeptDao;
 import com.zj.platform.business.dept.domain.DeptDO;
@@ -15,22 +35,22 @@ import com.zj.platform.business.user.vo.UserVO;
 import com.zj.platform.common.type.EnumErrorCode;
 import com.zj.platform.common.util.BuildTree;
 import com.zj.platform.common.util.MD5Utils;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.io.Serializable;
-import java.util.*;
 
 
 
 @Transactional
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements UserService {
+	
+	public static TableInfo tableInfo = null;
+	
+    static {
+    	tableInfo=TableInfoHelper.getTableInfo(UserDO.class);
+    }
+	
     @Autowired
     UserRoleDao userRoleMapper;
     @Autowired
@@ -114,7 +134,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
 
     @Override
     public boolean updateById(UserDO user) {
-        int r = baseMapper.updateById(user);
+    	List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<UserDO> updateWrapper=new UpdateWrapper<UserDO>().eq("id", user.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(user, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	 
+        boolean r = update(user, updateWrapper);
         Long userId = user.getId();
         List<Long> roles = user.getroleIds();
         //删除原来的角色
@@ -133,7 +162,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, UserDO> implements
         	//插入用户角色
             userRoleMapper.batchSave(list);
         }
-        return retBool(r);
+        return r;
     }
 
     @Override

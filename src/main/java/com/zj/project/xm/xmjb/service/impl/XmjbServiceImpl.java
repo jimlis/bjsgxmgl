@@ -1,24 +1,32 @@
 package com.zj.project.xm.xmjb.service.impl;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.user.domain.UserDO;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.platform.shiro.util.ShiroUtils;
-import com.zj.project.xm.xmjb.dao.XmjbDao;
 import com.zj.project.xm.xmdl.domain.XmDlDO;
-import com.zj.project.xm.xmjb.domain.XmjbDO;
 import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmjb.dao.XmjbDao;
+import com.zj.project.xm.xmjb.domain.XmjbDO;
 import com.zj.project.xm.xmjb.service.XmjbService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -30,12 +38,32 @@ import java.util.List;
  */
 @Service
 public class XmjbServiceImpl extends BaseServiceImpl<XmjbDao, XmjbDO> implements XmjbService {
+	
+	 public static TableInfo tableInfo = null;
 
+	    static {
+	        tableInfo=TableInfoHelper.getTableInfo( XmjbDO.class);
+	    }
+	
     @Autowired
     private FileService fileService;
 
     @Autowired
     private XmDlService xmDlService;
+    
+    @Override
+    public boolean updateById(XmjbDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmjbDO> updateWrapper=new UpdateWrapper<XmjbDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
+    
     /**
      * 保存项目基本信息
      * @param xmjbDO 项目对象

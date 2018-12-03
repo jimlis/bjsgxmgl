@@ -1,22 +1,30 @@
 package com.zj.project.xm.xmqyjwz.service.impl;
 
-import com.zj.platform.business.file.domain.FileDO;
-import com.zj.platform.business.file.service.FileService;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.business.file.domain.FileDO;
+import com.zj.platform.business.file.service.FileService;
+import com.zj.platform.common.util.MyStringUtils;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmqyjwz.dao.XmQyjwzDao;
 import com.zj.project.xm.xmqyjwz.domain.XmQyjwzDO;
 import com.zj.project.xm.xmqyjwz.service.XmQyjwzService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * 
@@ -34,6 +42,19 @@ public class XmQyjwzServiceImpl extends BaseServiceImpl<XmQyjwzDao, XmQyjwzDO> i
 
     static {
         tableInfo=TableInfoHelper.getTableInfo( XmQyjwzDO.class);
+    }
+    
+    @Override
+    public boolean updateById(XmQyjwzDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmQyjwzDO> updateWrapper=new UpdateWrapper<XmQyjwzDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
     }
 
     @Override

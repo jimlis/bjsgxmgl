@@ -1,16 +1,23 @@
 package com.zj.project.xm.splczt.service.impl;
 
-import org.springframework.stereotype.Service;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.zj.platform.common.util.MyStringUtils;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.splczt.dao.SplcZtDao;
 import com.zj.project.xm.splczt.domain.SplcZtDO;
 import com.zj.project.xm.splczt.service.SplcZtService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * 
@@ -26,6 +33,19 @@ public class SplcZtServiceImpl extends BaseServiceImpl<SplcZtDao, SplcZtDO> impl
 
     static {
         tableInfo=TableInfoHelper.getTableInfo( SplcZtDO.class);
+    }
+    
+    @Override
+    public boolean updateById(SplcZtDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<SplcZtDO> updateWrapper=new UpdateWrapper<SplcZtDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
     }
 
     @Override

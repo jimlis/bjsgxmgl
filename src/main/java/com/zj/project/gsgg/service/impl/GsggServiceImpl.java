@@ -1,10 +1,24 @@
 package com.zj.project.gsgg.service.impl;
 
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
 import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.user.domain.UserDO;
+import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.platform.shiro.util.ShiroUtils;
 import com.zj.project.api.pojo.vo.GsggDetailsVo;
@@ -13,12 +27,6 @@ import com.zj.project.gsgg.domain.GsggDO;
 import com.zj.project.gsgg.domain.GsggNrDO;
 import com.zj.project.gsgg.service.GsggNrService;
 import com.zj.project.gsgg.service.GsggService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * 
@@ -29,10 +37,32 @@ import java.util.List;
  */
 @Service
 public class GsggServiceImpl extends BaseServiceImpl<GsggDao, GsggDO> implements GsggService {
+	
+	public static TableInfo tableInfo = null;
+	
+    static {
+    	tableInfo=TableInfoHelper.getTableInfo(GsggDO.class);
+    }
+	
     @Autowired
     private FileService fileService;
     @Autowired
     private GsggNrService gsggNrService;
+    
+
+    
+    @Override
+    public boolean updateById(GsggDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<GsggDO> updateWrapper=new UpdateWrapper<GsggDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
+    }
 
     /**
      * 保存公司公告信息

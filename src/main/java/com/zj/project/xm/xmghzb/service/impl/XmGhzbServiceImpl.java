@@ -1,25 +1,30 @@
 package com.zj.project.xm.xmghzb.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.zj.platform.common.web.exception.MyApiException;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
-import com.zj.project.xm.xmghzb.dao.XmGhzbDao;
-import com.zj.project.xm.xmghzb.domain.XmGhzbDO;
-import com.zj.project.xm.xmghzb.service.XmGhzbService;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
-import org.springframework.util.Assert;
-import com.zj.platform.common.web.service.impl.BaseServiceImpl;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zj.platform.common.util.MyStringUtils;
+import com.zj.platform.common.web.exception.MyApiException;
+import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.xmghzb.dao.XmGhzbDao;
+import com.zj.project.xm.xmghzb.domain.XmGhzbDO;
+import com.zj.project.xm.xmghzb.service.XmGhzbService;
 
 /**
  * 
@@ -35,6 +40,19 @@ public class XmGhzbServiceImpl extends BaseServiceImpl<XmGhzbDao, XmGhzbDO> impl
 
     static {
         tableInfo=TableInfoHelper.getTableInfo( XmGhzbDO.class);
+    }
+    
+    @Override
+    public boolean updateById(XmGhzbDO entity) {
+		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
+    	UpdateWrapper<XmGhzbDO> updateWrapper=new UpdateWrapper<XmGhzbDO>().eq("id", entity.getId());
+    	fieldList.forEach(filed->{
+    		if(filed.isCharSequence()&&FieldStrategy.NOT_EMPTY==filed.getFieldStrategy()) {
+    			String value = (String)ReflectionKit.getMethodValue(entity, filed.getProperty());
+        		updateWrapper.set(MyStringUtils.isEmptyString(value),filed.getColumn(),value);
+    		}
+    	});
+    	return update(entity, updateWrapper);
     }
 
     @Override
