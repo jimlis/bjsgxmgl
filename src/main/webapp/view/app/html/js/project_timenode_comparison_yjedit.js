@@ -32,7 +32,7 @@ window.onload= function(){
 				delNode(nodeid,event.target);
 			},
 			datePicker:function(index,name){
-				vueArrDtPicker(pageData,index,name);
+				vueArrDtPicker(pageData,index,name,true);
 			}
 		}
 	});
