@@ -38,8 +38,8 @@ function showList(idName){
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
 			  	var id = item.id;
-			  	var chraqwtwz=item.chraqwtwz||'';
-			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
+			  	var chraqwtbs=item.chraqwtbs||'';
+			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtbs+`</li>`;
 			})
 			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML =html;
