@@ -12,6 +12,8 @@ window.onload = function(){
 
     upLoadImg('#chbtn',{"busType":"bj_xm_aqbg"});
     
+    upLoadImg('#chbtn_zgwc',{"busType":"bj_xm_aqbg","fileListName":"img-list_zgwc","type":"2"});
+    
     //修改
     if(!!obj.id){
     	var id=obj.id||"";
@@ -38,6 +40,9 @@ window.onload = function(){
 				
 				//加载图片
 				initImgList("bj_xm_aqbg",id,"1","fileIds","img-list",true);
+				
+				//加载图片
+				initImgList("bj_xm_aqbg",id,"2","fileIds","img-list_zgwc",true);
 			},
 		});
     	

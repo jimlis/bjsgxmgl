@@ -56,6 +56,10 @@ public class XmZlqxbgDO extends BaseDomain {
     /** 质量缺陷位置 */
     @ApiModelProperty(value = "质量缺陷位置 ",name = "chrqxwz",dataType = "string")
     private String chrqxwz;
+    /** 质量缺陷发现日期 */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @ApiModelProperty(value = "质量缺陷发现日期",name = "dtmzlqxfxrq",dataType = "string",example = "2018-10-13",required = true)
+    private Date dtmzlqxfxrq;
     /** 备注 */
     @ApiModelProperty(value = "备注",name = "chrbz",dataType = "string")
     private String chrbz;
@@ -274,6 +278,12 @@ public class XmZlqxbgDO extends BaseDomain {
      */
 	public void setChrsgdw(String chrsgdw) {
 		this.chrsgdw = chrsgdw;
+	}
+	public Date getDtmzlqxfxrq() {
+		return dtmzlqxfxrq;
+	}
+	public void setDtmzlqxfxrq(Date dtmzlqxfxrq) {
+		this.dtmzlqxfxrq = dtmzlqxfxrq;
 	}
     
 }

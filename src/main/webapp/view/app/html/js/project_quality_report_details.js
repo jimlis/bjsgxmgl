@@ -13,6 +13,7 @@ window.onload = function(){
 			document.getElementById("chrbzSpan").innerText = data.chrbz||"";
 			document.getElementById("chrqxmsSpan").innerText = data.chrqxms||"";
 			document.getElementById("chrqxwzSpan").innerText = data.chrqxwz||"";
+			document.getElementById("dtmzlqxfxrqSpan").innerText = data.dtmzlqxfxrq||"";
 			document.getElementById("dtmgxrqSpan").innerText = data.dtmgxrq||"";
 			document.getElementById("dtmtzrqSpan").innerText = data.dtmtzrq||"";
 			document.getElementById("dtmzgwcrqSpan").innerText = data.dtmzgwcrq||"";
@@ -31,6 +32,7 @@ window.onload = function(){
 			}
 			//加载图片
 			initImgList("bj_xm_zlqxbg",id,"1","fileIds","img-list",false);
+			initImgList("bj_xm_zlqxbg",id,"2","fileIds","img-list_zgwc",false);
 		},
 	});
    

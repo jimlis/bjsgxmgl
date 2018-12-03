@@ -7,7 +7,9 @@ window.onload = function(){
 	dtPicker('#dtmtzrq');
     dtPicker('#dtmwczgrq');
     dtPicker('#dtmzgwcrq');
+    dtPicker('#dtmzlqxfxrq');
 	upLoadImg('#chbtn',{"busType":"bj_xm_zlqxbg"});
+	upLoadImg('#chbtn_zgwc',{"busType":"bj_xm_zlqxbg","fileListName":"img-list_zgwc","type":"2"});
 	relPicker("chrqxlx",getPageData(),"intqxlx");
 	relPicker("chrsgdw",getXmdwmdData(intxmid,"2"),"intsgdw");
 	//修改
@@ -25,6 +27,7 @@ window.onload = function(){
 				document.getElementById("chrbz").value = data.chrbz||"";
 				document.getElementById("chrqxms").value = data.chrqxms||"";
 				document.getElementById("chrqxwz").value = data.chrqxwz||"";
+				document.getElementById("dtmzlqxfxrq").value = data.dtmzlqxfxrq||"";
 				document.getElementById("dtmgxrq").value = data.dtmgxrq||"";
 				document.getElementById("dtmtzrq").value = data.dtmtzrq||"";
 				document.getElementById("dtmzgwcrq").value = data.dtmzgwcrq||"";
@@ -47,6 +50,7 @@ window.onload = function(){
 				document.getElementById("intxmid").value = data.intxmid||"";
 				//加载图片
 				initImgList("bj_xm_zlqxbg",id,"1","fileIds","img-list",true);
+				initImgList("bj_xm_zlqxbg",id,"2","fileIds","img-list_zgwc",true);
 			},
 		});
 	}else{

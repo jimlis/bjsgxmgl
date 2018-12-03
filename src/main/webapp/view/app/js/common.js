@@ -517,7 +517,9 @@ function upLoadImg(elem,data,done){
 			});
 		}*/
 		,done: done||function(res) {
-            	uploadDone(res,"fileIds","img-list")
+				var fileIdsName=data.fileIdsName||"fileIds";
+				var fileListName=data.fileListName||"img-list";
+            	uploadDone(res,fileIdsName,fileListName);
        		 }
 		});
 	});

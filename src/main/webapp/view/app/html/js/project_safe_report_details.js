@@ -21,6 +21,7 @@ window.onload = function(){
 			 ;
 			//加载图片
 			initImgList("bj_xm_aqbg",id,"1","fileIds","img-list",false);
+			initImgList("bj_xm_aqbg",id,"2","fileIds","img-list_zgwc",false);
 		},
 	});
    

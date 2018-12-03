@@ -37,9 +37,16 @@ function showList(idName){
 			var html="";
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
+			  	var dtmwczgrq = item.dtmwczgrq||"";
+			  	var yjHtml="";
+				if(dtmwczgrq!=""){
+			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png'>";
+			    }else {
+			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png'>";
+			    }
 			  	var id = item.id;
 			  	var chraqwtwz=item.chraqwtwz||'';
-			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
+			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
 			})
 			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML =html;
