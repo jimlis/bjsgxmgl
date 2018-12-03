@@ -33,7 +33,7 @@ window.onload = function(){
 					var selectItems = getDtPicker(function(selectItems){
 						var value = selectItems.value;
 						vue.setdataPicker(index,value);
-					});
+					},true);
 					
 				},
 				setdataPicker:function(index,value){
