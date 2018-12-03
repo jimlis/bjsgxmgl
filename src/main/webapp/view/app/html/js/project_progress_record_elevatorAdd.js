@@ -2,6 +2,7 @@ var obj=getRequest()
 var id = obj.id||"";
 var xmid=getCookie("id");
 var sgwz=obj.sgwz||"";
+var dtbh=obj.dtbh||"";
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var sysdate=bjGetSysDate();
@@ -55,6 +56,7 @@ function isUpdata(){
 				xmSgjdDtsbazsgId:id,
 				xmid:xmid,
 				sgwz:sgwz,
+				dtbh:dtbh,
 				fwlx:"xz"
 			},
 			success:function(data){

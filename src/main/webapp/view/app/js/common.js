@@ -39,7 +39,7 @@ function initdata(){
 }
 
 /**服务端地址*/
-var serverPath="http://192.168.1.103:8080/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -121,6 +121,7 @@ var progressSecSaveQtApiPath=serverPath+"api/xmsgjdecjgzx/saveqt";
 var progressSecQtByIdApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxQtById";
 var progressSecQtListByXmidApiPath=serverPath+"api/xmsgjdecjgzx/getXmSgjdEcjgzxQtListByXmid";
 
+var progressElevatorGetListApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgListByXmidAndSgwz";
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 var progressElevatorByParamApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgByParam";

@@ -2,9 +2,16 @@
 var xmid=getCookie("id");
 var isclick= true;
 var vue;
+var dtShwoArr=[];
+var oldDtIndex=-1;
 window.onload=function(){
 	//得到数据
 	var pageData = getDl();
+	if(pageData){
+		for(i in pageData){
+			dtShwoArr.push(false);
+		}
+	}
 	var qt={};
 	var qqbj=[];
 	//绑定数据
@@ -15,10 +22,12 @@ window.onload=function(){
 			jcShow:false,
 			ztShow:false,
 			ecShow:false,
-			dtShow:false,
+			dtShow:dtShwoArr,
+			dtList:[],
 			dls:pageData,
 			qts:qt,
 			qqbj:qqbj
+			
 		},
 		beforeCreate: function(){
 			$bjAjax({
@@ -129,8 +138,37 @@ window.onload=function(){
 				var address = "project_progress_record_secDetail.html?did="+did;
     				toUrl(address);
 			},
-			openDT: function (sgwz,chrsgwz) {
-				var address = "project_progress_record_elevatorDetail.html?sgwz="+sgwz;
+			openDTbh: function (sgwz,index) {
+				if(oldDtIndex==index){
+					vue.$data.dtList=[];
+					oldDtIndex=-1;
+				}else{
+					oldDtIndex=index;
+					//加载数据
+					$bjAjax({
+						url:progressElevatorGetListApiPath,
+						type:"post",
+						data:{
+							xmid:xmid,
+							sgwz:sgwz
+						},
+						success:function(data){
+							if(data){
+								vue.$data.dtList=data||[];
+								for(i in vue.$data.dtShow){
+									if(i==index){
+										vue.$data.dtShow[i]=true;
+									}else{
+										vue.$data.dtShow[i]=false;
+									}
+								}
+							}
+						}
+					});
+				}
+			},
+			openDT: function (id,sgwz,dtbh) {
+				var address = "project_progress_record_elevatorDetail.html?sgwz="+sgwz+"&dtbh="+dtbh+"&id="+id;
     				toUrl(address);
 			},
 			openSW: function () {
@@ -165,6 +203,10 @@ window.onload=function(){
 			address = "project_progress_record_bodyAdd.html?intsgwzid=-1&chrsgwzmc=其他";
 		}else if(type=="EC"){
 			address = "project_progress_record_secqtAdd.html";
+		}else if(type=="DT"){
+			var sgwz = this.getAttribute("sgwz");
+			var dtbh = this.getAttribute("dtbh");
+		    address = "project_progress_record_elevatorAdd.html?sgwz="+sgwz+"&dtbh="+dtbh;
 		}
 		toUrl(address);
 	});

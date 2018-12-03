@@ -166,11 +166,12 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
 	 * @param xmSgjdDtsbazsgId 电梯安装记录
 	 * @param xmid 项目id
 	 * @param sgwz  施工位置
+	 * @param dtbh 电梯编号
 	 * @param fwlx "xz"-新增  "cx"-查询
 	 * @return
 	 */
 	@Override
-	public XmSgjdDtsbazsgDO getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId, Long xmid, Long sgwz, String fwlx) {
+	public XmSgjdDtsbazsgDO getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId, Long xmid, Long sgwz,String dtbh, String fwlx) {
 		if(xmSgjdDtsbazsgId==null&&(xmid==null||sgwz==null)) {
 			return null;
 		}
@@ -186,6 +187,7 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
 			xmSgjdDtsbazsgDO.setFcbz(1);
 			xmSgjdDtsbazsgDO.setIntxmid(xmid);
 			xmSgjdDtsbazsgDO.setIntsgwz(sgwz);
+			xmSgjdDtsbazsgDO.setChrdtbh(dtbh);
 			QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO).orderByDesc("id");
 			List<XmSgjdDtsbazsgDO> list=list(queryWrapper);
 			if(CollectionUtils.isNotEmpty(list)) {

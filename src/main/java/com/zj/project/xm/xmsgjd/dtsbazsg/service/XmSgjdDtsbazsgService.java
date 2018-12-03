@@ -31,8 +31,9 @@ public interface XmSgjdDtsbazsgService extends BaseService<XmSgjdDtsbazsgDO> {
 	 * @param xmSgjdDtsbazsgId 电梯安装记录
 	 * @param xmid 项目id
 	 * @param sgwz  施工位置
+	 * @param dtbh 电梯编号
 	 * @param fwlx "xz"-新增  "cx"-查询
 	 * @return
 	 */
-	public XmSgjdDtsbazsgDO getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId, Long xmid, Long sgwz, String fwlx);
+	public XmSgjdDtsbazsgDO getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId, Long xmid, Long sgwz,String dtbh, String fwlx);
 }
