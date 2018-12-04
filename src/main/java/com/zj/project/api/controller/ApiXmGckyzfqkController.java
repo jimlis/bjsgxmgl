@@ -54,7 +54,7 @@ public class ApiXmGckyzfqkController extends ApiBaseController {
         	xmGckyzfqkDO.setFcbz(1);
         	xmGckyzfqkDO.setIntxmid(xmid);
         	xmGckyzfqkDO.setIntdwlx(dwlx);
-        	QueryWrapper<XmGckyzfqkDO> queryWrapper=new QueryWrapper<XmGckyzfqkDO>(xmGckyzfqkDO).select("id","dtmgxrq","intdwmcid","intdwlx","(select chrdwmc from bj_xm_dwmd where id=intdwmcid) as chrdwmc").orderByAsc("dtmgxrq");
+        	QueryWrapper<XmGckyzfqkDO> queryWrapper=new QueryWrapper<XmGckyzfqkDO>(xmGckyzfqkDO).select("id","dtmgxrq","intdwmcid","intbcsqqs","intdwlx","(select chrdwmc from bj_xm_dwmd where id=intdwmcid) as chrdwmc").orderByAsc("dtmgxrq");
             return Result.ok(xmGckyzfqkService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();

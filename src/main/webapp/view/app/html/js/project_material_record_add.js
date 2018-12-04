@@ -20,7 +20,7 @@ window.onload = function(){
 				vuePicker(pageData,"chrsfdtp",[{"text":"是","value":"1"},{"text":"否","value":"0"}],"intsfdtp");
 			},
 			splcPicker: function () {
-				vuePicker(pageData,"chrsprmc",splctzs,"intsplcztid",function(item){
+				vuePicker(pageData,"chrsprmc",splctzs,"intsplczt",function(item){
 					pageData.chruserid = item.chruserid;
 				});
 			},
@@ -70,7 +70,7 @@ function isUpdata(){
 				document.getElementById("chrgfbz").value=data.chrgfbz||"";
 				document.getElementById("chrbz").value=data.chrbz||"";
 				document.getElementById("intsplczt").value=data.intsplczt||"";
-				document.getElementById("chrsplczt").value=data.chrsplczt||"";
+				//document.getElementById("chrsplczt").value=data.chrsplczt||"";
 				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
 				var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
 				for(i in xmClybspjlJszlList){
@@ -157,7 +157,7 @@ function buildModel(){
 	var model = {
 		intsfdtp:'',
 		chrsfdtp:'',
-		intsplcztid:'',
+		intsplczt:'',
 		chrsprmc:'',
 		chruserid:''
 	}
