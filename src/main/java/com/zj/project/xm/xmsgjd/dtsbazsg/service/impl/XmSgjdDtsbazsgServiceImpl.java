@@ -182,6 +182,10 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
 		//主键存在 优先主键查询 否则查询最新记录
 		if(xmSgjdDtsbazsgId!=null) {
 			xmSgjdDtsbazsgDO=getById(xmSgjdDtsbazsgId);
+			if("xz".equals(fwlx)) {//新增
+				xmSgjdDtsbazsgDO.setDtmgxrq(new Date());
+			}
+			
 		}else {
 			xmSgjdDtsbazsgDO=new XmSgjdDtsbazsgDO();
 			xmSgjdDtsbazsgDO.setFcbz(1);
@@ -192,6 +196,9 @@ public class XmSgjdDtsbazsgServiceImpl extends BaseServiceImpl<XmSgjdDtsbazsgDao
 			List<XmSgjdDtsbazsgDO> list=list(queryWrapper);
 			if(CollectionUtils.isNotEmpty(list)) {
 				xmSgjdDtsbazsgDO=list.get(0);
+				if("xz".equals(fwlx)) {//新增
+					xmSgjdDtsbazsgDO.setDtmgxrq(new Date());
+				}
 				
 				//查询附件
 		    	FileDO fileDO=new FileDO();
