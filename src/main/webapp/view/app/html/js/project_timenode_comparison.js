@@ -190,8 +190,8 @@ window.onload=function(){
 		}
 	});
 
-	tyclClick("#app");
-	mui(".mui-table-view-cell").on('tap','.addbtn',function(){
+	//tyclClick("#app");
+	mui("#app").on('tap','.addbtn',function(){
 	  	var type = this.getAttribute("type");
 	  	var address;
 	  	if(type=="qq"){

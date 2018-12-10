@@ -33,6 +33,8 @@ import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
 import com.zj.project.xm.xmdl.domain.XmDlDO;
 import com.zj.project.xm.xmdl.service.XmDlService;
+import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+import com.zj.project.xm.xmgqjdbj.service.XmGqjdbjService;
 import com.zj.project.xm.xmzpjl.dao.XmZpjlDao;
 import com.zj.project.xm.xmzpjl.domain.XmZpjlDO;
 import com.zj.project.xm.xmzpjl.service.XmZpjlService;
@@ -61,8 +63,9 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
     @Autowired
     private XmZpmsService xmZpmsService;
     
+    
     @Autowired
-    private XmDlService xmDlService;
+    private XmGqjdbjService xmGqjdbjService;
     
     @Override
     public boolean updateById(XmZpjlDO entity) {
@@ -94,9 +97,9 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
     				chrbglb="栋楼形象进度";
     				//设置拍摄地址描述
     				if(StringUtils.isNotEmpty(chrpswz)) {
-    					XmDlDO xmDlDO = xmDlService.getById(Long.parseLong(chrpswz));
-    					if(xmDlDO!=null) {
-    						xmZpjlDO.setChrpswzms(xmDlDO.getChrdlmc());
+    					XmGqjdbjDO xmGqjdbjDO = xmGqjdbjService.getById(Long.parseLong(chrpswz));
+    					if(xmGqjdbjDO!=null) {
+    						xmZpjlDO.setChrpswzms(xmGqjdbjDO.getChrjdmc());
     					}
     				}
     			}else if(intbglb.equals(3)) {
@@ -198,14 +201,15 @@ public class XmZpjlServiceImpl extends BaseServiceImpl<XmZpjlDao, XmZpjlDO> impl
         if(xmid==null){
             throw  new CommonException("xmid不能为空");
         }
-        XmDlDO xmDlDO=new XmDlDO();
-        xmDlDO.setIntxmid(xmid);
-        xmDlDO.setFcbz(1);
-        QueryWrapper<XmDlDO>  xmDlQuery=new QueryWrapper<XmDlDO>(xmDlDO).orderByAsc("intxh","id");
-        List<XmDlDO> list = xmDlService.list(xmDlQuery);
+        XmGqjdbjDO xmGqjdbjDO=new XmGqjdbjDO();
+        xmGqjdbjDO.setIntxmid(xmid);
+        xmGqjdbjDO.setFcbz(1);
+        xmGqjdbjDO.setChrlx("jc");
+        QueryWrapper<XmGqjdbjDO> xmGqjdbjQuery=new QueryWrapper<XmGqjdbjDO>(xmGqjdbjDO).orderByAsc("intxh","id");
+        List<XmGqjdbjDO> list = xmGqjdbjService.list(xmGqjdbjQuery);
         Map<String, String> xmDlMap=Maps.newLinkedHashMap();
         if(CollectionUtils.isNotEmpty(list)) {
-        	Map<String,String> collect = list.stream().collect(Collectors.toMap(one->Objects.toString(one.getId(), ""),one->one.getChrdlmc()));
+        	Map<String,String> collect = list.stream().collect(Collectors.toMap(one->Objects.toString(one.getId(), ""),one->one.getChrjdmc()));
         	xmDlMap.putAll(collect);
         }
         

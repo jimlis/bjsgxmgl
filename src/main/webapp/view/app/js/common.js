@@ -501,7 +501,7 @@ function upLoadImg(elem,data,done){
 		,data: data		//传递到后台的数据
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
-		,exts: 'png|jpg|bmp|gif|jpeg' 			//设置智能上传图片格式文件
+		,exts: 'png|jpg' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		/*,bindAction: bind		//“上传”按钮的ID
@@ -839,6 +839,7 @@ function upLoadFile(elem,data,done){
 		,data: data		//传递到后台的数据
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
+		,exts:'pdf'
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		,done: done||function(res) {
@@ -953,8 +954,8 @@ function removeMuiClick(parent,child){
  * @returns
  */
 function tyclClick(id){
-	removeMuiClick(id,"a");
-	addMuiClick(id,"a");
+	/*removeMuiClick(id,"a");
+	addMuiClick(id,"a");*/
 	removeMuiClick(id,"li");
 	addMuiClick(id,"li");
 }

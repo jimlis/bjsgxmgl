@@ -6,7 +6,8 @@ var xmid= getCookie("id");
 var id=obj.id||"";
 var ldData=[];
 window.onload = function(){
-	ldData=getXmdlListByXmid(xmid);
+	//ldData=getXmdlListByXmid(xmid);
+	ldData=getXmjdListByParam(xmid, "jc", "1", "");
 	upLoadImg('#chbtn',{"busType":"bj_xm_zpjl"});
 	relPicker("chrbglb",[{"text":"整体形象进度","value":"1"},{"text":"栋楼形象进度","value":"2"},{"text":"隐蔽工程形象进度","value":"3"}],"intbglb",intbglbChange);
 	isUpdate();

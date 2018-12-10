@@ -19,7 +19,7 @@ $bjAjax({
 					ztnum++;
 					var dtmbgrq = ztxx[i].dtmbgrq||"";
 				  	var id = ztxx[i].id||"";
-				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmbgrq+`</li>`;
+				  	html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+id+`" >`+dtmbgrq+`</li>`;
 				}
 				ztxxDom.innerHTML=html;
 			}else{
@@ -27,7 +27,34 @@ $bjAjax({
 			}
 			var dlxx=data["2"];
 			var dlxxDom=document.getElementById("dlxx");
-			if(dlxx){
+			var dlArr=getXmjdListByParam(xmid, "jc", "1", "");
+			if(dlArr&&dlArr.length>0){
+				var html="";
+				 for(i in dlArr){
+					 var dlObj=dlArr[i];
+					 var dlMc=dlObj.text||"";
+					 var dlId=dlObj.value||"";
+					 html +=`<li dlId="`+dlId+`" class="mui-table-view-cell mui-collapse mleft10 dlli" >`+dlMc+`</li>`;
+					 html +=`<ul name="dlul" id="`+dlId+`" class="mui-table-view  mleft30 " style="display:none">`;
+					 if(dlxx){
+						 for(key in dlxx){
+								if(key==dlId){
+									for(j in dlxx[key]){
+										dlnum++;
+										var dtmbgrq=dlxx[key][j]["dtmbgrq"];
+										var zpjdid=dlxx[key][j]["id"];
+									  	html +=`<li class="mui-table-view-cell details" zjid="`+zpjdid+`" >`+dtmbgrq+`</li>`;
+									}
+								}
+							}
+					 }
+					 html +=`</ul>`;
+				 }
+				 dlxxDom.innerHTML=html;
+			}else{
+				dlxxDom.innerHTML=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
+			}
+			/*if(dlxx){
 				var html="";
 				dlxxObj=dlxx;
 				for(key in dlxx){
@@ -38,7 +65,7 @@ $bjAjax({
 				dlxxDom.innerHTML=html;
 			}else{
 				dlxxDom.innerHTML=`<li class="mui-table-view-cell mui-collapse" >没有相关数据，请上传数据</li>`;
-			}
+			}*/
 			
 			var gcys=data["3"];
 			var gcysDom=document.getElementById("gcys");
@@ -46,8 +73,15 @@ $bjAjax({
 				var html="";
 				ycgcObj=gcys;
 				for(key in gcys){
-					ysnum++;
-				  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="selectDate('`+key+`','2')">`+key+`</li>`;
+					 html +=`<li gcysKey="`+key+`"  class="mui-table-view-cell mui-collapse mleft10 gcysli" >`+key+`</li>`;
+					 html +=`<ul name="ycgcul" id="`+key+`" class="mui-table-view  mleft30 " style="display:none">`;
+					 for(j in gcys[key]){
+						 ysnum++;
+						 var dtmbgrq=gcys[key][j]["dtmbgrq"];
+					     var zpjdid=gcys[key][j]["id"];
+						 html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+zpjdid+`" >`+dtmbgrq+`</li>`;
+					 }
+					 html +=`</ul>`;
 				}
 				gcysDom.innerHTML=html;
 			}else{
@@ -61,7 +95,58 @@ $bjAjax({
 });
 
 
-tyclClick("#list");
+mui("#list").on('tap',".details",function (event) {
+	var zjid=event.target.getAttribute("zjid");
+	openNext(zjid);
+});
+
+mui("#list").on('tap',".dlli",function (event) {
+	var dlid=event.target.getAttribute("dlid");
+	showNext(dlid);
+});
+
+mui("#list").on('tap',".gcysli",function (event) {
+	var gcysKey=event.target.getAttribute("gcysKey");
+	showGcysNext(gcysKey);
+});
+
+var temp=0;
+function showNext(dlid){
+	if(temp==dlid){
+		document.getElementById(dlid).style.display="none";
+		temp=0;
+		return;
+	}else{
+		temp=dlid;
+	}
+	var dlul=document.getElementsByName("dlul");
+	if(dlul&&dlul.length>0){
+		for(var i=0;i<dlul.length;i++){
+			dlul[i].style.display="none";
+		}
+		document.getElementById(dlid).style.display="block";
+	}
+}
+
+var temp1=0;
+function showGcysNext(key){
+	if(temp1==key){
+		document.getElementById(key).style.display="none";
+		temp1=0;
+		return;
+	}else{
+		temp1=key;
+	}
+	var ycgcul=document.getElementsByName("ycgcul");
+	if(ycgcul&&ycgcul.length>0){
+		for(var i=0;i<ycgcul.length;i++){
+			ycgcul[i].style.display="none";
+		}
+		document.getElementById(key).style.display="block";
+	}
+}
+
+
 
 function getDlMc(data,dlid){
 	if(!data||data.length==0){
@@ -79,31 +164,12 @@ function getDlMc(data,dlid){
 function selectDate(key,lx){
 	var nowData=[];
 		if(lx==1){
-			nowData=dlxxObj[key];
-			for(i in nowData){
-				nowData[i].text=nowData[i].dtmbgrq||"";
-				nowData[i].value=nowData[i].id||"";
-			}
+			openNext(key);
+			return;
 		}else if(lx==2){
-			nowData=ycgcObj[key];
-			for(i in nowData){
-				var intbglb=nowData[i].intbglb||"";
-				var chrpswz=nowData[i].chrpswz||"";
-				var chrqtms=nowData[i].chrqtms||"";
-				if(intbglb==3&&chrpswz==3){
-					nowData[i].text=nowData[i].dtmbgrq||""+"&nbsp;&nbsp;"+chrqtms;
-				}else{
-					nowData[i].text=nowData[i].dtmbgrq||"";
-				}
-				nowData[i].value=nowData[i].id||"";
-			}
+			openNext(key);
+			return;
 		}
-		
-	var userPicker = new mui.PopPicker();
-	userPicker.setData(nowData);
-	userPicker.show(function(items) {
-		openNext(items[0].value||"");
-	});
 }
 
 
