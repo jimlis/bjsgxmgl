@@ -57,7 +57,10 @@ function edit(){
 	toUrl("project_progress_record_baseAdd.html?intsgwzid="+sgwzid+"&chrsgwzmc="+chrsgwzmc+"&jcid="+id);
 }
 
-
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_progress_record.html");
 }

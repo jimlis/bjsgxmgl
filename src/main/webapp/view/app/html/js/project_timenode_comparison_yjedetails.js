@@ -85,7 +85,10 @@ function getPageData(){
 	});
 	return o;
 }
-
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_timenode_comparison.html");
 }

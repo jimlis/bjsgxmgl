@@ -56,6 +56,10 @@ function getPageData(){
 function edit(){
 	toUrl("project_progress_record_outdoorAdd.html?id="+id);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_progress_record.html");
 }

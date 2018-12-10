@@ -38,6 +38,10 @@ function getPageData(){
 function edit(){
 	toUrl("project_photo_record_add.html?id="+id);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_photo_record_list.html");
 }

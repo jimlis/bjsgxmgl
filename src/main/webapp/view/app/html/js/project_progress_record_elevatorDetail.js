@@ -71,6 +71,10 @@ function buildModel(){
 function edit(){
 	toUrl("project_progress_record_elevatorAdd.html?id="+id+"&sgwz="+sgwz);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_progress_record.html");
 }

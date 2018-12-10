@@ -1,5 +1,8 @@
 var obj = getRequest();
 var id=obj.id||"";
+mui.back=function(){
+	 outPage();
+}
 $bjAjax({
 	url:materialApiDetail,
 	type:"post",

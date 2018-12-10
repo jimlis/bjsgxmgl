@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>项目管理平台</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/app.css" />
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+            <h1 class="mui-title">
+                <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <div class="mui-scroll" id="title-scroll">
+
+                    </div>
+                </div>
+            </h1>
+            <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">更新</button>
+        </header>
+        <div class="mui-content" id="app">
+        		<div class="mui-content-padded" style="overflow-x: scroll;">
+	        		<table>
+				  <thead>
+				    <tr>
+				      <th>序号</th>
+				      <th>名称</th>
+				      <th>计划完成时间</th>
+				      <th style="width: 30px;">操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr v-for="(item , key) in qqbj">
+				    		<input class="bj-input" v-model="item.id" type="hidden" placeholder=""></input>
+					    	<td data-label="序号"><input class="bj-input bj-p-black-font" type="text" v-model="item.intxh" placeholder="请输入" /></td>
+					    <td data-label="名称"><input class="bj-input bj-p-black-font" type="text" v-model="item.chrjdmc" placeholder="请输入" /></td>
+					    <td data-label="计划完成时间"><input class="bj-input bj-p-black-font"   readonly="readonly" type="text" v-on:click="datePicker('qqbj',key)" v-model="item.dtmjhwcsj" placeholder="请选择" /></td>
+					    <td style="width: 30px;"><button class="mui-btn mui-btn-danger" type="button" v-on:click="delqqbj(key)">-</button></td>
+				    </tr>
+				  </tbody>
+				</table>
+				<button class="mui-btn mui-btn-primary" type="button" v-on:click="addqqbj">+</button>
+			</div>
+        </div>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/project_timenode_comparison_qqedit.js" type="text/javascript" charset="utf-8"></script>
+        
+    </body>
+
+</html>

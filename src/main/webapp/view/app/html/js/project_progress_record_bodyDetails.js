@@ -45,6 +45,10 @@ function edit(){
 	var id = (obj.jcid?obj.jcid:"");
 	toUrl("project_progress_record_bodyAdd.html?sgwzid="+sgwzid+"&jcid="+id);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_progress_record.html");
 }
