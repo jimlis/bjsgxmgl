@@ -200,6 +200,10 @@ window.onload=function(){
 			address = "project_timenode_comparison_jcejedit.html?chrjdlx=jc";
 		}else if(type=="zx"){
 			address = "project_timenode_comparison_zxysedit.html";
+		}else if(type=="zt"){
+			var nodeid = this.getAttribute("itemid");
+			address = "project_timenode_comparison_ztedit.html?gqjdbjid="+nodeid;
+			
 		}
 		toUrl(address);
 	});

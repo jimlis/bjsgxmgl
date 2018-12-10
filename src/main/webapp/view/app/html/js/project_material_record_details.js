@@ -15,6 +15,7 @@ $bjAjax({
 		document.getElementById("intsfdtp").innerText=data.chrsfdtp||"";
 		document.getElementById("chrybmc").innerText=data.chrybmc||"";
 		document.getElementById("chrybwz").innerText=data.chrybwz||"";
+		document.getElementById("chrppmc").innerText=data.chrppmc||"";
 		document.getElementById("chrgfbz").innerText=data.chrgfbz||"";
 		document.getElementById("chrbz").innerText=data.chrbz||"";
 		document.getElementById("chrsplczt").innerText=data.chrsplczt||"";

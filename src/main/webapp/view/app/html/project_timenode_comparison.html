@@ -89,7 +89,7 @@
                 <li class="mui-table-view-cell" v-on:click="toggle('zt')">主体<span :class="ztShow?'nav-right':'nav-right mui-active'"></span></li>
                 <ul class="mui-table-view bj-background-inherit mleft10" v-show="ztShow">
 			        <li class="mui-table-view-cell mui-collapse" v-for="item in zt">
-			            <a class="mui-navigate-right" href="javascript:void(0);">{{item.chrjdmc}}<span class="mui-badge addbtn"  v-on:click.stop="add(item.id)">+</span></a>
+			            <a class="mui-navigate-right" href="javascript:void(0);">{{item.chrjdmc}}<span class="mui-badge addbtn" type="zt" :itemid ="item.id" >+</span></a>
 			            	<ul class="mui-table-view " style="overflow-x: scroll;"> 
 			            		<table>
 					        		<thead>
