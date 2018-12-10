@@ -45,9 +45,13 @@ public class XmClybspjlDO extends BaseDomain {
     @ApiModelProperty(value = "项目基本信息id",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 更新日期 */
-    @ApiModelProperty(value = "报告日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
+    @ApiModelProperty(value = "更新日期",name = "dtmgxrq",dataType = "string",required = true,example = "2018-10-12")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
+    /** 报告日期 */
+    @ApiModelProperty(value = "报告日期",name = "dtmbgrq",dataType = "string",required = true,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmbgrq;
     /** 材料样板类型：1（土建）2（机电）3（装修）4（园林）5（其他） */
     @ApiModelProperty(value = "材料样板类型：1（土建）2（机电）3（装修）4（园林）5（其他",name = "intclyblx",dataType = "Integer",required = true)
     private Integer intclyblx;
@@ -74,6 +78,9 @@ public class XmClybspjlDO extends BaseDomain {
     /** 材料使用位置 */
     @ApiModelProperty(value = "材料使用位置",name = "chrybwz",dataType = "String",required = false)
     private String chrybwz;
+    /** 品牌名称 */
+    @ApiModelProperty(value = "品牌名称",name = "chrppmc",dataType = "String",required = false)
+    private String chrppmc;
     /** 规范标准 */
     @ApiModelProperty(value = "规范标准",name = "chrgfbz",dataType = "String",required = false)
     private String chrgfbz;
@@ -96,6 +103,13 @@ public class XmClybspjlDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称",name = "chrbgrmc",dataType = "String",required = true)
     private String chrbgrmc;
+    /** 审批状态日期 */
+    @ApiModelProperty(value = "审批状态日期",name = "dtmspztrq",dataType = "string",required = true,example = "2018-10-12")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmspztrq;
+    /**审批流转状态id 存在的时候代表已通过审核*/
+    @TableField(exist=false)
+    private Long ztid;
     
     /**
      * 材料样板审批记录对应品牌及技术资料集合
@@ -369,6 +383,29 @@ public class XmClybspjlDO extends BaseDomain {
 	public void setChrsplczt(String chrsplczt) {
 		this.chrsplczt = chrsplczt;
 	}
-	
+	public Date getDtmbgrq() {
+		return dtmbgrq;
+	}
+	public void setDtmbgrq(Date dtmbgrq) {
+		this.dtmbgrq = dtmbgrq;
+	}
+	public Date getDtmspztrq() {
+		return dtmspztrq;
+	}
+	public void setDtmspztrq(Date dtmspztrq) {
+		this.dtmspztrq = dtmspztrq;
+	}
+	public Long getZtid() {
+		return ztid;
+	}
+	public void setZtid(Long ztid) {
+		this.ztid = ztid;
+	}
+	public String getChrppmc() {
+		return chrppmc;
+	}
+	public void setChrppmc(String chrppmc) {
+		this.chrppmc = chrppmc;
+	}
 	
 }

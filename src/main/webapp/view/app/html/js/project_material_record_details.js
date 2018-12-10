@@ -8,6 +8,7 @@ $bjAjax({
 	},
 	success:function(data){
 		document.getElementById("dtmgxrq").innerText=data.dtmgxrq||"";
+		document.getElementById("dtmbgrq").innerText=data.dtmbgrq||"";
 		document.getElementById("intclyblx").innerText=data.chrclyblx||"";
 		document.getElementById("intsgdw").innerText=data.chrsgdw||"";
 		var intsfdtp=data.intsfdtp||"";
@@ -16,6 +17,8 @@ $bjAjax({
 		document.getElementById("chrybwz").innerText=data.chrybwz||"";
 		document.getElementById("chrgfbz").innerText=data.chrgfbz||"";
 		document.getElementById("chrbz").innerText=data.chrbz||"";
+		document.getElementById("chrsplczt").innerText=data.chrsplczt||"";
+		document.getElementById("dtmspztrq").innerText=data.dtmspztrq||"";
 		initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",false);
 		var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
 		var html="";

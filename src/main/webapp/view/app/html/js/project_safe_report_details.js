@@ -11,6 +11,7 @@ window.onload = function(){
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否登录成功；
 			document.getElementById("chraqwtbsSpan").innerText = data.chraqwtbs||"";
+			document.getElementById("dtmbgrqSpan").innerText = data.dtmbgrq||"";
 			document.getElementById("chraqwtwzSpan").innerText = data.chraqwtwz||"";
 			document.getElementById("chrbgrmcSpan").innerText = data.chrbgrmc||"";
 			document.getElementById("chrzbSpan").innerText = data.chrzb||"";

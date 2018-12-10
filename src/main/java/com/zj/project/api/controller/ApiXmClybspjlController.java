@@ -50,7 +50,10 @@ public class ApiXmClybspjlController extends ApiBaseController {
         	xmClybspjlDO.setFcbz(1);
         	xmClybspjlDO.setIntxmid(xmid);
         	xmClybspjlDO.setIntclyblx(clyblx);
-        	QueryWrapper<XmClybspjlDO> queryWrapper=new QueryWrapper<XmClybspjlDO>(xmClybspjlDO).orderByAsc("dtmgxrq");
+        	QueryWrapper<XmClybspjlDO> queryWrapper=new QueryWrapper<XmClybspjlDO>(xmClybspjlDO)
+        			.select("id","dtmgxrq","intclyblx","chrybmc","(select a.ztid from (select id as ztid  from bj_splc_zt where " + 
+        					"(chrsplclx,intxh) in (select chrsplclx,max(intxh) intxh  from bj_splc_zt where chrsplclx in ('clybspjls','clybspjlf') GROUP BY chrsplclx) " + 
+        					" ) a where a.ztid=intsplczt ) as ztid").orderByAsc("dtmgxrq");
             return Result.ok(xmClybspjlService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();

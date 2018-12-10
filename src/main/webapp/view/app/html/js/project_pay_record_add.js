@@ -57,6 +57,9 @@ window.onload = function(){
 				var contentText = pageData.chrsprmc+"，您有一个关于“工程款申请/支付情况待审批！”\n"+systemdate1
 				var userid = pageData.chruserid;
 				ftxsp(contentText,userid);
+			},
+			datePicker: function (key) {
+				vueDtPicker(pageData,key);
 			}
 		},
 		watch:{
@@ -237,6 +240,7 @@ function buildModel(){
 		id:id,
 		intxmid:intxmid,
 		dtmgxrq:systemdate,
+		dtmbgrq:'',
 		intdwlx:'',
 		chrdwlx:'',
 		intdwmcid:'',
@@ -246,6 +250,7 @@ function buildModel(){
 		intbqhsffje:'',
 		chrbz:'',
 		intsplcztid:'',
+		dtmspztrq:'',
 		chrsprmc:'',
 		chruserid:'',
 		intbgrid:chrdlrid,

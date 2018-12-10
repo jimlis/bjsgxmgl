@@ -21,6 +21,7 @@ window.onload = function(){
 			},
 			splcPicker: function () {
 				vuePicker(pageData,"chrsprmc",splctzs,"intsplczt",function(item){
+					//pageData.chrsprmc = item.chruserid;
 					pageData.chruserid = item.chruserid;
 				});
 			},
@@ -29,8 +30,20 @@ window.onload = function(){
 				var userid = pageData.chruserid;
 				ftxsp(contentText,userid);
 			}
+		},
+		watch: {
+			intsfdtp:function(newVal,oldVal){
+				onShqt(newVal);
+			}
 		}
 	});
+	
+	onShqt();
+	
+	dtPicker('#dtmbgrq');
+	
+	dtPicker('#dtmspztrq');
+	
     relPicker("chrclyblx",[{"text":"土建","value":"1"},{"text":"机电","value":"2"},{"text":"装修","value":"3"},{"text":"园林","value":"4"},
         {"text":"其他","value":"5"}],"intclyblx");
 
@@ -47,8 +60,12 @@ function getSgdw(){
 	var data = getXmdwmdData(xmid,2);
 	 relPicker("chrsgdw",data,"intsgdw");
 }
+
+var flag=true;
+
 //判断是否是修改
 function isUpdata(){
+	var row={};
 	if(obj.id){
 		$bjAjax({
 			url:materialApiDetail,
@@ -56,31 +73,44 @@ function isUpdata(){
 			data:{
 				xmClybspjlId:obj.id
 			},
+			async:false,
 			success:function(data){
+				data.chrsprmc=data.chrsplczt||"";
+				row=data;
 				var id=data.id||"";
 				document.getElementById("dtmgxrq").value=data.dtmgxrq||"";
+				document.getElementById("dtmbgrq").value=data.dtmbgrq||"";
 				document.getElementById("intclyblx").value=data.intclyblx||"";
 				document.getElementById("chrclyblx").value=data.chrclyblx||"";
 				document.getElementById("intsgdw").value=data.intsgdw||"";
 				document.getElementById("chrsgdw").value=data.chrsgdw||"";
-				document.getElementById("intsfdtp").value=data.intsfdtp||"";
-				document.getElementById("chrsfdtp").value=data.chrsfdtp||"";
+				//document.getElementById("intsfdtp").value=data.intsfdtp||"";
+				//document.getElementById("chrsfdtp").value=data.chrsfdtp||"";
 				document.getElementById("chrybmc").value=data.chrybmc||"";
 				document.getElementById("chrybwz").value=data.chrybwz||"";
 				document.getElementById("chrgfbz").value=data.chrgfbz||"";
+				document.getElementById("chrppmc").value=data.chrppmc||"";
 				document.getElementById("chrbz").value=data.chrbz||"";
 				document.getElementById("intsplczt").value=data.intsplczt||"";
+				document.getElementById("dtmspztrq").value=data.dtmspztrq||"";
 				//document.getElementById("chrsplczt").value=data.chrsplczt||"";
 				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
-				var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
-				for(i in xmClybspjlJszlList){
-					addpp(xmClybspjlJszlList[i]);
+				if(flag){
+					var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
+					for(i in xmClybspjlJszlList){
+						addpp(xmClybspjlJszlList[i]);
+					}
+					flag=false;
 				}
 			}
 		});
 	}else{
 		document.getElementById("dtmgxrq").value=sysdate;
 	}
+	for(i in row){
+		return row;
+	}
+	return '';
 }
 //增加品牌资料
 var ppSum=0;
@@ -104,9 +134,9 @@ function addpp(data){
 	addLi.innerHTML+=`
 			<input id="jszlid" class="bj-input bj-p-black-font" type="hidden" value="`+jszlid+`"/>
 			<input id="intclybspjlid" class="bj-input bj-p-black-font" type="hidden" value="`+id+`" />
-			<input id="chrpp" class="bj-input bj-p-black-font" type="text" placeholder="品牌" value="`+chrpp+`"/>
-			<input id="chrjscl" class="bj-input bj-p-black-font" type="text" placeholder="资料" value="`+chrjscl+`"/>
-			<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('`+ppSum+`','`+jszlid+`')">删除</button>
+			<input id="chrpp" class="bj-input bj-p-black-font" type="text" placeholder="参数名称" value="`+chrpp+`"/>
+			<input id="chrjscl" class="bj-input bj-p-black-font" type="text" placeholder="参数资料" value="`+chrjscl+`"/>
+			<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('`+ppSum+`','`+jszlid+`')">-</button>
 	`;
 	
 	mui("#pp-list")[0].appendChild(addLi);
@@ -165,9 +195,9 @@ function buildModel(){
 }
 
 //监听是否替代品，得到审批流程状态内容
-function onShqt(){
+function onShqt(nowVal){
 	splctzs=[];
-	var sfqt = pageData.intsfdtp;
+	var sfqt = nowVal||pageData.intsfdtp;
 	if(sfqt==1){
 		//是,获取审批类型为“变更记录是”
 		getSplcList("clybspjls");

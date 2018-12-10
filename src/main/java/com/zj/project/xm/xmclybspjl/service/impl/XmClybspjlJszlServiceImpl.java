@@ -1,5 +1,6 @@
 package com.zj.project.xm.xmclybspjl.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;

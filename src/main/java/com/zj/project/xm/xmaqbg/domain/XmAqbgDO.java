@@ -46,6 +46,10 @@ public class XmAqbgDO extends BaseDomain {
     @ApiModelProperty(value = "更新日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
+    /** 报告日期 */
+    @ApiModelProperty(value = "报告日期 ",name = "dtmbgrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmbgrq;
     /** 安全问题描述 */
     @ApiModelProperty(value = "安全问题描述 ",name = "chraqwtbs",dataType = "string",required = true)
     private String chraqwtbs;
@@ -258,5 +262,11 @@ public class XmAqbgDO extends BaseDomain {
      */
 	public void setChrsgdw(String chrsgdw) {
 		this.chrsgdw = chrsgdw;
+	}
+	public Date getDtmbgrq() {
+		return dtmbgrq;
+	}
+	public void setDtmbgrq(Date dtmbgrq) {
+		this.dtmbgrq = dtmbgrq;
 	}
 }

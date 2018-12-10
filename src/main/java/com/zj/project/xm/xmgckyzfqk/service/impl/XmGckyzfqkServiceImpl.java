@@ -21,6 +21,8 @@ import com.zj.platform.business.file.domain.FileDO;
 import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.splczt.domain.SplcZtDO;
+import com.zj.project.xm.splczt.service.SplcZtService;
 import com.zj.project.xm.xmdwmd.domain.XmDwmdDO;
 import com.zj.project.xm.xmdwmd.service.XmDwmdService;
 import com.zj.project.xm.xmgckyzfqk.dao.XmGckyzfqkDao;
@@ -42,6 +44,9 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     static {
         tableInfo=TableInfoHelper.getTableInfo( XmGckyzfqkDO.class);
     }
+    
+    @Autowired
+    private SplcZtService splcZtService;
     
     @Override
     public boolean updateById(XmGckyzfqkDO entity) {
@@ -89,18 +94,12 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     		
     		String intsplczt = xmGckyzfqkDO.getIntsplcztid();
     		if(StringUtils.isNotEmpty(intsplczt)) {
-    			String chrsplczt="";
-    			if(intsplczt.equals("1")) {
-    				chrsplczt="带审批";
-    			}else if(intsplczt.equals("2")) {
-    				chrsplczt="总部审批A";
-    			}else if(intsplczt.equals("3")) {
-    				chrsplczt="总部审批B";
-    			}else if(intsplczt.equals("4")) {
-    				chrsplczt="业务";
+    			SplcZtDO splcZtDO = splcZtService.getById(intsplczt);
+    			if(splcZtDO!=null) {
+    				xmGckyzfqkDO.setChrsplczt(splcZtDO.getChrsprmc());
     			}
-    			xmGckyzfqkDO.setChrsplczt(chrsplczt);
     		}
+    		
     	}
     	return xmGckyzfqkDO;
     }

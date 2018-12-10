@@ -44,9 +44,13 @@ public class XmZlqxbgDO extends BaseDomain {
     @ApiModelProperty(value = "项目基本信息id ",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 更新日期 */
-    @ApiModelProperty(value = "报告日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
+    @ApiModelProperty(value = "更新日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
+    /** 报告日期  */
+    @ApiModelProperty(value = "报告日期 ",name = "dtmbgrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmbgrq;
     /** 质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） */
     @ApiModelProperty(value = "质量缺陷类型：1(土建)2（机电）3（装修）4（园林）5（其他） ",name = "intqxlx",dataType = "string",required = true)
     private String intqxlx;
@@ -284,6 +288,12 @@ public class XmZlqxbgDO extends BaseDomain {
 	}
 	public void setDtmzlqxfxrq(Date dtmzlqxfxrq) {
 		this.dtmzlqxfxrq = dtmzlqxfxrq;
+	}
+	public Date getDtmbgrq() {
+		return dtmbgrq;
+	}
+	public void setDtmbgrq(Date dtmbgrq) {
+		this.dtmbgrq = dtmbgrq;
 	}
     
 }

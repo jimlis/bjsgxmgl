@@ -27,6 +27,8 @@ import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.common.util.MyStringUtils;
 import com.zj.platform.common.web.exception.CommonException;
 import com.zj.platform.common.web.service.impl.BaseServiceImpl;
+import com.zj.project.xm.splczt.domain.SplcZtDO;
+import com.zj.project.xm.splczt.service.SplcZtService;
 import com.zj.project.xm.xmclybspjl.dao.XmClybspjlDao;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlDO;
 import com.zj.project.xm.xmclybspjl.domain.XmClybspjlJszlDO;
@@ -60,6 +62,10 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 	
 	@Autowired
 	private XmDwmdService xmDwmdService;
+	
+	@Autowired
+	private SplcZtService splcZtService;
+	
 	
 	@Override
     public boolean updateById(XmClybspjlDO entity) {
@@ -115,6 +121,12 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 			
 			Integer intsfdtp = xmClybspjlDO.getIntsfdtp();
 			xmClybspjlDO.setChrsfdtp((intsfdtp!=null&&intsfdtp.equals(1))?"是":"否");
+			
+			String intsplczt = xmClybspjlDO.getIntsplczt();
+    		SplcZtDO splcZtDO = splcZtService.getById(intsplczt);
+    		if(splcZtDO!=null) {
+    			xmClybspjlDO.setChrsplczt(splcZtDO.getChrsprmc());
+    		}
 		}
 		return xmClybspjlDO;
 	}

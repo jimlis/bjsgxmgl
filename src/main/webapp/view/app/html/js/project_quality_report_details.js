@@ -10,6 +10,7 @@ window.onload = function(){
 		success:function(data){
 			//服务器返回响应，根据响应结果，分析是否登录成功；
 			document.getElementById("chrbgrmcSpan").innerText = data.chrbgrmc||"";
+			document.getElementById("dtmbgrqSpan").innerText = data.dtmbgrq||"";
 			document.getElementById("chrbzSpan").innerText = data.chrbz||"";
 			document.getElementById("chrqxmsSpan").innerText = data.chrqxms||"";
 			document.getElementById("chrqxwzSpan").innerText = data.chrqxwz||"";

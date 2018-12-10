@@ -38,6 +38,10 @@ public class XmGckyzfqkDO extends BaseDomain {
     @ApiModelProperty(value = "修改新增删除时间",name = "gxsj",dataType = "String",hidden = true,example = "eg:2018-10-12 09:05:26")
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date gxsj;
+    /** 报告日期 */
+    @ApiModelProperty(value = "报告日期 ",name = "dtmbgrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmbgrq;
     /** 序号 */
     @ApiModelProperty(value = "序号",name = "intxh",dataType = "Integer",required = false,hidden = true)
     private Integer intxh;
@@ -85,6 +89,10 @@ public class XmGckyzfqkDO extends BaseDomain {
     @TableField(exist=false)
     @ApiModelProperty(value = "审批流程状态 ",name = "chrsplczt",dataType = "String",required = false)
     private String chrsplczt;
+    /** 审批状态日期*/
+    @ApiModelProperty(value = "审批状态日期 ",name = "dtmspztrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmspztrq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id ",name = "intbgrid",dataType = "Long",required = true)
     private Long intbgrid;
@@ -314,5 +322,17 @@ public class XmGckyzfqkDO extends BaseDomain {
 	}
 	public void setChrsplczt(String chrsplczt) {
 		this.chrsplczt = chrsplczt;
+	}
+	public Date getDtmbgrq() {
+		return dtmbgrq;
+	}
+	public void setDtmbgrq(Date dtmbgrq) {
+		this.dtmbgrq = dtmbgrq;
+	}
+	public Date getDtmspztrq() {
+		return dtmspztrq;
+	}
+	public void setDtmspztrq(Date dtmspztrq) {
+		this.dtmspztrq = dtmspztrq;
 	}
 }

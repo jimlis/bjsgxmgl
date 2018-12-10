@@ -43,9 +43,13 @@ public class XmBgsqjlDO extends BaseDomain {
     @ApiModelProperty(value = "项目基本信息id ",name = "intxmid",dataType = "Long",required = true)
     private Long intxmid;
     /** 更新日期 */
-    @ApiModelProperty(value = "报告日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
+    @ApiModelProperty(value = "更新日期 ",name = "dtmgxrq",dataType = "string",example = "2018-10-13",required = true)
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date dtmgxrq;
+    /** 报告日期 */
+    @ApiModelProperty(value = "报告日期 ",name = "dtmbgrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmbgrq;
     /** 变更申请类型：1（顾问变更）2（工程变更）3（其他） */
     @ApiModelProperty(value = "变更申请类型：1（顾问变更）2（工程变更）3（其他） ",name = "intbgsqlx",dataType = "Integer",required = true)
     private Integer intbgsqlx;
@@ -104,6 +108,10 @@ public class XmBgsqjlDO extends BaseDomain {
     @ApiModelProperty(value = "审批流程状态名称",name = "chrsplczt",dataType = "String")
     @TableField(exist=false)
     private String chrsplczt;
+    /** 审批状态日期*/
+    @ApiModelProperty(value = "审批状态日期 ",name = "dtmspztrq",dataType = "string",example = "2018-10-13",required = true)
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date dtmspztrq;
     /** 报告人id */
     @ApiModelProperty(value = "报告人id",name = "intbgrid",dataType = "Long",required=true)
     private Long intbgrid;
@@ -397,5 +405,17 @@ public class XmBgsqjlDO extends BaseDomain {
 	 */
 	public void setIntbgthid(Long intbgthid) {
 		this.intbgthid = intbgthid;
+	}
+	public Date getDtmbgrq() {
+		return dtmbgrq;
+	}
+	public void setDtmbgrq(Date dtmbgrq) {
+		this.dtmbgrq = dtmbgrq;
+	}
+	public Date getDtmspztrq() {
+		return dtmspztrq;
+	}
+	public void setDtmspztrq(Date dtmspztrq) {
+		this.dtmspztrq = dtmspztrq;
 	}
 }

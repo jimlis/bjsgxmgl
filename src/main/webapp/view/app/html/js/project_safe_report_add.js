@@ -4,6 +4,7 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 window.onload = function(){
+	dtPicker('#dtmbgrq');
     dtPicker('#dtmtzrq');
 
     dtPicker('#dtmwczgrq');
@@ -26,6 +27,7 @@ window.onload = function(){
 			success:function(data){
 				//服务器返回响应，根据响应结果，分析是否登录成功；
 				document.getElementById("chraqwtbs").value = data.chraqwtbs||"";
+				document.getElementById("dtmbgrq").value = data.dtmbgrq||"";
 				document.getElementById("chraqwtwz").value = data.chraqwtwz||"";
 				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
 				document.getElementById("chrzb").value = data.chrzb||"";

@@ -37,8 +37,11 @@
 					<h5 style="margin-left: 16px;"><span id="toright"></span>材料样板审批记录详情</h5>
 					<hr />
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span>
-						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" placeholder=""  />
+						<input class="bj-input bj-p-black-font bj-disable" type="text" id="dtmgxrq" name="dtmgxrq" placeholder=""  />
 					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
+                        <input class="bj-input bj-p-black-font " type="text" id="dtmbgrq" name="dtmbgrq" readonly="readonly" data-options='{"type":"date"}'  placeholder="报告日期"  />
+                    </h5>
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">材料样板类型：</span>
 						<input class="bj-input bj-p-black-font" type="hidden" id="intclyblx" placeholder="材料样板类型" />
 						<input class="bj-input bj-p-black-font"  readonly="readonly"  type="text" id="chrclyblx" placeholder="材料样板类型" />
@@ -49,7 +52,7 @@
 					</h5>
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">是否替代品：</span>
 						<input class="bj-input bj-p-black-font" type="hidden" id="intsfdtp" v-model="intsfdtp" placeholder="是否替代品" />
-						<input class="bj-input bj-p-black-font" type="text" id="chrsfdtp" v-model="chrsfdtp" v-on:click="sfPicker()" onblur="onShqt()" placeholder="是否替代品" />
+						<input class="bj-input bj-p-black-font" type="text" id="chrsfdtp" v-model="chrsfdtp" v-on:click="sfPicker()"  placeholder="是否替代品" />
 					</h5>
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">材料样板名称：</span>
 						<input class="bj-input bj-p-black-font" type="text" id="chrybmc" placeholder="材料样板名称" />
@@ -57,16 +60,13 @@
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">材料使用位置：</span>
 						<input class="bj-input bj-p-black-font" type="text" id="chrybwz" placeholder="材料使用位置" />
 					</h5>
-					<h5 class="bj-title2-font">品牌及技术资料：</h5>
+					<h5 class="bj-title2-font">品牌名称：</h5>
+					   <input class="bj-input bj-p-black-font" type="text" id="chrppmc" placeholder="品牌名称" />
+					<h5 class="bj-title2-font">技术资料：</h5>
 					<div>
 						<div id="pp-list">
-							<!--<div class="bj-broder" id="0">
-								<input class="bj-input bj-p-black-font" type="text" placeholder="品牌" />
-								<input class="bj-input bj-p-black-font" type="text" placeholder="资料" />
-								<button class="mui-btn mui-btn-danger" style="margin-top: 3px;" onclick="deletePp('0')">删除</button>
-							</div>-->
 						</div>
-						<button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" onclick="addpp()">增加品牌</button>
+						<button class="mui-btn mui-btn-primary" type="button" style="margin-bottom: 5px;" onclick="addpp()">+</button>
 					</div>
 						
 					
@@ -91,8 +91,11 @@
 				
 						<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" v-model="intsplczt" placeholder="审批流程状态" />
 						<input class="bj-input bj-p-black-font" type="text" id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批流程状态" />
-						<button class="mui-btn mui-btn-blue" v-on:click="txsp">提醒审批</button>
+						<button class="mui-btn mui-btn-blue" type="button" v-on:click="txsp">提醒审批</button>
 					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span>
+                        <input class="bj-input bj-p-black-font " type="text" readonly="readonly" id="dtmspztrq" name="dtmspztrq" data-options='{"type":"date"}'  placeholder="审批状态日期"  />
+                    </h5>
 				</div>
 			</form>
 		</div>
