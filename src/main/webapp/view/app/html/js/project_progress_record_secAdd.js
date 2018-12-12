@@ -72,6 +72,7 @@ function isUpdata(){
 			},
 			success:function(data){
 				result = data;
+				result["dtmgxrq"]=sysdate;
 			}
 		});
 		return result;

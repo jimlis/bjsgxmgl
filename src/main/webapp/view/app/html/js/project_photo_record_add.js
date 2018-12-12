@@ -64,7 +64,8 @@ function isUpdate(){
 			success:function(data){
 				var chrpswz=data.chrpswz||"";
 				var intbglb=data.intbglb||"";
-				document.getElementById("dtmbgrq").value = data.dtmbgrq||"";
+				//document.getElementById("dtmbgrq").value = data.dtmbgrq||"";
+				document.getElementById("dtmbgrq").value = sysData;
 				document.getElementById("intbglb").value = intbglb;
 				document.getElementById("chrbglb").value = data.chrbglb||"";
 				document.getElementById("chrpswz").value = chrpswz;

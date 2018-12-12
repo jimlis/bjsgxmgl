@@ -31,6 +31,7 @@ window.onload = function(){
 				ztjdsJson = result.ztjgKzList||"";
 				delete result.ztjgKzList;
 				pageData=result;
+				pageData["dtmbgrq"]=sysdate;
 			}
 		}
 	}else{
@@ -46,6 +47,7 @@ window.onload = function(){
 			ztjdsJson = result.ztjgKzList||"";
 			delete result.ztjgKzList;
 			pageData=result;
+			pageData["dtmbgrq"]=sysdate;
 //		}
 	}
 	

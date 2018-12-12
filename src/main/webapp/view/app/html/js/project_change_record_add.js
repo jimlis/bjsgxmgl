@@ -114,6 +114,7 @@ function isUpdata(){
 			success:function(data){
 				if(data){
 					o=data;
+					o["dtmgxrq"]=systemdate;
 				}
 			}
 		});

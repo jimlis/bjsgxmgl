@@ -85,6 +85,7 @@ function isUpdata(){
 				if(data){
 					id=data.id||"";
 					o=data;
+					o["dtmgxrq"]=systemdate;
 				}
 			}
 		});
@@ -102,6 +103,7 @@ function isUpdata(){
 				success:function(data){
 					if(data){
 						o=data;
+						o["dtmgxrq"]=systemdate;
 					}
 				}
 			});
