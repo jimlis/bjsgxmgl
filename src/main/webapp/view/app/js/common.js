@@ -294,7 +294,7 @@ $bj_post_ajax=function (obj) {
 }
 //vue 日期选择器
 function vueDtPicker(vueData,selecter){
-	var dtPicker = new mui.DtPicker({"type":"date"}); 
+	var dtPicker = new mui.DtPicker({"type":"date","buttons":["qwe","ee","oo"]}); 
     dtPicker.show(function (selectItems) { 
         vueData[selecter] = selectItems.value;
         dtPicker.dispose();
@@ -343,7 +343,7 @@ function dtPicker(selecter){
 				 * 示例为了简洁，将 options 放在了按钮的 dom 上
 				 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
 				 */
-				_self.picker = new mui.DtPicker(options);
+				_self.picker = new mui.DtPicker({options});
 				_self.picker.show(function(rs) {
 					/*
 					 * rs.value 拼合后的 value
@@ -501,7 +501,7 @@ function upLoadImg(elem,data,done){
 		,data: data		//传递到后台的数据
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
-		,exts: 'png|jpg' 			//设置智能上传图片格式文件
+		,exts: 'png|jpg|jpeg|bmp|gif' 			//设置智能上传图片格式文件
 		,size: 5000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		/*,bindAction: bind		//“上传”按钮的ID

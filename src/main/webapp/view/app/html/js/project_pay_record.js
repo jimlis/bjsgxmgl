@@ -63,6 +63,10 @@ function openDetails(id){
     var address = "project_pay_record_details.html?id="+id;
     toUrl(address);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_detail_list.html");
 }

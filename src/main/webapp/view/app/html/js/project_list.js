@@ -34,3 +34,10 @@ function openNext(id,chrxmmc){
 		setCookie("id",id);
 		toUrl("project_detail_list.html");
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
+function outPage(){
+	toUrl("../main.html");
+}
