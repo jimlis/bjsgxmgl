@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>项目管理平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css"/>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+
+					</div>
+				</div>
+			</h1>
+		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		</header>
+		<div class="mui-content" id="list">
+			<div class="mui-content-padded">
+				<h5 id="bj-xmmc">xx项目</h5>
+				<h5 style="margin-left: 16px;"><span id="toright"></span>项目基本资料</h5>
+				<h5 style="margin-left: 32px;"><span id="toright"></span>建设工程用地规划证</h5>
+				<hr />
+				<form id="myform">
+				    <input class="bj-input bj-p-black-font" type="hidden" id="fileIds" placeholder="文件ids" />
+					<h5 class="bj-ul-clear bj-title2-font"><span class="bj-title-p-font">文件：</span>
+					    <div id="uploader" class="wu-example">
+	                        <!--用来存放文件信息-->
+	                        <div class="btns">
+	                            <button id="chbtn" type="button">选择文件</button>
+	                        </div>
+	                        <div id="file-list">
+	                        </div>
+                        </div>
+					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">许可证编号：</span>
+						<input class="bj-input bj-p-black-font" type="text" id="chrxkzbh" placeholder="请输入" />
+					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">发放部门：</span>
+						<input class="bj-input bj-p-black-font" type="text" id="chrffbm" placeholder="请输入" />
+					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">发证日期：</span>
+						<input class="bj-input bj-p-black-font" readonly="readonly" data-options='{"type":"date"}' id="dtmfzrq" placeholder="请选择日期" />
+					</h5>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">有效截止日期：</span>
+						<input class="bj-input bj-p-black-font" readonly="readonly" data-options='{"type":"date"}' id="dtmyxrq" placeholder="请选择日期" />
+					</h5>
+				</form>
+				
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/project_basis_jsgcydghz_edit.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

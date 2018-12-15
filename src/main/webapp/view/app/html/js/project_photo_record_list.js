@@ -34,7 +34,15 @@ $bjAjax({
 					 var dlObj=dlArr[i];
 					 var dlMc=dlObj.text||"";
 					 var dlId=dlObj.value||"";
-					 html +=`<li dlId="`+dlId+`" class="mui-table-view-cell mui-collapse mleft10 dlli" >`+dlMc+`</li>`;
+					 var num=0;
+					 if(dlxx){
+						 for(key in dlxx){
+							 if(key==dlId){
+								 num+=dlxx[key].length;
+							 }
+						 }
+					 }
+					 html +=`<li dlId="`+dlId+`" class="mui-table-view-cell mui-collapse mleft10 dlli" >`+dlMc+`<span  class="mui-badge mui-badge-primary" style="right:35px">`+num+`</span></li>`;
 					 html +=`<ul name="dlul" id="`+dlId+`" class="mui-table-view  mleft30 " style="display:none">`;
 					 if(dlxx){
 						 for(key in dlxx){

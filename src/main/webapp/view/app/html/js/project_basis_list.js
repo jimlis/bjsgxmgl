@@ -23,6 +23,12 @@ function openNext(id){
 		case 5:
 		address="project_basis_targetData.html"
 			break;
+		case 6:
+			address="project_basis_gytdsyz.html"
+				break;
+		case 7:
+			address="project_basis_jsgcydghz.html"
+				break;
 		default:
 			break;
 	}
