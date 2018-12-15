@@ -215,6 +215,10 @@ window.onload=function(){
 function getDl(){
 	return getXmjdListByParam(xmid,'jc',1,"");
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_detail_list.html");
 }

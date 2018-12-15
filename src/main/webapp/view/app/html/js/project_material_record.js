@@ -138,6 +138,10 @@ function add(){
     var address = "project_material_record_add.html";
     toUrl(address);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_detail_list.html");
 }
