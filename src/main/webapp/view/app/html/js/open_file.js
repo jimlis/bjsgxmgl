@@ -1,7 +1,7 @@
 
 var fileName = getRequest(location.search).fileName;
-mui("title")[0].innerText = fileName;
-mui("header .mui-title")[0].innerHTML = fileName;
+//mui("#fileName")[0].innerText = fileName;
+/*mui("header .mui-title")[0].innerHTML = fileName;*/
 function reinitIframe(){
 	var iframe = document.getElementById("fileIframe");
 	try{

@@ -1,8 +1,8 @@
 var obj = getRequest(location.search);
 var deptId = obj.deptId||0;
 if(isNotEmpty(obj.name)){
-	mui("header .mui-title")[0].innerHTML = obj.name;
-	mui("title")[0].innerText = obj.name;
+	//mui("header .mui-title")[0].innerHTML = obj.name;
+	mui("#title")[0].innerText = obj.name;
 }
 
 $bjAjax({

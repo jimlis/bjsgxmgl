@@ -319,6 +319,11 @@ function save(){
 		}
 	});
 }
+
+function back(){
+	 outPage();
+}
+
 function outPage(){
 	toUrl("project_pay_record.html");
 }

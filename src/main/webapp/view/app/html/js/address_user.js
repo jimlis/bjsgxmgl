@@ -1,7 +1,7 @@
 
 var obj = getRequest(location.search);
-mui("title")[0].innerText = obj.name;
-mui("header .mui-title")[0].innerHTML = obj.name;
+//mui("title")[0].innerText = obj.name;
+//mui("header .mui-title")[0].innerHTML = obj.name;
 $bjAjax({
 	url:userApiPath+"getUserById",
 	data:{

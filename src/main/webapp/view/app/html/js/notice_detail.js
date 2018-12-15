@@ -1,7 +1,7 @@
 
 var obj = getRequest(location.search);
-mui("title")[0].innerText = obj.chrbt;
-mui("header .mui-title")[0].innerHTML = obj.chrbt;
+//mui("title")[0].innerText = obj.chrbt;
+//mui("header .mui-title")[0].innerHTML = obj.chrbt;
 $bjAjax({
 	url:noticeApiPath+"details",
 	data:{

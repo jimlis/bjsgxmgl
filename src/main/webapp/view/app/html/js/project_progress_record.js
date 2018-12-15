@@ -216,9 +216,11 @@ function getDl(){
 	return getXmjdListByParam(xmid,'jc',1,"");
 }
 mui.back=function(){
+	debugger;
 	 outPage();
 	 console.log("123");
 }
 function outPage(){
+	debugger;
 	toUrl("project_detail_list.html");
 }
