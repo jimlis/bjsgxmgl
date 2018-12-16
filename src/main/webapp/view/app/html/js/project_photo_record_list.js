@@ -81,7 +81,7 @@ $bjAjax({
 				var html="";
 				ycgcObj=gcys;
 				for(key in gcys){
-					 html +=`<li gcysKey="`+key+`"  class="mui-table-view-cell mui-collapse mleft10 gcysli" >`+key+`</li>`;
+					 html +=`<li gcysKey="`+key+`"  class="mui-table-view-cell mui-collapse mleft10 gcysli" >`+key+`<span  class="mui-badge mui-badge-primary" style="right:35px">`+gcys[key].length+`</span></li></li>`;
 					 html +=`<ul name="ycgcul" id="`+key+`" class="mui-table-view  mleft30 " style="display:none">`;
 					 for(j in gcys[key]){
 						 ysnum++;

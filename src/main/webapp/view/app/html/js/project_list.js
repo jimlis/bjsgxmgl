@@ -1,7 +1,13 @@
 var obj = getRequest();
 var intxmlx=obj.intxmlx||"";
 setCookie("xmlx",intxmlx);
-
+var chrxmlx;
+if(intxmlx=='1'){
+	chrxmlx = "PMC项目";
+}else{
+	chrxmlx = "EPC项目";
+}
+document.getElementById("xmlx").innerText=chrxmlx;
 var xmlxmc='';
 
 $bjAjax({
