@@ -26,7 +26,7 @@ window.onload = function(){
 				newaddLx({});
 			},
 			datePicker: function (name) {
-				vueDtPicker(pageData,name);
+				vueDtPicker(pageData,name,false,true);
 			}
 		}
 	});

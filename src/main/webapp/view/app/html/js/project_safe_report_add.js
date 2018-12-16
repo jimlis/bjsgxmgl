@@ -7,7 +7,7 @@ window.onload = function(){
 	dtPicker('#dtmbgrq');
     dtPicker('#dtmtzrq');
 
-    dtPicker('#dtmwczgrq');
+    dtPicker('#dtmwczgrq',false,true);
     
     relPicker("chrsgdw",getXmdwmdData(intxmid,"2"),"intsgdw");
 

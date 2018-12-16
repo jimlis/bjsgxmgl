@@ -29,7 +29,7 @@ window.onload = function(){
 			datePicker: function (type,index) {
 				var selectItems = getDtPicker(function(selectItems){
 					var value = selectItems.value;
-					vue.setdataPicker(type,index,value);
+					vue.setdataPicker(type,index,value,true,false);
 				});
 				
 			},

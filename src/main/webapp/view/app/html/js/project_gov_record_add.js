@@ -37,7 +37,7 @@ window.onload = function(){
 				vuePicker(pageData,"chrxcbm",bmPickerData,"intxcbm");
 			},
 			datePicker: function (event) {
-				vueDtPicker(pageData,"dtmxcrq");
+				vueDtPicker(pageData,"dtmxcrq",false,true);
 			}
 		}
 	});

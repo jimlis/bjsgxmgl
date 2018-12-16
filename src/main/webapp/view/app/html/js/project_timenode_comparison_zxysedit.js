@@ -21,7 +21,7 @@ window.onload = function(){
 				var selectItems = getDtPicker(function(selectItems){
 					var value = selectItems.value;
 					vue.setdataPicker(type,index,value);
-				},true);
+				},true,false);
 				
 			},
 			setdataPicker:function(type,index,value){

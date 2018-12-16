@@ -12,7 +12,7 @@ window.onload = function(){
 		data:pageData,
 		methods: {
 			dataPicker:function(domid){
-				vueDtPicker(pageData,domid);
+				vueDtPicker(pageData,domid,false,true);
 			}
 		}
 	});

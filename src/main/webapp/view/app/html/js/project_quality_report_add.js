@@ -7,8 +7,8 @@ window.onload = function(){
 	dtPicker('#dtmbgrq');
 	dtPicker('#dtmtzrq');
     dtPicker('#dtmwczgrq');
-    dtPicker('#dtmzgwcrq');
-    dtPicker('#dtmzlqxfxrq');
+    dtPicker('#dtmzgwcrq',false,true);
+    dtPicker('#dtmzlqxfxrq',false,true);
 	upLoadImg('#chbtn',{"busType":"bj_xm_zlqxbg"});
 	upLoadImg('#chbtn_zgwc',{"busType":"bj_xm_zlqxbg","fileListName":"img-list_zgwc","type":"2"});
 	relPicker("chrqxlx",getPageData(),"intqxlx");

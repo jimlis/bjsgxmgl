@@ -1,5 +1,7 @@
 initdata();
+var sysdata;
 function initdata(){
+	
 	try{
 		var nav = document.getElementById("title-scroll");
 		nav.innerHTML = `
@@ -39,7 +41,7 @@ function initdata(){
 }
 
 /**服务端地址*/
-var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -293,8 +295,12 @@ $bj_post_ajax=function (obj) {
     $bjAjax(obj);
 }
 //vue 日期选择器
-function vueDtPicker(vueData,selecter){
-	var dtPicker = new mui.DtPicker({"type":"date","buttons":["qwe","ee","oo"]}); 
+function vueDtPicker(vueData,selecter,begin,end){
+	if(!sysdata){
+		sysdata = bjGetSysDate();
+	}
+	var d = new Date(sysdata.replace(/-/g,"/"));
+	var dtPicker = new mui.DtPicker({"type":"date","buttons":["取消","确定"],'beginDate': begin?d:"",'endDate':  end?d:""}); 
     dtPicker.show(function (selectItems) { 
         vueData[selecter] = selectItems.value;
         dtPicker.dispose();
@@ -303,8 +309,12 @@ function vueDtPicker(vueData,selecter){
 }
 
 //vue 日期选择器1
-function getDtPicker(fun){
-	var dtPicker = new mui.DtPicker({"type":"date"}); 
+function getDtPicker(fun,begin,end){
+	if(!sysdata){
+		sysdata = bjGetSysDate();
+	}
+	var d = new Date(sysdata.replace(/-/g,"/"));
+	var dtPicker = new mui.DtPicker({"type":"date",'beginDate': begin?d:"",'endDate':  end?d:""}); 
     dtPicker.show(function (selectItems) { 
         fun(selectItems);
         dtPicker.dispose();
@@ -312,8 +322,12 @@ function getDtPicker(fun){
 }
 
 //vue 日期选择器 参数为数组
-function vueArrDtPicker(vueData,index,selecter){
-	var dtPicker = new mui.DtPicker({"type":"date"}); 
+function vueArrDtPicker(vueData,index,selecter,begin,end){
+	if(!sysdata){
+		sysdata = bjGetSysDate();
+	}
+	var d = new Date(sysdata.replace(/-/g,"/"));
+	var dtPicker = new mui.DtPicker({"type":"date",'beginDate': begin?d:"",'endDate':  end?d:""}); 
     dtPicker.show(function (selectItems) { 
         vueData[index][selecter] = selectItems.value;
         dtPicker.dispose();
@@ -323,7 +337,11 @@ function vueArrDtPicker(vueData,index,selecter){
 /**
  *日期选择器
  */
-function dtPicker(selecter){
+function dtPicker(selecter,begin,end){
+	if(!sysdata){
+		sysdata = bjGetSysDate();
+	}
+	var d = new Date(sysdata.replace(/-/g,"/"));
 	var result = mui(selecter);
 	result.each(function(i, btn) {
 		btn.addEventListener('tap', function() {
@@ -337,13 +355,15 @@ function dtPicker(selecter){
 			} else {
 				var optionsJson = this.getAttribute('data-options') || '{}';
 				var options = JSON.parse(optionsJson);
+				options["beginDate"]= begin?d:"";
+				options["endDate"]= end?d:"";
 				var id = this.getAttribute('id');
 				/*
 				 * 首次显示时实例化组件
 				 * 示例为了简洁，将 options 放在了按钮的 dom 上
 				 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
 				 */
-				_self.picker = new mui.DtPicker({options});
+				_self.picker = new mui.DtPicker(options);
 				_self.picker.show(function(rs) {
 					/*
 					 * rs.value 拼合后的 value
@@ -726,7 +746,6 @@ function getFromData(form){
 function hasPermission(bs){
 	return true;
 }
-
 function bjGetSysDate(dfm){
 	var data1 ="";
 	$bjAjax({

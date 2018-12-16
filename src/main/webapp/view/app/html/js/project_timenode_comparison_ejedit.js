@@ -20,7 +20,7 @@ window.onload = function(){
 					newaddDl({});
 				},
 				datePicker: function (name,index) {
-					vueArrDtPicker(pageData,index,name);
+					vueArrDtPicker(pageData,index,name,true,false);
 				}
 			}
 	});

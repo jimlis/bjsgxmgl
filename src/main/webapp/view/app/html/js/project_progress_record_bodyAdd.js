@@ -71,7 +71,7 @@ window.onload = function(){
 				var selectItems = getDtPicker(function(selectItems){
 					var value = selectItems.value;
 					vue.setdataPicker(type,index,value);
-				});
+				},false,true);
 				
 			},
 			setdataPicker:function(type,index,value){
