@@ -300,12 +300,15 @@ function vueDtPicker(vueData,selecter,begin,end){
 		sysdata = bjGetSysDate();
 	}
 	var d = new Date(sysdata.replace(/-/g,"/"));
-	var dtPicker = new mui.DtPicker({"type":"date","buttons":["取消","确定"],'beginDate': begin?d:"",'endDate':  end?d:""}); 
+	var dtPicker = new mui.DtPicker({"type":"date","buttons":["取消","确定","清空"],'beginDate': begin?d:"",'endDate':  end?d:""}); 
     dtPicker.show(function (selectItems) { 
         vueData[selecter] = selectItems.value;
         dtPicker.dispose();
 		dtPicker = null;
     })
+    dtPicker.clearData(function(){
+    	  vueData[selecter] ="";
+    });
 }
 
 //vue 日期选择器1
@@ -352,6 +355,9 @@ function dtPicker(selecter,begin,end){
 					_self.picker.dispose();
 					_self.picker = null;
 				});
+				_self.picker.clearData(function(){
+					_self.value = "";
+				});
 			} else {
 				var optionsJson = this.getAttribute('data-options') || '{}';
 				var options = JSON.parse(optionsJson);
@@ -388,6 +394,9 @@ function dtPicker(selecter,begin,end){
 					_self.picker.dispose();
 					_self.picker = null;
 				});
+				_self.picker.clearData(function(){
+					_self.value = "";
+				});
 			}
 			
 		}, false);
@@ -406,6 +415,11 @@ function vuePicker(vueData,textSelecter,data,valueSelecter,funResult){
 		}
 		//返回 false 可以阻止选择框的关闭
 		//return false;
+	});
+	
+	userPicker.clearData(function(){
+		vueData[valueSelecter]="";
+		vueData[textSelecter]="";
 	});
 }
 /*
@@ -432,6 +446,12 @@ function relPicker(textSelecter,data,valueSelecter,funResult){
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
+		
+		userPicker.clearData(function(){
+			document.getElementById(valueSelecter).value="";
+			document.getElementById(textSelecter).value="";
+		});
+		
 	};
 }
 function getRelPicker(data,funResult){

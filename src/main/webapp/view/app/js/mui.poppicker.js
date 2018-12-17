@@ -27,6 +27,7 @@
 	var panelBuffer = '<div class="mui-poppicker">\
 		<div class="mui-poppicker-header">\
 			<button class="mui-btn mui-poppicker-btn-cancel">取消</button>\
+		<button class="mui-btn mui-poppicker-btn-clear">清空</button>\
 			<button class="mui-btn mui-btn-blue mui-poppicker-btn-ok">确定</button>\
 			<div class="mui-poppicker-clear"></div>\
 		</div>\
@@ -49,21 +50,32 @@
 		init: function(options) {
 			var self = this;
 			self.options = options || {};
-			self.options.buttons = self.options.buttons || ['取消', '确定'];
+			self.options.buttons = self.options.buttons || ['取消', '确定','清空'];
 			self.panel = $.dom(panelBuffer)[0];
 			document.body.appendChild(self.panel);
 			self.ok = self.panel.querySelector('.mui-poppicker-btn-ok');
 			self.cancel = self.panel.querySelector('.mui-poppicker-btn-cancel');
 			self.body = self.panel.querySelector('.mui-poppicker-body');
+			self.clear = self.panel.querySelector('.mui-poppicker-btn-clear');
 			self.mask = $.createMask();
 			self.cancel.innerText = self.options.buttons[0];
 			self.ok.innerText = self.options.buttons[1];
+			self.clear.innerText = self.options.buttons[2];
+			
 			self.cancel.addEventListener('tap', function(event) {
 				self.hide();
 			}, false);
 			self.ok.addEventListener('tap', function(event) {
 				if (self.callback) {
 					var rs = self.callback(self.getSelectedItems());
+					if (rs !== false) {
+						self.hide();
+					}
+				}
+			}, false);
+			self.clear.addEventListener('tap', function(event) {
+				if (self.clearFn) {
+					var rs = self.clearFn();
 					if (rs !== false) {
 						self.hide();
 					}
@@ -132,6 +144,11 @@
 			$.back = function() {
 				self.hide();
 			};
+		},
+		//清理数据
+		clearData: function(callback) {
+			var self = this;
+			self.clearFn = callback;
 		},
 		//隐藏
 		hide: function() {

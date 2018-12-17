@@ -126,7 +126,8 @@ function buildModel(){
 		dtmxcrq:'',
 		chrzb:'',
 		intbgrid:chrdlrid,
-		chrbgrmc:chrdlrmc
+		chrbgrmc:chrdlrmc,
+		fileIds:''
 	}
 	return model;
 }
