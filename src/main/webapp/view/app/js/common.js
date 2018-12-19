@@ -763,9 +763,37 @@ function getFromData(form){
  * @param bs 权限标识
  * @returns {boolean} true 拥有 false 不拥有
  */
-function hasPermission(bs){
-	return true;
+function hasPermission(perms){
+	var hasPerm=false;
+	$bj_post_ajax({
+		url:userApiPath+"checkPerms",
+		data:{"perms":perms},
+		async:false,
+		success:function(data){
+			hasPerm=data;
+		}
+	});
+	return hasPerm;
 }
+
+/**
+ * 是否拥有该权限
+ * @param bs 权限标识
+ * @returns {boolean} true 拥有 false 不拥有
+ */
+function hasEdit(){
+	return  hasPermission("bj_edit");
+}
+
+/**
+ * 是否拥有该权限
+ * @param bs 权限标识
+ * @returns {boolean} true 拥有 false 不拥有
+ */
+function hasDel(){
+	return  hasPermission("bj_del");
+}
+
 function bjGetSysDate(dfm){
 	var data1 ="";
 	$bjAjax({
