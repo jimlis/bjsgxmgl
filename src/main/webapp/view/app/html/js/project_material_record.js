@@ -2,6 +2,7 @@
 var xmid = getCookie("id");
 //初始化必要条件
 window.onload=function(){
+	showEdit();
 	$bjAjax({
 		url:materialApiList,
 		type:"post",

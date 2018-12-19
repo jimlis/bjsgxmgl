@@ -1,3 +1,4 @@
+showEdit();
 var obj = getRequest();
 var id=obj.id||"";
 mui.back=function(){

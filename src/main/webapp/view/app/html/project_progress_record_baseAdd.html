@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</h1>
-		    <button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
+		    <button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
 		<div class="mui-content" id="app" v-cloak>
 			<input class="bj-input bj-p-black-font" type="hidden" v-model="pagedata.fileIds" id="fileIds" placeholder="文件ids" />
@@ -73,7 +73,7 @@
 					    </tr>
 					  </tbody>
 					</table>
-					<button class="mui-btn mui-btn-primary" type="button" v-on:click="addzjc">+</button>
+					<button class="mui-btn mui-btn-primary addbtn" type="button" v-on:click="addzjc">+</button>
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">独立基础：</span>{{dljcs.length}}</span></h5>
 					<table>
 					  <thead>
@@ -91,7 +91,7 @@
 					    </tr>
 					  </tbody>
 					</table>
-					<button class="mui-btn mui-btn-primary" type="button" v-on:click="adddljc">+</button>
+					<button class="mui-btn mui-btn-primary addbtn" type="button" v-on:click="adddljc">+</button>
 					
 					<h5 class="bj-title2-font">照片：</h5>
 					<div id="uploader" class="wu-example">

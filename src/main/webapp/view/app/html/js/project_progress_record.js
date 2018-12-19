@@ -210,17 +210,24 @@ window.onload=function(){
 		}
 		toUrl(address);
 	});
+	
+	var flag=hasEdit();
+	mui(".addbtn").each(function(i,domOne){
+		if(flag){
+			domOne.style.display="inline-block";
+		}else{
+			domOne.style.display="none";
+		}
+	})
 }
 //得到【栋楼】数据
 function getDl(){
 	return getXmjdListByParam(xmid,'jc',1,"");
 }
 mui.back=function(){
-	debugger;
 	 outPage();
 	 console.log("123");
 }
 function outPage(){
-	debugger;
 	toUrl("project_detail_list.html");
 }

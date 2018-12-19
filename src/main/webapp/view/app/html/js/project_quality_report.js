@@ -1,6 +1,7 @@
 
 //初始化必要条件
 window.onload=function(){
+	showEdit();
 	showQuaReportList('1','tjQua');
 	showQuaReportList('2','jdQua');
 	showQuaReportList('3','zxQua');

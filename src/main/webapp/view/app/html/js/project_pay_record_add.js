@@ -12,6 +12,8 @@ var inthtje=0;
 var bgbhData=[];
 var splctzs = new Array();
 window.onload = function(){
+	showEdit();
+	
 	//得到审批流程状态内容
 	getSplcList("zfqk");
 	

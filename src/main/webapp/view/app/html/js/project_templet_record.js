@@ -1,5 +1,7 @@
 //初始化必要条件
 window.onload=function(){
+	showEdit();
+	
 	$bjAjax({
 		url:tempRecodeListApiPath,
 		type:"post",

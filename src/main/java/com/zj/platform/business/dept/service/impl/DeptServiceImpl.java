@@ -27,7 +27,7 @@ public class DeptServiceImpl extends BaseServiceImpl<DeptDao, DeptDO> implements
         List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
         DeptDO query=new DeptDO();
                         query.setDelFlag(1);
-        List<DeptDO> sysDepts = baseMapper.selectList(new QueryWrapper<>(query));
+        List<DeptDO> sysDepts = baseMapper.selectList(new QueryWrapper<>(query).orderByAsc("orderNum"));
         for (DeptDO sysDept : sysDepts) {
             Tree<DeptDO> tree = new Tree<DeptDO>();
             tree.setId(sysDept.getId().toString());

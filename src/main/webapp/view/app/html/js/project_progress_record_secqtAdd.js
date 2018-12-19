@@ -7,6 +7,8 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 window.onload = function(){
+	showEdit();
+	
 	pageData = isUpdata()||'';
 	
 	//upLoadImg('#chbtn',{"busType":"bj_xm_sgjd_ecjgzx_qt"});

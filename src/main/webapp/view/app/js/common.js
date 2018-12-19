@@ -42,6 +42,7 @@ function initdata(){
 
 /**服务端地址*/
 var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
+//var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -294,6 +295,7 @@ $bj_post_ajax=function (obj) {
     obj.type="POST";
     $bjAjax(obj);
 }
+
 //vue 日期选择器
 function vueDtPicker(vueData,selecter,begin,end){
 	if(!sysdata){
@@ -782,7 +784,7 @@ function hasPermission(perms){
  * @returns {boolean} true 拥有 false 不拥有
  */
 function hasEdit(){
-	return  hasPermission("bj_edit");
+	return  hasPermission("bj:edit");
 }
 
 /**
@@ -791,7 +793,20 @@ function hasEdit(){
  * @returns {boolean} true 拥有 false 不拥有
  */
 function hasDel(){
-	return  hasPermission("bj_del");
+	return  hasPermission("bj:delete");
+}
+
+function showEdit(){
+	var flag=hasEdit();
+	var editBtn=document.getElementById("editBtn");
+	if(editBtn){
+		if(flag){
+			editBtn.style.display="inline-block";
+		}else{
+			editBtn.style.display="none";
+		}
+	}
+	return flag;
 }
 
 function bjGetSysDate(dfm){

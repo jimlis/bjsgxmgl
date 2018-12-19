@@ -1,3 +1,4 @@
+showEdit();
 var xmid = getCookie("id");
 var dlxxObj={};
 var ycgcObj={};

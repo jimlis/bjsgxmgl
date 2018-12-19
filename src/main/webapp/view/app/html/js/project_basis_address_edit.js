@@ -1,4 +1,5 @@
 var obj = getRequest();
+showEdit();
 if(obj.id){
 	$bjAjax({
 		url:baseApiAddress,

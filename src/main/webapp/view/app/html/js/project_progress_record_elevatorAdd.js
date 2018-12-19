@@ -10,6 +10,8 @@ var pageData;
 var vue;
 var dlhData;
 window.onload = function(){
+	showEdit();
+	
 	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_dtsbazsg"});
 	
 	//dlhData=getXmjdListByParam(xmid,'jc',1,"");

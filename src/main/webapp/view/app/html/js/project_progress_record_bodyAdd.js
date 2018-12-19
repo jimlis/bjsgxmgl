@@ -1,4 +1,5 @@
-var obj=getRequest()
+showEdit();
+var obj=getRequest();
 var sgwzid = obj.sgwzid||"";
 var intsgwzid = obj.intsgwzid||"";
 var chrsgwzmc = obj.chrsgwzmc||"";

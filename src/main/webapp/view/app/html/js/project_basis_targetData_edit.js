@@ -1,3 +1,4 @@
+showEdit();
 var obj=getRequest();
 var intxmid = getCookie("id");
 var id=obj.id||"";

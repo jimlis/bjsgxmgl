@@ -1,6 +1,7 @@
 var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
+	showEdit();
 	var pageData = getPageData();
 	var gw=getDataByDwlx(pageData,"1");
 	var sg=getDataByDwlx(pageData,"2");

@@ -1,3 +1,5 @@
+showEdit();
+
 $bjAjax({
 	url:baseApixkz,
 	type:"post",

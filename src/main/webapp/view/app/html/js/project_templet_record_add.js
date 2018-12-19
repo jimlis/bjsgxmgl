@@ -4,6 +4,7 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');
 window.onload = function(){
+	showEdit();
 	dtPicker('#dtmwcrq',false,true);//样板施工完成日期
 	dtPicker('#dtmsprq',false,true);//样板施工完成日期
 	upLoadImg('#chbtn','#upbtn');

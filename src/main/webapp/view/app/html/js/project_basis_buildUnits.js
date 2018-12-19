@@ -1,3 +1,4 @@
+showEdit();
 var xmid = getCookie("id");
 $bjAjax({
 	url:baseApiCjdw,

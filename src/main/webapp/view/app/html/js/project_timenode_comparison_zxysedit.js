@@ -1,3 +1,4 @@
+showEdit();
 var obj=getRequest();
 var xmid=getCookie("id");
 var pageData;

@@ -1,3 +1,4 @@
+showEdit();
 var obj=getRequest();
 var intsgwzid = obj.intsgwzid||"";
 var chrsgwzmc = obj.chrsgwzmc||"";
@@ -100,10 +101,11 @@ window.onload = function(){
 		}
 	});
 	
-if(pageData.id){
+	if(pageData.id){
 		//加载图片
 		initImgList("bj_xm_sgjd_jcsgnew",pageData.id,"1","fileIds","img-list",false);
 	}
+	
 }
 
 

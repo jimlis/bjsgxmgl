@@ -3,6 +3,8 @@ var id=obj.id||"";
 var xmid=getCookie("id");
 //初始化显示数据
 window.onload = function(){
+	showEdit();
+	
 	//得到数据
 	var pageData = getPageData();
 	

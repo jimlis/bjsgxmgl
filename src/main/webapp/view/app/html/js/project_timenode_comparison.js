@@ -1,3 +1,4 @@
+showAdd();
 //初始化必要条件
 var xmid=getCookie("id");
 //var sysDate=bjGetSysDate();
@@ -293,4 +294,15 @@ function initZxjgData(){
 		}
 	});
 	return result;
+}
+
+function  showAdd(){
+	var flag=hasEdit();
+	mui(".addbtn").each(function(i,obj){
+		if(flag){
+			obj.style.display="inline-block";
+		}else{
+			obj.style.display="none";
+		}
+	});
 }

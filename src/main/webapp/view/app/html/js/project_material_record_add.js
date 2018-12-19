@@ -5,6 +5,7 @@ var sysdate=bjGetSysDate();
 var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 var splctzs = new Array();
 window.onload = function(){
+	showEdit();
 	pageData = isUpdata()||'';
 	//判断是否更新；
 	if(pageData==''){

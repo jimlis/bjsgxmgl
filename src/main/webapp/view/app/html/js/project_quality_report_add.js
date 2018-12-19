@@ -4,6 +4,7 @@ var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
 var intxmid = getCookie('id');//intxmid
 window.onload = function(){
+	showEdit();
 	dtPicker('#dtmbgrq');
 	dtPicker('#dtmtzrq');
     dtPicker('#dtmwczgrq');

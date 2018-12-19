@@ -1,4 +1,5 @@
-var obj=getRequest()
+showEdit();
+var obj=getRequest();
 var gqjdbjid=obj.gqjdbjid||"";
 var intxmid=getCookie("id");
 var pageData={};

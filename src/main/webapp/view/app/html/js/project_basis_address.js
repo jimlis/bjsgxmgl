@@ -1,3 +1,4 @@
+showEdit();
 $bjAjax({
 	url:baseApiAddress,
 	type:"post",

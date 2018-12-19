@@ -8,6 +8,7 @@ var pageData;
 var vue;
 var index=0;
 window.onload = function(){
+	showEdit();
 	
 	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_swgwsg"});
 	

@@ -1,5 +1,6 @@
 
 window.onload=function(){
+	showEdit();
 	showList('aqjcjl');
 	tyclClick("#list");
 }

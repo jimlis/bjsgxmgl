@@ -1,3 +1,4 @@
+showEdit();
 dtPicker('#dtmfzrq');
 dtPicker('#dtmyxrq');
 upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});

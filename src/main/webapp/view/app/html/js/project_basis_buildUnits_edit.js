@@ -1,4 +1,5 @@
 var xmid = getCookie("id");
+showEdit();
 $bjAjax({
 	url:baseApiCjdw,
 	type:"post",

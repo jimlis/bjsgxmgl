@@ -1,3 +1,4 @@
+showEdit();
 var obj=getRequest();
 var gqjdid=obj.gqjdid||"";
 var pageData;

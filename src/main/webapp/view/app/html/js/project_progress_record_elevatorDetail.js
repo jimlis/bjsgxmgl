@@ -1,10 +1,11 @@
-var obj=getRequest()
+var obj=getRequest();
 var id = obj.id||"";
 var sgwz=obj.sgwz||"";
 var xmid=getCookie("id");
 var pageData;
 var vue;
 window.onload = function(){
+	showEdit();
 	
 	//判断是否更新；
 	pageData = isUpdata();

@@ -1,5 +1,6 @@
 var xmid = getCookie("id");
 window.onload=function(){
+	showEdit();
 	showList("1");
 	showList("2");
 	showList("3");

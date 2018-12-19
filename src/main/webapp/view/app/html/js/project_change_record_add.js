@@ -12,6 +12,7 @@ var dwData=[];
 var nowHtje=0;
 var splctzs = new Array();
 window.onload = function(){
+	showEdit();
 	upLoadFile('#chbtn',{"busType":"bj_xm_bgsqjl"});
 	pageData = isUpdata()||'';
 	//判断是否更新；

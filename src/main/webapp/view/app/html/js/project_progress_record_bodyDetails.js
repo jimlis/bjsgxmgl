@@ -1,3 +1,4 @@
+showEdit();
 var obj = getRequest();
 var sgwzid=obj.sgwzid||"";
 var chrsgwz = obj.chrsgwz||"";

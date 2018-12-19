@@ -3,6 +3,7 @@ var xmid=getCookie("id");
 var zxysArr=[];
 var jgysArr=[];
 window.onload = function(){
+	showEdit();
 	var pageData = getPageData();
 	initZxjgData();
 	var sghj=getDataByXcbm(pageData,'sghj');

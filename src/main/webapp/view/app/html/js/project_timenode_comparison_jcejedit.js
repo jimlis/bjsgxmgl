@@ -1,4 +1,5 @@
-var obj=getRequest()
+showEdit();
+var obj=getRequest();
 var id = obj.id||"";
 var gqjdbjid=obj.gqjdbjid||"";
 var chrjdlx=obj.chrjdlx||"";

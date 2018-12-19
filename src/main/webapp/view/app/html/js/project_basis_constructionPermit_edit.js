@@ -1,3 +1,4 @@
+showEdit();
 dtPicker('#dtmfzrq');
 dtPicker('#dtmyxrq');
 upLoadFile('#chbtn',{"busType":"bj_xm_xkz"});
@@ -12,8 +13,8 @@ $bjAjax({
 		var id=data.id||"";
 		document.getElementById("chrxkzbh").value = data.chrxkzbh||"";
 		document.getElementById("chrffbm").value = data.chrffbm||"";
-		document.getElementById("dtmfzrq").value = data.dtmfzrq||"";
-		document.getElementById("dtmyxrq").value = data.dtmyxrq||"";
+		//document.getElementById("dtmfzrq").value = data.dtmfzrq||"";
+		//document.getElementById("dtmyxrq").value = data.dtmyxrq||"";
 		initFileList("bj_xm_xkz",id,"1","fileIds","file-list",true);
 	}
 })

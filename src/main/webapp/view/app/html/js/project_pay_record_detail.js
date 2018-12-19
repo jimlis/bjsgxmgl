@@ -6,6 +6,7 @@ var intxmid = getCookie('id');//intxmid
 //初始化显示数据
 var pageData={};
 window.onload = function(){
+	showEdit();
 	//得到数据
 	pageData = getPageData();
 	

@@ -1,3 +1,4 @@
+showEdit();
 var obj=getRequest();
 var sysData = bjGetSysDate();
 var chrdlrmc = getCookie("chrdlrmc");

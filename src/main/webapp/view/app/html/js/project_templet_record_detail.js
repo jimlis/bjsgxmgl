@@ -1,6 +1,6 @@
 var obj = getRequest();
 window.onload = function(){
-	
+	showEdit();
    	var id = obj.id;
    	$bjAjax({
 		url:tempRecodeByIdApiPath,
