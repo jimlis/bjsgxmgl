@@ -167,6 +167,9 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, MenuDO> implements
         List<Tree<MenuDO>> trees = new ArrayList<Tree<MenuDO>>();
         List<MenuDO> menuDOs = baseMapper.listMenuByUserId(id);
         for (MenuDO sysMenuDO : menuDOs) {
+        	if(sysMenuDO.getId().equals(232L)) {
+        		continue;
+        	}
             Tree<MenuDO> tree = new Tree<MenuDO>();
             tree.setId(sysMenuDO.getId().toString());
             tree.setParentId(sysMenuDO.getParentId().toString());

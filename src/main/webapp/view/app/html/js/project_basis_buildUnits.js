@@ -1,4 +1,5 @@
-showEdit();
+var isEdit=showEdit();
+var isCk=hasPermission("bj:ckje");
 var xmid = getCookie("id");
 $bjAjax({
 	url:baseApiCjdw,
@@ -26,7 +27,7 @@ $bjAjax({
 		mui.each(one,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje = item.inthtje||"";
+			var inthtje = clJe(item.inthtje||"");
 			mui("#gwdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -37,7 +38,7 @@ $bjAjax({
 		mui.each(two,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje = item.inthtje||"";
+			var inthtje = clJe(item.inthtje||"");
 			mui("#sgdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -48,7 +49,7 @@ $bjAjax({
 		mui.each(three,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje = item.inthtje||"";
+			var inthtje =clJe(item.inthtje||"");
 			mui("#qtdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -57,6 +58,10 @@ $bjAjax({
 		})
 	}
 });
+
+function clJe(je){
+	return (isEdit||isCk)?je:"*";
+}
 
 function edit(){
 	toUrl("project_basis_buildUnits_edit.html");
