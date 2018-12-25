@@ -23,6 +23,11 @@ window.onload = function(){
 		//创建数据Model；
 		pageData = buildModel();
 	}
+	if(xclb=='zxys' || xclb=='jgys'){
+		pageData["chrlbmc"]="验收";
+	}else{
+		pageData["chrlbmc"]="巡查";
+	}
 	//数据绑定
 	vue = new Vue({
 		el: '#app',

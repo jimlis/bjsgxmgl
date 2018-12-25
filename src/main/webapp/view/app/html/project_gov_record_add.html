@@ -13,7 +13,11 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
-
+        <style type="text/css"> 
+          [v-cloak] { 
+            display: none; 
+          } 
+        </style> 
 	</head>
 
 	<body>
@@ -28,7 +32,7 @@
 			</h1>
 			<button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="save()">保存</button>
 		</header>
-		<div class="mui-content" id="app">
+		<div class="mui-content" id="app" v-cloak> 
 			<form id="myform">
 				<input class="bj-input bj-p-black-font" type="hidden" id="intxmid" v-model="intxmid" placeholder="项目id" />
 				<input class="bj-input bj-p-black-font" type="hidden" id="id" v-model="id" placeholder="业务id" />
@@ -48,14 +52,14 @@
                         <input class="bj-input bj-p-black-font " readonly="readonly" type="hidden" id="intgqjdid" v-model="intgqjdid" placeholder="请选择" />
                         <input class="bj-input bj-p-black-font  bj-disable" readonly="readonly" type="text" id="chrgqjdmc" v-model="chrgqjdmc"  placeholder="请选择" />
                     </h5>
-					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收部门：</span>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">{{chrlbmc}}部门：</span>
 						<input class="bj-input bj-p-black-font" type="hidden" id="intxcbm" v-model="intxcbm" placeholder="请选择" />
 						<input class="bj-input bj-p-black-font" readonly="readonly" type="text" id="chrxcbm" v-model="chrxcbm" v-on:click="bmPicker" placeholder="请选择" />
 					</h5>
-					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收人员：</span>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">{{chrlbmc}}人员：</span>
 						<input class="bj-input bj-p-black-font" type="text" id="chrxcry" v-model="chrxcry" placeholder="请输入" />
 					</h5>
-					<h5 class="bj-title2-font"><span class="bj-title-p-font">验收日期：</span>
+					<h5 class="bj-title2-font"><span class="bj-title-p-font">{{chrlbmc}}日期：</span>
 						<input class="bj-input bj-p-black-font"  readonly="readonly" type="text" id="dtmxcrq" v-on:click="datePicker" v-model="dtmxcrq" placeholder="请选择" />
 					</h5>
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span>

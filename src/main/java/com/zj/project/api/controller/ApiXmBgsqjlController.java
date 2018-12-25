@@ -2,7 +2,9 @@ package com.zj.project.api.controller;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,13 +60,23 @@ public class ApiXmBgsqjlController extends ApiBaseController {
         		xmBgsqjlDO.setIntdwmcid(dwmcid);
         	}
         	if(bgthid!=null) {
-        		xmBgsqjlDO.setIntbgthid(bgthid);
+        		if(bgthid.equals(-2L)) {
+        			
+        		}else {
+        			xmBgsqjlDO.setIntbgthid(bgthid);
+        		}
         	}
             QueryWrapper<XmBgsqjlDO> queryWrapper=new QueryWrapper<XmBgsqjlDO>(xmBgsqjlDO).orderByAsc("dtmgxrq");
             if(nowBgsqjlId!=null) {
             	queryWrapper.ne("id", nowBgsqjlId);
             }
-            return Result.ok(xmBgsqjlService.list(queryWrapper));
+            List<XmBgsqjlDO> list = xmBgsqjlService.list(queryWrapper);
+            if(CollectionUtils.isNotEmpty(list)&&bgthid!=null&&bgthid.equals(-2L)) {
+            	List<Long> notId=list.stream().filter(one->one.getIntbgthid()!=null).map(one->one.getIntbgthid()).collect(Collectors.toList());
+            	return Result.ok(list.stream().filter(one->!notId.contains(one.getId())).collect(Collectors.toList()));
+            }else {
+            	return Result.ok(list);
+            }
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();

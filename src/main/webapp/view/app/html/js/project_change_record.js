@@ -32,9 +32,10 @@ function showList(type){
     		mui.each(data,function(index,item){
     			var dtmgxrq = item.dtmgxrq||"";
     			var chrbgsqmc = item.chrbgsqmc||"";
+    			var chrbgsqbh = item.chrbgsqbh||"";
     			var id = item.id||"";
     			html+=`
-    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+dtmgxrq+"&nbsp;"+chrbgsqmc+`</li>
+    				<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+chrbgsqbh+"&nbsp;"+chrbgsqmc+`</li>
     			`;
 			})
 			document.getElementById(type).innerHTML=html;

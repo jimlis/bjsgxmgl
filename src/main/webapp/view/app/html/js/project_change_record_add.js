@@ -82,6 +82,8 @@ window.onload = function(){
 				}
 			}
 		}
+		onShqt();
+		
 		getBgbhList(pageData.intbgsqlx||"",pageData.intdwmcid||"",id)
 		//加载图片
 		initFileList("bj_xm_bgsqjl",id,"1","fileIds","file-list",true);
@@ -164,7 +166,7 @@ function getBgbhList(bgsqlx,dwmcid,nowId){
 				xmid:intxmid,
 				bgsqlx:bgsqlx,
 				dwmcid:dwmcid,
-				bgthid:-1,
+				bgthid:-2,
 				nowBgsqjlId:(nowId||"")
 			},
 			success:function(data){
@@ -193,7 +195,8 @@ function setGgjeSum(){
 		var intsfqd=pageData.intsfqd||"";
 		var intbgthid=pageData.intbgthid||"";
 		for(i in bgbhData){
-			if(bgbhData[i].intsfqd==0&&(!(intsfqd==1&&intbgthid==bgbhData[i].value))){
+			//bgbhData[i].intsfqd==0&&
+			if((!(intsfqd==1&&intbgthid==bgbhData[i].value))){
 				intbggs+=Number(bgbhData[i].intbggs||0);
 			}
 		}

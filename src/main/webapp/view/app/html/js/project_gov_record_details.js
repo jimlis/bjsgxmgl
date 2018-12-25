@@ -9,7 +9,11 @@ window.onload = function(){
 	
 	//得到数据
 	var pageData = getPageData();
-	
+	if(xclb=='zxys' || xclb=='jgys'){
+		pageData["chrlbmc"]="验收";
+	}else{
+		pageData["chrlbmc"]="巡查";
+	}
     //数据绑定
 	var vue = new Vue({
 		el: '#app',
