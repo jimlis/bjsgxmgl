@@ -278,15 +278,19 @@ function ftxsp(contentText,chruserid){
 }
 //保存数据
 function save(){
-	
-	var data = getFromData("myform");
-	$bjAjax({
-		url:changeApiSave,
-		data:data,
-		type:"post",
-		success:function(data){
-			bjToast("保存成功！",function(){
-				toUrl("project_change_record_details.html?id="+data.id);
+	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+		console.log(seletitem);
+		if(seletitem.index==0){
+			var data = getFromData("myform");
+			$bjAjax({
+				url:changeApiSave,
+				data:data,
+				type:"post",
+				success:function(data){
+					bjToast("保存成功！",function(){
+						toUrl("project_change_record_details.html?id="+data.id);
+					});
+				}
 			});
 		}
 	});

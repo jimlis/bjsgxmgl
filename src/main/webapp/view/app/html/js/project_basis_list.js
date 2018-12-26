@@ -34,6 +34,10 @@ function openNext(id){
 	}
 	toUrl(address);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_detail_list.html");
 }

@@ -73,7 +73,10 @@ function getPageData(){
 function edit(){
 	toUrl("project_gov_record_add.html?id="+id+"&xclb="+xclb+"&gqjdid="+gqjdid);
 }
-
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 
 function outPage(){
 	toUrl("project_gov_record.html");

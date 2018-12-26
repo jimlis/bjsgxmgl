@@ -19,6 +19,10 @@ $bjAjax({
 function edit(){
 	toUrl("project_basis_jsgcydghz_edit.html");
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_basis_list.html");
 }

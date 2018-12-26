@@ -254,21 +254,26 @@ function ftxsp(contentText,chruserid){
 }
 
 function save(){
-    var data = getFromData("myform");
-    data["id"] = (obj.id||"");
-	data["intxmid"] = getCookie("id");
-	data["intbgrid"] = getCookie("chrdlrid");
-	data["chrbgrmc"] = getCookie("chrdlrmc");
-	data["deleteJszlIds"] =(deleteJszlIds.length>0?deleteJszlIds.substring(0,deleteJszlIds.length-1):deleteJszlIds);
-	data["xmClybspjlJszlJson"] = getpp();
-	$bjAjax({
-		url:materialApiSave,
-		data:data,
-		type:"post",
-		success:function(data){
-			bjConsole(data);
-			bjToast("保存成功！",function(){
-				toUrl("project_material_record_details.html?id="+data.id);
+	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+		console.log(seletitem);
+		if(seletitem.index==0){
+		    var data = getFromData("myform");
+		    data["id"] = (obj.id||"");
+			data["intxmid"] = getCookie("id");
+			data["intbgrid"] = getCookie("chrdlrid");
+			data["chrbgrmc"] = getCookie("chrdlrmc");
+			data["deleteJszlIds"] =(deleteJszlIds.length>0?deleteJszlIds.substring(0,deleteJszlIds.length-1):deleteJszlIds);
+			data["xmClybspjlJszlJson"] = getpp();
+			$bjAjax({
+				url:materialApiSave,
+				data:data,
+				type:"post",
+				success:function(data){
+					bjConsole(data);
+					bjToast("保存成功！",function(){
+						toUrl("project_material_record_details.html?id="+data.id);
+					});
+				}
 			});
 		}
 	});

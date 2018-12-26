@@ -35,6 +35,10 @@ function getPageData(){
 function edit(){
 	toUrl("project_basis_targetData_edit.html?id="+intxmid);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_basis_list.html");
 }

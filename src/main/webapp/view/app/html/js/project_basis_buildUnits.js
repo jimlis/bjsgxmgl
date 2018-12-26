@@ -66,6 +66,10 @@ function clJe(je){
 function edit(){
 	toUrl("project_basis_buildUnits_edit.html");
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_basis_list.html");
 }

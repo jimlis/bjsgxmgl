@@ -75,6 +75,10 @@ function  edit() {
     var address = "project_material_record_add.html?id="+id;
     toUrl(address);
 }
+mui.back=function(){
+	 outPage();
+	 console.log("123");
+}
 function outPage(){
 	toUrl("project_material_record.html");
 }
