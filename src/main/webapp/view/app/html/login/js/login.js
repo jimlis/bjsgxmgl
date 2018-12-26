@@ -1,6 +1,8 @@
 function login(){
-	var account=mui("#account")[0].value;
-	var password=mui("#password")[0].value;
+//	var account=mui("#account")[0].value;
+//	var password=mui("#password")[0].value;
+	var account="admin";
+	var password="1";
 	if(isEmpty(account)){
 		bjToast("账号不能为空");
 		return;
