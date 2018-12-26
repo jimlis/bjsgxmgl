@@ -40,11 +40,11 @@ window.onload = function(){
 				document.getElementById("intqxlx").value = data.intqxlx||"";
 				if(data.intqxlx=='1'){
 					document.getElementById("chrqxlx").value = "土建";
-				}else if(data.intyblx=='2'){
+				}else if(data.intqxlx=='2'){
 					document.getElementById("chrqxlx").value = "机电";
-				}else if(data.intyblx=='3'){
+				}else if(data.intqxlx=='3'){
 					document.getElementById("chrqxlx").value = "装修";
-				}else if(data.intyblx=='4'){
+				}else if(data.intqxlx=='4'){
 					document.getElementById("chrqxlx").value = "园林";				
 				}else{
 					document.getElementById("chrqxlx").value = "其他";
