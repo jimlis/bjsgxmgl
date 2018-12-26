@@ -544,7 +544,7 @@ function upLoadImg(elem,data,done){
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
 		,exts: 'png|jpg|jpeg|bmp|gif' 			//设置智能上传图片格式文件
-		,size: 5000 				//最大允许上传的文件大小
+		,size: 20000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		/*,bindAction: bind		//“上传”按钮的ID
 		,choose: function(obj){
@@ -922,7 +922,7 @@ function upLoadFile(elem,data,done){
 		,auto: true				//不自动上传设置
 		,accept: 'file'				 //允许上传的文件类型
 		,exts:'pdf'
-		,size: 5000 				//最大允许上传的文件大小
+		,size: 30000 				//最大允许上传的文件大小
 		,multiple: true				//设置是否多个文件上传
 		,done: done||function(res) {
 			var fileIdsName=data.fileIdsName||"fileIds";
