@@ -23,11 +23,11 @@ window.onload = function(){
 			document.getElementById("chrsgdwSpan").innerText = data.chrsgdw||"";
 			if(data.intqxlx=='1'){
 				document.getElementById("chrqxlxSpan").innerText = "土建";
-			}else if(data.intyblx=='2'){
+			}else if(data.intqxlx=='2'){
 				document.getElementById("chrqxlxSpan").innerText = "机电";
-			}else if(data.intyblx=='3'){
+			}else if(data.intqxlx=='3'){
 				document.getElementById("chrqxlxSpan").innerText = "装修";
-			}else if(data.intyblx=='4'){
+			}else if(data.intqxlx=='4'){
 				document.getElementById("chrqxlxSpan").innerText = "园林";				
 			}else{
 				document.getElementById("chrqxlxSpan").innerText = "其他";
@@ -50,7 +50,6 @@ function  edit() {
 }
 mui.back=function(){
 	 outPage();
-	 console.log("123");
 }
 function outPage(){
 	toUrl("project_quality_report.html");

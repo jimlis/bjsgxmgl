@@ -101,13 +101,15 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 变更申请文件：文件地址，多个逗号隔开 */
     @ApiModelProperty(value = "变更申请文件：文件地址，多个逗号隔开 ",name = "chrbgsqwj",dataType = "String")
     private String chrbgsqwj;
-    /** 审批流程状态：code码表 */
-    @ApiModelProperty(value = "审批流程状态：code码表 ",name = "intsplczt",dataType = "String")
+    /** 审批人 */
+    @ApiModelProperty(value = "审批人 ",name = "intsplczt",dataType = "String")
     private String intsplczt;
     /** 审批流程状态名称 */
-    @ApiModelProperty(value = "审批流程状态名称",name = "chrsplczt",dataType = "String")
     @TableField(exist=false)
     private String chrsplczt;
+    @TableField(exist=false)
+    @ApiModelProperty(value = "审批人名称 ",name = "chrsprmc",dataType = "String",required = false)
+    private String chrsprmc;
     /** 审批状态日期*/
     @ApiModelProperty(value = "审批状态日期 ",name = "dtmspztrq",dataType = "string",example = "2018-10-13",required = true)
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
@@ -121,6 +123,9 @@ public class XmBgsqjlDO extends BaseDomain {
     /** 变更替换id 默认-1 替换就入替换的主键id */
     @ApiModelProperty(value = "变更替换id 默认-1 替换就入替换的主键id",name = "intbgthid",dataType = "Long",required=false)
     private Long   intbgthid;
+    /** 审批结果 */
+    @ApiModelProperty(value = "审批结果",name = "chrspjg",dataType = "String",required = false)
+    private String chrspjg;
   
 
     /**
@@ -417,5 +422,17 @@ public class XmBgsqjlDO extends BaseDomain {
 	}
 	public void setDtmspztrq(Date dtmspztrq) {
 		this.dtmspztrq = dtmspztrq;
+	}
+	public String getChrsprmc() {
+		return chrsprmc;
+	}
+	public void setChrsprmc(String chrsprmc) {
+		this.chrsprmc = chrsprmc;
+	}
+	public String getChrspjg() {
+		return chrspjg;
+	}
+	public void setChrspjg(String chrspjg) {
+		this.chrspjg = chrspjg;
 	}
 }

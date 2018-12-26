@@ -97,6 +97,7 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     			SplcZtDO splcZtDO = splcZtService.getById(intsplczt);
     			if(splcZtDO!=null) {
     				xmGckyzfqkDO.setChrsplczt(splcZtDO.getChrsprmc());
+    				xmGckyzfqkDO.setChrsprmc(splcZtDO.getChrsprmc());
     			}
     		}
     		

@@ -84,11 +84,13 @@ public class XmGckyzfqkDO extends BaseDomain {
     @ApiModelProperty(value = "支付证书：文件地址，多个以英文逗号隔开 ",name = "chrzfzs",dataType = "String",required = false,hidden=true)
     private String chrzfzs;
     /** 审批流程状态：code码配置 */
-    @ApiModelProperty(value = "审批流程状态：code码配置 ",name = "intsplcztid",dataType = "String",required = false)
+    @ApiModelProperty(value = "审批人 ",name = "intsplcztid",dataType = "String",required = false)
     private String intsplcztid;
     @TableField(exist=false)
-    @ApiModelProperty(value = "审批流程状态 ",name = "chrsplczt",dataType = "String",required = false)
     private String chrsplczt;
+    @TableField(exist=false)
+    @ApiModelProperty(value = "审批人名称 ",name = "chrsprmc",dataType = "String",required = false)
+    private String chrsprmc;
     /** 审批状态日期*/
     @ApiModelProperty(value = "审批状态日期 ",name = "dtmspztrq",dataType = "string",example = "2018-10-13",required = true)
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
@@ -99,6 +101,9 @@ public class XmGckyzfqkDO extends BaseDomain {
     /** 报告人名称 */
     @ApiModelProperty(value = "报告人名称 ",name = "chrbgrmc",dataType = "String",required = true)
     private String chrbgrmc;
+    /** 审批结果 */
+    @ApiModelProperty(value = "审批结果",name = "chrspjg",dataType = "String",required = false)
+    private String chrspjg;
   
 
     /**
@@ -334,5 +339,17 @@ public class XmGckyzfqkDO extends BaseDomain {
 	}
 	public void setDtmspztrq(Date dtmspztrq) {
 		this.dtmspztrq = dtmspztrq;
+	}
+	public String getChrsprmc() {
+		return chrsprmc;
+	}
+	public void setChrsprmc(String chrsprmc) {
+		this.chrsprmc = chrsprmc;
+	}
+	public String getChrspjg() {
+		return chrspjg;
+	}
+	public void setChrspjg(String chrspjg) {
+		this.chrspjg = chrspjg;
 	}
 }

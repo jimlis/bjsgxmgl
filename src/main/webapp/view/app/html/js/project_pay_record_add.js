@@ -257,7 +257,8 @@ function buildModel(){
 		chrsprmc:'',
 		chruserid:'',
 		intbgrid:chrdlrid,
-		chrbgrmc:chrdlrmc
+		chrbgrmc:chrdlrmc,
+		chrspjg:""
 	}
 	return model;
 }

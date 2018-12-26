@@ -110,6 +110,9 @@ public class XmClybspjlDO extends BaseDomain {
     /**审批流转状态id 存在的时候代表已通过审核*/
     @TableField(exist=false)
     private Long ztid;
+    /** 审批结果 */
+    @ApiModelProperty(value = "审批结果",name = "chrspjg",dataType = "String",required = false)
+    private String chrspjg;
     
     /**
      * 材料样板审批记录对应品牌及技术资料集合
@@ -407,5 +410,10 @@ public class XmClybspjlDO extends BaseDomain {
 	public void setChrppmc(String chrppmc) {
 		this.chrppmc = chrppmc;
 	}
-	
+	public String getChrspjg() {
+		return chrspjg;
+	}
+	public void setChrspjg(String chrspjg) {
+		this.chrspjg = chrspjg;
+	}
 }

@@ -24,6 +24,7 @@ $bjAjax({
 		document.getElementById("chrbz").innerText=data.chrbz||"";
 		document.getElementById("chrsplczt").innerText=data.chrsplczt||"";
 		document.getElementById("dtmspztrq").innerText=data.dtmspztrq||"";
+		document.getElementById("chrspjg").innerText=data.chrspjg||"";
 		initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",false);
 		var xmClybspjlJszlList=data.xmClybspjlJszlList||[];
 		var html="";

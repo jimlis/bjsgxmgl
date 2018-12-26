@@ -35,7 +35,7 @@ window.onload = function(){
 				});
 			},
 			splcPicker: function () {
-				vuePicker(pageData,"chrsprmc",splctzs,"intsplcztid",function(item){
+				vuePicker(pageData,"chrsprmc",splctzs,"intsplczt",function(item){
 					pageData.chruserid = item.chruserid;
 				});
 			},
@@ -148,10 +148,11 @@ function buildModel(){
 		intqzbgzje:'',
 		inthtzb:'',
 		chrbz:'',
-		intsplcztid:'',
+		intsplczt:'',
 		dtmspztrq:'',
 		chrsprmc:'',
-		chruserid:''
+		chruserid:'',
+		chrspjg:""
 	}
 	return model;
 }

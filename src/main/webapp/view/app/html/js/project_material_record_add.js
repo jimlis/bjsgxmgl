@@ -94,6 +94,7 @@ function isUpdata(){
 				document.getElementById("chrbz").value=data.chrbz||"";
 				document.getElementById("intsplczt").value=data.intsplczt||"";
 				document.getElementById("dtmspztrq").value=data.dtmspztrq||"";
+				document.getElementById("chrspjg").value=data.chrspjg||"";
 				//document.getElementById("chrsplczt").value=data.chrsplczt||"";
 				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
 				if(flag){

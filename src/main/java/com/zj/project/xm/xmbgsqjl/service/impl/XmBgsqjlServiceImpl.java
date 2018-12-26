@@ -110,6 +110,7 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     			SplcZtDO splcZtDO = splcZtService.getById(intsplczt);
     			if(splcZtDO!=null) {
     				xmBgsqjlDO.setChrsplczt(splcZtDO.getChrsprmc());
+    				xmBgsqjlDO.setChrsprmc(splcZtDO.getChrsprmc());
     			}
     		}
     	}
