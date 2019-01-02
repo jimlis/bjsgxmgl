@@ -5,11 +5,12 @@ var bgbhData=[];
 var intxmid = getCookie('id');//intxmid
 //初始化显示数据
 var pageData={};
+var isCk=hasPermission("bj:ckje");
 window.onload = function(){
 	showEdit();
 	//得到数据
 	pageData = getPageData();
-	
+	pageData["isCk"] = isCk;
 	dwData=getXmdwmdData(intxmid,pageData.intdwlx);
 	
 	getBgbhList(pageData.intdwlx,pageData.intdwmcid,id);

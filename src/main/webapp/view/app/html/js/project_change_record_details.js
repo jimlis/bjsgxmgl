@@ -1,12 +1,13 @@
 var obj = getRequest();
 var id=obj.id||"";
+var isCk=hasPermission("bj:ckje");
 //初始化显示数据
 window.onload = function(){
 	showEdit();
 	
 	//得到数据
 	var pageData = getPageData();
-	
+	pageData["isCk"] = isCk;
     //数据绑定
 	var vue = new Vue({
 		el: '#app',

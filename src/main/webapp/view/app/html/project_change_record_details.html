@@ -72,15 +72,17 @@
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">工期影响：</span>
 				<span class="bj-p-gray-font" id="intgqyx">{{intgqyx}}</span>
 			</h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算：</span>
-				<span class="bj-p-gray-font" id="intbggs">{{intbggs}}</span>
-			</h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">潜在变更金额：</span>
-				<span class="bj-p-gray-font" id="">{{intqzbgzje}}</span>
-			</h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">合同占比：</span>
-				<span class="bj-p-gray-font" id="inthtzb">{{inthtzb}}</span>
-			</h5>
+				<span v-if="isCk">
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算：</span>
+					<span class="bj-p-gray-font" id="intbggs">{{intbggs}}</span>
+				</h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">潜在变更金额：</span>
+					<span class="bj-p-gray-font" id="">{{intqzbgzje}}</span>
+				</h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">合同占比：</span>
+					<span class="bj-p-gray-font" id="inthtzb">{{inthtzb}}</span>
+				</h5>
+			</span>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span>
 				<span class="bj-p-gray-font" id="chrbz">{{chrbz}}</span>
 			</h5>

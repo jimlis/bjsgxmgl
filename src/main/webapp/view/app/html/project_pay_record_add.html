@@ -25,8 +25,8 @@ td input {
 
 <body>
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-icon mui-icon-left-nav mui-pull-left"
-			href="javascript:void(0);" onclick="outPage()"></a>
+		<!--<a class="mui-icon mui-icon-left-nav mui-pull-left"
+			href="javascript:void(0);" onclick="outPage()"></a>-->
 		<h1 class="mui-title">
 			<div
 				class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -54,12 +54,12 @@ td input {
                 </h5>
 				<h5 class="bj-title2-font">
 					<span class="bj-title-p-font">单位类型：</span> <input class="bj-input bj-p-black-font" type="hidden" id="intdwlx" v-model="intdwlx" placeholder="请选择" />
-					 <input class="bj-input bj-p-black-font" type="text" id="chrdwlx" v-model="chrdwlx" v-on:click="lxPicker" placeholder="请选择" />
+					 <input class="bj-input bj-p-black-font" type="text" readonly="readonly" id="chrdwlx" v-model="chrdwlx" v-on:click="lxPicker" placeholder="请选择" />
 				</h5>
 				<h5 class="bj-title2-font">
 					<span class="bj-title-p-font">单位名称：</span>
 					 <input class="bj-input bj-p-black-font" type="hidden" id="intdwmcid" v-model="intdwmcid" placeholder="请选择" />
-					 <input class="bj-input bj-p-black-font" type="text" id="chrdwmc" v-model="chrdwmc" v-on:click="dwPicker" placeholder="请选择" />
+					 <input class="bj-input bj-p-black-font" type="text" id="chrdwmc" readonly="readonly" v-model="chrdwmc" v-on:click="dwPicker" placeholder="请选择" />
 				</h5>
 				<h5 class="bj-title2-font">
 					<span class="bj-title-p-font">本次申请期数：</span>
@@ -153,7 +153,7 @@ td input {
                        <textarea type="text" placeholder="审批结果" id="chrspjg"  name="chrspjg" v-model="chrspjg" class="bj-input bj-p-black-font"></textarea>
                 </h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span>
-                <input class="bj-input bj-p-black-font " type="text" id="dtmspztrq" v-model="dtmspztrq"  v-on:click="datePicker('dtmspztrq')" placeholder="请选择"/>
+                <input class="bj-input bj-p-black-font "  readonly="readonly"  type="text" id="dtmspztrq" v-model="dtmspztrq"  v-on:click="datePicker('dtmspztrq')" placeholder="请选择"/>
             </h5>
 				
 			</div>

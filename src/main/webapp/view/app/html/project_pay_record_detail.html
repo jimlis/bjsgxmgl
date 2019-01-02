@@ -39,6 +39,9 @@
 				<h5 id="bj-xmmc" >项目</h5>
 				<h5 style="margin-left: 16px;"><span id="toright"></span>工程款申请/支付情况</h5>
 				<hr />
+				<span v-if="isCk">
+					
+				
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span><span class="bj-p-gray-font">{{dtmgxrq}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
                 <span id="dtmgxrq">{{dtmbgrq}}</span>
@@ -110,6 +113,7 @@
                 <span id="dtmgxrq">{{dtmspztrq}}</span>
                 </h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span><span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
+				</span>			
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>

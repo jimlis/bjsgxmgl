@@ -1,4 +1,5 @@
 var xmid=getCookie("id");
+
 //初始化显示数据
 window.onload = function(){
 	showEdit();

@@ -56,14 +56,12 @@
 					    <tr>
 					      <th>名称</th>
 					      <th>数据</th>
-					      <th>单位</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr v-for="item in list">
 					      <td data-label="名称">{{item.chrzbmc}}</td>
-					      <td data-label="数据">{{item.chrzbz}}</td>
-					      <td data-label="单位">{{item.chrzdw}}</td>
+					      <td data-label="数据">{{item.chrzbz}}&nbsp;&nbsp;{{item.chrzdw}}</td>
 					    </tr>
 					  </tbody>
 					</table>
