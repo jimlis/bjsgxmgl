@@ -1,4 +1,4 @@
-mui("title")[0].innerText = getCookie("chrxmmc");
+//mui("title")[0].innerText = getCookie("chrxmmc");
 var isCk=hasPermission("bj:hz");
 var vue = new Vue({
 	el: '#app',
