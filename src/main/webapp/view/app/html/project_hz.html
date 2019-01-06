@@ -9,9 +9,9 @@
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
 		<style type="text/css">
-			/*[v-cloak] { 
+			[v-cloak] { 
 	            display: none; 
-	        } */
+	        } 
 		</style>
 	</head>
 	<body>
@@ -26,11 +26,9 @@
 			</h1>
 			<button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" ></button>
 		</header>
-		<div class="mui-content" id="app" v-cloak>
-			<div class="no-marginleft">
-	        	<h5 id="bj-xmmc" >项目</h5>
-				<h5 style="margin-left: 16px;"><span id="toright"></span>管理平台汇总资料</h5>
-			</div>
+		<div class="mui-content" id="app" style="margin: 15px;" v-cloak>
+        	<h5 id="bj-xmmc" >项目</h5>
+			<h5 style="margin-left: 16px;"><span id="toright"></span>管理平台汇总资料</h5>
 			<hr />
 			<h5>一、主要工期节点</h5>
 			<ul class="mui-table-view">
@@ -47,8 +45,9 @@
 				<li class="mui-table-view-cell">1、报审总数量：{{ybspZsl}}</li>
 				<li class="mui-table-view-cell">2、已完成审批流程数量：{{ybspWcsl}}</li>
 				<li class="mui-table-view-cell">3、审批通过数量：{{ybspTgsl}}</li>
-				<li class="mui-table-view-cell">4、待审批人A审批数量：{{ybspAsl}}</li>
-				<li class="mui-table-view-cell">5、待审批人B审批数量：{{ybspBsl}}</li>
+				<div v-for="(value,key) in ybspList">
+					<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+				</div>
 			</ul>
 			<h5>四、质量缺陷报告</h5>
 			<ul class="mui-table-view">
@@ -60,16 +59,18 @@
 				<li class="mui-table-view-cell">1、变更总数量：{{bgZsl}}</li>
 				<li class="mui-table-view-cell">2、已完成审批流程数量：{{bgWcsl}}</li>
 				<li class="mui-table-view-cell">3、审批通过数量：{{bgTgsl}}</li>
-				<li class="mui-table-view-cell">4、待审批人A审批数量：{{bgAsl}}</li>
-				<li class="mui-table-view-cell">5、待审批人B审批数量：{{bgBsl}}</li>
+				<div v-for="(value,key) in bgList">
+					<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+				</div>
 			</ul>
 			<h5>六、工程款申请/支付记录</h5>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">1、总申请期数：{{zfZsl}}</li>
 				<li class="mui-table-view-cell">2、已完成审批流程期数：{{zfWcsl}}</li>
 				<li class="mui-table-view-cell">3、审批通过数量：{{zfTgsl}}</li>
-				<li class="mui-table-view-cell">4、待审批人A审批数量：{{zfAsl}}</li>
-				<li class="mui-table-view-cell">5、待审批人B审批数量：{{zfBsl}}</li>
+				<div v-for="(value,key) in zfList">
+					<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+				</div>
 			</ul>
 			<h5>七、安全报告</h5>
 			<ul class="mui-table-view">
@@ -81,16 +82,32 @@
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-		$bjAjax({
-		    url:progressHzxxMapApiPath,
-		    type:"post",
-		    data:{
-		        xmid:getCookie("id")
-		    },
-		    success:function(data){
-		    	console.log(data);
-		    }
-		})
+			var pagedata;
+			var _self;
+			$bjAjax({
+			    url:progressHzxxMapApiPath,
+			    type:"post",
+			    async:false,
+			    data:{
+			        xmid:getCookie("id")
+			    },
+			    success:function(data){
+			    	pagedata = data;
+			    	console.log(pagedata);
+			    }
+			});
+			var vue = new Vue({
+				el: '#app',
+				data: pagedata,
+				beforeCreate: function(){
+					_self = this;
+				},
+				methods: {
+					
+				}
+			})
+			
+		
 		</script>
 	</body>
 </html>
