@@ -2,5 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zj.project.xm.xmgqjdbj.dao.XmGqjdbjDao">
-
+    <select  id="getXmgqjdbjXx" resultType="java.util.HashMap">
+	select c.* from (	select id,chrjdlx,chrjdmc,dtmjhwcsj,b.dtmwcrq  from  bj_xm_gqjdbj
+		left join (select intgqjdid,dtmwcrq  from bj_xm_sgjd_qqbj inner join (select max(id) maxid  from bj_xm_sgjd_qqbj where intxmid=#{intxmid} and fcbz=1 and dtmwcrq is not null GROUP BY intgqjdid ) a on id=a.maxid) b
+		on id=b.intgqjdid
+		 where intxmid=#{intxmid} and chrjdlx='qqbj' and fcbz=1
+		UNION
+		select id,chrjdlx,chrjdmc,dtmjhwcsj,b.dtmwcrq  from  bj_xm_gqjdbj
+		left join (select intsgwzid,dtmwcrq  from bj_xm_sgjd_jcsgnew inner join (select max(id) maxid  from bj_xm_sgjd_jcsgnew where intxmid=#{intxmid}  and fcbz=1 and dtmwcrq is not null GROUP BY intsgwzid ) a on id=a.maxid) b
+		on id=b.intsgwzid
+		 where intxmid=#{intxmid} and chrjdlx='jc' and fcbz=1
+		UNION
+		select id,chrjdlx,chrjdmc,dtmjhwcsj,b.dtmwcsj dtmwcrq  from  bj_xm_gqjdbj
+		left join (select intgqjdbjid,dtmwcsj  from bj_xm_sgjd_ztjgsg_kz inner join (select max(id) maxid  from bj_xm_sgjd_ztjgsg_kz where intxmid=#{intxmid} and fcbz=1 and dtmwcsj is not null GROUP BY intgqjdbjid ) a on id=a.maxid) b
+		on id=b.intgqjdbjid
+		 where intxmid=#{intxmid} and chrjdlx='zt' and fcbz=1
+		UNION
+		select id,chrjdlx,chrjdmc,dtmjhwcsj,b.dtmxcrq dtmwcrq  from  bj_xm_gqjdbj
+		left join (select intgqjdid,dtmxcrq  from bj_xm_zfxcyzxys inner join (select max(id) maxid  from bj_xm_zfxcyzxys where intxmid=#{intxmid} and fcbz=1 and intxclb='zxys' and dtmxcrq is not null GROUP BY intgqjdid ) a on id=a.maxid) b
+		on id=b.intgqjdid
+		 where intxmid=#{intxmid} and chrjdlx='zxys' and fcbz=1
+		UNION
+		select id,chrjdlx,chrjdmc,dtmjhwcsj,b.dtmxcrq dtmwcrq  from  bj_xm_gqjdbj
+		left join (select intgqjdid,dtmxcrq  from bj_xm_zfxcyzxys inner join (select max(id) maxid  from bj_xm_zfxcyzxys where intxmid=#{intxmid} and fcbz=1 and intxclb='jgys' and dtmxcrq is not null GROUP BY intgqjdid ) a on id=a.maxid) b
+		on id=b.intgqjdid
+		where intxmid=#{intxmid} and chrjdlx='jgys' and fcbz=1
+		)  c
+		<where>
+		      <if test='lx=="1"'>
+		                  and c.dtmwcrq is not null 
+		      </if>
+		      <if test='lx=="2"'>
+                          and c.dtmwcrq is null and TIMESTAMPDIFF(DAY,c.dtmjhwcsj,now())>0
+              </if>
+		</where>
+    </select>
 </mapper>

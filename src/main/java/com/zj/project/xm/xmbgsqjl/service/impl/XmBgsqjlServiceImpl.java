@@ -172,5 +172,10 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
         }
 	}
 
+	@Override
+	public List<Map<String, Object>> getSprSpsl(Long xmid) {
+		return baseMapper.getSprSpsl(xmid) ;
+	}
+
 
 }

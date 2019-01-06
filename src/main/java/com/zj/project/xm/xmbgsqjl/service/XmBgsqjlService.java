@@ -3,6 +3,7 @@ package com.zj.project.xm.xmbgsqjl.service;
 import com.zj.project.xm.xmbgsqjl.domain.XmBgsqjlDO;
 import  com.zj.platform.common.web.service.BaseService;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,4 +28,6 @@ public interface XmBgsqjlService extends BaseService<XmBgsqjlDO> {
      * @param fileIds
      */
 	public void saveXmBgsqjlXx(XmBgsqjlDO xmBgsqjlDO, String fileIds);
+	
+	public List<Map<String,Object>> getSprSpsl(Long xmid);
 }

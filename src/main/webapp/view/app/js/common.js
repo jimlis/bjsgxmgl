@@ -41,8 +41,8 @@ function initdata(){
 }
 
 /**服务端地址*/
-var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
-//var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+//var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -105,6 +105,7 @@ var quaRecodeByIdApiPath = serverPath+"api/xmzlqxbg/getXmZlqxbgById";
 var quaRecodeSaveApiPath = serverPath+"api/xmzlqxbg/save";
 
 //施工进度 
+var progressHzxxMapApiPath=serverPath+"api/xmsgjd/getXmSgjdHzxxByXmid";
 var progressGetQqbjApiPath=serverPath+"api/xmsgjdqqbj/getXmSgjdQqbj";
 var progressQqbjSaveApiPath=serverPath+"api/xmsgjdqqbj/save";
 var progressMapApiPath=serverPath+"api/xmsgjd/getXmSgjdListByXmid";

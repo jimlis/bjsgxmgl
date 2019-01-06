@@ -220,5 +220,18 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
 			});
 		}
 	}
+	
+	/**
+	 * <p>Title:获取审批人审批数量 </p>  
+	 * <p>Description: </p> 
+	 * @param xmid
+	 * @return
+	 * @author zhujujun
+	 * @date:2019年1月6日 下午4:00:17
+	 */
+	@Override
+	public List<Map<String,Object>> getSprSpsl(Long xmid){
+		return baseMapper.getSprSpsl(xmid);
+	}
 
 }

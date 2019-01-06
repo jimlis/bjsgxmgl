@@ -1,6 +1,12 @@
 package com.zj.project.xm.xmgqjdbj.dao;
 
 import com.zj.project.xm.xmgqjdbj.domain.XmGqjdbjDO;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zj.platform.common.web.dao.Dao;
 
 /**
@@ -11,5 +17,7 @@ import com.zj.platform.common.web.dao.Dao;
  * <small> 2018-10-24 21:18:21 | lijun</small>
  */
 public interface XmGqjdbjDao extends Dao<XmGqjdbjDO> {
+
+	List<Map<String, Object>> getXmgqjdbjXx(@Param("intxmid")Long intxmid, @Param("lx") String lx);
 
 }

@@ -321,5 +321,17 @@ public class XmGqjdbjServiceImpl extends BaseServiceImpl<XmGqjdbjDao, XmGqjdbjDO
           }
     }
     
-
+    /**
+     * <p>Title: 根据类型获取项目工期节点信息</p>  
+     * <p>Description: </p> 
+     * @param intxmid 项目id
+     * @param lx 类型  1：已完成节点 2：已延误未完成数据
+     * @return 
+     * @author zhujujun
+     * @date:2019年1月6日 下午3:10:14
+     */
+    @Override
+    public List<Map<String,Object>> getXmgqjdbjXx(Long intxmid,String lx){
+    	return baseMapper.getXmgqjdbjXx( intxmid, lx);
+    }
 }

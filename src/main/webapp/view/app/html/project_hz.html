@@ -81,7 +81,16 @@
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-            
+		$bjAjax({
+		    url:progressHzxxMapApiPath,
+		    type:"post",
+		    data:{
+		        xmid:getCookie("id")
+		    },
+		    success:function(data){
+		    	console.log(data);
+		    }
+		})
 		</script>
 	</body>
 </html>

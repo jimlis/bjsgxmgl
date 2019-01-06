@@ -2,5 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zj.project.xm.xmclybspjl.dao.XmClybspjlDao">
-
+    <select id="getSprSpsl" resultType="java.util.HashMap">
+            select count(*) as num,a.chrsprmc  from  bj_xm_clybspjl c inner join (
+select id,chrsprmc  from bj_splc_zt where (chrsplclx,intxh) in 
+(select chrsplclx,max(intxh) maxxh  from bj_splc_zt where fcbz=1 and chrsplclx in ('clybspjls','clybspjlf') GROUP BY chrsplclx)) a on c.intsplczt=a.id  where fcbz=1  and c.intxmid=#{xmid} GROUP BY a.chrsprmc
+    </select>
 </mapper>
