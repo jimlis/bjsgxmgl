@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>项目管理平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style type="text/css">
+			/*[v-cloak] { 
+	            display: none; 
+	        } */
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-title">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title-scroll">
+		
+					</div>
+				</div>
+			</h1>
+			<button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" ></button>
+		</header>
+		<div class="mui-content" id="app" v-cloak>
+			<div class="no-marginleft">
+	        	<h5 id="bj-xmmc" >项目</h5>
+				<h5 style="margin-left: 16px;"><span id="toright"></span>管理平台汇总资料</h5>
+			</div>
+			<hr />
+			<h5>一、主要工期节点</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、已完成节点数量：{{jdWcsl}}</li>
+				<li class="mui-table-view-cell">2、已延误未完成节点数量：{{jdWwcsl}}</li>
+			</ul>
+			<h5>二、样板施工记录</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、完成总数量：{{ybWcsl}}</li>
+				<li class="mui-table-view-cell">2、验收通过数量：{{ybTgsl}}</li>
+			</ul>
+			<h5>三、材料样板审批记录</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、报审总数量：{{ybspZsl}}</li>
+				<li class="mui-table-view-cell">2、已完成审批流程数量：{{ybspWcsl}}</li>
+				<li class="mui-table-view-cell">3、审批通过数量：{{ybspTgsl}}</li>
+				<li class="mui-table-view-cell">4、待审批人A审批数量：{{ybspAsl}}</li>
+				<li class="mui-table-view-cell">5、待审批人B审批数量：{{ybspBsl}}</li>
+			</ul>
+			<h5>四、质量缺陷报告</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、缺陷总数量：{{qxWcsl}}</li>
+				<li class="mui-table-view-cell">2、已整改数量：{{qxZgsl}}</li>
+			</ul>
+			<h5>五、工程顾问变更记录</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、变更总数量：{{bgZsl}}</li>
+				<li class="mui-table-view-cell">2、已完成审批流程数量：{{bgWcsl}}</li>
+				<li class="mui-table-view-cell">3、审批通过数量：{{bgTgsl}}</li>
+				<li class="mui-table-view-cell">4、待审批人A审批数量：{{bgAsl}}</li>
+				<li class="mui-table-view-cell">5、待审批人B审批数量：{{bgBsl}}</li>
+			</ul>
+			<h5>六、工程款申请/支付记录</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、总申请期数：{{zfZsl}}</li>
+				<li class="mui-table-view-cell">2、已完成审批流程期数：{{zfWcsl}}</li>
+				<li class="mui-table-view-cell">3、审批通过数量：{{zfTgsl}}</li>
+				<li class="mui-table-view-cell">4、待审批人A审批数量：{{zfAsl}}</li>
+				<li class="mui-table-view-cell">5、待审批人B审批数量：{{zfBsl}}</li>
+			</ul>
+			<h5>七、安全报告</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">1、安全隐患总数量：{{aqZsl}}</li>
+				<li class="mui-table-view-cell">2、已整改数量：{{aqYzgsl}}</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+            
+		</script>
+	</body>
+</html>

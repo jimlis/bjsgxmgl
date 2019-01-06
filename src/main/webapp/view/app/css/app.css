@@ -139,7 +139,9 @@ header.mui-bar.mui-bar-nav{
 .mui-content-padded p{
 	text-indent:2em;
 }
-
+.no-marginleft{
+	margin-left: 15px !important;
+}
 
 .bj-none{
 	display: none;
