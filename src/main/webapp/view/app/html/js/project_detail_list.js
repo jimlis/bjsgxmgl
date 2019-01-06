@@ -1,4 +1,15 @@
 mui("title")[0].innerText = getCookie("chrxmmc");
+var isCk=hasPermission("bj:hz");
+var vue = new Vue({
+	el: '#app',
+	data: {"isck":isCk},
+	beforeCreate: function(){
+		
+	},
+	methods: {
+		
+	}
+})
 /**
  * 跳转项目具体信息
  */
@@ -37,6 +48,8 @@ function openNext(id){
 			break;
 		case 11:
 		address="project_gov_record.html"
+		case 12:
+		address="project_hz.html"
 			break;
 		default:
 			break;

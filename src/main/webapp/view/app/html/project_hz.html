@@ -24,7 +24,7 @@
 					</div>
 				</div>
 			</h1>
-			<button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" ></button>
+			<button id="editBtn"  class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="msg()">通知</button>
 		</header>
 		<div class="mui-content" id="app" style="margin: 15px;" v-cloak>
         	<h5 id="bj-xmmc" >项目</h5>
@@ -84,6 +84,8 @@
 		<script type="text/javascript">
 			var pagedata;
 			var _self;
+			var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
+			//获取数据
 			$bjAjax({
 			    url:progressHzxxMapApiPath,
 			    type:"post",
@@ -106,8 +108,50 @@
 					
 				}
 			})
-			
-		
+			function msg(){
+				getSplcList("hzmsg");
+			}
+			//根据splclx审批流程状态获取list数据（汇总也是这个接口）
+			function getSplcList(lx){
+				$bjAjax({
+						url:splcztBySplclxApiPath,
+						type:"post",
+						async:false,
+						data:{
+							splclx:lx
+						},
+						success:function(data){
+							var userids="";
+							if(data){
+								for(item in data){
+									userids+=(data[item].chruserid+"|");
+								}
+								ftxsp("管理平台汇总资料送达，请查看！\n"+systemdate1,userids);
+							}
+						}
+					});
+			}
+			//提醒通知
+			function ftxsp(contentText,chruserid){
+				if(chruserid){
+					$bjAjax({
+						url:splcTxByUseridApiPath,
+						type:"post",
+						async:false,
+						data:{
+							contentText:contentText,
+							userId:chruserid
+						},
+						success:function(data){
+							if(data){
+								bjToast("已提醒！")
+							}
+						}
+					});
+				}else{
+					bjToast("该流程未设置UserId，不能进行提醒，联系管理员添加。")
+				}
+			}
 		</script>
 	</body>
 </html>

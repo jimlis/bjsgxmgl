@@ -13,6 +13,9 @@
 			.icon{
 				height: 20px!important
 			}
+			[v-cloak] { 
+	            display: none; 
+	        } 
 		</style>
 	</head>
 		
@@ -27,7 +30,7 @@
 				</div>
 			</h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content" id="app" v-cloak>
 			<h5 id="bj-xmmc" class="no-marginleft" >项目</h5>
 			<hr />
 			<ul class="mui-table-view">
@@ -42,10 +45,12 @@
 				<li class="mui-table-view-cell" onclick="openNext(9)"><img class="mui-media-object mui-pull-left icon" src="../images/kuan.jpg">工程款申请/支付记录</li>
 				<li class="mui-table-view-cell" onclick="openNext(10)"><img class="mui-media-object mui-pull-left icon" src="../images/an.jpg">安全报告</li>
 				<li class="mui-table-view-cell" onclick="openNext(11)"><img class="mui-media-object mui-pull-left icon" src="../images/yan.jpg">政府部门巡查/专项验收记录</li>
+				<li class="mui-table-view-cell" v-if="isck" onclick="openNext(12)">管理平台汇总资料</li>
 			</ul>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_detail_list.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
