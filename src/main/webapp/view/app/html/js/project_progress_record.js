@@ -179,6 +179,10 @@ window.onload=function(){
 				var address = "project_progress_record_gardenDetail.html";
     				toUrl(address);
 			},
+			openHZ: function () {
+				var address = "project_hz.html";
+    				toUrl(address);
+			},
 			openQT:function(type,sgwzid,id){
 				var address;
 				if(type=="jc"){
