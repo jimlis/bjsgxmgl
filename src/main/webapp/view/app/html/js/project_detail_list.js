@@ -48,6 +48,7 @@ function openNext(id){
 			break;
 		case 11:
 		address="project_gov_record.html"
+			break;
 		case 12:
 		address="project_hz.html"
 			break;

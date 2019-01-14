@@ -141,6 +141,7 @@ header.mui-bar.mui-bar-nav{
 }
 .no-marginleft{
 	margin-left: 15px !important;
+    margin-top: 0 !important;
 }
 
 .bj-none{
@@ -266,4 +267,10 @@ span.nav-right{
 	content: '\e581';
 	font-family: Muiicons;
 	color: #bbb;
+}
+.mleft30{
+	margin-top: 0 !important;
+}
+.mui-content-padded {
+    margin-top: 0 !important;
 }

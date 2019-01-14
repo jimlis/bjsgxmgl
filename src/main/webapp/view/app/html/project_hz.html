@@ -12,6 +12,13 @@
 			[v-cloak] { 
 	            display: none; 
 	        } 
+	        #print_div{
+	        	display: flex;
+	        }
+	        #print_btn{
+	        	padding: 5px 50px;
+    			margin: 5px auto;
+	        }
 		</style>
 	</head>
 	<body>
@@ -77,6 +84,9 @@
 				<li class="mui-table-view-cell">1、安全隐患总数量：{{aqZsl}}</li>
 				<li class="mui-table-view-cell">2、已整改数量：{{aqYzgsl}}</li>
 			</ul>
+		</div>
+		<div id="print_div">
+			<button id="print_btn" class="mui-btn mui-btn-blue" onclick="print()">打印</button>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
@@ -151,6 +161,16 @@
 				}else{
 					bjToast("该流程未设置UserId，不能进行提醒，联系管理员添加。")
 				}
+			}
+			//打印
+			function print(){
+				var tableToPrint = document.getElementById('app');//将要被打印的表格
+	            var newWin= window.open("");//新打开一个空窗口
+	            newWin.document.write(tableToPrint.outerHTML);//将表格添加进新的窗口
+	            newWin.document.close();//在IE浏览器中使用必须添加这一句
+	            newWin.focus();//在IE浏览器中使用必须添加这一句
+	            newWin.print();//打印
+	            newWin.close();//关闭窗口
 			}
 		</script>
 	</body>
