@@ -41,9 +41,9 @@ function showList(idName){
 			  	var dtmwczgrq = item.dtmwczgrq||"";
 			  	var yjHtml="";
 				if(dtmwczgrq!=""){
-			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png'>";
+			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 			    }else {
-			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png'>";
+			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
 			    }
 			  	var id = item.id;
 			  	var chraqwtwz=item.chraqwtwz||'';

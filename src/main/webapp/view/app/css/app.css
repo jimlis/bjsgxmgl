@@ -141,7 +141,7 @@ header.mui-bar.mui-bar-nav{
 }
 .no-marginleft{
 	margin-left: 15px !important;
-    margin-top: 0 !important;
+    margin-top: 5px !important;
 }
 
 .bj-none{
@@ -273,4 +273,7 @@ span.nav-right{
 }
 .mui-content-padded {
     margin-top: 0 !important;
+}
+.img-d{
+	width: 10px;
 }
