@@ -7,7 +7,7 @@
                 LEFT JOIN (
                     SELECT 	* FROM sys_dict
                     WHERE type IN ('intdwlxid')
-                ) t ON d.intdwlxid=t.value  where d.fcbz=1  and d.intxmid=#{xmid} order  by t.sort asc
+                ) t ON d.intdwlxid=t.value  where d.fcbz=1  and d.intxmid=#{xmid} order  by d.intlxmd asc,t.sort asc
         </select>
 
 

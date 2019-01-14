@@ -83,7 +83,7 @@ function getBgbhList(bgsqlx,dwmcid,nowId){
 				xmid:intxmid,
 				bgsqlx:bgsqlx,
 				dwmcid:dwmcid,
-				bgthid:-1,
+				bgthid:-2,
 				nowBgsqjlId:(nowId||"")
 			},
 			success:function(data){
@@ -146,12 +146,15 @@ function getQsAndJe(dwlx,dwmcid,xmgczfid){
  * @returns
  */
 function getGgjeSum(){
+	debugger;
 	if(bgbhData){
 		var intbggs=0;
 		for(i in bgbhData){
-			if(bgbhData[i].intsfqd==0){
+			var intsfqd=pageData.intsfqd||"";
+			//if((!(intsfqd==1&&intbgthid==bgbhData[i].value))){
+			//if(bgbhData[i].intsfqd==0){
 				intbggs+=Number(bgbhData[i].intbggs||0);
-			}
+			//}
 		}
 		pageData.intqzbgzje=intbggs;
 		return;

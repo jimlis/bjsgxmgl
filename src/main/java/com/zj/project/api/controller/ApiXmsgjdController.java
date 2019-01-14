@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.zj.platform.common.annotation.Log;
 import com.zj.platform.common.util.Result;
@@ -194,11 +195,17 @@ public class ApiXmsgjdController extends ApiBaseController{
 		QueryWrapper<XmClybspjlDO> xmClybspjlCountQuery=xmClybspjlQuery.clone();
 		map.put("ybspZsl", xmClybspjlService.count(xmClybspjlCountQuery));
 		QueryWrapper<XmClybspjlDO> xmClybspjlWcspQuery=xmClybspjlQuery.clone();
-		int ybspWcsl=xmClybspjlService.count(xmClybspjlWcspQuery.inSql("intsplczt", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
+		QueryWrapper<XmClybspjlDO> xmClybspjlTgspQuery=xmClybspjlQuery.clone();
+		/*int ybspWcsl=xmClybspjlService.count(xmClybspjlWcspQuery.inSql("intsplczt", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
 				"(select chrsplclx,max(intxh) maxxh  from bj_splc_zt where fcbz=1 and chrsplclx in ('clybspjls','clybspjlf') GROUP BY chrsplclx) " + 
-				" )  "));
+				" )  "));*/
+		List<String> wcWhereList=Lists.newArrayList();
+		wcWhereList.add("wtg");
+		wcWhereList.add("tg");
+		int ybspWcsl=xmClybspjlService.count(xmClybspjlWcspQuery.in("chrspzt", wcWhereList));
 		map.put("ybspWcsl", ybspWcsl);
-		map.put("ybspTgsl", ybspWcsl);
+		int ybspTgsl=xmClybspjlService.count(xmClybspjlTgspQuery.eq("chrspzt", "tg"));
+		map.put("ybspTgsl", ybspTgsl);
 		map.put("ybspList", xmClybspjlService.getSprSpsl(xmid));
 		
 		//质量缺陷报告
@@ -219,11 +226,14 @@ public class ApiXmsgjdController extends ApiBaseController{
 		QueryWrapper<XmBgsqjlDO> xmBgsqjlCountQuery=xmBgsqjlQuery.clone();
 		map.put("bgZsl", xmBgsqjlService.count(xmBgsqjlCountQuery));
 		QueryWrapper<XmBgsqjlDO> xmBgsqjlWcspQuery=xmBgsqjlQuery.clone();
-		int bgjlWcsl=xmBgsqjlService.count(xmBgsqjlWcspQuery.inSql("intsplczt", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
+		QueryWrapper<XmBgsqjlDO> xmBgsqjlTgspQuery=xmBgsqjlQuery.clone();
+		/*int bgjlWcsl=xmBgsqjlService.count(xmBgsqjlWcspQuery.inSql("intsplczt", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
 				"(select chrsplclx,max(intxh) maxxh  from bj_splc_zt where fcbz=1 and chrsplclx in ('bgjls','bgjlf') GROUP BY chrsplclx) " + 
-				" )  "));
+				" )  "));*/
+		int bgjlWcsl=xmBgsqjlService.count(xmBgsqjlWcspQuery.in("chrspzt",wcWhereList));
 		map.put("bgWcsl", bgjlWcsl);
-		map.put("bgTgsl", bgjlWcsl);
+		int bgjlTgsl=xmBgsqjlService.count(xmBgsqjlTgspQuery.eq("chrspzt","tg"));
+		map.put("bgTgsl", bgjlTgsl);
 		map.put("bgList", xmBgsqjlService.getSprSpsl(xmid));
 		
 		//工程款申请/支付记录
@@ -234,11 +244,14 @@ public class ApiXmsgjdController extends ApiBaseController{
 		QueryWrapper<XmGckyzfqkDO> xmGckyzfqkCountQuery=xmGckyzfqkQuery.clone();
 		map.put("zfZsl", xmGckyzfqkService.count(xmGckyzfqkCountQuery));
 		QueryWrapper<XmGckyzfqkDO> xmGckyzfqkWcspQuery=xmGckyzfqkQuery.clone();
-		int zfWcsl=xmGckyzfqkService.count(xmGckyzfqkWcspQuery.inSql("intsplcztid", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
+		QueryWrapper<XmGckyzfqkDO> xmGckyzfqkTgspQuery=xmGckyzfqkQuery.clone();
+		/*int zfWcsl=xmGckyzfqkService.count(xmGckyzfqkWcspQuery.inSql("intsplcztid", " ( select id  from bj_splc_zt where (chrsplclx,intxh) in " + 
 				"(select chrsplclx,max(intxh) maxxh  from bj_splc_zt where fcbz=1 and chrsplclx in ('zfqk') GROUP BY chrsplclx) " + 
-				" )  "));
+				" )  "));*/
+		int zfWcsl=xmGckyzfqkService.count(xmGckyzfqkWcspQuery.in("chrspzt", wcWhereList));
 		map.put("zfWcsl", zfWcsl);
-		map.put("zfTgsl", zfWcsl);
+		int zfTgsl=xmGckyzfqkService.count(xmGckyzfqkTgspQuery.eq("chrspzt", "tg"));
+		map.put("zfTgsl", zfTgsl);
 		map.put("zfList", xmGckyzfqkService.getSprSpsl(xmid));
 		
 		//安全报告

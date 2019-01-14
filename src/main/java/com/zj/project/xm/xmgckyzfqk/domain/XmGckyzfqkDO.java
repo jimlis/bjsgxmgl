@@ -104,6 +104,14 @@ public class XmGckyzfqkDO extends BaseDomain {
     /** 审批结果 */
     @ApiModelProperty(value = "审批结果",name = "chrspjg",dataType = "String",required = false)
     private String chrspjg;
+    /** 审批状态 ： 未完成-wwc 未通过-wtg 通过-tg */
+    @ApiModelProperty(value = "审批状态 ： 未完成-wwc 未通过-wtg 通过-tg",name = "chrspzt",dataType = "String",required = true)
+    private String chrspzt;
+    
+    /** 审批状态 ： 未完成 未通过 通过 */
+    @ApiModelProperty(value = "审批状态 ： 未完成 未通过 通过",name = "chrspztmc",dataType = "String",required = true)
+    @TableField(exist=false)
+    private String chrspztmc;
   
 
     /**
@@ -351,5 +359,17 @@ public class XmGckyzfqkDO extends BaseDomain {
 	}
 	public void setChrspjg(String chrspjg) {
 		this.chrspjg = chrspjg;
+	}
+	public String getChrspzt() {
+		return chrspzt;
+	}
+	public void setChrspzt(String chrspzt) {
+		this.chrspzt = chrspzt;
+	}
+	public String getChrspztmc() {
+		return chrspztmc;
+	}
+	public void setChrspztmc(String chrspztmc) {
+		this.chrspztmc = chrspztmc;
 	}
 }

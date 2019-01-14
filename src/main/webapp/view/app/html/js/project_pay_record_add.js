@@ -62,6 +62,9 @@ window.onload = function(){
 			},
 			datePicker: function (key) {
 				vueDtPicker(pageData,key);
+			},
+			spztPicker: function () {
+				vuePicker(pageData,"chrspztmc",[{"text":"未完成","value":"wwc"},{"text":"未通过","value":"wtg"},{"text":"通过","value":"tg"}],"chrspzt");
 			}
 		},
 		watch:{
@@ -258,7 +261,9 @@ function buildModel(){
 		chruserid:'',
 		intbgrid:chrdlrid,
 		chrbgrmc:chrdlrmc,
-		chrspjg:""
+		chrspjg:"",
+		chrspztmc:'',
+		chrspzt:''
 	}
 	return model;
 }

@@ -127,6 +127,19 @@ public class XmClybspjlServiceImpl extends BaseServiceImpl<XmClybspjlDao, XmClyb
     		if(splcZtDO!=null) {
     			xmClybspjlDO.setChrsplczt(splcZtDO.getChrsprmc());
     		}
+    		
+    		String chrspzt = xmClybspjlDO.getChrspzt();
+    		if(StringUtils.isNotEmpty(chrspzt)) {
+    			String chrspztmc="";
+    			if("wwc".equals(chrspzt)) {
+    				chrspztmc="未完成";
+    			}else if("wtg".equals(chrspzt)) {
+    				chrspztmc="未通过";
+    			}else if("tg".equals(chrspzt)) {
+    				chrspztmc="通过";
+    			}
+    			xmClybspjlDO.setChrspztmc(chrspztmc);
+    		}
 		}
 		return xmClybspjlDO;
 	}

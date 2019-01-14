@@ -101,6 +101,19 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     			}
     		}
     		
+    		String chrspzt = xmGckyzfqkDO.getChrspzt();
+    		if(StringUtils.isNotEmpty(chrspzt)) {
+    			String chrspztmc="";
+    			if("wwc".equals(chrspzt)) {
+    				chrspztmc="未完成";
+    			}else if("wtg".equals(chrspzt)) {
+    				chrspztmc="未通过";
+    			}else if("tg".equals(chrspzt)) {
+    				chrspztmc="通过";
+    			}
+    			xmGckyzfqkDO.setChrspztmc(chrspztmc);
+    		}
+    		
     	}
     	return xmGckyzfqkDO;
     }

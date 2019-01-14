@@ -113,6 +113,19 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     				xmBgsqjlDO.setChrsprmc(splcZtDO.getChrsprmc());
     			}
     		}
+    		
+    		String chrspzt = xmBgsqjlDO.getChrspzt();
+    		if(StringUtils.isNotEmpty(chrspzt)) {
+    			String chrspztmc="";
+    			if("wwc".equals(chrspzt)) {
+    				chrspztmc="未完成";
+    			}else if("wtg".equals(chrspzt)) {
+    				chrspztmc="未通过";
+    			}else if("tg".equals(chrspzt)) {
+    				chrspztmc="通过";
+    			}
+    			xmBgsqjlDO.setChrspztmc(chrspztmc);
+    		}
     	}
     	return xmBgsqjlDO;
     }

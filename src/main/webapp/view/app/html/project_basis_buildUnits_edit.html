@@ -34,6 +34,7 @@
 				<h5 style="margin-left: 32px;"><span id="toright"></span>项目承建各方名称</h5>
 				<hr />
 				<form id="myform">
+				        <input class="bj-input bj-p-black-font" type="hidden" id="id" title="已建单位id" placeholder="请输入" />
 					<h5 class="bj-title2-font"><span class="bj-title-p-font">建设单位：</span>
 						<input class="bj-input bj-p-black-font" type="text" id="chrcjdwmc" placeholder="请输入" />
 					</h5>
@@ -61,6 +62,25 @@
 		            <a class="mui-navigate-right" href="#" >已建单位</a>
 		            <div class="mui-collapse-content" id="yjdwDiv">
 		            		<!-- <h5 class="bj-title2-font">方案设计：<span class="bj-p-gray-font">单位</span></h5> -->
+		            	<table >
+                          <thead>
+                            <tr>
+                              <th>名单单位</th>
+                              <th>单位类型</th>
+                              <th>单位名称</th>
+                              <th>合同金额</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody  id="yjdwNr">
+                            <!--<tr>
+                              <td data-label="单位类型名称">{{item.chrzbmc}}</td>
+                              <td data-label="单位名称">{{item.chrzbz}}</td>
+                              <td data-label="合同金额">{{item.chrzbz}}</td>
+                            </tr>-->
+                            
+                          </tbody>
+                        </table>
 		            </div>
 		        </li>
 		    </ul>

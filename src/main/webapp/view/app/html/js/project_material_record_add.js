@@ -30,6 +30,9 @@ window.onload = function(){
 				var contentText = pageData.chrsprmc+"，您有一个关于“新增材料样板审批记录待审批！”\n"+systemdate1
 				var userid = pageData.chruserid;
 				ftxsp(contentText,userid);
+			},
+			spztPicker: function () {
+				vuePicker(pageData,"chrspztmc",[{"text":"未完成","value":"wwc"},{"text":"未通过","value":"wtg"},{"text":"通过","value":"tg"}],"chrspzt");
 			}
 		},
 		watch: {
@@ -95,6 +98,8 @@ function isUpdata(){
 				document.getElementById("intsplczt").value=data.intsplczt||"";
 				document.getElementById("dtmspztrq").value=data.dtmspztrq||"";
 				document.getElementById("chrspjg").value=data.chrspjg||"";
+				document.getElementById("chrspzt").value=data.chrspzt||"";
+				document.getElementById("chrspztmc").value=data.chrspztmc||"";
 				//document.getElementById("chrsplczt").value=data.chrsplczt||"";
 				initFileList("bj_xm_clybspjl",id,"1","fileIds","file-list",true);
 				if(flag){
@@ -191,7 +196,9 @@ function buildModel(){
 		chrsfdtp:'',
 		intsplczt:'',
 		chrsprmc:'',
-		chruserid:''
+		chruserid:'',
+		chrspztmc:'',
+		chrspzt:''
 	}
 	return model;
 }
