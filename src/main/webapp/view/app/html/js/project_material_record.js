@@ -28,7 +28,7 @@ window.onload=function(){
 				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 				    }else {
 				    	tjlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 				    }
 			  		tjl = true;
 			  		tjlnum++;
@@ -40,7 +40,7 @@ window.onload=function(){
 				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 				    }else {
 				    	jdlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 				    }
 			  		jdl = true;
 			  		jdlnum++;
@@ -52,7 +52,7 @@ window.onload=function(){
 				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 				    }else {
 				    	zxlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 				    }
 			  		zxl = true;
 			  		zxlnum++;
@@ -64,7 +64,7 @@ window.onload=function(){
 				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 				    }else {
 				    	yllRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 				    }
 			  		yll = true;
 			  		yllnum++;
@@ -76,7 +76,7 @@ window.onload=function(){
 				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 				    }else {
 				    	qtlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 				    }
 			  		qtl = true;
 			  		qtlnum++;

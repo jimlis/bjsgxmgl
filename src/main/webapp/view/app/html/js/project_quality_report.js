@@ -41,7 +41,7 @@ function showQuaReportList(temptype,idName){
 			  	if(dtmzgwcrq!=""){
 			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
 			    }else {
-			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>>";
+			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
 			    }
 			  	var id = item.id;
 			  	var chrqxwz = item.chrqxwz||"";
