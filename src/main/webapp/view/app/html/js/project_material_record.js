@@ -19,16 +19,17 @@ window.onload=function(){
 			  	var dtmgxrq = item.dtmgxrq||"";
 			  	var intclyblx = item.intclyblx||"";
 			  	var chrybmc = item.chrybmc||"";
+			  
 			  	var id = item.id;
 			  	var ztid = item.ztid;
 			  	var yjHtml="";
 			  	if(intclyblx=="1"){
 			  		if(ztid!=null){
 			  			tjlGrenum++;
-				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
 				    	tjlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+				    	yjHtml = "<span class='img-r'></span>";
 				    }
 			  		tjl = true;
 			  		tjlnum++;
@@ -37,10 +38,10 @@ window.onload=function(){
 			  	if(intclyblx=="2"){
 			  		if(ztid!=null){
 			  			jdlGrenum++;
-				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
 				    	jdlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+				    	yjHtml = "<span class='img-r'></span>";
 				    }
 			  		jdl = true;
 			  		jdlnum++;
@@ -49,10 +50,10 @@ window.onload=function(){
 			  	if(intclyblx=="3"){
 			  		if(ztid!=null){
 			  			zxlGrenum++;
-				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
 				    	zxlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+				    	yjHtml = "<span class='img-r'></span>";
 				    }
 			  		zxl = true;
 			  		zxlnum++;
@@ -61,10 +62,10 @@ window.onload=function(){
 			  	if(intclyblx=="4"){
 			  		if(ztid!=null){
 			  			yllGrenum++;
-				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
 				    	yllRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+				    	yjHtml = "<span class='img-r'></span>";
 				    }
 			  		yll = true;
 			  		yllnum++;
@@ -73,10 +74,10 @@ window.onload=function(){
 			  	if(intclyblx=="5"){
 			  		if(ztid!=null){
 			  			qtlGrenum++;
-				    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
 				    	qtlRednum++;
-				    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+				    	yjHtml = "<span class='img-r'></span>";
 				    }
 			  		qtl = true;
 			  		qtlnum++;

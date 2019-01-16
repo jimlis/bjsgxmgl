@@ -20,7 +20,8 @@ $bjAjax({
 					ztnum++;
 					var dtmbgrq = ztxx[i].dtmbgrq||"";
 				  	var id = ztxx[i].id||"";
-				  	html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+id+`" >`+dtmbgrq+`</li>`;
+				  	var chrzpms = ztxx[i].chrzpms||"";
+				  	html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+id+`" >`+dtmbgrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrzpms+`</li>`;
 				}
 				ztxxDom.innerHTML=html;
 			}else{
@@ -52,7 +53,8 @@ $bjAjax({
 										dlnum++;
 										var dtmbgrq=dlxx[key][j]["dtmbgrq"];
 										var zpjdid=dlxx[key][j]["id"];
-									  	html +=`<li class="mui-table-view-cell details" zjid="`+zpjdid+`" >`+dtmbgrq+`</li>`;
+										var chrzpms=dlxx[key][j]["chrzpms"];
+									  	html +=`<li class="mui-table-view-cell details" zjid="`+zpjdid+`" >`+dtmbgrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrzpms+`</li>`;
 									}
 								}
 							}
@@ -88,7 +90,8 @@ $bjAjax({
 						 ysnum++;
 						 var dtmbgrq=gcys[key][j]["dtmbgrq"];
 					     var zpjdid=gcys[key][j]["id"];
-						 html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+zpjdid+`" >`+dtmbgrq+`</li>`;
+					     var chrzpms=gcys[key][j]["chrzpms"];
+						 html +=`<li class="mui-table-view-cell mui-collapse details" zjid="`+zpjdid+`" >`+dtmbgrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrzpms+`</li>`;
 					 }
 					 html +=`</ul>`;
 				}

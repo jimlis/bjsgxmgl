@@ -99,23 +99,24 @@
 				<div id="file-list">
 				</div>
 			</div>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">审批人：</span>
-				
-				<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" v-model="intsplczt" placeholder="审批人" />
-				<input class="bj-input bj-p-black-font" type="text"   readonly="readonly"  id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批人" />
-				<button class="mui-btn mui-btn-blue" type="button" v-on:click="txsp">提醒审批</button>
-			</h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态：</span>
-                        <input class="bj-input bj-p-black-font" type="hidden" id="chrspzt" name="chrspzt" v-model="chrspzt" placeholder="审批状态" />
-                        <input class="bj-input bj-p-black-font" type="text" id="chrspztmc" name="chrspztmc" v-model="chrspztmc" v-on:click="spztPicker()"  placeholder="审批状态" />
-            </h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">审批结果：</span>
-               <textarea type="text" placeholder="审批结果" id="chrspjg"  name="chrspjg" v-model="chrspjg"  class="bj-input bj-p-black-font"></textarea>
-            </h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span>
-                <input class="bj-input bj-p-black-font "  readonly="readonly"  type="text" id="dtmspztrq" v-model="dtmspztrq"  v-on:click="datePicker('dtmspztrq')" placeholder="请选择"/>
-            </h5>
-			
+			<div  v-bind:class="isSp ? '' : 'bj-disable'">
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批人：</span>
+					
+					<input class="bj-input bj-p-black-font" type="hidden" id="intsplczt" name="intsplczt" v-model="intsplczt" placeholder="审批人" />
+					<input class="bj-input bj-p-black-font" type="text"   readonly="readonly"  id="chrsprmc" name="chrsprmc" v-model="chrsprmc" v-on:click="splcPicker()"  placeholder="审批人" />
+					<button class="mui-btn mui-btn-blue" type="button" v-on:click="txsp">提醒审批</button>
+				</h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态：</span>
+	                        <input class="bj-input bj-p-black-font" type="hidden" id="chrspzt" name="chrspzt" v-model="chrspzt" placeholder="审批状态" />
+	                        <input class="bj-input bj-p-black-font" type="text" id="chrspztmc" name="chrspztmc" v-model="chrspztmc" v-on:click="spztPicker()"  placeholder="审批状态" />
+	            </h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批结果：</span>
+	               <textarea type="text" placeholder="审批结果" id="chrspjg"  name="chrspjg" v-model="chrspjg"  class="bj-input bj-p-black-font"></textarea>
+	            </h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span>
+	                <input class="bj-input bj-p-black-font "  readonly="readonly"  type="text" id="dtmspztrq" v-model="dtmspztrq"  v-on:click="datePicker('dtmspztrq')" placeholder="请选择"/>
+	            </h5>
+			</div>
 		</div>
 	</form>
 </div>

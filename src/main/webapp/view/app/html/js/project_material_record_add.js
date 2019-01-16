@@ -4,6 +4,7 @@ var pageData;
 var sysdate=bjGetSysDate();
 var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 var splctzs = new Array();
+var isSp=hasPermission("bj:spqx");
 window.onload = function(){
 	showEdit();
 	pageData = isUpdata()||'';
@@ -12,6 +13,7 @@ window.onload = function(){
 		//创建数据Model；
 		pageData = buildModel();
 	}
+	pageData["isSp"] = isSp;
     //数据绑定
 	vue = new Vue({
 		el: '#app',

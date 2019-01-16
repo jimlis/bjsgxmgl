@@ -37,15 +37,16 @@ function showQuaReportList(temptype,idName){
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
 			  	var dtmzgwcrq = item.dtmzgwcrq||"";
+			  	var chrqxms = item.chrqxms||"";
 			  	var yjHtml="";
 			  	if(dtmzgwcrq!=""){
-			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+			    	yjHtml = "<span class='img-g'></span>";
 			    }else {
-			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+			    	yjHtml = "<span class='img-r'></span>";
 			    }
 			  	var id = item.id;
 			  	var chrqxwz = item.chrqxwz||"";
-			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxwz+`</li>`;
+			  	html +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxwz+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrqxms+`</li>`;
 			})
 			mui("#" + idName+"Span")[0].innerText=array.length;
 			mui("#" + idName)[0].innerHTML=html;

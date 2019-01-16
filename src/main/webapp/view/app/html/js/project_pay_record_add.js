@@ -11,6 +11,7 @@ var dwData=[];
 var inthtje=0;
 var bgbhData=[];
 var splctzs = new Array();
+var isSp=hasPermission("bj:spqx");
 window.onload = function(){
 	showEdit();
 	
@@ -26,7 +27,7 @@ window.onload = function(){
 		//创建数据Model；
 		pageData = buildModel();
 	}
-	
+	pageData["isSp"] = isSp;
 	dwData=getXmdwmdData(intxmid,pageData.intdwlx);
 	
 	getBgbhList(pageData.intdwlx,pageData.intdwmcid,id);

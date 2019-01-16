@@ -11,6 +11,7 @@ var bgbhData=[];
 var dwData=[];
 var nowHtje=0;
 var splctzs = new Array();
+var isSp=hasPermission("bj:spqx");
 window.onload = function(){
 	showEdit();
 	upLoadFile('#chbtn',{"busType":"bj_xm_bgsqjl"});
@@ -20,6 +21,7 @@ window.onload = function(){
 		//创建数据Model；
 		pageData = buildModel();
 	}
+	pageData["isSp"] = isSp;
 	//数据绑定
 	vue = new Vue({
 		el: '#app',

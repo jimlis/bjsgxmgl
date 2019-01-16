@@ -39,15 +39,16 @@ function showList(idName){
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq;
 			  	var dtmwczgrq = item.dtmwczgrq||"";
+			  	var chraqwtbs = item.chraqwtbs||"";
 			  	var yjHtml="";
 				if(dtmwczgrq!=""){
-			    	yjHtml = "<img title=\"绿灯\" border='0' src='../images/green.png' class='img-d'>";
+			    	yjHtml = "<span class='img-g'></span>";
 			    }else {
-			    	yjHtml = "<img title=\"红灯\" border='0' src='../images/red.png' class='img-d'>";
+			    	yjHtml = "<span class='img-r'></span>";
 			    }
 			  	var id = item.id;
 			  	var chraqwtwz=item.chraqwtwz||'';
-			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`</li>`;
+			  	html+=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtwz+`&nbsp;&nbsp;&nbsp;&nbsp;`+chraqwtbs+`</li>`;
 			  	
 			})
 			mui("#" + idName+"Span")[0].innerText=array.length;

@@ -14,31 +14,32 @@ window.onload=function(){
 			mui.each(array,function(index,item){
 			  	var dtmgxrq = item.dtmgxrq||"";
 			  	var intyblx = item.intyblx||"";
+			  	var chrybms = item.chrybms||"";
 			  	var id = item.id;
 			  	if(intyblx=="1"){
 			  		tjtemp = true;
 			  		tjtempnum++;
-			  		mui("#tjtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#tjtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrybms+`</li>`;
 			  	}
 			  	if(intyblx=="2"){
 			  		jdtemp = true;
 			  		jdtempnum++;
-			  		mui("#jdtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#jdtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrybms+`</li>`;
 			  	}
 			  	if(intyblx=="3"){
 			  		zxtemp = true;
 			  		zxtempnum++;
-			  		mui("#zxtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#zxtemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrybms+`</li>`;
 			  	}
 			  	if(intyblx=="4"){
 			  		yltemp = true;
 			  		yltempnum++;
-			  		mui("#yltemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#yltemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrybms+`</li>`;
 			  	}
 			  	if(intyblx=="5"){
 			  		qttemp = true;
 			  		qttempnum++;
-			  		mui("#qttemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`</li>`;
+			  		mui("#qttemp")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openNext(`+id+`)">`+dtmgxrq+`&nbsp;&nbsp;&nbsp;&nbsp;`+chrybms+`</li>`;
 			  	}
 			});
 			if(!tjtemp){
