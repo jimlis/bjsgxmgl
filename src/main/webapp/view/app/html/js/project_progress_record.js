@@ -26,7 +26,8 @@ window.onload=function(){
 			dtList:[],
 			dls:pageData,
 			qts:qt,
-			qqbj:qqbj
+			qqbj:qqbj,
+			allDtList:[]
 			
 		},
 		beforeCreate: function(){
@@ -76,6 +77,18 @@ window.onload=function(){
 				success:function(data){
 					if(data){
 						vue.$data.qqbj=data||[];
+					}
+				}
+			});
+			$bjAjax({
+				url:progressElevatorGetListApiPath,
+				type:"post",
+				data:{
+					xmid:xmid
+				},
+				success:function(data){
+					if(data){
+						vue.$data.allDtList=data||[];
 					}
 				}
 			});
@@ -190,6 +203,24 @@ window.onload=function(){
 				}
 				toUrl(address);
 			}
+		},
+		computed: {
+			dlcount(){
+		    	return function(list,key){
+			    	if(key){
+			    		var nowDtList=list;
+			    		var count=0;
+			    		for(i in nowDtList){
+			    			if(key==nowDtList[i].intsgwz){
+			    				count++;
+			    			}
+			    		}
+			    		return count;
+			    	}else {
+			    		return 0;
+			    	}
+		    	}
+		    }
 		}
 	});
 	
