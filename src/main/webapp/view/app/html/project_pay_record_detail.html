@@ -39,18 +39,14 @@
 				<h5 id="bj-xmmc" >项目</h5>
 				<h5 style="margin-left: 16px;"><span id="toright"></span>工程款申请/支付情况</h5>
 				<hr />
-				<span v-if="isCk">
-					
 				
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span><span class="bj-p-gray-font">{{dtmgxrq}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span>
-                <span id="dtmgxrq">{{dtmbgrq}}</span>
-                </h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位类型：</span><span class="bj-p-gray-font">{{chrdwlx}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位名称：</span><span class="bj-p-gray-font">{{chrdwmc}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">本次申请期数：</span><span class="bj-p-gray-font">{{intbcsqqs}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期申请金额：</span><span class="bj-p-gray-font">{{intbqsqje}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期核发金额：</span><span class="bj-p-gray-font">{{intbqhsffje}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span><span class="bj-p-gray-font">{{isCk?dtmgxrq:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span><span id="dtmgxrq" class="bj-p-gray-font">{{isCk?dtmbgrq:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位类型：</span><span class="bj-p-gray-font">{{isCk?chrdwlx:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位名称：</span><span class="bj-p-gray-font">{{isCk?chrdwmc:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">本次申请期数：</span><span class="bj-p-gray-font">{{isCk?intbcsqqs:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期申请金额：</span><span class="bj-p-gray-font">{{isCk?intbqsqje:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期核发金额：</span><span class="bj-p-gray-font">{{isCk?intbqhsffje:'*'}}</span></h5>
 				<h5 class="bj-title2-font">申请支付情况：</h5>
 				<table>
 		          <thead>
@@ -63,10 +59,10 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="合同金额A">{{inthtje}}</td>
-				      <td data-label="潜在变更总金额B">{{intqzbgzje}}</td>
-				      <td data-label="累计已发放期数">{{yfqs}}</td>
-				      <td data-label="累计发放金额C">{{yfje}}</td>
+				      <td data-label="合同金额A">{{isCk?inthtje:'*'}}</td>
+				      <td data-label="潜在变更总金额B">{{isCk?intqzbgzje:'*'}}</td>
+				      <td data-label="累计已发放期数">{{isCk?yfqs:'*'}}</td>
+				      <td data-label="累计发放金额C">{{isCk?yfje:'*'}}</td>
 				    </tr>
 				  </tbody>
 				  <thead>
@@ -79,10 +75,10 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="B/A">{{BA}}</td>
-				      <td data-label="本次申请金额D">{{intbqsqje}}</td>
-				      <td data-label="本期核实发放金额E">{{intbqhsffje}}</td>
-				      <td data-label="D/E">{{DE}}</td>
+				      <td data-label="B/A">{{isCk?BA:'*'}}</td>
+				      <td data-label="本次申请金额D">{{isCk?intbqsqje:'*'}}</td>
+				      <td data-label="本期核实发放金额E">{{isCk?intbqhsffje:'*'}}</td>
+				      <td data-label="D/E">{{isCk?DE:'*'}}</td>
 				    </tr>
 				  </tbody>
 				  <thead>
@@ -95,26 +91,24 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="C/A">{{CA}}</td>
-				      <td data-label="(C+E)/A">{{CEA}}</td>
-				      <td data-label="C/(A+B)">{{CAB}}</td>
-				      <td data-label="(C+E)/(A+B)">{{CEAB}}</td>
+				      <td data-label="C/A">{{isCk?CA:'*'}}</td>
+				      <td data-label="(C+E)/A">{{isCk?CEA:'*'}}</td>
+				      <td data-label="C/(A+B)">{{isCk?CAB:'*'}}</td>
+				      <td data-label="(C+E)/(A+B)">{{isCk?CEAB:'*'}}</td>
 				    </tr>
 				  </tbody>
 	            </table>
 				<h5 class="bj-ul-clear bj-title2-font"><span class="bj-title-p-font">支付证书：</span>
-				    <div id="file-list">
+					
+				    <div v-if="isCk" id="file-list">
                     </div>
 				</h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批人：</span><span class="bj-p-gray-font">{{chrsplczt}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态：</span><span class="bj-p-gray-font">{{chrspztmc}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批结果：</span><span class="bj-p-gray-font">{{chrspjg}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span>
-                <span id="dtmgxrq">{{dtmspztrq}}</span>
-                </h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span><span class="bj-p-gray-font">{{chrbgrmc}}</span></h5>
-				</span>			
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span><span class="bj-p-gray-font">{{chrbz}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批人：</span><span class="bj-p-gray-font">{{isCk?chrsplczt:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态：</span><span class="bj-p-gray-font">{{isCk?chrspztmc:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批结果：</span><span class="bj-p-gray-font">{{isCk?chrspjg:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span><span class="bj-p-gray-font" id="dtmgxrq">{{isCk?dtmspztrq:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span><span class="bj-p-gray-font">{{isCk?chrbgrmc:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span><span class="bj-p-gray-font">{{isCk?chrbz:'*'}}</span></h5>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
