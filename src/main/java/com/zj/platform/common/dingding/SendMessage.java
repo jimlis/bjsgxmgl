@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class SendMessage {
     //得到token
-    private static String getToken(String getTokenPath) throws Exception{
+    public static String getToken(String getTokenPath) throws Exception{
         String tokenResult= CommonUtils.HttpURLConnectionGet(getTokenPath);
         java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {}.getType();
         Map<String ,String> tokenMap = new Gson().fromJson(tokenResult, type);
@@ -24,8 +24,8 @@ public class SendMessage {
         agentid：应用id
         touser：接收人，多个用|分开
      */
-    public static String sendMessage(String corpid,String corpsecret,String agentid,String contentText,String touser) throws Exception{
-        String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
+    public static String sendMessage(String appkey,String appsecret,String agentid,String contentText,String touser) throws Exception{
+        String getTokenPath = "https://oapi.dingtalk.com/gettoken?appkey="+appkey+"&appsecret="+appsecret;
         String access_token = SendMessage.getToken(getTokenPath);
 
         JSONObject image=new JSONObject();

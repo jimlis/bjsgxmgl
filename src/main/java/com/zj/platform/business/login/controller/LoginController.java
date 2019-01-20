@@ -10,6 +10,7 @@ import com.zj.platform.business.file.service.FileService;
 import com.zj.platform.business.menu.domain.MenuDO;
 import com.zj.platform.business.menu.service.MenuService;
 import com.zj.platform.common.annotation.Log;
+import com.zj.platform.common.dingding.SendMessage;
 import com.zj.platform.common.type.EnumErrorCode;
 import com.zj.platform.common.util.CommonUtils;
 import com.zj.platform.common.util.Constant;
@@ -111,19 +112,17 @@ public class LoginController extends AdminBaseController {
     @ResponseBody
     Result<Map<String ,String>> getToken(HttpServletRequest request,String code) {
         Map<String ,String> resultConfig =new HashMap<>();
-        String corpid = environment.getProperty("corpId");
-        String corpsecret = environment.getProperty("corpsecret");
-        String getTokenPath = "https://oapi.dingtalk.com/gettoken?corpid="+corpid+"&corpsecret="+corpsecret;
+        String appkey = environment.getProperty("appKey");
+        String appsecret = environment.getProperty("appSecret");
+        String getTokenPath = "https://oapi.dingtalk.com/gettoken?appkey="+appkey+"&appsecret="+appsecret;
         String accessToken = "";//token
         String ticket = "";//jsapi_ticket
         String signature = "";//前端鉴权-计算签名信息
         try {
             //得到token
-            JSONObject tokenResult= CommonUtils.httpGet(getTokenPath);
             java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {}.getType();
-            Map<String ,String> tokenMap = new Gson().fromJson(tokenResult.toJSONString(), type);
-            accessToken = tokenMap.get("access_token");
-            resultConfig.put("access_token",tokenMap.get("access_token"));
+            accessToken = SendMessage.getToken(getTokenPath);
+            resultConfig.put("access_token",accessToken);
             //获取jsapi_ticket
             String getTicketPath ="https://oapi.dingtalk.com/get_jsapi_ticket?access_token="+accessToken;
             String ticketResult = CommonUtils.HttpURLConnectionGet(getTicketPath);

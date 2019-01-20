@@ -69,7 +69,7 @@ public class ApiCommonController extends ApiBaseController {
     @RequiresAuthentication
     public Result<String> sendMessage(HttpServletRequest request,String contentText,String userId) {
         try {
-          String result = SendMessage.sendMessage(environment.getProperty("corpId"),environment.getProperty("corpsecret"),environment.getProperty("agentId"),contentText,userId);
+          String result = SendMessage.sendMessage(environment.getProperty("appKey"),environment.getProperty("appSecret"),environment.getProperty("agentId"),contentText,userId);
           return Result.ok(result);
         }catch (Exception e){
             e.printStackTrace();
