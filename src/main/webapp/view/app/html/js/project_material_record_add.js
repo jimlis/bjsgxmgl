@@ -34,7 +34,7 @@ window.onload = function(){
 				ftxsp(contentText,userid);
 			},
 			spztPicker: function () {
-				vuePicker(pageData,"chrspztmc",[{"text":"未完成","value":"wwc"},{"text":"未通过","value":"wtg"},{"text":"通过","value":"tg"}],"chrspzt");
+				vuePicker(pageData,"chrspztmc",[{"text":"正在审批","value":"wwc"},{"text":"未通过审批","value":"wtg"},{"text":"通过审批","value":"tg"}],"chrspzt");
 			}
 		},
 		watch: {
@@ -263,7 +263,7 @@ function ftxsp(contentText,chruserid){
 }
 
 function save(){
-	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+	isSure(function(){
 		console.log(seletitem);
 		if(seletitem.index==0){
 		    var data = getFromData("myform");

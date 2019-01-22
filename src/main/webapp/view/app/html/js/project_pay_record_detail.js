@@ -6,6 +6,7 @@ var intxmid = getCookie('id');//intxmid
 //初始化显示数据
 var pageData={};
 var isCk=hasPermission("bj:ckje");
+var bjje=hasPermission("bj:bjje");
 window.onload = function(){
 	showEdit();
 	//得到数据
@@ -70,8 +71,20 @@ window.onload = function(){
 	if(id){
 		initFileList("bj_xm_gckyzfqk",id,"1","fileIds","file-list",false);
 	}
-}
 
+}
+//是否具有编辑金额权限
+function showEdit(){
+	var editBtn=document.getElementById("editBtn");
+	if(editBtn){
+		if(bjje){
+			editBtn.style.display="inline-block";
+		}else{
+			editBtn.style.display="none";
+		}
+	}
+	return bjje;
+}
 //获取变更情况
 function getBgbhList(bgsqlx,dwmcid,nowId){
 	if(bgsqlx){
@@ -146,7 +159,6 @@ function getQsAndJe(dwlx,dwmcid,xmgczfid){
  * @returns
  */
 function getGgjeSum(){
-	debugger;
 	if(bgbhData){
 		var intbggs=0;
 		for(i in bgbhData){

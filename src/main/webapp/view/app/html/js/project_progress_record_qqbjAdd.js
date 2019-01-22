@@ -51,7 +51,7 @@ function getPageData(){
 
 //保存数据
 function save(){
-	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+	isSure(function(){
 		console.log(seletitem);
 		if(seletitem.index==0){
 			var data = getFromData("form");

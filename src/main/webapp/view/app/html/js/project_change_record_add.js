@@ -12,6 +12,7 @@ var dwData=[];
 var nowHtje=0;
 var splctzs = new Array();
 var isSp=hasPermission("bj:spqx");
+var bjje=hasPermission("bj:bjje");
 window.onload = function(){
 	showEdit();
 	upLoadFile('#chbtn',{"busType":"bj_xm_bgsqjl"});
@@ -22,6 +23,11 @@ window.onload = function(){
 		pageData = buildModel();
 	}
 	pageData["isSp"] = isSp;
+	if(!bjje){
+		pageData["intbggs"] ='*';
+		pageData["intqzbgzje"] ='*';
+		pageData["inthtzb"] ='*';
+	};
 	//数据绑定
 	vue = new Vue({
 		el: '#app',
@@ -285,7 +291,7 @@ function ftxsp(contentText,chruserid){
 }
 //保存数据
 function save(){
-	mui.confirm("将新增一条新的报告记录，\n是否确定更新？","提示",['是','否'],function(seletitem){
+	isSure(function(){
 		console.log(seletitem);
 		if(seletitem.index==0){
 			var data = getFromData("myform");

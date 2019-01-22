@@ -54,7 +54,7 @@
 					<li class="mui-table-view-cell">2、已完成审批流程数量：{{ybspWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{ybspTgsl}}</li>
 					<div v-for="(value,key) in ybspList">
-						<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
 					</div>
 				</ul>
 				<h5>四、质量缺陷报告</h5>
@@ -68,7 +68,7 @@
 					<li class="mui-table-view-cell">2、已完成审批流程数量：{{bgWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{bgTgsl}}</li>
 					<div v-for="(value,key) in bgList">
-						<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
 					</div>
 				</ul>
 				<h5>六、工程款申请/支付记录</h5>
@@ -77,7 +77,7 @@
 					<li class="mui-table-view-cell">2、已完成审批流程期数：{{zfWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{zfTgsl}}</li>
 					<div v-for="(value,key) in zfList">
-						<li class="mui-table-view-cell">{{key+4}}、待{{value.chrsprmc}}审批数量：{{value.num}}</li>
+						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
 					</div>
 				</ul>
 				<h5>七、安全报告</h5>

@@ -1,6 +1,7 @@
 var xmid = getCookie("id");
 var dwmdArr=[{"text":"顾问单位名单","value":"1"},{"text":"施工单位名单","value":"2"},{"text":"其他工作单位名单","value":"3"}];
-showEdit();
+//showEdit();
+var bjje=hasPermission("bj:bjje");
 $bjAjax({
 	url:baseApiCjdw,
 	type:"post",
@@ -69,7 +70,8 @@ function see(){
 			  	var intlxmdmc = getDwmdmcById(item.intlxmd)||"";
 		  		var chrdwmc = item.chrdwmc||"";
 		  		var inthtje = item.inthtje||"";
-		  		mui("#yjdwNr")[0].innerHTML +=`<tr>
+		  		if(bjje){
+		  			mui("#yjdwNr")[0].innerHTML +=`<tr>
 		  			  <td data-label="单位类型">`+intlxmdmc+`</td>
 				      <td data-label="单位类型">`+chrdwlxmc+`</td>
 				      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -77,6 +79,17 @@ function see(){
 				      <td data-label="操作"><span style="" onclick="updateyjdw(`+(item.id||"")+`,'`+chrdwmc+`','`+chrdwlxmc+`','`+intdwlxid+`','`+intlxmd+`','`+inthtje+`',this)" class="bj-red bj-hand">修改</span>
 				      <span style="" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除</span></td>
 				    </tr>`;
+		  		}else{
+		  			mui("#yjdwNr")[0].innerHTML +=`<tr>
+		  			  <td data-label="单位类型">`+intlxmdmc+`</td>
+				      <td data-label="单位类型">`+chrdwlxmc+`</td>
+				      <td data-label="单位名称">`+chrdwmc+`</td>
+				      <td data-label="合同金额">*</td>
+				      <td data-label="操作"><span style="" onclick="updateyjdw(`+(item.id||"")+`,'`+chrdwmc+`','`+chrdwlxmc+`','`+intdwlxid+`','`+intlxmd+`','`+inthtje+`',this)" class="bj-red bj-hand">修改</span>
+				      <span style="" onclick="delyjdw(`+(item.id||"")+`,'`+chrdwmc+`',this)" class="bj-red bj-hand">删除</span></td>
+				    </tr>`;
+		  		}
+		  		
 			})
 		//	mui("#yjdwDiv")[0].innerHTML =htmls;
 		}

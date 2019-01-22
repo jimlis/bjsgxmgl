@@ -22,12 +22,13 @@ window.onload=function(){
 			  
 			  	var id = item.id;
 			  	var ztid = item.ztid;
+			  	var chrspzt = item.chrspzt;
 			  	var yjHtml="";
 			  	if(intclyblx=="1"){
-			  		if(ztid!=null){
+			  		if(chrspzt!='wwc'){
 			  			tjlGrenum++;
 				    	yjHtml = "<span class='img-g'></span>";
-				    }else {
+				    }else {//未完成就是正在审批
 				    	tjlRednum++;
 				    	yjHtml = "<span class='img-r'></span>";
 				    }
@@ -36,7 +37,7 @@ window.onload=function(){
 			  		mui("#tjl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="2"){
-			  		if(ztid!=null){
+			  		if(chrspzt!='wwc'){
 			  			jdlGrenum++;
 				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
@@ -48,7 +49,7 @@ window.onload=function(){
 			  		mui("#jdl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="3"){
-			  		if(ztid!=null){
+			  		if(chrspzt!='wwc'){
 			  			zxlGrenum++;
 				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
@@ -60,7 +61,7 @@ window.onload=function(){
 			  		mui("#zxl")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="4"){
-			  		if(ztid!=null){
+			  		if(chrspzt!='wwc'){
 			  			yllGrenum++;
 				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
@@ -72,7 +73,7 @@ window.onload=function(){
 			  		mui("#yll")[0].innerHTML +=`<li class="mui-table-view-cell mui-collapse" onclick="openDetails(`+id+`)">`+yjHtml+`&nbsp;&nbsp;`+dtmgxrq+`&nbsp;&nbsp;`+chrybmc+`</li>`;
 			  	}
 			  	if(intclyblx=="5"){
-			  		if(ztid!=null){
+			  		if(chrspzt!='wwc'){
 			  			qtlGrenum++;
 				    	yjHtml = "<span class='img-g'></span>";
 				    }else {
