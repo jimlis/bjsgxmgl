@@ -74,8 +74,8 @@
 					    <tr v-for="(item,index) in xmSgjdEcjgzxWclList">
 					      <td data-label="楼层">{{item.chrlc}}</td>
 					      <td data-label="门窗">{{item.intmc}}</td>
-					      <td data-label="防水">{{item.intfs}}</td>
-					      <td data-label="保温">{{item.intnbw}}</td>
+					      <td data-label="防水">{{item.intfs||"/"}}</td>
+					      <td data-label="保温">{{item.intnbw||"/"}}</td>
 					      <td data-label="砌墙">{{item.intqt}}</td>
 					      <td data-label="装修">{{item.intzx}}</td>
 					    </tr>

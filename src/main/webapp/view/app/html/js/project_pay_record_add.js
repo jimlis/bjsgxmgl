@@ -88,6 +88,11 @@ window.onload = function(){
 			    	var A=this.inthtje;
 			      return A?new Number((new Number(B)/new Number(A))).toFixed(2):0;
 			    },
+			    ED:function(){
+			    	var D=this.intbqsqje;
+			    	var E=this.intbqhsffje;
+			    	return D?new Number((new Number(E)/new Number(D))).toFixed(2):0;
+			    },
 			    DE:function(){
 			    	var D=this.intbqsqje;
 			    	var E=this.intbqhsffje;
@@ -232,6 +237,8 @@ function isUpdata(){
 			},
 			success:function(data){
 				if(data){
+					data["intbgrid"]=chrdlrid;
+					data["chrbgrmc"]=chrdlrmc;
 					o=data;
 					o["dtmgxrq"]=systemdate;
 				}
@@ -316,8 +323,6 @@ function ftxsp(contentText,chruserid){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = getFromData("myform");
 			$bjAjax({
 				url:payApiSave,
@@ -329,7 +334,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 }
 

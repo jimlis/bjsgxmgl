@@ -72,6 +72,8 @@ function isUpdata(){
 				fwlx:"xz"
 			},
 			success:function(data){
+				data["intbgrid"]=chrdlrid;
+				data["chrbgrmc"]=chrdlrmc;
 				result = data;
 				result["dtmgxrq"]=sysdate;
 			}

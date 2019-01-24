@@ -15,9 +15,50 @@ window.onload = function(){
 				var address = "project_pay_record_detail.html?id="+id;
     				toUrl(address);
 			}
+		},
+		computed: {
+		    gwGre: function () {
+		      return getSpztNum(this.gw,"gre");
+		    },
+		    gwRed: function () {
+			      return getSpztNum(this.gw,"red");
+			    },
+		    sgGre: function () {
+		      return getSpztNum(this.sg,"gre");
+		    },
+		    sgRed: function () {
+		      return getSpztNum(this.sg,"red");
+		    },
+		    qtGre: function () {
+			      return getSpztNum(this.qt,"gre");
+			},
+		    qtRed: function () {
+		      return getSpztNum(this.qt,"red");
+		    }
 		}
 	});
 	tyclClick("#app");
+}
+
+function getSpztNum(arr,type){
+	var num=0;
+	try{
+		if(arr){
+			for(var i=0;i<arr.length;i++){
+				var chrspzt = arr[i].chrspzt;
+				if(chrspzt){
+					if(type=="gre"&&chrspzt!='wwc'){
+						num++;
+					}else if(type=="red"&&chrspzt=='wwc'){
+						num++;
+					}
+				}
+			}
+		}
+	}catch(e){
+		
+	}
+		return num;
 }
 
 function getDataByDwlx(data,dwlx){

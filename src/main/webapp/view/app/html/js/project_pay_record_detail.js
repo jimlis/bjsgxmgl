@@ -32,6 +32,11 @@ window.onload = function(){
 			    	var A=this.inthtje;
 			      return A?new Number((new Number(B)/new Number(A))).toFixed(2):0;
 			    },
+			    ED:function(){
+			    	var D=this.intbqsqje;
+			    	var E=this.intbqhsffje;
+			    	return D?new Number((new Number(E)/new Number(D))).toFixed(2):0;
+			    },
 			    DE:function(){
 			    	var D=this.intbqsqje;
 			    	var E=this.intbqhsffje;

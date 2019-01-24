@@ -23,6 +23,9 @@ window.onload = function(){
 		pageData = buildModel();
 	}
 	pageData["isSp"] = isSp;
+	pageData["intbgrid"] = chrdlrid;
+	pageData["chrbgrmc"] = chrdlrmc;
+	
 	if(!bjje){
 		pageData["intbggs"] ='*';
 		pageData["intqzbgzje"] ='*';
@@ -292,8 +295,6 @@ function ftxsp(contentText,chruserid){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = getFromData("myform");
 			$bjAjax({
 				url:changeApiSave,
@@ -305,7 +306,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 }
 function outPage(){

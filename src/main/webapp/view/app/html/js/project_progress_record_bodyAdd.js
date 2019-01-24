@@ -115,6 +115,8 @@ function isUpdata(){
 			},
 			success:function(data){
 				if(data){
+					data["intbgrid"]=chrdlrid;
+					data["chrbgrmc"]=chrdlrmc;
 					o=data;
 				}
 			}
@@ -141,8 +143,6 @@ function buildModel(){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = restore(this.vue.$data.pagedata);
 			for(i in this.vue.$data.ztjdsJson){
 				this.vue.$data.ztjdsJson[i].dtmwcsj=this.vue.$data.ztjdsJson[i].dtmwcsj||null;
@@ -168,7 +168,6 @@ function save(){
 					bjToast("保存成功！");
 				}
 			});
-		}
 	});
 	
 }

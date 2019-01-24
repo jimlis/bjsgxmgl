@@ -31,7 +31,7 @@ $bjAjax({
 			mui("#gwdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
-						      <td data-label="合同金额">`+inthtje+`</td>
+						      <td data-label="合同金额"><span style="color: black;">`+inthtje+`</span></td>
 						    </tr>`;
 		})
 		var two=data["2"]||[];
@@ -42,7 +42,7 @@ $bjAjax({
 			mui("#sgdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
-						      <td data-label="合同金额">`+inthtje+`</td>
+						      <td data-label="合同金额"><span style="color: black;">`+inthtje+`</span></td>
 						    </tr>`;
 		})
 		var three=data["3"]||[];
@@ -53,7 +53,7 @@ $bjAjax({
 			mui("#qtdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
-						      <td data-label="合同金额">`+inthtje+`</td>
+						      <td data-label="合同金额"><span style="color: black;">`+inthtje+`</span></td>
 						    </tr>`;
 		})
 	}

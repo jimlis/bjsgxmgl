@@ -13,6 +13,18 @@
           [v-cloak] { 
             display: none; 
           } 
+           .blue{
+                  right: 85px !important;
+              }
+              
+              .green{
+                  right: 60px !important;
+                  background-color: green;
+              }
+              
+               .red{
+                  background-color: red;
+              }
         </style> 
 	</head>
 		
@@ -38,7 +50,8 @@
 			<hr />
 			<ul class="mui-table-view bj-title2-font bj-background-inherit"> 
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">顾问公司费用申请/支付情况<span class="mui-badge mui-badge-primary" v-cloak>{{gw.length}}</span></a>
+		            <a class="mui-navigate-right" href="#">顾问公司费用申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{gw.length}}</span>
+		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{gwGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{gwRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in gw"  v-on:click="openDetail(item.id)">
 				            {{item.dtmgxrq}}  &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
@@ -47,7 +60,8 @@
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">施工单位工程款申请/支付情况<span class="mui-badge mui-badge-primary" v-cloak>{{sg.length}}</span></a>
+		            <a class="mui-navigate-right" href="#">施工单位工程款申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{sg.length}}</span>
+		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{sgGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{sgRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in sg"  v-on:click="openDetail(item.id)">
 				             {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
@@ -56,7 +70,8 @@
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
-		            <a class="mui-navigate-right" href="#">其他单位费用申请/支付情况<span class="mui-badge mui-badge-primary" v-cloak>{{qt.length}}</span></a>
+		            <a class="mui-navigate-right" href="#">其他单位费用申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{qt.length}}</span>
+		                              <span  class="mui-badge mui-badge-primary green" v-cloak>{{qtGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{qtRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in qt"  v-on:click="openDetail(item.id)">
 				             {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期

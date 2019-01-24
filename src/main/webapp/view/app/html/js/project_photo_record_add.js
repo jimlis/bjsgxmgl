@@ -76,6 +76,8 @@ function isUpdate(){
 				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
 				document.getElementById("chrzpms").value = data.chrzpms||"";
 				initImgList("bj_xm_zpjl",id,"1","fileIds","img-list",true);
+				document.getElementById("chrbgrmc").value = chrdlrmc;
+				document.getElementById("intbgrid").value = chrdlrid;
 				if(intbglb==2){
 					relPicker("chrpswzms",ldData,"chrpswz");
 				}else if(chrpswz==3&&intbglb==3){
@@ -90,6 +92,7 @@ function isUpdate(){
 		document.getElementById("chrbgrmc").value = chrdlrmc;
 		document.getElementById("intbgrid").value = chrdlrid;
 	}
+	
 }
 
 function save(){

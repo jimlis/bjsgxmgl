@@ -90,6 +90,8 @@ function isUpdata(){
 			success:function(data){
 				if(data){
 					id=data.id||"";
+					data["intbgrid"]=chrdlrid;
+					data["chrbgrmc"]=chrdlrmc;
 					o=data;
 					o["dtmgxrq"]=systemdate;
 				}
@@ -108,6 +110,8 @@ function isUpdata(){
 				},
 				success:function(data){
 					if(data){
+						data["intbgrid"]=chrdlrid;
+						data["chrbgrmc"]=chrdlrmc;
 						o=data;
 						o["dtmgxrq"]=systemdate;
 					}
@@ -141,8 +145,6 @@ function buildModel(){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = getFromData("myform");
 			if(xclb=="zxys"||xclb=="jgys"){
 				data["id"]="";
@@ -157,7 +159,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 }
 

@@ -25,7 +25,7 @@ window.onload = function(){
 			type:'post',
 			success:function(data){
 				//服务器返回响应，根据响应结果，分析是否登录成功；
-				document.getElementById("chrbgrmc").value = data.chrbgrmc||"";
+				document.getElementById("chrbgrmc").value = chrdlrmc;
 				document.getElementById("dtmbgrq").value = data.dtmbgrq||"";
 				document.getElementById("chrbz").value = data.chrbz||"";
 				document.getElementById("chrqxms").value = data.chrqxms||"";
@@ -36,7 +36,7 @@ window.onload = function(){
 				document.getElementById("dtmtzrq").value = data.dtmtzrq||"";
 				document.getElementById("dtmzgwcrq").value = data.dtmzgwcrq||"";
 				document.getElementById("id").value = data.id||"";
-				document.getElementById("intbgrid").value = data.intbgrid||"";
+				document.getElementById("intbgrid").value = chrdlrid;
 				document.getElementById("intqxlx").value = data.intqxlx||"";
 				if(data.intqxlx=='1'){
 					document.getElementById("chrqxlx").value = "土建";

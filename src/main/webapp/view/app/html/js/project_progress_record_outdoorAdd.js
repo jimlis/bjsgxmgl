@@ -36,7 +36,7 @@ window.onload = function(){
 		//加载图片
 		initFileList("bj_xm_sgjd_swgwsg",id,"1","fileIds","file-list",true);
 	}
-	
+	debugger;
 	//init 
 	var listMap=pageData.xmSgjdSwgwsgJdListMap;
 	if(listMap){
@@ -74,9 +74,9 @@ function newaddLx(data){
 	lxDiv.innerHTML=
 		'<input type="hidden" placeholder="" name="intswgwlxid" value="'+id+'">'+
 		'<input type="hidden" placeholder="" name="fileIds" value="'+fileIds+'">'+
+		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%">'+
 		'<button type="button" class="mui-btn mui-btn-danger" style="margin: 2px;" onclick="delLx(\''+id+'\',this)">-</button>'+
-		'<button type="button" class="mui-btn mui-btn-primary" style="margin: 2px;" onclick="addQyTable([],\''+tbodyId+'\')">+</button>'+
-		'<input type="text" placeholder="请输入类型名称" name="chrswgwlx" value="'+chrswgwlx+'"  style="width:100%">';
+		'<button type="button" class="mui-btn mui-btn-primary" style="margin: 2px;" onclick="addQyTable([],\''+tbodyId+'\')">+</button>';
     var xLul=document.getElementById("xLul");
 		thead.innerHTML='<tr><th style="width: 30px;">操作</th><th>施工区域</th><th>完成量</th>'+
 		'<th>完成情况</th><th>备注</th></tr>';
@@ -271,6 +271,8 @@ function isUpdata(){
 				fwlx:"xz"
 			},
 			success:function(data){
+				data["intbgrid"]=chrdlrid;
+				data["chrbgrmc"]=chrdlrmc;
 				result = data;
 			}
 		});

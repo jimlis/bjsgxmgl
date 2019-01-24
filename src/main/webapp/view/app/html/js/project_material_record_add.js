@@ -4,6 +4,8 @@ var pageData;
 var sysdate=bjGetSysDate();
 var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 var splctzs = new Array();
+var chrdlrmc = getCookie("chrdlrmc");
+var chrdlrid = getCookie("chrdlrid");
 var isSp=hasPermission("bj:spqx");
 window.onload = function(){
 	showEdit();
@@ -116,6 +118,8 @@ function isUpdata(){
 	}else{
 		document.getElementById("dtmgxrq").value=sysdate;
 	}
+	document.getElementById("chrbgrmc").value = chrdlrmc;
+	document.getElementById("intbgrid").value = chrdlrid;
 	for(i in row){
 		return row;
 	}
@@ -264,8 +268,6 @@ function ftxsp(contentText,chruserid){
 
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 		    var data = getFromData("myform");
 		    data["id"] = (obj.id||"");
 			data["intxmid"] = getCookie("id");
@@ -284,7 +286,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 }
 function outPage(){

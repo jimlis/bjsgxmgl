@@ -14,7 +14,6 @@ window.onload = function(){
 		el: '#app',
 		data: pageData
 	});
-	debugger;
 	if(id){
 		initFileList("bj_xm_sgjd_ylsg",id,"1","fileIds","file-list",false);
 	}

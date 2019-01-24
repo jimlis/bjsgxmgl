@@ -44,6 +44,8 @@ function isUpdata(){
 			},
 			success:function(data){
 				if(data){
+					data["intbgrid"]=chrdlrid;
+					data["chrbgrmc"]=chrdlrmc;
 					o=data;
 				}
 			}

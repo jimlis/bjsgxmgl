@@ -86,8 +86,6 @@ function initData(){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data={};
 			var jsonArr=[];
 				jsonArr=jsonArr.concat(vue.$data.zxys,vue.$data.jgys);
@@ -105,7 +103,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 	
 }

@@ -41,6 +41,8 @@ window.onload = function(){
 					document.getElementById("chryblx").value = "其他";
 				}
 				document.getElementById("intyblx").value = data.intyblx||"";
+				document.getElementById("intbgrid").value = chrdlrid;
+				document.getElementById("chrbgrmc").value = chrdlrmc;
 				if(id){
 					//加载图片
 					initImgList("bj_xm_ybsgjl",id,"1","fileIds","img-list",true);

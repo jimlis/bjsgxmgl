@@ -125,6 +125,8 @@ function isUpdata(){
 				id:id
 			},
 			success:function(data){
+				data["intbgrid"]=chrdlrid;
+				data["chrbgrmc"]=chrdlrmc;
 				result = data;
 			}
 		});
@@ -153,8 +155,6 @@ function buildModel(){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = restore(this.vue.$data.pagedata);
 			for(i in this.vue.$data.dljcs){
 				this.vue.$data.dljcs[i].dtmjzsrq=this.vue.$data.dljcs[i].dtmjzsrq||null;
@@ -185,7 +185,6 @@ function save(){
 					bjToast("保存成功！");
 				}
 			});
-		}
 	});
 	
 }

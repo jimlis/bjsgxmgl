@@ -52,8 +52,6 @@ function getPageData(){
 //保存数据
 function save(){
 	isSure(function(){
-		console.log(seletitem);
-		if(seletitem.index==0){
 			var data = getFromData("form");
 			data["id"]="";
 			$bjAjax({
@@ -66,7 +64,6 @@ function save(){
 					});
 				}
 			});
-		}
 	});
 	
 }
