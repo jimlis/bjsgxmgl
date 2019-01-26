@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no" />
 		<link rel="stylesheet" type="text/css" href="../libs/layui/css/layui.css" />
 		<link rel="stylesheet" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
@@ -15,6 +16,9 @@
 				margin: 0px !important;
 				border-radius: 0px !important;
 				pointer-events:none !important;
+			}
+			th div{
+				width: 96px;
 			}
 			[v-cloak] {
 				display: none;
@@ -48,13 +52,14 @@
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期申请金额：</span><span class="bj-p-gray-font">{{isCk?intbqsqje:'*'}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期核发金额：</span><span class="bj-p-gray-font">{{isCk?intbqhsffje:'*'}}</span></h5>
 				<h5 class="bj-title2-font">申请支付情况：</h5>
+				<div style="overflow-x: scroll;">
 				<table>
 		          <thead>
 				    <tr>
-				      <th>合同金额A</th>
-				      <th>潜在变更总金额B</th>
-				      <th>累计已发放期数</th>
-				      <th>累计发放金额C</th>
+				      <th><div>合同金额<br/>A</div></th>
+				      <th><div>潜在变更<br/>总金额B</div></th>
+				      <th><div>累计已发<br/>放期数</div></th>
+				      <th><div>累计发放<br/>金额C</div></th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -68,9 +73,9 @@
 				  <thead>
 				    <tr>
 				      <th>B/A</th>
-				      <th>本次申请金额D</th>
-				      <th>本期核实发放金额E</th>
-				      <th>D/E</th>
+				      <th>本次申请<br/>金额D</th>
+				      <th>本期核实<br/>发放金额E</th>
+				      <th>E/D</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -98,6 +103,7 @@
 				    </tr>
 				  </tbody>
 	            </table>
+	            	</div>
 				<h5 class="bj-ul-clear bj-title2-font"><span class="bj-title-p-font">支付证书：</span>
 					
 				    <div v-if="isCk" id="file-list">
@@ -108,7 +114,7 @@
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态：</span><span class="bj-p-gray-font">{{isCk?chrspztmc:'*'}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">审批状态日期：</span><span class="bj-p-gray-font" id="dtmgxrq">{{isCk?dtmspztrq:'*'}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告人：</span><span class="bj-p-gray-font">{{isCk?chrbgrmc:'*'}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span><span class="bj-p-gray-font">{{isCk?chrbz:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">备注：</span><br /><span class="bj-p-gray-font">{{isCk?chrbz:'*'}}</span></h5>
 			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>

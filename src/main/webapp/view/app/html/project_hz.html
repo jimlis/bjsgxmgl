@@ -53,9 +53,10 @@
 					<li class="mui-table-view-cell">1、报审总数量：{{ybspZsl}}</li>
 					<li class="mui-table-view-cell">2、已完成审批流程数量：{{ybspWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{ybspTgsl}}</li>
-					<div v-for="(value,key) in ybspList">
+					<li class="mui-table-view-cell">4、正在审批总数量：{{ybnum}}</li>
+					<!--<div v-for="(value,key) in ybspList">
 						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
-					</div>
+					</div>-->
 				</ul>
 				<h5>四、质量缺陷报告</h5>
 				<ul class="mui-table-view">
@@ -67,18 +68,20 @@
 					<li class="mui-table-view-cell">1、变更总数量：{{bgZsl}}</li>
 					<li class="mui-table-view-cell">2、已完成审批流程数量：{{bgWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{bgTgsl}}</li>
-					<div v-for="(value,key) in bgList">
+					<li class="mui-table-view-cell">4、正在审批总数量：{{bgnum}}</li>
+					<!--<div v-for="(value,key) in bgList">
 						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
-					</div>
+					</div>-->
 				</ul>
 				<h5>六、工程款申请/支付记录</h5>
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">1、总申请期数：{{zfZsl}}</li>
 					<li class="mui-table-view-cell">2、已完成审批流程期数：{{zfWcsl}}</li>
 					<li class="mui-table-view-cell">3、审批通过数量：{{zfTgsl}}</li>
-					<div v-for="(value,key) in zfList">
+					<li class="mui-table-view-cell">4、正在审批总数量：{{zfnum}}</li>
+					<!--<div v-for="(value,key) in zfList">
 						<li class="mui-table-view-cell">{{key+4}}、{{value.chrsprmc}}正在审批数量：{{value.num}}</li>
-					</div>
+					</div>-->
 				</ul>
 				<h5>七、安全报告</h5>
 				<ul class="mui-table-view">
@@ -96,6 +99,7 @@
 		<script type="text/javascript">
 			var pagedata;
 			var _self;
+			var ybnum=0,bgnum=0,zfnum=0;
 			var systemdate1 = bjGetSysDate("yyyy-MM-dd E a HH:mm");
 			//获取数据
 			$bjAjax({
@@ -107,6 +111,18 @@
 			    },
 			    success:function(data){
 			    	pagedata = data;
+			    	for (i in data.ybspList) {
+			    		ybnum+=data.ybspList[i].num;
+			    	}
+			    	for (i in data.bgList) {
+			    		bgnum+=data.bgList[i].num;
+			    	}
+			    	for (i in data.zfList) {
+			    		zfnum+=data.zfList[i].num;
+			    	}
+			    	pagedata['ybnum']=ybnum;
+			    	pagedata['bgnum']=bgnum;
+			    	pagedata['zfnum']=zfnum;
 			    	console.log(pagedata);
 			    }
 			});
