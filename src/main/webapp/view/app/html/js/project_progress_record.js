@@ -88,6 +88,9 @@ window.onload=function(){
 				},
 				success:function(data){
 					if(data){
+						for(i in data){
+							console.log(data[i].chrdtbh+":"+data[i].intsgwz)
+						}
 						vue.$data.allDtList=data||[];
 					}
 				}

@@ -57,7 +57,7 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
         	queryOne.setIntxmid(xmid);
         	queryOne.setIntsgwz(sgwz);
         	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapperOne=new QueryWrapper<XmSgjdDtsbazsgDO>(queryOne).select("max(id) as id")
-        			.groupBy("chrdtbh");
+        			.groupBy("chrdtbh","intsgwz");
         	
         	List<XmSgjdDtsbazsgDO> list = xmSgjdDtsbazsgService.list(queryWrapperOne);
         	if(CollectionUtils.isEmpty(list)) {

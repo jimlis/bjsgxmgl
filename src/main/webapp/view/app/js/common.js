@@ -214,7 +214,9 @@ function toUrl(url){
 }
 
 function getRequest(){
-	var url=window.location.search;
+	var url=window.location.href;
+		url=url.indexOf( "?" )>-1?url.substr(url.indexOf( "?" )):url;
+	//var url=window.location.search;
 	      url = decodeURI(url);
 	var theRequest = new Object();
 	if ( url.indexOf( "?" ) != -1 ) {
