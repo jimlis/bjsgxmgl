@@ -2,6 +2,7 @@ var obj=getRequest()
 var id = obj.id||"";
 var xmid=getCookie("id");
 var sgwz=obj.sgwz||"";
+var chrsgwz=obj.chrsgwz||"";
 var dtbh=obj.dtbh||"";
 var chrdlrid = getCookie('chrdlrid');//chrbgrmc
 var chrdlrmc = getCookie('chrdlrmc');//chrbgrmc
@@ -50,6 +51,9 @@ function deletelc(id,obj){
 //判断是否更新
 function isUpdata(){
 		var result={};
+		if(!id){
+			return buildModel();
+		}
 		$bjAjax({
 			url:progressElevatorByParamApiPath,
 			type:"post",
@@ -75,8 +79,8 @@ function buildModel(){
 		id:id,
 		intxmid:xmid,
 		dtmgxrq:sysdate,
-		intsgwz:'',
-		chrsgwz:'',
+		intsgwz:sgwz,
+		chrsgwz:chrsgwz,
 		chrdtbh:'',
 		dtmdhrq:'',
 		dtmyjrq:'',
@@ -88,7 +92,8 @@ function buildModel(){
 		dtmdqrq:'',
 		chrbz:'',
 		intbgrid:chrdlrid,
-		chrbgrmc:chrdlrmc
+		chrbgrmc:chrdlrmc,
+		fileIds:''
 	}
 	return model;
 }

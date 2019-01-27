@@ -1,4 +1,3 @@
-debugger;
 var obj=getRequest();
 var id = obj.id||"";
 var sgwz=obj.sgwz||"";
@@ -38,7 +37,6 @@ function isUpdata(){
 				fwlx:"cx"
 			},
 			success:function(data){
-				debugger;
 				id=data.id||"";
 				result = data;
 			}

@@ -88,9 +88,6 @@ window.onload=function(){
 				},
 				success:function(data){
 					if(data){
-						for(i in data){
-							console.log(data[i].chrdtbh+":"+data[i].intsgwz)
-						}
 						vue.$data.allDtList=data||[];
 					}
 				}
@@ -240,7 +237,8 @@ window.onload=function(){
 		}else if(type=="DT"){
 			var sgwz = this.getAttribute("sgwz");
 			var dtbh = this.getAttribute("dtbh");
-		    address = "project_progress_record_elevatorAdd.html?sgwz="+sgwz+"&dtbh="+dtbh;
+			var chrsgwz = this.getAttribute("chrsgwz");
+		    address = "project_progress_record_elevatorAdd.html?sgwz="+sgwz+"&dtbh="+dtbh+"&chrsgwz="+chrsgwz;
 		}
 		toUrl(address);
 	});

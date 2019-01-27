@@ -90,7 +90,7 @@
 		        <li class="mui-table-view-cell mui-collapse" >
 		            <a class="mui-navigate-right" href="#">电梯设备安装施工<!--<span id="ztsbSpanNum" class="mui-badge mui-badge-primary">{{dls.length}}</span>--></a>
 		            	<ul class="mui-table-view"  v-for="(item,index) in dls"> 
-				            <li class="mui-table-view-cell mui-collapse mleft10"  v-on:click="openDTbh(item.value,index)">{{item.text}}<span class="mui-badge mui-badge-primary">{{dlcount(allDtList,item.value)}}</span><span class="mui-badge addbtn" type="DT" :sgwz="item.value" dtbh="" >+</span></li>
+				            <li class="mui-table-view-cell mui-collapse mleft10"  v-on:click="openDTbh(item.value,index)">{{item.text}}<span class="mui-badge mui-badge-primary">{{dlcount(allDtList,item.value)}}</span><span class="mui-badge addbtn" type="DT" :sgwz="item.value" :chrsgwz="item.text" dtbh="" >+</span></li>
 				            <ul class="mui-table-view  mleft30" v-show="dtShow[index]">
                                 <li class="mui-table-view-cell" v-for="row in dtList" v-on:click="openDT(row.id,row.intsgwz,row.chrdtbh)">{{row.chrdtbh}}&nbsp;&nbsp;&nbsp;&nbsp;{{row.dtmdqrq}}</li>
                             </ul>   
