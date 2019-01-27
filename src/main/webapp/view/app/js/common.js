@@ -129,6 +129,7 @@ var progressElevatorGetListApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsba
 var progressElevatorSaveApiPath=serverPath+"api/xmsgjddtsbazsg/save";
 var progressElevatorByIdApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgById";
 var progressElevatorByParamApiPath=serverPath+"api/xmsgjddtsbazsg/getXmSgjdDtsbazsgByParam";
+var progressElevatorDelByIdApiPath=serverPath+"api/xmsgjddtsbazsg/delById";
 
 var progressOutDoorByIdApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgById";
 var progressOutDoorByParamApiPath=serverPath+"api/xmsgjdswgwsg/getXmSgjdSwgwsgByParam";

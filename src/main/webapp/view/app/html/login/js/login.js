@@ -31,7 +31,6 @@ function login(){
 	
 }
 function mlogin1(){
-	
 			bjToast("正在免登录中...");
 				$bj_get_ajax({
 					url:serverPath+"getToken",

@@ -12,7 +12,7 @@ var vue;
 var dlhData;
 window.onload = function(){
 	showEdit();
-	
+	showDel();
 	upLoadFile('#chbtn',{"busType":"bj_xm_sgjd_dtsbazsg"});
 	
 	//dlhData=getXmjdListByParam(xmid,'jc',1,"");
@@ -116,4 +116,27 @@ isSure(function(){
 }
 function outPage(){
 	toUrl("project_progress_record_elevatorDetail.html?id="+id);
+}
+
+function showDel(){
+	if(id&&hasEdit()){
+		$("#delH5").show();
+	}else{
+		$("#delH5").hide();
+	}
+}
+
+function delObj(){
+	isSure(function(){
+		$bjAjax({
+			url:progressElevatorDelByIdApiPath,
+			data:{"id":id},
+			type:"post",
+			success:function(result){
+				bjToast("删除成功！",function(){
+					toUrl("project_progress_record.html");
+				});
+			}
+		});
+	})
 }

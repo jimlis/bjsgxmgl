@@ -1,10 +1,9 @@
 package com.zj.project.api.controller;
 
 
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +51,7 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
         	if(xmid==null) {
        		 Result.ok(Lists.newArrayList());
         	}
-        	XmSgjdDtsbazsgDO queryOne=new XmSgjdDtsbazsgDO();
+        	/*XmSgjdDtsbazsgDO queryOne=new XmSgjdDtsbazsgDO();
         	queryOne.setFcbz(1);
         	queryOne.setIntxmid(xmid);
         	queryOne.setIntsgwz(sgwz);
@@ -63,13 +62,13 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
         	if(CollectionUtils.isEmpty(list)) {
         		Result.ok(Lists.newArrayList());
         	}
-        	
+        	*/
         	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=new XmSgjdDtsbazsgDO();
         	xmSgjdDtsbazsgDO.setFcbz(1);
         	xmSgjdDtsbazsgDO.setIntxmid(xmid);
         	xmSgjdDtsbazsgDO.setIntsgwz(sgwz);
-        	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO)
-        			.in("id", list.stream().map(one->one.getId()).collect(Collectors.toList())).orderByAsc("dtmgxrq");
+        	QueryWrapper<XmSgjdDtsbazsgDO> queryWrapper=new QueryWrapper<XmSgjdDtsbazsgDO>(xmSgjdDtsbazsgDO).orderByAsc("dtmgxrq");
+        			/*.in("id", list.stream().map(one->one.getId()).collect(Collectors.toList()))*/
             return Result.ok(xmSgjdDtsbazsgService.list(queryWrapper));
         }catch (Exception e){
             e.printStackTrace();
@@ -126,6 +125,30 @@ public class ApiXmSgjdDtsbazsgController extends ApiBaseController {
     public Result<XmSgjdDtsbazsgDO> getXmSgjdDtsbazsgByParam(Long xmSgjdDtsbazsgId,Long xmid,Long sgwz,String dtbh,String fwlx) {
         try {
             return Result.ok(xmSgjdDtsbazsgService.getXmSgjdDtsbazsgByParam(xmSgjdDtsbazsgId,xmid,sgwz,dtbh,fwlx));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail();
+        }
+    }
+    
+    @Log("根据xmSgjdEcjgzxId删除电梯设置安装施工记录信息")
+    @PostMapping("delById")
+    @ApiOperation(value="根据xmSgjdEcjgzxId删除电梯设置安装施工记录信息",httpMethod="POST")
+    @ApiImplicitParams({@ApiImplicitParam(name="id",paramType="form",dataType = "Long",required=false,value = "电梯安装记录id")})
+    @ApiResponses({@ApiResponse(code=0,message="操作成功",response=Result.class),
+            @ApiResponse(code=1,message="操作失败",response=Result.class)})
+    @RequiresAuthentication
+    public Result delById(Long id) {
+        try {
+        	if(id==null) {
+        		return Result.build(Result.CODE_FAIL, "id不能为空");
+        	}
+        	XmSgjdDtsbazsgDO xmSgjdDtsbazsgDO=new XmSgjdDtsbazsgDO();
+        	xmSgjdDtsbazsgDO.setId(id);
+        	xmSgjdDtsbazsgDO.setDtmgxrq(new Date());
+        	xmSgjdDtsbazsgDO.setFcbz(0);
+        	xmSgjdDtsbazsgService.updateById(xmSgjdDtsbazsgDO);
+            return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
             return Result.fail();
