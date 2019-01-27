@@ -297,7 +297,7 @@ function initZxjgData(){
 }
 
 function  showAdd(){
-	var flag=hasEdit();
+	var flag=hasPermission("bj:gqjd:bj");
 	mui(".addbtn").each(function(i,obj){
 		if(flag){
 			obj.style.display="inline-block";

@@ -811,6 +811,20 @@ function showEdit(){
 	}
 	return flag;
 }
+/**项目基本资料的通用编辑*/
+function showEdit1(){
+	var flag=hasPermission("bj:jbzl:bj");
+	var editBtn=document.getElementById("editBtn");
+	if(editBtn){
+		if(flag){
+			editBtn.style.display="inline-block";
+		}else{
+			editBtn.style.display="none";
+		}
+	}
+	return flag;
+}
+
 
 function bjGetSysDate(dfm){
 	var data1 ="";

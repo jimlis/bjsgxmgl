@@ -40,10 +40,10 @@
                     <input class="bj-input" name="intxh" v-model="item.intxh" type="number" placeholder="请输入序号"></input>
                     <input class="bj-input" name="chrjdmc" v-model="item.chrjdmc" type="text" placeholder="请输入名称"></input>
                     <input class="bj-input" name="dtmjhwcsj" v-model="item.dtmjhwcsj" readonly="readonly" :id="'dtmjhwcsj'+index" v-on:click="datePicker(index,'dtmjhwcsj')" type="text" placeholder="请输入计划完成时间"></input>
-                  <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_delNode(item.id,$event)">删除</button>
+                  <button class="mui-btn mui-btn-danger" style="margin-top: 3px;" v-on:click="v_delNode(item.id,$event)">-</button>
                 </div>
             </h5>
-            <button v-if="gqjdbjid==''" class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;margin-left: 15px" v-on:click="addNode">增加节点</button>
+            <button v-if="gqjdbjid==''" class="mui-btn mui-btn-primary" type="button" style="margin-top: 5px;margin-left: 15px" v-on:click="addNode">+</button>
         </div>
         <script src="../js/mui.min.js"></script>
         <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>

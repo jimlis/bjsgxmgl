@@ -1,4 +1,4 @@
-var isEdit=showEdit();
+var isEdit=showEdit1();
 var isCk=hasPermission("bj:ckje");
 var xmid = getCookie("id");
 $bjAjax({
