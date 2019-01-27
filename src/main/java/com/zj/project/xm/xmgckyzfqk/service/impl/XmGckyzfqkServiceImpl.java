@@ -105,11 +105,11 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     		if(StringUtils.isNotEmpty(chrspzt)) {
     			String chrspztmc="";
     			if("wwc".equals(chrspzt)) {
-    				chrspztmc="未完成";
+    				chrspztmc="正在审批";
     			}else if("wtg".equals(chrspzt)) {
-    				chrspztmc="未通过";
+    				chrspztmc="未通过审批";
     			}else if("tg".equals(chrspzt)) {
-    				chrspztmc="通过";
+    				chrspztmc="通过审批";
     			}
     			xmGckyzfqkDO.setChrspztmc(chrspztmc);
     		}
