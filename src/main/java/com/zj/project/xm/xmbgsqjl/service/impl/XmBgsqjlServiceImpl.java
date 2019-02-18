@@ -122,7 +122,7 @@ public class XmBgsqjlServiceImpl extends BaseServiceImpl<XmBgsqjlDao, XmBgsqjlDO
     			}else if("wtg".equals(chrspzt)) {
     				chrspztmc="未通过审批";
     			}else if("tg".equals(chrspzt)) {
-    				chrspztmc="通过审批";
+    				chrspztmc="完成审批";
     			}
     			xmBgsqjlDO.setChrspztmc(chrspztmc);
     		}

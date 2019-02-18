@@ -109,7 +109,7 @@ public class XmGckyzfqkServiceImpl extends BaseServiceImpl<XmGckyzfqkDao, XmGcky
     			}else if("wtg".equals(chrspzt)) {
     				chrspztmc="未通过审批";
     			}else if("tg".equals(chrspzt)) {
-    				chrspztmc="通过审批";
+    				chrspztmc="完成审批";
     			}
     			xmGckyzfqkDO.setChrspztmc(chrspztmc);
     		}

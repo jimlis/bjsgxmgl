@@ -65,7 +65,7 @@ window.onload = function(){
 				vueDtPicker(pageData,key);
 			},
 			spztPicker: function () {
-				vuePicker(pageData,"chrspztmc",[{"text":"正在审批","value":"wwc"},{"text":"未通过审批","value":"wtg"},{"text":"通过审批","value":"tg"}],"chrspzt");
+				vuePicker(pageData,"chrspztmc",[{"text":"正在审批","value":"wwc"},{"text":"未通过审批","value":"wtg"},{"text":"完成审批","value":"tg"}],"chrspzt");
 			}
 		},
 		watch:{
