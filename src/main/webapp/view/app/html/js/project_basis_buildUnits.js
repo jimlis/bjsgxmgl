@@ -27,7 +27,7 @@ $bjAjax({
 		mui.each(one,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje = clJe(item.inthtje||"");
+			var inthtje = clJe(item.inthtje?item.inthtje.toFixed(2):"");
 			mui("#gwdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -38,7 +38,7 @@ $bjAjax({
 		mui.each(two,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje = clJe(item.inthtje||"");
+			var inthtje = clJe(item.inthtje?item.inthtje.toFixed(2):"");
 			mui("#sgdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>
@@ -49,7 +49,7 @@ $bjAjax({
 		mui.each(three,function(index,item){
 		  	var chrdwlxmc = item.chrdwlxmc;
 		  	var chrdwmc = item.chrdwmc;
-			var inthtje =clJe(item.inthtje||"");
+			var inthtje =clJe(item.inthtje?item.inthtje.toFixed(2):"");
 			mui("#qtdwNr")[0].innerHTML +=`<tr>
 						      <td data-label="单位类型名称">`+chrdwlxmc+`</td>
 						      <td data-label="单位名称">`+chrdwmc+`</td>

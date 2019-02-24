@@ -40,8 +40,8 @@
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">设备到货日期：</span><span class="bj-p-gray-font">{{dtmdhrq}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">井道移交日期：</span><span class="bj-p-gray-font">{{dtmyjrq}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">轨道完成日期：</span><span class="bj-p-gray-font">{{dtmwcrq}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">门套完成比例：</span><span class="bj-p-gray-font">{{intwcbl}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">设备安装比例：</span><span class="bj-p-gray-font">{{intazbl}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">门套完成比例：</span><span class="bj-p-gray-font">{{intwcbl|decimalFilter}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">设备安装比例：</span><span class="bj-p-gray-font">{{intazbl|decimalFilter}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">试运行日期：</span><span class="bj-p-gray-font">{{dtmyxrq}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">通过验收日期：</span><span class="bj-p-gray-font">{{dtmysrq}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">验收合格证明：</span>
@@ -58,9 +58,9 @@
 		</div>
 	</body>
         <script src="../js/mui.min.js"></script>
-        <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/common.js?v=1" type="text/javascript" charset="utf-8"></script>
         <script src="../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/project_progress_record_elevatorDetail.js" type="text/javascript" charset="utf-8"></script>
 </html>

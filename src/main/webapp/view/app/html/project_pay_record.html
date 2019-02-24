@@ -54,7 +54,7 @@
 		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{gwGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{gwRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in gw"  v-on:click="openDetail(item.id)">
-				            {{item.dtmgxrq}}  &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
+				          <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span>  &nbsp;&nbsp;  {{item.dtmgxrq}}  &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
 				        </li>
 				        <li v-if="gw.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
@@ -64,7 +64,7 @@
 		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{sgGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{sgRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in sg"  v-on:click="openDetail(item.id)">
-				             {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
+				          <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span> &nbsp;&nbsp;   {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
 				        </li>
 				         <li v-if="sg.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>
@@ -74,7 +74,7 @@
 		                              <span  class="mui-badge mui-badge-primary green" v-cloak>{{qtGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{qtRed}}</span></a>
 		            	<ul class="mui-table-view bj-background-inherit"> 
 				        <li class="mui-table-view-cell mui-collapse" v-for="item in qt"  v-on:click="openDetail(item.id)">
-				             {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
+				           <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span> &nbsp;&nbsp;  {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
 				        </li>
 				         <li v-if="qt.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
 		    			</ul>

@@ -46,28 +46,28 @@
 				
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">更新日期：</span><span class="bj-p-gray-font">{{isCk?dtmgxrq:'*'}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">报告日期：</span><span id="dtmgxrq" class="bj-p-gray-font">{{isCk?dtmbgrq:'*'}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位类型：</span><span class="bj-p-gray-font">{{isCk?chrdwlx:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位类型：</span><span class="bj-p-gray-font">{{(isCk?chrdwlx:'*')}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">单位名称：</span><span class="bj-p-gray-font">{{isCk?chrdwmc:'*'}}</span></h5>
 				<h5 class="bj-title2-font"><span class="bj-title-p-font">本次申请期数：</span><span class="bj-p-gray-font">{{isCk?intbcsqqs:'*'}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期申请金额：</span><span class="bj-p-gray-font">{{isCk?intbqsqje:'*'}}</span></h5>
-				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期核发金额：</span><span class="bj-p-gray-font">{{isCk?intbqhsffje:'*'}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期申请金额：</span><span class="bj-p-gray-font">{{(isCk?intbqsqje:'*')|decimalFilter}}</span></h5>
+				<h5 class="bj-title2-font"><span class="bj-title-p-font">本期核发金额：</span><span class="bj-p-gray-font">{{(isCk?intbqhsffje:'*')|decimalFilter}}</span></h5>
 				<h5 class="bj-title2-font">申请支付情况：</h5>
 				<div style="overflow-x: scroll;">
 				<table>
 		          <thead>
 				    <tr>
-				      <th><div>合同金额<br/>A</div></th>
-				      <th><div>潜在变更<br/>总金额B</div></th>
-				      <th><div>累计已发<br/>放期数</div></th>
-				      <th><div>累计发放<br/>金额C</div></th>
+				      <th>合同金额<br/>A</th>
+				      <th>潜在变更<br/>总金额B</th>
+				      <th>累计已发<br/>放期数</th>
+				      <th>累计发放<br/>金额C</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="合同金额A">{{isCk?inthtje:'*'}}</td>
-				      <td data-label="潜在变更总金额B">{{isCk?intqzbgzje:'*'}}</td>
-				      <td data-label="累计已发放期数">{{isCk?yfqs:'*'}}</td>
-				      <td data-label="累计发放金额C">{{isCk?yfje:'*'}}</td>
+				      <td data-label="合同金额A">{{(isCk?inthtje:'*')|decimalFilter}}</td>
+				      <td data-label="潜在变更总金额B">{{(isCk?intqzbgzje:'*')|decimalFilter}}</td>
+				      <td data-label="累计已发放期数">{{(isCk?yfqs:'*')|decimalFilter}}</td>
+				      <td data-label="累计发放金额C">{{(isCk?yfje:'*')|decimalFilter}}</td>
 				    </tr>
 				  </tbody>
 				  <thead>
@@ -80,10 +80,10 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="B/A">{{isCk?BA:'*'}}</td>
-				      <td data-label="本次申请金额D">{{isCk?intbqsqje:'*'}}</td>
-				      <td data-label="本期核实发放金额E">{{isCk?intbqhsffje:'*'}}</td>
-				      <td data-label="E/D">{{isCk?ED:'*'}}</td>
+				      <td data-label="B/A">{{(isCk?BA:'*')|decimalFilter}}</td>
+				      <td data-label="本次申请金额D">{{(isCk?intbqsqje:'*')|decimalFilter}}</td>
+				      <td data-label="本期核实发放金额E">{{(isCk?intbqhsffje:'*')|decimalFilter}}</td>
+				      <td data-label="E/D">{{(isCk?ED:'*')|decimalFilter}}</td>
 				    </tr>
 				  </tbody>
 				  <thead>
@@ -96,10 +96,10 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td data-label="C/A">{{isCk?CA:'*'}}</td>
-				      <td data-label="(C+E)/A">{{isCk?CEA:'*'}}</td>
-				      <td data-label="C/(A+B)">{{isCk?CAB:'*'}}</td>
-				      <td data-label="(C+E)/(A+B)">{{isCk?CEAB:'*'}}</td>
+				      <td data-label="C/A">{{(isCk?CA:'*')|decimalFilter}}</td>
+				      <td data-label="(C+E)/A">{{(isCk?CEA:'*')|decimalFilter}}</td>
+				      <td data-label="C/(A+B)">{{(isCk?CAB:'*')|decimalFilter}}</td>
+				      <td data-label="(C+E)/(A+B)">{{(isCk?CEAB:'*')|decimalFilter}}</td>
 				    </tr>
 				  </tbody>
 	            </table>
@@ -119,7 +119,7 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common.js?v=1" type="text/javascript" charset="utf-8"></script>
 		<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/project_pay_record_detail.js" type="text/javascript" charset="utf-8"></script>
 	</body>

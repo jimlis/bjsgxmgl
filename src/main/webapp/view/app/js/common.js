@@ -41,8 +41,8 @@ function initdata(){
 }
 
 /**服务端地址*/
-var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
-//var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
+//var serverPath="http://pms.china-bojian.com:7399/bjsgxmgl/";
+var serverPath="http://127.0.0.1:8080/bjsgxmgl/";
 var getSysDate =serverPath+"api/common/getSysDate"
 var userApiPath=serverPath+"api/user/";
 var deptApiPath=serverPath+"api/dept/";
@@ -1138,3 +1138,16 @@ function isSure(funs,funf){
 		}
 	});
 }
+
+var decimalFilter=null;
+try{
+	Vue.filter('decimalFilter', function (value) {
+	 	return value?(value=="*"?"*":(value=="/"?"/":Number(value).toFixed(2))):0;
+	})
+    decimalFilter=Vue.filter("decimalFilter");
+}catch(e){
+	
+}
+
+
+

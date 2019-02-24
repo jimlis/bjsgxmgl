@@ -74,13 +74,18 @@
 				<span class="bj-p-gray-font" id="intgqyx">{{intgqyx}}</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算：</span>
-				<span class="bj-p-gray-font" id="intbggs">{{isCk?intbggs:'*'}}</span>
+			     <span class="bj-p-gray-font" v-if="isCk">{{intbggs|decimalFilter}}</span>
+                 <span class="bj-p-gray-font" v-if="!isCk">*</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">潜在变更金额：</span>
-				<span class="bj-p-gray-font" id="">{{isCk?intqzbgzje:'*'}}</span>
+				<span class="bj-p-gray-font" id="">
+				    <span class="bj-p-gray-font" v-if="isCk">{{intqzbgzje|decimalFilter}}</span>
+				    <span class="bj-p-gray-font" v-if="!isCk">*</span>
+				</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">合同占比：</span>
-				<span class="bj-p-gray-font" id="inthtzb">{{isCk?inthtzb:'*'}}</span>
+			     <span class="bj-p-gray-font" v-if="isCk">{{inthtzb|decimalFilter}}</span>
+                 <span class="bj-p-gray-font" v-if="!isCk">*</span>
 			</h5>
 			
 			<h5 class="bj-ul-clear bj-title2-font"><span class="bj-title-p-font">变更申请文件：</span>
@@ -109,14 +114,14 @@
 		</div>
 </div>
 <script src="../js/mui.min.js"></script>
+<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.lazyload.img.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../libs/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/project_change_record_details.js" type="text/javascript" charset="utf-8"></script>
 </body>
 

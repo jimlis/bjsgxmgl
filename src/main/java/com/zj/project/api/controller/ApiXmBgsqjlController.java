@@ -66,7 +66,7 @@ public class ApiXmBgsqjlController extends ApiBaseController {
         			xmBgsqjlDO.setIntbgthid(bgthid);
         		}
         	}
-            QueryWrapper<XmBgsqjlDO> queryWrapper=new QueryWrapper<XmBgsqjlDO>(xmBgsqjlDO).orderByAsc("dtmgxrq");
+            QueryWrapper<XmBgsqjlDO> queryWrapper=new QueryWrapper<XmBgsqjlDO>(xmBgsqjlDO).orderByAsc("chrbgsqbh","dtmgxrq");
             if(nowBgsqjlId!=null) {
             	queryWrapper.ne("id", nowBgsqjlId);
             }
