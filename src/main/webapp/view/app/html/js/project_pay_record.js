@@ -1,5 +1,7 @@
 var xmid=getCookie("id");
-
+var gwShowArr={};
+var sgShowArr={};
+var qtShowArr={};
 //初始化显示数据
 window.onload = function(){
 	showEdit();
@@ -9,11 +11,22 @@ window.onload = function(){
 	var qt=getDataByDwlx(pageData,"3");
 	var vue = new Vue({
 		el: '#app',
-		data: {gw:gw,sg:sg,qt:qt},
+		data: {gw:gw,gwMap:dwMap(gw,'gw'),gwShow:gwShowArr,
+			sg:sg,sgMap:dwMap(sg,'sg'),sgShow:sgShowArr,
+			qt:qt,qtMap:dwMap(qt,'qt'),qtShow:qtShowArr},
 		methods: {
 			openDetail: function (id) {
 				var address = "project_pay_record_detail.html?id="+id;
     				toUrl(address);
+			},
+			changeSwShow:function(key){
+				this.gwShow[key]=!this.gwShow[key];
+			},
+			changeSgShow:function(key){
+				this.sgShow[key]=!this.sgShow[key];
+			},
+			changeQtShow:function(key){
+				this.qtShow[key]=!this.qtShow[key];
 			}
 		},
 		computed: {
@@ -112,4 +125,30 @@ mui.back=function(){
 }
 function outPage(){
 	toUrl("project_detail_list.html");
+}
+
+function dwMap(list,type){
+	var map={};
+	if(list&&list.length>0){
+		for(var i=0;i<list.length;i++){
+			var o=list[i];
+			var intdwmcid=o["intdwmcid"]||"";
+			var chrdwmc=o["chrdwmc"]||"";
+			if(map[""+intdwmcid]){
+				var dwArr=map[intdwmcid];
+				    dwArr.push(o);
+				map[""+intdwmcid]=dwArr;
+			}else{
+				map[""+intdwmcid]=[o];
+			}
+			if(type=="gw"){
+				gwShowArr[intdwmcid]=false;
+			}else if(type=="sg"){
+				sgShowArr[intdwmcid]=false;
+			}else if(type=="qt"){
+				qtShowArr[intdwmcid]=false;
+			}
+		}
+	}
+	return map;
 }

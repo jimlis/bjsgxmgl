@@ -25,6 +25,14 @@
                .red{
                   background-color: red;
               }
+              
+            .mleft10{
+                margin-left: 10px!important;
+            }
+            .mleft30{
+                margin-left: 30px!important;
+            }
+          
         </style> 
 	</head>
 		
@@ -52,32 +60,38 @@
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">顾问公司费用申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{gw.length}}</span>
 		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{gwGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{gwRed}}</span></a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in gw"  v-on:click="openDetail(item.id)">
+		            	<ul class="mui-table-view" v-for="(item,key) in gwMap"> 
+				       <!--  <li class="mui-table-view-cell mui-collapse" v-for="item in gw"  v-on:click="openDetail(item.id)">
 				          <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span>  &nbsp;&nbsp;  {{item.dtmgxrq}}  &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
-				        </li>
-				        <li v-if="gw.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
+				        </li> -->
+				            <li class="mui-table-view-cell mui-collapse mleft10"  v-on:click="changeSwShow(key)">{{item[0]["chrdwmc"]}}</li>
+                            <ul class="mui-table-view  mleft30" v-show="gwShow[key]">
+                                <li class="mui-table-view-cell" v-on:click="openDetail(row.id)" v-for="row in item"><span :class="row.chrspzt=='wwc'?'img-r':'img-g'"></span>  &nbsp;&nbsp;  {{row.dtmgxrq}}  <!-- &nbsp;&nbsp; {{row.chrdwmc}} --> &nbsp;&nbsp; 第{{row.intbcsqqs}}期</li>
+                            </ul>   
+                        <!-- <li v-if="gw.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li> -->
 		    			</ul>
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">施工单位工程款申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{sg.length}}</span>
 		            <span  class="mui-badge mui-badge-primary green" v-cloak>{{sgGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{sgRed}}</span></a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in sg"  v-on:click="openDetail(item.id)">
-				          <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span> &nbsp;&nbsp;   {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
-				        </li>
-				         <li v-if="sg.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
-		    			</ul>
+		                <ul class="mui-table-view" v-for="(item,key) in sgMap"> 
+                            <li class="mui-table-view-cell mui-collapse mleft10"  v-on:click="changeSgShow(key)">{{item[0]["chrdwmc"]}}</li>
+                            <ul class="mui-table-view  mleft30" v-show="sgShow[key]">
+                                <li class="mui-table-view-cell" v-on:click="openDetail(row.id)" v-for="row in item"><span :class="row.chrspzt=='wwc'?'img-r':'img-g'"></span>  &nbsp;&nbsp;  {{row.dtmgxrq}}  <!-- &nbsp;&nbsp; {{row.chrdwmc}} --> &nbsp;&nbsp; 第{{row.intbcsqqs}}期</li>
+                            </ul>   
+                        </ul>
+				        <!--  <li v-if="sg.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li> -->
 		        </li>
 		        <li class="mui-table-view-cell mui-collapse">
 		            <a class="mui-navigate-right" href="#">其他单位费用申请/支付情况<span class="mui-badge mui-badge-primary blue" v-cloak>{{qt.length}}</span>
-		                              <span  class="mui-badge mui-badge-primary green" v-cloak>{{qtGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{qtRed}}</span></a>
-		            	<ul class="mui-table-view bj-background-inherit"> 
-				        <li class="mui-table-view-cell mui-collapse" v-for="item in qt"  v-on:click="openDetail(item.id)">
-				           <span :class="item.chrspzt=='wwc'?'img-r':'img-g'"></span> &nbsp;&nbsp;  {{item.dtmgxrq}} &nbsp;&nbsp; {{item.chrdwmc}} &nbsp;&nbsp; 第{{item.intbcsqqs}}期
-				        </li>
-				         <li v-if="qt.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li>
-		    			</ul>
+		               <span  class="mui-badge mui-badge-primary green" v-cloak>{{qtGre}}</span><span  class="mui-badge mui-badge-primary red" v-cloak>{{qtRed}}</span></a>
+		               <ul class="mui-table-view" v-for="(item,key) in qtMap"> 
+                            <li class="mui-table-view-cell mui-collapse mleft10"  v-on:click="changeQtShow(key)">{{item[0]["chrdwmc"]}}</li>
+                            <ul class="mui-table-view  mleft30" v-show="qtShow[key]">
+                                <li class="mui-table-view-cell" v-on:click="openDetail(row.id)" v-for="row in item"><span :class="row.chrspzt=='wwc'?'img-r':'img-g'"></span>  &nbsp;&nbsp;  {{row.dtmgxrq}}  <!-- &nbsp;&nbsp; {{row.chrdwmc}} --> &nbsp;&nbsp; 第{{row.intbcsqqs}}期</li>
+                            </ul>   
+                        </ul>
+				       <!--   <li v-if="qt.length==0" class="mui-table-view-cell mui-collapse"  >没有相关数据，请上传数据</li> -->
 		        </li>
 		    </ul>
 		</div>
