@@ -71,17 +71,16 @@
 				<span class="bj-p-gray-font" id="chrbgxq">{{chrbgxq}}</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">工期影响：</span>
-				<span class="bj-p-gray-font" id="intgqyx">{{intgqyx}}</span>
+				<span class="bj-p-gray-font" v-if="intgqyx<=0" id="intgqyx">提前{{-intgqyx}}天</span>
+				<span class="bj-p-gray-font" v-if="intgqyx>0" id="intgqyx">延误{{intgqyx}}天</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算：</span>
 			     <span class="bj-p-gray-font" v-if="isCk">{{intbggs|decimalFilter}}</span>
                  <span class="bj-p-gray-font" v-if="!isCk">*</span>
 			</h5>
-			<h5 class="bj-title2-font"><span class="bj-title-p-font">潜在变更金额：</span>
-				<span class="bj-p-gray-font" id="">
+			<h5 class="bj-title2-font"><span class="bj-title-p-font">变更估算总额：</span>
 				    <span class="bj-p-gray-font" v-if="isCk">{{intqzbgzje|decimalFilter}}</span>
 				    <span class="bj-p-gray-font" v-if="!isCk">*</span>
-				</span>
 			</h5>
 			<h5 class="bj-title2-font"><span class="bj-title-p-font">合同占比：</span>
 			     <span class="bj-p-gray-font" v-if="isCk">{{inthtzb|decimalFilter}}</span>
