@@ -2,6 +2,7 @@ var xmid=getCookie("id");
 var gwShowArr={};
 var sgShowArr={};
 var qtShowArr={};
+var oldtimestamp=0;
 //初始化显示数据
 window.onload = function(){
 	showEdit();
@@ -20,13 +21,26 @@ window.onload = function(){
     				toUrl(address);
 			},
 			changeSwShow:function(key){
-				this.gwShow[key]=!this.gwShow[key];
+				var newTime = new Date().getTime();
+				if((newTime - oldtimestamp)>400){
+					
+					this.gwShow[key]=!this.gwShow[key];
+					oldtimestamp = new Date().getTime();
+				}
 			},
 			changeSgShow:function(key){
-				this.sgShow[key]=!this.sgShow[key];
+				var newTime = new Date().getTime();
+				if((newTime - oldtimestamp)>400){
+					this.sgShow[key]=!this.sgShow[key];
+					oldtimestamp = new Date().getTime();
+				}
 			},
 			changeQtShow:function(key){
-				this.qtShow[key]=!this.qtShow[key];
+				var newTime = new Date().getTime();
+				if((newTime - oldtimestamp)>400){
+					this.qtShow[key]=!this.qtShow[key];
+					oldtimestamp = new Date().getTime();
+				}
 			}
 		},
 		computed: {
